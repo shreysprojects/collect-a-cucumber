@@ -1,0 +1,1907 @@
+{
+ "_meta": {
+  "date": "2026-08-28",
+  "sim": "economy_sim.py v2",
+  "targets": {
+   "A2": "7m",
+   "A3": "27m",
+   "A4": "72m",
+   "A5": "3h",
+   "A6": "6h",
+   "A7": "10.3h",
+   "A8": "16.7h"
+  },
+  "simResults": {
+   "average": "A2@6m A3@29m A4@1.0h A5@2.7h A6@5.4h A7@10.1h A8@17.2h",
+   "casual": "A7@15.4h (A8 ~24h)",
+   "lucky": "A8@12.2h",
+   "optimized(whale)": "A8@1.9h"
+  }
+ },
+ "zoneLadders": {
+  "ZONE_V": [
+   1,
+   8,
+   64,
+   512,
+   4096,
+   32768,
+   262144,
+   2097152
+  ],
+  "ZONE_HP": [
+   1,
+   13,
+   165,
+   2050,
+   24500,
+   285000,
+   3250000,
+   36500000
+  ],
+  "doorOrbs": [
+   {
+    "zone": "Spawn",
+    "Multi": 1,
+    "Orb": 1
+   },
+   {
+    "zone": "Desert",
+    "Multi": 2,
+    "Orb": 4
+   },
+   {
+    "zone": "Samurai",
+    "Multi": 4,
+    "Orb": 16
+   },
+   {
+    "zone": "Farm",
+    "Multi": 8,
+    "Orb": 64
+   },
+   {
+    "zone": "Snow",
+    "Multi": 16,
+    "Orb": 256
+   },
+   {
+    "zone": "Underwater",
+    "Multi": 32,
+    "Orb": 1024
+   },
+   {
+    "zone": "Volcano",
+    "Multi": 64,
+    "Orb": 4096
+   },
+   {
+    "zone": "Narmek",
+    "Multi": 128,
+    "Orb": 16384
+   }
+  ]
+ },
+ "types": {
+  "Spawn": {
+   "sliced": {
+    "name": "Sliced Cucumber",
+    "weight": 25,
+    "hp": 8,
+    "reward": 3,
+    "bonusCoins": 1
+   },
+   "regular": [
+    {
+     "name": "Cucumber",
+     "weight": 61,
+     "hp": 30,
+     "reward": 8,
+     "bonusCoins": 2,
+     "tree": false
+    },
+    {
+     "name": "Slice Stack",
+     "weight": 24,
+     "hp": 57,
+     "reward": 20,
+     "bonusCoins": 5,
+     "tree": false
+    },
+    {
+     "name": "Vined Cucumber",
+     "weight": 10,
+     "hp": 105,
+     "reward": 56,
+     "bonusCoins": 14,
+     "tree": false
+    },
+    {
+     "name": "Flowered Cucumber",
+     "weight": 4,
+     "hp": 180,
+     "reward": 144,
+     "bonusCoins": 36,
+     "tree": false
+    },
+    {
+     "name": "Cucumber Tree",
+     "weight": 2,
+     "hp": 300,
+     "reward": 360,
+     "bonusCoins": 90,
+     "tree": true
+    }
+   ]
+  },
+  "Desert": {
+   "sliced": {
+    "name": "Sun-Dried Slice",
+    "weight": 25,
+    "hp": 8,
+    "reward": 3,
+    "bonusCoins": 1
+   },
+   "regular": [
+    {
+     "name": "Prickly Cucumber",
+     "weight": 46,
+     "hp": 30,
+     "reward": 8,
+     "bonusCoins": 2,
+     "tree": false
+    },
+    {
+     "name": "Sliced Cucumber",
+     "weight": 25,
+     "hp": 46,
+     "reward": 15,
+     "bonusCoins": 4,
+     "tree": false
+    },
+    {
+     "name": "Sun-Baked Cucumber",
+     "weight": 14,
+     "hp": 70,
+     "reward": 28,
+     "bonusCoins": 7,
+     "tree": false
+    },
+    {
+     "name": "Wrapped Cucumber",
+     "weight": 7,
+     "hp": 105,
+     "reward": 56,
+     "bonusCoins": 14,
+     "tree": false
+    },
+    {
+     "name": "Cactus Cucumber",
+     "weight": 4,
+     "hp": 150,
+     "reward": 105,
+     "bonusCoins": 26,
+     "tree": false
+    },
+    {
+     "name": "Desert Palm",
+     "weight": 2,
+     "hp": 213,
+     "reward": 195,
+     "bonusCoins": 49,
+     "tree": false
+    },
+    {
+     "name": "Sandstone Tree",
+     "weight": 1,
+     "hp": 300,
+     "reward": 360,
+     "bonusCoins": 90,
+     "tree": true
+    }
+   ]
+  },
+  "Samurai": {
+   "sliced": {
+    "name": "Sliced Cucumber",
+    "weight": 25,
+    "hp": 8,
+    "reward": 3,
+    "bonusCoins": 1
+   },
+   "regular": [
+    {
+     "name": "Katana Cucumber",
+     "weight": 53,
+     "hp": 30,
+     "reward": 8,
+     "bonusCoins": 2,
+     "tree": false
+    },
+    {
+     "name": "Bamboo Cucumber",
+     "weight": 25,
+     "hp": 50,
+     "reward": 17,
+     "bonusCoins": 4,
+     "tree": false
+    },
+    {
+     "name": "Lantern Cucumber",
+     "weight": 12,
+     "hp": 82,
+     "reward": 37,
+     "bonusCoins": 9,
+     "tree": false
+    },
+    {
+     "name": "Bamboo Grove",
+     "weight": 6,
+     "hp": 130,
+     "reward": 82,
+     "bonusCoins": 20,
+     "tree": false
+    },
+    {
+     "name": "Torii Gate",
+     "weight": 3,
+     "hp": 199,
+     "reward": 173,
+     "bonusCoins": 43,
+     "tree": false
+    },
+    {
+     "name": "Sakura Tree",
+     "weight": 1,
+     "hp": 300,
+     "reward": 360,
+     "bonusCoins": 90,
+     "tree": true
+    }
+   ]
+  },
+  "Farm": {
+   "sliced": {
+    "name": "Cucumber Basket",
+    "weight": 25,
+    "hp": 8,
+    "reward": 3,
+    "bonusCoins": 1
+   },
+   "regular": [
+    {
+     "name": "Muddy Cucumber",
+     "weight": 61,
+     "hp": 30,
+     "reward": 8,
+     "bonusCoins": 2,
+     "tree": false
+    },
+    {
+     "name": "Crate Cucumber",
+     "weight": 24,
+     "hp": 57,
+     "reward": 20,
+     "bonusCoins": 5,
+     "tree": false
+    },
+    {
+     "name": "Windmill Plant",
+     "weight": 10,
+     "hp": 105,
+     "reward": 56,
+     "bonusCoins": 14,
+     "tree": false
+    },
+    {
+     "name": "Hay Bale",
+     "weight": 4,
+     "hp": 180,
+     "reward": 144,
+     "bonusCoins": 36,
+     "tree": false
+    },
+    {
+     "name": "Cucumber Tree",
+     "weight": 2,
+     "hp": 300,
+     "reward": 360,
+     "bonusCoins": 90,
+     "tree": true
+    }
+   ]
+  },
+  "Snow": {
+   "sliced": {
+    "name": "Frozen Slice",
+    "weight": 25,
+    "hp": 8,
+    "reward": 3,
+    "bonusCoins": 1
+   },
+   "regular": [
+    {
+     "name": "Snowcap Cucumber",
+     "weight": 46,
+     "hp": 30,
+     "reward": 8,
+     "bonusCoins": 2,
+     "tree": false
+    },
+    {
+     "name": "Snowball Slice",
+     "weight": 25,
+     "hp": 46,
+     "reward": 15,
+     "bonusCoins": 4,
+     "tree": false
+    },
+    {
+     "name": "Crystal Cucumber",
+     "weight": 14,
+     "hp": 70,
+     "reward": 28,
+     "bonusCoins": 7,
+     "tree": false
+    },
+    {
+     "name": "Frozen Cucumber",
+     "weight": 7,
+     "hp": 105,
+     "reward": 56,
+     "bonusCoins": 14,
+     "tree": false
+    },
+    {
+     "name": "Snow Tree",
+     "weight": 4,
+     "hp": 150,
+     "reward": 105,
+     "bonusCoins": 26,
+     "tree": false
+    },
+    {
+     "name": "Icicle Tree",
+     "weight": 2,
+     "hp": 213,
+     "reward": 195,
+     "bonusCoins": 49,
+     "tree": false
+    },
+    {
+     "name": "Frozen Tree",
+     "weight": 1,
+     "hp": 300,
+     "reward": 360,
+     "bonusCoins": 90,
+     "tree": true
+    }
+   ]
+  },
+  "Underwater": {
+   "sliced": {
+    "name": "Bubble Slice",
+    "weight": 25,
+    "hp": 8,
+    "reward": 3,
+    "bonusCoins": 1
+   },
+   "regular": [
+    {
+     "name": "Seaweed Cucumber",
+     "weight": 46,
+     "hp": 30,
+     "reward": 8,
+     "bonusCoins": 2,
+     "tree": false
+    },
+    {
+     "name": "Shell Slice",
+     "weight": 25,
+     "hp": 46,
+     "reward": 15,
+     "bonusCoins": 4,
+     "tree": false
+    },
+    {
+     "name": "Coral Cucumber",
+     "weight": 14,
+     "hp": 70,
+     "reward": 28,
+     "bonusCoins": 7,
+     "tree": false
+    },
+    {
+     "name": "Pearl Cucumber",
+     "weight": 7,
+     "hp": 105,
+     "reward": 56,
+     "bonusCoins": 14,
+     "tree": false
+    },
+    {
+     "name": "Kelp Tree",
+     "weight": 4,
+     "hp": 150,
+     "reward": 105,
+     "bonusCoins": 26,
+     "tree": false
+    },
+    {
+     "name": "Bubble Tree",
+     "weight": 2,
+     "hp": 213,
+     "reward": 195,
+     "bonusCoins": 49,
+     "tree": false
+    },
+    {
+     "name": "Coral Tree",
+     "weight": 1,
+     "hp": 300,
+     "reward": 360,
+     "bonusCoins": 90,
+     "tree": true
+    }
+   ]
+  },
+  "Volcano": {
+   "sliced": {
+    "name": "Molten Slice",
+    "weight": 25,
+    "hp": 8,
+    "reward": 3,
+    "bonusCoins": 1
+   },
+   "regular": [
+    {
+     "name": "Charred Cucumber",
+     "weight": 53,
+     "hp": 30,
+     "reward": 8,
+     "bonusCoins": 2,
+     "tree": false
+    },
+    {
+     "name": "Molten Cucumber",
+     "weight": 25,
+     "hp": 50,
+     "reward": 17,
+     "bonusCoins": 4,
+     "tree": false
+    },
+    {
+     "name": "Flame Cucumber",
+     "weight": 12,
+     "hp": 82,
+     "reward": 37,
+     "bonusCoins": 9,
+     "tree": false
+    },
+    {
+     "name": "Obsidian Tree",
+     "weight": 6,
+     "hp": 130,
+     "reward": 82,
+     "bonusCoins": 20,
+     "tree": false
+    },
+    {
+     "name": "Volcano Cucumber",
+     "weight": 3,
+     "hp": 199,
+     "reward": 173,
+     "bonusCoins": 43,
+     "tree": false
+    },
+    {
+     "name": "Magma Tree",
+     "weight": 1,
+     "hp": 300,
+     "reward": 360,
+     "bonusCoins": 90,
+     "tree": true
+    }
+   ]
+  },
+  "Narmek": {
+   "sliced": {
+    "name": "Moon Slice",
+    "weight": 25,
+    "hp": 8,
+    "reward": 3,
+    "bonusCoins": 1
+   },
+   "regular": [
+    {
+     "name": "Meteor Cucumber",
+     "weight": 46,
+     "hp": 30,
+     "reward": 8,
+     "bonusCoins": 2,
+     "tree": false
+    },
+    {
+     "name": "Planet Slice",
+     "weight": 25,
+     "hp": 46,
+     "reward": 15,
+     "bonusCoins": 4,
+     "tree": false
+    },
+    {
+     "name": "Astronaut Cucumber",
+     "weight": 14,
+     "hp": 70,
+     "reward": 28,
+     "bonusCoins": 7,
+     "tree": false
+    },
+    {
+     "name": "Neon Alien Cucumber",
+     "weight": 7,
+     "hp": 105,
+     "reward": 56,
+     "bonusCoins": 14,
+     "tree": false
+    },
+    {
+     "name": "Moon Tree",
+     "weight": 4,
+     "hp": 150,
+     "reward": 105,
+     "bonusCoins": 26,
+     "tree": false
+    },
+    {
+     "name": "Alien Tree",
+     "weight": 2,
+     "hp": 213,
+     "reward": 195,
+     "bonusCoins": 49,
+     "tree": false
+    },
+    {
+     "name": "Galaxy Tree",
+     "weight": 1,
+     "hp": 300,
+     "reward": 360,
+     "bonusCoins": 90,
+     "tree": true
+    }
+   ]
+  }
+ },
+ "materials": {
+  "GOLDEN": {
+   "chance": 0.04,
+   "valueMult": 12,
+   "hpMult": 3,
+   "coinMult": 10,
+   "goldenHourMult": 4
+  },
+  "DIAMOND": {
+   "chance": 0.006,
+   "valueMult": 50,
+   "hpMult": 5,
+   "coinMult": 25
+  }
+ },
+ "mutations": {
+  "rotation": {
+   "NEON": 15,
+   "SHADOW": 15,
+   "FROZEN": 20,
+   "RADIOACTIVE": 25,
+   "ROYAL": 40,
+   "MOLTEN": 25
+  },
+  "VOID": {
+   "chance": 0.0008333333333333334,
+   "valueMult": 150,
+   "color": [
+    90,
+    30,
+    140
+   ],
+   "announce": false
+  },
+  "PRISMATIC": {
+   "chance": 5e-05,
+   "valueMult": 750,
+   "announce": true
+  },
+  "lightningChargedMult": [
+   40,
+   80
+  ],
+  "lightningIntervalSeconds": [
+   120,
+   240
+  ],
+  "stackRule": "material x mutation multiply; product capped at JACKPOT_STACK_CAP",
+  "jackpotStackCap": 5000,
+  "mixTotalChance": 0.0305,
+  "mixChances": {
+   "NEON": 0.01,
+   "SHADOW": 0.01,
+   "FROZEN": 0.004,
+   "RADIOACTIVE": 0.0025,
+   "ROYAL": 0.0015,
+   "MOLTEN": 0.0025
+  },
+  "mixNote": "ALWAYS-ON weighted mix since 2026-08-28 later (daily rotation removed; TodaysMutation kept only for the admin TODAY spawner); CarryRarityOf now uses per-mutation odds"
+ },
+ "pickaxes": [
+  {
+   "name": "Wood Pickaxe",
+   "order": 0,
+   "price": 0,
+   "damage": 3
+  },
+  {
+   "name": "Stone Pickaxe",
+   "order": 1,
+   "price": 400,
+   "damage": 5,
+   "range": 6
+  },
+  {
+   "name": "Bronze Pickaxe",
+   "order": 2,
+   "price": 6000,
+   "damage": 14,
+   "range": 7
+  },
+  {
+   "name": "Iron Pickaxe",
+   "order": 3,
+   "price": 60000,
+   "damage": 38,
+   "range": 8
+  },
+  {
+   "name": "Steel Pickaxe",
+   "order": 4,
+   "price": 500000,
+   "damage": 105,
+   "range": 9
+  },
+  {
+   "name": "Gold Pickaxe",
+   "order": 5,
+   "price": 2500000,
+   "damage": 290,
+   "range": 10
+  },
+  {
+   "name": "Emerald Pickaxe",
+   "order": 6,
+   "price": 10000000,
+   "damage": 800,
+   "range": 11
+  },
+  {
+   "name": "Ruby Pickaxe",
+   "order": 7,
+   "price": 60000000,
+   "damage": 2200,
+   "range": 12
+  },
+  {
+   "name": "Amethyst Pickaxe",
+   "order": 8,
+   "price": 300000000,
+   "damage": 6000,
+   "range": 13
+  },
+  {
+   "name": "Diamond Pickaxe",
+   "order": 9,
+   "price": 2000000000,
+   "damage": 16500,
+   "range": 14
+  },
+  {
+   "name": "Valentine Pickaxe",
+   "order": 10,
+   "price": 10000000000,
+   "damage": 45000,
+   "range": 15
+  },
+  {
+   "name": "Magma Pickaxe",
+   "order": 11,
+   "price": 60000000000,
+   "damage": 124000,
+   "range": 16
+  },
+  {
+   "name": "VoidNeon Pickaxe",
+   "order": 12,
+   "price": 250000000000,
+   "damage": 340000,
+   "range": 17
+  },
+  {
+   "name": "CosmicIce Pickaxe",
+   "order": 13,
+   "price": 1000000000000,
+   "damage": 935000,
+   "range": 18
+  },
+  {
+   "name": "YinYang Pickaxe",
+   "order": 14,
+   "price": 6000000000000,
+   "damage": 2600000,
+   "range": 19
+  },
+  {
+   "name": "Galaxy Pickaxe",
+   "order": 15,
+   "price": 40000000000000,
+   "damage": 7000000,
+   "range": 20
+  },
+  {
+   "name": "SolarFlare Pickaxe",
+   "order": 16,
+   "price": 200000000000000,
+   "damage": 19500000,
+   "range": 21
+  },
+  {
+   "name": "BloodMoon Pickaxe",
+   "order": 17,
+   "price": 1000000000000000,
+   "damage": 53500000,
+   "range": 22
+  },
+  {
+   "name": "Rainbow Pickaxe",
+   "order": 18,
+   "price": 5000000000000000,
+   "damage": 147000000,
+   "range": 23
+  }
+ ],
+ "doors": [
+  {
+   "zone": "Spawn",
+   "price": 0,
+   "minRebirths": 0
+  },
+  {
+   "zone": "Desert",
+   "price": 60000.0,
+   "minRebirths": 0
+  },
+  {
+   "zone": "Samurai",
+   "price": 5000000.0,
+   "minRebirths": 0
+  },
+  {
+   "zone": "Farm",
+   "price": 300000000.0,
+   "minRebirths": 1
+  },
+  {
+   "zone": "Snow",
+   "price": 60000000000.0,
+   "minRebirths": 2
+  },
+  {
+   "zone": "Underwater",
+   "price": 5000000000000.0,
+   "minRebirths": 3
+  },
+  {
+   "zone": "Volcano",
+   "price": 400000000000000.0,
+   "minRebirths": 4
+  },
+  {
+   "zone": "Narmek",
+   "price": 2.5e+16,
+   "minRebirths": 5
+  }
+ ],
+ "rebirth": {
+  "incomeMultiplier": "2^R on Cucumbers earned (replaces 1+0.5R)",
+  "coinSideMultiplier": "REMOVED (sell is flat 1:1; kills the quadratic double-dip)",
+  "costs": [
+   90000000.0,
+   20000000000.0,
+   1500000000000.0,
+   100000000000000.0,
+   7500000000000000.0,
+   2.175e+16,
+   6.3075e+16,
+   1.829175e+17,
+   5.3046075e+17,
+   1.5383361749999997e+18,
+   4.4611749074999987e+18,
+   1.2937407231749997e+19,
+   3.751848097207499e+19,
+   1.0880359481901747e+20,
+   3.155304249751507e+20,
+   9.150382324279369e+20,
+   2.653610874041017e+21,
+   7.695471534718949e+21,
+   2.2316867450684953e+22,
+   6.4718915606986355e+22,
+   1.8768485526026044e+23,
+   5.442860802547552e+23,
+   1.57842963273879e+24,
+   4.577445934942491e+24,
+   1.3274593211333223e+25,
+   3.8496320312866345e+25,
+   1.116393289073124e+26,
+   3.237540538312059e+26,
+   9.388867561104973e+26,
+   2.722771592720442e+27,
+   7.896037618889281e+27,
+   2.2898509094778917e+28,
+   6.640567637485885e+28,
+   1.9257646148709067e+29,
+   5.584717383125628e+29,
+   1.6195680411064323e+30,
+   4.6967473192086535e+30,
+   1.3620567225705095e+31,
+   3.9499644954544776e+31,
+   1.1454897036817985e+32,
+   3.321920140677215e+32,
+   9.633568407963925e+32,
+   2.793734838309538e+33,
+   8.10183103109766e+33,
+   2.3495309990183213e+34,
+   6.813639897153131e+34,
+   1.975955570174408e+35,
+   5.7302711535057836e+35,
+   1.661778634516677e+36,
+   4.819158040098364e+36
+  ],
+  "max": 50,
+  "keeps": "pickaxes, pets, upgrades, vault, shards (unchanged)",
+  "resets": "Cukes, Coins, doors (unchanged)",
+  "vaultSlotPerRebirth": 1
+ },
+ "eggs": [
+  {
+   "name": "Basic Egg",
+   "zone": "Spawn",
+   "price": 250,
+   "pool": [
+    {
+     "pet": "Cat",
+     "pct": 40
+    },
+    {
+     "pet": "Dog",
+     "pct": 30
+    },
+    {
+     "pet": "Bunny",
+     "pct": 15
+    },
+    {
+     "pet": "Wolf",
+     "pct": 9
+    },
+    {
+     "pet": "Tabby",
+     "pct": 5
+    },
+    {
+     "pet": "Fox",
+     "pct": 1
+    }
+   ]
+  },
+  {
+   "name": "Desert Egg",
+   "zone": "Desert",
+   "price": 100000,
+   "pool": [
+    {
+     "pet": "Barrel",
+     "pct": 40
+    },
+    {
+     "pet": "Treasure Gem",
+     "pct": 30
+    },
+    {
+     "pet": "Cannon",
+     "pct": 15
+    },
+    {
+     "pet": "Chest",
+     "pct": 9
+    },
+    {
+     "pet": "Desert Overlord",
+     "pct": 5
+    },
+    {
+     "pet": "Cactus",
+     "pct": 1
+    }
+   ]
+  },
+  {
+   "name": "Samurai Egg",
+   "zone": "Samurai",
+   "price": 3000000,
+   "pool": [
+    {
+     "pet": "Dog Ninja",
+     "pct": 40
+    },
+    {
+     "pet": "Good Ninja",
+     "pct": 30
+    },
+    {
+     "pet": "Evil Ninja",
+     "pct": 15
+    },
+    {
+     "pet": "Good Samurai",
+     "pct": 9
+    },
+    {
+     "pet": "Evil Samurai",
+     "pct": 5
+    },
+    {
+     "pet": "Sensei",
+     "pct": 1
+    }
+   ]
+  },
+  {
+   "name": "Farm Egg",
+   "zone": "Farm",
+   "price": 200000000,
+   "pool": [
+    {
+     "pet": "Hay",
+     "pct": 40
+    },
+    {
+     "pet": "Bird",
+     "pct": 30
+    },
+    {
+     "pet": "Panda",
+     "pct": 15
+    },
+    {
+     "pet": "Cow",
+     "pct": 9
+    },
+    {
+     "pet": "Pig",
+     "pct": 5
+    },
+    {
+     "pet": "Farmer",
+     "pct": 1
+    }
+   ]
+  },
+  {
+   "name": "Frozen Egg",
+   "zone": "Snow",
+   "price": 10000000000,
+   "pool": [
+    {
+     "pet": "Red Snowman",
+     "pct": 40
+    },
+    {
+     "pet": "Blue Snowman",
+     "pct": 30
+    },
+    {
+     "pet": "Frozen Dragon",
+     "pct": 15
+    },
+    {
+     "pet": "Frozen Hydra",
+     "pct": 9
+    },
+    {
+     "pet": "Frozen Ice Shock",
+     "pct": 5
+    },
+    {
+     "pet": "Frozen Gem",
+     "pct": 1
+    }
+   ]
+  },
+  {
+   "name": "Ocean Egg",
+   "zone": "Underwater",
+   "price": 500000000000,
+   "pool": [
+    {
+     "pet": "Oceanic Dog",
+     "pct": 40
+    },
+    {
+     "pet": "Oceanic Kitty",
+     "pct": 30
+    },
+    {
+     "pet": "Oceanic Bunny",
+     "pct": 15
+    },
+    {
+     "pet": "Oceanic Bear",
+     "pct": 9
+    },
+    {
+     "pet": "Ocean Dragon",
+     "pct": 5
+    },
+    {
+     "pet": "Atlantic Hydra",
+     "pct": 1
+    }
+   ]
+  },
+  {
+   "name": "Lava Egg",
+   "zone": "Volcano",
+   "price": 30000000000000,
+   "pool": [
+    {
+     "pet": "Lava Plume",
+     "pct": 40
+    },
+    {
+     "pet": "Lava Golem",
+     "pct": 30
+    },
+    {
+     "pet": "Lava Veltal",
+     "pct": 15
+    },
+    {
+     "pet": "Lava Trio",
+     "pct": 9
+    },
+    {
+     "pet": "Lava Dragon",
+     "pct": 5
+    },
+    {
+     "pet": "Demon Dog",
+     "pct": 1
+    }
+   ]
+  },
+  {
+   "name": "Narmek Egg",
+   "zone": "Narmek",
+   "price": 2000000000000000,
+   "pool": [
+    {
+     "pet": "Moon Bunny",
+     "pct": 40
+    },
+    {
+     "pet": "Satellite Pup",
+     "pct": 30
+    },
+    {
+     "pet": "Alien Slime",
+     "pct": 15
+    },
+    {
+     "pet": "Meteor Moth",
+     "pct": 9
+    },
+    {
+     "pet": "Nebula Fox",
+     "pct": 5
+    },
+    {
+     "pet": "Cosmo Cat",
+     "pct": 1
+    }
+   ]
+  },
+  {
+   "name": "Food Cuke Egg",
+   "zone": null,
+   "price": 0,
+   "pool": [
+    {
+     "pet": "Popcorn Cuke",
+     "pct": 30
+    },
+    {
+     "pet": "Cotton Candy Cuke",
+     "pct": 24
+    },
+    {
+     "pet": "Lollipop Cuke",
+     "pct": 18
+    },
+    {
+     "pet": "Fried Egg Cuke",
+     "pct": 12
+    },
+    {
+     "pet": "Cupcake Cuke",
+     "pct": 8
+    },
+    {
+     "pet": "Taco Cuke",
+     "pct": 4
+    },
+    {
+     "pet": "Watermelon Cuke",
+     "pct": 2.5
+    },
+    {
+     "pet": "Burger Cuke",
+     "pct": 1
+    },
+    {
+     "pet": "Pizza Cuke",
+     "pct": 0.49
+    },
+    {
+     "pet": "Ice Cream Cuke",
+     "pct": 0.01
+    }
+   ]
+  }
+ ],
+ "pets": [
+  {
+   "name": "Cat",
+   "rarity": "Common",
+   "source": "Basic Egg",
+   "Multi1": 1.0,
+   "Damage": 2.0,
+   "Multi2": 1.0
+  },
+  {
+   "name": "Dog",
+   "rarity": "Common",
+   "source": "Basic Egg",
+   "Multi1": 1.0,
+   "Damage": 2.5,
+   "Multi2": 1.0
+  },
+  {
+   "name": "Bunny",
+   "rarity": "Uncommon",
+   "source": "Basic Egg",
+   "Multi1": 1.5,
+   "Damage": 3.0,
+   "Multi2": 1.0
+  },
+  {
+   "name": "Wolf",
+   "rarity": "Rare",
+   "source": "Basic Egg",
+   "Multi1": 2.0,
+   "Damage": 4.0,
+   "Multi2": 1.0
+  },
+  {
+   "name": "Tabby",
+   "rarity": "Legendary",
+   "source": "Basic Egg",
+   "Multi1": 3.0,
+   "Damage": 5.5,
+   "Multi2": 1.5
+  },
+  {
+   "name": "Fox",
+   "rarity": "Mythical",
+   "source": "Basic Egg",
+   "Multi1": 4.5,
+   "Damage": 9.0,
+   "Multi2": 1.5
+  },
+  {
+   "name": "Barrel",
+   "rarity": "Common",
+   "source": "Desert Egg",
+   "Multi1": 3.5,
+   "Damage": 25,
+   "Multi2": 1.5
+  },
+  {
+   "name": "Treasure Gem",
+   "rarity": "Common",
+   "source": "Desert Egg",
+   "Multi1": 4.5,
+   "Damage": 31,
+   "Multi2": 1.5
+  },
+  {
+   "name": "Cannon",
+   "rarity": "Uncommon",
+   "source": "Desert Egg",
+   "Multi1": 5.5,
+   "Damage": 40,
+   "Multi2": 1.5
+  },
+  {
+   "name": "Chest",
+   "rarity": "Rare",
+   "source": "Desert Egg",
+   "Multi1": 7.5,
+   "Damage": 52,
+   "Multi2": 2.0
+  },
+  {
+   "name": "Desert Overlord",
+   "rarity": "Legendary",
+   "source": "Desert Egg",
+   "Multi1": 10.0,
+   "Damage": 70,
+   "Multi2": 2.0
+  },
+  {
+   "name": "Cactus",
+   "rarity": "Mythical",
+   "source": "Desert Egg",
+   "Multi1": 16,
+   "Damage": 110,
+   "Multi2": 2.5
+  },
+  {
+   "name": "Dog Ninja",
+   "rarity": "Common",
+   "source": "Samurai Egg",
+   "Multi1": 10,
+   "Damage": 280,
+   "Multi2": 2.0
+  },
+  {
+   "name": "Good Ninja",
+   "rarity": "Common",
+   "source": "Samurai Egg",
+   "Multi1": 12,
+   "Damage": 350,
+   "Multi2": 2.0
+  },
+  {
+   "name": "Evil Ninja",
+   "rarity": "Uncommon",
+   "source": "Samurai Egg",
+   "Multi1": 16,
+   "Damage": 450,
+   "Multi2": 2.5
+  },
+  {
+   "name": "Good Samurai",
+   "rarity": "Rare",
+   "source": "Samurai Egg",
+   "Multi1": 21,
+   "Damage": 590,
+   "Multi2": 3.0
+  },
+  {
+   "name": "Evil Samurai",
+   "rarity": "Legendary",
+   "source": "Samurai Egg",
+   "Multi1": 28,
+   "Damage": 780,
+   "Multi2": 4.0
+  },
+  {
+   "name": "Sensei",
+   "rarity": "Mythical",
+   "source": "Samurai Egg",
+   "Multi1": 45,
+   "Damage": 1300,
+   "Multi2": 5.5
+  },
+  {
+   "name": "Hay",
+   "rarity": "Common",
+   "source": "Farm Egg",
+   "Multi1": 30,
+   "Damage": 3200,
+   "Multi2": 4.0
+  },
+  {
+   "name": "Bird",
+   "rarity": "Common",
+   "source": "Farm Egg",
+   "Multi1": 38,
+   "Damage": 4000,
+   "Multi2": 5.0
+  },
+  {
+   "name": "Panda",
+   "rarity": "Uncommon",
+   "source": "Farm Egg",
+   "Multi1": 48,
+   "Damage": 5100,
+   "Multi2": 6.0
+  },
+  {
+   "name": "Cow",
+   "rarity": "Rare",
+   "source": "Farm Egg",
+   "Multi1": 63,
+   "Damage": 6700,
+   "Multi2": 7.5
+  },
+  {
+   "name": "Pig",
+   "rarity": "Legendary",
+   "source": "Farm Egg",
+   "Multi1": 84,
+   "Damage": 9000,
+   "Multi2": 9.5
+  },
+  {
+   "name": "Farmer",
+   "rarity": "Mythical",
+   "source": "Farm Egg",
+   "Multi1": 140,
+   "Damage": 14000,
+   "Multi2": 15
+  },
+  {
+   "name": "Red Snowman",
+   "rarity": "Common",
+   "source": "Frozen Egg",
+   "Multi1": 90,
+   "Damage": 38000,
+   "Multi2": 10
+  },
+  {
+   "name": "Blue Snowman",
+   "rarity": "Common",
+   "source": "Frozen Egg",
+   "Multi1": 110,
+   "Damage": 48000,
+   "Multi2": 12
+  },
+  {
+   "name": "Frozen Dragon",
+   "rarity": "Uncommon",
+   "source": "Frozen Egg",
+   "Multi1": 140,
+   "Damage": 61000,
+   "Multi2": 15
+  },
+  {
+   "name": "Frozen Hydra",
+   "rarity": "Rare",
+   "source": "Frozen Egg",
+   "Multi1": 190,
+   "Damage": 80000,
+   "Multi2": 20
+  },
+  {
+   "name": "Frozen Ice Shock",
+   "rarity": "Legendary",
+   "source": "Frozen Egg",
+   "Multi1": 250,
+   "Damage": 110000,
+   "Multi2": 26
+  },
+  {
+   "name": "Frozen Gem",
+   "rarity": "Mythical",
+   "source": "Frozen Egg",
+   "Multi1": 400,
+   "Damage": 170000,
+   "Multi2": 41
+  },
+  {
+   "name": "Oceanic Dog",
+   "rarity": "Common",
+   "source": "Ocean Egg",
+   "Multi1": 280,
+   "Damage": 430000,
+   "Multi2": 29
+  },
+  {
+   "name": "Oceanic Kitty",
+   "rarity": "Common",
+   "source": "Ocean Egg",
+   "Multi1": 340,
+   "Damage": 540000,
+   "Multi2": 35
+  },
+  {
+   "name": "Oceanic Bunny",
+   "rarity": "Uncommon",
+   "source": "Ocean Egg",
+   "Multi1": 440,
+   "Damage": 690000,
+   "Multi2": 45
+  },
+  {
+   "name": "Oceanic Bear",
+   "rarity": "Rare",
+   "source": "Ocean Egg",
+   "Multi1": 580,
+   "Damage": 900000,
+   "Multi2": 59
+  },
+  {
+   "name": "Ocean Dragon",
+   "rarity": "Legendary",
+   "source": "Ocean Egg",
+   "Multi1": 770,
+   "Damage": 1200000,
+   "Multi2": 78
+  },
+  {
+   "name": "Atlantic Hydra",
+   "rarity": "Mythical",
+   "source": "Ocean Egg",
+   "Multi1": 1200,
+   "Damage": 1900000,
+   "Multi2": 120
+  },
+  {
+   "name": "Lava Plume",
+   "rarity": "Common",
+   "source": "Lava Egg",
+   "Multi1": 800,
+   "Damage": 5000000,
+   "Multi2": 81
+  },
+  {
+   "name": "Lava Golem",
+   "rarity": "Common",
+   "source": "Lava Egg",
+   "Multi1": 1000,
+   "Damage": 6200000,
+   "Multi2": 100
+  },
+  {
+   "name": "Lava Veltal",
+   "rarity": "Uncommon",
+   "source": "Lava Egg",
+   "Multi1": 1300,
+   "Damage": 8000000,
+   "Multi2": 130
+  },
+  {
+   "name": "Lava Trio",
+   "rarity": "Rare",
+   "source": "Lava Egg",
+   "Multi1": 1700,
+   "Damage": 10000000,
+   "Multi2": 170
+  },
+  {
+   "name": "Lava Dragon",
+   "rarity": "Legendary",
+   "source": "Lava Egg",
+   "Multi1": 2200,
+   "Damage": 14000000,
+   "Multi2": 220
+  },
+  {
+   "name": "Demon Dog",
+   "rarity": "Mythical",
+   "source": "Lava Egg",
+   "Multi1": 3600,
+   "Damage": 22000000,
+   "Multi2": 360
+  },
+  {
+   "name": "Moon Bunny",
+   "rarity": "Common",
+   "source": "Narmek Egg",
+   "Multi1": 2500,
+   "Damage": 60000000,
+   "Multi2": 250
+  },
+  {
+   "name": "Satellite Pup",
+   "rarity": "Common",
+   "source": "Narmek Egg",
+   "Multi1": 3100,
+   "Damage": 75000000,
+   "Multi2": 310
+  },
+  {
+   "name": "Alien Slime",
+   "rarity": "Uncommon",
+   "source": "Narmek Egg",
+   "Multi1": 4000,
+   "Damage": 96000000,
+   "Multi2": 400
+  },
+  {
+   "name": "Meteor Moth",
+   "rarity": "Rare",
+   "source": "Narmek Egg",
+   "Multi1": 5200,
+   "Damage": 130000000,
+   "Multi2": 520
+  },
+  {
+   "name": "Nebula Fox",
+   "rarity": "Legendary",
+   "source": "Narmek Egg",
+   "Multi1": 7000,
+   "Damage": 170000000,
+   "Multi2": 700
+  },
+  {
+   "name": "Cosmo Cat",
+   "rarity": "Mythical",
+   "source": "Narmek Egg",
+   "Multi1": 11000,
+   "Damage": 270000000,
+   "Multi2": 1100
+  },
+  {
+   "name": "Gregory",
+   "rarity": "Mythical",
+   "source": "Basic Egg secret 1/50,000 (pity 25)",
+   "Multi1": 50,
+   "Damage": 10000,
+   "Multi2": 6
+  },
+  {
+   "name": "Popcorn Cuke",
+   "rarity": "varies",
+   "source": "Food Cuke Egg (playtime)",
+   "Multi1": 4,
+   "Damage": 60,
+   "Multi2": 1.5
+  },
+  {
+   "name": "Cotton Candy Cuke",
+   "rarity": "varies",
+   "source": "Food Cuke Egg (playtime)",
+   "Multi1": 5,
+   "Damage": 80,
+   "Multi2": 1.5
+  },
+  {
+   "name": "Lollipop Cuke",
+   "rarity": "varies",
+   "source": "Food Cuke Egg (playtime)",
+   "Multi1": 6.5,
+   "Damage": 110,
+   "Multi2": 1.5
+  },
+  {
+   "name": "Fried Egg Cuke",
+   "rarity": "varies",
+   "source": "Food Cuke Egg (playtime)",
+   "Multi1": 8,
+   "Damage": 150,
+   "Multi2": 2.0
+  },
+  {
+   "name": "Cupcake Cuke",
+   "rarity": "varies",
+   "source": "Food Cuke Egg (playtime)",
+   "Multi1": 10,
+   "Damage": 210,
+   "Multi2": 2.0
+  },
+  {
+   "name": "Taco Cuke",
+   "rarity": "varies",
+   "source": "Food Cuke Egg (playtime)",
+   "Multi1": 13,
+   "Damage": 280,
+   "Multi2": 2.5
+  },
+  {
+   "name": "Watermelon Cuke",
+   "rarity": "varies",
+   "source": "Food Cuke Egg (playtime)",
+   "Multi1": 16,
+   "Damage": 380,
+   "Multi2": 2.5
+  },
+  {
+   "name": "Burger Cuke",
+   "rarity": "varies",
+   "source": "Food Cuke Egg (playtime)",
+   "Multi1": 20,
+   "Damage": 500,
+   "Multi2": 3.0
+  },
+  {
+   "name": "Pizza Cuke",
+   "rarity": "varies",
+   "source": "Food Cuke Egg (playtime)",
+   "Multi1": 28,
+   "Damage": 900,
+   "Multi2": 4.0
+  },
+  {
+   "name": "Ice Cream Cuke",
+   "rarity": "varies",
+   "source": "Food Cuke Egg (playtime)",
+   "Multi1": 40,
+   "Damage": 3000,
+   "Multi2": 5.0
+  },
+  {
+   "name": "Lil Pickle",
+   "rarity": "Special/Omega",
+   "source": "tutorial",
+   "Multi1": 2,
+   "Damage": 3,
+   "Multi2": 1.0
+  },
+  {
+   "name": "OG Pickle",
+   "rarity": "Special/Omega",
+   "source": "launch exclusive",
+   "Multi1": 3,
+   "Damage": 8,
+   "Multi2": 1.5
+  },
+  {
+   "name": "Blazing Pickle",
+   "rarity": "Special/Omega",
+   "source": "playtime 30m (ONE-TIME now)",
+   "Multi1": 25,
+   "Damage": 5000,
+   "Multi2": 3.5
+  },
+  {
+   "name": "King Cuke",
+   "rarity": "Special/Omega",
+   "source": "playtime 90m (ONE-TIME now)",
+   "Multi1": 60,
+   "Damage": 25000,
+   "Multi2": 7.0
+  },
+  {
+   "name": "Red Demon",
+   "rarity": "Special/Omega",
+   "source": "Robux product / Starter Pack",
+   "Multi1": 500,
+   "Damage": 500000,
+   "Multi2": 51
+  },
+  {
+   "name": "Purple Hydra",
+   "rarity": "Special/Omega",
+   "source": "Robux product",
+   "Multi1": 800,
+   "Damage": 900000,
+   "Multi2": 81
+  },
+  {
+   "name": "Heavenly Angel",
+   "rarity": "Special/Omega",
+   "source": "Robux product",
+   "Multi1": 800,
+   "Damage": 900000,
+   "Multi2": 81
+  },
+  {
+   "name": "Golden Cucumber",
+   "rarity": "Special/Omega",
+   "source": "season champion (Cukes)",
+   "Multi1": 1200,
+   "Damage": 2000000,
+   "Multi2": 120
+  },
+  {
+   "name": "Solid Gold Coin",
+   "rarity": "Special/Omega",
+   "source": "season champion (Coins)",
+   "Multi1": 600,
+   "Damage": 800000,
+   "Multi2": 61
+  },
+  {
+   "name": "Silver Pickle",
+   "rarity": "Special/Omega",
+   "source": "season top-10",
+   "Multi1": 300,
+   "Damage": 300000,
+   "Multi2": 31
+  },
+  {
+   "name": "Diamond Gherkin",
+   "rarity": "Special/Omega",
+   "source": "unobtainable (future)",
+   "Multi1": 600,
+   "Damage": 800000,
+   "Multi2": 61
+  },
+  {
+   "name": "Colossal Cucumber",
+   "rarity": "Special (boss forge, 10 shards)",
+   "source": "Spawn boss",
+   "Multi1": 3.0,
+   "Damage": 8.0,
+   "Multi2": 1.5
+  },
+  {
+   "name": "Cactus Colossus",
+   "rarity": "Special (boss forge, 10 shards)",
+   "source": "Desert boss",
+   "Multi1": 11,
+   "Damage": 100,
+   "Multi2": 2.0
+  },
+  {
+   "name": "Shogun Colossus",
+   "rarity": "Special (boss forge, 10 shards)",
+   "source": "Samurai boss",
+   "Multi1": 32,
+   "Damage": 1100,
+   "Multi2": 4.0
+  },
+  {
+   "name": "Harvest Colossus",
+   "rarity": "Special (boss forge, 10 shards)",
+   "source": "Farm boss",
+   "Multi1": 96,
+   "Damage": 13000,
+   "Multi2": 11
+  },
+  {
+   "name": "Frozen Colossus",
+   "rarity": "Special (boss forge, 10 shards)",
+   "source": "Snow boss",
+   "Multi1": 290,
+   "Damage": 150000,
+   "Multi2": 30
+  },
+  {
+   "name": "Abyssal Colossus",
+   "rarity": "Special (boss forge, 10 shards)",
+   "source": "Underwater boss",
+   "Multi1": 880,
+   "Damage": 1700000,
+   "Multi2": 89
+  },
+  {
+   "name": "Magma Colossus",
+   "rarity": "Special (boss forge, 10 shards)",
+   "source": "Volcano boss",
+   "Multi1": 2600,
+   "Damage": 20000000,
+   "Multi2": 260
+  },
+  {
+   "name": "Cosmic Colossus",
+   "rarity": "Special (boss forge, 10 shards)",
+   "source": "Narmek boss",
+   "Multi1": 8000,
+   "Damage": 240000000,
+   "Multi2": 800
+  }
+ ],
+ "bosses": [
+  {
+   "zone": "Spawn",
+   "hpBase": 3500,
+   "reward": 900,
+   "bonusCoins": 300,
+   "note": "pool = 900 * ZONE_V * 6 split by contribution; escape pays HALF rate now"
+  },
+  {
+   "zone": "Desert",
+   "hpBase": 4000,
+   "reward": 900,
+   "bonusCoins": 300,
+   "note": "pool = 900 * ZONE_V * 6 split by contribution; escape pays HALF rate now"
+  },
+  {
+   "zone": "Samurai",
+   "hpBase": 4500,
+   "reward": 900,
+   "bonusCoins": 300,
+   "note": "pool = 900 * ZONE_V * 6 split by contribution; escape pays HALF rate now"
+  },
+  {
+   "zone": "Farm",
+   "hpBase": 5000,
+   "reward": 900,
+   "bonusCoins": 300,
+   "note": "pool = 900 * ZONE_V * 6 split by contribution; escape pays HALF rate now"
+  },
+  {
+   "zone": "Snow",
+   "hpBase": 5500,
+   "reward": 900,
+   "bonusCoins": 300,
+   "note": "pool = 900 * ZONE_V * 6 split by contribution; escape pays HALF rate now"
+  },
+  {
+   "zone": "Underwater",
+   "hpBase": 6500,
+   "reward": 900,
+   "bonusCoins": 300,
+   "note": "pool = 900 * ZONE_V * 6 split by contribution; escape pays HALF rate now"
+  },
+  {
+   "zone": "Volcano",
+   "hpBase": 7500,
+   "reward": 900,
+   "bonusCoins": 300,
+   "note": "pool = 900 * ZONE_V * 6 split by contribution; escape pays HALF rate now"
+  },
+  {
+   "zone": "Narmek",
+   "hpBase": 8500,
+   "reward": 900,
+   "bonusCoins": 300,
+   "note": "pool = 900 * ZONE_V * 6 split by contribution; escape pays HALF rate now"
+  }
+ ],
+ "vault": {
+  "earnRate": "rate/s = max(0.01, breakValue(record) / 220) \u2014 FRACTIONAL, exactly proportional (2026-08-28 later fix: the launch version floored to integers with min 1, which collapsed every record worth <440 to the same 1/s \u2014 a Golden Sliced and a plain Sliced showed identical rate/value/cost)",
+  "breakValue": "typeReward * materialMult * mutationMult (record's own properties, zone-inflated)",
+  "accrualMultiplier": "x (1 + Pets.Multi1) x 2^Rebirths read LIVE from the owner (was flat) \u2014 snapshot persisted as VaultMultSnap for offline math",
+  "upgrades": "cost = Rate x 500 x 1.35^(L-1) Cukes, L<=20, rate x1.18^(L-1) (UNCHANGED)",
+  "offline": "50% first 6h / 30% next, 6h-equivalent cap (UNCHANGED), applied to rate x VaultMultSnap",
+  "questQuoteCap": "vault-coin quest/minigame quotes capped at TimeSkipRate-equivalent for same seconds",
+  "migration": "LoadVault recomputes each record's Rate from live tables (RateV=3 stamp; v2 = the short-lived integer-floor formula, recomputed too); Accrued/OfflineCash preserved"
+ },
+ "upgrades": [
+  {
+   "name": "Vault slots",
+   "prices": [
+    500000.0,
+    25000000.0,
+    2000000000.0
+   ],
+   "max": 3
+  },
+  {
+   "name": "Pet equips",
+   "prices": [
+    25000.0,
+    100000.0,
+    400000.0
+   ],
+   "max": 3
+  },
+  {
+   "name": "Smashes required",
+   "prices": [
+    50000.0,
+    1000000.0,
+    30000000.0
+   ],
+   "max": 3
+  }
+ ],
+ "fixes": [
+  "EvolveService: validate 3 same-name Normal copies + ownership BEFORE charging; evolve cost = 2x source egg price (was flat 600k)",
+  "PlaytimeRewards: free rebirth + Blazing Pickle + King Cuke become ONE-TIME (persisted); repeat sessions get time-skip grants instead",
+  "StarterPortalService: progress reset moved from loadCooldown (every join) to startCooldown (parity with other portals)",
+  "Escaped bosses pay HALF the per-HP kill rate (was full)",
+  "SellCarried pays flat (MultipliersApplied) so the shown card value == paid value",
+  "SellAll: rebirth coin multiplier REMOVED (1:1; income already scales 2^R on the cuke side)",
+  "Quest/minigame vault-coin quotes capped (see vault.questQuoteCap)",
+  "GoldenHour churn filter: base HP <= zone common HP (was flat 30; no-oped outside Spawn)",
+  "Index milestone payout: 500*N -> scales with sqrt of current zone value, capped (was unbounded flat faucet)",
+  "NumberController.SuffixNumber: nil-guard + scientific fallback past table end; VaultService Abbrev unified onto NumberController"
+ ],
+ "retention": {
+  "firstSession": "tutorial gift 2,500 Coins ~= 10 Basic Egg hatches; Stone Pickaxe at 400 within ~1 min; Desert door 60K at ~6-8 min",
+  "jackpotCadence": "DIAMOND 1/167 (~every 8 min), daily mutation 1/50, VOID 1/1500 (~1.5/h), PRISMATIC 1/25,000 (~1/day of active play, server-announced)",
+  "singleDropBudget": "largest realistic jackpot (PRISMATIC common) ~= 10 min of income; stacked cap 5000x ~= 1.1h of income"
+ }
+}

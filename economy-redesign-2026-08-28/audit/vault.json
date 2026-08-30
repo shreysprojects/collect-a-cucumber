@@ -1,0 +1,132 @@
+{
+  "sources": {
+    "carryService": "backups/EconomyRedesign_2026-08-28/scripts/ServerStorage__ServerController__CarryService.lua",
+    "vaultService": "backups/EconomyRedesign_2026-08-28/scripts/ServerStorage__ServerController__VaultService.lua",
+    "bankBuilder": "backups/EconomyRedesign_2026-08-28/scripts/ServerStorage__ServerController__VaultService__BankBuilder.lua",
+    "vaultTimeSkip": "backups/EconomyRedesign_2026-08-28/scripts/ServerStorage__ServerController__VaultTimeSkipService.lua",
+    "breakables": "backups/EconomyRedesign_2026-08-28/scripts/ServerStorage__ServerController__BreakablesService.lua"
+  },
+  "carry": {
+    "catchOdds": {
+      "mode": "100_PERCENT_CATCH",
+      "since": "2026-08-27",
+      "note": "TryAwardFromBreak bypasses (does not delete) the odds roll; every break by the last attacker lands on the arm. CarryService.lua:330-337",
+      "legacyChanceFor": {
+        "formula": "chance = 0.04 + 0.16 * clamp(Weight/35, 0, 1); golden *= 0.5",
+        "constants": { "BASE_CHANCE": 0.16, "FLOOR_CHANCE": 0.04 },
+        "ref": "CarryService.lua:30-31,64-70 (unused, kept for revert; backup ServerStorage.CarryOddsBackup_2026_08_27)"
+      },
+      "swapRule": "while carrying, only STRICTLY rarer replaces: if rarity >= current.Rarity then refuse (CarryService.lua:323-329)",
+      "tutorialGate": "no carries mid-tutorial unless TutorialCarryPending or already carrying (CarryService.lua:313-318)",
+      "bossTrophy": { "guaranteed": true, "rarity": 1e-4, "rate": "floor(8 * 1.6^(tier-1))", "ref": "CarryService.lua:374-405" }
+    },
+    "rarity": {
+      "formula": "p = (Weight / sum(zoneWeights)) / 2^(tier-1); golden: p *= clamp(GoldenChanceFor(zone), 0.001, 1); mutation: p *= 0.02; lightning: p *= 0.05; diamond: p *= 0.02",
+      "goldenChance": 0.08,
+      "goldenHourMult": 4,
+      "mutationChance": 0.02,
+      "prismaticChance": 3.333e-5,
+      "diamondChance": 0.02,
+      "lightningChance": 0.05,
+      "zones": ["Spawn", "Desert", "Samurai", "Farm", "Snow", "Underwater", "Volcano", "Narmek"],
+      "usedFor": "swap comparison (lower = rarer) + '1 IN X' showcase display only; NOT an odds roll in 100% catch mode",
+      "ref": "BreakablesService.lua:3682-3706; GOLDEN_CHANCE 2521; MUTATION_CHANCE 605; Prismatic 613; DiamondMod 618-619"
+    },
+    "earnRate": {
+      "formula": "Rate = max(1, floor( (1 + (35 - clamp(Weight,1,35))/35 * 4) * 1.6^(tier-1) * [golden?3] * [diamond?8] * [mutation? (PRISMATIC?20:5)] * [lightning?4] ))",
+      "ref": "CarryService.lua:76-88",
+      "baseByWeight": { "w35": 1.0, "w25": 2.14, "w16": 3.17, "w14": 3.4, "w8": 4.09, "w5": 4.43, "w1": 4.89 },
+      "tierMult": { "Spawn": 1, "Desert": 1.6, "Samurai": 2.56, "Farm": 4.096, "Snow": 6.5536, "Underwater": 10.4858, "Volcano": 16.7772, "Narmek": 26.8435 },
+      "modifiers": { "golden": 3, "diamond": 8, "mutation": 5, "PRISMATIC": 20, "lightning_CHARGED": 4 },
+      "stacking": "golden and diamond are exclusive at spawn (elseif); mutation and lightning can each stack on golden/diamond and on each other",
+      "floor": "max(1, floor(rate)) - integer base rate stored as record.Rate",
+      "bossTrophyRate": "floor(8 * 1.6^(tier-1)) (CarryService.lua:391-392)"
+    },
+    "effectiveRate": {
+      "formula": "EffectiveRate(record) = (record.Rate or 1) * 1.18^((record.Level or 1) - 1); FROZEN mutation *= 0.8; returns FLOAT",
+      "ref": "CarryService.lua:417-423",
+      "levelMultAtMax": 23.214
+    }
+  },
+  "value": {
+    "formula": "ValueOf(record) = floor(EffectiveRate(record) * 250)",
+    "ref": "CarryService.lua:427-429",
+    "meaning": "~250s (~4min) of the cucumber's earn rate; green number on vault cards AND the SellCarried vendor payout",
+    "sellCarriedQuirk": "SellVendorServer.lua:121-126 pays ValueOf via AddCurrency WITHOUT MultipliersApplied/WasPurchase, so CurrencyHandler.GetMulipliers (CurrencyHandler.lua:66-103) multiplies it by the rebirth mult (1 + 0.5*rebirths, up to 26x) - actual payout exceeds the displayed card value at any rebirth > 0"
+  },
+  "vault": {
+    "stalls": { "count": 12, "ref": "VaultService.lua:54" },
+    "upgrade": {
+      "costFormula": "floor(record.Rate * 500 * 1.35^(Level-1)) paid in Cukes (Cucumbers currency)",
+      "constants": { "MAX_LEVEL": 20, "COST_MULT": 1.35, "BASE_COST_PER_RATE": 500 },
+      "rateGrowthPerLevel": 1.18,
+      "ref": "VaultService.lua:56-61,176-178,1598-1645",
+      "cumulativeCostToMax": "Rate * 500 * (1.35^19 - 1)/0.35 = Rate * ~425,950 Cukes",
+      "rateAtMaxVsL1": 23.214,
+      "marginalROI": "each level: +18% rate for a cost 35% higher than the last - diminishing returns by design",
+      "notes": "cost uses base Rate, never EffectiveRate; upgrades survive take-back/replace/steal/sale via record.Level"
+    },
+    "accrual": {
+      "formula": "per stored cucumber per tick: Accrued += EffectiveRate(rec) * dt (TICK=0.2s, 5x/s); MOLTEN: rate *= 1 + 1.5 * (HeatT/3600), HeatT += dt capped 3600 (2.5x after 1h uncollected), reset to 0 on Collect",
+      "ref": "VaultService.lua:2069-2115 (loop), 2092-2095 (MOLTEN), 1663 (heat reset)",
+      "collect": {
+        "trigger": "owner touches the spot's CollectPad (per-cucumber pads)",
+        "payout": "floor(Accrued) + floor(OfflineCash), sub-1 remainder kept ticking; 1s per-record debounce",
+        "multipliers": "MultipliersApplied = true -> paid FLAT, no rebirth/coin multipliers (user fix 2026-08-27)",
+        "ref": "VaultService.lua:1648-1682"
+      },
+      "mutations": {
+        "FROZEN": { "earnMult": 0.8, "theftProof": true, "ref": "CarryService.lua:419-422; VaultService.lua:647,1880-1884" },
+        "MOLTEN": { "liveRampMax": 2.5, "rampSeconds": 3600, "offlineRamp": false, "ref": "VaultService.lua:2088-2095" },
+        "PRISMATIC": { "note": "x20 lives in the base Rate (EarnRateOf), not in vault code", "ref": "CarryService.lua:85" }
+      },
+      "persistence": "write-through SaveVault on every mutation + ~1s cadence in accrual loop; VaultLoaded hard gate prevents overwriting profile with empty stall (VaultService.lua:452-483)"
+    },
+    "offline": {
+      "formula": "away = clamp(os.time() - Data.VaultLastSave, 0, 57600); if away >= 120: equivSeconds = min(away, 21600)*0.5 + max(0, away-21600)*0.3; per cucumber: OfflineCash += EffectiveRate(rec) * equivSeconds",
+      "tiers": { "first6h": 0.5, "after6h": 0.3, "countedAbsenceCapSeconds": 57600, "maxEquivalentSeconds": 21600 },
+      "notes": "flat rate (no MOLTEN ramp, no multipliers); uncollected OfflineCash carries over and stacks across absences; paid with next pad Collect; zeroed if the cucumber is stolen (VaultService.lua:1913-1914)",
+      "ref": "VaultService.lua:1041-1060,1104-1106; mirrors OfflineService.lua:15-26 cukes tiers"
+    },
+    "capacity": {
+      "formula": "CapacityFor(level, extra) = 6 + clamp(rebirths, 0, 50) + clamp(extraSlots, 0, 3); max 59",
+      "constants": { "BASE_CAPACITY": 6, "MAX_LEVEL_rebirths": 50, "MAX_EXTRA_SLOTS": 3, "SLOTS_PER_FLOOR": 10 },
+      "floors": "FloorsFor(capacity) = max(1, ceil(capacity/10)); max 6 floors",
+      "width": "36 + 5.75 * clamp(level, 0, 5) studs; physical fit floor((width-4.8)/5.9)+1 caps a floor at 10-11 podiums",
+      "stallLevelSource": "leaderstats.Rebirths watched live (VaultService.lua:1345-1375); extra slots = PlayerData.Upgrades['Vault slots'] (VaultService.lua:1313-1343)",
+      "ref": "BankBuilder.lua:43-75"
+    },
+    "security": {
+      "SECURE_DURATION": 300,
+      "freshOwnerStartsLocked": true,
+      "stealGates": "not FROZEN; lock lapsed (IsSecured false); thief within 14 studs of spot; empty hands; 1s per-player steal rate limit; not owner",
+      "stealEconomics": "thief gains full record (Rate, Level, Mutation ride along); victim's profile forgets it immediately (SaveVault); Accrued and OfflineCash zeroed - pad money never changes hands",
+      "heist": "victim lands 3 strikes (range 16, cooldown 0.7s) -> auto-return to podium; thief slowed 1.5x (CarryingStolen); thief leaving mid-heist returns it, victim leaving forfeits",
+      "ref": "VaultService.lua:63-65,1517,1876-1958 (Steal), 1377-1505 (Heist), 1818-1864 (PullLever)"
+    }
+  },
+  "timeskip": {
+    "coinsPerSecond": "sum of CarryService.EffectiveRate(record) over the player's stored cucumbers (includes FROZEN 0.8x and level mult; EXCLUDES MOLTEN heat ramp)",
+    "getRate": "CoinsPerSecond * CurrencyHandler.GetMulipliers(Coins) = CoinsPerSecond * rebirthMult where rebirthMult = 1 + 0.5*rebirths (max 26x at 50 rebirths)",
+    "quote": "floor(GetRate * seconds)",
+    "grant": "pays Quote flat (WasPurchase=true); refuses empty vault (quote 0)",
+    "ref": "VaultTimeSkipService.lua:30-80; CurrencyHandler.lua:66-103; RebirthService.lua:17,175-180",
+    "consumers": {
+      "devProducts": { "durationsSeconds": [60, 300, 1800, 18000, 86400, 604800], "status": "Id 0 placeholders - not yet live", "ref": "ProductController.lua:236-243; ProductHandler.lua:139-146" },
+      "questBoard": { "rewardSeconds": [60, 180, 300, 600], "floor": 500, "cadence": "3 quests per 6h cycle, each also grants a cukes time-skip (TimeSkipRateService)", "ref": "QuestBoardService.lua:40-43,130-139" },
+      "minigames": { "coinRewardSeconds": [120, 300, 900, 1800], "poolWeights": { "coins_2m": 10, "coins_5m": 8, "coins_15m": 6, "coins_30m": 3 }, "emptyVaultFallback": "same-duration cucumber prize", "lockedAtPickTime": true, "ref": "MinigameCompletionService.lua:59-72,112-130,190-242" },
+      "storeUI": { "liveQuotes": "GetVaultTimeSkipQuote RemoteFunction", "ref": "TimeSkipQuoteServer.lua:5-17; Store.lua:13,67" }
+    }
+  },
+  "expectedIncome": {
+    "padPassiveCoinsPerSec": "sum_i [ Rate_i * 1.18^(L_i-1) * (FROZEN_i?0.8:1) * (MOLTEN_i? 1+1.5*HeatT_i/3600 : 1) ] - collected FLAT",
+    "questCoinsPerClaim": "max( sum_i EffRate_i * (1+0.5*rebirths) * rolledSeconds{60,180,300,600}, 500 )",
+    "minigameCoinsPerWin": "sum_i EffRate_i * (1+0.5*rebirths) * {120,300,900,1800}",
+    "offlineCoins": "sum_i EffRate_i * min( 0.5*min(away,21600) + 0.3*max(0,away-21600), 21600 ) for away in [120, 57600]",
+    "examples": {
+      "earlySpawnStall": { "stored": "6x common Spawn L1 (Rate 1)", "coinsPerMin": 360 },
+      "midFarmStall": { "stored": "8x golden Farm mid-rarity L5 (Rate ~38, EffRate ~73.7)", "coinsPerMin": 35400 },
+      "lateNarmekStall": { "stored": "10x golden Narmek tree L20 (Rate 329, EffRate ~7637)", "coinsPerMin": 4582000, "tenMinQuestAtR50": "~1.19B coins" }
+    }
+  }
+}

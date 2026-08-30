@@ -1,0 +1,314 @@
+{
+  "_meta": {
+    "source": "backups/EconomyRedesign_2026-08-28/scripts/",
+    "files": {
+      "BS": "ServerStorage__ServerController__BreakablesService.lua",
+      "TS": "ServerStorage__ServerController__TimeSkipRateService.lua",
+      "CS": "ServerStorage__ServerController__CarryService.lua",
+      "CH": "ServerStorage__ServerController__CurrencyHandler.lua",
+      "VS": "ServerStorage__ServerController__VaultService.lua",
+      "RB": "ServerStorage__ServerController__RebirthService.lua",
+      "DOORS": "ServerStorage__ServerController__Dictionaries__Doors.lua",
+      "BC": "StarterPlayer__StarterPlayerScripts__BreakablesClient.lua"
+    },
+    "note": "spawnPct = weight / sum(non-sliced weights in zone). Sliced types spawn from a separate fixed quota, never from the weighted roll (BS:845-867). effectiveHP = HP * zoneHp (BS:2730-2732). effectiveReward = Reward * orb * multi (BS:1065-1067)."
+  },
+  "zones": [
+    {"index": 1, "name": "Spawn",      "zoneHp": 1,   "orb": 1,   "multi": 1,   "zoneValue": 1,    "refs": {"zoneHp": "BS:112", "orbs": "DOORS:29-30"}},
+    {"index": 2, "name": "Desert",     "zoneHp": 3,   "orb": 2,   "multi": 1.5, "zoneValue": 3,    "refs": {"zoneHp": "BS:112", "orbs": "DOORS:61-62"}},
+    {"index": 3, "name": "Samurai",    "zoneHp": 8,   "orb": 2.5, "multi": 2,   "zoneValue": 5,    "refs": {"zoneHp": "BS:112", "orbs": "DOORS:91-92"}},
+    {"index": 4, "name": "Farm",       "zoneHp": 20,  "orb": 3,   "multi": 2.5, "zoneValue": 7.5,  "refs": {"zoneHp": "BS:112", "orbs": "DOORS:120-121"}},
+    {"index": 5, "name": "Snow",       "zoneHp": 45,  "orb": 3.5, "multi": 3,   "zoneValue": 10.5, "refs": {"zoneHp": "BS:113", "orbs": "DOORS:149-150"}},
+    {"index": 6, "name": "Underwater", "zoneHp": 110, "orb": 5,   "multi": 4,   "zoneValue": 20,   "refs": {"zoneHp": "BS:113", "orbs": "DOORS:178-179"}},
+    {"index": 7, "name": "Volcano",    "zoneHp": 240, "orb": 6,   "multi": 5,   "zoneValue": 30,   "refs": {"zoneHp": "BS:113", "orbs": "DOORS:208-209"}},
+    {"index": 8, "name": "Narmek",     "zoneHp": 500, "orb": 7,   "multi": 6,   "zoneValue": 42,   "refs": {"zoneHp": "BS:114", "orbs": "DOORS:238-239"}}
+  ],
+  "zonesOrderRef": "BS:158",
+  "zoneIndexEffects": [
+    "HP wall: effectiveHP = typeHP * zoneHp (BS:2730-2732, 3625)",
+    "Reward: effectiveReward = typeReward * orb * multi (BS:1065-1067)",
+    "BonusCoins: coins = floor(BonusCoins * multi * damageShare * petCoinMult) min 1 (BS:1127-1134); multi only, NOT orb",
+    "Carry rarity: p /= 2^(zoneIndex-1) (BS:3690-3691)",
+    "Vault earn rate: rate *= 1.6^(zoneIndex-1) (CS:79-80)",
+    "Boss trophy carry rate: floor(8 * 1.6^(zoneIndex-1)) (CS:391-392)"
+  ],
+  "types": {
+    "Spawn": {
+      "ref": "BS:176-209",
+      "slicedQuota": {"name": "Sliced Cucumber", "weight": 25, "hp": 8, "reward": 3, "bonusCoins": 1, "template": "Spawn Sliced Cucumber", "effectiveHP": 8, "effectiveReward": 3, "ref": "BS:177-181"},
+      "regular": [
+        {"name": "Cucumber",           "weight": 35, "hp": 30,  "reward": 8,   "bonusCoins": 3,  "template": "Spawn Cucumber",           "spawnPct": 42.68, "effectiveHP": 30,  "effectiveReward": 8,   "ref": "BS:182-186"},
+        {"name": "Slice Stack",        "weight": 16, "hp": 65,  "reward": 22,  "bonusCoins": 6,  "template": "Spawn Slice Stack",        "spawnPct": 19.51, "effectiveHP": 65,  "effectiveReward": 22,  "ref": "BS:187-191"},
+        {"name": "Vined Cucumber",     "weight": 14, "hp": 110, "reward": 42,  "bonusCoins": 10, "template": "Spawn Vined Cucumber",     "spawnPct": 17.07, "effectiveHP": 110, "effectiveReward": 42,  "ref": "BS:192-196"},
+        {"name": "Flowered Cucumber",  "weight": 9,  "hp": 160, "reward": 70,  "bonusCoins": 16, "template": "Spawn Flowered Cucumber",  "spawnPct": 10.98, "effectiveHP": 160, "effectiveReward": 70,  "ref": "BS:199-203"},
+        {"name": "Cucumber Tree",      "weight": 8,  "hp": 350, "reward": 140, "bonusCoins": 25, "template": "Spawn Cucumber Tree", "tree": true, "spawnPct": 9.76, "effectiveHP": 350, "effectiveReward": 140, "ref": "BS:204-208"}
+      ]
+    },
+    "Desert": {
+      "ref": "BS:217-261",
+      "slicedQuota": {"name": "Sun-Dried Slice", "weight": 25, "hp": 10, "reward": 4, "bonusCoins": 1, "template": "Desert Sun-Dried Slice", "effectiveHP": 30, "effectiveReward": 12, "ref": "BS:218-222"},
+      "regular": [
+        {"name": "Prickly Cucumber",  "weight": 34, "hp": 35,  "reward": 10,  "bonusCoins": 4,  "template": "Desert Prickly Cucumber",  "spawnPct": 35.79, "effectiveHP": 105,  "effectiveReward": 30,  "ref": "BS:223-227"},
+        {"name": "Sliced Cucumber",   "weight": 18, "hp": 70,  "reward": 25,  "bonusCoins": 7,  "template": "Desert Sliced Cucumber",   "spawnPct": 18.95, "effectiveHP": 210,  "effectiveReward": 75,  "ref": "BS:228-235"},
+        {"name": "Sun-Baked Cucumber","weight": 14, "hp": 130, "reward": 50,  "bonusCoins": 12, "template": "Desert Sun-Baked Cucumber","spawnPct": 14.74, "effectiveHP": 390,  "effectiveReward": 150, "ref": "BS:236-240"},
+        {"name": "Wrapped Cucumber",  "weight": 10, "hp": 190, "reward": 85,  "bonusCoins": 18, "template": "Desert Wrapped Cucumber",  "spawnPct": 10.53, "effectiveHP": 570,  "effectiveReward": 255, "ref": "BS:241-245"},
+        {"name": "Cactus Cucumber",   "weight": 8,  "hp": 260, "reward": 110, "bonusCoins": 22, "template": "Desert Cactus Cucumber",   "spawnPct": 8.42,  "effectiveHP": 780,  "effectiveReward": 330, "ref": "BS:246-250"},
+        {"name": "Desert Palm",       "weight": 6,  "hp": 320, "reward": 135, "bonusCoins": 26, "template": "Desert Palm",              "spawnPct": 6.32,  "effectiveHP": 960,  "effectiveReward": 405, "ref": "BS:251-255"},
+        {"name": "Sandstone Tree",    "weight": 5,  "hp": 400, "reward": 165, "bonusCoins": 30, "template": "Desert Sandstone Tree", "tree": true, "spawnPct": 5.26, "effectiveHP": 1200, "effectiveReward": 495, "ref": "BS:256-260"}
+      ]
+    },
+    "Samurai": {
+      "ref": "BS:270-306",
+      "slicedQuota": {"name": "Sliced Cucumber", "weight": 25, "hp": 10, "reward": 4, "bonusCoins": 1, "template": "Samurai Sliced Cucumber", "effectiveHP": 80, "effectiveReward": 20, "ref": "BS:271-275"},
+      "regular": [
+        {"name": "Katana Cucumber",  "weight": 34, "hp": 38,  "reward": 11,  "bonusCoins": 4,  "template": "Samurai Katana Cucumber",  "spawnPct": 39.08, "effectiveHP": 304,  "effectiveReward": 55,  "ref": "BS:276-280"},
+        {"name": "Bamboo Cucumber",  "weight": 20, "hp": 80,  "reward": 28,  "bonusCoins": 8,  "template": "Samurai Bamboo Cucumber",  "spawnPct": 22.99, "effectiveHP": 640,  "effectiveReward": 140, "ref": "BS:281-285"},
+        {"name": "Lantern Cucumber", "weight": 13, "hp": 150, "reward": 58,  "bonusCoins": 14, "template": "Samurai Lantern Cucumber", "spawnPct": 14.94, "effectiveHP": 1200, "effectiveReward": 290, "ref": "BS:286-290"},
+        {"name": "Bamboo Grove",     "weight": 9,  "hp": 230, "reward": 98,  "bonusCoins": 20, "template": "Samurai Bamboo Grove",     "spawnPct": 10.34, "effectiveHP": 1840, "effectiveReward": 490, "ref": "BS:291-295"},
+        {"name": "Torii Gate",       "weight": 6,  "hp": 330, "reward": 140, "bonusCoins": 26, "template": "Samurai Torii Gate",       "spawnPct": 6.90,  "effectiveHP": 2640, "effectiveReward": 700, "ref": "BS:296-300"},
+        {"name": "Sakura Tree",      "weight": 5,  "hp": 420, "reward": 175, "bonusCoins": 32, "template": "Samurai Sakura Tree", "tree": true, "spawnPct": 5.75, "effectiveHP": 3360, "effectiveReward": 875, "ref": "BS:301-305"}
+      ]
+    },
+    "Farm": {
+      "ref": "BS:313-348",
+      "slicedQuota": {"name": "Cucumber Basket", "weight": 25, "hp": 10, "reward": 4, "bonusCoins": 1, "template": "Farm Cucumber Basket", "effectiveHP": 200, "effectiveReward": 30, "ref": "BS:314-318"},
+      "regular": [
+        {"name": "Muddy Cucumber", "weight": 34, "hp": 42,  "reward": 12,  "bonusCoins": 5,  "template": "Farm Muddy Cucumber", "spawnPct": 42.50, "effectiveHP": 840,  "effectiveReward": 90,     "ref": "BS:319-323"},
+        {"name": "Crate Cucumber", "weight": 22, "hp": 95,  "reward": 34,  "bonusCoins": 10, "template": "Farm Crate Cucumber", "spawnPct": 27.50, "effectiveHP": 1900, "effectiveReward": 255,    "ref": "BS:324-328"},
+        {"name": "Windmill Plant", "weight": 12, "hp": 190, "reward": 76,  "bonusCoins": 17, "template": "Farm Windmill Plant", "spawnPct": 15.00, "effectiveHP": 3800, "effectiveReward": 570,    "ref": "BS:329-333"},
+        {"name": "Hay Bale",       "weight": 7,  "hp": 310, "reward": 130, "bonusCoins": 25, "template": "Farm Hay Bale",       "spawnPct": 8.75,  "effectiveHP": 6200, "effectiveReward": 975,    "ref": "BS:334-338"},
+        {"name": "Cucumber Tree",  "weight": 5,  "hp": 440, "reward": 185, "bonusCoins": 34, "template": "Farm Cucumber Tree", "tree": true, "spawnPct": 6.25, "effectiveHP": 8800, "effectiveReward": 1387.5, "ref": "BS:339-347"}
+      ]
+    },
+    "Snow": {
+      "ref": "BS:352-393",
+      "slicedQuota": {"name": "Frozen Slice", "weight": 25, "hp": 10, "reward": 4, "bonusCoins": 1, "template": "Snow Frozen Slice", "effectiveHP": 450, "effectiveReward": 42, "ref": "BS:353-357"},
+      "regular": [
+        {"name": "Snowcap Cucumber", "weight": 32, "hp": 45,  "reward": 13,  "bonusCoins": 5,  "template": "Snow Snowcap Cucumber", "spawnPct": 35.96, "effectiveHP": 2025,  "effectiveReward": 136.5,  "ref": "BS:358-362"},
+        {"name": "Snowball Slice",   "weight": 20, "hp": 85,  "reward": 30,  "bonusCoins": 9,  "template": "Snow Snowball Slice",   "spawnPct": 22.47, "effectiveHP": 3825,  "effectiveReward": 315,    "ref": "BS:363-367"},
+        {"name": "Crystal Cucumber", "weight": 13, "hp": 160, "reward": 64,  "bonusCoins": 15, "template": "Snow Crystal Cucumber", "spawnPct": 14.61, "effectiveHP": 7200,  "effectiveReward": 672,    "ref": "BS:368-372"},
+        {"name": "Frozen Cucumber",  "weight": 9,  "hp": 250, "reward": 105, "bonusCoins": 21, "template": "Snow Frozen Cucumber",  "spawnPct": 10.11, "effectiveHP": 11250, "effectiveReward": 1102.5, "ref": "BS:373-377"},
+        {"name": "Snow Tree",        "weight": 6,  "hp": 330, "reward": 138, "bonusCoins": 26, "template": "Snow Snow Tree",        "spawnPct": 6.74,  "effectiveHP": 14850, "effectiveReward": 1449,   "ref": "BS:378-382"},
+        {"name": "Icicle Tree",      "weight": 5,  "hp": 400, "reward": 168, "bonusCoins": 31, "template": "Snow Icicle Tree",      "spawnPct": 5.62,  "effectiveHP": 18000, "effectiveReward": 1764,   "ref": "BS:383-387"},
+        {"name": "Frozen Tree",      "weight": 4,  "hp": 460, "reward": 195, "bonusCoins": 36, "template": "Snow Frozen Tree", "tree": true, "spawnPct": 4.49, "effectiveHP": 20700, "effectiveReward": 2047.5, "ref": "BS:388-392"}
+      ]
+    },
+    "Underwater": {
+      "ref": "BS:396-437",
+      "slicedQuota": {"name": "Bubble Slice", "weight": 25, "hp": 10, "reward": 4, "bonusCoins": 1, "template": "Underwater Bubble Slice", "effectiveHP": 1100, "effectiveReward": 80, "ref": "BS:397-401"},
+      "regular": [
+        {"name": "Seaweed Cucumber", "weight": 32, "hp": 48,  "reward": 14,  "bonusCoins": 5,  "template": "Underwater Seaweed Cucumber", "spawnPct": 35.96, "effectiveHP": 5280,  "effectiveReward": 280,  "ref": "BS:402-406"},
+        {"name": "Shell Slice",      "weight": 20, "hp": 90,  "reward": 32,  "bonusCoins": 9,  "template": "Underwater Shell Slice",      "spawnPct": 22.47, "effectiveHP": 9900,  "effectiveReward": 640,  "ref": "BS:407-411"},
+        {"name": "Coral Cucumber",   "weight": 13, "hp": 170, "reward": 68,  "bonusCoins": 16, "template": "Underwater Coral Cucumber",   "spawnPct": 14.61, "effectiveHP": 18700, "effectiveReward": 1360, "ref": "BS:412-416"},
+        {"name": "Pearl Cucumber",   "weight": 9,  "hp": 265, "reward": 110, "bonusCoins": 22, "template": "Underwater Pearl Cucumber",   "spawnPct": 10.11, "effectiveHP": 29150, "effectiveReward": 2200, "ref": "BS:417-421"},
+        {"name": "Kelp Tree",        "weight": 6,  "hp": 345, "reward": 145, "bonusCoins": 27, "template": "Underwater Kelp Tree",        "spawnPct": 6.74,  "effectiveHP": 37950, "effectiveReward": 2900, "ref": "BS:422-426"},
+        {"name": "Bubble Tree",      "weight": 5,  "hp": 415, "reward": 175, "bonusCoins": 32, "template": "Underwater Bubble Tree",      "spawnPct": 5.62,  "effectiveHP": 45650, "effectiveReward": 3500, "ref": "BS:427-431"},
+        {"name": "Coral Tree",       "weight": 4,  "hp": 480, "reward": 205, "bonusCoins": 38, "template": "Underwater Coral Tree", "tree": true, "spawnPct": 4.49, "effectiveHP": 52800, "effectiveReward": 4100, "ref": "BS:432-436"}
+      ]
+    },
+    "Volcano": {
+      "ref": "BS:440-476",
+      "slicedQuota": {"name": "Molten Slice", "weight": 25, "hp": 10, "reward": 4, "bonusCoins": 1, "template": "Volcano Molten Slice", "effectiveHP": 2400, "effectiveReward": 120, "ref": "BS:441-445"},
+      "regular": [
+        {"name": "Charred Cucumber", "weight": 34, "hp": 50,  "reward": 15,  "bonusCoins": 5,  "template": "Volcano Charred Cucumber", "spawnPct": 37.78, "effectiveHP": 12000,  "effectiveReward": 450,  "ref": "BS:446-450"},
+        {"name": "Molten Cucumber",  "weight": 22, "hp": 105, "reward": 38,  "bonusCoins": 10, "template": "Volcano Molten Cucumber",  "spawnPct": 24.44, "effectiveHP": 25200,  "effectiveReward": 1140, "ref": "BS:451-455"},
+        {"name": "Flame Cucumber",   "weight": 14, "hp": 195, "reward": 78,  "bonusCoins": 17, "template": "Volcano Flame Cucumber",   "spawnPct": 15.56, "effectiveHP": 46800,  "effectiveReward": 2340, "ref": "BS:456-460"},
+        {"name": "Obsidian Tree",    "weight": 9,  "hp": 310, "reward": 130, "bonusCoins": 25, "template": "Volcano Obsidian Tree",    "spawnPct": 10.00, "effectiveHP": 74400,  "effectiveReward": 3900, "ref": "BS:461-465"},
+        {"name": "Volcano Cucumber", "weight": 6,  "hp": 400, "reward": 168, "bonusCoins": 31, "template": "Volcano Volcano Cucumber", "spawnPct": 6.67,  "effectiveHP": 96000,  "effectiveReward": 5040, "ref": "BS:466-470"},
+        {"name": "Magma Tree",       "weight": 5,  "hp": 500, "reward": 210, "bonusCoins": 39, "template": "Volcano Magma Tree", "tree": true, "spawnPct": 5.56, "effectiveHP": 120000, "effectiveReward": 6300, "ref": "BS:471-475"}
+      ]
+    },
+    "Narmek": {
+      "ref": "BS:480-521",
+      "slicedQuota": {"name": "Moon Slice", "weight": 25, "hp": 10, "reward": 4, "bonusCoins": 1, "template": "Narmek Moon Slice", "effectiveHP": 5000, "effectiveReward": 168, "ref": "BS:481-485"},
+      "regular": [
+        {"name": "Meteor Cucumber",     "weight": 32, "hp": 52,  "reward": 16,  "bonusCoins": 6,  "template": "Narmek Meteor Cucumber",     "spawnPct": 35.96, "effectiveHP": 26000,  "effectiveReward": 672,  "ref": "BS:486-490"},
+        {"name": "Planet Slice",        "weight": 20, "hp": 100, "reward": 36,  "bonusCoins": 10, "template": "Narmek Planet Slice",        "spawnPct": 22.47, "effectiveHP": 50000,  "effectiveReward": 1512, "ref": "BS:491-495"},
+        {"name": "Astronaut Cucumber",  "weight": 13, "hp": 185, "reward": 75,  "bonusCoins": 17, "template": "Narmek Astronaut Cucumber",  "spawnPct": 14.61, "effectiveHP": 92500,  "effectiveReward": 3150, "ref": "BS:496-500"},
+        {"name": "Neon Alien Cucumber", "weight": 9,  "hp": 290, "reward": 120, "bonusCoins": 24, "template": "Narmek Neon Alien Cucumber", "spawnPct": 10.11, "effectiveHP": 145000, "effectiveReward": 5040, "ref": "BS:501-505"},
+        {"name": "Moon Tree",           "weight": 6,  "hp": 380, "reward": 158, "bonusCoins": 29, "template": "Narmek Moon Tree",           "spawnPct": 6.74,  "effectiveHP": 190000, "effectiveReward": 6636, "ref": "BS:506-510"},
+        {"name": "Alien Tree",          "weight": 5,  "hp": 450, "reward": 188, "bonusCoins": 34, "template": "Narmek Alien Tree",          "spawnPct": 5.62,  "effectiveHP": 225000, "effectiveReward": 7896, "ref": "BS:511-515"},
+        {"name": "Galaxy Tree",         "weight": 4,  "hp": 520, "reward": 220, "bonusCoins": 40, "template": "Narmek Galaxy Tree", "tree": true, "spawnPct": 4.49, "effectiveHP": 260000, "effectiveReward": 9240, "ref": "BS:516-520"}
+      ]
+    }
+  },
+  "legacySharedTypes": {
+    "note": "TYPES (BS:119-156) + empty ZONE_TYPES (BS:532-550) are DEAD for all 8 live zones - EffectiveTypes (BS:825-835) returns the exclusive list for every zone. Kept only as fallback for a future zone.",
+    "types": [
+      {"name": "Cucumber", "weight": 35, "hp": 30, "reward": 8, "bonusCoins": 3, "ref": "BS:120-127"},
+      {"name": "Giant Cucumber", "weight": 22, "hp": 120, "reward": 45, "bonusCoins": 8, "ref": "BS:128-135"},
+      {"name": "Sliced Cucumber", "weight": 25, "hp": 8, "reward": 3, "bonusCoins": 1, "sliced": true, "ref": "BS:138-146"},
+      {"name": "Cucumber Tree", "weight": 8, "hp": 350, "reward": 140, "bonusCoins": 25, "tree": true, "ref": "BS:147-155"}
+    ]
+  },
+  "spawns": {
+    "perZoneOtherBase": {"value": 12, "ref": "BS:24"},
+    "perZoneOtherMax": {"value": 32, "ref": "BS:25"},
+    "perPlayerBonusOther": {"value": 3, "ref": "BS:26"},
+    "otherCountMultiplier": {"value": 1, "ref": "BS:27"},
+    "slicedBasePerZone": {"value": 7, "ref": "BS:28"},
+    "slicedPerPlayerBonus": {"value": 3, "ref": "BS:29"},
+    "slicedPerZoneMax": {"value": 28, "ref": "BS:30"},
+    "emptyZoneSliced": {"value": 2, "ref": "BS:31"},
+    "emptyZoneOther": {"value": 3, "ref": "BS:32"},
+    "formulas": {
+      "otherTarget": "clamp(12 + (players-1)*3, 12, 32) (BS:1963-1969)",
+      "slicedTarget": "clamp(7 + (players-1)*3, 7, 28) (BS:1971-1977)",
+      "activeZones": "each player's anchored biome +/- 1 neighbor (BS:2045-2102); 8s unload grace (BS:36, 2093-2100); inactive zones idle at 2 sliced + 3 other (BS:2104-2109)"
+    },
+    "respawnTime": {"value": 6, "unit": "s", "ref": "BS:38, 1311-1319"},
+    "populationLoop": {"planTick": 0.5, "workTick": 0.08, "startupTick": 0.025, "onePieceOfWorkPerTick": true, "ref": "BS:33-35, 4384-4431"},
+    "prunePerStep": {"value": 1, "ref": "BS:37, 2111-2134", "note": "PruneZone removes at most 1 over-target breakable per pass; never prunes bosses, lightning jackpots, or player-dropped carries (BS:2119)"},
+    "treeGuarantee": "if the zone has no standing tree (name match, golden prefix included), the next non-sliced spawn is forced to the tree type (BS:2696-2717)",
+    "modelScale": {"value": 0.75, "note": "all non-boss templates scaled x0.75; x2 during SuperStrength (BS:2742-2744)"}
+  },
+  "golden": {
+    "chance": {"value": 0.08, "ref": "BS:2521"},
+    "goldenHourChanceMult": {"value": 4, "ref": "BS:2522", "effectiveChance": 0.32},
+    "hpMult": {"value": 2.5, "ref": "BS:2523"},
+    "rewardMult": {"value": 7, "ref": "BS:2524"},
+    "coinMult": {"value": 10, "ref": "BS:2525"},
+    "appliesTo": "any non-boss spawn of any type, rolled after the type pick (BS:2718-2727)",
+    "exclusiveWithDiamond": true,
+    "effectiveGoldenChance": 0.0784,
+    "effectiveGoldenChanceNote": "diamond is rolled first (0.02); golden only if diamond missed: 0.98*0.08 (BS:2722-2727)"
+  },
+  "diamond": {
+    "chance": {"value": 0.02, "ref": "BS:619"},
+    "hpMult": {"value": 4, "ref": "BS:620"},
+    "rewardMult": {"value": 20, "ref": "BS:621"},
+    "coinMult": {"value": 25, "ref": "BS:622"},
+    "rolledBeforeGolden": true,
+    "exclusiveWithGolden": true,
+    "stacksWithRotationMutations": true,
+    "namePrefix": "Diamond ",
+    "variantRef": "BS:626-639",
+    "vaultEarnMult": {"value": 8, "ref": "CS:84"}
+  },
+  "mutations": {
+    "rotation": [
+      {"name": "NEON",        "ref": "BS:598"},
+      {"name": "SHADOW",      "ref": "BS:599"},
+      {"name": "FROZEN",      "ref": "BS:600", "mechanics": "vault only: 0.8x earn rate everywhere the record earns/is valued (CS:417-423), theft-proof on vault podium even unlocked (VS:646-647, 1880-1882)"},
+      {"name": "RADIOACTIVE", "ref": "BS:601"},
+      {"name": "ROYAL",       "ref": "BS:602"},
+      {"name": "MOLTEN",      "ref": "BS:603", "mechanics": "vault only: earn rate ramps rate*=1+1.5*(HeatT/3600), HeatT capped 3600s => 2.5x after 1h uncollected; Collect resets heat (VS:1663, 2088-2096); live tick only, offline uses flat rate"}
+    ],
+    "dailyRotation": {
+      "formula": "MUTATIONS[(floor(os.time()/86400) % 6) + 1]",
+      "activePerDay": 1,
+      "cycleDays": 6,
+      "ref": "BS:650-653"
+    },
+    "chance": {"value": 0.02, "ref": "BS:605"},
+    "rewardMult": {"value": 25, "ref": "BS:606, applied BS:1074-1078"},
+    "hpMult": 1,
+    "hpMultNote": "rotation mutations, Prismatic, and lightning charge change NO HP - pure reward multipliers",
+    "prismatic": {
+      "chance": 3.333e-05,
+      "chanceExpr": "1/30000",
+      "rewardMult": 100,
+      "ref": "BS:613",
+      "rollOrder": "pre-rolled BEFORE the daily mutation roll on every non-boss spawn (BS:2789-2793, 3010-3014)",
+      "vaultEarnMult": {"value": 20, "ref": "CS:85"},
+      "serverWideAnnounce": "BS:1086-1089",
+      "questWildcard": "counts as any catch target for QuestBoardService (BS:609-610 comment)"
+    },
+    "rotationVaultEarnMult": {"value": 5, "ref": "CS:85"},
+    "stacking": "material (diamond|golden) is exclusive but a rotation/prismatic mutation stacks multiplicatively on top (BS:614-617, 2718-2727 then 2785-2793); lightning never lands on a mutated cucumber (BS:1653) but can land on golden/diamond"
+  },
+  "lightning": {
+    "intervalMin": {"value": 30, "unit": "s", "ref": "BS:658"},
+    "intervalMax": {"value": 90, "unit": "s", "ref": "BS:659"},
+    "perZoneIndependentClocks": true,
+    "chargedMultRange": {"min": 25, "max": 50, "ref": "BS:660, roll BS:682-684"},
+    "maxActivePerZone": {"value": 1, "ref": "BS:671-675"},
+    "lifetimeSeconds": {"value": 75, "graceExtensions": 1, "graceCondition": "someone already damaged it", "ref": "BS:676-679, 1704-1719"},
+    "eligibleTargets": "non-boss, non-mutated live cucumbers in the zone (golden/diamond allowed) (BS:1649-1657)",
+    "rewardApplication": "totalReward *= rolled mult at Break (BS:1094-1103)"
+  },
+  "damage": {
+    "clickFormula": "floor( floor(PickaxeDamage * FriendBoost) * comboMult ) -> x5 if SuperStrength active in zone -> x5 on 10% crit",
+    "pickaxeDamageSource": "Pickaxes[equipped].Stats.Damage dictionary stat, default 4, floored, min 1 (TS:219-228); live strike adds FriendBoost (BS:1554-1558)",
+    "friendBoost": {"perFriend": 0.10, "maxFriends": 5, "maxBoost": 1.5, "ref": "BS:1506-1543"},
+    "combo": {"baseMult": 1, "stepPerHit": 0.05, "maxMult": 2, "windowSeconds": 3, "hitsToCap": 21, "ref": "BS:44-49, 1880-1889", "notes": "combo is per-player not per-target; indirect (auto-aim) strikes deal flat 1x and neither build nor break combo (BS:1874-1878)"},
+    "manualHitDebounce": {"value": 0.25, "unit": "s", "maxClicksPerSec": 4, "ref": "BS:41, 1862-1864"},
+    "pickaxeReach": {"value": 30, "surfaceRelative": true, "ref": "BS:1478-1494; client mirror BC:539"},
+    "commitAtDistance": {"value": 55, "note": "beyond-reach clicks up to 55 studs commit pets without damage (BS:1847-1860, 1899-1922)"},
+    "crit": {"chance": 0.10, "mult": 5, "ref": "BS:1452-1453; mirrored TS:17-18", "expectedDpsMult": 1.4, "appliedAfterSuperStrength": true},
+    "petFormula": "max(1, 2 + floor(Pets.Damage.Value)) as ONE combined swarm strike (TS:230-241) every 0.6s (BS:50, 4662-4669) -> x2 if SuperStrength -> 10% crit x5",
+    "petTick": {"value": 0.6, "ref": "BS:50; TS:15"},
+    "petAttackRange": {"value": 10, "surfaceRelative": true, "note": "ALL readable pets must be within range or the combined strike is withheld (BS:53-55, 919-942)"},
+    "autoLeash": {"value": 110, "ref": "BS:51"},
+    "chainRange": {"value": 15, "ref": "BS:116, 1778-1798"},
+    "petSwitchHits": {"value": 3, "ref": "BS:1560-1587"},
+    "superStrength": {"clickMult": 5, "petMult": 2, "splashRadius": 10, "splashOneHop": true, "ref": "BS:1443-1447, 1420, 1455-1475", "visual": "breakables and players scale x2 (BS:2742-2744, 3941-3960)"},
+    "lockedBiomeGuard": "no damage source lands in a biome the player has not unlocked (BS:1425-1441, 1836-1846, 1905-1914)",
+    "eventHitCounting": "every landed direct hit on a non-boss counts toward the event Goal; splash hits do not (BS:1387-1389, 1467-1475)"
+  },
+  "bosses": {
+    "hpFormula": "floor((HPBase + 800 * max(0, players-1)) * ZONE_HP[zone]) (BS:58, 3813)",
+    "rewardFormula": "Reward * zoneValue * 6, split by damage contribution, min 1/damager (BS:1065-1071, 1117-1123)",
+    "bonusCoinsFormula": "floor(BonusCoins * zoneMulti * damageShare * petCoinMult) min 1 (BS:1127-1134)",
+    "summonRequirement": "floor(Breaks * (1 + 0.05 * players) + 0.5) - note: per player INCLUDING the first (BS:59, 4548-4559)",
+    "fallbackBreaks": {"value": 180, "ref": "BS:56"},
+    "timeoutSeconds": {"value": 360, "ref": "BS:57, 3894-3926"},
+    "escapePayout": "per-HP rate identical to a kill: (Reward * zoneValue * 6) / MaxHP per damage dealt; no coins/shard/trophy (BS:3901-3914)",
+    "shardsPerKill": {"value": 1, "perDamager": true, "ref": "BS:1146-1205"},
+    "shardsPerPet": {"value": 10, "spent": true, "repeatable": true, "ref": "BS:108, 997-1045"},
+    "trophy": {
+      "recipient": "top damager, guaranteed on kill (BS:1273-1294)",
+      "carryRatePerSec": "floor(8 * 1.6^(zoneIndex-1)) (CS:391-392)",
+      "carryRateByZone": {"Spawn": 8, "Desert": 12, "Samurai": 20, "Farm": 32, "Snow": 52, "Underwater": 83, "Volcano": 134, "Narmek": 214},
+      "rarity": 0.0001
+    },
+    "deathBurst": {"cucumberPickups": 12, "coinPickups": 6, "amountEach": 500, "expireSeconds": 12, "singleClaim": true, "mobileBossOnly": true, "ref": "BS:3164-3220"},
+    "meterGating": "meter only advances when zone event Phase == None and no boss active; nuke breaks never advance it (BS:1212-1224)",
+    "defs": {
+      "Spawn":      {"name": "COLOSSAL CUCUMBER", "breaks": 90,  "hpBase": 1200, "reward": 600,  "bonusCoins": 250, "scale": 11,   "walkSpeed": 11,   "soloHP": 1200,    "soloRewardPool": 3600,   "ref": "BS:3547-3552"},
+      "Desert":     {"name": "CACTUS COLOSSUS",   "breaks": 135, "hpBase": 1500, "reward": 650,  "bonusCoins": 275, "scale": 11.5, "walkSpeed": 11,   "soloHP": 4500,    "soloRewardPool": 11700,  "ref": "BS:3553-3560"},
+      "Samurai":    {"name": "SHOGUN COLOSSUS",   "breaks": 180, "hpBase": 1800, "reward": 700,  "bonusCoins": 300, "scale": 12,   "walkSpeed": 11.5, "soloHP": 14400,   "soloRewardPool": 21000,  "ref": "BS:3561-3568"},
+      "Farm":       {"name": "HARVEST COLOSSUS",  "breaks": 225, "hpBase": 2100, "reward": 750,  "bonusCoins": 325, "scale": 12.5, "walkSpeed": 12,   "soloHP": 42000,   "soloRewardPool": 33750,  "ref": "BS:3569-3576"},
+      "Snow":       {"name": "FROZEN COLOSSUS",   "breaks": 270, "hpBase": 2400, "reward": 800,  "bonusCoins": 350, "scale": 13,   "walkSpeed": 12,   "soloHP": 108000,  "soloRewardPool": 50400,  "ref": "BS:3577-3584"},
+      "Underwater": {"name": "ABYSSAL COLOSSUS",  "breaks": 330, "hpBase": 2800, "reward": 900,  "bonusCoins": 400, "scale": 13.5, "walkSpeed": 12.5, "soloHP": 308000,  "soloRewardPool": 108000, "ref": "BS:3585-3592"},
+      "Volcano":    {"name": "MAGMA COLOSSUS",    "breaks": 390, "hpBase": 3200, "reward": 1000, "bonusCoins": 450, "scale": 14,   "walkSpeed": 13,   "soloHP": 768000,  "soloRewardPool": 180000, "ref": "BS:3593-3600"},
+      "Narmek":     {"name": "COSMIC COLOSSUS",   "breaks": 450, "hpBase": 4000, "reward": 1200, "bonusCoins": 550, "scale": 15,   "walkSpeed": 13,   "soloHP": 2000000, "soloRewardPool": 302400, "ref": "BS:3601-3608"}
+    },
+    "bossPets": {"ref": "BS:98-107", "map": {"Spawn": "Colossal Cucumber", "Desert": "Cactus Colossus", "Samurai": "Shogun Colossus", "Farm": "Harvest Colossus", "Snow": "Frozen Colossus", "Underwater": "Abyssal Colossus", "Volcano": "Magma Colossus", "Narmek": "Cosmic Colossus"}}
+  },
+  "events": {
+    "durationSeconds": {"value": 120, "ref": "BS:565"},
+    "goalBase": {"value": 100, "ref": "BS:566"},
+    "goalPerExtraPlayerInBiome": {"value": 25, "ref": "BS:567, 4198"},
+    "cycle": "boss kill -> Goal challenge (landed hits) -> 2-minute event -> meter restarts (BS:1270-1272, 4128-4211)",
+    "goldenHourChurn": "on start, 50% of live non-golden non-sliced cucumbers with BASE HP <= 30 are respawned to reroll at 4x golden chance - only Spawn's 'Cucumber' (HP 30) qualifies anywhere in the live game (BS:4073-4093)"
+  },
+  "rewardFlow": {
+    "breakPayout": "totalReward = Type.Reward * Orb * Multi [* 6 boss] [* 25 mutation | * 100 prismatic] [* lightningMult 25-50]; per damager: max(1, floor(totalReward * dmg/totalDmg)) -> CurrencyHandler.AddCurrency('Cucumbers') (BS:1065-1123)",
+    "cucumberMultipliersAtAddCurrency": "rebirth (1 + 0.5*rebirths, RB:17,175-179) * 2 (gamepass 2x Cucumbers) * Pets.Multi1 * 2 (boost) * 1.5 (group member) (CH:66-103)",
+    "coinDrops": "BonusCoins > 0 pays banked Coins directly on break: floor(BonusCoins * zoneMulti * share * Pets.Multi2) min 1; AddCurrency Coins branch then applies rebirth only (BS:1127-1134; CH:94-100)",
+    "contributionMinimum": "every damager with >0 damage gets at least 1 Cuke (BS:981-989)",
+    "statsCredits": "TotalBreaks +1, GoalService Break, SmashEventService.RecordBreak per contributor; GoldenBreaks only for Golden (not Diamond) (BS:1137-1144)",
+    "carryPickup": "100% catch mode: every template break by DoneTutorial players lands on the arm unless already carrying something rarer (CS:301-364); rarity = CarryRarityOf (BS:3682-3706)",
+    "vaultEarnRate": "coins/sec = (1 + (35-clamp(Weight,1,35))/35*4) * 1.6^(tier-1) [*3 golden] [*8 diamond] [*5 mutation | *20 prismatic] [*4 charged], floored min 1 (CS:76-88); level mult 1.18^(level-1) (CS:417-423); value = floor(rate*250) (CS:427-429)"
+  },
+  "carryRarity": {
+    "formula": "p = Weight / sum(ALL zone weights incl. sliced) / 2^(zoneIndex-1) [* goldenChance] [* 0.02 mutation] [* 0.05 lightning] [* 0.02 diamond] (BS:3682-3706)",
+    "quirk": "denominator includes the sliced type's Weight 25 even though sliced never competes in the weighted spawn roll"
+  },
+  "timeSkipMirror": {
+    "petTick": 0.6, "pickaxeTick": 0.25, "critChance": 0.10, "critMult": 5,
+    "slicedSlots": 15, "otherSlots": 24,
+    "ref": "TS:15-18, 35-36",
+    "spawnZoneQuotedFromLegacyPool": "TS:38-43 incl. dead 'Golden Cucumber' (W10/HP90/R60); intentional per TS:55-57",
+    "omits": "friend boost, combo, golden/diamond/mutation/lightning upside, player-count population scaling"
+  },
+  "deadValues": [
+    {"name": "TARGET_RANGE", "value": 42, "ref": "BS:115", "status": "defined, never read"},
+    {"name": "isDiamond in LightningStrike", "ref": "BS:1675, 1680, 1687, 1733", "status": "undefined global (nil) - remnant of diamond-from-storm; branch never taken, return label always 'Charged'"},
+    {"name": "TYPES/ZONE_TYPES shared pool", "ref": "BS:119-156, 532-550", "status": "unreachable for all 8 live zones"},
+    {"name": "Scale on Sliced types", "ref": "BS:144", "status": "unused - slices built as fixed-size discs"},
+    {"name": "ChanceFor pickup odds", "ref": "CS:30-31, 64-70", "status": "bypassed since 100% catch mode 2026-08-27 (CS:331-337)"},
+    {"name": "WEAKPOINT_MULT", "value": 1, "ref": "BS:44", "status": "multiplicative identity; combo formula's base"}
+  ]
+}

@@ -1,0 +1,296 @@
+{
+  "_meta": {
+    "generated": "2026-08-28",
+    "sources": "C:/Users/shrey/OneDrive/Documents/RobloxGames/backups/EconomyRedesign_2026-08-28/scripts/",
+    "statSemantics": {
+      "Multi1": "Cucumber income multiplier. Additive across equipped pets onto a base of 1 (PlayerData.Pets.Multi1 starts at 1, InstanceValues.lua:142-145; EquipService.lua:54 adds per pet). Applied multiplicatively to every Cucumbers grant in CurrencyHandler.GetMulipliers (CurrencyHandler.lua:84).",
+      "Multi2": "Coin multiplier, but ONLY on direct BonusCoins drops when a breakable dies (BreakablesService.lua:1127-1133). NOT applied at the sell vendor (CurrencyHandler.lua:94-100 explicitly excludes pet multi from Coins).",
+      "Damage": "Additive pet swarm damage. Sum of equipped pets' Damage -> PlayerData.Pets.Damage (EquipService.lua:56). Pet swing = max(1, 2 + sum) every AUTO_TICK=0.6s (TimeSkipRateService.lua:230-241 GetPetStrike; BreakablesService.lua:906-909, 4662-4669). Also drives Time Skip product payout quotes (TimeSkipRateService.lua:249-251, PET_TICK=0.6)."
+    }
+  },
+  "eggs": [
+    {
+      "name": "Basic Egg", "price": 2500, "currency": "Coins", "zone": "Spawn",
+      "ref": "Dictionaries__Eggs.lua:18-54",
+      "totalWeight": 100.002,
+      "pool": [
+        {"pet": "Cat", "weight": 40, "pct": 39.999},
+        {"pet": "Dog", "weight": 30, "pct": 29.999},
+        {"pet": "Bunny", "weight": 15, "pct": 15.0},
+        {"pet": "Wolf", "weight": 10, "pct": 10.0},
+        {"pet": "Tabby", "weight": 3.5, "pct": 3.5},
+        {"pet": "Fox", "weight": 1.5, "pct": 1.5},
+        {"pet": "Gregory", "weight": 0.002, "pct": 0.002, "secret": true, "note": "1-in-50,000; no Rank so hidden from egg UI (Eggs.lua:24-28, UiController.lua:827-850)"}
+      ]
+    },
+    {
+      "name": "Desert Egg", "price": 10000, "currency": "Coins", "zone": "Desert",
+      "ref": "Dictionaries__Eggs.lua:122-153",
+      "totalWeight": 100,
+      "pool": [
+        {"pet": "Barrel", "weight": 40, "pct": 40},
+        {"pet": "Treasure Gem", "weight": 30, "pct": 30},
+        {"pet": "Cannon", "weight": 15, "pct": 15},
+        {"pet": "Chest", "weight": 10, "pct": 10},
+        {"pet": "Desert Overlord", "weight": 4.5, "pct": 4.5},
+        {"pet": "Cactus", "weight": 0.5, "pct": 0.5}
+      ]
+    },
+    {
+      "name": "Samurai Egg", "price": 40000, "currency": "Coins", "zone": "Samurai",
+      "ref": "Dictionaries__Eggs.lua:56-87",
+      "totalWeight": 100,
+      "pool": [
+        {"pet": "Dog Ninja", "weight": 40, "pct": 40},
+        {"pet": "Good Ninja", "weight": 30, "pct": 30},
+        {"pet": "Evil Ninja", "weight": 15, "pct": 15},
+        {"pet": "Good Samurai", "weight": 10, "pct": 10},
+        {"pet": "Evil Samurai", "weight": 4.5, "pct": 4.5},
+        {"pet": "Sensei", "weight": 0.5, "pct": 0.5}
+      ]
+    },
+    {
+      "name": "Farm Egg", "price": 150000, "currency": "Coins", "zone": "Farm",
+      "ref": "Dictionaries__Eggs.lua:89-120",
+      "totalWeight": 100,
+      "pool": [
+        {"pet": "Hay", "weight": 40, "pct": 40},
+        {"pet": "Bird", "weight": 30, "pct": 30},
+        {"pet": "Panda", "weight": 15, "pct": 15},
+        {"pet": "Cow", "weight": 10, "pct": 10},
+        {"pet": "Pig", "weight": 4.9, "pct": 4.9},
+        {"pet": "Farmer", "weight": 0.1, "pct": 0.1}
+      ]
+    },
+    {
+      "name": "Frozen Egg", "price": 600000, "currency": "Coins", "zone": "Snow",
+      "ref": "Dictionaries__Eggs.lua:188-219",
+      "totalWeight": 100,
+      "pool": [
+        {"pet": "Red Snowman", "weight": 40, "pct": 40},
+        {"pet": "Blue Snowman", "weight": 30, "pct": 30},
+        {"pet": "Frozen Dragon", "weight": 15, "pct": 15},
+        {"pet": "Frozen Hydra", "weight": 10, "pct": 10},
+        {"pet": "Frozen Ice Shock", "weight": 4.5, "pct": 4.5},
+        {"pet": "Frozen Gem", "weight": 0.5, "pct": 0.5}
+      ]
+    },
+    {
+      "name": "Ocean Egg", "price": 1500000, "currency": "Coins", "zone": "Underwater",
+      "ref": "Dictionaries__Eggs.lua:155-186",
+      "totalWeight": 100,
+      "pool": [
+        {"pet": "Oceanic Dog", "weight": 40, "pct": 40},
+        {"pet": "Oceanic Kitty", "weight": 30, "pct": 30},
+        {"pet": "Oceanic Bunny", "weight": 15, "pct": 15},
+        {"pet": "Oceanic Bear", "weight": 10, "pct": 10},
+        {"pet": "Ocean Dragon", "weight": 4.9, "pct": 4.9},
+        {"pet": "Atlantic Hydra", "weight": 0.1, "pct": 0.1}
+      ]
+    },
+    {
+      "name": "Lava Egg", "price": 2500000, "currency": "Coins", "zone": "Volcano",
+      "ref": "Dictionaries__Eggs.lua:221-252",
+      "totalWeight": 100.01,
+      "pool": [
+        {"pet": "Lava Plume", "weight": 40, "pct": 39.996},
+        {"pet": "Lava Golem", "weight": 30, "pct": 29.997},
+        {"pet": "Lava Veltal", "weight": 15, "pct": 14.999},
+        {"pet": "Lava Trio", "weight": 10, "pct": 9.999},
+        {"pet": "Lava Dragon", "weight": 5, "pct": 5.0},
+        {"pet": "Demon Dog", "weight": 0.01, "pct": 0.01}
+      ]
+    },
+    {
+      "name": "Narmek Egg", "price": 5500000, "currency": "Coins", "zone": "Narmek",
+      "ref": "Dictionaries__Eggs.lua:254-288",
+      "totalWeight": 100,
+      "pool": [
+        {"pet": "Moon Bunny", "weight": 40, "pct": 40},
+        {"pet": "Satellite Pup", "weight": 30, "pct": 30},
+        {"pet": "Alien Slime", "weight": 15, "pct": 15},
+        {"pet": "Meteor Moth", "weight": 10, "pct": 10},
+        {"pet": "Nebula Fox", "weight": 4.99, "pct": 4.99},
+        {"pet": "Cosmo Cat", "weight": 0.01, "pct": 0.01}
+      ]
+    },
+    {
+      "name": "Food Cuke Egg", "price": 600000, "currency": "Coins", "zone": null,
+      "obtainable": "PlaytimeRewards only (rewards 2, 5 grant hatches; no walk-up pad; price never charged)",
+      "ref": "Dictionaries__Eggs.lua:290-307; PlaytimeRewards.lua:118-130",
+      "totalWeight": 100,
+      "pool": [
+        {"pet": "Popcorn Cuke", "weight": 30, "pct": 30},
+        {"pet": "Cotton Candy Cuke", "weight": 24, "pct": 24},
+        {"pet": "Lollipop Cuke", "weight": 18, "pct": 18},
+        {"pet": "Fried Egg Cuke", "weight": 12, "pct": 12},
+        {"pet": "Cupcake Cuke", "weight": 8, "pct": 8},
+        {"pet": "Taco Cuke", "weight": 4, "pct": 4},
+        {"pet": "Watermelon Cuke", "weight": 2.5, "pct": 2.5},
+        {"pet": "Burger Cuke", "weight": 1, "pct": 1},
+        {"pet": "Pizza Cuke", "weight": 0.49, "pct": 0.49},
+        {"pet": "Ice Cream Cuke", "weight": 0.01, "pct": 0.01}
+      ]
+    }
+  ],
+  "hatchMechanics": {
+    "types": {
+      "Single": {"amount": 1, "priceMult": 1},
+      "Triple": {"amount": 3, "priceMult": 3, "gamepass": "Triple Egg Hatch (Id 1903566581)"},
+      "Instant": {"amount": 1, "priceMult": 1, "gamepass": "Instant Egg Hatch (Id 1911700950)", "effect": "skips reveal animation"},
+      "Auto": {"gamepass": "Auto Egg Hatch (Id 1898883147)", "effect": "server converts to Triple if Triple pass owned else Single; client re-requests on reveal end (UiController.lua:396-415, EggService.lua:420-432)"}
+    },
+    "ref": "EggService.lua:31-50, 392-446",
+    "zoneGate": "EGG_REQUIRED_ZONE: egg purchasable only if zone owned in profile.DoorData (EggService.lua:57-91); must also physically stand on egg pad (raycast, EggService.lua:104-127)",
+    "pity": {"limit": 25, "scope": "GLOBAL per profile across ALL eggs (profile.EggPity)", "guarantee": "rarest pet of the CURRENT egg on the 25th non-rarest hatch; naturally hitting the rarest resets counter", "playerFacing": "notif every 5 hatches", "ref": "EggService.lua:129-140, 221-237"},
+    "firstHatchGuarantee": "player's first-ever pet (Basic Egg, Unlocked=='') is upgraded to Rare+ via weighted re-roll among Rare+ entries (EggService.lua:142-179, 210-219, 309-316)",
+    "autoDelete": "client settings AutoDeleteCommon/Uncommon/Rare cause hatched pet to be discarded (coins still spent); secured handshake with 5s server wait per roll (EggService.lua:260-278, ServerNetwork.lua:282-290)",
+    "rareHatchBroadcast": "every hatch with Percent <= 10 announced game-wide (RareHatchChat); Percent <= 0.1 also logs SecretHatch_<name> analytics (EggService.lua:239-258)",
+    "hatchSpeed": "PlayerData.FastHatch divides reveal tween durations; hard-coded 1 (InstanceValues.lua:76-79), nothing ever raises it (UpgradeService.lua:91) - dead knob"
+  },
+  "pets": [
+    {"name": "Cat", "display": "Cucumber Deer", "rarity": "Common", "stats": {"Multi1": 1, "Damage": 2, "Multi2": 1}, "source": "Basic Egg", "ref": "Pets.lua:19"},
+    {"name": "Dog", "display": "Moss Turtle", "rarity": "Common", "stats": {"Multi1": 1, "Damage": 2, "Multi2": 1}, "source": "Basic Egg", "ref": "Pets.lua:33"},
+    {"name": "Bunny", "display": "Sprout Pup", "rarity": "Uncommon", "stats": {"Multi1": 1, "Damage": 3, "Multi2": 1.1}, "source": "Basic Egg", "ref": "Pets.lua:47"},
+    {"name": "Wolf", "display": "Bloom Bee", "rarity": "Rare", "stats": {"Multi1": 1, "Damage": 3, "Multi2": 1.1}, "source": "Basic Egg", "ref": "Pets.lua:61"},
+    {"name": "Tabby", "display": "Vine Gecko", "rarity": "Rare", "stats": {"Multi1": 1.1, "Damage": 4, "Multi2": 1.2}, "source": "Basic Egg", "ref": "Pets.lua:75"},
+    {"name": "Fox", "display": "Meadow Bunny", "rarity": "Legendary", "stats": {"Multi1": 1.3, "Damage": 5, "Multi2": 1.5}, "source": "Basic Egg", "ref": "Pets.lua:89"},
+    {"name": "Barrel", "display": "Dune Scorpion", "rarity": "Common", "stats": {"Multi1": 1.6, "Damage": 4, "Multi2": 1.7}, "source": "Desert Egg", "ref": "Pets.lua:104"},
+    {"name": "Treasure Gem", "display": "Cactus Fox", "rarity": "Common", "stats": {"Multi1": 1.6, "Damage": 5, "Multi2": 1.7}, "source": "Desert Egg", "ref": "Pets.lua:118"},
+    {"name": "Cannon", "display": "Sand Scarab", "rarity": "Common", "stats": {"Multi1": 1.7, "Damage": 5, "Multi2": 1.7}, "source": "Desert Egg", "ref": "Pets.lua:132"},
+    {"name": "Chest", "display": "Oasis Turtle", "rarity": "Uncommon", "stats": {"Multi1": 1.7, "Damage": 6, "Multi2": 1.8}, "source": "Desert Egg", "ref": "Pets.lua:146"},
+    {"name": "Desert Overlord", "display": "Sun Lizard", "rarity": "Rare", "stats": {"Multi1": 1.8, "Damage": 7, "Multi2": 1.9}, "source": "Desert Egg", "ref": "Pets.lua:160"},
+    {"name": "Cactus", "display": "Relic Cobra", "rarity": "Legendary", "stats": {"Multi1": 2.1, "Damage": 10, "Multi2": 2.1}, "source": "Desert Egg", "ref": "Pets.lua:174"},
+    {"name": "Dog Ninja", "display": "Sakura Kitsune", "rarity": "Common", "stats": {"Multi1": 2.3, "Damage": 8, "Multi2": 2.4}, "source": "Samurai Egg", "ref": "Pets.lua:189"},
+    {"name": "Good Ninja", "display": "Bamboo Panda", "rarity": "Uncommon", "stats": {"Multi1": 2.4, "Damage": 9, "Multi2": 2.5}, "source": "Samurai Egg", "ref": "Pets.lua:203"},
+    {"name": "Evil Ninja", "display": "Ronin Beetle", "rarity": "Uncommon", "stats": {"Multi1": 2.4, "Damage": 10, "Multi2": 2.5}, "source": "Samurai Egg", "ref": "Pets.lua:217"},
+    {"name": "Good Samurai", "display": "Lantern Crane", "rarity": "Rare", "stats": {"Multi1": 2.5, "Damage": 12, "Multi2": 2.5}, "source": "Samurai Egg", "ref": "Pets.lua:231"},
+    {"name": "Evil Samurai", "display": "Kappa Cub", "rarity": "Rare", "stats": {"Multi1": 2.5, "Damage": 14, "Multi2": 2.6}, "source": "Samurai Egg", "ref": "Pets.lua:245"},
+    {"name": "Sensei", "display": "Torii Dragon", "rarity": "Legendary", "stats": {"Multi1": 2.7, "Damage": 20, "Multi2": 2.8}, "source": "Samurai Egg", "ref": "Pets.lua:259"},
+    {"name": "Hay", "display": "Barn Chick", "rarity": "Common", "stats": {"Multi1": 3, "Damage": 16, "Multi2": 3}, "source": "Farm Egg", "ref": "Pets.lua:274"},
+    {"name": "Bird", "display": "Hay Pup", "rarity": "Common", "stats": {"Multi1": 3, "Damage": 18, "Multi2": 3.1}, "source": "Farm Egg", "ref": "Pets.lua:288"},
+    {"name": "Panda", "display": "Tractor Beetle", "rarity": "Uncommon", "stats": {"Multi1": 3, "Damage": 21, "Multi2": 3.1}, "source": "Farm Egg", "ref": "Pets.lua:302"},
+    {"name": "Cow", "display": "Patch Piglet", "rarity": "Uncommon", "stats": {"Multi1": 3.1, "Damage": 24, "Multi2": 3.1}, "source": "Farm Egg", "ref": "Pets.lua:316"},
+    {"name": "Pig", "display": "Windmill Lamb", "rarity": "Rare", "stats": {"Multi1": 3.1, "Damage": 28, "Multi2": 3.2}, "source": "Farm Egg", "ref": "Pets.lua:330"},
+    {"name": "Farmer", "display": "Harvest Cow", "rarity": "Legendary", "stats": {"Multi1": 3.4, "Damage": 40, "Multi2": 3.6}, "source": "Farm Egg", "ref": "Pets.lua:344"},
+    {"name": "Red Snowman", "display": "Frost Penguin", "rarity": "Common", "stats": {"Multi1": 3.7, "Damage": 32, "Multi2": 3.8}, "source": "Frozen Egg", "ref": "Pets.lua:359"},
+    {"name": "Blue Snowman", "display": "Glacier Wolf", "rarity": "Common", "stats": {"Multi1": 3.7, "Damage": 37, "Multi2": 3.8}, "source": "Frozen Egg", "ref": "Pets.lua:373"},
+    {"name": "Frozen Dragon", "display": "Snowy Seal", "rarity": "Uncommon", "stats": {"Multi1": 3.8, "Damage": 42, "Multi2": 3.8}, "source": "Frozen Egg", "ref": "Pets.lua:387"},
+    {"name": "Frozen Hydra", "display": "Icicle Owl", "rarity": "Uncommon", "stats": {"Multi1": 3.8, "Damage": 48, "Multi2": 3.9}, "source": "Frozen Egg", "ref": "Pets.lua:401"},
+    {"name": "Frozen Ice Shock", "display": "Polar Cub", "rarity": "Rare", "stats": {"Multi1": 3.9, "Damage": 56, "Multi2": 3.9}, "source": "Frozen Egg", "ref": "Pets.lua:415"},
+    {"name": "Frozen Gem", "display": "Crystal Hare", "rarity": "Legendary", "stats": {"Multi1": 4.2, "Damage": 80, "Multi2": 4.3}, "source": "Frozen Egg", "ref": "Pets.lua:429"},
+    {"name": "Oceanic Dog", "display": "Coral Axolotl", "rarity": "Common", "stats": {"Multi1": 4.4, "Damage": 64, "Multi2": 4.5}, "source": "Ocean Egg", "ref": "Pets.lua:444"},
+    {"name": "Oceanic Kitty", "display": "Bubble Turtle", "rarity": "Common", "stats": {"Multi1": 4.5, "Damage": 74, "Multi2": 4.6}, "source": "Ocean Egg", "ref": "Pets.lua:458"},
+    {"name": "Oceanic Bunny", "display": "Kelp Seahorse", "rarity": "Uncommon", "stats": {"Multi1": 4.5, "Damage": 83, "Multi2": 4.6}, "source": "Ocean Egg", "ref": "Pets.lua:472"},
+    {"name": "Oceanic Bear", "display": "Pearl Crab", "rarity": "Uncommon", "stats": {"Multi1": 4.6, "Damage": 96, "Multi2": 4.6}, "source": "Ocean Egg", "ref": "Pets.lua:486"},
+    {"name": "Ocean Dragon", "display": "Starfish Pup", "rarity": "Rare", "stats": {"Multi1": 4.6, "Damage": 112, "Multi2": 4.7}, "source": "Ocean Egg", "ref": "Pets.lua:500"},
+    {"name": "Atlantic Hydra", "display": "Clown Ray", "rarity": "Legendary", "stats": {"Multi1": 4.9, "Damage": 160, "Multi2": 5.1}, "source": "Ocean Egg", "ref": "Pets.lua:514"},
+    {"name": "Lava Plume", "display": "Magma Hound", "rarity": "Common", "stats": {"Multi1": 5.2, "Damage": 128, "Multi2": 5.3}, "source": "Lava Egg", "ref": "Pets.lua:529"},
+    {"name": "Lava Golem", "display": "Ember Bat", "rarity": "Common", "stats": {"Multi1": 5.2, "Damage": 147, "Multi2": 5.3}, "source": "Lava Egg", "ref": "Pets.lua:543"},
+    {"name": "Lava Veltal", "display": "Obsidian Golem", "rarity": "Uncommon", "stats": {"Multi1": 5.3, "Damage": 166, "Multi2": 5.3}, "source": "Lava Egg", "ref": "Pets.lua:557"},
+    {"name": "Lava Trio", "display": "Flame Salamander", "rarity": "Rare", "stats": {"Multi1": 5.3, "Damage": 192, "Multi2": 5.4}, "source": "Lava Egg", "ref": "Pets.lua:571"},
+    {"name": "Lava Dragon", "display": "Coal Beetle", "rarity": "Rare", "stats": {"Multi1": 5.4, "Damage": 224, "Multi2": 5.4}, "source": "Lava Egg", "ref": "Pets.lua:585"},
+    {"name": "Demon Dog", "display": "Volcano Turtle", "rarity": "Mythical", "stats": {"Multi1": 5.6, "Damage": 320, "Multi2": 5.8}, "source": "Lava Egg (0.01%)", "ref": "Pets.lua:599"},
+    {"name": "Moon Bunny", "rarity": "Common", "stats": {"Multi1": 5.9, "Damage": 150, "Multi2": 6.0}, "source": "Narmek Egg", "ref": "Pets.lua:618"},
+    {"name": "Satellite Pup", "rarity": "Common", "stats": {"Multi1": 5.9, "Damage": 172, "Multi2": 6.0}, "source": "Narmek Egg", "ref": "Pets.lua:632"},
+    {"name": "Alien Slime", "rarity": "Uncommon", "stats": {"Multi1": 6.0, "Damage": 195, "Multi2": 6.1}, "source": "Narmek Egg", "ref": "Pets.lua:646"},
+    {"name": "Meteor Moth", "rarity": "Rare", "stats": {"Multi1": 6.1, "Damage": 225, "Multi2": 6.2}, "source": "Narmek Egg", "ref": "Pets.lua:660"},
+    {"name": "Nebula Fox", "rarity": "Legendary", "stats": {"Multi1": 6.3, "Damage": 262, "Multi2": 6.4}, "source": "Narmek Egg", "ref": "Pets.lua:674"},
+    {"name": "Cosmo Cat", "rarity": "Mythical", "stats": {"Multi1": 6.6, "Damage": 375, "Multi2": 6.8}, "source": "Narmek Egg (0.01%)", "ref": "Pets.lua:688"},
+    {"name": "Red Demon", "rarity": "Omega", "stats": {"Multi1": 25, "Damage": 500, "Multi2": 25}, "source": "Robux dev product Id 3609774225; also Starter Pack Id 3609836817 (with 20,000 Coins)", "ref": "Pets.lua:704; ProductController.lua:193-206; ProductController.lua:176-187"},
+    {"name": "Purple Hydra", "rarity": "Omega", "stats": {"Multi1": 30, "Damage": 500, "Multi2": 30}, "source": "Robux dev product Id 3609774320", "ref": "Pets.lua:719"},
+    {"name": "Heavenly Angel", "rarity": "Mythical", "stats": {"Multi1": 30, "Damage": 500, "Multi2": 30}, "source": "Robux dev product Id 3609773882", "ref": "Pets.lua:733"},
+    {"name": "Lil Pickle", "rarity": "Special", "stats": {"Multi1": 1, "Damage": 2, "Multi2": 1}, "source": "Tutorial completion, one-time (ClaimedTutorialPet gate)", "ref": "Pets.lua:750; ServerNetwork.lua:244-280"},
+    {"name": "Colossal Cucumber", "rarity": "Special", "stats": {"Multi1": 6, "Damage": 125, "Multi2": 6}, "source": "Forge 10 Spawn boss shards", "ref": "Pets.lua:771; BreakablesService.lua:98-108"},
+    {"name": "Cactus Colossus", "rarity": "Special", "stats": {"Multi1": 8, "Damage": 145, "Multi2": 8}, "source": "Forge 10 Desert boss shards", "ref": "Pets.lua:785"},
+    {"name": "Shogun Colossus", "rarity": "Special", "stats": {"Multi1": 10, "Damage": 165, "Multi2": 10}, "source": "Forge 10 Samurai boss shards", "ref": "Pets.lua:799"},
+    {"name": "Harvest Colossus", "rarity": "Special", "stats": {"Multi1": 12, "Damage": 185, "Multi2": 12}, "source": "Forge 10 Farm boss shards", "ref": "Pets.lua:813"},
+    {"name": "Frozen Colossus", "rarity": "Special", "stats": {"Multi1": 14, "Damage": 200, "Multi2": 14}, "source": "Forge 10 Snow boss shards", "ref": "Pets.lua:827"},
+    {"name": "Abyssal Colossus", "rarity": "Special", "stats": {"Multi1": 17, "Damage": 215, "Multi2": 17}, "source": "Forge 10 Underwater boss shards", "ref": "Pets.lua:841"},
+    {"name": "Magma Colossus", "rarity": "Special", "stats": {"Multi1": 20, "Damage": 230, "Multi2": 20}, "source": "Forge 10 Volcano boss shards", "ref": "Pets.lua:855"},
+    {"name": "Cosmic Colossus", "rarity": "Special", "stats": {"Multi1": 24, "Damage": 245, "Multi2": 24}, "source": "Forge 10 Narmek boss shards", "ref": "Pets.lua:869"},
+    {"name": "Gregory", "rarity": "Mythical", "stats": {"Multi1": 12, "Damage": 500, "Multi2": 12}, "source": "Basic Egg secret 0.002% (1/50,000); pity-guaranteed within 25 Basic hatches", "ref": "Pets.lua:883-902; Eggs.lua:24-28"},
+    {"name": "Golden Cucumber", "rarity": "Special", "stats": {"Multi1": 8.2, "Damage": 400, "Multi2": 8.2}, "source": "Season prize: Cucumbers leaderboard champion", "ref": "Pets.lua:903; SeasonService.lua:24-28,171-186"},
+    {"name": "Solid Gold Coin", "rarity": "Special", "stats": {"Multi1": 4.4, "Damage": 120, "Multi2": 4.4}, "source": "Season prize: Coins leaderboard champion", "ref": "Pets.lua:917; SeasonService.lua:26"},
+    {"name": "Diamond Gherkin", "rarity": "Special", "stats": {"Multi1": 4.4, "Damage": 120, "Multi2": 4.4}, "source": "UNOBTAINABLE - defined in dictionary, no grant path anywhere in the dump", "ref": "Pets.lua:931"},
+    {"name": "OG Pickle", "rarity": "Special", "stats": {"Multi1": 1.5, "Damage": 5, "Multi2": 1.5}, "source": "Launch-window one-time gift via OGPetService - NOTE: OGPetService script NOT present in this dump", "ref": "Pets.lua:945-963"},
+    {"name": "Silver Pickle", "rarity": "Special", "stats": {"Multi1": 2.2, "Damage": 16, "Multi2": 2.2}, "source": "Season prize: Cucumbers leaderboard top 10 (non-champion)", "ref": "Pets.lua:964; SeasonService.lua:27"},
+    {"name": "Popcorn Cuke", "rarity": "Common", "stats": {"Multi1": 1.2, "Damage": 5, "Multi2": 1.2}, "source": "Food Cuke Egg", "ref": "Pets.lua:979"},
+    {"name": "Cotton Candy Cuke", "rarity": "Common", "stats": {"Multi1": 1.4, "Damage": 7, "Multi2": 1.4}, "source": "Food Cuke Egg", "ref": "Pets.lua:987"},
+    {"name": "Lollipop Cuke", "rarity": "Uncommon", "stats": {"Multi1": 1.8, "Damage": 10, "Multi2": 1.8}, "source": "Food Cuke Egg", "ref": "Pets.lua:995"},
+    {"name": "Fried Egg Cuke", "rarity": "Uncommon", "stats": {"Multi1": 2.2, "Damage": 14, "Multi2": 2.2}, "source": "Food Cuke Egg", "ref": "Pets.lua:1003"},
+    {"name": "Cupcake Cuke", "rarity": "Rare", "stats": {"Multi1": 2.8, "Damage": 20, "Multi2": 2.8}, "source": "Food Cuke Egg", "ref": "Pets.lua:1011"},
+    {"name": "Taco Cuke", "rarity": "Rare", "stats": {"Multi1": 3.3, "Damage": 26, "Multi2": 3.3}, "source": "Food Cuke Egg", "ref": "Pets.lua:1019"},
+    {"name": "Watermelon Cuke", "rarity": "Legendary", "stats": {"Multi1": 4.0, "Damage": 33, "Multi2": 4.0}, "source": "Food Cuke Egg", "ref": "Pets.lua:1027"},
+    {"name": "Burger Cuke", "rarity": "Legendary", "stats": {"Multi1": 4.6, "Damage": 40, "Multi2": 4.6}, "source": "Food Cuke Egg", "ref": "Pets.lua:1035"},
+    {"name": "Pizza Cuke", "rarity": "Mythical", "stats": {"Multi1": 5.3, "Damage": 46, "Multi2": 5.3}, "source": "Food Cuke Egg", "ref": "Pets.lua:1043"},
+    {"name": "Ice Cream Cuke", "rarity": "Omega", "stats": {"Multi1": 6.0, "Damage": 50, "Multi2": 6.0}, "source": "Food Cuke Egg (0.01%)", "ref": "Pets.lua:1051"},
+    {"name": "Blazing Pickle", "rarity": "Omega", "stats": {"Multi1": 8, "Damage": 100, "Multi2": 8}, "source": "Playtime reward 6 (30 min session), repeatable every session", "ref": "Pets.lua:1060; PlaytimeRewards.lua:167-175"},
+    {"name": "King Cuke", "rarity": "Omega", "stats": {"Multi1": 15, "Damage": 300, "Multi2": 15}, "source": "Playtime reward 9 (90 min session), repeatable every session", "ref": "Pets.lua:1068; PlaytimeRewards.lua:190-197"}
+  ],
+  "equip": {
+    "baseMaxEquipped": 4,
+    "boardUpgrade": {"name": "Pet equips", "perLevel": 1, "maxLevels": 3, "pricePerLevel": 30000, "currency": "Coins", "ref": "Upgrades.lua:107-123, 47-82"},
+    "legacyDevProduct": {"name": "+2 Pets Equip", "id": 3609836815, "perPurchase": 2, "cap": 6, "ref": "ProductHandler.lua:164-175"},
+    "gamepass": {"name": "+4 Pet Slots", "id": 1903134517, "bonus": 4, "ref": "ProductController.lua:128-140; Upgrades.lua:66-77"},
+    "theoreticalMax": 17,
+    "hardCap": 10,
+    "hardCapRef": "EquipService.lua:149 - math.min(MaxEquipped.Value, 10): slots past 10 are purchasable but unusable",
+    "equipBest": {"ranks": "Multi1 + Multi2 descending, Damage IGNORED", "ref": "UserInterfaceLoader__Pets.lua:729-755; PetService.lua:87-104"},
+    "teamUp": "No team-up mechanic exists in these files; pets share a committed target and chain to the nearest breakable (BreakablesService AUTO_LEASH=110, CHAIN_RANGE=15, PET_ATTACK_RANGE=10)",
+    "inventory": {"base": 30, "plus10Product": {"id": 3609836686, "perPurchase": 10, "persisted": "MaxPetInventoryIncrement"}, "plus75Gamepass": {"id": 1899609194, "bonus": 75, "appliedEachJoin": true}, "hatchBlockedWhenFull": "EggService.lua:434-436", "ref": "InstanceValues.lua:132-135; ProductHandler.lua:157-162; ProductController.lua:113-127"}
+  },
+  "evolve": {
+    "input": "exactly 3 pets (UI enforces 3 same-name Craft=Normal copies; server checks only that the 3 ids exist)",
+    "cost": {"amount": 600000, "currency": "Coins"},
+    "output": "1 Golden copy of SelectedPet: Multi1 x1.5 (rounded), Multi2 x1.5 (rounded), Damage x1.5 (floor+0.5), RequiredXP 150",
+    "goldenVisual": "gold recolor + particles (EquipService.lua:66-84)",
+    "onlyVariant": "Golden is the ONLY evolved form - no shiny/rainbow tiers exist",
+    "refs": "EvolveService.lua:32-88; PetDefaults.lua:64-100; UserInterfaceLoader__Evolving.lua:289-331",
+    "bugs": [
+      "Charges 600k BEFORE validating (EvolveService.lua:34-41): a failed validation still costs the player 600,000 Coins",
+      "Server never verifies PetData[id].Name == SelectedPet, ownership of SelectedPet, or Craft=='Normal': a modified client can consume 3 junk Commons and name any dictionary pet (e.g. 'Purple Hydra') to mint a Golden 45x/750dmg pet for 600k Coins"
+    ]
+  },
+  "sellValues": {
+    "currency": "Coins",
+    "byRarity": {"Common": 100, "Uncommon": 250, "Rare": 600, "Epic": 1500, "Legendary": 3500, "Special": 5000, "Mythical": 10000, "Omega": 25000},
+    "default": 100,
+    "goldenMultiplier": 1.5,
+    "epicNote": "Epic is defensive only - zero pets carry it (PetSellValues.lua:20-22)",
+    "vendorRules": {"maxBatch": 50, "cooldownSec": 0.5, "equippedRefused": true, "ref": "SellVendorServer.lua:23-24, 170-265"},
+    "ref": "PetSellValues.lua:16-54"
+  },
+  "specialObtain": {
+    "tutorial": {"pet": "Lil Pickle", "oneTime": true, "plus": "250 Coins if not skipped; separate 2,500-Coin PetShopGift mid-tutorial for first hatch (PetShopGiftServer.lua:21, 57-116)", "ref": "ServerNetwork.lua:244-280"},
+    "ogLaunch": {"pet": "OG Pickle", "note": "granted by OGPetService during launch window; that script is ABSENT from this dump", "ref": "Pets.lua:945-949"},
+    "playtime": {"ladder": ["30s: 2,500 Coins flat", "2m: 1 Food Cuke Egg", "5m: 10min 2x Cucumbers boost", "10m: 15min time skip", "18m: 3 Food Cuke Eggs", "30m: Blazing Pickle", "45m: +1 free rebirth", "1h: 2h time skip", "1h30m: King Cuke"], "resets": "every session (in-memory only)", "ref": "PlaytimeRewards.lua:14-50, 137-198"},
+    "season": {"CucumbersChampion": "Golden Cucumber", "CoinsChampion": "Solid Gold Coin", "CucumbersTop10": "Silver Pickle", "ref": "SeasonService.lua:24-28, 171-186"},
+    "bossShards": {"shardsPerPet": 10, "dropRule": "1 shard of that boss per kill you damaged; repeatable", "zonePets": {"Spawn": "Colossal Cucumber", "Desert": "Cactus Colossus", "Samurai": "Shogun Colossus", "Farm": "Harvest Colossus", "Snow": "Frozen Colossus", "Underwater": "Abyssal Colossus", "Volcano": "Magma Colossus", "Narmek": "Cosmic Colossus"}, "forge": "manual FORGE button (BreakablesService.ForgeBossPet) + auto batch on kill (ForgeBossPets)", "ref": "BreakablesService.lua:93-108, 993-1045, 1171-1204"},
+    "robux": {"Red Demon": 3609774225, "Purple Hydra": 3609774320, "Heavenly Angel": 3609773882, "Starter Pack (Red Demon + 20k Coins)": 3609836817},
+    "unobtainable": ["Diamond Gherkin (no grant path)"]
+  },
+  "expectedValue": {
+    "note": "E[stat] per hatch over normalized pool; per1000 = E[stat] / price * 1000. Ignores pity, auto-delete, first-hatch guarantee. Multi1 EV is the additive cucumber-multi contribution of one average hatch.",
+    "eggs": [
+      {"egg": "Basic Egg", "price": 2500, "evMulti1": 1.0082, "evDamage": 2.375, "evMulti2": 1.0397, "multi1Per1000": 0.4033, "damagePer1000": 0.950, "bestPet": "Gregory (0.002%, 12/500/12)", "worstPet": "Cat (40%, 1/2/1)", "evSellCoins": 241, "pityAdjEvDamage": 22.28},
+      {"egg": "Desert Egg", "price": 10000, "evMulti1": 1.6365, "evDamage": 4.815, "evMulti2": 1.721, "multi1Per1000": 0.1637, "damagePer1000": 0.4815, "bestPet": "Cactus (0.5%, 2.1/10/2.1)", "worstPet": "Barrel (40%)"},
+      {"egg": "Samurai Egg", "price": 40000, "evMulti1": 2.376, "evDamage": 9.33, "evMulti2": 2.466, "multi1Per1000": 0.0594, "damagePer1000": 0.2333, "bestPet": "Sensei (0.5%, 2.7/20/2.8)", "worstPet": "Dog Ninja (40%)"},
+      {"egg": "Farm Egg", "price": 150000, "evMulti1": 3.0153, "evDamage": 18.762, "evMulti2": 3.0654, "multi1Per1000": 0.0201, "damagePer1000": 0.1251, "bestPet": "Farmer (0.1%, 3.4/40/3.6)", "worstPet": "Hay (40%)"},
+      {"egg": "Frozen Egg", "price": 600000, "evMulti1": 3.7365, "evDamage": 37.92, "evMulti2": 3.817, "multi1Per1000": 0.00623, "damagePer1000": 0.0632, "bestPet": "Frozen Gem (0.5%, 4.2/80/4.3)", "worstPet": "Red Snowman (40%)"},
+      {"egg": "Ocean Egg", "price": 1500000, "evMulti1": 4.4753, "evDamage": 75.50, "evMulti2": 4.5654, "multi1Per1000": 0.00298, "damagePer1000": 0.0503, "bestPet": "Atlantic Hydra (0.1%, 4.9/160/5.1)", "worstPet": "Oceanic Dog (40%)"},
+      {"egg": "Lava Egg", "price": 2500000, "evMulti1": 5.2350, "evDamage": 150.62, "evMulti2": 5.3151, "multi1Per1000": 0.00209, "damagePer1000": 0.0602, "bestPet": "Demon Dog (0.01%, 5.6/320/5.8)", "worstPet": "Lava Plume (40%)"},
+      {"egg": "Narmek Egg", "price": 5500000, "evMulti1": 5.9550, "evDamage": 176.46, "evMulti2": 6.0550, "multi1Per1000": 0.00108, "damagePer1000": 0.0321, "bestPet": "Cosmo Cat (0.01%, 6.6/375/6.8)", "worstPet": "Moon Bunny (40%)"},
+      {"egg": "Food Cuke Egg", "price": 0, "nominalPrice": 600000, "evMulti1": 1.8126, "evDamage": 11.755, "evMulti2": 1.8126, "bestPet": "Ice Cream Cuke (0.01%, 6/50/6)", "worstPet": "Popcorn Cuke (30%)", "note": "free via PlaytimeRewards; the 600k price is never charged"}
+    ]
+  },
+  "otherNumbers": {
+    "petSwing": "max(1, 2 + sumEquippedDamage) every 0.6s (AUTO_TICK), only while >=1 pet equipped and pets within 10 studs of target",
+    "pickaxeClick": "pickaxe dictionary Damage x FriendBoost x combo (combo +0.05x per consecutive weak-point hit, cap 2x); 0.25s debounce",
+    "petLevels": "PetTable.Levels {Level 0, XP 0, RequiredXP 50/150} created at grant but NO system ever adds XP - dead data",
+    "zoneHpWalls": {"Spawn": 1, "Desert": 3, "Samurai": 8, "Farm": 20, "Snow": 45, "Underwater": 110, "Volcano": 240, "Narmek": 500},
+    "petSizeCap": "equipped models uniformly shrunk to fit ReplicatedStorage.petsize bounding cube (EquipService.lua:29-38)",
+    "statResyncOnJoin": "owned pets re-synced to live dictionary stats each join; goldens keep 1.5x (PetService.lua:206-241)",
+    "gamepassBypassAccounts": [1, 1660029941, 1196256323]
+  }
+}

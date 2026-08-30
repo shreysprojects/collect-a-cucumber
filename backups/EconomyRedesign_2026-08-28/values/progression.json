@@ -1,0 +1,216 @@
+{
+  "_meta": {
+    "generated": "2026-08-28",
+    "source": "backups/EconomyRedesign_2026-08-28/scripts",
+    "note": "All file:line refs point into the source dump. Currency ids: 'Cucumbers' (leaderstat shown as 'Cukes') and 'Coins'."
+  },
+
+  "doors": {
+    "refs": ["Dictionaries__Doors.lua:16-256", "DoorService.lua:131-207 (PurchaseDoor)", "DoorService.lua:209-233 (PromptPurchase)"],
+    "chargeFlow": "HitPart touch -> PromptPurchase (rebirth-gate checked, DoorService.lua:221-226) -> client Door UI -> Network 'PurchaseDoor' -> PurchaseDoor: rebirth gate (150-153), CheckIfEnough (156), RemoveCurrency with sku 'Door:<name>' (174), DoorData string append, buying a later door BACKFILLS all earlier doors free (163-171); join-time backfill self-heal too (DoorService.lua:64-83)",
+    "entries": [
+      {"index": "Spawn",      "name": "Spawn",          "price": 0,          "currency": "Coins", "order": 1, "minRebirths": 0, "orbs": {"multi": 1,   "orb": 1}},
+      {"index": "Desert",     "name": "The Wild West",  "price": 4000,       "currency": "Coins", "order": 2, "minRebirths": 0, "orbs": {"multi": 1.5, "orb": 2}},
+      {"index": "Samurai",    "name": "Samurai Palace", "price": 30000,      "currency": "Coins", "order": 3, "minRebirths": 0, "orbs": {"multi": 2,   "orb": 2.5}},
+      {"index": "Farm",       "name": "The Farm",       "price": 1000000,    "currency": "Coins", "order": 4, "minRebirths": 1, "orbs": {"multi": 2.5, "orb": 3}},
+      {"index": "Snow",       "name": "The Arctic",     "price": 7500000,    "currency": "Coins", "order": 5, "minRebirths": 2, "orbs": {"multi": 3,   "orb": 3.5}},
+      {"index": "Underwater", "name": "The Ocean",      "price": 45000000,   "currency": "Coins", "order": 6, "minRebirths": 3, "orbs": {"multi": 4,   "orb": 5}},
+      {"index": "Volcano",    "name": "The Volcano",    "price": 250000000,  "currency": "Coins", "order": 7, "minRebirths": 4, "orbs": {"multi": 5,   "orb": 6}},
+      {"index": "Narmek",     "name": "The Greenland",  "price": 1500000000, "currency": "Coins", "order": 8, "minRebirths": 5, "orbs": {"multi": 6,   "orb": 7}}
+    ]
+  },
+
+  "rebirth": {
+    "refs": ["RebirthService.lua:15-18 (config)", "RebirthService.lua:27-29 (CostOf)", "RebirthService.lua:31-138 (TryRebirth)", "RebirthService.lua:143-173 (GrantFree)", "RebirthService.lua:175-180 (Multiplier)", "RebirthService.lua:220-263 (GetRebirthInfo/DoRebirth)"],
+    "costFormula": "cost(R -> R+1) = 100000 * 3.5^R, paid in COINS (leaderstats Coins; comment at :44-45). BASE_COST comment still says 'cucumbers' but the charge is Coins.",
+    "costTableCoins": {"0": 100000, "1": 350000, "2": 1225000, "3": 4287500, "4": 15006250, "5": 52521875, "6": 183826562, "7": 643392968, "8": 2251875390, "9": 7881563867, "10": 27585473535},
+    "maxRebirths": 50,
+    "resets": ["Cucumbers -> 0 (:80)", "Coins -> 0 (:81)", "DoorData -> 'Spawn' (:84) + live OwnedString mirror (:90-94)", "character respawn at Spawn (:126)"],
+    "persists": ["Pickaxes (owned + equipped + BuyAmount; explicitly NOT reset since 2026-08-05, :55-65)", "Pets (unequip/re-equip dance :96-114,128-137)", "Board upgrades (:89)", "Boss shards", "Vault contents (VaultCucumbers untouched)", "Quests", "Stats.Radius / walkspeed"],
+    "bonusPerRebirth": "+50% (BONUS_PER_REBIRTH=0.5) applied as multiplier 1+0.5R to Cucumbers earned AND to Coins from selling (CurrencyHandler.GetMulipliers:76-99) - i.e. it double-dips across the earn->sell loop (~(1+0.5R)^2 on farmed income)",
+    "otherBonuses": ["+1 vault slot per rebirth: capacity = 6 + rebirths (cap 50) + 'Vault slots' upgrade (max 3) => 59 max; new vault floor every 10 slots (BankBuilder.lua:69-75)", "Trading unlocks at 1 rebirth (TradeService.lua:20)", "Doors Farm..Narmek gated at 1..5 rebirths"],
+    "freeRebirth": "RebirthService.GrantFree (playtime reward): +1 rebirth and its permanent bonus with NO cost and NO reset (:143-173)",
+    "getRebirthInfoPayload": ["Rebirths", "Bonus (=R*50)", "NextBonus", "Cost", "Coins", "CanAfford", "MaxRebirths (50)", "AtMax", "VaultSlots", "NextVaultSlots", "VaultFloors", "NextVaultFloors"]
+  },
+
+  "pickaxes": {
+    "refs": ["Dictionaries__Pickaxes.lua:36-306", "PickaxeService.lua:85-155 (purchase/equip)", "PickaxeService.lua:157-196 (CharacterJoined re-grant + ToolData self-heal)", "Shop__Pickaxes.lua:172-178,239-262 (UI gate/order)", "TimeSkipRateService.lua:219-228 (damage lookup)"],
+    "currency": "Coins (all)",
+    "gating": "Strictly sequential: a pickaxe is buyable only if Order <= ToolData.BuyAmount (PickaxeService.lua:113); BuyAmount starts at 1 and +1 per purchase (:133-135). No zone/biome gating. Shop UI shows Locked state for Order > BuyAmount and orders cards by dictionary Order (Shop__Pickaxes.lua:251-258,269).",
+    "giftPickaxe": "No gift pickaxe; PickaxeShopGiftServer grants one-time 500 COINS during tutorial at the shop (PickaxeShopGiftServer.lua:23,73-95; replay top-up back to 500 once/session :78-93)",
+    "damageLookup": "TimeSkipRateService.GetPickaxeDamage reads PlayerData.Pickaxes.Equipped.Value -> dictionary Stats.Damage, default 4 (TimeSkipRateService.lua:219-228); combat uses the same dictionary via BreakablesService",
+    "list": [
+      {"name": "Wood Pickaxe",      "order": 0,  "price": 0,          "damage": 4,    "range": 6},
+      {"name": "Stone Pickaxe",     "order": 1,  "price": 500,        "damage": 5,    "range": 7},
+      {"name": "Bronze Pickaxe",    "order": 2,  "price": 2000,       "damage": 8,    "range": 8},
+      {"name": "Iron Pickaxe",      "order": 3,  "price": 6000,       "damage": 11,   "range": 9},
+      {"name": "Steel Pickaxe",     "order": 4,  "price": 15000,      "damage": 16,   "range": 10},
+      {"name": "Gold Pickaxe",      "order": 5,  "price": 40000,      "damage": 23,   "range": 11},
+      {"name": "Emerald Pickaxe",   "order": 6,  "price": 100000,     "damage": 32,   "range": 12},
+      {"name": "Ruby Pickaxe",      "order": 7,  "price": 250000,     "damage": 46,   "range": 13},
+      {"name": "Amethyst Pickaxe",  "order": 8,  "price": 600000,     "damage": 66,   "range": 14},
+      {"name": "Diamond Pickaxe",   "order": 9,  "price": 1500000,    "damage": 93,   "range": 15},
+      {"name": "Valentine Pickaxe", "order": 10, "price": 4000000,    "damage": 133,  "range": 16},
+      {"name": "Magma Pickaxe",     "order": 11, "price": 10000000,   "damage": 189,  "range": 17},
+      {"name": "VoidNeon Pickaxe",  "order": 12, "price": 25000000,   "damage": 268,  "range": 18},
+      {"name": "CosmicIce Pickaxe", "order": 13, "price": 60000000,   "damage": 381,  "range": 19},
+      {"name": "YinYang Pickaxe",   "order": 14, "price": 150000000,  "damage": 542,  "range": 20},
+      {"name": "Galaxy Pickaxe",    "order": 15, "price": 400000000,  "damage": 769,  "range": 21},
+      {"name": "SolarFlare Pickaxe","order": 16, "price": 1000000000, "damage": 1093, "range": 22},
+      {"name": "BloodMoon Pickaxe", "order": 17, "price": 2500000000, "damage": 1550, "range": 23},
+      {"name": "Rainbow Pickaxe",   "order": 18, "price": 6000000000, "damage": 2200, "range": 24}
+    ]
+  },
+
+  "upgrades": {
+    "refs": ["Dictionaries__Upgrades.lua:87-144", "UpgradeService.lua:43-79 (purchase; price formula :56)", "UpgradeService.lua:81-116 (join re-apply + legacy scrub)"],
+    "currency": "Coins (all)",
+    "priceFormula": "price(level) = RoundNumber(Base + Base*level*Increment, 100)",
+    "list": [
+      {"name": "Vault slots",      "base": 150000, "increment": 1.0,  "max": 3, "effect": "+1 vault podium per level (stacks on 6+rebirths capacity; VaultService relayouts live)", "levelPrices": [150000, 300000, 450000]},
+      {"name": "Pet equips",       "base": 30000,  "increment": 0.6,  "max": 3, "effect": "+1 pet equip slot per level (base 4 -> 7; gamepass +4 and legacy products stack above, Dictionaries__Upgrades.lua:47-82)", "levelPrices": [30000, 48000, 66000]},
+      {"name": "Smashes required", "base": 25000,  "increment": 0.45, "max": 3, "effect": "-3 cucumbers required per level on EVERY portal (max -9; portals only, PortalCucumberProgress.lua:133-145)", "levelPrices": [25000, 36250, 47500], "levelPricesNote": "36250 rounds to hundreds via RoundNumber"}
+    ],
+    "retired": ["Faster walkspeed (base is flat 29 now)", "Hatch speed (scrubbed from saves on join, UpgradeService.lua:90-100)"]
+  },
+
+  "selling": {
+    "refs": ["SellVendorServer.lua:70-90 (SellAll)", "SellVendorServer.lua:105-151 (SellCarried)", "SellVendorServer.lua:170-290 (SellPets)", "CurrencyHandler.lua:66-103 (GetMulipliers)", "CarryService.lua:417-429 (EffectiveRate/ValueOf)", "PetSellValues.lua:16-54", "NewPetSellController.lua (sell UI, 50-pet cap :186)"],
+    "sellAll": {
+      "base": "Cukes -> Coins at 1:1 of the leaderstat balance, then Coins multipliers apply",
+      "effective": "coins = cukes * (1 + 0.5*rebirths); no pet multi / no 2x pass on the coin side (deliberate, CurrencyHandler.lua:94-99). Sets Cucumbers to 0. Fires GoalService SellCucumbers with the PRE-multiplier amount.",
+      "cooldown": "1s debounce",
+      "sellGamepass": "none - no sell-related gamepass exists (ProductController gamepass list); rebirth is the only sell multiplier"
+    },
+    "sellCarried": {
+      "value": "floor(EffectiveRate * 250) where EffectiveRate = record.Rate * 1.18^(level-1), FROZEN mutation *0.8 (CarryService.lua:417-429)",
+      "effective": "payout goes through AddCurrency WITHOUT WasPurchase/MultipliersApplied, so the rebirth coin multiplier applies on top: floor(Rate*1.18^(L-1)*250) * (1+0.5R)",
+      "cooldown": "0.5s shared SellCooldown"
+    },
+    "sellPets": {
+      "values": {"Common": 100, "Uncommon": 250, "Rare": 600, "Epic": 1500, "Legendary": 3500, "Special": 5000, "Mythical": 10000, "Omega": 25000, "default": 100, "goldenMultiplier": 1.5},
+      "flat": "paid with MultipliersApplied=true -> NO rebirth multiplier (SellVendorServer.lua:283-286)",
+      "caps": "MAX_SELL_BATCH=50 per request (mirrored client-side); equipped pets refused; dedupe; mid-trade refused; absolute Inventory.Value recompute to repair drift (:261-265)"
+    }
+  },
+
+  "timeskips": {
+    "refs": ["TimeSkipRateService.lua (whole file)", "VaultTimeSkipService.lua (whole file)", "ProductController.lua:222-243 (products)", "ProductHandler.lua:119-150 (receipt grants)", "WalkCucumberService.lua:16-20 (disabled map pickups)"],
+    "cucumberRate": {
+      "model": "Deterministic expected cukes/sec vs the HIGHEST unlocked zone's baseline spawn mixture (15 sliced + 24 weighted regular slots), ZONE_HP wall scaling and Door Orbs (Orb*Multi) value scaling, 10% crit x5, pickaxe tick 0.25s + pet tick 0.6s (pet strike = 2 + summed pet Damage, 0 with no pets)",
+      "zoneHP": {"Spawn": 1, "Desert": 3, "Samurai": 8, "Farm": 20, "Snow": 45, "Underwater": 110, "Volcano": 240, "Narmek": 500},
+      "quote": "Quote(sec) = max(1, floor(GetRate * sec)); GetRate = base rate * cucumber multipliers (rebirth, 2x pass, pet Multi1, 2x boost, group +50%). Grant() awards flat (WasPurchase) so multipliers never apply twice."
+    },
+    "vaultRate": "VaultTimeSkipService: coins/sec = sum of CarryService.EffectiveRate over stored vault cucumbers, x coin multipliers (= rebirth); empty vault quotes 0 and Grant refuses (VaultTimeSkipService.lua:30-80)",
+    "products": {
+      "cucumberTimeSkips": [
+        {"name": "1 Minute",  "id": 3609921759, "seconds": 60},
+        {"name": "5 Minutes", "id": 3609921779, "seconds": 300},
+        {"name": "30 Minutes","id": 3609921799, "seconds": 1800},
+        {"name": "5 Hours",   "id": 3609921818, "seconds": 18000},
+        {"name": "1 Day",     "id": 3609921841, "seconds": 86400},
+        {"name": "1 Week",    "id": 3609921920, "seconds": 604800}
+      ],
+      "vaultTimeSkips": "same six durations but ALL Id=0 placeholders - not purchasable yet (ProductController.lua:236-243); ProductHandler skips Id 0",
+      "robuxPricesNote": "Robux prices live on the dashboard, not in code (GetProductInfo at runtime)"
+    },
+    "walkCucumberService": "Walk-over 'Time Skip' map pickups: each awarded a random 10-60s of Quote() (i.e. cucumber production incl. multipliers) to the collector if they own the zone; 5 world pickups + 1 per player, 10s respawn. CURRENTLY DISABLED: MAP_PICKUPS_ENABLED=false (WalkCucumberService.lua:16,294-297)"
+  },
+
+  "quests": {
+    "refs": ["QuestBoardService.lua:40-46 (config)", ":104-128 (roll)", ":130-139 (grantClaim)", ":188-201 (claim)", ":253-264 (6h expiry loop)"],
+    "board": "3 quests: Smash 30-40 breakables, Collect 3-5 chests, Catch 1 specific weight-rolled cucumber type from a random UNLOCKED biome (PRISMATIC catch is a wildcard)",
+    "rewardPerQuest": "duration rolled per quest from {60,180,300,600}s (1/3/5/10 min); claim pays BOTH: TimeSkipRateService.Grant(sec) cucumbers AND max(VaultTimeSkipService.Quote(sec), 500) coins - the 500-coin floor pays even with an empty vault",
+    "reset": "all 3 claimed -> ResetAt = now + 6h; watcher rerolls in-session every 15s once expired; no manual reroll (dev hook only in Studio)",
+    "claimDebounce": "0.3s"
+  },
+
+  "minigames": {
+    "refs": ["MinigameCompletionService.lua:15-80 (pool)", ":190-242 (secure/lock)", ":285-306 (grant)", "PortalCucumberProgress.lua:10-16 (requirements)", "StarterPortalService.lua:8,127-134,255-266 (cooldown armed on completion)", "PortalUnlockService.lua (paid skips)", "MinigameTimeService.lua (best times)"],
+    "portals": [
+      {"portal": "Starter", "minigame": "Classic Obby",           "biomeCounted": "Spawn",   "smashesRequired": 18, "cooldown": 3600},
+      {"portal": "Desert",  "minigame": "Wild West Rat Hunt",     "biomeCounted": "Desert",  "smashesRequired": 27, "cooldown": 3600},
+      {"portal": "Snow",    "minigame": "Avalanche",              "biomeCounted": "Snow",    "smashesRequired": 54, "cooldown": 3600},
+      {"portal": "Lava",    "minigame": "Lava Run",               "biomeCounted": "Volcano", "smashesRequired": 78, "cooldown": 3600},
+      {"portal": "Void",    "minigame": "Bloxout Incorporated",   "biomeCounted": "Samurai", "smashesRequired": 90, "cooldown": 3600}
+    ],
+    "smashUpgradeReduction": "-3 per 'Smashes required' level, max -9, portals only",
+    "cooldownRule": "1h absolute os.time() expiry per portal in its own DataStore; armed by COMPLETING the run, not entering; smash progress resets when the cooldown arms; entry requires cooldown==0 AND remaining smashes==0",
+    "paidUnlock": "'Unlock Portal Now!' dev product 3709119039 (PortalUnlockService): one-use credit per portal, bypasses BOTH cooldown and smash requirement, consumed on entry",
+    "rewardSpinner": {
+      "weights": {"cucumber_1m": 17, "cucumber_2m": 15, "cucumber_3m": 12, "cucumber_5m": 10, "cucumber_10m": 8, "cucumber_15m": 9, "cucumber_30m": 5, "cucumber_1h": 4, "shard_1": 9, "shard_3": 4, "foodegg_1": 7, "coins_2m": 10, "coins_5m": 8, "coins_15m": 6, "coins_30m": 3},
+      "totalWeight": 127,
+      "cucumberPrizes": "TimeSkipRateService.Quote over 60/120/180/300/600/900/1800/3600s (multipliers included), amount LOCKED at pick time",
+      "coinPrizes": "VaultTimeSkipService.Quote over 120/300/900/1800s; empty vault downgrades to same-duration cucumber prize",
+      "shards": "1 or 3 boss shards banked to the HIGHEST unlocked zone's boss (10 forge that boss pet)",
+      "foodEgg": "1 real Food Cuke Egg hatch (pity included)"
+    },
+    "nuke": {
+      "productId": 3610280695,
+      "cost": "Robux dev product (dashboard-priced, no in-game currency cost)",
+      "effect": "cinematic missile strike on every SpawnArea, kills+returns players caught in areas, then BreakablesService.NukeAll(purchaser) collects EVERY live breakable's reward for the BUYER (NukeService.lua:348-400); queued 2s apart"
+    }
+  },
+
+  "saveSchema": {
+    "refs": ["UserData.lua:12-115 (defaults)", "InstanceValues.lua:16-177 (live mirrors)", "PortalCucumberProgress_v1 / <X>PortalCooldown_v1 / PortalUnlockState_v1 / MinigameBestTimes_v1 (separate DataStores outside the profile)"],
+    "profileDefaults": {
+      "Stats": {"Cucumbers": 0, "Coins": 0, "Radius": 7, "DoneTutorial": false, "TutorialStep": 0, "ClaimedGroupPet": false, "ClaimedTutorialPet": false, "PetShopGiftGiven": false, "PickaxeShopGiftGiven": false, "Scale": 1},
+      "TotalStats": {"TotalCucumbers": 0, "TotalCoins": 0, "TotalTime": 0, "TotalEggsOpened": 0, "TotalBreaks": 0, "GoldenBreaks": 0},
+      "ToolData": {"Equipped": "Wood Pickaxe", "Owned": "Wood Pickaxe", "BuyAmount": 1},
+      "DoorData": "Spawn ('#'-separated door names)",
+      "Boosts": {"2x Cucumbers": 0},
+      "BoostTotals": {"2x Cucumbers": 0},
+      "UsedCodes": "",
+      "PetData": {"Unlocked": "('|'-separated discovered names; other keys = pet id -> pet table)"},
+      "Chests": {},
+      "QuestBoard": "{Quests = {3 quest tables}, ResetAt}",
+      "Upgrades": {"Vault slots": 0, "Pet equips": 0, "Smashes required": 0},
+      "EggPity": 0,
+      "MaxEquipIncrement": 0,
+      "MaxPetInventoryIncrement": 0,
+      "SeasonStats": {"Season": 0, "Cucumbers": 0, "Coins": 0},
+      "ClaimedSeasonRewards": {},
+      "GoldenChampion": false,
+      "Streak": {"Day": 0, "Count": 0},
+      "GoalIndex": 1,
+      "GoalProgress": {"Index": 1, "Amount": 0},
+      "Rebirths": 0,
+      "VaultLoot": 0,
+      "VaultCucumbers": "[] entries {Spot, Zone, Name, Rate, Level, Rarity, Mutation, Accrued, OfflineCash}",
+      "VaultLastSave": 0,
+      "IndexClaimed": 0,
+      "ColossalShards": "0 (LEGACY, migrates into BossShards.Spawn)",
+      "BossShards": "{[zone] = count}",
+      "SeenShardHint": false,
+      "ChosenPath": false,
+      "SeenStarterOffer": false,
+      "SeenGroupOffer": false,
+      "SeenFavoritePrompt": false,
+      "PlaytimeRewards": {"Time": 0, "Claimed": {}},
+      "OfflineData": {"LastSeen": 0, "Rate": 0, "Vault": 0}
+    },
+    "liveMirrors": "leaderstats (Coins NumberValue, 'Cukes' NumberValue, Rebirths NumberValue) are the SOURCE OF TRUTH and write back to the profile on .Changed (InstanceValues.lua:47-55). PlayerData: DoneTutorial, Scale, Doors.OwnedString, FastHatch, AutoTarget, Pickaxes{Owned,Equipped,BuyAmount}, Pets{Equipped,MaxEquipped=4+legacy+board(clamped 0..6),Inventory,MaxInventory=30+incr,Unlocked,Multi1,Multi2,Damage}, Upgrades{per-upgrade IntValues}. NOTE: no instance->profile writeback for Pickaxes/Doors/Upgrades - services must write both (RebirthService.lua:86-89)."
+  },
+
+  "indexAndTrade": {
+    "refs": ["IndexService.lua:14-16,47-74", "TradeService.lua:19-21,102-157"],
+    "indexRewards": "Every 5 discovered pets = 1 milestone; claiming milestone N pays 500*N Coins flat (WasPurchase - no multipliers). Unbounded coin faucet scaling with collection size.",
+    "bossShardForge": "10 shards of a zone's boss forge that boss pet, repeatable (IndexService GetBossShards/ForgeBossPet -> BreakablesService)",
+    "trade": "Pet-only trading, both sides need >= 1 rebirth, max 4 pets per side, equipped pets untradeable, re-validated at execution, selling mid-trade refused. Pets move by id between profiles with absolute PetData writes; Inventory.Value adjusted relatively (drift risk repaired by SellPets' absolute recompute). No currency trading, no dupe path found."
+  },
+
+  "quirksAndRisks": [
+    "REBIRTH DOUBLE-DIP: 1+0.5R multiplies cucumber earnings AND the vendor's cuke->coin conversion, so farm-loop coins scale ~(1+0.5R)^2 while door/pickaxe prices are static - late-game prices are effectively much cheaper per rebirth (CurrencyHandler.lua:76-99).",
+    "MAX_REBIRTHS=50 is unreachable in practice: cost 100k*3.5^R passes 27B coins at R10 and ~4.6e31 at R49; the vault tower floors 5-6 (rebirth 35-45) are effectively decorative.",
+    "DOOR BACKFILL: buying any later door grants ALL earlier doors free (DoorService.lua:163-171) - skipping Desert/Samurai (34k combined) by saving 1M for Farm is possible but rebirth gates keep order roughly intact; join-time backfill also repairs old skipped saves.",
+    "QUEST COIN FLOOR: every quest claim pays >= 500 Coins even with an empty vault (QuestBoardService.lua:43,134-136) - a small guaranteed faucet, up to 1500/6h at zero effort beyond quest completion.",
+    "STARTER PORTAL PROGRESS WIPE: StarterPortalService calls PortalProgress.Reset inside loadCooldown (join, :118) instead of startCooldown like the other four portals (e.g. SnowPortalService.lua:125) - Starter smash progress (18) is wiped on EVERY join, defeating its DataStore persistence; likely a bug.",
+    "SELLCARRIED REBIRTH BONUS: carried-cucumber sale (Rate*1.18^(L-1)*250) also gets the rebirth coin multiplier (no MultipliersApplied flag, SellVendorServer.lua:126) - vault display cards show the flat value, so paid amount exceeds the shown green number at R>0.",
+    "MINT-GUARD NOTES ALREADY IN CODE: SellPets is a two-pass yield-free design with absolute inventory recompute because client-reachable PetService.DeletePet decrements across a yield (free pet-storage drift, SellVendorServer.lua:255-265); leaderstats.Changed mirrors straight to profile, so ANY server-side leaderstat write persists instantly (InstanceValues.lua:47-55).",
+    "TIMESKIP QUOTES INCLUDE MULTIPLIERS: minigame cucumber prizes, quest cucumber halves, and Robux time skips all scale with rebirth/pets/gamepass/group multipliers - a 1-week time skip (604800s) at late-game rates is an enormous grant; quotes are deterministic and locked at pick time so spinner-time equipment swaps cannot inflate them.",
+    "PET EQUIPS CLAMP MISMATCH: InstanceValues clamps board 'Pet equips' to 0..6 (InstanceValues.lua:125) while the dictionary caps board progression at 3 (MAX_PET_EQUIPS-4, Dictionaries__Upgrades.lua:57) - harmless today (MaxUpgrade=3) but a trap if MaxUpgrade rises.",
+    "VaultTimeSkips products are Id=0 placeholders - the second time-skip product line is wired but not sellable yet (ProductController.lua:236-243).",
+    "WalkCucumberService map pickups are disabled (MAP_PICKUPS_ENABLED=false) - dead code kept; quest/minigame time-skips are the only remaining pickup-style faucets."
+  ]
+}
