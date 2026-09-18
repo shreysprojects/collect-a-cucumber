@@ -89,3 +89,26 @@ instead of the 82 px portrait-plus-pointer that hung above it. Combo label at 10
   impacts (speed collapse >30% within a fraction of a second).
 - Other themes (Christmas, Candy, ...) generate from `PropInfo.Category`; only Frostpeak was
   tested.
+
+## 2026-09-17: overwritten by a Rojo sync, restored, now in the GitHub repo
+
+The place was synced from the Rojo project at https://github.com/kinqxz/RAS (Eric's repo,
+we have write access) at its 2026-09-10 state, which put the old scripts back, deleted
+`CLIENT_SnowballFX` and the `ChargeBar` template, and left everything Rojo does not map
+(RaceProgressGui, place properties, the prop library, billboards). The mirrors in `src/`
+were the only surviving copy.
+
+Restored the same day and committed to that repo as `daf124d` (all seven sources in the
+Rojo tree + `src/ReplicatedStorage/Assets/UserInterfaces/ChargeBar.rbxm`), so a sync now
+carries the work instead of wiping it. **Keep the repo and `src/` in step: after editing in
+Studio, copy the source into both.**
+
+Transfer recipe that works through the official Roblox Studio MCP (Edit mode, no HTTP):
+wrap each source in an `.rbxmx` (`ProtectedString` Source in CDATA), copy the files into
+`%LOCALAPPDATA%\Roblox\Versions\<running version>\content\`, then `game:GetObjects("rbxasset://name.rbxmx")`
+and copy `.Source` across (38 KB in one call, `loadstring` compile check available).
+Gotchas: the eval thread cannot reparent a script into the sandboxed folders (Modules,
+UserInterfaces: "additional values for the Capabilities property") - create new scripts with
+the MCP `multi_edit` tool and strip LuaSourceContainers out of GUIs before parenting them;
+it also cannot `require` the game modules or `FireServer`, so drive a ride with the
+`DevChargeHold` PlayerGui attribute (true, wait 1.7 s, false).
