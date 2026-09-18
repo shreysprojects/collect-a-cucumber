@@ -22,7 +22,7 @@ func.GUIFramework:SetupUIs()
 
 local function styleButton(button, text, background, strokeColor)
 	button.AnchorPoint = Vector2.new(0.5, 1)
-	button.Position = UDim2.new(0.5, 0, 1, -40)
+	button.Position = UDim2.new(0.5, 0, 0.86, 0) -- above the HUD level bar (y 0.88-0.98)
 	button.Size = UDim2.fromOffset(260, 80)
 	button.BackgroundColor3 = background
 	button.BorderSizePixel = 0

@@ -73,6 +73,31 @@ anchored (0.5, 0) at y 14, size (0.5, 0, 0, 34), pill corners, 3 px outline; `Tr
 controller (`src/RaceProgressController.lua`, installed over the original) draws a 44 px
 headshot ring that rides on the bar (marker anchor 0.5/0.5, target `UDim2.new(f, 0, 0.5, 0)`)
 instead of the 82 px portrait-plus-pointer that hung above it. Combo label at 108 px.
+`race-bar-layout.lua` re-applies this layout to a freshly imported `assets/RaceProgressGui.rbxm`
+(the export still has the original tall layout); then set the controller Source from `src/`.
+
+## 2026-09-18 audit after the user's revert
+
+Studio sources = `src/` mirrors = GitHub `kinqxz/RAS` Rojo tree (all 7 identical by checksum,
+`ChargeBar.rbxm` identical), RaceProgressController identical to `src/`, compact bar layout with
+labels below, `FallenPartsDestroyHeight` -10000, 3 lobby billboards 14x3.5 studs, 8 prop themes
+(Frostpeak 33), 12 pieces, 30 balls + BallColision. Test ride: 150 studs/s launch, radius 0.67,
+8 smashes / x9 combo in 8 s, race marker live. Nothing missing.
+
+## 2026-09-18: HUD in game (src/HUD.lua -> ServerStorage.Modules.UserInterfaces.HUD)
+
+The frames the user authored in `ServerStorage.Assets.UserInterfaces.HUD` (MainUI with
+Rebirth / Shop / Mountains / Invite / DistanceBoost / Auto buttons, Level bar, friend boost;
+Shop and Mountains panels; the empty Interface) are moved under the HUD module by
+`SERV_General.SetupInterfaces`; GUIFramework spawns `Interface` into `PlayerGui.HUD.Base` as
+"HUD". The module clones `MainUI` into it and wires the buttons: Shop / Mountains / Rebirth
+open the frame of the same name IF it exists (spawned panel -> module template -> anything in
+ReplicatedStorage.Assets.UserInterfaces -> anything already in PlayerGui). Panels are cloned
+into `PlayerGui.Menu.Basis.Window` (Menu DisplayOrder raised to 5), one open at a time, the
+panel's `X` closes it, the button toggles it. `PlayerGui` attribute `PanelOpen` = the open
+panel; hold-to-launch ignores presses while it is set. Rebirth only warns until a frame named
+"Rebirth" is added anywhere above. Dev hook: `PlayerGui:SetAttribute("DevPanel", name)`.
+The "HOLD TO LAUNCH" hint and the Stop button moved to y 0.86 (above the level bar).
 
 ## Numbers from the 2026-09-16 test rides
 
