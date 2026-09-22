@@ -66,15 +66,13 @@ local function collectTemplates()
 	return templates
 end
 
-local function normalizeAssetName(name)
+-- "Candy_Cane" / "Candy Cane" -> "candycane": no order prefix, case, spaces or separators.
+local function compactAssetName(name)
 	if type(name) ~= "string" then
 		return ""
 	end
-	local trimmed = string.lower(name)
-	trimmed = string.gsub(trimmed, "^%d+[%s_%-]*", "")
-	trimmed = string.gsub(trimmed, "[_%-]+", " ")
-	trimmed = string.gsub(trimmed, "%s+", " ")
-	return (string.match(trimmed, "^%s*(.-)%s*$")) or trimmed
+	local trimmed = string.gsub(string.lower(name), "^%d+[%s_%-]*", "")
+	return (string.gsub(trimmed, "[^%w]", ""))
 end
 
 local function isSnowballAsset(instance)
@@ -90,27 +88,50 @@ local function isSnowballAsset(instance)
 	return instance:IsA("Model") or instance:IsA("BasePart")
 end
 
+local function namedSnowballTemplate(folder, name)
+	if type(name) ~= "string" or name == "" then
+		return nil
+	end
+	local named = folder:FindFirstChild(name)
+	if named and isSnowballAsset(named) then
+		return named
+	end
+	local want = compactAssetName(name)
+	if want == "" then
+		return nil
+	end
+	for _, child in folder:GetChildren() do
+		if isSnowballAsset(child) and compactAssetName(child.Name) == want then
+			return child
+		end
+	end
+	return nil
+end
+
+local missingWarned = {}
+
+-- Catalog Asset names the model; display names can differ ("Candy Cane").
+-- A snowball with no model falls back to the starter's, with one warning.
 local function findSnowballTemplate(snowballName)
 	local folder = ServerStorage.Assets.Storage:FindFirstChild(mountainConfig.LAUNCH.StorageFolder)
 	if not folder then
 		return nil
 	end
 
-	local named = folder:FindFirstChild(snowballName)
-	if named and isSnowballAsset(named) then
-		return named
+	local catalog = sself.DEF_GVARS.Snowballs
+	local info = catalog:GetByName(snowballName)
+	local found = namedSnowballTemplate(folder, info and info.Asset) or namedSnowballTemplate(folder, snowballName)
+	if found then
+		return found
 	end
 
-	local want = normalizeAssetName(snowballName)
-	if want ~= "" then
-		for _, child in folder:GetChildren() do
-			if isSnowballAsset(child) and normalizeAssetName(child.Name) == want then
-				return child
-			end
-		end
+	local key = tostring(snowballName)
+	if not missingWarned[key] then
+		missingWarned[key] = true
+		warn("[SERVER]: No snowball model for", key, "- using the starter snowball")
 	end
-
-	return collectTemplates()[1]
+	local starter = catalog:GetByOrder(1)
+	return (starter and namedSnowballTemplate(folder, starter.Asset)) or collectTemplates()[1]
 end
 
 local function resolveSnowball(requestedName)
@@ -873,20 +894,28 @@ function m_api:EquipSnowball(player, requestedName)
 	return true
 end
 
+-- ReFunction: true, or false and a PlayerProgress.PurchaseInOrder reason for the shop to show.
 function m_api:BuySnowball(player, requestedName)
 	if not player or type(requestedName) ~= "string" or requestedName == "" then
-		return false
+		return false, "Invalid"
 	end
 
 	local catalog = sself.DEF_GVARS.Snowballs
 	local info = catalog:GetByName(requestedName)
 	if not info then
-		return false
+		return false, "Invalid"
 	end
 
 	local data = sself:GetPlayerProgress(player)
-	if not data or not playerProgress.PurchaseInOrder(data, "UnlockedSnowballs", catalog.List, info.Name) then
-		return false
+	if not data then
+		return false, "Invalid"
+	end
+	local bought, reason = playerProgress.PurchaseInOrder(data, "UnlockedSnowballs", catalog.List, info.Name)
+	if not bought then
+		return false, reason
+	end
+	if playerProgress.EQUIP_ON_BUY then
+		playerProgress.SetEquippedSnowball(data, info.Name)
 	end
 	data.Dirty = true
 	sself:ReplicateProgress(player)

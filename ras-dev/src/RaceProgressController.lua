@@ -3,6 +3,16 @@
 -- ring that rides ON the bar (the original hung a 62 px portrait + pointer above it).
 -- Distance comes from the replicated player attribute "Distance" (or leaderstats), the
 -- run length from the gui attribute "MaxDistance".
+--
+-- 2026-09-22: the bar never covers the HUD.
+--   * The gui draws below the HUD and Menu ScreenGuis (LAYOUT.DisplayOrder).
+--   * It slides up out of view while a HUD panel is open (PlayerGui attribute "PanelOpen")
+--     and slides back when the panel closes.
+--   * A UIScale on Root shrinks the whole authored bar (Track art, shadow, markers) just
+--     enough that it ends above the HUD's top-centre ride labels (MainUI.DistanceRolled /
+--     CoinsMade), measured live, on any screen size. Start / Finish text and the markers
+--     keep a readable minimum size. The Markers frame follows the Track box.
+-- Dev check: gui attributes LayoutScale / LayoutClearTop / LayoutBottom hold the result.
 
 local Players = game:GetService("Players")
 local StarterGui = game:GetService("StarterGui")
@@ -10,10 +20,26 @@ local TweenService = game:GetService("TweenService")
 
 local gui = script.Parent
 local root = gui:WaitForChild("Root")
+local track = root:WaitForChild("Track")
 local markers = root:WaitForChild("Markers")
 local setDistance = gui:WaitForChild("SetDistance")
+local playerGui = Players.LocalPlayer:WaitForChild("PlayerGui")
 
 local MARKER_SIZE = 44
+
+local LAYOUT = {
+	DisplayOrder = -1, -- under HUD (0) and Menu (5): HUD elements always draw over the bar
+	AvoidLabels = { "DistanceRolled", "CoinsMade" }, -- labels under PlayerGui.HUD the bar must end above
+	FallbackClearTop = 0.067, -- screen fraction: DistanceRolled's top edge in the Studio template
+	Gap = 2, -- px kept between the bar and those labels
+	MinScale = 0.25,
+	MaxScale = 1, -- never larger than the authored layout
+	LabelMinScale = 0.65, -- Start / Finish text renders at no less than this x its authored size
+	MarkerMinPx = 20, -- headshot rings stay at least this big while the space allows
+	HideMargin = 8, -- px past the bar's lowest pixel when slid out
+	HideTween = TweenInfo.new(0.16, Enum.EasingStyle.Quad, Enum.EasingDirection.In),
+	ShowTween = TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), -- no overshoot into the HUD
+}
 
 local palette = {
 	Color3.fromRGB(255, 220, 48),
@@ -27,6 +53,7 @@ local palette = {
 local playerConnections = {}
 local markerTweens = {}
 local localOverrides = {}
+local markerSize = MARKER_SIZE -- pre-scale marker size (grows when LayoutScale is small)
 
 local function hideTopbar()
 	for _ = 1, 30 do
@@ -41,6 +68,298 @@ local function hideTopbar()
 end
 
 task.spawn(hideTopbar)
+
+gui.DisplayOrder = LAYOUT.DisplayOrder
+
+----------------------------------------------------------------------------------------------
+-- Layout: every number below is read from the authored frames, so Studio edits to the
+-- bar (height, art, label placement) carry through; only the overall scale is computed.
+----------------------------------------------------------------------------------------------
+
+local ROOT_H = root.Size.Y.Offset
+
+-- Root hangs from the top centre so the UIScale shrinks it towards the middle.
+root.AnchorPoint = Vector2.new(0.5, 0)
+root.Position = UDim2.new(0.5, 0, 0, 0)
+root.Size = UDim2.new(1, 0, 0, ROOT_H)
+
+markers.AnchorPoint = track.AnchorPoint
+markers.Position = track.Position
+markers.Size = track.Size
+
+-- Top and bottom of a Root child in Root's unscaled space.
+local function spanY(object)
+	local height = object.Size.Y.Scale * ROOT_H + object.Size.Y.Offset
+	local top = object.Position.Y.Scale * ROOT_H + object.Position.Y.Offset - object.AnchorPoint.Y * height
+	return top, top + height
+end
+
+local function borderStroke(object)
+	local stroke = object:FindFirstChildOfClass("UIStroke")
+	if stroke and stroke.Enabled and stroke.ApplyStrokeMode == Enum.ApplyStrokeMode.Border then
+		return stroke.Thickness
+	end
+	return 0
+end
+
+local layoutScale = Instance.new("UIScale")
+layoutScale.Name = "LayoutScale"
+layoutScale.Parent = root
+
+-- Start / Finish labels get their own UIScale so their text never drops below LabelMinScale.
+local labels = {}
+for _, name in ipairs({ "StartLabel", "FinishLabel" }) do
+	local label = root:FindFirstChild(name)
+	if label and label:IsA("GuiObject") then
+		local top, bottom = spanY(label)
+		local scale = Instance.new("UIScale")
+		scale.Name = "MinTextScale"
+		scale.Parent = label
+		table.insert(labels, { Top = top, Height = bottom - top, Scale = scale })
+	end
+end
+
+local shown = true
+local slideTween = nil
+local contentBottom = 160 -- lowest on-screen pixel of the bar at rest, labels included (160 covers the unscaled bar)
+local lastLayoutKey = nil
+local avoidLabels = {} -- strong keys: an Instance's Luau reference can be collected from a weak table while it is still parented
+
+local function restPosition(visible)
+	if visible then
+		return UDim2.new(0.5, 0, 0, 0)
+	end
+	return UDim2.new(0.5, 0, 0, -math.ceil(contentBottom + LAYOUT.HideMargin))
+end
+
+-- A label's box without any pop UIScale on it (CoinsMade grows while coins land).
+local function restingBox(label)
+	local size = label.AbsoluteSize
+	local pop = label:FindFirstChildOfClass("UIScale")
+	local k = if pop and pop.Scale > 0 then pop.Scale else 1
+	local rest = size / k
+	local center = label.AbsolutePosition + size / 2 - gui.AbsolutePosition
+	return center - rest / 2, rest
+end
+
+-- Screen y the bar has to stay above: the highest HUD avoid-label overlapping it sideways.
+local function clearTop(height, barLeft, barRight)
+	local found = false
+	local best = math.huge
+	for label in avoidLabels do
+		if label.Parent and label:IsDescendantOf(playerGui) and label.AbsoluteSize.Y > 0 then
+			found = true
+			local position, size = restingBox(label)
+			if position.X < barRight and position.X + size.X > barLeft then
+				best = math.min(best, position.Y)
+			end
+		end
+	end
+	if not found then
+		return LAYOUT.FallbackClearTop * height
+	end
+	return best
+end
+
+local function applyLayout()
+	local viewport = gui.AbsoluteSize
+	local width, height = viewport.X, viewport.Y
+	if width <= 0 or height <= 0 then
+		return
+	end
+
+	local trackTop, trackBottom = spanY(track)
+	local stroke = borderStroke(track)
+	local shadowBottom = trackBottom
+	local shadow = root:FindFirstChild("TrackShadow")
+	if shadow and shadow:IsA("GuiObject") then
+		local _, bottom = spanY(shadow)
+		shadowBottom = bottom
+	end
+	local markerCenter = (trackTop + trackBottom) / 2
+
+	-- Track span sideways on screen (the authored track has no X offsets to scale).
+	local trackWidth = track.Size.X.Scale * width + track.Size.X.Offset
+	local barLeft = track.Position.X.Scale * width + track.Position.X.Offset - track.AnchorPoint.X * trackWidth
+	local barRight = barLeft + trackWidth
+	local overhang = MARKER_SIZE / 2 + stroke
+
+	local limit = clearTop(height, barLeft - overhang, barRight + overhang) - LAYOUT.Gap
+	local scale = LAYOUT.MaxScale
+	if limit < math.huge then
+		-- Stroke thickness is treated as unscaled (safe either way).
+		scale = math.min(
+			scale,
+			(limit - stroke) / trackBottom,
+			limit / shadowBottom,
+			limit / (markerCenter + MARKER_SIZE / 2)
+		)
+	end
+	scale = math.clamp(math.floor(scale * 1000) / 1000, LAYOUT.MinScale, LAYOUT.MaxScale)
+
+	local labelScale = math.max(scale, LAYOUT.LabelMinScale)
+	local centerPx = markerCenter * scale
+	local room = 2 * math.min(limit - centerPx, centerPx)
+	local markerPx = math.max(MARKER_SIZE * scale, math.min(LAYOUT.MarkerMinPx, room))
+
+	local key = string.format("%.1f:%.1f:%.3f:%.3f:%.2f", width, height, scale, labelScale, markerPx)
+	if key == lastLayoutKey then
+		return
+	end
+	lastLayoutKey = key
+
+	layoutScale.Scale = scale
+	-- Root spans 1/scale screens before the UIScale, i.e. exactly one screen after it, so
+	-- the scale-based widths (the bar is half the screen) do not shrink.
+	root.Size = UDim2.new(1 / scale, 0, 0, ROOT_H)
+
+	local barBottom = math.max(trackBottom * scale + stroke, shadowBottom * scale, centerPx + markerPx / 2)
+	contentBottom = barBottom
+	for _, label in labels do
+		label.Scale.Scale = labelScale / scale
+		contentBottom = math.max(contentBottom, label.Top * scale + label.Height * labelScale)
+	end
+
+	markerSize = markerPx / scale
+	for _, marker in markers:GetChildren() do
+		if marker:IsA("GuiObject") then
+			marker.Size = UDim2.fromOffset(markerSize, markerSize)
+		end
+	end
+
+	if slideTween then
+		slideTween:Cancel()
+		slideTween = nil
+	end
+	root.Position = restPosition(shown)
+	root.Visible = shown
+
+	gui:SetAttribute("LayoutScale", scale)
+	gui:SetAttribute("LayoutClearTop", if limit < math.huge then limit + LAYOUT.Gap else -1)
+	gui:SetAttribute("LayoutBottom", barBottom)
+end
+
+local layoutQueued = false
+local function queueLayout()
+	if layoutQueued then
+		return
+	end
+	layoutQueued = true
+	task.defer(function()
+		layoutQueued = false
+		applyLayout()
+	end)
+end
+
+local function isAvoidLabel(instance)
+	return (instance:IsA("TextLabel") or instance:IsA("TextButton")) and table.find(LAYOUT.AvoidLabels, instance.Name) ~= nil
+end
+
+local function watchAvoidLabel(label)
+	if avoidLabels[label] then
+		return
+	end
+	avoidLabels[label] = true
+	label:GetPropertyChangedSignal("AbsolutePosition"):Connect(queueLayout)
+	label:GetPropertyChangedSignal("AbsoluteSize"):Connect(queueLayout)
+	label.AncestryChanged:Connect(queueLayout)
+	label.Destroying:Connect(function()
+		avoidLabels[label] = nil
+		queueLayout()
+	end)
+	queueLayout()
+end
+
+gui:GetPropertyChangedSignal("AbsoluteSize"):Connect(queueLayout)
+applyLayout()
+
+-- The HUD clones MainUI in after this script starts; pick its labels up when they arrive
+-- (also from a HUD ScreenGui that is added later or replaced).
+local function watchHud(hud)
+	hud.DescendantAdded:Connect(function(descendant)
+		if isAvoidLabel(descendant) then
+			watchAvoidLabel(descendant)
+		end
+	end)
+	for _, descendant in hud:GetDescendants() do
+		if isAvoidLabel(descendant) then
+			watchAvoidLabel(descendant)
+		end
+	end
+end
+
+playerGui.ChildAdded:Connect(function(child)
+	if child.Name == "HUD" then
+		watchHud(child)
+	end
+end)
+local existingHud = playerGui:FindFirstChild("HUD")
+if existingHud then
+	watchHud(existingHud)
+end
+
+----------------------------------------------------------------------------------------------
+-- HUD panels: slide the bar out while one is open.
+----------------------------------------------------------------------------------------------
+
+local function setShown(visible, instant)
+	if slideTween then
+		slideTween:Cancel()
+		slideTween = nil
+	end
+	shown = visible
+	if visible then
+		root.Visible = true
+	end
+
+	local target = restPosition(visible)
+	if instant then
+		root.Position = target
+		root.Visible = visible
+		return
+	end
+
+	local tween = TweenService:Create(root, if visible then LAYOUT.ShowTween else LAYOUT.HideTween, { Position = target })
+	slideTween = tween
+	tween.Completed:Connect(function(state)
+		if slideTween == tween then
+			slideTween = nil
+		end
+		if state == Enum.PlaybackState.Completed and not shown then
+			root.Visible = false
+		end
+	end)
+	tween:Play()
+end
+
+local function panelOpen()
+	local name = playerGui:GetAttribute("PanelOpen")
+	return name ~= nil and name ~= false and name ~= ""
+end
+
+-- Deferred so a panel swap (PanelOpen nil -> next panel in one frame) never flickers the bar.
+local panelQueued = false
+playerGui:GetAttributeChangedSignal("PanelOpen"):Connect(function()
+	if panelQueued then
+		return
+	end
+	panelQueued = true
+	task.defer(function()
+		panelQueued = false
+		local visible = not panelOpen()
+		if visible ~= shown then
+			setShown(visible, false)
+		end
+	end)
+end)
+
+if panelOpen() then
+	setShown(false, true)
+end
+
+----------------------------------------------------------------------------------------------
+-- Markers
+----------------------------------------------------------------------------------------------
 
 local function getMaxDistance()
 	return math.max(1, tonumber(gui:GetAttribute("MaxDistance")) or 10000)
@@ -114,7 +433,7 @@ local function createMarker(player)
 	marker.Name = tostring(player.UserId)
 	marker.AnchorPoint = Vector2.new(0.5, 0.5)
 	marker.Position = UDim2.new(fractionFor(player), 0, 0.5, 0)
-	marker.Size = UDim2.fromOffset(MARKER_SIZE, MARKER_SIZE)
+	marker.Size = UDim2.fromOffset(markerSize, markerSize)
 	marker.BackgroundTransparency = 1
 	marker.BorderSizePixel = 0
 	marker.ZIndex = 12

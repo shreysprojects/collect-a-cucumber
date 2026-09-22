@@ -478,7 +478,10 @@ config.SMASH = {
 	ComboPopTime = 0.5,
 	ComboStartY = 0.4, -- screen fraction where the pop starts (centre-ish)
 	ComboTopY = 0, -- screen fraction where it settles (top)...
-	ComboTopOffset = 108, -- ...plus pixels, so it sits under the compact race bar (y 14-48) and its labels
+	ComboTopOffset = 108, -- ...plus pixels: the highest it settles (it also drops below the HUD readouts below)
+	ComboAvoid = { "DistanceRolled", "CoinsMade" }, -- PlayerGui.HUD labels the settled combo must stay under
+	ComboClearGap = 6, -- px between those labels and the settled combo text
+	ComboAvoidPop = 1.45, -- biggest EarnPop scale the HUD gives CoinsMade (HUD popCoinsMade clamp)
 	ComboFadeTime = 0.45,
 	ComboColor = Color3.fromRGB(255, 138, 0),
 	ComboFlashColor = Color3.fromRGB(255, 236, 190),
@@ -498,8 +501,30 @@ config.SOUNDS = {
 }
 
 -- LaunchPoint is on the rolling surface; ExtraHeight sits the character above snow.
+-- The rest keeps characters from falling off the map on join (SERV_PlayerEvents +
+-- CLIENT_SpawnGuard): the server anchors each new character, places it on the pad
+-- once the mountain exists, and lets go when the client reports the pad's floor
+-- under it (the mountain is one Persistent model, so a joining client can get it
+-- seconds after its character is placed).
 config.SPAWN = {
 	ExtraHeight = 3,
+	SpawnLocationName = "MountainSpawn", -- invisible Neutral SpawnLocation on the launch pad (workspace)
+	SpawnLocationSize = Vector3.new(4, 1, 4),
+	HoldAttribute = "SpawnHold", -- character attribute: hold token while the server anchors it on the pad
+	ParentTimeout = 5, -- seconds the server waits for a new character to be parented before holding it
+	SpawnKeepRadius = 4, -- flat studs from the pad spawn inside which an engine spawn is kept (no server re-pivot)
+	HoldTimeout = 30, -- seconds a placed character stays anchored waiting for the client's floor report
+	StreamTimeout = 10, -- RequestStreamAroundAsync timeout for the pad
+	FloorProbe = 40, -- studs below the root part searched for mountain floor (client)
+	AckResend = 0.5, -- seconds between the client's SpawnReady reports while still held
+	AckTolerance = 12, -- studs between the reported and the placed root position
+	FallDepth = 60, -- studs below the StartPlatform (near it) or the whole mountain before the failsafe acts
+	StartMargin = 40, -- studs around the StartPlatform footprint that still count as "at the start"
+	FailsafeInterval = 0.5, -- seconds between server failsafe sweeps
+	-- ReplicatedStorage.Assets.GameInfo attributes the server stamps once the mountain is built.
+	InfoSpawnCFrame = "SpawnCFrame",
+	InfoStartBoxCFrame = "StartBoxCFrame",
+	InfoStartBoxSize = "StartBoxSize",
 }
 
 -- Reaching FinishPlatform parks the ball in front of it (chase camera stays on
@@ -516,6 +541,16 @@ config.LAUNCHER = {
 	InstanceName = "EquippedLauncher",
 	Grip = "Grip",
 	HandGrip = "RightGripAttachment",
+	-- Launch pad stance: standing still, charging or releasing on the pad turns the
+	-- character side-on so the pad camera (behind, looking down the track) sees the
+	-- launcher and its charge animation. Walking hands turning back to the Humanoid.
+	-- The launch itself always goes down the track.
+	PadStance = {
+		Enabled = true, -- false = face down the track (the old stance)
+		Yaw = -90, -- degrees from facing down the track: -90 = right side (launcher hand) to the camera, 90 = left side
+		TurnRate = 10, -- ease speed (1/s): about 95% of the turn in 0.3 s
+		WalkThreshold = 0.1, -- Humanoid.MoveDirection magnitude that counts as walking
+	},
 }
 
 config.LAUNCH = {

@@ -152,3 +152,52 @@ Studio was behind: five scripts were an older draft of the lifetime-totals work 
 commit behind. Nothing in Studio was missing from GitHub. The six scripts were set to `2e1cb4c`
 and checksum-verified; every script in the place now equals the repo. The files in `src/`
 were refreshed from `2e1cb4c` too (the ones we mirror; the repo is the full source).
+
+## 2026-09-22: six fixes (HUD overlap, shop, purchase FX, first-join spawn, side stance, gear audit)
+
+All in GitHub kinqxz/RAS main `e26b1e8` (branches fix/race, fix/shop, fix/spawn, fix/facing, fix/gear
+merged, plus two follow-up commits); every script in RAS - Dev equals that commit. The files in
+`src/` were refreshed from it.
+
+- **Race bar vs HUD** (`src/RaceProgressController.lua`, also in the repo as
+  `extras/RaceProgressGui/RaceProgressController.lua` because StarterGui.RaceProgressGui is not in
+  the Rojo tree): the gui draws at DisplayOrder -1 (under HUD 0 / Menu 5), slides out while the
+  PlayerGui attribute `PanelOpen` is set, and a runtime UIScale `Root.LayoutScale` shrinks the
+  team's 58 px bar just enough to end above MainUI.DistanceRolled / CoinsMade (result in the gui
+  attributes LayoutScale / LayoutClearTop / LayoutBottom). To make it bigger, move those HUD labels
+  down. Do NOT re-run `race-bar-layout.lua` on the current gui (it resets the 58 px Track to 34);
+  the live gui is exported as `assets/RaceProgressGui_2026-09-22.rbxm`.
+- **Combo counter** (CLIENT_SnowballFX `comboSettlePosition`, SMASH.ComboAvoid / ComboClearGap /
+  ComboAvoidPop): settles under DistanceRolled / CoinsMade (measured at rest plus the biggest
+  EarnPop) instead of the fixed 108 px that covered CoinsMade.
+- **Shop**: the purchase gate and the UI read the same unlocks (`PlayerProgress.EffectiveUnlocks`:
+  saved unlocks + Studio `StudioSettings.UnlockAll`, never saved). Gear stays gated by mountain on
+  live servers (`GEAR_REQUIRES_MOUNTAIN = true`, switchable); locked cards read "BEAT <mountain>",
+  out-of-order presses say "Buy <next> first". BuySnowball / BuyLauncher go through ReFunction and
+  return true or false + reason. `EQUIP_ON_BUY = false` keeps buy-then-EQUIP. The ride coins
+  readout counts only gains, so a mid-ride buy no longer zeroes it.
+- **Purchase effects**: `Client/UI/PurchaseFX` + `Client/UI/Notify` = port of the New Map Cucumber
+  Game ButtonFX / Notify (press pop, flash, big pop, "UNLOCKED!" float, sparkles seen by others,
+  Cash Register 120891770644830 + Magic Shimmer 3199238931, Button Pop 9113263444, Error 550209561).
+  Plays on snowball, blaster and rebirth purchases. Robux products do not exist yet; when added,
+  fire the client mode `PurchaseConfirmed` after ProcessReceipt grants.
+- **First-join spawn**: ServerMain connects player handlers before generating; SERV_PlayerEvents
+  holds (anchors) each new character until the mountain is ready and the client reports the pad
+  floor (`SpawnReady`, CLIENT_SpawnGuard), then places / releases it; `workspace.MountainSpawn`
+  SpawnLocation on the pad; a 0.5 s failsafe returns fallen non-riding characters to the pad.
+  Studio test knobs: StudioSettings attributes `GenerationDelay` / `SpawnFloorDelay` (inert live).
+- **Side stance**: `MountainConfig.LAUNCHER.PadStance` (Yaw -90 = right side to the camera, eased,
+  AutoRotate while walking). Use -60 / -45 if the launcher should point more down the track.
+- **Gear audit**: all 30 launchers + 30 snowballs from RAS - Assets were already in Dev, in the shop
+  and animated (30 procedural charge/fire profiles). Fixed: catalog `Asset` names (Revolver,
+  Dragoon Launcher, Candy Cane, Black Hole showed the wrong model), Snowball Flipper icon id,
+  shop multiplier = Order (x1..x30, what the game uses), and `CLIENT_LauncherObservers` so other
+  players see the launcher pose. No Blender work was needed; Blender would only add moving parts to
+  the rigid launcher meshes.
+
+Tested live (solo + 2-player): mid-generation join held then placed, 15 s GenerationDelay held 18 s
+with no fall, -200 stud drop back on the pad in 0.4 s, stance right.back = 1.000 idle and charging,
+ball launches down the track, bar hides on panel open, real clicks buy / refuse with toasts, the
+four fixed items load their own meshes, observers see ready pose + wind-up/fire, no script errors.
+Note: the charge bar ping-pongs (FillTime 0.42 s, Time 1.2 s); releasing at the bottom of the swing
+(< MinCharge 0.03) launches nothing, by design. Test holds of ~1.6 s land there.
