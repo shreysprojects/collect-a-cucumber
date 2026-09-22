@@ -1,7 +1,19 @@
 --[[---------------------------------------DESCRIPTION------------------------------------------
-	Picks the first snowball from Storage/Snowballs, attaches Templates collision,
-	and tells the client to follow it with the camera. Rolling over SnowPatches
-	drains snow into the ball and scales it up.
+	Picks the equipped snowball from Storage/Snowballs, attaches Templates collision,
+	and tells the client to follow it with the camera. Classic is granted on join
+	and used until the player equips another owned ball.
+
+	Rolling carves the snow: every Carve.Interval the server finds the ball's
+	ground contact, removes the exposed snow layer inside a footprint the width
+	of the ball, and turns what it actually removed into growth and rewards.
+	Snow and smash rewards are scaled by the equipped snowball × launcher
+	multiplier, and that same multiplier lengthens the launch.
+	The riding client reports its own contact point (CarveSnow) so a fast ride
+	cannot outrun the server's view of the roll; that request is validated
+	against the server's ball position before it is used.
+
+	Reaching FinishPlatform parks the ball in front of it and keeps the chase
+	camera on the ball, then unlocks the next mountain and teleports them there.
 
 --------------------------------------------------------------------------------------------]]--
 
@@ -11,7 +23,9 @@ local RunService = game:GetService("RunService")
 local CollectionService = game:GetService("CollectionService")
 
 local mountainConfig = require(ReplicatedStorage.Assets.Modules.Shared.MountainConfig)()
-local SNOW_TAG = "MountainSnow"
+local mountainPlaces = require(ReplicatedStorage.Assets.Modules.Shared.MountainPlaces)()
+local playerProgress = require(ReplicatedStorage.Assets.Modules.Shared.PlayerProgress)()
+local snowField = require(ServerStorage.Modules.SnowField)
 
 local MODULE = {}
 local m_api = {}
@@ -21,6 +35,7 @@ local sself = m_sapi
 function MODULE.new(r_sapi)
 	sself = r_sapi
 	sself.SNOWBALLS = sself.SNOWBALLS or {}
+	sself.MountainFinishing = sself.MountainFinishing or {}
 	return m_api, m_sapi
 end
 
@@ -49,6 +64,64 @@ local function collectTemplates()
 		return a.Name < b.Name
 	end)
 	return templates
+end
+
+local function normalizeAssetName(name)
+	if type(name) ~= "string" then
+		return ""
+	end
+	local trimmed = string.lower(name)
+	trimmed = string.gsub(trimmed, "^%d+[%s_%-]*", "")
+	trimmed = string.gsub(trimmed, "[_%-]+", " ")
+	trimmed = string.gsub(trimmed, "%s+", " ")
+	return (string.match(trimmed, "^%s*(.-)%s*$")) or trimmed
+end
+
+local function isSnowballAsset(instance)
+	if not instance then
+		return false
+	end
+	if COLLISION_NAMES[instance.Name] then
+		return false
+	end
+	if string.find(string.lower(instance.Name), "collision", 1, true) then
+		return false
+	end
+	return instance:IsA("Model") or instance:IsA("BasePart")
+end
+
+local function findSnowballTemplate(snowballName)
+	local folder = ServerStorage.Assets.Storage:FindFirstChild(mountainConfig.LAUNCH.StorageFolder)
+	if not folder then
+		return nil
+	end
+
+	local named = folder:FindFirstChild(snowballName)
+	if named and isSnowballAsset(named) then
+		return named
+	end
+
+	local want = normalizeAssetName(snowballName)
+	if want ~= "" then
+		for _, child in folder:GetChildren() do
+			if isSnowballAsset(child) and normalizeAssetName(child.Name) == want then
+				return child
+			end
+		end
+	end
+
+	return collectTemplates()[1]
+end
+
+local function resolveSnowball(requestedName)
+	local catalog = sself.DEF_GVARS.Snowballs
+	if type(requestedName) == "string" then
+		local named = catalog:GetByName(requestedName)
+		if named then
+			return named
+		end
+	end
+	return catalog:GetByOrder(1)
 end
 
 local function isCollisionAsset(instance)
@@ -162,6 +235,7 @@ local function attachCollision(clone, template)
 		part.Anchored = false
 		part.CanCollide = true
 		part.Massless = false
+		part.CollisionGroup = mountainConfig.PHYSICS.SnowballGroup
 		if part ~= root then
 			local weld = Instance.new("WeldConstraint")
 			weld.Part0 = root
@@ -203,6 +277,7 @@ local function prepareBody(clone, collisionTemplate)
 		part.Anchored = false
 		part.CanCollide = true
 		part.Massless = false
+		part.CollisionGroup = mountainConfig.PHYSICS.SnowballGroup
 		if part ~= root then
 			local weld = Instance.new("WeldConstraint")
 			weld.Part0 = root
@@ -214,7 +289,6 @@ local function prepareBody(clone, collisionTemplate)
 	return root
 end
 
-local patchBases = setmetatable({}, { __mode = "k" })
 local growConnection = nil
 
 local function sphereVolume(radius)
@@ -225,103 +299,28 @@ local function getModel(state)
 	return state.Model or state
 end
 
-local function ancestorHasType(instance, attachmentType)
-	local current = instance
-	while current and current ~= workspace do
-		if current:GetAttribute("AttachmentType") == attachmentType then
-			return true
-		end
-		current = current.Parent
-	end
-	return false
+local function ballRadius(state)
+	return state.StartRadius * (state.Scale or 1)
 end
 
-local function sphereHitsPart(center, radius, part)
-	local localPoint = part.CFrame:PointToObjectSpace(center)
-	local half = part.Size * 0.5
-	local closest = Vector3.new(
-		math.clamp(localPoint.X, -half.X, half.X),
-		math.clamp(localPoint.Y, -half.Y, half.Y),
-		math.clamp(localPoint.Z, -half.Z, half.Z)
-	)
-	return (localPoint - closest).Magnitude <= radius
+-- The cleared trail is as wide as the ball unless Carve.Width overrides it.
+local function carveWidth(state)
+	local carve = mountainConfig.SNOW.Carve
+	local width = carve.Width or 0
+	if width <= 0 then
+		width = ballRadius(state) * 2 * (carve.WidthScale or 1) + (carve.WidthPadding or 0) * 2
+	end
+	return width
 end
 
-local function getPatchBase(part)
-	local cached = patchBases[part]
-	if cached then
-		return cached
-	end
-
-	cached = {
-		Size = part.Size,
-		CFrame = part.CFrame,
-		Original = part:GetAttribute("SnowOriginal") or part:GetAttribute("SnowAmount") or 1,
-	}
-	patchBases[part] = cached
-	return cached
-end
-
-local function hidePatch(part)
-	getPatchBase(part)
-	part:SetAttribute("SnowAmount", 0)
-	part.Transparency = 1
-	part.CanCollide = false
-	part.CanTouch = false
-	part.CanQuery = false
-end
-
-local function restoreSnow()
-	for _, part in CollectionService:GetTagged(SNOW_TAG) do
-		if not part:IsA("BasePart") or not part.Parent then
-			continue
-		end
-
-		local original = part:GetAttribute("SnowOriginal")
-		if type(original) ~= "number" then
-			original = part:GetAttribute("SnowAmount") or 1
-		end
-
-		local base = getPatchBase(part)
-		part.Size = base.Size
-		part.CFrame = base.CFrame
-		part.Transparency = 0
-		part.CanCollide = false
-		part.CanTouch = false
-		part.CanQuery = false
-		part:SetAttribute("SnowAmount", original)
-	end
-end
-
-local function collectSnow(state)
-	local launch = mountainConfig.LAUNCH
-	if not workspace:FindFirstChild(mountainConfig.WORKSPACE_NAME) then
-		return
-	end
-
-	local collectRadius = state.StartRadius * state.Scale + launch.GrowCollectPadding
-	local gained = 0
-
-	for _, part in CollectionService:GetTagged(SNOW_TAG) do
-		local remaining = part:GetAttribute("SnowAmount")
-		if type(remaining) ~= "number" or remaining <= 0 then
-			continue
-		end
-		if not mountainConfig.SNOW.CollectStartPlatform and ancestorHasType(part, mountainConfig.Attachment.StartPlatform) then
-			continue
-		end
-		if not sphereHitsPart(state.Root.Position, collectRadius, part) then
-			continue
-		end
-
-		gained += remaining
-		hidePatch(part)
-	end
-
+-- Growth is driven by the snow that was actually removed, so a pass over bare
+-- track adds nothing.
+local function applySnow(state, gained)
 	if gained <= 0 then
-		return
+		return 0
 	end
 
+	local launch = mountainConfig.LAUNCH
 	local maxVolume = sphereVolume(state.StartRadius * launch.GrowMaxScale)
 	state.Volume = math.min(maxVolume, state.Volume + gained * launch.GrowVolumePerSnow)
 	state.TargetScale = math.clamp(
@@ -330,7 +329,84 @@ local function collectSnow(state)
 		launch.GrowMaxScale
 	)
 	state.Scale = state.TargetScale
-	state.Model:SetAttribute("TargetSnowScale", state.TargetScale)
+	if state.Model and state.Model.Parent then
+		state.Model:SetAttribute("TargetSnowScale", state.TargetScale)
+	end
+	return gained
+end
+
+-- One authoritative removal step. `contact` is an optional client-reported
+-- ground point; it is only ever used as a ray origin, so the surface the carve
+-- lands on is always one the server raycast itself.
+local function carveSnow(state, contact)
+	if not state.Root or not state.Root.Parent then
+		return 0
+	end
+
+	local carve = mountainConfig.SNOW.Carve
+	local lift = carve.SampleLift or 4
+	local origin, reach
+	if contact then
+		origin = contact + Vector3.yAxis * lift
+		reach = lift + (carve.GroundProbe or 2.5)
+	else
+		origin = state.Root.Position
+		reach = ballRadius(state) + (carve.GroundProbe or 2.5)
+	end
+
+	local removed, point = snowField.Carve({
+		Origin = origin,
+		Reach = reach,
+		Width = carveWidth(state),
+		Depth = carve.Depth,
+		From = state.CarveFrom,
+	})
+
+	-- Airborne: drop the anchor so the next landing does not carve a line
+	-- through everything the ball flew over.
+	state.CarveFrom = point
+	return applySnow(state, removed)
+end
+
+local function runMultiplier(player, state)
+	if state and type(state.Multiplier) == "number" and state.Multiplier >= 1 then
+		return state.Multiplier
+	end
+	local data = sself:GetPlayerProgress(player)
+	if not data then
+		return 1
+	end
+	return playerProgress.EquipmentMultiplier(data.EquippedSnowball, data.EquippedLauncher)
+end
+
+-- Tiles are worth a fraction of a snow unit each, so the remainder is carried
+-- instead of being floored away (and never awarded twice).
+local function rewardSnow(player, state, gained)
+	if gained <= 0 then
+		return
+	end
+
+	state.SnowCollected = (state.SnowCollected or 0) + gained
+	local carry = (state.RewardCarry or 0) + gained
+	local whole = math.floor(carry)
+	state.RewardCarry = carry - whole
+	if whole <= 0 then
+		return
+	end
+
+	local xp, coins = playerProgress.RewardsForSnow(whole)
+	local multiplier = runMultiplier(player, state)
+	sself:AwardProgress(player, xp * multiplier, coins * multiplier)
+end
+
+local function stepCarve(player, state, contact, minGap)
+	local now = os.clock()
+	if now - (state.LastCarve or 0) < minGap then
+		return false
+	end
+	state.LastCarve = now
+	rewardSnow(player, state, carveSnow(state, contact))
+	return true
 end
 
 local function streamAround(player, root)
@@ -369,16 +445,94 @@ function m_sapi:GetRun()
 	end
 	axis = axis.Unit
 	local total = 0
+	local finishAt = nil
 	for _, piece in mountain:GetChildren() do
 		local pieceRoot = piece:FindFirstChild("Root")
 		local exit = pieceRoot and pieceRoot:FindFirstChild("Exit")
 		if exit then
 			total = math.max(total, (exit.WorldPosition - root.Position):Dot(axis))
 		end
+		if piece:GetAttribute("AttachmentType") == mountainConfig.Attachment.FinishPlatform then
+			local entrance = pieceRoot and pieceRoot:FindFirstChild(mountainConfig.SOCKETS.Entrance)
+			if entrance then
+				local along = (entrance.WorldPosition - root.Position):Dot(axis)
+				finishAt = if finishAt then math.min(finishAt, along) else along
+			end
+		end
 	end
-	mountain:SetAttribute("RunLength", math.floor(total))
-	sself.RUN = { Mountain = mountain, Origin = root.Position, Axis = axis, Total = total }
+	if not finishAt or finishAt < total * 0.5 then
+		finishAt = total
+	end
+	local shown = math.floor(total + 1e-3)
+	local designed = mountain:GetAttribute("Length")
+	if type(designed) == "number" and designed > 0 and math.abs(total - designed) <= 2 then
+		shown = designed
+	end
+	mountain:SetAttribute("RunLength", shown)
+	sself.RUN = {
+		Mountain = mountain,
+		Origin = root.Position,
+		Axis = axis,
+		Total = total,
+		FinishAt = finishAt or total,
+	}
 	return sself.RUN
+end
+
+local function finishEntranceAlong(finish, run)
+	local root = finish:FindFirstChild(mountainConfig.SOCKETS.Root)
+	local entrance = root and root:FindFirstChild(mountainConfig.SOCKETS.Entrance)
+	local position = if entrance and entrance:IsA("Attachment") then entrance.WorldPosition else finish:GetPivot().Position
+	return (position - run.Origin):Dot(run.Axis)
+end
+
+-- The riding client simulates the ball, so the server's copy can lag behind a
+-- fast roll. Accept a finish report when that copy is close enough to the
+-- finish that the ball could have reached it since the last physics update.
+local function confirmFinish(state, point)
+	local finish = sself:GetFinishPlatform()
+	if not finish or not state.Root or not state.Root.Parent then
+		return false
+	end
+	local padding = ballRadius(state) + 14
+	if not mountainConfig.IsOnFinishPiece(finish, point, padding) then
+		return false
+	end
+
+	local run = sself:GetRun()
+	if not run or run.Total <= 0 then
+		return (point - state.Root.Position).Magnitude <= 200
+	end
+
+	local speed = state.Root.AssemblyLinearVelocity.Magnitude
+	local lead = math.clamp(speed * 0.2, 120, 1500)
+	local ballAlong = (state.Root.Position - run.Origin):Dot(run.Axis)
+	return ballAlong + lead >= finishEntranceAlong(finish, run) - 24
+end
+
+local function beginFinish(player, state)
+	if not player or not player.Parent or state.Finishing or sself.MountainFinishing[player] then
+		return
+	end
+	state.Finishing = true
+	sself.MountainFinishing[player] = true
+	task.spawn(function()
+		local ok, err = pcall(function()
+			sself:CompleteMountainRun(player)
+		end)
+		if ok then
+			return
+		end
+		warn("[SERVER]: CompleteMountainRun failed:", err)
+		sself.MountainFinishing[player] = nil
+		local character = player.Character
+		local hrp = character and character:FindFirstChild("HumanoidRootPart")
+		if hrp and player.Parent then
+			pcall(function()
+				hrp:SetNetworkOwner(player)
+			end)
+		end
+	end)
 end
 
 local function updateDistance(player, state)
@@ -391,10 +545,21 @@ local function updateDistance(player, state)
 	if player:GetAttribute("Distance") ~= distance then
 		player:SetAttribute("Distance", distance)
 	end
+	if not state.Finishing then
+		local recorded = state.RecordedDistance or 0
+		if distance > recorded then
+			sself:AddRolledDistance(player, distance - recorded)
+			state.RecordedDistance = distance
+		end
+	end
+	if not state.Finishing and run.Total > 0 and along >= (run.FinishAt or run.Total) - 4 then
+		beginFinish(player, state)
+	end
 end
 
 local function tickSnowballs(_dt)
 	local any = false
+	local interval = mountainConfig.SNOW.Carve.Interval or 0.05
 	for player, state in sself.SNOWBALLS do
 		if typeof(state) ~= "table" or not state.Root or not state.Root.Parent then
 			sself.SNOWBALLS[player] = nil
@@ -402,7 +567,12 @@ local function tickSnowballs(_dt)
 		end
 
 		any = true
-		collectSnow(state)
+		-- Fallback carve from the server's own view of the ball. The rider's
+		-- CarveSnow reports share this throttle, so a reporting client drives
+		-- the trail and this only fills in when those stop arriving.
+		if not state.Finishing then
+			stepCarve(player, state, nil, interval)
+		end
 		if os.clock() - (state.LastDistance or 0) >= 0.15 then
 			state.LastDistance = os.clock()
 			updateDistance(player, state)
@@ -411,10 +581,20 @@ local function tickSnowballs(_dt)
 			state.LastStream = os.clock()
 			streamAround(player, state.Root)
 		end
+
+		if not state.Finishing then
+			local pos = state.Root.Position
+			local padding = ballRadius(state) + 12
+			local finish = sself:GetFinishPlatform()
+			if finish and mountainConfig.FinishContact(finish, state.ServerPos or pos, pos, padding) then
+				beginFinish(player, state)
+			end
+			state.ServerPos = pos
+		end
 	end
 
 	if not any then
-		restoreSnow()
+		snowField.RestoreAll()
 		if growConnection then
 			growConnection:Disconnect()
 			growConnection = nil
@@ -448,19 +628,169 @@ function m_sapi:ClearSnowball(player)
 		end
 		sself.SNOWBALLS[player] = nil
 	end
+	-- RaceProgressGui draws the player's profile marker from this attribute.
+	if player then
+		player:SetAttribute("Distance", 0)
+	end
 
 	for _, state in sself.SNOWBALLS do
 		if typeof(state) == "table" and state.Root and state.Root.Parent then
 			return
 		end
 	end
-	restoreSnow()
+	snowField.RestoreAll()
 end
 
 function m_api:StopSnowball(player)
+	local state = sself.SNOWBALLS[player]
+	if typeof(state) == "table" and not state.Finishing and state.Root and state.Root.Parent then
+		-- Stopping on the finish (or rolling off it) still completes the mountain.
+		local reached = false
+		local run = sself:GetRun()
+		if run and run.Total > 0 then
+			local along = (state.Root.Position - run.Origin):Dot(run.Axis)
+			reached = along >= (run.FinishAt or run.Total) - 8
+		end
+		if not reached then
+			local finish = sself:GetFinishPlatform()
+			reached = finish ~= nil and mountainConfig.IsOnFinishPiece(finish, state.Root.Position, ballRadius(state) + 24) == true
+		end
+		if reached then
+			beginFinish(player, state)
+			return true
+		end
+	end
+
 	sself:ClearSnowball(player)
 	ReplicatedStorage.ReEvent:FireClient(player, "UnbindSnowballCamera")
 	return true
+end
+
+-- Rider says the ball reached FinishPlatform. Validated against the server ball.
+function m_api:ReachFinish(player, point)
+	if typeof(point) ~= "Vector3" or point ~= point then
+		return false
+	end
+
+	local state = sself.SNOWBALLS[player]
+	if typeof(state) ~= "table" or state.Finishing then
+		return false
+	end
+	if not confirmFinish(state, point) then
+		return false
+	end
+
+	beginFinish(player, state)
+	return true
+end
+
+local function parkSnowball(player, standCF)
+	local state = sself.SNOWBALLS[player]
+	if typeof(state) ~= "table" or not state.Root or not state.Root.Parent then
+		return false
+	end
+
+	local root = state.Root
+	pcall(function()
+		root:SetNetworkOwner(nil)
+	end)
+
+	local parked = standCF + Vector3.yAxis * (ballRadius(state) + 1)
+	root.Anchored = true
+	root.AssemblyLinearVelocity = Vector3.zero
+	root.AssemblyAngularVelocity = Vector3.zero
+
+	local model = getModel(state)
+	if typeof(model) == "Instance" then
+		if model:IsA("Model") then
+			model:PivotTo(parked)
+		else
+			root.CFrame = parked
+		end
+		model:SetAttribute("Finishing", true)
+		model:SetAttribute("FinishCFrame", parked)
+		model:SetAttribute("FinishLook", standCF.LookVector)
+	end
+	return true
+end
+
+function m_sapi:CompleteMountainRun(player)
+	if not player or not player.Parent then
+		if player and sself.MountainFinishing then
+			sself.MountainFinishing[player] = nil
+		end
+		return false
+	end
+
+	local standCF = sself:GetFinishStandCFrame()
+	if standCF and player.Parent then
+		pcall(function()
+			player:RequestStreamAroundAsync(standCF.Position)
+		end)
+		if not player.Parent then
+			sself.MountainFinishing[player] = nil
+			return false
+		end
+		-- Keep the chase camera on the ball. Do not cut to the character.
+		parkSnowball(player, standCF)
+		ReplicatedStorage.ReEvent:FireClient(player, "HoldAtFinish", standCF)
+	end
+
+	task.wait(mountainConfig.FINISH.ArriveHold or 2)
+	if not player.Parent then
+		sself.MountainFinishing[player] = nil
+		return false
+	end
+
+	local current = mountainPlaces.GetCurrentMountainId()
+	local nextId = mountainConfig:GetNextMountain(current)
+	if not nextId then
+		sself:StopSnowball(player)
+		if standCF then
+			sself:PlaceCharacter(player.Character, standCF)
+			ReplicatedStorage.ReEvent:FireClient(player, "StandAtFinish", standCF)
+		end
+		sself.MountainFinishing[player] = nil
+		print("[SERVER]:", player.Name, "finished", current)
+		return true
+	end
+
+	sself:UnlockMountain(player, nextId)
+	local ok, err = sself:TravelToMountain(player, nextId)
+	sself.MountainFinishing[player] = nil
+	if not ok then
+		sself:StopSnowball(player)
+		if standCF then
+			sself:PlaceCharacter(player.Character, standCF)
+			ReplicatedStorage.ReEvent:FireClient(player, "StandAtFinish", standCF)
+		end
+		warn("[SERVER]:", player.Name, "finished", current, "but could not travel to", nextId .. ":", err)
+	end
+	return ok
+end
+
+-- The rider reports the ground contact under its own ball (CLIENT_SnowballFX).
+-- The point is only accepted when it is close to where the server thinks the
+-- ball is; the removal and the reward are worked out here either way.
+function m_api:CarveSnow(player, point)
+	if typeof(point) ~= "Vector3" or point.Magnitude ~= point.Magnitude then
+		return false
+	end
+
+	local state = sself.SNOWBALLS[player]
+	if typeof(state) ~= "table" or not state.Root or not state.Root.Parent then
+		return false
+	end
+
+	local carve = mountainConfig.SNOW.Carve
+	local reach = ballRadius(state) + (carve.ClientReach or 60)
+	if (point - state.Root.Position).Magnitude > reach then
+		return false
+	end
+
+	-- Half the interval, so a report that arrives a little early still lands;
+	-- the swept carve fills in anything a dropped report would have missed.
+	return stepCarve(player, state, point, (carve.Interval or 0.05) * 0.5)
 end
 
 -- The riding client reports props its ball rolled through (CLIENT_SnowballFX).
@@ -495,19 +825,27 @@ function m_api:SmashProp(player, model)
 	end
 	if state.Model and state.Model.Parent then
 		state.Model:SetAttribute("SmashCount", (state.Model:GetAttribute("SmashCount") or 0) + 1)
+	end
 
-		-- Server-side combo (the client shows its own immediate counter; this one is
-		-- the authoritative value for scoring later).
-		local now = os.clock()
-		if now - (state.LastSmash or 0) > (mountainConfig.SMASH.ComboWindow or 2.5) then
-			state.Combo = 0
-		end
-		state.Combo = (state.Combo or 0) + 1
-		state.LastSmash = now
-		state.BestCombo = math.max(state.BestCombo or 0, state.Combo)
+	-- Server-side combo (the client shows its own immediate counter; this one is
+	-- the authoritative value for scoring).
+	local now = os.clock()
+	if now - (state.LastSmash or 0) > (mountainConfig.SMASH.ComboWindow or 2.5) then
+		state.Combo = 0
+	end
+	state.Combo = (state.Combo or 0) + 1
+	state.LastSmash = now
+	state.BestCombo = math.max(state.BestCombo or 0, state.Combo)
+	if state.Model and state.Model.Parent then
 		state.Model:SetAttribute("Combo", state.Combo)
 		state.Model:SetAttribute("BestCombo", state.BestCombo)
 	end
+
+	local category = model:GetAttribute("PropCategory") or "Default"
+	local radius = model:GetAttribute("PropRadius") or 4
+	local xp, coins = playerProgress.RewardsForSmash(category, radius, state.Combo)
+	local multiplier = runMultiplier(player, state)
+	sself:AwardProgress(player, xp * multiplier, coins * multiplier)
 	task.delay(mountainConfig.PROPS.FadeTime + 0.5, function()
 		if model.Parent then
 			model:Destroy()
@@ -516,9 +854,54 @@ function m_api:SmashProp(player, model)
 	return true
 end
 
+function m_api:EquipSnowball(player, requestedName)
+	if not player or type(requestedName) ~= "string" or requestedName == "" then
+		return false
+	end
+
+	local info = sself.DEF_GVARS.Snowballs:GetByName(requestedName)
+	if not info then
+		return false
+	end
+
+	local data = sself:GetPlayerProgress(player)
+	if not data or not playerProgress.SetEquippedSnowball(data, info.Name) then
+		return false
+	end
+	data.Dirty = true
+	sself:ReplicateProgress(player)
+	return true
+end
+
+function m_api:BuySnowball(player, requestedName)
+	if not player or type(requestedName) ~= "string" or requestedName == "" then
+		return false
+	end
+
+	local catalog = sself.DEF_GVARS.Snowballs
+	local info = catalog:GetByName(requestedName)
+	if not info then
+		return false
+	end
+
+	local data = sself:GetPlayerProgress(player)
+	if not data or not playerProgress.PurchaseInOrder(data, "UnlockedSnowballs", catalog.List, info.Name) then
+		return false
+	end
+	data.Dirty = true
+	sself:ReplicateProgress(player)
+	return true
+end
+
 function m_api:Launch(player, requestedSpeed)
-	local templates = collectTemplates()
-	if #templates == 0 then
+	if sself.MountainFinishing[player] then
+		return false
+	end
+
+	local data = sself:GetPlayerProgress(player)
+	local info = resolveSnowball((data and data.EquippedSnowball) or player:GetAttribute("EquippedSnowball"))
+	local template = info and findSnowballTemplate(info.Name)
+	if not template then
 		warn("[SERVER]: No snowballs in Storage/" .. mountainConfig.LAUNCH.StorageFolder)
 		return false
 	end
@@ -554,9 +937,11 @@ function m_api:Launch(player, requestedSpeed)
 		warn("[SERVER]: Ball collision template not found in Assets.Templates (expected", launch.CollisionTemplate, ")")
 	end
 
-	local template = templates[1]
 	local clone = template:Clone()
 	clone.Name = player.Name .. "_Snowball"
+	if info then
+		clone:SetAttribute("EquippedName", info.Name)
+	end
 
 	local folder = workspace:FindFirstChild("ActiveSnowballs")
 	if not folder then
@@ -587,13 +972,14 @@ function m_api:Launch(player, requestedSpeed)
 	end
 
 	-- Snow absorbs impacts: a softer bounce than the default 0.5 elasticity.
+	-- Extra friction so a weak launch can actually roll to a stop.
 	do
 		local current = root.CurrentPhysicalProperties
 		root.CustomPhysicalProperties = PhysicalProperties.new(
 			current.Density,
-			current.Friction,
+			launch.Friction or current.Friction,
 			launch.Elasticity or 0.35,
-			current.FrictionWeight,
+			launch.FrictionWeight or current.FrictionWeight,
 			launch.ElasticityWeight or 3
 		)
 	end
@@ -611,7 +997,7 @@ function m_api:Launch(player, requestedSpeed)
 	end)
 	setReplicationFocus(player, root)
 	streamAround(player, root)
-	player:SetAttribute("Distance", 0) -- race progress marker back to the start
+	player:SetAttribute("Distance", 0) -- race progress marker at the start of the ride
 
 	-- The client sends the hold charge (0..1); it maps onto MinSpeed..MaxSpeed.
 	-- Anything above 1 is treated as a raw speed for older callers.
@@ -629,14 +1015,43 @@ function m_api:Launch(player, requestedSpeed)
 			speed = requestedSpeed
 		end
 	end
-	speed = math.clamp(speed, 1, 500)
+	local gear = 1
+	local earnings = 1
+	local launchBoost = 1
+	if data then
+		gear = playerProgress.EquipmentMultiplier(data.EquippedSnowball, data.EquippedLauncher)
+		local rebirths = data.Rebirths or 0
+		earnings = playerProgress.EarningsMultiplier(rebirths)
+		launchBoost = playerProgress.LaunchBoost(rebirths)
+	end
+	local baseSpeed = speed
+	speed = math.clamp(baseSpeed * gear * launchBoost, 1, launch.MaxPoweredSpeed or 12000)
 	clone:SetAttribute("LaunchSpeed", speed)
+	-- Coast and loft stay on the gear product. Rebirth earnings are rewards only.
+	clone:SetAttribute("PowerMultiplier", gear)
 
 	local look = downhill.Unit
-	root.AssemblyLinearVelocity = look * speed + Vector3.yAxis * launch.UpSpeed
-	root.AssemblyAngularVelocity = spawnCF.RightVector * (8 * speed / math.max(launch.ThrustSpeed, 1))
+	-- Starter gear follows the slope. A higher gear multiplier throws level and lofts,
+	-- so the ball flies before gravity brings it down.
+	local velocity = look * speed + Vector3.yAxis * (launch.UpSpeed or 0)
+	local thrustDir = look
+	if gear > 1 then
+		local flat = Vector3.new(look.X, 0, look.Z)
+		if flat.Magnitude < 0.05 then
+			flat = Vector3.new(0, 0, -1)
+		else
+			flat = flat.Unit
+		end
+		local loft = math.min(launch.MaxLoft or 120, (gear - 1) * (launch.LoftPerMultiplier or 26))
+		velocity = flat * speed + Vector3.yAxis * loft
+		thrustDir = flat
+	end
+	root.AssemblyLinearVelocity = velocity
+	root.AssemblyAngularVelocity = spawnCF.RightVector * (8 * baseSpeed / math.max(launch.ThrustSpeed, 1))
 
 	local mass = root.AssemblyMass
+	local duration = math.max(launch.ThrustDuration or 0.22, 0.08)
+	local boost = launch.ThrustBoost or 0.22
 	local force = Instance.new("VectorForce")
 	force.Name = "LaunchThrust"
 	force.Attachment0 = Instance.new("Attachment")
@@ -644,16 +1059,17 @@ function m_api:Launch(player, requestedSpeed)
 	force.Attachment0.Parent = root
 	force.RelativeTo = Enum.ActuatorRelativeTo.World
 	force.ApplyAtCenterOfMass = true
-	force.Force = look * mass * speed * (80 / math.max(launch.ThrustSpeed, 1))
+	force.Force = thrustDir * mass * speed * boost / duration
 	force.Parent = root
 
-	task.delay(launch.ThrustDuration, function()
+	task.delay(duration, function()
 		if force.Parent then
 			force:Destroy()
 		end
 	end)
 
 	sself.SNOWBALLS[player] = {
+		Player = player,
 		Model = clone,
 		Root = root,
 		StartRadius = radius,
@@ -664,6 +1080,7 @@ function m_api:Launch(player, requestedSpeed)
 		BaseScale = if clone:IsA("Model") then clone:GetScale() else 1,
 		BaseSize = if clone:IsA("BasePart") then clone.Size else nil,
 		BaseDensity = root.CurrentPhysicalProperties.Density,
+		Multiplier = gear * earnings,
 	}
 	ensureGrowLoop()
 	ReplicatedStorage.ReEvent:FireClient(player, "BindSnowballCamera", clone)

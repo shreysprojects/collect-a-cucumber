@@ -1,17 +1,21 @@
 --[[---------------------------------------DESCRIPTION------------------------------------------
 	Builds a mountain from the shared Maps.Attachments library. Walks the shared
 	grammar, then snapModule clones each piece and aligns Entrance to the previous Exit.
+	Each mountain's Length is the finish distance in meters. Piece count is chosen
+	from that length, then the built course is scaled so the run lands on it.
 	Theme comes from props under Storage.Props/<MountainId>, not from unique terrain.
 
 --------------------------------------------------------------------------------------------]]--
 
 local ServerStorage = game:GetService("ServerStorage")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local PhysicsService = game:GetService("PhysicsService")
 
 local mountainConfig = require(ReplicatedStorage.Assets.Modules.Shared.MountainConfig)()
 local snapModule = require(ServerStorage.Modules.SnapMountainModule)
 local buildMountainSnow = require(ServerStorage.Modules.BuildMountainSnow)
 local placeMountainProps = require(ServerStorage.Modules.PlaceMountainProps)
+local buildMountainBorders = require(ServerStorage.Modules.BuildMountainBorders)
 
 local MODULE = {}
 local m_api = {}
@@ -24,6 +28,48 @@ local T = mountainConfig.Attachment
 function MODULE.new(r_sapi)
 	sself = r_sapi
 	return m_api, m_sapi
+end
+
+local function ensureCollisionGroup(name)
+	if not name or name == "" or PhysicsService:IsCollisionGroupRegistered(name) then
+		return
+	end
+	PhysicsService:RegisterCollisionGroup(name)
+end
+
+function m_sapi:SetupMountainCollisionGroups()
+	local physics = mountainConfig.PHYSICS
+	ensureCollisionGroup(physics.SnowballGroup)
+	ensureCollisionGroup(physics.PlayerBarrierGroup)
+	PhysicsService:CollisionGroupSetCollidable(physics.SnowballGroup, physics.PlayerBarrierGroup, false)
+end
+
+local function isPlayerBarrier(part)
+	local name = mountainConfig.PHYSICS.PlayerBarrierName
+	return part.Name == name or string.sub(part.Name, 1, #name) == name
+end
+
+local function applyStartPlatformBarriers(piece)
+	if not piece then
+		return 0
+	end
+
+	sself:SetupMountainCollisionGroups()
+	local group = mountainConfig.PHYSICS.PlayerBarrierGroup
+	local count = 0
+	local function consider(inst)
+		if inst:IsA("BasePart") and isPlayerBarrier(inst) then
+			inst.CanCollide = true
+			inst.CollisionGroup = group
+			count += 1
+		end
+	end
+
+	consider(piece)
+	for _, desc in piece:GetDescendants() do
+		consider(desc)
+	end
+	return count
 end
 
 local function hashString(str)
@@ -281,6 +327,114 @@ local function findMountainFolder()
 	return attachments
 end
 
+local function averagePieceSpan(variantsByType, entranceName, exitName)
+	local sum, count = 0, 0
+	for _, variants in variantsByType do
+		for _, template in variants do
+			local entrance = snapModule.getSocket(template, entranceName)
+			local exit = snapModule.getSocket(template, exitName)
+			if entrance and exit then
+				local span = (exit.WorldPosition - entrance.WorldPosition).Magnitude
+				if span > 5 then
+					sum += span
+					count += 1
+				end
+			end
+		end
+	end
+	if count == 0 then
+		return 100
+	end
+	return sum / count
+end
+
+-- Enough middle pieces that a uniform scale can hit Length without stretching
+-- each segment by more than a little.
+local function applyTargetPieces(grammar, target, span)
+	local pieces = math.clamp(math.floor(target / math.max(span, 20) + 0.5), 12, 360)
+	local ratio = pieces / math.max(grammar.MinPieces, 1)
+	grammar.MinPieces = pieces
+	grammar.MaxPieces = pieces + 12
+	for name, count in grammar.MaxCount do
+		grammar.MaxCount[name] = math.max(1, math.floor(count * ratio + 0.5))
+	end
+	return pieces
+end
+
+local function measureRun(mountainModel)
+	local startPiece = nil
+	for _, child in mountainModel:GetChildren() do
+		if child:GetAttribute("AttachmentType") == T.StartPlatform then
+			startPiece = child
+			break
+		end
+	end
+	local root = startPiece and startPiece:FindFirstChild("Root")
+	if not root then
+		return nil, nil
+	end
+	local axis = root.CFrame.LookVector
+	axis = Vector3.new(axis.X, 0, axis.Z)
+	if axis.Magnitude < 0.05 then
+		axis = Vector3.new(0, 0, -1)
+	else
+		axis = axis.Unit
+	end
+	local total = 0
+	for _, piece in mountainModel:GetChildren() do
+		local pieceRoot = piece:FindFirstChild("Root")
+		local exit = pieceRoot and pieceRoot:FindFirstChild("Exit")
+		if exit then
+			total = math.max(total, (exit.WorldPosition - root.Position):Dot(axis))
+		end
+	end
+	return total, root.Position
+end
+
+local function scaleMountainToLength(mountainModel, target)
+	local measured, origin = measureRun(mountainModel)
+	if not measured or measured < 1 or typeof(origin) ~= "Vector3" then
+		return measured
+	end
+
+	-- Sit inside [target, target + 1) so the meter readout is exactly Length.
+	local goal = target + 0.5
+	local function apply(factor)
+		factor = math.clamp(factor, 0.05, 20)
+		mountainModel.WorldPivot = CFrame.new(origin)
+		mountainModel:ScaleTo(mountainModel:GetScale() * factor)
+		local length, drifted = measureRun(mountainModel)
+		if typeof(drifted) == "Vector3" and (drifted - origin).Magnitude > 0.5 then
+			mountainModel:TranslateBy(origin - drifted)
+			length = measureRun(mountainModel)
+		end
+		return length
+	end
+
+	local factor = goal / measured
+	if math.abs(factor - 1) > 0.001 then
+		local ok, result = pcall(apply, factor)
+		if ok then
+			measured = result or measured
+		else
+			warn("[SERVER]: Failed to scale mountain:", result)
+			return measured
+		end
+	end
+	if measured and math.floor(measured + 1e-3) ~= target then
+		local ok, result = pcall(apply, goal / math.max(measured, 1))
+		if ok then
+			measured = result or measured
+		else
+			warn("[SERVER]: Failed to correct mountain length:", result)
+		end
+	end
+	if measured and (measured < target * 0.5 or measured > target * 1.5) then
+		warn("[SERVER]: Mountain length landed at", math.floor(measured), "instead of", target)
+	end
+	return measured
+end
+
 function m_sapi:GenerateMountain(mountainId)
 	local mountain = mountainConfig:GetMountain(mountainId)
 	if not mountain then
@@ -298,10 +452,30 @@ function m_sapi:GenerateMountain(mountainId)
 	local entranceName = mountainConfig.SOCKETS.Entrance
 	local exitName = mountainConfig.SOCKETS.Exit
 	local available, variantsByType = resolveAvailableTypes(mountainFolder, entranceName, exitName)
+	local targetLength = mountainConfig:GetLength(mountainId)
+	if targetLength then
+		local span = averagePieceSpan(variantsByType, entranceName, exitName)
+		applyTargetPieces(grammar, targetLength, span)
+	end
 
 	local seed, jobId = seedFromJobId()
 	local rng = Random.new(seed)
-	print("[SERVER]: Generating mountain", mountainId, "seed", seed, "jobId", jobId)
+	print(
+		"[SERVER]: Generating mountain",
+		mountainId,
+		"difficulty",
+		mountain.Difficulty,
+		mountain.DifficultyName,
+		"pieces",
+		grammar.MinPieces,
+		grammar.MaxPieces,
+		"length",
+		targetLength,
+		"seed",
+		seed,
+		"jobId",
+		jobId
+	)
 
 	local sequence = walkGrammar(rng, grammar, available)
 	if not sequence then
@@ -314,9 +488,20 @@ function m_sapi:GenerateMountain(mountainId)
 		existing:Destroy()
 	end
 
+	-- Drop the previous visual border pass with the mountain. BuildMountainBorders
+	-- clears this folder again before it places, including when borders are disabled.
+	local borderSettings = mountainConfig:GetBorderSettings(mountainId)
+	local oldBorders = workspace:FindFirstChild(borderSettings.WorkspaceFolder)
+	if oldBorders then
+		oldBorders:Destroy()
+	end
+
 	local mountainModel = Instance.new("Model")
 	mountainModel.Name = mountainConfig.WORKSPACE_NAME
 	mountainModel:SetAttribute("MountainId", mountainId)
+	mountainModel:SetAttribute("Difficulty", mountain.Difficulty or 1)
+	mountainModel:SetAttribute("DifficultyName", mountain.DifficultyName or "")
+	mountainModel:SetAttribute("CoastResistance", mountainConfig:CoastResistance(mountainId))
 	mountainModel:SetAttribute("Seed", seed)
 	mountainModel.ModelStreamingMode = Enum.ModelStreamingMode.Persistent
 	mountainModel.Parent = workspace
@@ -358,11 +543,24 @@ function m_sapi:GenerateMountain(mountainId)
 		end
 	end
 
+	if targetLength then
+		local measured = scaleMountainToLength(mountainModel, targetLength)
+		mountainModel:SetAttribute("Length", targetLength)
+		print("[SERVER]: Mountain length", targetLength, "m, measured", measured and math.floor(measured))
+	end
+
 	local snowPatches = buildMountainSnow(mountainModel, mountainId)
 	print("[SERVER]: Snow patches", snowPatches)
 
+	local startPiece = sself:GetStartPlatform()
+	local barriers = applyStartPlatformBarriers(startPiece)
+	print("[SERVER]: StartPlatform player barriers", barriers)
+
 	local propsPlaced = placeMountainProps(mountainModel, mountainId, seed)
 	print("[SERVER]: Props placed", propsPlaced)
+
+	local bordersPlaced = buildMountainBorders(mountainModel, mountainId, seed)
+	print("[SERVER]: Border clusters", bordersPlaced)
 
 	-- Stamp RunLength on the mountain for the race progress bar (SERV_Snowball:GetRun).
 	if sself.GetRun then
@@ -390,6 +588,11 @@ function m_sapi:GetStartPlatform()
 		end
 	end
 	return nil
+end
+
+function m_sapi:GetFinishPlatform()
+	local mountain = workspace:FindFirstChild(mountainConfig.WORKSPACE_NAME)
+	return mountainConfig.FindFinishPlatform(mountain), mountain
 end
 
 function m_sapi:GetLaunchPlatform()
@@ -492,6 +695,32 @@ function m_sapi:GetMountainSpawnCFrame()
 	return CFrame.lookAt(position, position + look.Unit)
 end
 
+function m_sapi:GetFinishStandCFrame()
+	local finish = sself:GetFinishPlatform()
+	if not finish then
+		return nil
+	end
+
+	local entrance = snapModule.getSocket(finish, mountainConfig.SOCKETS.Entrance)
+	if not entrance then
+		return nil
+	end
+
+	-- Entrance looks downhill into the platform. Stand uphill of it, facing it.
+	local look = Vector3.new(entrance.WorldCFrame.LookVector.X, 0, entrance.WorldCFrame.LookVector.Z)
+	if look.Magnitude < 0.05 then
+		look = Vector3.new(0, 0, -1)
+	end
+	look = look.Unit
+
+	local back = mountainConfig.FINISH.StandBack or 16
+	local origin = entrance.WorldPosition - look * back + Vector3.yAxis * 80
+	local mountain = workspace:FindFirstChild(mountainConfig.WORKSPACE_NAME)
+	local hit = raycastSurface(origin, surfaceFilter(mountain or finish))
+	local position = if hit then hit.Position else entrance.WorldPosition - look * back
+	return CFrame.lookAt(position, position + look)
+end
+
 function m_sapi:GetMountainLaunchCFrame()
 	local startPiece, mountain = sself:GetStartPlatform()
 	if not startPiece then
@@ -574,6 +803,28 @@ function m_sapi:GetPlayerLaunchCFrame(player)
 	end
 
 	return CFrame.lookAt(position, position + look, up), look
+end
+
+function m_sapi:PlaceCharacter(character, spawnCF)
+	if not character or not character.Parent or not spawnCF then
+		return false
+	end
+
+	local hrp = character:FindFirstChild("HumanoidRootPart")
+	local humanoid = character:FindFirstChildOfClass("Humanoid")
+	if not hrp or not humanoid then
+		return false
+	end
+
+	if humanoid.SeatPart then
+		humanoid.Sit = false
+	end
+
+	local height = humanoid.HipHeight + (hrp.Size.Y / 2) + mountainConfig.SPAWN.ExtraHeight
+	character:PivotTo(spawnCF + Vector3.yAxis * height)
+	hrp.AssemblyLinearVelocity = Vector3.zero
+	hrp.AssemblyAngularVelocity = Vector3.zero
+	return true
 end
 
 function m_sapi:SpawnCharacterAtStart(character)

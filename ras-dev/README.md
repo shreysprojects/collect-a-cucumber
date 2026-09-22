@@ -137,3 +137,18 @@ UserInterfaces: "additional values for the Capabilities property") - create new 
 the MCP `multi_edit` tool and strip LuaSourceContainers out of GUIs before parenting them;
 it also cannot `require` the game modules or `FireServer`, so drive a ride with the
 `DevChargeHold` PlayerGui attribute (true, wait 1.7 s, false).
+
+## 2026-09-22: pulled Eric's and Ali's work, Studio synced to GitHub
+
+GitHub main moved from `c97ec0b` to `2e1cb4c` (Ali's UI polish merged, "System changes",
+"Major changes", "added a bunch of stuff", "rebirth"): player data store, XP / coins /
+levels, snowball + launcher catalogs with a gear multiplier, mountain places and travel,
+rebirths, mountain borders (`BuildMountainBorders` + `Storage.BorderClusters`), a snow field,
+panel UI modules and a much larger HUD. Our physics, smash, combo and hold-to-launch code is
+still in it. The launch is now `charge -> MinSpeed..MaxSpeed (22..78) x gear x rebirth boost`,
+so starter gear rolls a few hundred metres.
+
+Studio was behind: five scripts were an older draft of the lifetime-totals work and HUD was one
+commit behind. Nothing in Studio was missing from GitHub. The six scripts were set to `2e1cb4c`
+and checksum-verified; every script in the place now equals the repo. The files in `src/`
+were refreshed from `2e1cb4c` too (the ones we mirror; the repo is the full source).

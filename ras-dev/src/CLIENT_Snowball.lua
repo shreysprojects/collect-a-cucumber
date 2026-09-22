@@ -1,14 +1,21 @@
 --[[---------------------------------------DESCRIPTION------------------------------------------
 	Launch pad camera, snowball chase camera, and ride UI. Launch is only
-	available while standing on StartPlatform.LaunchPlatform.
+	available while standing on StartPlatform.LaunchPlatform. Entering the
+	pad also asks the server to weld the equipped launcher to the hand.
+
+	While riding: Left / Stop / Right on LaunchGui, plus A/D and the left stick.
+	If the ball sits still or crawls for a moment, the ride ends the same as Stop.
 
 --------------------------------------------------------------------------------------------]]--
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local UserInputService = game:GetService("UserInputService")
+local ContextActionService = game:GetService("ContextActionService")
 
 local mountainConfig = require(ReplicatedStorage.Assets.Modules.Shared.MountainConfig)()
+local launcherCatalog = require(ReplicatedStorage.Assets.Modules.Shared.SnowballLaunchers)
+local ChargeController = require(ReplicatedStorage.Assets.SnowballAnimations.ChargeController)
 
 local api = {}
 
@@ -26,6 +33,95 @@ local function getRoot(snowball)
 	return nil
 end
 
+local STEER_ACTION = "SnowballSteer"
+local STEER_PRIORITY = 3000
+local STICK_DEADZONE = 0.2
+
+local function refreshSteer(vars)
+	if not vars then
+		return
+	end
+	local digital = 0
+	if vars.SteerLeftKey or vars.SteerLeftButton then
+		digital -= 1
+	end
+	if vars.SteerRightKey or vars.SteerRightButton then
+		digital += 1
+	end
+	local stick = vars.SteerStick or 0
+	if math.abs(stick) < STICK_DEADZONE then
+		stick = 0
+	end
+	if digital ~= 0 then
+		vars.Steer = math.clamp(digital, -1, 1)
+	else
+		vars.Steer = math.clamp(stick, -1, 1)
+	end
+end
+
+local function sampleGamepadSteer(vars)
+	if not UserInputService.GamepadEnabled then
+		return
+	end
+	for _, gamepad in UserInputService:GetConnectedGamepads() do
+		for _, input in UserInputService:GetGamepadState(gamepad) do
+			if input.KeyCode == Enum.KeyCode.Thumbstick1 then
+				vars.SteerStick = input.Position.X
+				return
+			end
+		end
+	end
+end
+
+local function unbindSteer(vars)
+	if not vars then
+		return
+	end
+	if vars.SteerBoundAction then
+		ContextActionService:UnbindAction(STEER_ACTION)
+		vars.SteerBoundAction = false
+	end
+	vars.SteerLeftKey = false
+	vars.SteerRightKey = false
+	vars.SteerStick = 0
+	vars.SteerLeftButton = false
+	vars.SteerRightButton = false
+	vars.Steer = 0
+end
+
+local function bindSteer(vars)
+	if not vars or vars.SteerBoundAction then
+		return
+	end
+	vars.SteerBoundAction = true
+	vars.SteerLeftKey = UserInputService:IsKeyDown(Enum.KeyCode.A)
+	vars.SteerRightKey = UserInputService:IsKeyDown(Enum.KeyCode.D)
+	sampleGamepadSteer(vars)
+	refreshSteer(vars)
+	ContextActionService:BindActionAtPriority(STEER_ACTION, function(_, inputState, input)
+		if input.KeyCode == Enum.KeyCode.A or input.KeyCode == Enum.KeyCode.D then
+			local down = inputState == Enum.UserInputState.Begin
+			if input.KeyCode == Enum.KeyCode.A then
+				vars.SteerLeftKey = down
+			else
+				vars.SteerRightKey = down
+			end
+			refreshSteer(vars)
+			return Enum.ContextActionResult.Sink
+		end
+		if input.KeyCode == Enum.KeyCode.Thumbstick1 then
+			if inputState == Enum.UserInputState.Change or inputState == Enum.UserInputState.Begin then
+				vars.SteerStick = input.Position.X
+			else
+				vars.SteerStick = 0
+			end
+			refreshSteer(vars)
+			return Enum.ContextActionResult.Sink
+		end
+		return Enum.ContextActionResult.Pass
+	end, false, STEER_PRIORITY, Enum.KeyCode.A, Enum.KeyCode.D, Enum.KeyCode.Thumbstick1)
+end
+
 local function setRideButtons(vars, riding)
 	if not vars then
 		return
@@ -40,6 +136,17 @@ local function setRideButtons(vars, riding)
 	if vars.StopButton then
 		vars.StopButton.Visible = riding
 	end
+	if vars.LeftButton then
+		vars.LeftButton.Visible = riding
+	end
+	if vars.RightButton then
+		vars.RightButton.Visible = riding
+	end
+	if riding then
+		bindSteer(vars)
+	else
+		unbindSteer(vars)
+	end
 	local chargeBar = vars.ChargeBar
 	if chargeBar and chargeBar.Hint then
 		local panelOpen = vars.PlayerGui and vars.PlayerGui:GetAttribute("PanelOpen") ~= nil
@@ -47,10 +154,186 @@ local function setRideButtons(vars, riding)
 	end
 end
 
+function api:SetupSteer()
+	local vars = getVars(self)
+	if not vars or vars.SteerInputBound then
+		return
+	end
+	vars.SteerInputBound = true
+	vars.Steer = 0
+
+	local function bindButton(button, isLeft)
+		if not (button and button:IsA("GuiButton")) then
+			return
+		end
+		button.MouseButton1Down:Connect(function()
+			if isLeft then
+				vars.SteerLeftButton = true
+			else
+				vars.SteerRightButton = true
+			end
+			refreshSteer(vars)
+		end)
+		button.MouseButton1Up:Connect(function()
+			if isLeft then
+				vars.SteerLeftButton = false
+			else
+				vars.SteerRightButton = false
+			end
+			refreshSteer(vars)
+		end)
+	end
+
+	bindButton(vars.LeftButton, true)
+	bindButton(vars.RightButton, false)
+
+	UserInputService.InputChanged:Connect(function(input)
+		if not vars.SteerBoundAction or input.KeyCode ~= Enum.KeyCode.Thumbstick1 then
+			return
+		end
+		vars.SteerStick = input.Position.X
+		refreshSteer(vars)
+	end)
+
+	UserInputService.InputEnded:Connect(function(input)
+		if input.UserInputType ~= Enum.UserInputType.MouseButton1 and input.UserInputType ~= Enum.UserInputType.Touch then
+			return
+		end
+		if not vars.SteerLeftButton and not vars.SteerRightButton then
+			return
+		end
+		vars.SteerLeftButton = false
+		vars.SteerRightButton = false
+		refreshSteer(vars)
+	end)
+end
+
+----------------------------------------------------------------------------------------------
+-- Charge / fire arm animation (ReplicatedStorage.Assets.SnowballAnimations). Profile ids
+-- match the catalog Order, 1-30. The controller writes R15 joint transforms on this client
+-- only: it is cosmetic, the ball itself is still launched by the server on release.
+----------------------------------------------------------------------------------------------
+
+local animationWarned = false
+
+local function equippedLauncherId()
+	local name = Players.LocalPlayer:GetAttribute("EquippedLauncher")
+	local info = if type(name) == "string" then launcherCatalog:GetByName(name) else nil
+	return if info then info.Order else 1
+end
+
+local ANIMATION_FADE = 0.25 -- a little longer than the controller's own fade
+
+local function destroyChargeAnimation(vars)
+	local controller = vars and vars.ChargeAnimation
+	if not controller then
+		return
+	end
+	vars.ChargeAnimation = nil
+	controller:Destroy()
+end
+
+-- Unequipping: fade out of the pose first, so the arms do not snap back to the
+-- avatar animation part way through a charge.
+local function fadeChargeAnimation(vars)
+	local controller = vars and vars.ChargeAnimation
+	if not controller then
+		return
+	end
+	controller:Cancel()
+	task.delay(ANIMATION_FADE, function()
+		-- Stepping straight back onto the pad picks the same controller up again.
+		if vars.ChargeAnimation == controller and controller.State ~= "charging" then
+			destroyChargeAnimation(vars)
+		end
+	end)
+end
+
+-- One controller per character, rebuilt on respawn or when another launcher is
+-- equipped. Controller.new throws on R6 rigs, missing joints and unknown ids.
+local function chargeAnimation(vars)
+	local character = Players.LocalPlayer.Character
+	if not (character and character.Parent) then
+		destroyChargeAnimation(vars)
+		return nil
+	end
+
+	local launcherId = equippedLauncherId()
+	local controller = vars.ChargeAnimation
+	local stale = controller
+		and (
+			controller.Destroyed
+			or not controller:IsLive()
+			or controller.Character ~= character
+			or (controller.Profile.id ~= launcherId and controller.State == "idle")
+		)
+	if stale then
+		destroyChargeAnimation(vars)
+		controller = nil
+	end
+	if controller then
+		return controller
+	end
+
+	-- Spawn lands on the pad and GiveLauncher runs before the R15 joints
+	-- exist (Motor6D or AnimationConstraint). Skip until they do.
+	local ready, reason = ChargeController.Ready(character)
+	if not ready then
+		if reason ~= "loading" and not animationWarned then
+			animationWarned = true
+			warn("[CLIENT]: Launcher charge animation unavailable:", reason)
+		end
+		return nil
+	end
+
+	local ok, result = pcall(ChargeController.new, character, launcherId)
+	if not ok then
+		if not animationWarned then
+			animationWarned = true
+			warn("[CLIENT]: Launcher charge animation unavailable:", result)
+		end
+		return nil
+	end
+
+	vars.ChargeAnimation = result
+	return result
+end
+
+-- Ready pose: on the pad with the launcher in hand and nothing else running, the
+-- charge loop is held at 0% so the launcher is carried instead of hanging at the
+-- side. Holding to launch then raises the same loop without restarting it.
+local function holdChargeAnimation(vars)
+	if not vars.OnLaunchPad or vars.Charging or vars.SnowballCamera then
+		return
+	end
+
+	local character = Players.LocalPlayer.Character
+	if not (character and character:FindFirstChild(mountainConfig.LAUNCHER.InstanceName)) then
+		return
+	end
+
+	-- Another launcher was equipped: fade out of the old pose, then let the next
+	-- frames rebuild the controller on the new profile.
+	local controller = vars.ChargeAnimation
+	if controller and not controller.Destroyed and controller.Profile.id ~= equippedLauncherId() then
+		if controller.State == "charging" then
+			fadeChargeAnimation(vars)
+		elseif controller.State == "idle" then
+			destroyChargeAnimation(vars)
+		end
+		return
+	end
+
+	controller = chargeAnimation(vars)
+	if controller and controller.State == "idle" then
+		controller:BeginCharge()
+	end
+end
+
 ----------------------------------------------------------------------------------------------
 -- Hold-to-launch. Standing on the pad, hold click / touch: the bar (the LoadingProgressGui
 -- from RAS - Maps, kept in ReplicatedStorage.Assets.UserInterfaces.ChargeBar) fills to
--- 100%, release fires the ball with a speed proportional to the charge.
+-- 100% quickly, then ping-pongs 100% ↔ 0% until release. Release fires at the live charge.
 ----------------------------------------------------------------------------------------------
 
 local function fallbackChargeBar()
@@ -208,6 +491,14 @@ local function endCharge(self, fire)
 		ReplicatedStorage.ReEvent:FireServer("Launch", charge)
 		fired = true
 	end
+	local animation = vars.ChargeAnimation
+	if animation and not animation.Destroyed then
+		if fired then
+			animation:Release()
+		else
+			animation:Cancel()
+		end
+	end
 	if chargeBar then
 		if fired then
 			-- leave the full bar on screen for a beat, then hide
@@ -234,7 +525,8 @@ local function beginCharge(self)
 	end
 	local chargeBar = vars.ChargeBar or buildChargeBar(vars)
 	local settings = mountainConfig.LAUNCH.Charge or {}
-	local chargeTime = math.max(settings.Time or 1.5, 0.1)
+	local fillTime = math.max(settings.FillTime or 0.28, 0.05)
+	local cycleTime = math.max(settings.Time or 0.8, 0.1)
 
 	vars.Charging = true
 	vars.Charge = 0
@@ -248,13 +540,30 @@ local function beginCharge(self)
 	chargeBar.Gui.Enabled = true
 	setRideButtons(vars, false)
 
+	local animation = chargeAnimation(vars)
+	if animation then
+		animation:BeginCharge()
+	end
+
 	stopChargeLoop(vars)
-	vars.ChargeLoop = vars.RNS.Heartbeat:Connect(function(dt)
+	vars.ChargeLoop = vars.RNS.Heartbeat:Connect(function()
 		if not vars.Charging then
 			return
 		end
-		vars.Charge = math.min(1, (vars.Charge or 0) + dt / chargeTime)
+		local elapsed = os.clock() - (vars.ChargeStart or os.clock())
+		local charge
+		if elapsed <= fillTime then
+			charge = elapsed / fillTime
+		else
+			-- After the first fill: 100% → 0% → 100%… until release.
+			local t = elapsed - fillTime
+			charge = math.abs((t / cycleTime) % 2 - 1)
+		end
+		vars.Charge = math.clamp(charge, 0, 1)
 		renderCharge(chargeBar, vars.Charge)
+		if vars.ChargeAnimation then
+			vars.ChargeAnimation:SetChargePercent(vars.Charge * 100)
+		end
 		if not vars.OnLaunchPad or vars.SnowballCamera then
 			endCharge(self, false)
 		end
@@ -483,9 +792,19 @@ function api:WatchLaunchPad()
 		return
 	end
 
+	if not vars.LaunchPadCharacter then
+		vars.LaunchPadCharacter = Players.LocalPlayer.CharacterAdded:Connect(function()
+			vars.OnLaunchPad = nil
+			unbindPadCamera(vars)
+			destroyChargeAnimation(vars)
+		end)
+	end
+
 	setRideButtons(vars, vars.SnowballCamera ~= nil)
 
 	vars.LaunchPadWatch = vars.RNS.Heartbeat:Connect(function()
+		holdChargeAnimation(vars)
+
 		local character = Players.LocalPlayer.Character
 		local hrp = character and character:FindFirstChild("HumanoidRootPart")
 		local collision = findLaunchCollision()
@@ -505,9 +824,12 @@ function api:WatchLaunchPad()
 
 		if onPad then
 			api.BindPadCamera(self)
+			ReplicatedStorage.ReEvent:FireServer("EquipLauncher")
 		else
 			unbindPadCamera(vars)
 			restorePlayerCamera()
+			fadeChargeAnimation(vars)
+			ReplicatedStorage.ReEvent:FireServer("UnequipLauncher")
 		end
 	end)
 end
@@ -527,6 +849,9 @@ local function stopSnowballFollow(vars)
 end
 
 function api:UnbindSnowballCamera()
+	if self.GUIFramework then
+		self.GUIFramework:InvokeUI("HUD", "EndRunReadout")
+	end
 	local vars = getVars(self)
 	if self.StopAirPhysics then
 		self:StopAirPhysics()
@@ -546,12 +871,62 @@ function api:StopRide()
 	ReplicatedStorage.ReEvent:FireServer("StopSnowball")
 end
 
+function api:StandAtFinish(spawnCF)
+	if typeof(spawnCF) ~= "CFrame" then
+		return
+	end
+
+	local character = Players.LocalPlayer.Character
+	local hrp = character and character:FindFirstChild("HumanoidRootPart")
+	local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+	if not hrp or not humanoid then
+		return
+	end
+
+	local height = humanoid.HipHeight + (hrp.Size.Y / 2) + (mountainConfig.SPAWN.ExtraHeight or 3)
+	character:PivotTo(spawnCF + Vector3.yAxis * height)
+	hrp.AssemblyLinearVelocity = Vector3.zero
+	hrp.AssemblyAngularVelocity = Vector3.zero
+end
+
+-- Park the ball in front of the finish and keep the chase camera on it.
+function api:HoldAtFinish(standCF)
+	if typeof(standCF) ~= "CFrame" then
+		return
+	end
+
+	local folder = workspace:FindFirstChild("ActiveSnowballs")
+	local snowball = folder and folder:FindFirstChild(Players.LocalPlayer.Name .. "_Snowball")
+	local root = snowball and getRoot(snowball)
+	if not snowball or not root then
+		return
+	end
+
+	local radius = math.max(root.Size.X, root.Size.Y, root.Size.Z) / 2
+	local parked = standCF + Vector3.yAxis * (radius + 1)
+	snowball:SetAttribute("Finishing", true)
+	snowball:SetAttribute("FinishCFrame", parked)
+	snowball:SetAttribute("FinishLook", standCF.LookVector)
+	root.Anchored = true
+	root.AssemblyLinearVelocity = Vector3.zero
+	root.AssemblyAngularVelocity = Vector3.zero
+	if snowball:IsA("Model") then
+		snowball:PivotTo(parked)
+	else
+		root.CFrame = parked
+	end
+end
+
 local function horizontalUnit(vector, fallback)
 	local flat = Vector3.new(vector.X, 0, vector.Z)
 	if flat.Magnitude < 0.05 then
 		return fallback
 	end
 	return flat.Unit
+end
+
+local function horizontalSpeed(vector)
+	return Vector3.new(vector.X, 0, vector.Z).Magnitude
 end
 
 local function liftAboveGround(desired, ignore)
@@ -576,11 +951,12 @@ local function keepMass(root, baseDensity, scale)
 	end
 	local density = baseDensity / math.max(scale ^ 3, 0.05)
 	local current = root.CurrentPhysicalProperties
+	local launch = mountainConfig.LAUNCH
 	root.CustomPhysicalProperties = PhysicalProperties.new(
 		density,
-		current.Friction,
+		launch.Friction or current.Friction,
 		current.Elasticity,
-		current.FrictionWeight,
+		launch.FrictionWeight or current.FrictionWeight,
 		current.ElasticityWeight
 	)
 end
@@ -631,6 +1007,11 @@ function api:BindSnowballCamera(snowball)
 		end
 		return
 	end
+	-- Snapshot coins before the root wait so snow collected while the ball
+	-- streams in still counts toward this run.
+	if self.GUIFramework then
+		self.GUIFramework:InvokeUI("HUD", "BeginRunReadout")
+	end
 	local root = getRoot(snowball)
 	if not root then
 		local timeout = os.clock() + 3
@@ -640,6 +1021,9 @@ function api:BindSnowballCamera(snowball)
 		until root or os.clock() > timeout or not snowball.Parent
 	end
 	if not root then
+		if self.GUIFramework then
+			self.GUIFramework:InvokeUI("HUD", "EndRunReadout")
+		end
 		if vars and vars.OnLaunchPad then
 			api.BindPadCamera(self)
 		end
@@ -656,6 +1040,9 @@ function api:BindSnowballCamera(snowball)
 	end
 
 	local launch = mountainConfig.LAUNCH
+	local stopSpeed = launch.StopSpeed or 8
+	local stopHold = launch.StopHold or 0.75
+	local stopGrace = launch.StopGrace or 1.25
 	-- Stay behind this heading for the whole ride. Do not yaw with wobble or reverse.
 	local behind = horizontalUnit(root.AssemblyLinearVelocity, Vector3.new(0, 0, -1))
 	local camPos = nil
@@ -664,10 +1051,16 @@ function api:BindSnowballCamera(snowball)
 	local missingFor = 0
 	local lastStream = 0
 	local lastPos = root.Position
-	local movingSpeed = math.max((launch.StopSpeed or 0.45) * 8, 4)
+	local smoothSpeed = horizontalSpeed(root.AssemblyLinearVelocity)
+	local holdSnapped = false
 
 	vars.SnowballCamera = vars.RNS.RenderStepped:Connect(function(dt)
 		if not root.Parent or not snowball.Parent then
+			-- Ball was removed for the place teleport. Stay on the last ball frame
+			-- instead of cutting to the character.
+			if holdSnapped then
+				return
+			end
 			missingFor += dt
 			if missingFor >= 1 then
 				api.UnbindSnowballCamera(self)
@@ -676,17 +1069,45 @@ function api:BindSnowballCamera(snowball)
 		end
 		missingFor = 0
 
+		local hold = snowball:GetAttribute("FinishCFrame")
+		if typeof(hold) == "CFrame" then
+			root.Anchored = true
+			root.AssemblyLinearVelocity = Vector3.zero
+			root.AssemblyAngularVelocity = Vector3.zero
+			if snowball:IsA("Model") then
+				snowball:PivotTo(hold)
+			else
+				root.CFrame = hold
+			end
+			local look = snowball:GetAttribute("FinishLook")
+			if typeof(look) == "Vector3" then
+				behind = horizontalUnit(look, behind)
+			end
+			if not holdSnapped then
+				holdSnapped = true
+				camPos = nil
+			end
+		end
+
 		local velocity = root.AssemblyLinearVelocity
 		local scale = applyClientGrow(snowball, root, dt)
+		if typeof(hold) == "CFrame" then
+			if snowball:IsA("Model") then
+				snowball:PivotTo(hold)
+			else
+				root.CFrame = hold
+			end
+			root.AssemblyLinearVelocity = Vector3.zero
+		end
 		local position = root.Position
 		local moved = 0
 		if dt > 0 then
-			moved = (position - lastPos).Magnitude / dt
+			moved = horizontalSpeed(position - lastPos) / dt
 		end
 		lastPos = position
-		-- Trust travel distance more than AssemblyLinearVelocity; streaming can report 0 while rolling.
-		local speed = math.max(velocity.Magnitude, moved)
-		local spin = root.AssemblyAngularVelocity.Magnitude
+		-- Horizontal travel (or reported velocity). Physics jitter on Y should not keep the ride alive.
+		local speed = math.max(horizontalSpeed(velocity), moved)
+		smoothSpeed += (speed - smoothSpeed) * (1 - math.exp(-10 * math.max(dt, 0)))
 
 		if os.clock() - lastStream >= 0.45 then
 			lastStream = os.clock()
@@ -715,20 +1136,21 @@ function api:BindSnowballCamera(snowball)
 			camera.CFrame = camera.CFrame * self:GetCameraKick(dt)
 		end
 
-		if speed > movingSpeed or spin > (launch.StopSpin or 0.6) * 4 then
+		-- The server is moving the rider onto the finish platform.
+		if snowball:GetAttribute("Finishing") then
+			return
+		end
+
+		if smoothSpeed > stopSpeed then
 			lastFast = os.clock()
 		end
 
-		if os.clock() - followStarted < launch.StopGrace then
+		if os.clock() - followStarted < stopGrace then
 			return
 		end
 
-		-- One hitch or stream stall can report 0 speed while the ball is still flying.
-		-- Only return to the player after it has really been slow for StopHold.
-		if os.clock() - lastFast < launch.StopHold then
-			return
-		end
-		if speed <= launch.StopSpeed and spin <= (launch.StopSpin or 0.6) then
+		-- Same as pressing Stop: idle or crawling for StopHold ends the ride.
+		if os.clock() - lastFast >= stopHold then
 			restorePlayerCamera()
 			api.StopRide(self)
 		end

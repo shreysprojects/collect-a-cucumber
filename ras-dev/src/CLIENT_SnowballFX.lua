@@ -26,6 +26,7 @@ local TweenService = game:GetService("TweenService")
 
 local mountainConfig = require(ReplicatedStorage.Assets.Modules.Shared.MountainConfig)()
 local FLIGHT = mountainConfig.FLIGHT
+local COAST = mountainConfig.COAST or {}
 local SMASH = mountainConfig.SMASH
 local SOUNDS = mountainConfig.SOUNDS
 local PROPS = mountainConfig.PROPS
@@ -612,8 +613,20 @@ local function checkSmash(state, radius, prevPos, pos)
 				sound:Play()
 			end
 
+			local speed = state.Root.AssemblyLinearVelocity.Magnitude
 			local loss = SMASH.SpeedLoss[category] or SMASH.SpeedLoss.Default
+			local energyLoss = (SMASH.EnergyLoss and (SMASH.EnergyLoss[category] or SMASH.EnergyLoss.Default)) or 0
+			-- Fast balls plow through; slower ones bleed speed and energy.
+			if speed >= (COAST.FastSpeed or 78) then
+				local scale = COAST.FastSmashScale or 0.18
+				loss *= scale
+				energyLoss *= scale
+			end
 			state.Root.AssemblyLinearVelocity *= (1 - loss)
+			state.SpeedPeak = math.min(state.SpeedPeak or speed, state.Root.AssemblyLinearVelocity.Magnitude)
+			if state.Energy ~= nil then
+				state.Energy = math.max(0, state.Energy - energyLoss)
+			end
 			addCameraKick(state.Self, (SMASH.Kick[category] or SMASH.Kick.Default) * (1 + bonus))
 			state.SmashCount = (state.SmashCount or 0) + 1
 			pcall(function()
@@ -626,15 +639,55 @@ local function checkSmash(state, radius, prevPos, pos)
 	end
 end
 
--- Arcade momentum keeper. Rolling into a concave kink (steep slope straight into a
--- jump kicker, valley wall) at 300 studs/s makes the engine eat most of the speed in
--- one contact and the ball ends up rocking in a bowl. Only an impact can drop the
--- speed by 30% within a fraction of a second (uphill braking is gradual), so when
--- that happens we put most of it back along the surface, pointing down the run.
+local function powerMultiplier(state)
+	local model = state.Model
+	local power = model and model:GetAttribute("PowerMultiplier")
+	if type(power) ~= "number" then
+		local player = Players.LocalPlayer
+		power = player and player:GetAttribute("Multiplier")
+	end
+	if type(power) ~= "number" or power < 1 then
+		return 1
+	end
+	return power
+end
+
+local function lerpPair(pair, t)
+	t = math.clamp(t, 0, 1)
+	if type(pair) ~= "table" then
+		return pair or 0
+	end
+	return (pair[1] or 0) + ((pair[2] or pair[1] or 0) - (pair[1] or 0)) * t
+end
+
+local function resolveCharge(state)
+	local charge = state.Model:GetAttribute("LaunchCharge")
+	if type(charge) == "number" then
+		state.Charge = math.clamp(charge, 0, 1)
+	elseif state.Charge == nil then
+		local launchSpeed = state.Model:GetAttribute("LaunchSpeed")
+		local settings = mountainConfig.LAUNCH.Charge
+		if type(launchSpeed) == "number" and settings then
+			local span = math.max((settings.MaxSpeed or 78) - (settings.MinSpeed or 22), 1)
+			charge = (launchSpeed - (settings.MinSpeed or 22)) / span
+		else
+			charge = 0.5
+		end
+		state.Charge = math.clamp(charge, 0, 1)
+	end
+	if state.Energy == nil then
+		state.Energy = 1
+	end
+	return state.Charge or 0.5
+end
+
+-- Arcade momentum keeper. A fast ball plows through kinks and keeps most of its
+-- speed. A slower one keeps the hit (and loses a little more) so objects can stop it.
 local function keepMomentum(state, dt, hit, speed, vel, radius)
 	local peak = state.SpeedPeak or 0
 	peak = math.max(speed, peak - (FLIGHT.PeakDecay or 400) * dt)
-	if peak > (FLIGHT.ImpactMinSpeed or 60) and speed < peak * (FLIGHT.ImpactRatio or 0.7) then
+	local fast = math.max(speed, peak) >= (COAST.FastSpeed or 78)
+	if fast and peak > (FLIGHT.ImpactMinSpeed or 60) and speed < peak * (FLIGHT.ImpactRatio or 0.7) then
 		local n = (hit and hit.Normal) or state.GroundNormal or Vector3.yAxis
 		local axis = state.Axis or Vector3.new(0, 0, -1)
 		local tangent = axis - n * axis:Dot(n)
@@ -651,55 +704,97 @@ local function keepMomentum(state, dt, hit, speed, vel, radius)
 			end)
 			peak = keep
 		end
+	elseif not fast and peak > 25 and speed < peak * 0.85 then
+		local extra = COAST.HitSlow or 0.08
+		local newVel = vel * (1 - extra)
+		state.Root.AssemblyLinearVelocity = newVel
+		peak = newVel.Magnitude
 	end
 	state.SpeedPeak = peak
 end
 
--- Left/right wandering. A smooth noise target (pulled toward the nearest structure
--- ahead) sets where across the track the ball wants to be; we blend its sideways
--- velocity toward that, capped to a fraction of the forward speed so it carves
--- instead of skidding. Soft edges keep it on the 100-stud track.
-local function seekTarget(state, pos, right)
-	local W = FLIGHT.Wander
-	local now = os.clock()
-	if now - (state.SeekAt or 0) < (W.SeekInterval or 0.12) then
-		return state.SeekX
+-- Charge-scaled coast: drag + a decaying energy budget. Weak launches fade out
+-- quickly; a full hold lasts much longer. Spent energy brakes even on downhill.
+-- Later mountains drain energy faster until equipped power catches the gear
+-- that mountain expects. At the expected power, coast time matches mountain 1.
+local function coastDrainScale(state)
+	local mountain = workspace:FindFirstChild(mountainConfig.WORKSPACE_NAME)
+	local mountainId = mountain and mountain:GetAttribute("MountainId")
+	local resistance = mountainConfig:CoastResistance(mountainId)
+	local power = mountainConfig:EffectivePower(powerMultiplier(state))
+	if resistance < 1 then
+		resistance = 1
 	end
-	state.SeekAt = now
-	state.SeekX = nil
-	local decor = workspace:FindFirstChild(PROPS.WorkspaceFolder)
-	if not decor or (W.Seek or 0) <= 0 then
-		return nil
-	end
-	local params = state.Overlap
-	if not params then
-		params = OverlapParams.new()
-		params.FilterType = Enum.RaycastFilterType.Include
-		state.Overlap = params
-	end
-	params.FilterDescendantsInstances = { decor }
-	local axis = state.Axis
-	local centre = pos + axis * (W.SeekRange / 2)
-	local cf = CFrame.lookAt(centre, centre + axis)
-	local best, bestDist = nil, math.huge
-	for _, part in workspace:GetPartBoundsInBox(cf, Vector3.new(W.SeekWidth * 2, 40, W.SeekRange), params) do
-		local model = propModelOf(part)
-		if model and not model:GetAttribute("Smashed") and not state.Smashed[model] then
-			local ok, pivot = pcall(model.GetPivot, model)
-			if ok then
-				local ahead = (pivot.Position - pos):Dot(axis)
-				if ahead > 5 and ahead < bestDist then
-					best, bestDist = pivot.Position, ahead
-				end
-			end
-		end
-	end
-	if best then
-		state.SeekX = (best - state.AxisOrigin):Dot(right)
-	end
-	return state.SeekX
+	return resistance / math.max(power, 1)
 end
 
+local function applyCoast(state, dt, grounded, hit)
+	local charge = resolveCharge(state)
+	local drain = lerpPair(COAST.EnergyDrain, charge) * coastDrainScale(state)
+	local energy = math.max(0, (state.Energy or 1) - drain * dt)
+	state.Energy = energy
+
+	local root = state.Root
+	local vel = root.AssemblyLinearVelocity
+
+	-- Once the budget is gone, cancel this frame's slope gravity so the ball can
+	-- actually halt on a downhill instead of creeping forever.
+	if energy < (COAST.BrakeBelow or 0.2) and grounded and hit then
+		local spent = 1 - energy / math.max(COAST.BrakeBelow or 0.2, 0.01)
+		local g = Vector3.new(0, -workspace.Gravity, 0)
+		local along = g - hit.Normal * g:Dot(hit.Normal)
+		vel -= along * dt * spent
+	end
+
+	local horiz = Vector3.new(vel.X, 0, vel.Z)
+	local speedH = horiz.Magnitude
+	if speedH < 0.05 then
+		if energy < (COAST.BrakeBelow or 0.2) then
+			root.AssemblyLinearVelocity = Vector3.new(0, vel.Y, 0)
+			root.AssemblyAngularVelocity *= math.max(0, 1 - (COAST.SpinDamp or 4) * dt)
+		end
+		return
+	end
+
+	local drag = lerpPair(if grounded then COAST.GroundDrag else COAST.AirDrag, charge)
+	drag *= 1 + (1 - energy) * (COAST.EmptyDragBonus or 2.2)
+	local damp = lerpPair(if grounded then COAST.GroundDamp else COAST.AirDamp, charge)
+	if energy < (COAST.BrakeBelow or 0.2) then
+		local spent = 1 - energy / math.max(COAST.BrakeBelow or 0.2, 0.01)
+		drag += (COAST.BrakeAccel or 36) * spent
+		damp += (COAST.BrakeDamp or 5) * spent
+	end
+
+	local cap = lerpPair(COAST.MaxSpeed, charge)
+	cap *= powerMultiplier(state)
+	cap *= (COAST.CapFloor or 0.32) + (1 - (COAST.CapFloor or 0.32)) * energy
+
+	local newSpeed = math.min(speedH, cap)
+	newSpeed *= math.exp(-damp * dt)
+	newSpeed = math.max(0, newSpeed - drag * dt)
+	local dir = horiz / speedH
+	root.AssemblyLinearVelocity = Vector3.new(dir.X * newSpeed, vel.Y, dir.Z * newSpeed)
+
+	if energy < (COAST.BrakeBelow or 0.2) then
+		root.AssemblyAngularVelocity *= math.max(0, 1 - (COAST.SpinDamp or 4) * dt)
+	end
+end
+
+local function readSteer(state)
+	if not state.Physics then
+		return 0
+	end
+	local vars = getVars(state.Self)
+	local value = vars and vars.Steer
+	if type(value) ~= "number" then
+		return 0
+	end
+	return math.clamp(value, -1, 1)
+end
+
+-- Rolling stays on the downhill line: no auto weave, and leftover sideways
+-- speed is bled off. Left/right is only player steering on the ground.
+-- Flight is up/down only (plus a soft edge push if it drifts off the track).
 local function steerWander(state, dt, grounded, pos)
 	local W = FLIGHT.Wander
 	local right = state.Right
@@ -709,28 +804,31 @@ local function steerWander(state, dt, grounded, pos)
 	local root = state.Root
 	local vel = root.AssemblyLinearVelocity
 	local forward = vel:Dot(state.Axis)
-	if forward < 15 then
+	if forward < 12 then
 		return
 	end
 
-	state.WanderSeed = state.WanderSeed or math.random() * 1000
-	local t = os.clock() * W.Speed
-	local targetX = math.noise(t, state.WanderSeed) * 2 * W.Amplitude
-	local seekX = seekTarget(state, pos, right)
-	if seekX then
-		targetX = targetX + (seekX - targetX) * W.Seek
-	end
-	targetX = math.clamp(targetX, -W.EdgeLimit + 4, W.EdgeLimit - 4)
-
+	local player = readSteer(state)
+	local steering = grounded and math.abs(player) > 0.05
 	local offset = (pos - state.AxisOrigin):Dot(right)
-	local wanted = (targetX - offset) * W.Gain
-	local cap = math.max(forward, 15) * W.MaxHeading
+	local wanted = 0
+	local heading = W.MaxHeading
+	local blendRate = if grounded then W.GroundBlend else W.AirBlend
+
+	if steering then
+		local playerTarget = player * (W.EdgeLimit - 8)
+		wanted = (playerTarget - offset) * W.Gain
+		wanted += player * math.max(forward, 15) * (W.PlayerHeading or 0)
+		heading = W.PlayerMaxHeading or W.MaxHeading
+		blendRate = math.max(blendRate, W.PlayerBlend or 7)
+	end
+
+	local cap = math.max(forward, 15) * heading
 	wanted = math.clamp(wanted, -cap, cap)
 
 	-- Edge safety: sideways speed toward the nearer edge is limited by the room left,
 	-- and past the limit the ball is pushed back with a fast blend (air included).
 	local room = W.EdgeLimit - math.abs(offset)
-	local blendRate = if grounded then W.GroundBlend else W.AirBlend
 	if offset ~= 0 and math.sign(wanted) == math.sign(offset) then
 		wanted = math.sign(wanted) * math.min(math.abs(wanted), math.max(room, 0) * 3)
 	end
@@ -751,7 +849,7 @@ local function steerWander(state, dt, grounded, pos)
 	if math.abs(newLateral - realLateral) > 0.01 then
 		root.AssemblyLinearVelocity = vel + right * (newLateral - realLateral)
 	end
-	state.WanderTarget = targetX
+	state.WanderTarget = if steering then player * (W.EdgeLimit - 8) else 0
 end
 
 local function stepPhysics(state, dt, grounded, radius, pos, hit)
@@ -824,6 +922,7 @@ local function stepPhysics(state, dt, grounded, radius, pos, hit)
 	end
 
 	steerWander(state, dt, grounded, pos)
+	applyCoast(state, dt, grounded, hit)
 end
 
 ----------------------------------------------------------------------------------------------
@@ -955,12 +1054,67 @@ local function stepBall(state, dt)
 	end
 
 	if state.Physics then
+		local hold = model:GetAttribute("FinishCFrame")
+		if typeof(hold) == "CFrame" then
+			root.Anchored = true
+			root.AssemblyLinearVelocity = Vector3.zero
+			root.AssemblyAngularVelocity = Vector3.zero
+			if model:IsA("Model") then
+				model:PivotTo(hold)
+			else
+				root.CFrame = hold
+			end
+			return
+		end
+
 		stepPhysics(state, dt, grounded, radius, pos, hit)
 		checkSmash(state, radius, prevPos, pos)
 
+		-- The server owns snow removal, but it only sees this ball at replication
+		-- rate. Reporting the contact point we are actually rolling on keeps the
+		-- cleared trail under the ball at speed; the server validates it.
+		if grounded and hit then
+			local carve = mountainConfig.SNOW.Carve
+			if now - (state.LastCarveSent or 0) >= (carve.Interval or 0.05) then
+				state.LastCarveSent = now
+				ReplicatedStorage.ReEvent:FireServer("CarveSnow", hit.Position)
+			end
+		end
+
+		-- Reaching the finish parks the ball in front of the platform. The chase
+		-- camera stays on the ball; the server unlocks the next mountain from here.
+		local finish = state.FinishPiece
+		if not finish or not finish.Parent then
+			local mountain = workspace:FindFirstChild(mountainConfig.WORKSPACE_NAME)
+			finish = mountain and mountainConfig.FindFinishPlatform(mountain)
+			state.FinishPiece = finish
+		end
+		if finish and not state.Ended then
+			local contact = mountainConfig.FinishContact(finish, prevPos, pos, radius + 12)
+			if contact then
+				state.FinishPoint = contact
+			end
+		end
+
+		local finishCfg = mountainConfig.FINISH
+		if state.FinishPoint and not state.Ended and not state.FinishGaveUp then
+			if not state.FinishStarted then
+				state.FinishStarted = now
+				model:SetAttribute("Finishing", true)
+			end
+			if now - state.FinishStarted > (finishCfg.ReportWindow or 6) then
+				state.FinishGaveUp = true
+				state.FinishPoint = nil
+				model:SetAttribute("Finishing", nil)
+			elseif now - (state.FinishSentAt or 0) >= (finishCfg.ReportInterval or 0.6) then
+				state.FinishSentAt = now
+				ReplicatedStorage.ReEvent:FireServer("ReachFinish", state.FinishPoint)
+			end
+		end
+
 		-- Rolled off the end of the finish platform: end the ride instead of
-		-- watching the ball fall for ten seconds.
-		if state.FloorY and pos.Y < state.FloorY and not state.Ended then
+		-- watching the ball fall for ten seconds. A finish arrival is handled above.
+		if state.FloorY and pos.Y < state.FloorY and not state.Ended and not model:GetAttribute("Finishing") then
 			state.Ended = true
 			local self = state.Self
 			task.defer(function()
@@ -1114,6 +1268,9 @@ function api:StartAirPhysics(snowball, root)
 	state.Physics = true
 	state.Self = self
 	state.SmashCount = 0
+	state.Charge = nil
+	state.Energy = 1
+	resolveCharge(state)
 
 	local mountain = workspace:FindFirstChild(mountainConfig.WORKSPACE_NAME)
 	local startPiece = mountain and mountain:FindFirstChild(mountainConfig.Attachment.StartPlatform .. "_1")
