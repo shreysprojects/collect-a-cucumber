@@ -201,3 +201,32 @@ ball launches down the track, bar hides on panel open, real clicks buy / refuse 
 four fixed items load their own meshes, observers see ready pose + wind-up/fire, no script errors.
 Note: the charge bar ping-pongs (FillTime 0.42 s, Time 1.2 s); releasing at the bottom of the swing
 (< MinCharge 0.03) launches nothing, by design. Test holds of ~1.6 s land there.
+
+## 2026-09-22: player-save fixes (SERV_PlayerData + SERV_PlayerEvents)
+
+kinqxz/RAS commit `6321c61` (on top of `e26b1e8`); both scripts in RAS - Dev equal it byte for byte.
+Not mirrored in `src/` (the repo is the source).
+
+- **Blank profile over a real save**: the join placeholder is `Loaded = false` and `SavePlayerData`
+  skips anything not Loaded or `LoadFailed`. A read that fails all 5 tries kicks the player ("Couldn't
+  load your data, please rejoin."); in Studio they play on defaults with saving off. A load that ends
+  after the player left returns nil and PlayerAdded skips setup. `EnforceMountainAccess` ignores an
+  unloaded profile. Extra guard: the UpdateAsync transform refuses a payload whose lifetime totals
+  are behind the stored ones (they only grow; rebirth keeps them), so a stale session cannot roll a
+  save back. Admin rollbacks therefore have to go through `SetAsync`, not SavePlayerData.
+- **Forced save during an autosave**: a leave / shutdown / travel / unlock / rebirth save now waits
+  for that player's in-flight autosave and writes a fresh snapshot. Dirty is cleared before the
+  snapshot and restored on failure.
+- PlayerRemoving keeps the profile when the same user already rejoined this server mid-save.
+
+Tests: `tests/playerdata-harness.lua` runs any two versions of the scripts with fake
+DataStore / Players / RunService / TeleportService / MountainPlaces in the Studio edit peer (serve the
+folder holding the sources + harness on 127.0.0.1:18794, then
+`loadstring(HttpService:GetAsync(".../harness.lua"))()("SERV_PlayerData.luau", "SERV_PlayerEvents.luau", "T1 T5")`).
+New code passes all 9 cases (T1 read fails live: kick, 0 writes; T2 Studio: no kick, 0 writes; T3
+transient failure recovers; T4 leave mid-load: 0 writes; T5 leave mid-autosave: writes 5010 then 5110;
+T6 stale totals refused; T7 new player saves; T8 locked mountain still redirects; T9 rejoin keeps
+the profile). The old code wiped the save to 0/0 in T1 and T4, lost the +100 in T5 and regressed
+totals in T6. A real playtest with the real DataStore confirmed normal load, a forced save that waited out an
+in-flight autosave (stored 15314 = latest), and a real leave-mid-load on a throwaway key (nothing
+written). The test account was restored to its baseline afterwards and verified after the stop.
