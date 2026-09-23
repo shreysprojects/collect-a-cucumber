@@ -371,6 +371,48 @@ scoops and heaves; the ball flies off the blade.
   speed while the low-speed feel (rate 10) is unchanged. Files: CLIENT_Snowball (BindSnowballCamera),
   MountainConfig (LAUNCH.CameraFollowRate / CameraMaxLag).
 
+## 2026-09-23 (night): chase camera stays behind the ball, no leap over it at launch
+
+User: "camera is weird and just goes completely over the ball - fix it, keep it behind and normal from
+launch." Measured with a Heartbeat sampler (ball vs camera per frame, this account launches at ~600
+studs/s now): the chase framing was `CameraDistance 18 / CameraHeight 16` = a 38-42 degree look-down,
+growing to 42 studs above the ball as it scaled up (the horizon sat at the top edge of the screen), and
+the speed-tightened follow (`max(10, speed/6)` = 100/s at 600 studs/s) turned the intended 0.3 s ease
+from the pad camera into a ONE-FRAME snap: pad view (3 up, pitch 11) -> 14 up, pitch 38 in 16 ms. That
+snap plus the steep framing is the "leaps over the ball". Two more launch hops hid under it: the
+ground-clearance ray (`liftAboveGround`) counted the launch pad's invisible, non-colliding 15-stud-tall
+trigger volume `StartPlatform_N.LaunchPlatform.Collision` (CanCollide false, CanQuery true) as ground
+and lifted the camera 8 studs on frame 2, and the player's own character was not excluded from it.
+
+Fix (CLIENT_Snowball `BindSnowballCamera` + `liftAboveGround`, MountainConfig LAUNCH; Studio == repo
+main == mirrors, checksummed):
+- **Camera = anchor + offset.** The anchor still eases toward the ball with the lag-capped rate
+  (`CameraFollowRate 10` / `CameraMaxLag 6`). The camera's OFFSET from the anchor now lives in ball space
+  and eases separately at `LAUNCH.CameraOffsetRate 8` (1/s). From the pad the offset starts as the pad
+  camera's offset from the ball, so the shot settles into the chase framing in the same ~0.4 s at every
+  gear (a world-space lerp settles in speed x time-constant studs, i.e. instantly once the ball is fast).
+- **Lower framing:** `CameraHeight 16 -> 8` over `CameraDistance 18` = a 24 degree look-down with the
+  track ahead in view. Growth with the snowball scale is now `CameraGrowDistance 0.5` / `CameraGrowHeight
+  0.5` per scale step (was hard-coded 0.5 / 0.4 of the 16), so a scale-8 ball is framed from 81 back /
+  36 up instead of 81 / 61 (same angle as at scale 1).
+- **Slope follow:** the behind offset tilts with the ball's travel pitch (`asin(v.y/|v|)`, eased at
+  `CameraPitchRate 2.5`, clamped `CameraPitchMin -20 .. CameraPitchMax 8` degrees), so on a downhill the
+  camera sits up the slope behind the ball instead of being pushed over it by the clearance ray, and a
+  climbing ball is watched from nearly level. -20 (not -30) so dives do not swing the camera far above.
+- **Clearance ray:** `RaycastParams.RespectCanCollide = true` (solid geometry only) + the local character
+  in the ignore list; the lift itself is eased (`lift` rises at once, settles back at `CameraLiftSettle 4`
+  1/s) so a rail or bump under the camera reads as a small lift rather than a pop.
+- Verified (Heartbeat sampler, 60 Hz then a 15 fps throttled Studio window): launch pitch 10 -> 15 ->
+  18 -> 20 -> 21 degrees over the first 0.4 s, camera 0.6 -> 7 studs above the ball, largest one-frame
+  rise 0 (was 13 studs); rolling framing 18-24 back / 7-9 up at scale 1; the two screenshots (before:
+  horizon at the top edge, after: horizon a third of the way down, ball centred on the track) are in the
+  session summary. Test rides added ~7 km / ~60K coins to awesomeotheraccount's real profile.
+- Gotcha: when the Studio window is not in front, Roblox renders at ~15 fps while Heartbeat stays at 60,
+  so a Heartbeat sampler sees the camera update only every 4th sample (a 4-sample sawtooth in "behind").
+  Read the first sample after each camera update, and add v x dt to it: the chase sets the camera from
+  the ball's pre-physics position, so a Heartbeat sample sees the ball one step (10 studs at 600 studs/s)
+  further on. `RunService.RenderStepped` count per second tells you the render rate.
+
 ## 2026-09-23 (night): Rojo workflow set up on this machine
 
 - **Tooling:** `rokit` 1.2.0 (`C:\Users\shrey\.rokit\bin`, on the user PATH) installs the repo's pinned
