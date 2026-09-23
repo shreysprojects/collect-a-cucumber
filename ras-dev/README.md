@@ -270,3 +270,15 @@ Test recipe: `eval_client_runtime` sampler on RenderStepped keyed on `vars.Charg
 `PlayerGui:SetAttribute("DevChargeHold", true)`, 0.6 s, false; `vars.Functions:StopRide()` 2 s later. Two
 short rides (~800 and ~600 studs) went onto the test account's real profile.
 
+### Follow-up: launcher gone after leaving the pad and coming back (same branch)
+
+Server log of a walk off and back: `UnequipLauncher` arrived while the server still saw the player on
+the pad, and `EquipLauncher` arrived while it saw them 4 studs OUTSIDE it (the client's own pad check
+runs a few replication ticks ahead of the position the server has), so `EquipLauncher` skipped the
+hand-out and nothing asked again. Fix: SERV_Launcher.EquipLauncher polls `IsPlayerOnLaunchPad` for up
+to 1 s (EQUIP_GRACE / EQUIP_POLL) before giving up, with a per-player request counter
+(`sself.LAUNCHER_REQUEST`, weak keys) that an Unequip or a later Equip bumps to cancel a waiting one;
+CLIENT_Snowball.WatchLaunchPad re-sends `EquipLauncher` at most every 2 s while standing alive on the
+pad with no launcher in the character (`vars.LauncherRequestAt`). Measured: launcher back 0.27 / 0.35 s
+after stepping on in two consecutive rounds.
+
