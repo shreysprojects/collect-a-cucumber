@@ -362,3 +362,11 @@ scoops and heaves; the ball flies off the blade.
   `self.HoldBlend = math.clamp(target, self.HoldBlend - step, self.HoldBlend + step)`. Verified with the
   same 60 Hz probe: standing, holding (SetHolding(true) on the live controller, no launch) and back to
   ready, see the numbers in the summary of that session.
+- **Chase camera trailing far behind at launch** (user: "at launch camera goes too far away from ball"): the
+  chase eased `camPos` toward its spot with a fixed `1 - exp(-10 dt)`, i.e. a 0.1 s time constant, and an
+  exponential follower trails a moving target by speed x time constant: at this account's gear 18 the ball
+  leaves at ~1,300 studs/s, so the camera settled ~130 studs behind its framing (140 studs from the ball)
+  within 0.3 s of the launch (measured `gap` 19 -> 124 studs). Fix: the follow rate is now
+  `max(LAUNCH.CameraFollowRate 10, speed / LAUNCH.CameraMaxLag 6)`, so the trail is capped at 6 studs at any
+  speed while the low-speed feel (rate 10) is unchanged. Files: CLIENT_Snowball (BindSnowballCamera),
+  MountainConfig (LAUNCH.CameraFollowRate / CameraMaxLag).
