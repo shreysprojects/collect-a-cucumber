@@ -1261,9 +1261,10 @@ function api:StartSnowballFX()
 	end)
 end
 
--- Race progress bar (StarterGui.RaceProgressGui from RAS - Maps): its controller draws
--- one marker per player from the replicated player attribute "Distance", which the
--- server writes while a ball rides. We only feed it the run length + finish label.
+-- Race progress bar (the RaceProgressGui UI: ServerStorage.Modules.UserInterfaces + its
+-- frames, spawned into PlayerGui by GUIFramework): it draws one marker per player from the
+-- replicated player attribute "Distance", which the server writes while a ball rides. We
+-- only feed it the run length + finish label.
 local function withCommas(n)
 	local s = tostring(math.floor(n))
 	local out = s:reverse():gsub("(%d%d%d)", "%1,"):reverse()
@@ -1272,9 +1273,9 @@ end
 
 function api:SetupRaceProgress()
 	task.spawn(function()
-		local playerGui = Players.LocalPlayer:WaitForChild("PlayerGui")
-		local gui = playerGui:WaitForChild("RaceProgressGui", 20)
+		local gui = self.GUIFramework and self.GUIFramework:GetUI("RaceProgressGui")
 		if not gui then
+			warn("[CLIENT]: RaceProgressGui UI not found (manifest entry missing?)")
 			return
 		end
 

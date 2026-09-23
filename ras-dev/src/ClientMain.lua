@@ -118,7 +118,6 @@ rideControls.BackgroundTransparency = 1
 rideControls.BorderSizePixel = 0
 rideControls.Parent = gui
 HUDLayout.BindRide(rideControls, gui)
-HUDLayout.BindHint(playerGui:WaitForChild("ChargeHint"))
 
 -- Launching is hold-to-charge now (CLIENT_Snowball.SetupChargeLaunch).
 -- Ride controls: Left / Stop / Right, created here so they sit above the HUD.

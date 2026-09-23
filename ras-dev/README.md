@@ -438,3 +438,27 @@ main == mirrors, checksummed):
   948e18d.
 - Gotcha: a shell heredoc containing one ~14 KB line fails to parse in this Bash tool ("unexpected EOF
   while looking for matching quote"); write the script with the Write tool instead.
+
+## 2026-09-23 (night): the place brought back to the owner's architecture
+
+Rule (from Eric via the user): one Script (ServerMain), one LocalScript (ClientMain), one RemoteEvent
+(ReEvent; its ReFunction stays), everything else modules; every UI = frames in
+`ServerStorage.Assets.UserInterfaces/<UI>` + `ServerStorage.Modules.UserInterfaces/<UI>.luau` + an entry in
+the `Default` manifest; backups in one folder. Done (kinqxz/RAS main `a0d20a4`, verified in a playtest):
+
+- StarterGui.RaceProgressGui (+ RaceProgressController LocalScript + SetDistance bindable), StarterGui.ChargeHint
+  and ReplicatedStorage.Assets.UserInterfaces.ChargeBar (+ ProgressController + SetProgress) became UIs:
+  `Interface` ScreenGui templates in the UI folder, modules RaceProgressGui / ChargeHint / ChargeBar, manifest
+  entries with `Parent = {}` (GUIFramework spawns a whole ScreenGui straight into PlayerGui, keeping its
+  DisplayOrder). CLIENT_Snowball / CLIENT_SnowballFX / ClientMain fetch them with `GUIFramework:GetUI`.
+- StarterGui.HUD.Base.MainUI moved back next to the other HUD frames; HUD.luau clones the template.
+- ServerStorage root = Assets, Modules, Backups. `Backups` holds the 16 former loose items, `Backups.Unused`
+  the old SnowballAnimations.Clips KeyframeSequences, the empty leftover folders, StarterGui.Test and the two
+  retired StarterGui guis. Pre-change export: `backups/RASDev_ui-before-architecture-cleanup_2026-09-23.rbxm`.
+- Repo: `extras/ServerStorage_UserInterfaces.rbxm` refreshed, `extras/RaceProgressGui` + the StarterGui snapshot
+  removed, README rules added. Mirrors here: RaceProgressGui.lua / ChargeHint.lua / ChargeBar.lua / UI_Default.lua
+  added, RaceProgressController.lua removed.
+- Test gotcha: `DevPanel` set to the same value twice does not close the panel (no changed signal) and an open
+  panel blocks charging; close with `vars.Functions.GUIFramework:InvokeUI("HUD", "ClosePanels")`.
+- Another session committed `99b3d07` ("chase camera stays behind the ball") into the same clone meanwhile;
+  Rojo synced it, main carries both.
