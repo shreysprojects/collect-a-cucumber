@@ -370,3 +370,29 @@ scoops and heaves; the ball flies off the blade.
   `max(LAUNCH.CameraFollowRate 10, speed / LAUNCH.CameraMaxLag 6)`, so the trail is capped at 6 studs at any
   speed while the low-speed feel (rate 10) is unchanged. Files: CLIENT_Snowball (BindSnowballCamera),
   MountainConfig (LAUNCH.CameraFollowRate / CameraMaxLag).
+
+## 2026-09-23 (night): Rojo workflow set up on this machine
+
+- **Tooling:** `rokit` 1.2.0 (`C:\Users\shrey\.rokit\bin`, on the user PATH) installs the repo's pinned
+  `rojo-rbx/rojo@7.7.0` from `aftman.toml` (`rokit install` inside the clone). The Rojo Studio plugin was
+  installed with `rojo plugin install` -> `%LOCALAPPDATA%\Roblox\Plugins\RojoManagedPlugin.rbxm`
+  (Studio loads it on its next start).
+- **Persistent clone = the source of truth:** `C:\Users\shrey\RAS` (kinqxz/RAS main, `core.longpaths`
+  on). The `ras-dev/src` mirrors here are now only a backup copy; edit the clone.
+- **Serve:** `rojo serve C:\Users\shrey\RAS\default.project.json` (port 34872), then Plugins > Rojo >
+  Connect in Studio. Rojo is one-way (files -> Studio). Before connecting the first time, the place was
+  checked against the repo: all 74 scripts identical, nothing a sync would delete (the project's service
+  nodes and `init.meta.json` files carry `ignoreUnknownInstances`, so the Studio-only backup folders
+  under ServerStorage, `ServerStorage.Assets.*`, `SnowballAnimations.Clips`, StarterGui guis all survive).
+  `$properties` on Lighting/SoundService/Workspace already match the place (Technology is unreadable
+  from plugin code, so it is unverified).
+- **Studio -> repo (what Rojo cannot do):** manifest check recipe = `scratchpad/manifest.py` builds a
+  Luau table of every repo script (instance path, class, LF-normalised length + `(h*31+b) % 2147483647`
+  checksum) and every path-backed directory with its expected children; an edit-peer `execute_luau`
+  compares it with the DataModel and reports differing/missing scripts, children a sync would delete,
+  and Studio scripts unknown to the repo. Line-level diff of one script: per-line checksums from Studio
+  (`fx_linediff.py`), then `get_script_source` with a `line_range`. Found and pulled today:
+  CLIENT_SnowballFX combo tweak (COMBO_CENTER_HOLD 1, pop x0.6 capped at 0.51 of the width) = repo
+  948e18d.
+- Gotcha: a shell heredoc containing one ~14 KB line fails to parse in this Bash tool ("unexpected EOF
+  while looking for matching quote"); write the script with the Write tool instead.
