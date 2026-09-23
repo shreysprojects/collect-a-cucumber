@@ -592,11 +592,11 @@ config.LAUNCH = {
 	PadCameraDistance = 13,
 	PadCameraHeight = 3,
 	PadLookAhead = 3,
-	-- After a launch the camera stays on the character for Hold seconds (the throw),
-	-- then blends to the ball chase over Blend seconds instead of cutting. A ball that
-	-- is already further than BlendMaxDistance studs away when the blend would start
-	-- (high gear) gets a cut: a dolly over hundreds of studs reads as a glitch.
-	ReleaseCamera = { Hold = 0.45, Blend = 0.6, BlendMaxDistance = 150 },
+	-- The chase camera follows the ball from the frame it leaves the launcher: no hold on
+	-- the throw and no delayed blend. With ChaseFromPadCamera the camera position starts
+	-- where the pad camera was and settles behind the ball through the chase follow (about
+	-- 0.3 s), one continuous shot; false = cut straight to the chase framing instead.
+	ChaseFromPadCamera = true,
 	-- The ride ball starts where the launcher lets it go (the clip's Seat / Muzzle point at its
 	-- fire moment, reported by the client) instead of on the ground ahead of the pad, as long as
 	-- that point is within MaxDistance studs of the character with nothing solid in between.

@@ -329,3 +329,34 @@ scoops and heaves; the ball flies off the blade.
 - Code review (3 lenses + adversarial verify) found 9 real issues, all fixed before install: observer
   handoff to a ball that arrives before their fire frame, pose-relay drops, a second click during the
   throw, the snap-back of the copy on a slow connection.
+
+## 2026-09-23 (late): chase camera from the moment the ball leaves + the standing-shake diagnosis
+
+- **Camera follows the ball from the frame it spawns** (user ask: "follow the ball from the second it's
+  launched instead of delaying"). `LAUNCH.ReleaseCamera` (Hold 0.45 s + 0.6 s blend, added the same
+  morning) is gone. `BindSnowballCamera` now looks at the ball on its very first frame; when the launch
+  came from the pad the camera *position* starts where the pad camera was (`LAUNCH.ChaseFromPadCamera =
+  true`, new) and the existing 10/s follow lerp carries it up behind the ball in ~0.3 s, so there is no
+  hold and no cut (set it false for a straight cut to the chase framing). The ball still spawns at the
+  clip's fire moment (`fireAt`, ~0.2 s after release), so the throw plays on the pad camera until the
+  ball exists and the chase takes over the same frame. Files: CLIENT_Snowball (BindSnowballCamera),
+  MountainConfig (LAUNCH), Profiles (comment only). Studio == repo == mirrors, checksummed.
+- **Avatar "shaking" while just standing with the launcher = a blend ping-pong in ChargeController, NOT
+  the clips, physics or the pad stance** (diagnosed on request, deliberately not changed). Measured in a
+  playtest (Hand Catapult, 60 Hz PreSimulation sampler wrapped around `Controller._step`): root part,
+  angular velocity, camera, FloorMaterial (always Plastic), MoveDirection (0) and Humanoid state are all
+  perfectly still, and the authored Ready pose moves the hips only ~0.1 deg/frame; yet the written joint
+  Transforms jump 2-4.6 deg *every other frame* (LeftHip max 4.6, RightHip 3.2, RightKnee 3.1, Root/
+  LowerTorso 2.7). Cause: the leg blend
+  `self.LegWeight = math.clamp(self.LegWeight + (if legTarget > self.LegWeight then rate else -rate), 0, 1)`
+  never rests at its target. With legTarget = 1 and LegWeight = 1 the test `1 > 1` is false, so it steps
+  DOWN by dt/0.15 (to 0.889, or 0.861 on a 1/48 s frame), next frame it is below the target so it steps
+  back UP to 1, and so on: 114 dips in 242 frames. Every dip blends the whole lower body (LowerTorso,
+  hips, knees, feet) 11-14 % toward the Animator's idle pose for one frame and back = a 30 Hz vibration
+  of the body above the hips. The bottom end is stable only because the clamp at 0 absorbs the extra
+  `-rate`. `HoldBlend` (ready <-> charge loops, HOLD_BLEND 0.2) has the same shape, so while HOLDING the
+  charge the whole pose (arms included) flickers 8 % between the ready and charge poses each frame too;
+  `CLIENT_LauncherObservers` runs the same controller, so other players' characters do it as well.
+  The fix, when wanted, is to move toward the target without overshooting, e.g.
+  `self.LegWeight = math.clamp(legTarget, self.LegWeight - rate, self.LegWeight + rate)` and
+  `self.HoldBlend = math.clamp(target, self.HoldBlend - step, self.HoldBlend + step)`.

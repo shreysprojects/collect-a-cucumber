@@ -135,8 +135,8 @@ local PROFILES = {
 		description = "Shouldered heavy hold and backward rocket recoil" },
 }
 
--- The release plays while the pad camera holds on the character (MountainConfig
--- LAUNCH.ReleaseCamera). The authored durations were a 0.5-1 s flick; stretch
+-- The release plays on the pad camera until the ball leaves at fireAt, then the
+-- chase camera takes over. The authored durations were a 0.5-1 s flick; stretch
 -- them so the swing and the recoil can be seen. fireAt keeps its fraction.
 local RELEASE_TIME_SCALE = 2.0
 

@@ -1181,12 +1181,11 @@ function api:BindSnowballCamera(snowball)
 	end
 
 	local camera = workspace.CurrentCamera
-	-- Launched from the pad: keep the pad frame on the character for the throw, then
-	-- blend into the chase (LAUNCH.ReleaseCamera) instead of cutting to the ball.
-	local releaseCamera = mountainConfig.LAUNCH.ReleaseCamera
-	local holdFrame = if releaseCamera and vars and vars.OnLaunchPad then camera.CFrame else nil
-	local bindTime = os.clock()
-	local blendChecked = false
+	-- Launched from the pad: the chase looks at the ball from this very frame (no hold on
+	-- the throw, no delayed blend). With LAUNCH.ChaseFromPadCamera the camera position
+	-- starts where the pad camera was and settles behind the ball through the follow lerp
+	-- below (about 0.3 s), so the launch reads as one continuous shot instead of a cut.
+	local fromPad = mountainConfig.LAUNCH.ChaseFromPadCamera ~= false and vars ~= nil and vars.OnLaunchPad == true
 	camera.CameraType = Enum.CameraType.Scriptable
 	setRideButtons(vars, true)
 
@@ -1201,7 +1200,7 @@ function api:BindSnowballCamera(snowball)
 	local stopGrace = launch.StopGrace or 1.25
 	-- Stay behind this heading for the whole ride. Do not yaw with wobble or reverse.
 	local behind = horizontalUnit(root.AssemblyLinearVelocity, Vector3.new(0, 0, -1))
-	local camPos = nil
+	local camPos = if fromPad then camera.CFrame.Position else nil
 	local followStarted = os.clock()
 	local lastFast = os.clock()
 	local missingFor = 0
@@ -1287,30 +1286,7 @@ function api:BindSnowballCamera(snowball)
 			table.insert(ignore, decor)
 		end
 		camPos = liftAboveGround(camPos, ignore)
-		local chase = CFrame.lookAt(camPos, position, Vector3.yAxis)
-		if holdFrame and not holdSnapped then
-			local age = os.clock() - bindTime
-			local hold = releaseCamera.Hold or 0
-			local blend = math.max(releaseCamera.Blend or 0, 0.01)
-			if age < hold then
-				chase = holdFrame
-			elseif age < hold + blend then
-				if not blendChecked then
-					blendChecked = true
-					local reach = releaseCamera.BlendMaxDistance or 150
-					if (holdFrame.Position - chase.Position).Magnitude > reach then
-						holdFrame = nil -- the ball is already far downhill: cut
-					end
-				end
-				if holdFrame then
-					local t = (age - hold) / blend
-					chase = holdFrame:Lerp(chase, t * t * (3 - 2 * t))
-				end
-			else
-				holdFrame = nil
-			end
-		end
-		camera.CFrame = chase
+		camera.CFrame = CFrame.lookAt(camPos, position, Vector3.yAxis)
 		if self.GetCameraKick then
 			camera.CFrame = camera.CFrame * self:GetCameraKick(dt)
 		end
