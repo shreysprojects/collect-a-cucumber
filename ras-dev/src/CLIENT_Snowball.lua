@@ -17,6 +17,7 @@ local ContextActionService = game:GetService("ContextActionService")
 
 local mountainConfig = require(ReplicatedStorage.Assets.Modules.Shared.MountainConfig)()
 local launcherCatalog = require(ReplicatedStorage.Assets.Modules.Shared.SnowballLaunchers)
+local playerProgress = require(ReplicatedStorage.Assets.Modules.Shared.PlayerProgress)()
 local ChargeController = require(ReplicatedStorage.Assets.SnowballAnimations.ChargeController)
 
 local api = {}
@@ -124,6 +125,25 @@ local function bindSteer(vars)
 	end, false, STEER_PRIORITY, Enum.KeyCode.A, Enum.KeyCode.D, Enum.KeyCode.Thumbstick1)
 end
 
+local STOP_BUTTON_DELAY = 3
+
+local function startStopButtonDelay(vars)
+	vars.StopButtonDelayToken = (vars.StopButtonDelayToken or 0) + 1
+	local token = vars.StopButtonDelayToken
+	vars.StopButtonReadyAt = os.clock() + STOP_BUTTON_DELAY
+	if vars.StopButton then
+		vars.StopButton.Visible = false
+	end
+	task.delay(STOP_BUTTON_DELAY, function()
+		if vars.StopButtonDelayToken ~= token or not vars.SnowballCamera then
+			return
+		end
+		if vars.StopButton and vars.StopButton.Parent then
+			vars.StopButton.Visible = true
+		end
+	end)
+end
+
 local function setRideButtons(vars, riding)
 	if not vars then
 		return
@@ -136,7 +156,7 @@ local function setRideButtons(vars, riding)
 		vars.LaunchSpeedBox.Visible = onPad and not riding
 	end
 	if vars.StopButton then
-		vars.StopButton.Visible = riding
+		vars.StopButton.Visible = riding and vars.StopButtonReadyAt ~= nil and os.clock() >= vars.StopButtonReadyAt
 	end
 	if vars.LeftButton then
 		vars.LeftButton.Visible = riding
@@ -227,14 +247,46 @@ end
 local ANIMATION_FADE = 0.25 -- a little longer than the controller's own fade
 
 -- A release parks its charge in vars.PendingLaunch; the controller's OnFire (or the
--- fallback timer in endCharge) sends it. Whichever comes first, once.
-local function firePendingLaunch(vars)
+-- fallback timer in endCharge) sends it. Whichever comes first, once. origin = where the
+-- launcher let go of the ball (its Seat / Muzzle at the clip's fire moment): the server spawns
+-- the ride ball there, so the ball comes out of the launcher.
+local function firePendingLaunch(vars, origin)
 	local charge = vars and vars.PendingLaunch
 	if charge == nil then
 		return
 	end
 	vars.PendingLaunch = nil
-	ReplicatedStorage.ReEvent:FireServer("Launch", charge)
+	if typeof(origin) == "Vector3" then
+		ReplicatedStorage.ReEvent:FireServer("Launch", charge, origin)
+	else
+		ReplicatedStorage.ReEvent:FireServer("Launch", charge)
+	end
+end
+
+-- Same speed the server will give the ball (SERV_Snowball.Launch), for the visual ball that
+-- covers the moment before the real one arrives.
+local function predictLaunchSpeed(charge)
+	local launch = mountainConfig.LAUNCH
+	local settings = launch.Charge
+	local base = launch.ThrustSpeed or 90
+	if settings then
+		base = settings.MinSpeed + (settings.MaxSpeed - settings.MinSpeed) * math.clamp(charge or 0, 0, 1)
+	end
+	local player = Players.LocalPlayer
+	local gear = player:GetAttribute("Multiplier")
+	local ok, boost = pcall(playerProgress.LaunchBoost, player:GetAttribute("Rebirths") or 0)
+	gear = if type(gear) == "number" and gear > 0 then gear else 1
+	boost = if ok and type(boost) == "number" then boost else 1
+	return base * gear * boost
+end
+
+-- Other players see the hold / release through a player attribute (CLIENT_LauncherObservers).
+local function sendLauncherPose(vars, state)
+	if vars.LauncherPoseSent == state then
+		return
+	end
+	vars.LauncherPoseSent = state
+	ReplicatedStorage.ReEvent:FireServer("LauncherPose", state)
 end
 
 local function destroyChargeAnimation(vars)
@@ -300,10 +352,11 @@ local function chargeAnimation(vars)
 	end
 
 	local ok, result = pcall(ChargeController.new, character, launcherId, {
-		-- The ball leaves at the profile's fire moment, so the swing and the launch line up.
-		OnFire = function()
-			firePendingLaunch(vars)
+		-- The ball leaves at the clip's fire moment, from the point it visibly leaves the launcher.
+		OnFire = function(_, _, origin)
+			firePendingLaunch(vars, origin)
 		end,
+		PredictSpeed = predictLaunchSpeed,
 	})
 	if not ok then
 		if not animationWarned then
@@ -440,31 +493,13 @@ local function buildChargeBar(vars)
 	-- "HOLD TO LAUNCH" prompt while standing on the pad (separate gui so it can show
 	-- while the bar itself is hidden).
 	local hintGui = playerGui:FindFirstChild("ChargeHint")
-	if hintGui then
-		hintGui:Destroy()
+	if not hintGui then
+		hintGui = game:GetService("StarterGui"):WaitForChild("ChargeHint"):Clone()
+		hintGui.Parent = playerGui
 	end
-	hintGui = Instance.new("ScreenGui")
-	hintGui.Name = "ChargeHint"
-	hintGui.ResetOnSpawn = false
-	hintGui.IgnoreGuiInset = true
-	hintGui.DisplayOrder = 1001
-	local hint = Instance.new("TextLabel")
-	hint.Name = "Hint"
-	hint.AnchorPoint = Vector2.new(0.5, 1)
-	hint.Position = UDim2.new(0.5, 0, 0.86, 0) -- above the HUD level bar (y 0.88-0.98)
-	hint.Size = UDim2.fromOffset(420, 54)
-	hint.BackgroundTransparency = 1
-	hint.Font = Enum.Font.FredokaOne
-	hint.TextSize = 34
+	local hint = hintGui:WaitForChild("Hint")
 	hint.Text = (mountainConfig.LAUNCH.Charge and mountainConfig.LAUNCH.Charge.HintText) or "HOLD TO LAUNCH"
-	hint.TextColor3 = Color3.fromRGB(236, 248, 255)
 	hint.Visible = false
-	hint.Parent = hintGui
-	local hintStroke = Instance.new("UIStroke")
-	hintStroke.Thickness = 3
-	hintStroke.Color = Color3.fromRGB(28, 48, 72)
-	hintStroke.Parent = hint
-	hintGui.Parent = playerGui
 
 	gui.Parent = playerGui
 	vars.ChargeBar = {
@@ -520,8 +555,12 @@ local function endCharge(self, fire)
 		else
 			firePendingLaunch(vars)
 		end
-	elseif animation then
-		animation:Cancel()
+		sendLauncherPose(vars, "release")
+	else
+		if animation then
+			animation:Cancel()
+		end
+		sendLauncherPose(vars, "idle")
 	end
 	if chargeBar then
 		if fired then
@@ -547,6 +586,15 @@ local function beginCharge(self)
 	if vars.PlayerGui and vars.PlayerGui:GetAttribute("PanelOpen") then
 		return
 	end
+	-- The last release is still on its way out (waiting for the clip's fire moment, or the throw
+	-- is still playing): a second press must not replace that launch or cut the throw short.
+	if vars.PendingLaunch ~= nil then
+		return
+	end
+	local current = vars.ChargeAnimation
+	if current and not current.Destroyed and current.State == "firing" then
+		return
+	end
 	local chargeBar = vars.ChargeBar or buildChargeBar(vars)
 	local settings = mountainConfig.LAUNCH.Charge or {}
 	local fillTime = math.max(settings.FillTime or 0.28, 0.05)
@@ -567,7 +615,9 @@ local function beginCharge(self)
 	local animation = chargeAnimation(vars)
 	if animation then
 		animation:BeginCharge()
+		animation:SetHolding(true)
 	end
+	sendLauncherPose(vars, "hold")
 
 	stopChargeLoop(vars)
 	vars.ChargeLoop = vars.RNS.Heartbeat:Connect(function()
@@ -932,6 +982,11 @@ local function stopSnowballFollow(vars)
 	if not vars then
 		return
 	end
+	vars.StopButtonDelayToken = (vars.StopButtonDelayToken or 0) + 1
+	vars.StopButtonReadyAt = nil
+	if vars.StopButton then
+		vars.StopButton.Visible = false
+	end
 	if vars.SnowballCamera then
 		vars.SnowballCamera:Disconnect()
 		vars.SnowballCamera = nil
@@ -1101,6 +1156,7 @@ function api:BindSnowballCamera(snowball)
 		end
 		return
 	end
+	startStopButtonDelay(vars)
 	-- Snapshot coins before the root wait so snow collected while the ball
 	-- streams in still counts toward this run.
 	if self.GUIFramework then

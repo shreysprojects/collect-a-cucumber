@@ -282,3 +282,50 @@ CLIENT_Snowball.WatchLaunchPad re-sends `EquipLauncher` at most every 2 s while 
 pad with no launcher in the character (`vars.LauncherRequestAt`). Measured: launcher back 0.27 / 0.35 s
 after stepping on in two consecutive rounds.
 
+
+## 2026-09-23: new launcher animations for all 30 launchers (Blender), the ball comes out of the launcher
+
+Branch `feat/launcher-clips` in kinqxz/RAS (on `fix/launcher-visibility`). Blender work in
+`launcher-anims/` (see its `BRIEF.md`), mirrors of the changed scripts in `src/`.
+
+**What the player sees.** Every launcher has its own animation set, authored in Blender: `Ready`
+(carried on the pad), `ChargeLo` / `ChargeHi` (the charging action while the mouse is held, blended
+by the live charge), `Fire` (release, the shot, follow-through). The snowball is visible where it
+belongs: on the shovel blade / in the scoop, flipper cup, sling pouch, catapult cup, on the crossbow
+rails, in the slingshot pouch-hand with elastic bands drawn from the fork tips; barrel launchers
+fire it out of the muzzle with a burst (snow / smoke / sparks / fire / steam / toxic, per launcher)
+and some have a charge effect at the muzzle. At the clip's fire moment the ball leaves the launcher
+and **the server spawns the ride ball at that exact point** (Launch gets the origin; validated: within
+`LAUNCH.MuzzleSpawn.MaxDistance` 14 studs of the root, nothing solid in between, above the floor;
+anything else keeps the old ground spawn). The shovel scrapes the floor while charging, digs,
+scoops and heaves; the ball flies off the blade.
+
+**How it works (no Animation assets, so it plays in any game whoever owns it).**
+- `launcher-anims/launcherlib.py`: R15 rig + all 30 launcher meshes/textures (pulled from the place
+  with EditableMesh / EditableImage), IK (`hold`, `left_hand_to`, `stance`), an elbow guard, keying,
+  export, checks (fire direction, ball clearance, loops, floor) and a frame-by-frame motion audit
+  (elbow flips, one-frame snaps, arm / launcher inside the body on realistic avatar sizes), preview
+  sheets from the real pad camera / front / down the track. `meta/NN.json` = each launcher's Muzzle,
+  Seat, Grip2 (left hand), Tip, Bands, Back points in its grip-pivot frame.
+- `launchers/NN/build.py` = one script per launcher (headless: `blender -b LauncherAnims.blend
+  --python launchers/NN/build.py`), 30 authored by parallel agents from per-launcher concepts,
+  reviewed from the preview sheets (all 30 passed, 7-8/10), audited clean (0 problems, 0 flips / snaps,
+  arm <= 0.17, launcher <= 0.14 studs into the body, shot within 12 deg of the track).
+  `tools/rebuild_all.py` re-runs all of them; `tools/to_luau.py out luau` writes the modules.
+- Game side: `SnowballAnimations/LauncherClips/L01..L30` (generated data, ~44 KB each, required
+  lazily), `ClipPlayer` (Catmull-Rom sampling of 15 fps loops / 30 fps Fire), `ChargeController`
+  (writes the joint Transforms incl. the legs and the `LauncherGrip` grip, legs handed back to the
+  Animator while walking / airborne, root height scaled by the avatar's HipHeight, falls back to the
+  old procedural profiles for a launcher without clips), `LauncherBall` (the visible ball in the
+  seat, the flying copy that eases onto the real ride ball when it arrives: covers network delay,
+  never snaps back; bands; bursts; charge effects; snowball looks from
+  `ReplicatedStorage.Assets.SnowballVisuals`, published by SERV_Launcher at boot).
+- Floor contact: the shovel and the scoop carry a per-frame `Tip` height track; the controller tilts
+  the launcher in the hand so the tip keeps that height above the floor on any avatar (measured on
+  the tall test avatar: 8-9 deg of tilt, blade 0.1-0.2 studs above the snow while scraping).
+- Other players: the owner sends `LauncherPose` hold / release / idle; SERV_Launcher relays it as the
+  player attribute `LauncherPose = "<state>:<n>"` (coalesced, a quick tap's release is never dropped);
+  CLIENT_LauncherObservers plays the same clips from it (falls back to the ball appearing).
+- Code review (3 lenses + adversarial verify) found 9 real issues, all fixed before install: observer
+  handoff to a ball that arrives before their fire frame, pose-relay drops, a second click during the
+  throw, the snap-back of the copy on a slow connection.

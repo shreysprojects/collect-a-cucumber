@@ -922,7 +922,51 @@ function m_api:BuySnowball(player, requestedName)
 	return true
 end
 
-function m_api:Launch(player, requestedSpeed)
+-- The client reports where its launcher let the ball go (the Seat / Muzzle point of the
+-- launcher clip at its fire moment, ChargeController OnFire). The ride ball starts there when
+-- that is believable: close to the character, nothing solid in between, above the floor.
+-- Anything else (old clients, no clip, a bad point) keeps the ground spawn ahead of the pad.
+local function launchOrigin(player, requested, radius)
+	local settings = mountainConfig.LAUNCH.MuzzleSpawn
+	if not (settings and settings.Enabled) or typeof(requested) ~= "Vector3" then
+		return nil
+	end
+	if requested.X ~= requested.X or requested.Y ~= requested.Y or requested.Z ~= requested.Z then
+		return nil
+	end
+	local character = player.Character
+	local hrp = character and character:FindFirstChild("HumanoidRootPart")
+	if not hrp then
+		return nil
+	end
+	if (requested - hrp.Position).Magnitude > (settings.MaxDistance or 14) then
+		return nil
+	end
+	local exclude = { character }
+	local folder = workspace:FindFirstChild("ActiveSnowballs")
+	if folder then
+		table.insert(exclude, folder)
+	end
+	local params = RaycastParams.new()
+	params.FilterType = Enum.RaycastFilterType.Exclude
+	params.FilterDescendantsInstances = exclude
+	params.RespectCanCollide = true
+	pcall(function()
+		params.CollisionGroup = settings.CollisionGroup or "Snowball"
+	end)
+	local from = hrp.Position + Vector3.yAxis * 1.5
+	if workspace:Raycast(from, requested - from, params) then
+		return nil -- a wall between the character and the launcher's muzzle
+	end
+	local lift = radius + (settings.FloorClearance or 0.05)
+	local down = workspace:Raycast(requested + Vector3.yAxis * lift, Vector3.new(0, -(lift * 2 + 6), 0), params)
+	if down and requested.Y - down.Position.Y < lift then
+		requested = Vector3.new(requested.X, down.Position.Y + lift, requested.Z)
+	end
+	return requested
+end
+
+function m_api:Launch(player, requestedSpeed, requestedOrigin)
 	if sself.MountainFinishing[player] then
 		return false
 	end
@@ -1014,7 +1058,13 @@ function m_api:Launch(player, requestedSpeed)
 	end
 
 	local radius = math.max(root.Size.X, root.Size.Y, root.Size.Z) / 2
-	clone:PivotTo(spawnCF + spawnCF.UpVector * (radius + 0.2))
+	local origin = launchOrigin(player, requestedOrigin, radius)
+	if origin then
+		clone:PivotTo(spawnCF.Rotation + origin)
+		clone:SetAttribute("LaunchOrigin", origin)
+	else
+		clone:PivotTo(spawnCF + spawnCF.UpVector * (radius + 0.2))
+	end
 	clone:SetAttribute("SnowScale", 1)
 	clone:SetAttribute("TargetSnowScale", 1)
 	clone:SetAttribute("StartRadius", radius)

@@ -1,0 +1,81 @@
+{
+ "problems": [],
+ "warnings": [],
+ "Ready_loop_seam_deg": 0.0,
+ "ChargeLo_loop_seam_deg": 0.0,
+ "ChargeHi_loop_seam_deg": 0.0,
+ "fire_muzzle_pos": [
+  -1.52,
+  1.1,
+  -1.18
+ ],
+ "fire_dir": [
+  -0.995,
+  0.054,
+  -0.078
+ ],
+ "fire_yaw_off_track_deg": 4.5,
+ "fire_elevation_deg": 3.1,
+ "ball_start": [
+  -0.77,
+  0.92,
+  -1.32
+ ],
+ "ball_body_clearance": 0.03,
+ "ball_nearest_part": "LeftHand",
+ "flight_clearance": 0.22,
+ "Ready_audit": {
+  "arm_in_body": 0.07,
+  "arm_in_body_at": "RightHand in UpperTorso @1.50s",
+  "launcher_in_body": 0.0,
+  "launcher_in_body_at": "",
+  "snaps": [],
+  "flips": []
+ },
+ "ChargeLo_audit": {
+  "arm_in_body": 0.09,
+  "arm_in_body_at": "LeftUpperArm in UpperTorso @0.40s",
+  "launcher_in_body": 0.0,
+  "launcher_in_body_at": "",
+  "snaps": [],
+  "flips": []
+ },
+ "ChargeHi_audit": {
+  "arm_in_body": 0.17,
+  "arm_in_body_at": "LeftLowerArm in Head @0.00s",
+  "launcher_in_body": 0.0,
+  "launcher_in_body_at": "",
+  "snaps": [],
+  "flips": []
+ },
+ "Fire_audit": {
+  "arm_in_body": 0.17,
+  "arm_in_body_at": "LeftLowerArm in Head @0.00s",
+  "launcher_in_body": 0.04,
+  "launcher_in_body_at": "launcher in Head @0.50s",
+  "snaps": [],
+  "flips": []
+ },
+ "Ready_launcher_lowest_y": -1.61,
+ "Ready_ankle_lift": 0.06,
+ "Ready_max_grip_turn_deg": 0.0,
+ "Ready_max_wrist_bend_deg": 20.0,
+ "ChargeLo_launcher_lowest_y": 0.45,
+ "ChargeLo_ankle_lift": 0.02,
+ "ChargeLo_max_grip_turn_deg": 0.0,
+ "ChargeLo_max_wrist_bend_deg": 13.1,
+ "ChargeHi_launcher_lowest_y": 0.13,
+ "ChargeHi_ankle_lift": 0.0,
+ "ChargeHi_max_grip_turn_deg": 0.0,
+ "ChargeHi_max_wrist_bend_deg": 13.2,
+ "Fire_launcher_lowest_y": -1.6,
+ "Fire_ankle_lift": 0.06,
+ "Fire_max_grip_turn_deg": 0.0,
+ "Fire_max_wrist_bend_deg": 20.0,
+ "export": "C:\\Users\\shrey\\OneDrive\\Documents\\RobloxGames\\ras-dev\\launcher-anims\\out\\06.json",
+ "sheets": [
+  "C:\\Users\\shrey\\OneDrive\\Documents\\RobloxGames\\ras-dev\\launcher-anims\\launchers\\06\\sheet_game.png",
+  "C:\\Users\\shrey\\OneDrive\\Documents\\RobloxGames\\ras-dev\\launcher-anims\\launchers\\06\\sheet_front.png",
+  "C:\\Users\\shrey\\OneDrive\\Documents\\RobloxGames\\ras-dev\\launcher-anims\\launchers\\06\\sheet_track.png"
+ ]
+}

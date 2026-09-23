@@ -1,0 +1,265 @@
+[
+ {
+  "id": 25,
+  "name": "25_Aurora_Prism",
+  "clips": {
+   "Ready": {
+    "arm_in_body": 0.47,
+    "arm_in_body_at": "RightUpperArm in UpperTorso @1.80s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   },
+   "ChargeLo": {
+    "arm_in_body": 0.47,
+    "arm_in_body_at": "RightUpperArm in UpperTorso @0.03s",
+    "launcher_in_body": 0.06,
+    "launcher_in_body_at": "launcher in Head @0.63s",
+    "pops": [],
+    "pop_count": 0
+   },
+   "ChargeHi": {
+    "arm_in_body": 0.47,
+    "arm_in_body_at": "LeftUpperArm in UpperTorso @0.47s",
+    "launcher_in_body": 0.31,
+    "launcher_in_body_at": "launcher in Head @0.83s",
+    "pops": [
+     "RightUpperArm spike 107deg @0.73s",
+     "RightUpperArm spike 111deg @0.87s",
+     "RightLowerArm flip -30/28 @0.43s",
+     "RightHand spike 83deg @0.73s",
+     "RightHand spike 82deg @0.87s"
+    ],
+    "pop_count": 5
+   },
+   "Fire": {
+    "arm_in_body": 0.47,
+    "arm_in_body_at": "LeftUpperArm in UpperTorso @0.77s",
+    "launcher_in_body": 0.18,
+    "launcher_in_body_at": "launcher in Head @0.10s",
+    "pops": [
+     "LeftLowerArm spike 60deg @0.23s"
+    ],
+    "pop_count": 1
+   }
+  }
+ },
+ {
+  "id": 26,
+  "name": "26_Meteor_Launcher",
+  "clips": {
+   "Ready": {
+    "arm_in_body": 0.4,
+    "arm_in_body_at": "LeftUpperArm in UpperTorso @1.20s",
+    "launcher_in_body": 0.3,
+    "launcher_in_body_at": "launcher in Head @1.20s",
+    "pops": [],
+    "pop_count": 0
+   },
+   "ChargeLo": {
+    "arm_in_body": 0.5,
+    "arm_in_body_at": "RightLowerArm in Head @0.67s",
+    "launcher_in_body": 0.36,
+    "launcher_in_body_at": "launcher in Head @0.00s",
+    "pops": [],
+    "pop_count": 0
+   },
+   "ChargeHi": {
+    "arm_in_body": 0.55,
+    "arm_in_body_at": "RightLowerArm in Head @0.70s",
+    "launcher_in_body": 0.54,
+    "launcher_in_body_at": "launcher in Head @0.07s",
+    "pops": [],
+    "pop_count": 0
+   },
+   "Fire": {
+    "arm_in_body": 0.47,
+    "arm_in_body_at": "RightHand in Head @0.13s",
+    "launcher_in_body": 0.47,
+    "launcher_in_body_at": "launcher in UpperTorso @0.73s",
+    "pops": [
+     "LeftLowerArm flip 30/-41 @0.23s"
+    ],
+    "pop_count": 1
+   }
+  }
+ },
+ {
+  "id": 27,
+  "name": "27_Orbital_Cannon",
+  "clips": {
+   "Ready": {
+    "arm_in_body": 0.43,
+    "arm_in_body_at": "LeftUpperArm in UpperTorso @2.87s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   },
+   "ChargeLo": {
+    "arm_in_body": 0.46,
+    "arm_in_body_at": "LeftUpperArm in UpperTorso @0.00s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   },
+   "ChargeHi": {
+    "arm_in_body": 0.47,
+    "arm_in_body_at": "LeftUpperArm in UpperTorso @1.47s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   },
+   "Fire": {
+    "arm_in_body": 0.47,
+    "arm_in_body_at": "RightUpperArm in UpperTorso @0.13s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [
+     "RightLowerArm spike 33deg @0.23s",
+     "RightLowerArm spike 32deg @0.27s"
+    ],
+    "pop_count": 2
+   }
+  }
+ },
+ {
+  "id": 28,
+  "name": "28_Nebula_Accelerator",
+  "clips": {
+   "Ready": {
+    "arm_in_body": 0.45,
+    "arm_in_body_at": "RightUpperArm in UpperTorso @0.73s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   },
+   "ChargeLo": {
+    "arm_in_body": 0.47,
+    "arm_in_body_at": "RightUpperArm in UpperTorso @1.53s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   },
+   "ChargeHi": {
+    "arm_in_body": 0.46,
+    "arm_in_body_at": "LeftUpperArm in UpperTorso @0.30s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   },
+   "Fire": {
+    "arm_in_body": 0.47,
+    "arm_in_body_at": "RightUpperArm in UpperTorso @0.30s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   }
+  }
+ },
+ {
+  "id": 29,
+  "name": "29_Singularity_Cannon",
+  "clips": {
+   "Ready": {
+    "arm_in_body": 0.0,
+    "arm_in_body_at": null,
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   },
+   "ChargeLo": {
+    "arm_in_body": 0.0,
+    "arm_in_body_at": "LeftUpperArm in UpperTorso @0.40s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   },
+   "ChargeHi": {
+    "arm_in_body": 0.0,
+    "arm_in_body_at": null,
+    "launcher_in_body": 0.09,
+    "launcher_in_body_at": "launcher in Head @0.77s",
+    "pops": [
+     "LeftUpperArm spike 33deg @0.17s",
+     "LeftLowerArm spike 45deg @0.17s",
+     "LeftLowerArm spike 35deg @0.40s",
+     "LeftLowerArm flip 36/-45 @0.10s",
+     "LeftLowerArm flip 35/-35 @0.40s",
+     "LeftLowerArm flip -35/39 @0.43s",
+     "LeftLowerArm flip 36/-48 @0.63s",
+     "LeftLowerArm flip -48/44 @0.70s"
+    ],
+    "pop_count": 16
+   },
+   "Fire": {
+    "arm_in_body": 0.33,
+    "arm_in_body_at": "LeftHand in Head @0.73s",
+    "launcher_in_body": 0.1,
+    "launcher_in_body_at": "launcher in Head @0.77s",
+    "pops": [
+     "LeftUpperArm spike 32deg @0.67s",
+     "LeftUpperArm spike 36deg @0.80s",
+     "LeftLowerArm spike 69deg @0.67s",
+     "LeftLowerArm flip 63/-47 @0.33s",
+     "LeftLowerArm flip 56/-47 @0.37s",
+     "RightLowerArm flip 31/-26 @0.37s"
+    ],
+    "pop_count": 6
+   }
+  }
+ },
+ {
+  "id": 30,
+  "name": "30_Galactic_Rocket_Launcher",
+  "clips": {
+   "Ready": {
+    "arm_in_body": 0.42,
+    "arm_in_body_at": "LeftUpperArm in UpperTorso @0.60s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   },
+   "ChargeLo": {
+    "arm_in_body": 0.35,
+    "arm_in_body_at": "LeftUpperArm in UpperTorso @0.93s",
+    "launcher_in_body": 0.03,
+    "launcher_in_body_at": "launcher in Head @0.37s",
+    "pops": [],
+    "pop_count": 0
+   },
+   "ChargeHi": {
+    "arm_in_body": 0.51,
+    "arm_in_body_at": "LeftLowerArm in Head @1.07s",
+    "launcher_in_body": 0.16,
+    "launcher_in_body_at": "launcher in Head @0.70s",
+    "pops": [
+     "LeftLowerArm spike 30deg @0.43s"
+    ],
+    "pop_count": 1
+   },
+   "Fire": {
+    "arm_in_body": 0.47,
+    "arm_in_body_at": "LeftUpperArm in UpperTorso @0.70s",
+    "launcher_in_body": 0.03,
+    "launcher_in_body_at": "launcher in Head @0.03s",
+    "pops": [
+     "LeftLowerArm spike 34deg @0.20s",
+     "RightUpperArm spike 88deg @0.93s",
+     "RightHand spike 71deg @0.93s"
+    ],
+    "pop_count": 3
+   }
+  }
+ }
+]

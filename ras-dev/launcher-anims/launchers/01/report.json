@@ -1,0 +1,85 @@
+{
+ "problems": [],
+ "warnings": [],
+ "Ready_loop_seam_deg": 0.0,
+ "ChargeLo_loop_seam_deg": 0.0,
+ "ChargeHi_loop_seam_deg": 0.0,
+ "fire_muzzle_pos": [
+  -2.84,
+  1.19,
+  -2.67
+ ],
+ "fire_dir": [
+  -0.694,
+  0.705,
+  -0.147
+ ],
+ "fire_yaw_off_track_deg": 12.0,
+ "fire_elevation_deg": 44.8,
+ "ball_start": [
+  -2.66,
+  1.13,
+  -2.64
+ ],
+ "ball_body_clearance": 1.14,
+ "ball_nearest_part": "LeftUpperArm",
+ "flight_clearance": 1.47,
+ "Ready_audit": {
+  "arm_in_body": 0.08,
+  "arm_in_body_at": "RightUpperArm in UpperTorso @0.00s",
+  "launcher_in_body": 0.0,
+  "launcher_in_body_at": "",
+  "snaps": [],
+  "flips": []
+ },
+ "ChargeLo_audit": {
+  "arm_in_body": 0.1,
+  "arm_in_body_at": "RightUpperArm in UpperTorso @0.70s",
+  "launcher_in_body": 0.0,
+  "launcher_in_body_at": "",
+  "snaps": [],
+  "flips": []
+ },
+ "ChargeHi_audit": {
+  "arm_in_body": 0.1,
+  "arm_in_body_at": "RightUpperArm in UpperTorso @0.70s",
+  "launcher_in_body": 0.02,
+  "launcher_in_body_at": "launcher in Head @0.30s",
+  "snaps": [],
+  "flips": []
+ },
+ "Fire_audit": {
+  "arm_in_body": 0.14,
+  "arm_in_body_at": "RightHand in UpperTorso @0.70s",
+  "launcher_in_body": 0.04,
+  "launcher_in_body_at": "launcher in UpperTorso @1.00s",
+  "snaps": [],
+  "flips": []
+ },
+ "Ready_launcher_lowest_y": -3.0,
+ "Ready_ankle_lift": 0.0,
+ "Ready_max_grip_turn_deg": 0.0,
+ "Ready_max_wrist_bend_deg": 59.9,
+ "Ready_left_hand_gap": 0.02,
+ "ChargeLo_launcher_lowest_y": -3.0,
+ "ChargeLo_ankle_lift": 0.0,
+ "ChargeLo_max_grip_turn_deg": 0.0,
+ "ChargeLo_max_wrist_bend_deg": 63.1,
+ "ChargeLo_left_hand_gap": 0.02,
+ "ChargeHi_launcher_lowest_y": -3.0,
+ "ChargeHi_ankle_lift": 0.0,
+ "ChargeHi_max_grip_turn_deg": 0.0,
+ "ChargeHi_max_wrist_bend_deg": 58.8,
+ "ChargeHi_left_hand_gap": 0.03,
+ "Fire_launcher_lowest_y": -3.08,
+ "Fire_ankle_lift": 0.0,
+ "Fire_max_grip_turn_deg": 0.0,
+ "Fire_max_wrist_bend_deg": 56.5,
+ "Fire_left_hand_gap": 0.02,
+ "export": "C:\\Users\\shrey\\OneDrive\\Documents\\RobloxGames\\ras-dev\\launcher-anims\\out\\01.json",
+ "sheets": [
+  "C:\\Users\\shrey\\OneDrive\\Documents\\RobloxGames\\ras-dev\\launcher-anims\\launchers\\01\\sheet_game.png",
+  "C:\\Users\\shrey\\OneDrive\\Documents\\RobloxGames\\ras-dev\\launcher-anims\\launchers\\01\\sheet_front.png",
+  "C:\\Users\\shrey\\OneDrive\\Documents\\RobloxGames\\ras-dev\\launcher-anims\\launchers\\01\\sheet_track.png"
+ ]
+}

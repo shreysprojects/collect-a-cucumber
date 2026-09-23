@@ -2,6 +2,11 @@
 	Clones the equipped snowball launcher from Storage/SnowballLaunchers and
 	welds it to the right hand while the player is on the launch platform.
 
+	Also: copies the snowball looks to ReplicatedStorage.Assets.SnowballVisuals (the clients
+	show the ball sitting in / leaving the launcher, SnowballAnimations/LauncherBall), and
+	relays each player's hold / release (LauncherPose) as a player attribute so everyone else
+	plays the same launcher clip at the same moment (CLIENT_LauncherObservers).
+
 --------------------------------------------------------------------------------------------]]--
 
 local ServerStorage = game:GetService("ServerStorage")
@@ -15,11 +20,52 @@ local m_api = {}
 local m_sapi = {}
 local sself = m_sapi
 
+-- Visual copies of every snowball for the clients (no scripts, no collision).
+local function publishSnowballVisuals()
+	local source = ServerStorage.Assets.Storage:FindFirstChild(mountainConfig.LAUNCH.StorageFolder)
+	local assets = ReplicatedStorage:FindFirstChild("Assets")
+	if not (source and assets) or assets:FindFirstChild("SnowballVisuals") then
+		return
+	end
+	local folder = Instance.new("Folder")
+	folder.Name = "SnowballVisuals"
+	for _, template in source:GetChildren() do
+		if not (template:IsA("Model") or template:IsA("BasePart")) then
+			continue
+		end
+		local copy = template:Clone()
+		for _, d in copy:GetDescendants() do
+			if d:IsA("LuaSourceContainer") then
+				d:Destroy()
+			end
+		end
+		local parts = copy:GetDescendants()
+		table.insert(parts, copy)
+		for _, part in parts do
+			if part:IsA("BasePart") then
+				part.Anchored = true
+				part.CanCollide = false
+				part.CanTouch = false
+				part.CanQuery = false
+			end
+		end
+		copy.Parent = folder
+	end
+	folder.Parent = assets
+end
+
 function MODULE.new(r_sapi)
 	sself = r_sapi
 	sself.LAUNCHERS = sself.LAUNCHERS or {}
 	-- Per-player request counter: a later equip / unequip cancels an equip still waiting.
 	sself.LAUNCHER_REQUEST = sself.LAUNCHER_REQUEST or setmetatable({}, { __mode = "k" })
+	sself.LAUNCHER_POSE = sself.LAUNCHER_POSE or setmetatable({}, { __mode = "k" })
+	task.defer(function()
+		local ok, err = pcall(publishSnowballVisuals)
+		if not ok then
+			warn("[SERVER]: Snowball visuals not published:", err)
+		end
+	end)
 	return m_api, m_sapi
 end
 
@@ -362,6 +408,46 @@ function m_api:BuyLauncher(player, requestedName)
 			sself:GiveLauncher(player)
 		end)
 	end
+	return true
+end
+
+-- Hold / release relay for the other clients (CLIENT_LauncherObservers). The attribute is
+-- "<state>:<count>" so two releases in a row still read as a change. At most one write per
+-- POSE_MIN_GAP; a state that comes sooner is held back and written when the gap is over, so the
+-- last one always lands (a quick tap's release must not be dropped).
+local POSE_STATES = { hold = true, release = true, idle = true }
+local POSE_MIN_GAP = 0.05
+
+local function applyPose(player, record)
+	record.Timer = nil
+	local state = record.Pending
+	record.Pending = nil
+	if not state or not player.Parent then
+		return
+	end
+	record.At = os.clock()
+	record.Count += 1
+	player:SetAttribute("LauncherPose", state .. ":" .. record.Count)
+end
+
+function m_api:LauncherPose(player, state)
+	if not player or not POSE_STATES[state] then
+		return false
+	end
+	local record = sself.LAUNCHER_POSE[player]
+	if not record then
+		record = { At = -math.huge, Count = 0 }
+		sself.LAUNCHER_POSE[player] = record
+	end
+	record.Pending = state
+	local wait = POSE_MIN_GAP - (os.clock() - record.At)
+	if wait > 0 then
+		if not record.Timer then
+			record.Timer = task.delay(wait, applyPose, player, record)
+		end
+		return true
+	end
+	applyPose(player, record)
 	return true
 end
 

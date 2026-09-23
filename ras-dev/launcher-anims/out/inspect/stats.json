@@ -1,0 +1,542 @@
+{
+ "01_Wooden_Shovel": {
+  "bbox_min": [
+   -0.65,
+   -2.955,
+   -0.12
+  ],
+  "bbox_max": [
+   0.65,
+   0.135,
+   0.885
+  ],
+  "far_end_centroid": [
+   0.0,
+   -2.912,
+   0.733
+  ],
+  "far_end_count": 168
+ },
+ "02_Snow_Scoop": {
+  "bbox_min": [
+   -0.644,
+   -2.436,
+   -0.15
+  ],
+  "bbox_max": [
+   0.644,
+   0.282,
+   0.259
+  ],
+  "far_end_centroid": [
+   0.0,
+   -2.391,
+   -0.15
+  ],
+  "far_end_count": 16
+ },
+ "03_Snowball_Flipper": {
+  "bbox_min": [
+   -0.345,
+   -2.585,
+   -1.49
+  ],
+  "bbox_max": [
+   0.345,
+   0.348,
+   0.227
+  ],
+  "far_end_centroid": [
+   0.003,
+   -2.504,
+   -1.379
+  ],
+  "far_end_count": 52
+ },
+ "04_Leather_Sling": {
+  "bbox_min": [
+   -0.684,
+   -2.803,
+   -0.042
+  ],
+  "bbox_max": [
+   0.684,
+   0.195,
+   0.55
+  ],
+  "far_end_centroid": [
+   -0.0,
+   -2.765,
+   0.19
+  ],
+  "far_end_count": 13
+ },
+ "05_Wooden_Slingshot": {
+  "bbox_min": [
+   -0.72,
+   -0.198,
+   -1.45
+  ],
+  "bbox_max": [
+   0.72,
+   1.018,
+   0.46
+  ],
+  "far_end_centroid": [
+   -0.0,
+   -0.129,
+   -0.233
+  ],
+  "far_end_count": 345
+ },
+ "06_Steel_Slingshot": {
+  "bbox_min": [
+   -0.72,
+   -0.198,
+   -1.45
+  ],
+  "bbox_max": [
+   0.72,
+   1.018,
+   0.46
+  ],
+  "far_end_centroid": [
+   -0.0,
+   -0.129,
+   -0.233
+  ],
+  "far_end_count": 345
+ },
+ "07_Spring_Scoop": {
+  "bbox_min": [
+   -0.402,
+   -2.073,
+   -1.6
+  ],
+  "bbox_max": [
+   0.403,
+   0.325,
+   0.505
+  ],
+  "far_end_centroid": [
+   0.007,
+   -1.992,
+   -1.558
+  ],
+  "far_end_count": 52
+ },
+ "08_Snow_Crossbow": {
+  "bbox_min": [
+   -1.593,
+   -1.795,
+   -1.15
+  ],
+  "bbox_max": [
+   1.593,
+   1.045,
+   0.505
+  ],
+  "far_end_centroid": [
+   0.0,
+   -1.731,
+   -0.912
+  ],
+  "far_end_count": 176
+ },
+ "09_Hand_Catapult": {
+  "bbox_min": [
+   -0.5,
+   -1.838,
+   -1.76
+  ],
+  "bbox_max": [
+   0.5,
+   0.325,
+   0.505
+  ],
+  "far_end_centroid": [
+   -0.001,
+   -1.759,
+   -1.723
+  ],
+  "far_end_count": 49
+ },
+ "10_Pump_Blaster": {
+  "bbox_min": [
+   -0.609,
+   -1.994,
+   -1.63
+  ],
+  "bbox_max": [
+   0.609,
+   1.045,
+   0.505
+  ],
+  "far_end_centroid": [
+   -0.007,
+   -1.946,
+   -0.852
+  ],
+  "far_end_count": 296
+ },
+ "11_Twin_Snow_Blaster": {
+  "bbox_min": [
+   -0.7,
+   -1.961,
+   -1.63
+  ],
+  "bbox_max": [
+   0.7,
+   1.045,
+   0.505
+  ],
+  "far_end_centroid": [
+   -0.0,
+   -1.917,
+   -0.851
+  ],
+  "far_end_count": 628
+ },
+ "12_Snow_Revolver": {
+  "bbox_min": [
+   -0.58,
+   -1.978,
+   -1.585
+  ],
+  "bbox_max": [
+   0.58,
+   0.325,
+   0.505
+  ],
+  "far_end_centroid": [
+   0.0,
+   -1.93,
+   -1.146
+  ],
+  "far_end_count": 418
+ },
+ "13_Pressure_Cannon": {
+  "bbox_min": [
+   -0.779,
+   -1.994,
+   -1.63
+  ],
+  "bbox_max": [
+   0.632,
+   1.045,
+   0.505
+  ],
+  "far_end_centroid": [
+   -0.006,
+   -1.941,
+   -0.861
+  ],
+  "far_end_count": 326
+ },
+ "14_Snowball_Gatling": {
+  "bbox_min": [
+   -0.68,
+   -1.893,
+   -2.09
+  ],
+  "bbox_max": [
+   0.68,
+   1.045,
+   0.505
+  ],
+  "far_end_centroid": [
+   -0.007,
+   -1.858,
+   -0.852
+  ],
+  "far_end_count": 1634
+ },
+ "15_Avalanche_Mortar": {
+  "bbox_min": [
+   -1.065,
+   -1.498,
+   -2.27
+  ],
+  "bbox_max": [
+   0.84,
+   0.926,
+   0.079
+  ],
+  "far_end_centroid": [
+   -0.0,
+   -1.444,
+   -1.376
+  ],
+  "far_end_count": 21
+ },
+ "16_Frostbite_Cannon": {
+  "bbox_min": [
+   -0.763,
+   -1.994,
+   -1.8
+  ],
+  "bbox_max": [
+   0.702,
+   1.045,
+   0.505
+  ],
+  "far_end_centroid": [
+   0.003,
+   -1.944,
+   -0.863
+  ],
+  "far_end_count": 315
+ },
+ "17_Toxic_Lobber": {
+  "bbox_min": [
+   -0.678,
+   -2.047,
+   -2.04
+  ],
+  "bbox_max": [
+   0.678,
+   0.325,
+   0.505
+  ],
+  "far_end_centroid": [
+   0.034,
+   -1.989,
+   -0.878
+  ],
+  "far_end_count": 160
+ },
+ "18_Thunder_Coil": {
+  "bbox_min": [
+   -0.645,
+   -1.7,
+   -1.695
+  ],
+  "bbox_max": [
+   0.645,
+   1.045,
+   0.505
+  ],
+  "far_end_centroid": [
+   -0.012,
+   -1.642,
+   -1.006
+  ],
+  "far_end_count": 380
+ },
+ "19_Lava_Lobber": {
+  "bbox_min": [
+   -0.863,
+   -2.064,
+   -1.73
+  ],
+  "bbox_max": [
+   0.863,
+   1.045,
+   0.505
+  ],
+  "far_end_centroid": [
+   0.0,
+   -2.007,
+   -0.85
+  ],
+  "far_end_count": 248
+ },
+ "20_Blizzard_Launcher": {
+  "bbox_min": [
+   -0.936,
+   -2.055,
+   -1.909
+  ],
+  "bbox_max": [
+   0.936,
+   1.045,
+   0.505
+  ],
+  "far_end_centroid": [
+   -0.0,
+   -2.003,
+   -0.853
+  ],
+  "far_end_count": 183
+ },
+ "21_Golden_Ballista": {
+  "bbox_min": [
+   -1.593,
+   -1.795,
+   -1.15
+  ],
+  "bbox_max": [
+   1.593,
+   1.045,
+   0.505
+  ],
+  "far_end_centroid": [
+   0.0,
+   -1.731,
+   -0.912
+  ],
+  "far_end_count": 176
+ },
+ "22_Royal_Cannon": {
+  "bbox_min": [
+   -0.712,
+   -1.994,
+   -1.88
+  ],
+  "bbox_max": [
+   0.713,
+   0.325,
+   0.505
+  ],
+  "far_end_centroid": [
+   -0.001,
+   -1.945,
+   -0.87
+  ],
+  "far_end_count": 310
+ },
+ "23_Diamond_Railgun": {
+  "bbox_min": [
+   -0.559,
+   -2.128,
+   -1.39
+  ],
+  "bbox_max": [
+   0.559,
+   1.045,
+   0.505
+  ],
+  "far_end_centroid": [
+   0.0,
+   -2.044,
+   -0.858
+  ],
+  "far_end_count": 132
+ },
+ "24_Dragon_Launcher": {
+  "bbox_min": [
+   -0.694,
+   -1.8,
+   -1.885
+  ],
+  "bbox_max": [
+   0.694,
+   0.932,
+   0.505
+  ],
+  "far_end_centroid": [
+   0.002,
+   -1.787,
+   -1.039
+  ],
+  "far_end_count": 223
+ },
+ "25_Aurora_Prism": {
+  "bbox_min": [
+   -0.739,
+   -1.943,
+   -1.765
+  ],
+  "bbox_max": [
+   0.477,
+   1.071,
+   0.505
+  ],
+  "far_end_centroid": [
+   0.0,
+   -1.943,
+   -1.0
+  ],
+  "far_end_count": 30
+ },
+ "26_Meteor_Launcher": {
+  "bbox_min": [
+   -1.005,
+   -2.094,
+   -1.855
+  ],
+  "bbox_max": [
+   1.005,
+   1.045,
+   0.505
+  ],
+  "far_end_centroid": [
+   -0.004,
+   -2.045,
+   -0.857
+  ],
+  "far_end_count": 303
+ },
+ "27_Orbital_Cannon": {
+  "bbox_min": [
+   -0.794,
+   -1.994,
+   -1.675
+  ],
+  "bbox_max": [
+   0.781,
+   1.045,
+   0.505
+  ],
+  "far_end_centroid": [
+   0.002,
+   -1.945,
+   -0.865
+  ],
+  "far_end_count": 311
+ },
+ "28_Nebula_Accelerator": {
+  "bbox_min": [
+   -0.71,
+   -1.865,
+   -1.719
+  ],
+  "bbox_max": [
+   0.71,
+   1.045,
+   0.505
+  ],
+  "far_end_centroid": [
+   0.003,
+   -1.828,
+   -0.982
+  ],
+  "far_end_count": 398
+ },
+ "29_Singularity_Cannon": {
+  "bbox_min": [
+   -0.932,
+   -2.037,
+   -1.831
+  ],
+  "bbox_max": [
+   0.932,
+   1.045,
+   0.505
+  ],
+  "far_end_centroid": [
+   -0.0,
+   -1.983,
+   -0.85
+  ],
+  "far_end_count": 492
+ },
+ "30_Galactic_Rocket_Launcher": {
+  "bbox_min": [
+   -1.181,
+   -2.603,
+   -2.031
+  ],
+  "bbox_max": [
+   1.181,
+   1.41,
+   0.555
+  ],
+  "far_end_centroid": [
+   0.832,
+   -2.539,
+   -0.85
+  ],
+  "far_end_count": 72
+ }
+}

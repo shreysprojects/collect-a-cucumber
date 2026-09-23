@@ -1,0 +1,239 @@
+[
+ {
+  "id": 13,
+  "name": "13_Pressure_Cannon",
+  "clips": {
+   "Ready": {
+    "arm_in_body": 0.45,
+    "arm_in_body_at": "RightUpperArm in UpperTorso @0.03s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   },
+   "ChargeLo": {
+    "arm_in_body": 0.47,
+    "arm_in_body_at": "RightUpperArm in UpperTorso @0.60s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   },
+   "ChargeHi": {
+    "arm_in_body": 0.47,
+    "arm_in_body_at": "RightUpperArm in UpperTorso @0.53s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   },
+   "Fire": {
+    "arm_in_body": 0.47,
+    "arm_in_body_at": "RightUpperArm in UpperTorso @0.67s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   }
+  }
+ },
+ {
+  "id": 14,
+  "name": "14_Snowball_Gatling",
+  "clips": {
+   "Ready": {
+    "arm_in_body": 0.47,
+    "arm_in_body_at": "RightUpperArm in UpperTorso @0.13s",
+    "launcher_in_body": 0.47,
+    "launcher_in_body_at": "launcher in UpperTorso @1.37s",
+    "pops": [],
+    "pop_count": 0
+   },
+   "ChargeLo": {
+    "arm_in_body": 0.44,
+    "arm_in_body_at": "RightUpperArm in UpperTorso @0.20s",
+    "launcher_in_body": 0.2,
+    "launcher_in_body_at": "launcher in Head @0.20s",
+    "pops": [],
+    "pop_count": 0
+   },
+   "ChargeHi": {
+    "arm_in_body": 0.47,
+    "arm_in_body_at": "RightUpperArm in UpperTorso @0.67s",
+    "launcher_in_body": 0.43,
+    "launcher_in_body_at": "launcher in Head @0.60s",
+    "pops": [],
+    "pop_count": 0
+   },
+   "Fire": {
+    "arm_in_body": 0.47,
+    "arm_in_body_at": "LeftUpperArm in UpperTorso @1.40s",
+    "launcher_in_body": 0.46,
+    "launcher_in_body_at": "launcher in UpperTorso @1.50s",
+    "pops": [
+     "LeftLowerArm flip -37/28 @0.13s",
+     "LeftLowerArm flip -33/28 @0.17s",
+     "LeftLowerArm flip 28/-56 @0.20s",
+     "LeftLowerArm flip 28/-56 @0.23s",
+     "LeftLowerArm flip -56/30 @0.27s",
+     "LeftLowerArm flip 30/-59 @0.30s",
+     "LeftLowerArm flip 30/-59 @0.33s",
+     "LeftLowerArm flip -59/29 @0.37s"
+    ],
+    "pop_count": 17
+   }
+  }
+ },
+ {
+  "id": 15,
+  "name": "15_Avalanche_Mortar",
+  "clips": {
+   "Ready": {
+    "arm_in_body": 0.4,
+    "arm_in_body_at": "RightUpperArm in UpperTorso @0.80s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   },
+   "ChargeLo": {
+    "arm_in_body": 0.45,
+    "arm_in_body_at": "RightUpperArm in UpperTorso @0.60s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   },
+   "ChargeHi": {
+    "arm_in_body": 0.26,
+    "arm_in_body_at": "RightUpperArm in UpperTorso @0.33s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   },
+   "Fire": {
+    "arm_in_body": 0.47,
+    "arm_in_body_at": "RightUpperArm in UpperTorso @0.60s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   }
+  }
+ },
+ {
+  "id": 16,
+  "name": "16_Frostbite_Cannon",
+  "clips": {
+   "Ready": {
+    "arm_in_body": 0.46,
+    "arm_in_body_at": "LeftUpperArm in UpperTorso @0.00s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   },
+   "ChargeLo": {
+    "arm_in_body": 0.45,
+    "arm_in_body_at": "RightUpperArm in UpperTorso @0.13s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   },
+   "ChargeHi": {
+    "arm_in_body": 0.47,
+    "arm_in_body_at": "RightUpperArm in UpperTorso @0.10s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   },
+   "Fire": {
+    "arm_in_body": 0.47,
+    "arm_in_body_at": "LeftUpperArm in UpperTorso @1.37s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   }
+  }
+ },
+ {
+  "id": 17,
+  "name": "17_Toxic_Lobber",
+  "clips": {
+   "Ready": {
+    "arm_in_body": 0.47,
+    "arm_in_body_at": "RightUpperArm in UpperTorso @2.03s",
+    "launcher_in_body": 0.27,
+    "launcher_in_body_at": "launcher in UpperTorso @1.23s",
+    "pops": [],
+    "pop_count": 0
+   },
+   "ChargeLo": {
+    "arm_in_body": 0.47,
+    "arm_in_body_at": "RightUpperArm in UpperTorso @1.13s",
+    "launcher_in_body": 0.26,
+    "launcher_in_body_at": "launcher in UpperTorso @0.97s",
+    "pops": [],
+    "pop_count": 0
+   },
+   "ChargeHi": {
+    "arm_in_body": 0.47,
+    "arm_in_body_at": "RightUpperArm in UpperTorso @1.03s",
+    "launcher_in_body": 0.43,
+    "launcher_in_body_at": "launcher in UpperTorso @1.00s",
+    "pops": [],
+    "pop_count": 0
+   },
+   "Fire": {
+    "arm_in_body": 0.47,
+    "arm_in_body_at": "RightUpperArm in UpperTorso @0.27s",
+    "launcher_in_body": 0.14,
+    "launcher_in_body_at": "launcher in UpperTorso @0.20s",
+    "pops": [],
+    "pop_count": 0
+   }
+  }
+ },
+ {
+  "id": 18,
+  "name": "18_Thunder_Coil",
+  "clips": {
+   "Ready": {
+    "arm_in_body": 0.46,
+    "arm_in_body_at": "LeftUpperArm in UpperTorso @0.00s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   },
+   "ChargeLo": {
+    "arm_in_body": 0.46,
+    "arm_in_body_at": "RightUpperArm in UpperTorso @0.60s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   },
+   "ChargeHi": {
+    "arm_in_body": 0.47,
+    "arm_in_body_at": "RightUpperArm in UpperTorso @0.43s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   },
+   "Fire": {
+    "arm_in_body": 0.47,
+    "arm_in_body_at": "RightUpperArm in UpperTorso @0.70s",
+    "launcher_in_body": 0.0,
+    "launcher_in_body_at": null,
+    "pops": [],
+    "pop_count": 0
+   }
+  }
+ }
+]
