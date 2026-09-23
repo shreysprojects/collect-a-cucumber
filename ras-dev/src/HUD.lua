@@ -1,7 +1,7 @@
 --[[---------------------------------------DESCRIPTION------------------------------------------
 	HUD module. GUIFramework spawns the empty "Interface" frame into PlayerGui.HUD.Base
-	as "HUD" (self.UI); MainUI (side buttons, boosts, level bar) is cloned into it here.
-	SetProgress writes MainUI.Level.Frame.TextLabel as "Level 1: 0/10",
+	as "HUD" (self.UI); the editable StarterGui.HUD.Base.MainUI is adopted into it here.
+	SetProgress writes Level.Frame.TextLabel as "Level 1" and Frame.XPLabel as "0/10",
 	sizes MainUI.Level.BackFrame to the current XP fraction, and sets
 	MainUI.Coins to the player's coin balance.
 
@@ -14,7 +14,7 @@
 	Shop / Mountains / Rebirth buttons open the frame of the same name IF one exists:
 	  1. a panel already spawned by this module,
 	  2. a template under this module (SetupInterfaces moves every frame from
-	     ServerStorage.Assets.UserInterfaces.HUD here: MainUI, Shop, Mountains, ...),
+	     ServerStorage.Assets.UserInterfaces.HUD here: Shop, Mountains, ...),
 	  3. anything under ReplicatedStorage.Assets.UserInterfaces,
 	  4. any GuiObject of that name already in PlayerGui.
 	Rebirth uses the Studio frame when one exists. Its Foreground.Buy button is
@@ -84,6 +84,7 @@ local snowballs = require(ReplicatedStorage.Assets.Modules.Shared.Snowballs)
 local snowballLaunchers = require(ReplicatedStorage.Assets.Modules.Shared.SnowballLaunchers)
 local PanelManager = require(ReplicatedStorage.Assets.Modules.Client.UI.PanelManager)
 local UIUtils = require(ReplicatedStorage.Assets.Modules.Client.UI.UIUtils)
+local HUDLayout = require(ReplicatedStorage.Assets.Modules.Client.UI.HUDLayout)
 local PurchaseFX = require(ReplicatedStorage.Assets.Modules.Client.UI.PurchaseFX)
 local Notify = require(ReplicatedStorage.Assets.Modules.Client.UI.Notify)
 
@@ -1463,7 +1464,7 @@ function api:FindProgressWidgets(main)
 		return nil
 	end
 
-	local levelRoot = main:FindFirstChild("Level")
+	local levelRoot = main:FindFirstChild("Level", true)
 	if not (levelRoot and levelRoot:IsA("GuiObject")) then
 		return nil
 	end
@@ -1507,7 +1508,7 @@ local function pinFillLeft(ui)
 
 	ui.FillY = size.Y
 	ui.FillWidth = size.X.Offset
-	ui.FillScale = size.X.Scale
+	ui.FillScale = fill:GetAttribute("FullWidthScale") or size.X.Scale
 	ui.FillUsesOffset = size.X.Scale == 0 and size.X.Offset > 0
 
 	-- Keep the current left edge, then grow width to the right.
@@ -1526,9 +1527,15 @@ local function fillSize(ui, alpha)
 end
 
 local function applyText(ui, text)
-	ui.LevelLabel.Text = text
+	local xpLabel = ui.LevelLabel.Parent:FindFirstChild("XPLabel")
+	local levelText, xpText = string.match(text, "^(Level %d+):%s*(.+)$")
+	local split = xpLabel and xpLabel:IsA("TextLabel") and levelText ~= nil
+	ui.LevelLabel.Text = if split then levelText else text
+	if split then
+		xpLabel.Text = xpText
+	end
 	if ui.ShadowLabel then
-		ui.ShadowLabel.Text = text
+		ui.ShadowLabel.Text = ui.LevelLabel.Text
 	end
 end
 
@@ -1600,7 +1607,11 @@ local function formatCoins(amount)
 end
 
 local function formatDistance(amount)
-	return formatCoins(amount) .. " m"
+	return (formatCoins(amount):gsub(",", " ")) .. " m"
+end
+
+local function formatRunCoins(amount)
+	return "+" .. (formatCoins(amount):gsub(",", " ")) .. " $"
 end
 
 local function setLabelText(label, text)
@@ -1787,7 +1798,7 @@ local function noteRunCoins(self, amount)
 	if not label then
 		return
 	end
-	setLabelText(label, formatCoins(made))
+	setLabelText(label, formatRunCoins(made))
 	local gain = made - previous
 	if gain > 0 then
 		popCoinsMade(self, label, gain)
@@ -1830,7 +1841,7 @@ function api:BeginRunReadout()
 		if not self.CoinsMadeColor then
 			self.CoinsMadeColor = coins.TextColor3
 		end
-		setLabelText(coins, formatCoins(0))
+		setLabelText(coins, formatRunCoins(0))
 		coins.Visible = true
 	end
 
@@ -1965,7 +1976,9 @@ function api:WireButtons(main)
 			warn("[CLIENT]: HUD button not found:", buttonName)
 		end
 	end
-	UIUtils.bindHoverScaleAll(main)
+	-- Preserve authored edges: button size constraints make Size differ from rendered size.
+	-- Re-centering from Size shifts the HUD buttons when Play mode starts.
+	UIUtils.bindHoverScaleAll(main, { centerPivot = false })
 end
 
 local function findCircleModel(name)
@@ -2052,6 +2065,16 @@ function api:Initialize()
 
 	local main = root:FindFirstChild("MainUI")
 	if not main then
+		-- Reuse the Studio-authored HUD copied from StarterGui; keep one live HUD.
+		local screen = getPlayerGui():FindFirstChild("HUD")
+		local base = screen and screen:FindFirstChild("Base")
+		local authored = base and base:FindFirstChild("MainUI")
+		if authored and authored:IsA("GuiObject") then
+			main = authored
+			main.Parent = root
+		end
+	end
+	if not main then
 		local template = script:FindFirstChild("MainUI")
 		if template then
 			main = template:Clone()
@@ -2061,6 +2084,7 @@ function api:Initialize()
 	self.MainUI = main
 	if main then
 		main.Visible = true
+		table.insert(self.Connections, HUDLayout.BindMain(main))
 		self:WireButtons(main)
 		self.ProgressUI = self:FindProgressWidgets(main)
 		if self.ProgressUI then

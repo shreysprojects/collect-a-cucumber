@@ -1,6 +1,4 @@
--- RaceProgressGui controller (from RAS - Maps). 2026-09-17: compact layout - the bar is
--- half the screen wide at the very top, and each player's marker is a small headshot
--- ring that rides ON the bar (the original hung a 62 px portrait + pointer above it).
+-- Race progress: player portrait pins sit above the taller artwork strip.
 -- Distance comes from the replicated player attribute "Distance" (or leaderstats), the
 -- run length from the gui attribute "MaxDistance".
 --
@@ -18,6 +16,7 @@ local Players = game:GetService("Players")
 local StarterGui = game:GetService("StarterGui")
 local TweenService = game:GetService("TweenService")
 
+local HUDLayout = require(game.ReplicatedStorage.Assets.Modules.Client.UI.HUDLayout)
 local gui = script.Parent
 local root = gui:WaitForChild("Root")
 local track = root:WaitForChild("Track")
@@ -25,12 +24,15 @@ local markers = root:WaitForChild("Markers")
 local setDistance = gui:WaitForChild("SetDistance")
 local playerGui = Players.LocalPlayer:WaitForChild("PlayerGui")
 
-local MARKER_SIZE = 44
+local preview = markers:FindFirstChild("StudioPreview")
+if preview then preview:Destroy() end
+
+local MARKER_SIZE = 64
 
 local LAYOUT = {
 	DisplayOrder = -1, -- under HUD (0) and Menu (5): HUD elements always draw over the bar
 	AvoidLabels = { "DistanceRolled", "CoinsMade" }, -- labels under PlayerGui.HUD the bar must end above
-	FallbackClearTop = 0.067, -- screen fraction: DistanceRolled's top edge in the Studio template
+	FallbackClearTop = 0.22, -- screen fraction: DistanceRolled's top edge in the Studio template
 	Gap = 2, -- px kept between the bar and those labels
 	MinScale = 0.25,
 	MaxScale = 1, -- never larger than the authored layout
@@ -55,10 +57,10 @@ local markerTweens = {}
 local localOverrides = {}
 local markerSize = MARKER_SIZE -- pre-scale marker size (grows when LayoutScale is small)
 
-local function hideTopbar()
+local function restoreTopbar()
 	for _ = 1, 30 do
 		local ok = pcall(function()
-			StarterGui:SetCore("TopbarEnabled", false)
+			StarterGui:SetCore("TopbarEnabled", true)
 		end)
 		if ok then
 			return
@@ -67,7 +69,7 @@ local function hideTopbar()
 	end
 end
 
-task.spawn(hideTopbar)
+task.spawn(restoreTopbar)
 
 gui.DisplayOrder = LAYOUT.DisplayOrder
 
@@ -102,7 +104,7 @@ local function borderStroke(object)
 	return 0
 end
 
-local layoutScale = Instance.new("UIScale")
+local layoutScale = root:FindFirstChild("LayoutScale") or Instance.new("UIScale")
 layoutScale.Name = "LayoutScale"
 layoutScale.Parent = root
 
@@ -127,7 +129,7 @@ local avoidLabels = {} -- strong keys: an Instance's Luau reference can be colle
 
 local function restPosition(visible)
 	if visible then
-		return UDim2.new(0.5, 0, 0, 0)
+		return UDim2.new(0.5, 0, 0, HUDLayout.GetTopInset(gui.AbsoluteSize) + 6 * HUDLayout.GetScale(gui.AbsoluteSize))
 	end
 	return UDim2.new(0.5, 0, 0, -math.ceil(contentBottom + LAYOUT.HideMargin))
 end
@@ -163,80 +165,30 @@ end
 
 local function applyLayout()
 	local viewport = gui.AbsoluteSize
-	local width, height = viewport.X, viewport.Y
-	if width <= 0 or height <= 0 then
-		return
-	end
-
-	local trackTop, trackBottom = spanY(track)
-	local stroke = borderStroke(track)
-	local shadowBottom = trackBottom
-	local shadow = root:FindFirstChild("TrackShadow")
-	if shadow and shadow:IsA("GuiObject") then
-		local _, bottom = spanY(shadow)
-		shadowBottom = bottom
-	end
-	local markerCenter = (trackTop + trackBottom) / 2
-
-	-- Track span sideways on screen (the authored track has no X offsets to scale).
-	local trackWidth = track.Size.X.Scale * width + track.Size.X.Offset
-	local barLeft = track.Position.X.Scale * width + track.Position.X.Offset - track.AnchorPoint.X * trackWidth
-	local barRight = barLeft + trackWidth
-	local overhang = MARKER_SIZE / 2 + stroke
-
-	local limit = clearTop(height, barLeft - overhang, barRight + overhang) - LAYOUT.Gap
-	local scale = LAYOUT.MaxScale
-	if limit < math.huge then
-		-- Stroke thickness is treated as unscaled (safe either way).
-		scale = math.min(
-			scale,
-			(limit - stroke) / trackBottom,
-			limit / shadowBottom,
-			limit / (markerCenter + MARKER_SIZE / 2)
-		)
-	end
-	scale = math.clamp(math.floor(scale * 1000) / 1000, LAYOUT.MinScale, LAYOUT.MaxScale)
-
-	local labelScale = math.max(scale, LAYOUT.LabelMinScale)
-	local centerPx = markerCenter * scale
-	local room = 2 * math.min(limit - centerPx, centerPx)
-	local markerPx = math.max(MARKER_SIZE * scale, math.min(LAYOUT.MarkerMinPx, room))
-
-	local key = string.format("%.1f:%.1f:%.3f:%.3f:%.2f", width, height, scale, labelScale, markerPx)
-	if key == lastLayoutKey then
-		return
-	end
+	if viewport.X <= 0 or viewport.Y <= 0 then return end
+	local hudScale = HUDLayout.GetScale(viewport)
+	local scale = hudScale * HUDLayout.TrackerBaseScale * HUDLayout.TrackerFactor
+	local key = string.format("%.1f:%.1f:%.4f", viewport.X, viewport.Y, scale)
+	if key == lastLayoutKey then return end
 	lastLayoutKey = key
-
 	layoutScale.Scale = scale
-	-- Root spans 1/scale screens before the UIScale, i.e. exactly one screen after it, so
-	-- the scale-based widths (the bar is half the screen) do not shrink.
-	root.Size = UDim2.new(1 / scale, 0, 0, ROOT_H)
-
-	local barBottom = math.max(trackBottom * scale + stroke, shadowBottom * scale, centerPx + markerPx / 2)
-	contentBottom = barBottom
+	root.Size = UDim2.fromOffset(1301 / HUDLayout.TrackerBaseScale, ROOT_H)
+	local _, trackBottom = spanY(track)
+	local topOffset = HUDLayout.GetTopInset(viewport) + 6 * hudScale
+	contentBottom = topOffset + (trackBottom + borderStroke(track) + 3) * scale
 	for _, label in labels do
-		label.Scale.Scale = labelScale / scale
-		contentBottom = math.max(contentBottom, label.Top * scale + label.Height * labelScale)
+		label.Scale.Scale = 1
+		contentBottom = math.max(contentBottom, topOffset + (label.Top + label.Height) * scale)
 	end
-
-	markerSize = markerPx / scale
+	markerSize = MARKER_SIZE
 	for _, marker in markers:GetChildren() do
-		if marker:IsA("GuiObject") then
-			marker.Size = UDim2.fromOffset(markerSize, markerSize)
-		end
+		if marker:IsA("GuiObject") then marker.Size = UDim2.fromOffset(markerSize, markerSize) end
 	end
-
-	if slideTween then
-		slideTween:Cancel()
-		slideTween = nil
-	end
+	if slideTween then slideTween:Cancel() slideTween = nil end
 	root.Position = restPosition(shown)
 	root.Visible = shown
-
 	gui:SetAttribute("LayoutScale", scale)
-	gui:SetAttribute("LayoutClearTop", if limit < math.huge then limit + LAYOUT.Gap else -1)
-	gui:SetAttribute("LayoutBottom", barBottom)
+	gui:SetAttribute("LayoutBottom", contentBottom)
 end
 
 local layoutQueued = false
@@ -404,7 +356,7 @@ local function updateMarker(player, instant)
 		return
 	end
 
-	local target = UDim2.new(fractionFor(player), 0, 0.5, 0)
+	local target = UDim2.new(fractionFor(player), 0, 0, 0)
 	if markerTweens[player] then
 		markerTweens[player]:Cancel()
 	end
@@ -431,8 +383,8 @@ end
 local function createMarker(player)
 	local marker = Instance.new("Frame")
 	marker.Name = tostring(player.UserId)
-	marker.AnchorPoint = Vector2.new(0.5, 0.5)
-	marker.Position = UDim2.new(fractionFor(player), 0, 0.5, 0)
+	marker.AnchorPoint = Vector2.new(0.5, 1)
+	marker.Position = UDim2.new(fractionFor(player), 0, 0, 0)
 	marker.Size = UDim2.fromOffset(markerSize, markerSize)
 	marker.BackgroundTransparency = 1
 	marker.BorderSizePixel = 0
@@ -443,12 +395,32 @@ local function createMarker(player)
 
 	local color = markerColor(player)
 
+	local pointer = Instance.new("Frame")
+	pointer.Name = "Pointer"
+	pointer.AnchorPoint = Vector2.new(0.5, 0.5)
+	pointer.Position = UDim2.fromScale(0.5, 0.735)
+	pointer.Size = UDim2.fromScale(0.36, 0.36)
+	pointer.Rotation = 45
+	pointer.BackgroundColor3 = Color3.fromRGB(12, 14, 18)
+	pointer.BorderSizePixel = 0
+	pointer.ZIndex = 13
+	pointer.Parent = marker
+	local pointerFill = Instance.new("Frame")
+	pointerFill.Name = "Color"
+	pointerFill.AnchorPoint = Vector2.new(0.5, 0.5)
+	pointerFill.Position = UDim2.fromScale(0.5, 0.5)
+	pointerFill.Size = UDim2.fromScale(0.64, 0.64)
+	pointerFill.BackgroundColor3 = color
+	pointerFill.BorderSizePixel = 0
+	pointerFill.ZIndex = 14
+	pointerFill.Parent = pointer
+
 	local ring = Instance.new("Frame")
 	ring.Name = "HeadshotRing"
 	ring.AnchorPoint = Vector2.new(0.5, 0.5)
-	ring.Position = UDim2.fromScale(0.5, 0.5)
-	ring.Size = UDim2.fromScale(1, 1)
-	ring.BackgroundColor3 = Color3.fromRGB(29, 32, 37)
+	ring.Position = UDim2.fromScale(0.5, 0.42)
+	ring.Size = UDim2.fromScale(0.84, 0.84)
+	ring.BackgroundColor3 = Color3.fromRGB(12, 14, 18)
 	ring.BorderSizePixel = 0
 	ring.ZIndex = 15
 	ring.Parent = marker
@@ -469,7 +441,7 @@ local function createMarker(player)
 	portrait.Name = "Headshot"
 	portrait.AnchorPoint = Vector2.new(0.5, 0.5)
 	portrait.Position = UDim2.fromScale(0.5, 0.5)
-	portrait.Size = UDim2.new(1, -6, 1, -6)
+	portrait.Size = UDim2.new(1, -8, 1, -8)
 	portrait.BackgroundColor3 = Color3.fromRGB(227, 239, 231)
 	portrait.BorderSizePixel = 0
 	portrait.Image = ""
