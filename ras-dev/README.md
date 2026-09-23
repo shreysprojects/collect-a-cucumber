@@ -230,3 +230,43 @@ the profile). The old code wiped the save to 0/0 in T1 and T4, lost the +100 in 
 totals in T6. A real playtest with the real DataStore confirmed normal load, a forced save that waited out an
 in-flight autosave (stored 15314 = latest), and a real leave-mid-load on a throwaway key (nothing
 written). The test account was restored to its baseline afterwards and verified after the stop.
+
+## 2026-09-23: launcher visible on the pad + a readable throw
+
+Branch `fix/launcher-visibility` in kinqxz/RAS (on `e26b1e8`); the five scripts in RAS - Dev equal it.
+Mirrors: `src/MountainConfig.lua`, `src/CLIENT_Snowball.lua`, `src/SERV_Launcher.lua`,
+`src/AnimationMath.lua`, `src/Profiles.lua`. Pre-change export:
+`backups/RASDev_launcher-visibility_before_2026-09-22.rbxm`.
+
+Complaint: "can't see the snowball launcher, it's like hidden; can't see the animation or it's too
+fast." Measured before: pad camera 24 studs back (LAUNCH.PadCameraDistance 24 / Height 8 /
+LookAhead 10) put the character at 127 px and the launcher at 48x38 px of a 1301x611 viewport; a
+full charge moved the shoulder 8 degrees; the release flick peaked 0.12 s after release and lasted
+0.48 s; SERV_Snowball.Launch fired BindSnowballCamera in the frame it spawned the ball and the client
+snapped to the chase on frame 1, so the flick played with the camera already gone.
+
+- **Launcher scale** `LAUNCHER.Scale = 1.5` (MountainConfig), applied in SERV_Launcher.GiveLauncher with
+  `Model:ScaleTo` about the grip pivot (every template in Storage/SnowballLaunchers is one MeshPart with
+  its PivotOffset at the grip and no Grip attachment, so the generic hand offset in alignToHand is what
+  everyone gets). Flipper 0.69x1.72x2.93 -> 1.04x2.58x4.40, grip still 0.4 studs from the hand.
+- **Pad camera** 13 / 3 / 3: character 264x301 px, launcher 177x117 px.
+- **Wind-up** (AnimationMath.TUNING): scoop/flipper/catapult/sling pull the launcher arm 32 degrees low and
+  back at full charge, the others raise it 26 degrees to the aim line; elbow +22, torso -8, sway 1.0x at 0%
+  to 2.4x at 100% of the profile's sway. Release kick x2.6 (toss) / x1.8 (others). Measured flipper throw:
+  shoulder 37 -> 25 dip -> 90 peak at 0.32 s -> 22 overshoot at 0.52 s -> settled by 0.65 s, launcher travel
+  2.6 studs.
+- **Release timing** Profiles: `RELEASE_TIME_SCALE = 2.0` on every duration/fireAt (flipper 0.48 -> 0.96 s,
+  fireAt 0.09 -> 0.18 s).
+- **Ball leaves at the fire moment**: CLIENT_Snowball parks the charge in `vars.PendingLaunch`; the
+  ChargeController's OnFire sends `Launch` (measured 0.184 s after release); a `fireAt + 0.25 s` timer is
+  the fallback, and with no controller it launches at once as before.
+- **Camera hold + blend** `LAUNCH.ReleaseCamera = { Hold = 0.45, Blend = 0.6, BlendMaxDistance = 150 }`:
+  BindSnowballCamera keeps the pad frame for Hold seconds after the ball arrives, then smoothsteps into the
+  chase; if the ball is already further than BlendMaxDistance when the blend would start (gear 6 = 430
+  studs/s here) it cuts instead (a 0.6 s dolly over 300 studs read as a glitch in the first test).
+  Measured: camera static until 0.72 s after release, then the cut.
+
+Test recipe: `eval_client_runtime` sampler on RenderStepped keyed on `vars.Charging` true->false, then
+`PlayerGui:SetAttribute("DevChargeHold", true)`, 0.6 s, false; `vars.Functions:StopRide()` 2 s later. Two
+short rides (~800 and ~600 studs) went onto the test account's real profile.
+
