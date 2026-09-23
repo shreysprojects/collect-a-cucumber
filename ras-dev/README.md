@@ -342,7 +342,7 @@ scoops and heaves; the ball flies off the blade.
   ball exists and the chase takes over the same frame. Files: CLIENT_Snowball (BindSnowballCamera),
   MountainConfig (LAUNCH), Profiles (comment only). Studio == repo == mirrors, checksummed.
 - **Avatar "shaking" while just standing with the launcher = a blend ping-pong in ChargeController, NOT
-  the clips, physics or the pad stance** (diagnosed on request, deliberately not changed). Measured in a
+  the clips, physics or the pad stance** (diagnosed first, then fixed on the user's go-ahead, see below). Measured in a
   playtest (Hand Catapult, 60 Hz PreSimulation sampler wrapped around `Controller._step`): root part,
   angular velocity, camera, FloorMaterial (always Plastic), MoveDirection (0) and Humanoid state are all
   perfectly still, and the authored Ready pose moves the hips only ~0.1 deg/frame; yet the written joint
@@ -357,6 +357,8 @@ scoops and heaves; the ball flies off the blade.
   `-rate`. `HoldBlend` (ready <-> charge loops, HOLD_BLEND 0.2) has the same shape, so while HOLDING the
   charge the whole pose (arms included) flickers 8 % between the ready and charge poses each frame too;
   `CLIENT_LauncherObservers` runs the same controller, so other players' characters do it as well.
-  The fix, when wanted, is to move toward the target without overshooting, e.g.
+  FIX (ChargeController, both blends): move toward the target by at most one step and rest AT it:
   `self.LegWeight = math.clamp(legTarget, self.LegWeight - rate, self.LegWeight + rate)` and
-  `self.HoldBlend = math.clamp(target, self.HoldBlend - step, self.HoldBlend + step)`.
+  `self.HoldBlend = math.clamp(target, self.HoldBlend - step, self.HoldBlend + step)`. Verified with the
+  same 60 Hz probe: standing, holding (SetHolding(true) on the live controller, no launch) and back to
+  ready, see the numbers in the summary of that session.
