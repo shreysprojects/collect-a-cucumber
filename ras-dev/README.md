@@ -716,3 +716,35 @@ the body, above the Dimmer) swallows those clicks. HUD.luau creates it at runtim
 that has a Dimmer (ensureClickCatcher in WirePanel) and both builders author it in the frames.
 Verified with simulated clicks: a card icon and the body keep the Shop / Mountains open, the
 backdrop still closes them. `Active = true` on a Frame does NOT stop the fall-through.
+
+## 2026-09-24 (later still): free look fixed, no air steering, falls recover
+
+User: "doesn't close the frame when you click anywhere on it (like in the shop)", "fix the ability to
+handle in the air, handling still a bit too strong", "fix how you can just fall off the map and die -
+no rewards from it", "camera moves weird on the pad / in game, moving somewhere moves it the
+opposite direction".
+
+- **Click-through close:** my Rebirth / Ascend panels stay open on an inside click (verified with a
+  simulated click on the panel body). The close-on-inside-click lives in the remade Shop /
+  Mountains panels: their oversized Dimmer button behind the panel catches clicks that pass
+  through non-button areas; the "RAS GAME" session owns that and is adding a ClickCatcher.
+- **Camera:** the free-look pitch was inverted against Roblox's own camera (mouse up lifted the
+  camera instead of looking up) - fixed to Roblox's convention; the pad no longer eases back
+  (`CameraOrbit.PadReturnDelay = false`, the angle resets when the pad camera binds), the ride
+  eases back after `RideReturnDelay` 3 s (was 1.5). Verified: pad yaw 40 stays after 2 s idle;
+  ride yaw 60 stays at 1.5 s and is 0.1 at 5 s.
+- **Steering:** only on the ground (it already was in code, but the sideways speed a ball took off
+  with carried into the air) - takeoff caps it at `Wander.TakeoffLateralCap` 0.25 x forward and the
+  air bleed is 4.5/s (was 2.2); ground handling softer: Gain 1.5, PlayerHeading 0.16,
+  PlayerMaxHeading 0.45, PlayerBlend 5.
+- **Falls:** `FLIGHT.Recover` - CLIENT_SnowballFX samples the last good track patch every 0.25 s
+  while rolling inside the edges; below the run's floor, or airborne 2.5 s with no track within
+  400 studs below, the ball goes back there (half way to the centreline, 60 % speed, min 30) and
+  the ride carries on; 3 recoveries in 20 s ends it the old way. The chase camera's auto-stop
+  ignores a ball dropping faster than `LAUNCH.StopFallSpeed` 40 (a slow fall used to "stop" the
+  ride before the recovery could act). Verified: pushed 160 studs sideways the existing edge guard
+  flew it back (no recovery needed); dropped 120 studs into the void it was back on the track at
+  +2.6 s at 108 studs/s and kept rolling ("[CLIENT]: Ball off the map (falling) - back on the
+  track"). Rewards keep accruing since they are awarded live during the ride.
+- kinqxz/RAS main: see the commit after f1814cc; the other session's uncommitted HUD.luau /
+  builders were left untouched (only my three files were added).
