@@ -706,3 +706,13 @@ towards the left coin indicator."
   around z -89 in the generated lobby) before framing a screenshot camera, and hold it per frame
   because the client resets the camera to Custom once. The test account is the user's real
   profile (level 119, 153K coins after the test ride).
+
+### Follow-up: clicks inside a panel must not close it
+
+A click on a plain frame falls through to the button beneath it, so the Shop / Mountains body
+(above the oversized Dimmer button that closes on click) closed the panel from the inside. Fix:
+a transparent, non-selectable `ClickCatcher` TextButton at the bottom of `Panel` (ZIndex 1, below
+the body, above the Dimmer) swallows those clicks. HUD.luau creates it at runtime for any panel
+that has a Dimmer (ensureClickCatcher in WirePanel) and both builders author it in the frames.
+Verified with simulated clicks: a card icon and the body keep the Shop / Mountains open, the
+backdrop still closes them. `Active = true` on a Frame does NOT stop the fall-through.
