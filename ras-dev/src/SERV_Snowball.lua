@@ -537,6 +537,9 @@ local function beginFinish(player, state)
 	end
 	state.Finishing = true
 	sself.MountainFinishing[player] = true
+	if sself.EndLaunchPropRide then
+		sself:EndLaunchPropRide(player)
+	end
 	task.spawn(function()
 		local ok, err = pcall(function()
 			sself:CompleteMountainRun(player)
@@ -640,6 +643,9 @@ local function setReplicationFocus(player, part)
 end
 
 function m_sapi:ClearSnowball(player)
+	if sself.EndLaunchPropRide then
+		sself:EndLaunchPropRide(player)
+	end
 	setReplicationFocus(player, nil)
 	local current = sself.SNOWBALLS[player]
 	if current then
@@ -1070,6 +1076,8 @@ function m_api:Launch(player, requestedSpeed, requestedOrigin)
 	clone:SetAttribute("StartRadius", radius)
 	clone:SetAttribute("BaseScale", if clone:IsA("Model") then clone:GetScale() else 1)
 	clone:SetAttribute("BaseDensity", root.CurrentPhysicalProperties.Density)
+	local rideToken = string.format("%d:%d:%d", player.UserId, math.floor(os.clock() * 1000) % 1000000000, math.random(1, 1000000000))
+	clone:SetAttribute("RideToken", rideToken)
 
 	pcall(function()
 		root:SetNetworkOwner(player)
@@ -1103,25 +1111,25 @@ function m_api:Launch(player, requestedSpeed, requestedOrigin)
 		earnings = playerProgress.EarningsMultiplier(rebirths)
 		launchBoost = playerProgress.LaunchBoost(rebirths)
 	end
+	local launchPower = playerProgress.LaunchPower(gear)
 	local baseSpeed = speed
-	speed = math.clamp(baseSpeed * gear * launchBoost, 1, launch.MaxPoweredSpeed or 12000)
+	speed = math.clamp(baseSpeed * launchPower * launchBoost, 1, launch.MaxPoweredSpeed or 12000)
 	clone:SetAttribute("LaunchSpeed", speed)
-	-- Coast and loft stay on the gear product. Rebirth earnings are rewards only.
-	clone:SetAttribute("PowerMultiplier", gear)
+	-- Coast and loft follow throw speed. Rewards keep the full shop total.
+	clone:SetAttribute("PowerMultiplier", launchPower)
 
 	local look = downhill.Unit
-	-- Starter gear follows the slope. A higher gear multiplier throws level and lofts,
-	-- so the ball flies before gravity brings it down.
+	-- Starters follow the slope. A stronger throw levels out and lofts a short hop.
 	local velocity = look * speed + Vector3.yAxis * (launch.UpSpeed or 0)
 	local thrustDir = look
-	if gear > 1 then
+	if launchPower >= (launch.LoftFrom or 1.8) then
 		local flat = Vector3.new(look.X, 0, look.Z)
 		if flat.Magnitude < 0.05 then
 			flat = Vector3.new(0, 0, -1)
 		else
 			flat = flat.Unit
 		end
-		local loft = math.min(launch.MaxLoft or 120, (gear - 1) * (launch.LoftPerMultiplier or 26))
+		local loft = math.min(launch.MaxLoft or 56, (launchPower - 1) * (launch.LoftPerMultiplier or 12))
 		velocity = flat * speed + Vector3.yAxis * loft
 		thrustDir = flat
 	end
@@ -1160,7 +1168,11 @@ function m_api:Launch(player, requestedSpeed, requestedOrigin)
 		BaseSize = if clone:IsA("BasePart") then clone.Size else nil,
 		BaseDensity = root.CurrentPhysicalProperties.Density,
 		Multiplier = gear * earnings,
+		RideToken = rideToken,
 	}
+	if sself.BeginLaunchPropRide then
+		sself:BeginLaunchPropRide(player, rideToken)
+	end
 	ensureGrowLoop()
 	ReplicatedStorage.ReEvent:FireClient(player, "BindSnowballCamera", clone)
 	return true
