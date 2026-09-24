@@ -1,0 +1,478 @@
+{
+ "key": "Ascend",
+ "build_hash": "a12f3651cf74",
+ "size_studs": {
+  "width_x": 20.05,
+  "depth_y": 9.22,
+  "height_z": 19.4
+ },
+ "min": [
+  -10.027,
+  -4.61,
+  -0.256
+ ],
+ "max": [
+  10.027,
+  4.61,
+  19.148
+ ],
+ "attrs": {
+  "PreciseCollision": [
+   "Steps",
+   "Carpet",
+   "GoldTrim"
+  ]
+ },
+ "tris_total": 28164,
+ "objects": [
+  {
+   "name": "Arrow",
+   "color": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 408,
+   "parts": 6,
+   "size": [
+    3.55,
+    6.392,
+    0.96
+   ]
+  },
+  {
+   "name": "Ascend_05_Wings",
+   "color": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 5584,
+   "parts": 50,
+   "size": [
+    18.899,
+    9.361,
+    1.913
+   ]
+  },
+  {
+   "name": "Carpet",
+   "color": "2f5fbf",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 164,
+   "parts": 1,
+   "size": [
+    2.56,
+    1.95,
+    4.72
+   ]
+  },
+  {
+   "name": "CloudShade",
+   "color": "8fbbe8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 1280,
+   "parts": 16,
+   "size": [
+    18.927,
+    0.952,
+    9.118
+   ]
+  },
+  {
+   "name": "Clouds",
+   "color": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 4960,
+   "parts": 38,
+   "size": [
+    18.735,
+    2.508,
+    9.2
+   ]
+  },
+  {
+   "name": "Columns",
+   "color": "f3f5fa",
+   "material": "Marble",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 376,
+   "parts": 2,
+   "size": [
+    8.84,
+    7.78,
+    1.64
+   ]
+  },
+  {
+   "name": "GoldDeco",
+   "color": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 3212,
+   "parts": 42,
+   "size": [
+    11.0,
+    8.625,
+    2.68
+   ]
+  },
+  {
+   "name": "GoldTrim",
+   "color": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 932,
+   "parts": 9,
+   "size": [
+    12.16,
+    2.6,
+    7.45
+   ]
+  },
+  {
+   "name": "Halo",
+   "color": "ffa82e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "tris": 816,
+   "parts": 5,
+   "size": [
+    15.05,
+    14.828,
+    2.954
+   ]
+  },
+  {
+   "name": "Letters",
+   "color": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 2048,
+   "parts": 1,
+   "size": [
+    8.596,
+    1.382,
+    0.3
+   ]
+  },
+  {
+   "name": "Lintel",
+   "color": "f3f5fa",
+   "material": "Marble",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 132,
+   "parts": 2,
+   "size": [
+    10.4,
+    5.15,
+    1.9
+   ]
+  },
+  {
+   "name": "Plaque",
+   "color": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 120,
+   "parts": 2,
+   "size": [
+    9.7,
+    4.7,
+    1.69
+   ]
+  },
+  {
+   "name": "Portal",
+   "color": "3d9bff",
+   "material": "Neon",
+   "transparency": 0.15,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "tris": 80,
+   "parts": 1,
+   "size": [
+    4.6,
+    8.22,
+    0.18
+   ]
+  },
+  {
+   "name": "Portal_2",
+   "color": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "tris": 12,
+   "parts": 1,
+   "size": [
+    5.9,
+    9.1,
+    0.1
+   ]
+  },
+  {
+   "name": "Steps",
+   "color": "f3f5fa",
+   "material": "Marble",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 176,
+   "parts": 4,
+   "size": [
+    11.9,
+    1.88,
+    7.2
+   ]
+  },
+  {
+   "name": "WingArm",
+   "color": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 984,
+   "parts": 6,
+   "size": [
+    18.009,
+    5.368,
+    1.766
+   ]
+  },
+  {
+   "name": "WingBack",
+   "color": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 1472,
+   "parts": 16,
+   "size": [
+    16.706,
+    5.792,
+    1.029
+   ]
+  },
+  {
+   "name": "WingTips",
+   "color": "3f82e2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 2080,
+   "parts": 20,
+   "size": [
+    20.054,
+    10.905,
+    1.883
+   ]
+  },
+  {
+   "name": "WingTipsMid",
+   "color": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 3328,
+   "parts": 32,
+   "size": [
+    17.661,
+    8.862,
+    2.241
+   ]
+  }
+ ],
+ "colliders": [
+  {
+   "name": "Crest",
+   "centre": [
+    0.0,
+    14.885,
+    0.31
+   ],
+   "size": [
+    4.7,
+    2.35,
+    1.2
+   ]
+  },
+  {
+   "name": "DaisBody",
+   "centre": [
+    0.0,
+    0.78,
+    0.51
+   ],
+   "size": [
+    11.9,
+    1.56,
+    4.4
+   ]
+  },
+  {
+   "name": "DaisTop",
+   "centre": [
+    0.0,
+    1.74,
+    0.51
+   ],
+   "size": [
+    11.56,
+    0.28,
+    4.06
+   ]
+  },
+  {
+   "name": "LintelBlock",
+   "centre": [
+    0.0,
+    12.275,
+    0.31
+   ],
+   "size": [
+    10.4,
+    2.15,
+    1.9
+   ]
+  },
+  {
+   "name": "PlinthL",
+   "centre": [
+    3.6,
+    2.05,
+    0.31
+   ],
+   "size": [
+    2.1,
+    0.38,
+    2.1
+   ]
+  },
+  {
+   "name": "PlinthR",
+   "centre": [
+    -3.6,
+    2.05,
+    0.31
+   ],
+   "size": [
+    2.1,
+    0.38,
+    2.1
+   ]
+  },
+  {
+   "name": "PortalFrame",
+   "centre": [
+    0.0,
+    6.45,
+    0.31
+   ],
+   "size": [
+    5.9,
+    9.1,
+    0.2
+   ]
+  },
+  {
+   "name": "ShaftL",
+   "centre": [
+    3.6,
+    6.47,
+    0.31
+   ],
+   "size": [
+    1.64,
+    7.78,
+    1.64
+   ]
+  },
+  {
+   "name": "ShaftR",
+   "centre": [
+    -3.6,
+    6.47,
+    0.31
+   ],
+   "size": [
+    1.64,
+    7.78,
+    1.64
+   ]
+  },
+  {
+   "name": "Step0",
+   "centre": [
+    0.0,
+    0.315,
+    -3.69
+   ],
+   "size": [
+    9.0,
+    0.63,
+    1.6
+   ]
+  },
+  {
+   "name": "Step1",
+   "centre": [
+    0.0,
+    0.63,
+    -2.29
+   ],
+   "size": [
+    8.2,
+    1.26,
+    1.6
+   ]
+  }
+ ]
+}

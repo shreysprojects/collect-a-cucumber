@@ -1,0 +1,1679 @@
+{
+ "key": "Gift",
+ "size_studs": {
+  "width_x": 19.65,
+  "depth_y": 6.85,
+  "height_z": 13.57
+ },
+ "min": [
+  -9.836,
+  -3.52,
+  0.0
+ ],
+ "max": [
+  9.812,
+  3.33,
+  13.571
+ ],
+ "parts": 162,
+ "meshes_after_merge": 22,
+ "labels": [
+  "Badges",
+  "Dots",
+  "GoldBits",
+  "IconShade",
+  "IconWhite",
+  "Knot",
+  "Letters",
+  "Minis",
+  "Posts",
+  "Present",
+  "RedBits",
+  "Ribbon",
+  "SignSlate",
+  "SignTrim",
+  "Sparkles",
+  "Tag"
+ ],
+ "tris_total": 19948,
+ "meshes": [
+  {
+   "label": "Badges",
+   "hex": "2f5fbf",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 216
+  },
+  {
+   "label": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 2640
+  },
+  {
+   "label": "GoldBits",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 1488
+  },
+  {
+   "label": "IconShade",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 3280
+  },
+  {
+   "label": "IconWhite",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 2856
+  },
+  {
+   "label": "Knot",
+   "hex": "d4861e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 1180
+  },
+  {
+   "label": "Letters",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 3208
+  },
+  {
+   "label": "Minis",
+   "hex": "2a68c0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "label": "Minis",
+   "hex": "3a8cf0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "label": "Minis",
+   "hex": "7d3fb5",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "label": "Minis",
+   "hex": "a45de0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "label": "Minis",
+   "hex": "b92f2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "label": "Minis",
+   "hex": "e8413c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "label": "Posts",
+   "hex": "9a6238",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 88
+  },
+  {
+   "label": "Present",
+   "hex": "1f9447",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "label": "Present",
+   "hex": "36c45a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 396
+  },
+  {
+   "label": "RedBits",
+   "hex": "e8413c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 804
+  },
+  {
+   "label": "Ribbon",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 1608
+  },
+  {
+   "label": "SignSlate",
+   "hex": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 336
+  },
+  {
+   "label": "SignTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 1432
+  },
+  {
+   "label": "Sparkles",
+   "hex": "ffa82e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 64
+  },
+  {
+   "label": "Tag",
+   "hex": "fff1d6",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  }
+ ],
+ "attrs": {},
+ "problems": [],
+ "part_list": [
+  {
+   "name": "Body",
+   "mesh": "Present",
+   "hex": "1f9447",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "PanelF11",
+   "mesh": "Present",
+   "hex": "36c45a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "PanelF1-1",
+   "mesh": "Present",
+   "hex": "36c45a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "PanelF-11",
+   "mesh": "Present",
+   "hex": "36c45a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "PanelF-1-1",
+   "mesh": "Present",
+   "hex": "36c45a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "PanelS11",
+   "mesh": "Present",
+   "hex": "36c45a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "PanelS1-1",
+   "mesh": "Present",
+   "hex": "36c45a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "PanelS-11",
+   "mesh": "Present",
+   "hex": "36c45a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "PanelS-1-1",
+   "mesh": "Present",
+   "hex": "36c45a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "Dot0",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot1",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot2",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot3",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot4",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot5",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot6",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot7",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot8",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot9",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot10",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot11",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot12",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot13",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot14",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot15",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot16",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot17",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot18",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot19",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot20",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot21",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot22",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot23",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot24",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot25",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot26",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot27",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot28",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot29",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot30",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Dot31",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "RibbonBody",
+   "mesh": "Ribbon",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 140
+  },
+  {
+   "name": "Lid",
+   "mesh": "Present",
+   "hex": "36c45a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "RibbonLid",
+   "mesh": "Ribbon",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 140
+  },
+  {
+   "name": "LDot32",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot33",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot34",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot35",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot36",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot37",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot38",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot39",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot40",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot41",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot42",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot43",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot44",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot45",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot46",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot47",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot48",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot49",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot50",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot51",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot52",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot53",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot54",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot55",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot56",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot57",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot58",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LDot59",
+   "mesh": "Dots",
+   "hex": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Knot",
+   "mesh": "Ribbon",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 320
+  },
+  {
+   "name": "KnotBand",
+   "mesh": "Knot",
+   "hex": "d4861e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 444
+  },
+  {
+   "name": "Loop0",
+   "mesh": "Ribbon",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 368
+  },
+  {
+   "name": "Loop1",
+   "mesh": "Ribbon",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 368
+  },
+  {
+   "name": "Loop2",
+   "mesh": "Knot",
+   "hex": "d4861e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 368
+  },
+  {
+   "name": "Loop3",
+   "mesh": "Knot",
+   "hex": "d4861e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 368
+  },
+  {
+   "name": "Tail1",
+   "mesh": "Ribbon",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 68
+  },
+  {
+   "name": "Tail-1",
+   "mesh": "Ribbon",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 68
+  },
+  {
+   "name": "TailBk1",
+   "mesh": "Ribbon",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 68
+  },
+  {
+   "name": "TailBk-1",
+   "mesh": "Ribbon",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 68
+  },
+  {
+   "name": "Tag",
+   "mesh": "Tag",
+   "hex": "fff1d6",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "TagEyelet",
+   "mesh": "GoldBits",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 144
+  },
+  {
+   "name": "TagWord",
+   "mesh": "RedBits",
+   "hex": "e8413c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 728
+  },
+  {
+   "name": "TagCord",
+   "mesh": "RedBits",
+   "hex": "e8413c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 76
+  },
+  {
+   "name": "MiniRed",
+   "mesh": "Minis",
+   "hex": "e8413c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "MiniLidRed",
+   "mesh": "Minis",
+   "hex": "b92f2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "MiniRibbonRed",
+   "mesh": "GoldBits",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 140
+  },
+  {
+   "name": "MiniBowRed1",
+   "mesh": "GoldBits",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 144
+  },
+  {
+   "name": "MiniBowRed-1",
+   "mesh": "GoldBits",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 144
+  },
+  {
+   "name": "MiniKnotRed",
+   "mesh": "GoldBits",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 20
+  },
+  {
+   "name": "MiniPurple",
+   "mesh": "Minis",
+   "hex": "a45de0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "MiniLidPurple",
+   "mesh": "Minis",
+   "hex": "7d3fb5",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "MiniRibbonPurple",
+   "mesh": "GoldBits",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 140
+  },
+  {
+   "name": "MiniBowPurple1",
+   "mesh": "GoldBits",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 144
+  },
+  {
+   "name": "MiniBowPurple-1",
+   "mesh": "GoldBits",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 144
+  },
+  {
+   "name": "MiniKnotPurple",
+   "mesh": "GoldBits",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 20
+  },
+  {
+   "name": "MiniBlue",
+   "mesh": "Minis",
+   "hex": "3a8cf0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "MiniLidBlue",
+   "mesh": "Minis",
+   "hex": "2a68c0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "MiniRibbonBlue",
+   "mesh": "GoldBits",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 140
+  },
+  {
+   "name": "MiniBowBlue1",
+   "mesh": "GoldBits",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 144
+  },
+  {
+   "name": "MiniBowBlue-1",
+   "mesh": "GoldBits",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 144
+  },
+  {
+   "name": "MiniKnotBlue",
+   "mesh": "GoldBits",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 20
+  },
+  {
+   "name": "FootL",
+   "mesh": "SignSlate",
+   "hex": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "FootCapL",
+   "mesh": "SignTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "PostL",
+   "mesh": "Posts",
+   "hex": "9a6238",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "CollarL0",
+   "mesh": "SignTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "CollarL1",
+   "mesh": "SignTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "PlaqueL",
+   "mesh": "SignSlate",
+   "hex": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 124
+  },
+  {
+   "name": "StudL0",
+   "mesh": "SignTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "StudL1",
+   "mesh": "SignTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "StudL2",
+   "mesh": "SignTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "StudL3",
+   "mesh": "SignTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "WordL",
+   "mesh": "Letters",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 548
+  },
+  {
+   "name": "WordLBk",
+   "mesh": "Letters",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 548
+  },
+  {
+   "name": "Badge",
+   "mesh": "Badges",
+   "hex": "2f5fbf",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 140
+  },
+  {
+   "name": "BadgeRim",
+   "mesh": "SignTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 528
+  },
+  {
+   "name": "Cuff",
+   "mesh": "IconShade",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 188
+  },
+  {
+   "name": "CuffBk",
+   "mesh": "IconShade",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 188
+  },
+  {
+   "name": "Palm",
+   "mesh": "IconShade",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 236
+  },
+  {
+   "name": "PalmBk",
+   "mesh": "IconShade",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 236
+  },
+  {
+   "name": "Finger0",
+   "mesh": "IconWhite",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 164
+  },
+  {
+   "name": "Finger0Bk",
+   "mesh": "IconWhite",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 164
+  },
+  {
+   "name": "Finger1",
+   "mesh": "IconWhite",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 164
+  },
+  {
+   "name": "Finger1Bk",
+   "mesh": "IconWhite",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 164
+  },
+  {
+   "name": "Finger2",
+   "mesh": "IconWhite",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 164
+  },
+  {
+   "name": "Finger2Bk",
+   "mesh": "IconWhite",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 164
+  },
+  {
+   "name": "Finger3",
+   "mesh": "IconWhite",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 164
+  },
+  {
+   "name": "Finger3Bk",
+   "mesh": "IconWhite",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 164
+  },
+  {
+   "name": "Thumb",
+   "mesh": "IconWhite",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 164
+  },
+  {
+   "name": "ThumbBk",
+   "mesh": "IconWhite",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 164
+  },
+  {
+   "name": "FootR",
+   "mesh": "SignSlate",
+   "hex": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "FootCapR",
+   "mesh": "SignTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "PostR",
+   "mesh": "Posts",
+   "hex": "9a6238",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "CollarR0",
+   "mesh": "SignTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "CollarR1",
+   "mesh": "SignTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "PlaqueR",
+   "mesh": "SignSlate",
+   "hex": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 124
+  },
+  {
+   "name": "StudR0",
+   "mesh": "SignTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "StudR1",
+   "mesh": "SignTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "StudR2",
+   "mesh": "SignTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "StudR3",
+   "mesh": "SignTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "WordR",
+   "mesh": "Letters",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 1056
+  },
+  {
+   "name": "WordRBk",
+   "mesh": "Letters",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 1056
+  },
+  {
+   "name": "Board",
+   "mesh": "Badges",
+   "hex": "2f5fbf",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 76
+  },
+  {
+   "name": "BoardRim",
+   "mesh": "SignTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 288
+  },
+  {
+   "name": "BodyM",
+   "mesh": "IconWhite",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 176
+  },
+  {
+   "name": "BodyMBk",
+   "mesh": "IconWhite",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 176
+  },
+  {
+   "name": "HeadM",
+   "mesh": "IconWhite",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 432
+  },
+  {
+   "name": "HeadMBk",
+   "mesh": "IconWhite",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 432
+  },
+  {
+   "name": "BodyA",
+   "mesh": "IconShade",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 176
+  },
+  {
+   "name": "BodyABk",
+   "mesh": "IconShade",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 176
+  },
+  {
+   "name": "HeadA",
+   "mesh": "IconShade",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 432
+  },
+  {
+   "name": "HeadABk",
+   "mesh": "IconShade",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 432
+  },
+  {
+   "name": "BodyB",
+   "mesh": "IconShade",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 176
+  },
+  {
+   "name": "BodyBBk",
+   "mesh": "IconShade",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 176
+  },
+  {
+   "name": "HeadB",
+   "mesh": "IconShade",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 432
+  },
+  {
+   "name": "HeadBBk",
+   "mesh": "IconShade",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 432
+  },
+  {
+   "name": "Sparkle0",
+   "mesh": "Sparkles",
+   "hex": "ffa82e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 16
+  },
+  {
+   "name": "Sparkle1",
+   "mesh": "Sparkles",
+   "hex": "ffa82e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 16
+  },
+  {
+   "name": "Sparkle2",
+   "mesh": "Sparkles",
+   "hex": "ffa82e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 16
+  },
+  {
+   "name": "Sparkle3",
+   "mesh": "Sparkles",
+   "hex": "ffa82e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 16
+  }
+ ]
+}

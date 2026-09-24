@@ -1,0 +1,5 @@
+scratch/
+__pycache__/
+*.blend
+shots/v1_*.png
+shots/*.b64

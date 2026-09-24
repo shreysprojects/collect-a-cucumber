@@ -1,0 +1,2491 @@
+{
+ "key": "Ascend",
+ "size_studs": {
+  "width_x": 20.05,
+  "depth_y": 9.22,
+  "height_z": 19.4
+ },
+ "min": [
+  -10.027,
+  -4.61,
+  -0.256
+ ],
+ "max": [
+  10.027,
+  4.61,
+  19.148
+ ],
+ "parts": 254,
+ "meshes_after_merge": 19,
+ "labels": [
+  "Arrow",
+  "Ascend_05_Wings",
+  "Carpet",
+  "CloudShade",
+  "Clouds",
+  "Columns",
+  "GoldDeco",
+  "GoldTrim",
+  "Halo",
+  "Letters",
+  "Lintel",
+  "Plaque",
+  "Portal",
+  "Steps",
+  "WingArm",
+  "WingBack",
+  "WingTips",
+  "WingTipsMid"
+ ],
+ "tris_total": 28164,
+ "meshes": [
+  {
+   "label": "Arrow",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 408
+  },
+  {
+   "label": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 5584
+  },
+  {
+   "label": "Carpet",
+   "hex": "2f5fbf",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 164
+  },
+  {
+   "label": "CloudShade",
+   "hex": "8fbbe8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 1280
+  },
+  {
+   "label": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 4960
+  },
+  {
+   "label": "Columns",
+   "hex": "f3f5fa",
+   "material": "Marble",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 376
+  },
+  {
+   "label": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 3212
+  },
+  {
+   "label": "GoldTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 932
+  },
+  {
+   "label": "Halo",
+   "hex": "ffa82e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 816
+  },
+  {
+   "label": "Letters",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 2048
+  },
+  {
+   "label": "Lintel",
+   "hex": "f3f5fa",
+   "material": "Marble",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 132
+  },
+  {
+   "label": "Plaque",
+   "hex": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 120
+  },
+  {
+   "label": "Portal",
+   "hex": "3d9bff",
+   "material": "Neon",
+   "transparency": 0.15,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "label": "Portal",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 12
+  },
+  {
+   "label": "Steps",
+   "hex": "f3f5fa",
+   "material": "Marble",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 176
+  },
+  {
+   "label": "WingArm",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 984
+  },
+  {
+   "label": "WingBack",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 1472
+  },
+  {
+   "label": "WingTips",
+   "hex": "3f82e2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 2080
+  },
+  {
+   "label": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 3328
+  }
+ ],
+ "attrs": {
+  "PreciseCollision": [
+   "Steps",
+   "Carpet",
+   "GoldTrim"
+  ]
+ },
+ "problems": [],
+ "part_list": [
+  {
+   "name": "DaisBody",
+   "mesh": "Steps",
+   "hex": "f3f5fa",
+   "material": "Marble",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "DaisRim",
+   "mesh": "GoldTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "DaisTop",
+   "mesh": "Steps",
+   "hex": "f3f5fa",
+   "material": "Marble",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "Step0",
+   "mesh": "Steps",
+   "hex": "f3f5fa",
+   "material": "Marble",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "Nose0",
+   "mesh": "GoldTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "Step1",
+   "mesh": "Steps",
+   "hex": "f3f5fa",
+   "material": "Marble",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "Nose1",
+   "mesh": "GoldTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "Runner",
+   "mesh": "Carpet",
+   "hex": "2f5fbf",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 164
+  },
+  {
+   "name": "RunnerEdge1",
+   "mesh": "GoldTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 164
+  },
+  {
+   "name": "RunnerEdge0",
+   "mesh": "GoldTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 164
+  },
+  {
+   "name": "PlinthL",
+   "mesh": "GoldTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "TorusL",
+   "mesh": "GoldTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 192
+  },
+  {
+   "name": "ShaftL",
+   "mesh": "Columns",
+   "hex": "f3f5fa",
+   "material": "Marble",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 188
+  },
+  {
+   "name": "CapL",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 192
+  },
+  {
+   "name": "AbacusL",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "BolsterL0",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "ScrollLF0",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 60
+  },
+  {
+   "name": "EyeLF0",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 36
+  },
+  {
+   "name": "ScrollLB0",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 60
+  },
+  {
+   "name": "EyeLB0",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 36
+  },
+  {
+   "name": "BolsterL1",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "ScrollLF1",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 60
+  },
+  {
+   "name": "EyeLF1",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 36
+  },
+  {
+   "name": "ScrollLB1",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 60
+  },
+  {
+   "name": "EyeLB1",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 36
+  },
+  {
+   "name": "PlinthR",
+   "mesh": "GoldTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "TorusR",
+   "mesh": "GoldTrim",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 192
+  },
+  {
+   "name": "ShaftR",
+   "mesh": "Columns",
+   "hex": "f3f5fa",
+   "material": "Marble",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 188
+  },
+  {
+   "name": "CapR",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 192
+  },
+  {
+   "name": "AbacusR",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "BolsterR0",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "ScrollRF0",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 60
+  },
+  {
+   "name": "EyeRF0",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 36
+  },
+  {
+   "name": "ScrollRB0",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 60
+  },
+  {
+   "name": "EyeRB0",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 36
+  },
+  {
+   "name": "BolsterR1",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "ScrollRF1",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 60
+  },
+  {
+   "name": "EyeRF1",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 36
+  },
+  {
+   "name": "ScrollRB1",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 60
+  },
+  {
+   "name": "EyeRB1",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 36
+  },
+  {
+   "name": "Spandrel",
+   "mesh": "Lintel",
+   "hex": "f3f5fa",
+   "material": "Marble",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 88
+  },
+  {
+   "name": "ArchMould",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 376
+  },
+  {
+   "name": "ImpostL",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "ImpostR",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "PortalFrame",
+   "mesh": "Portal",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 12
+  },
+  {
+   "name": "PortalCore",
+   "mesh": "Portal",
+   "hex": "3d9bff",
+   "material": "Neon",
+   "transparency": 0.15,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Chev0",
+   "mesh": "Arrow",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 68
+  },
+  {
+   "name": "ChevB0",
+   "mesh": "Arrow",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 68
+  },
+  {
+   "name": "Chev1",
+   "mesh": "Arrow",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 68
+  },
+  {
+   "name": "ChevB1",
+   "mesh": "Arrow",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 68
+  },
+  {
+   "name": "Chev2",
+   "mesh": "Arrow",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 68
+  },
+  {
+   "name": "ChevB2",
+   "mesh": "Arrow",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 68
+  },
+  {
+   "name": "LintelBlock",
+   "mesh": "Lintel",
+   "hex": "f3f5fa",
+   "material": "Marble",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "Plaque",
+   "mesh": "Plaque",
+   "hex": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "Letters",
+   "mesh": "Letters",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 2048
+  },
+  {
+   "name": "Cornice",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "BackStar",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "Crest",
+   "mesh": "Plaque",
+   "hex": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 76
+  },
+  {
+   "name": "CrestRim",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 452
+  },
+  {
+   "name": "SunF",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 152
+  },
+  {
+   "name": "RayF0",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "RayF1",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "RayF2",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "RayF3",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "RayF4",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "SunB",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 152
+  },
+  {
+   "name": "RayB0",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "RayB1",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "RayB2",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "RayB3",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "RayB4",
+   "mesh": "GoldDeco",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Halo",
+   "mesh": "Halo",
+   "hex": "ffa82e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 448
+  },
+  {
+   "name": "Twinkle0",
+   "mesh": "Halo",
+   "hex": "ffa82e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "Twinkle1",
+   "mesh": "Halo",
+   "hex": "ffa82e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "Twinkle2",
+   "mesh": "Halo",
+   "hex": "ffa82e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "Twinkle3",
+   "mesh": "Halo",
+   "hex": "ffa82e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "FlyL0",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "TipL0",
+   "mesh": "WingTips",
+   "hex": "3f82e2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 104
+  },
+  {
+   "name": "FlyL1",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "TipL1",
+   "mesh": "WingTips",
+   "hex": "3f82e2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 104
+  },
+  {
+   "name": "FlyL2",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "TipL2",
+   "mesh": "WingTips",
+   "hex": "3f82e2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 104
+  },
+  {
+   "name": "FlyL3",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "TipL3",
+   "mesh": "WingTips",
+   "hex": "3f82e2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 104
+  },
+  {
+   "name": "FlyL4",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "TipL4",
+   "mesh": "WingTips",
+   "hex": "3f82e2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 104
+  },
+  {
+   "name": "FlyL5",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "TipL5",
+   "mesh": "WingTips",
+   "hex": "3f82e2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 104
+  },
+  {
+   "name": "FlyL6",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "TipL6",
+   "mesh": "WingTips",
+   "hex": "3f82e2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 104
+  },
+  {
+   "name": "FlyL7",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "TipL7",
+   "mesh": "WingTips",
+   "hex": "3f82e2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 104
+  },
+  {
+   "name": "FlyL8",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "TipL8",
+   "mesh": "WingTips",
+   "hex": "3f82e2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 104
+  },
+  {
+   "name": "FlyL9",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "TipL9",
+   "mesh": "WingTips",
+   "hex": "3f82e2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 104
+  },
+  {
+   "name": "MidL0",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "MidTipL0",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "MidL1",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "MidTipL1",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "MidL2",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "MidTipL2",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "MidL3",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "MidTipL3",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "MidL4",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "MidTipL4",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "MidL5",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "MidTipL5",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "MidL6",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "MidTipL6",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "MidL7",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "MidTipL7",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "CovL0",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "CovL1",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "CovL2",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "CovL3",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "CovL4",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "CovL5",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "CovL6",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "BackL0",
+   "mesh": "WingBack",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "BackTipL0",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "BackL1",
+   "mesh": "WingBack",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "BackTipL1",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "BackL2",
+   "mesh": "WingBack",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "BackTipL2",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "BackL3",
+   "mesh": "WingBack",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "BackTipL3",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "BackL4",
+   "mesh": "WingBack",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "BackTipL4",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "BackL5",
+   "mesh": "WingBack",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "BackTipL5",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "BackL6",
+   "mesh": "WingBack",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "BackTipL6",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "BackL7",
+   "mesh": "WingBack",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "BackTipL7",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "ArmL",
+   "mesh": "WingArm",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 332
+  },
+  {
+   "name": "CollarL",
+   "mesh": "WingArm",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "ArmEndL",
+   "mesh": "WingArm",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "FlyR0",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "TipR0",
+   "mesh": "WingTips",
+   "hex": "3f82e2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 104
+  },
+  {
+   "name": "FlyR1",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "TipR1",
+   "mesh": "WingTips",
+   "hex": "3f82e2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 104
+  },
+  {
+   "name": "FlyR2",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "TipR2",
+   "mesh": "WingTips",
+   "hex": "3f82e2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 104
+  },
+  {
+   "name": "FlyR3",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "TipR3",
+   "mesh": "WingTips",
+   "hex": "3f82e2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 104
+  },
+  {
+   "name": "FlyR4",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "TipR4",
+   "mesh": "WingTips",
+   "hex": "3f82e2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 104
+  },
+  {
+   "name": "FlyR5",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "TipR5",
+   "mesh": "WingTips",
+   "hex": "3f82e2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 104
+  },
+  {
+   "name": "FlyR6",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "TipR6",
+   "mesh": "WingTips",
+   "hex": "3f82e2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 104
+  },
+  {
+   "name": "FlyR7",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "TipR7",
+   "mesh": "WingTips",
+   "hex": "3f82e2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 104
+  },
+  {
+   "name": "FlyR8",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "TipR8",
+   "mesh": "WingTips",
+   "hex": "3f82e2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 104
+  },
+  {
+   "name": "FlyR9",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "TipR9",
+   "mesh": "WingTips",
+   "hex": "3f82e2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 104
+  },
+  {
+   "name": "MidR0",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "MidTipR0",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "MidR1",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "MidTipR1",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "MidR2",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "MidTipR2",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "MidR3",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "MidTipR3",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "MidR4",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "MidTipR4",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "MidR5",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "MidTipR5",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "MidR6",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "MidTipR6",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "MidR7",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "MidTipR7",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "CovR0",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "CovR1",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "CovR2",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "CovR3",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "CovR4",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "CovR5",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "CovR6",
+   "mesh": "Ascend_05_Wings",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 128
+  },
+  {
+   "name": "BackR0",
+   "mesh": "WingBack",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "BackTipR0",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "BackR1",
+   "mesh": "WingBack",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "BackTipR1",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "BackR2",
+   "mesh": "WingBack",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "BackTipR2",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "BackR3",
+   "mesh": "WingBack",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "BackTipR3",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "BackR4",
+   "mesh": "WingBack",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "BackTipR4",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "BackR5",
+   "mesh": "WingBack",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "BackTipR5",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "BackR6",
+   "mesh": "WingBack",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "BackTipR6",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "BackR7",
+   "mesh": "WingBack",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "BackTipR7",
+   "mesh": "WingTipsMid",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "ArmR",
+   "mesh": "WingArm",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 332
+  },
+  {
+   "name": "CollarR",
+   "mesh": "WingArm",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "ArmEndR",
+   "mesh": "WingArm",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Puff0",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 320
+  },
+  {
+   "name": "CloudLo0",
+   "mesh": "CloudShade",
+   "hex": "8fbbe8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Bit0",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Puff1",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 320
+  },
+  {
+   "name": "CloudLo1",
+   "mesh": "CloudShade",
+   "hex": "8fbbe8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Bit1",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Top1",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Puff2",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 320
+  },
+  {
+   "name": "CloudLo2",
+   "mesh": "CloudShade",
+   "hex": "8fbbe8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Bit2",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Puff3",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 320
+  },
+  {
+   "name": "CloudLo3",
+   "mesh": "CloudShade",
+   "hex": "8fbbe8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Bit3",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Top3",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Puff4",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "CloudLo4",
+   "mesh": "CloudShade",
+   "hex": "8fbbe8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Bit4",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Puff5",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "CloudLo5",
+   "mesh": "CloudShade",
+   "hex": "8fbbe8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Bit5",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Top5",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Puff6",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "CloudLo6",
+   "mesh": "CloudShade",
+   "hex": "8fbbe8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Bit6",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Puff7",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "CloudLo7",
+   "mesh": "CloudShade",
+   "hex": "8fbbe8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Top7",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Puff8",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 320
+  },
+  {
+   "name": "CloudLo8",
+   "mesh": "CloudShade",
+   "hex": "8fbbe8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Bit8",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Puff9",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 320
+  },
+  {
+   "name": "CloudLo9",
+   "mesh": "CloudShade",
+   "hex": "8fbbe8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Bit9",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Top9",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Puff10",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 320
+  },
+  {
+   "name": "CloudLo10",
+   "mesh": "CloudShade",
+   "hex": "8fbbe8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Bit10",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Puff11",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 320
+  },
+  {
+   "name": "CloudLo11",
+   "mesh": "CloudShade",
+   "hex": "8fbbe8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Bit11",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Top11",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Puff12",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "CloudLo12",
+   "mesh": "CloudShade",
+   "hex": "8fbbe8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Bit12",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Puff13",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "CloudLo13",
+   "mesh": "CloudShade",
+   "hex": "8fbbe8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Bit13",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Top13",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Puff14",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "CloudLo14",
+   "mesh": "CloudShade",
+   "hex": "8fbbe8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Bit14",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Puff15",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "CloudLo15",
+   "mesh": "CloudShade",
+   "hex": "8fbbe8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Top15",
+   "mesh": "Clouds",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  }
+ ]
+}

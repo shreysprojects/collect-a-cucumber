@@ -1,0 +1,546 @@
+{
+ "key": "Gift",
+ "build_hash": "353109b21ef6",
+ "size_studs": {
+  "width_x": 19.65,
+  "depth_y": 6.85,
+  "height_z": 13.57
+ },
+ "min": [
+  -9.836,
+  -3.52,
+  0.0
+ ],
+ "max": [
+  9.812,
+  3.33,
+  13.571
+ ],
+ "attrs": {},
+ "tris_total": 19948,
+ "objects": [
+  {
+   "name": "Badges",
+   "color": "2f5fbf",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 216,
+   "parts": 2,
+   "size": [
+    18.834,
+    4.69,
+    1.548
+   ]
+  },
+  {
+   "name": "Dots",
+   "color": "8ee6a4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 2640,
+   "parts": 60,
+   "size": [
+    7.5,
+    6.816,
+    6.2
+   ]
+  },
+  {
+   "name": "GoldBits",
+   "color": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 1488,
+   "parts": 13,
+   "size": [
+    12.01,
+    3.928,
+    6.504
+   ]
+  },
+  {
+   "name": "IconShade",
+   "color": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 3280,
+   "parts": 12,
+   "size": [
+    18.134,
+    2.507,
+    2.208
+   ]
+  },
+  {
+   "name": "IconWhite",
+   "color": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 2856,
+   "parts": 14,
+   "size": [
+    16.775,
+    4.053,
+    2.677
+   ]
+  },
+  {
+   "name": "Knot",
+   "color": "d4861e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 1180,
+   "parts": 3,
+   "size": [
+    5.027,
+    3.256,
+    3.446
+   ]
+  },
+  {
+   "name": "Letters",
+   "color": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 3208,
+   "parts": 4,
+   "size": [
+    18.391,
+    1.162,
+    2.026
+   ]
+  },
+  {
+   "name": "Minis",
+   "color": "3a8cf0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 44,
+   "parts": 1,
+   "size": [
+    2.131,
+    1.3,
+    2.131
+   ]
+  },
+  {
+   "name": "Minis_2",
+   "color": "2a68c0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 44,
+   "parts": 1,
+   "size": [
+    2.48,
+    0.4,
+    2.48
+   ]
+  },
+  {
+   "name": "Minis_3",
+   "color": "7d3fb5",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 44,
+   "parts": 1,
+   "size": [
+    2.354,
+    0.4,
+    2.354
+   ]
+  },
+  {
+   "name": "Minis_4",
+   "color": "b92f2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 44,
+   "parts": 1,
+   "size": [
+    2.861,
+    0.4,
+    2.715
+   ]
+  },
+  {
+   "name": "Minis_5",
+   "color": "a45de0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 44,
+   "parts": 1,
+   "size": [
+    2.057,
+    1.4,
+    2.057
+   ]
+  },
+  {
+   "name": "Minis_6",
+   "color": "e8413c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 44,
+   "parts": 1,
+   "size": [
+    2.551,
+    1.8,
+    2.405
+   ]
+  },
+  {
+   "name": "Posts",
+   "color": "9a6238",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 88,
+   "parts": 2,
+   "size": [
+    14.631,
+    4.96,
+    0.636
+   ]
+  },
+  {
+   "name": "Present",
+   "color": "36c45a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 396,
+   "parts": 9,
+   "size": [
+    7.34,
+    7.06,
+    6.04
+   ]
+  },
+  {
+   "name": "Present_2",
+   "color": "1f9447",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 44,
+   "parts": 1,
+   "size": [
+    6.7,
+    6.2,
+    5.4
+   ]
+  },
+  {
+   "name": "RedBits",
+   "color": "e8413c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 804,
+   "parts": 2,
+   "size": [
+    3.22,
+    3.5,
+    0.777
+   ]
+  },
+  {
+   "name": "Ribbon",
+   "color": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 1608,
+   "parts": 9,
+   "size": [
+    7.846,
+    10.701,
+    6.68
+   ]
+  },
+  {
+   "name": "SignSlate",
+   "color": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 336,
+   "parts": 4,
+   "size": [
+    19.605,
+    4.95,
+    1.966
+   ]
+  },
+  {
+   "name": "SignTrim",
+   "color": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 1432,
+   "parts": 16,
+   "size": [
+    19.55,
+    9.91,
+    1.99
+   ]
+  },
+  {
+   "name": "Sparkles",
+   "color": "ffa82e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 64,
+   "parts": 4,
+   "size": [
+    10.201,
+    3.121,
+    1.236
+   ]
+  },
+  {
+   "name": "Tag",
+   "color": "fff1d6",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 44,
+   "parts": 1,
+   "size": [
+    4.032,
+    2.374,
+    0.26
+   ]
+  }
+ ],
+ "colliders": [
+  {
+   "name": "Badge",
+   "centre": [
+    7.0,
+    7.53,
+    -0.1
+   ],
+   "size": [
+    4.669,
+    4.64,
+    1.002
+   ]
+  },
+  {
+   "name": "Board",
+   "centre": [
+    -7.0,
+    7.26,
+    -0.1
+   ],
+   "size": [
+    4.999,
+    4.2,
+    1.548
+   ]
+  },
+  {
+   "name": "Body",
+   "centre": [
+    0.0,
+    3.1,
+    0.18
+   ],
+   "size": [
+    6.7,
+    6.2,
+    5.4
+   ]
+  },
+  {
+   "name": "FootL",
+   "centre": [
+    7.0,
+    0.18,
+    -0.1
+   ],
+   "size": [
+    1.843,
+    0.36,
+    1.843
+   ]
+  },
+  {
+   "name": "FootR",
+   "centre": [
+    -7.0,
+    0.18,
+    -0.1
+   ],
+   "size": [
+    1.966,
+    0.36,
+    1.966
+   ]
+  },
+  {
+   "name": "Lid",
+   "centre": [
+    0.0,
+    6.675,
+    0.18
+   ],
+   "size": [
+    7.34,
+    1.45,
+    6.04
+   ]
+  },
+  {
+   "name": "MiniBlue",
+   "centre": [
+    4.715,
+    0.65,
+    2.23
+   ],
+   "size": [
+    2.131,
+    1.3,
+    2.131
+   ]
+  },
+  {
+   "name": "MiniPurple",
+   "centre": [
+    -4.66,
+    0.7,
+    -2.02
+   ],
+   "size": [
+    2.057,
+    1.4,
+    2.057
+   ]
+  },
+  {
+   "name": "MiniRed",
+   "centre": [
+    4.875,
+    0.9,
+    -1.97
+   ],
+   "size": [
+    2.551,
+    1.8,
+    2.405
+   ]
+  },
+  {
+   "name": "PlaqueL",
+   "centre": [
+    7.0,
+    3.95,
+    -0.1
+   ],
+   "size": [
+    5.624,
+    2.0,
+    1.281
+   ]
+  },
+  {
+   "name": "PlaqueR",
+   "centre": [
+    -7.0,
+    3.95,
+    -0.1
+   ],
+   "size": [
+    5.586,
+    2.0,
+    1.827
+   ]
+  },
+  {
+   "name": "PostL",
+   "centre": [
+    7.0,
+    2.93,
+    -0.1
+   ],
+   "size": [
+    0.636,
+    4.96,
+    0.636
+   ]
+  },
+  {
+   "name": "PostR",
+   "centre": [
+    -7.0,
+    2.93,
+    -0.1
+   ],
+   "size": [
+    0.626,
+    4.96,
+    0.626
+   ]
+  }
+ ]
+}
