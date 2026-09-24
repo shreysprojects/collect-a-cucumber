@@ -1122,7 +1122,8 @@ function m_api:Launch(player, requestedSpeed, requestedOrigin)
 	if data then
 		gear = playerProgress.EquipmentMultiplier(data.EquippedSnowball, data.EquippedLauncher)
 		local rebirths = data.Rebirths or 0
-		earnings = playerProgress.EarningsMultiplier(rebirths)
+		-- Rebirth boost x the permanent ascension power (13x each).
+		earnings = playerProgress.RewardMultiplier(data)
 		launchBoost = playerProgress.LaunchBoost(rebirths)
 	end
 	local launchPower = playerProgress.LaunchPower(gear)

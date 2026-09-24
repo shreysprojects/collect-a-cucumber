@@ -546,3 +546,52 @@ moveable/draggable. Push everything." kinqxz/RAS main, Studio == repo == mirrors
   script). Architecture audit clean (ServerMain, ClientMain, ReEvent + ReFunction, no bindables,
   ScreenGuis only as UI templates + the framework's three in StarterGui, ServerStorage = Assets /
   Modules / Backups).
+
+## 2026-09-24 (later): Rebirth panel restyled, attention arrows, Ascend
+
+User: "make the rebirth UI look better, similar style to the frames from my New Map Cucumber Game
+place, keep a backup of the previous one; notifications (NOT distracting) - arrows / pop-ups when a
+new purchase or a rebirth is available; an 'ascend' feature: level 100, every piece of data resets,
+permanent x13 power multiplier, its own UI, opened by stepping near the heavenly wings in the lobby."
+
+- **Panels (Studio frames, not in the Rojo tree):** `extras/panels/build_panels.lua` builds
+  `ServerStorage.Assets.UserInterfaces.HUD.Rebirth` and `.Ascend` in the New Map "Manage" look
+  (maroon drop shadow, white body + pink/gold vertical gradient, tiled stud texture 14905298636,
+  cream inner rim + coloured edge, banner header on the top edge with the rebirth icon, red X,
+  gradient boost card with the arrow 113666736365393, level bar track + fill, green / gold button
+  with an inner rim, FredokaOne + ink outline). Run it from an edit-mode execute_luau (it fetched
+  fine through `ras-dev/tools/serve-src.ps1 -Root C:\Users\shrey\RAS` + `loadstring`). Layout is
+  all Scale inside a window of 80 % screen height with a 1.25 UIAspectRatioConstraint; the
+  constraint is FitWithinMaxSize, so the Size's width must be a real bound (a 0 width collapsed the
+  whole panel to 0 x 0 on the first try). Names the HUD reads are unchanged (CurrentBoost,
+  UpcomingBoost, Level + BackFrame + Frame.TextLabel/TextShadow, Buy + TextLabel/TextShadow, X).
+  Backup of the old Rebirth frame: `ServerStorage.Backups.UI_Rebirth_before-restyle_2026-09-24`
+  and `extras/Rebirth_before-restyle_2026-09-24.rbxm`; the UI snapshot
+  `extras/ServerStorage_UserInterfaces.rbxm` was re-exported.
+- **Ascend:** `PlayerProgress.ASCEND_LEVEL` 100, `ASCEND_POWER` 13; `AscendMultiplier` = 13 ^
+  Ascensions, `RewardMultiplier(profile)` = rebirth boost x that (SERV_Snowball launch earnings);
+  `ApplyAscend` replaces the whole profile with a fresh one (level, XP, coins, rebirths, mountains,
+  gear, lifetime totals) keeping only Ascensions + 1. Saved as `Ascensions`; the stale-write guard
+  now treats a payload with more ascensions as newer (fewer = stale) so the reset can be written
+  even though the totals drop. `SERV_PlayerData.Ascend` mirrors Rebirth (shared `finishReset`).
+  Attributes Ascensions / AscendLevel / AscendMultiplier. HUD: `Ascend` in CIRCLE_PANELS - the
+  `Ascend` model (stairs + arrow + wings) inside the lobby's StartPlatform is the trigger,
+  bounding box + `CIRCLE_RADIUS_PAD.Ascend` 4 studs; trigger models are cached
+  (`api:GetCircleModel`) instead of a recursive FindFirstChild per frame. Panel logic =
+  Rebirth's (RefreshAscendPanel / PressAscend / SetupAscendPanel, `SetPanelLevelBar` drives both
+  bars, DevPress "Ascend"). PurchaseFX sparkles on `Ascensions` too. Verified in a playtest at
+  level 100: everything reset, Ascensions 1, X13 -> X169, bar 1/100; test profile restored
+  through `SetAsync` (the guard refuses 1 -> 0 on purpose).
+- **Attention (quiet):** `AttentionState` = next buyable item per catalog (in order, mountain open,
+  affordable), rebirth level reached, ascend level reached. A gold arrow (the panel arrow tinted,
+  rotated to point at the button) bobs beside the Shop / Rebirth buttons (to the RIGHT: above them
+  sit the coin counter and the button before), an "ASCEND!" billboard bobs over the wings, and each
+  new key (item name / rebirth number / ascension number) gets one Notify.Info toast, queued one
+  every 6 s after a 4 s settle on join. Hidden while that panel is open or during a ride;
+  re-checked on attribute changes and every 2 s (the lobby generates after the HUD starts).
+- **Rojo gotcha:** the rojo serve on 34872 was restarted by another session at 03:02 and the Studio
+  plugin dropped ("WebSocket error ... forcibly closed"), so the second batch of edits never
+  synced. Studio == repo was kept by pushing the sources through `ras-dev/tools/serve-src.ps1`
+  (loopback, GetAsync + `Source =` in the edit DM, checksummed) until the user reconnects the
+  plugin. Also seen in the console: the user rebirthed twice on the test account between my
+  playtests (profile now rebirths 2, level 22, 7,691 coins).

@@ -26,6 +26,20 @@
 	"REBIRTH!", grayed until that level is reached; a press invokes Rebirth. The
 	main level bar reads "MAX" with a full fill at PlayerProgress.MAX_LEVEL. A
 	generated frame is only built when Studio has not supplied one.
+	Ascend is the same panel shape (Studio frame HUD/Ascend, built by
+	extras/panels/build_panels.lua): CurrentBoost / UpcomingBoost = the permanent
+	power multiplier now / after ascending (X1 -> X13), the level bar toward
+	PlayerProgress.ASCEND_LEVEL, Buy = "ASCEND!"; a press invokes Ascend, which
+	resets everything. It opens by walking up to the heavenly wings: the "Ascend"
+	model inside the lobby's StartPlatform (CIRCLE_PANELS, bounding box + pad).
+
+	Attention (not distracting): a small gold arrow bobs above the Shop button
+	while the next snowball or blaster can be bought (in order, mountain open,
+	affordable) and above the Rebirth button while the rebirth level is reached;
+	a bobbing "ASCEND!" billboard hangs over the wings at the ascend level. Each
+	one also gets a single Notify.Info toast the first time it becomes available
+	(per item / rebirth / ascension, this session). Nothing shows while that panel
+	is open or during a ride.
 
 	Mountains cards (Frostpeak, Candy, ...) show Travel when unlocked and Locked
 	when not. Travel invokes TravelToMountain (teleport to that mountain's place).
@@ -102,11 +116,16 @@ local BUTTON_PANELS = {
 local CIRCLE_PANELS = {
 	ShopCircle = "Shop",
 	MountainCircle = "Mountains",
+	Ascend = "Ascend", -- the heavenly wings model in the lobby's StartPlatform
+}
+local CIRCLE_RADIUS_PAD = { -- extra studs around a trigger's footprint
+	Ascend = 4,
 }
 local HIDES_MAIN = {
 	Shop = true,
 	Mountains = true,
 	Rebirth = true,
+	Ascend = true,
 }
 local REBIRTH_CAN = Color3.fromRGB(46, 160, 90)
 local REBIRTH_CANT = Color3.fromRGB(78, 84, 96)
@@ -136,7 +155,26 @@ local REBIRTH_FLOAT = "REBIRTH!"
 local REBIRTH_TOAST = "Rebirth %d! Boost %s"
 local REBIRTH_BUY_TEXT = "REBIRTH!"
 local REBIRTH_NEED_TOAST = "Reach level %d first"
+local ASCEND_FLOAT = "ASCENDED!"
+local ASCEND_TOAST = "Ascension %d! Power %s"
+local ASCEND_BUY_TEXT = "ASCEND!"
 local MAX_LEVEL_TEXT = "MAX"
+-- Attention arrows + one-time toasts.
+local ATTENTION_ARROW = "rbxassetid://113666736365393" -- the panel arrow, turned to point at the button
+local ATTENTION_COLOR = Color3.fromRGB(255, 214, 64)
+local ATTENTION_SIZE = 26 -- px, before the dock's ResponsiveScale
+local ATTENTION_GAP = 6 -- px between the button's right edge and the arrow
+local ATTENTION_BOB = 4 -- px
+local ATTENTION_BOB_RATE = 3.2 -- rad/s
+local ATTENTION_SETTLE = 4 -- s after the HUD starts before the first toast
+local ATTENTION_TOAST_GAP = 6 -- s between two attention toasts (they queue, never stack)
+local ATTENTION_TOASTS = {
+	Snowballs = "New snowball ready to buy!",
+	Blasters = "New blaster ready to buy!",
+	Rebirth = "Rebirth ready!",
+	Ascend = "You can ASCEND at the heavenly wings!",
+}
+local ASCEND_BILLBOARD_TEXT = "ASCEND!"
 local RING_HEIGHT_PAD = 12
 local POP_IN = TweenInfo.new(0.28, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
 local POP_OUT = TweenInfo.new(0.18, Enum.EasingStyle.Quad, Enum.EasingDirection.In)
@@ -156,6 +194,13 @@ api.ShopBuyLooks = {}
 api.ShopGradientLooks = {}
 api.RebirthBuyLooks = {}
 api.RebirthGradientLooks = {}
+api.AscendBuyLooks = {}
+api.AscendGradientLooks = {}
+api.LevelBars = {}
+api.Attention = {}
+api.AttentionToasted = {}
+api.AttentionToastQueue = {}
+api.CircleCache = {}
 api.PanelShown = {}
 api.PanelTweens = {}
 api.PanelRegistered = {}
@@ -1085,6 +1130,19 @@ function api:DisconnectRebirth()
 	self.RebirthBusy = false
 end
 
+function api:DisconnectAscend()
+	if self.AscendConnection then
+		self.AscendConnection:Disconnect()
+		self.AscendConnection = nil
+	end
+	local panel = self.Panels.Ascend
+	local buy = panel and panel:FindFirstChild("Buy", true)
+	if buy then
+		buy:SetAttribute("AscendWired", nil)
+	end
+	self.AscendBusy = false
+end
+
 function api:DisconnectEvents()
 	for _, connection in self.Connections do
 		connection:Disconnect()
@@ -1093,9 +1151,12 @@ function api:DisconnectEvents()
 	self:DisconnectMountainTravel()
 	self:DisconnectShop()
 	self:DisconnectRebirth()
+	self:DisconnectAscend()
+	self:ClearAttention()
 	self:EndRunReadout()
 	self.CircleWatch = nil
 	self.InsideCircle = nil
+	table.clear(self.CircleCache)
 end
 
 function api:ConnectEvents()
@@ -1136,6 +1197,7 @@ function api:HidePanel(name)
 		end
 	end)
 	self:SyncMainVisibility()
+	self:QueueAttention()
 end
 
 function api:WirePanel(panel)
@@ -1295,7 +1357,7 @@ function api:RefreshRebirthPanel()
 	-- Studio frame: boost now -> after the next rebirth, and the level bar toward the gate.
 	setText("CurrentBoost", formatBoost(playerProgress.EarningsMultiplier(rebirths)))
 	setText("UpcomingBoost", formatBoost(playerProgress.EarningsMultiplier(rebirths + 1)))
-	self:SetRebirthLevelBar(panel, level, needLevel)
+	self:SetPanelLevelBar(panel, level, needLevel)
 
 	-- Generated fallback frame.
 	setText("Count", "Rebirths: " .. tostring(rebirths))
@@ -1386,13 +1448,132 @@ function api:SetupRebirthPanel(panel)
 	end)
 end
 
--- Dev hook (PlayerGui attribute "DevPress"): "<Snowballs|Blasters>:<item>" or "Rebirth" opens that
--- panel and presses the button as a click would, so a playtest eval can buy without FireServer.
+----------------------------------------------------------------------------------------------
+-- Ascend: the Studio frame HUD/Ascend (same shape as Rebirth), opened by the heavenly wings.
+----------------------------------------------------------------------------------------------
+
+function api:EnsureAscendFrame()
+	local existing = findFrame(self, "Ascend")
+	if not existing then
+		warn("[CLIENT]: No Ascend frame in the game (ServerStorage.Assets.UserInterfaces.HUD.Ascend)")
+	end
+	return existing
+end
+
+function api:RefreshAscendPanel()
+	local panel = self.Panels.Ascend
+	if not panel or not panel.Parent then
+		return
+	end
+
+	local player = Players.LocalPlayer
+	local ascensions = math.max(0, math.floor(tonumber(player:GetAttribute("Ascensions")) or 0))
+	local level = math.max(1, math.floor(tonumber(player:GetAttribute("Level")) or 1))
+	local needLevel = playerProgress.AscendLevel()
+	local ready = level >= needLevel
+	local enabled = ready and not self.AscendBusy
+
+	local function setText(name, text)
+		local label = panel:FindFirstChild(name, true)
+		if label and (label:IsA("TextLabel") or label:IsA("TextButton")) then
+			label.Text = text
+		end
+	end
+
+	setText("CurrentBoost", formatBoost(playerProgress.AscendMultiplier(ascensions)))
+	setText("UpcomingBoost", formatBoost(playerProgress.AscendMultiplier(ascensions + 1)))
+	self:SetPanelLevelBar(panel, level, needLevel)
+
+	local buy = findRebirthBuy(panel)
+	if buy then
+		setButtonText(buy, ASCEND_BUY_TEXT)
+		-- Grayed, not inert: an early press still explains itself ("Reach level 100 first").
+		buy.Active = not self.AscendBusy
+		local tinted = false
+		eachShopBuyGradient(buy, function(gradient)
+			tinted = true
+			local colors = rememberGradientLook(self.AscendGradientLooks, gradient)
+			gradient.Color = if enabled then colors.Green else colors.Gray
+		end)
+		if tinted then
+			buy.AutoButtonColor = enabled
+		else
+			local look = rememberButtonLook(self.AscendBuyLooks, buy)
+			applyButtonLook(buy, look, not enabled)
+			buy.AutoButtonColor = if enabled then look.AutoButtonColor else false
+		end
+	end
+end
+
+function api:PressAscend(buy)
+	if self.AscendBusy then
+		return
+	end
+	local player = Players.LocalPlayer
+	local ascensions = math.max(0, math.floor(tonumber(player:GetAttribute("Ascensions")) or 0))
+	local level = math.max(1, math.floor(tonumber(player:GetAttribute("Level")) or 1))
+	local needLevel = playerProgress.AscendLevel()
+	PurchaseFX.Press(buy)
+	if level < needLevel then
+		PurchaseFX.Fail(buy)
+		Notify.Error(string.format(REBIRTH_NEED_TOAST, needLevel))
+		self:RefreshAscendPanel()
+		return
+	end
+
+	self.AscendBusy = true
+	self:RefreshAscendPanel()
+	local invoked, ok, err = pcall(function()
+		return ReplicatedStorage.ReEvent.ReFunction:InvokeServer("Ascend")
+	end)
+	self.AscendBusy = false
+	self:RefreshAscendPanel()
+	self:RefreshRebirthPanel()
+	self:RefreshShopPanel()
+	self:RefreshMountainsPanel()
+	if invoked and ok then
+		PurchaseFX.Success(buy)
+		PurchaseFX.FloatText(buy, ASCEND_FLOAT)
+		Audio.Play("Rebirth")
+		Audio.Play("LevelUp")
+		Notify.Success(string.format(ASCEND_TOAST, ascensions + 1, formatBoost(playerProgress.AscendMultiplier(ascensions + 1))))
+	else
+		warn("[CLIENT]: Ascend failed:", if invoked then err else ok)
+		PurchaseFX.Fail(buy)
+		Notify.Error(if invoked and type(err) == "string" then err else "Ascend failed")
+	end
+end
+
+function api:SetupAscendPanel(panel)
+	if not panel then
+		return
+	end
+	self:RefreshAscendPanel()
+
+	local buy = findRebirthBuy(panel)
+	if not buy or buy:GetAttribute("AscendWired") then
+		return
+	end
+	buy:SetAttribute("AscendWired", true)
+	self.AscendConnection = buy.Activated:Connect(function()
+		self:PressAscend(buy)
+	end)
+end
+
+-- Dev hook (PlayerGui attribute "DevPress"): "<Snowballs|Blasters>:<item>", "Rebirth" or "Ascend"
+-- opens that panel and presses the button as a click would, so a playtest eval can buy without FireServer.
 function api:DevPress(request)
 	if request == "Rebirth" then
 		local buy = findRebirthBuy(self:OpenPanel("Rebirth"))
 		if buy then
 			self:PressRebirth(buy)
+		end
+		return
+	end
+	if request == "Ascend" then
+		local buy = findRebirthBuy(self:OpenPanel("Ascend"))
+		if buy then
+			self:PressAscend(buy)
 		end
 		return
 	end
@@ -1416,6 +1597,8 @@ end
 function api:OpenPanel(name)
 	if name == "Rebirth" then
 		self:EnsureRebirthFrame()
+	elseif name == "Ascend" then
+		self:EnsureAscendFrame()
 	end
 
 	local template, alreadySpawned = findFrame(self, name)
@@ -1468,8 +1651,11 @@ function api:OpenPanel(name)
 		self:SetupShopPanel(panel)
 	elseif name == "Rebirth" then
 		self:SetupRebirthPanel(panel)
+	elseif name == "Ascend" then
+		self:SetupAscendPanel(panel)
 	end
 	self:SyncMainVisibility()
+	self:QueueAttention()
 	return panel
 end
 
@@ -1618,14 +1804,14 @@ local function tweenFill(ui, alpha, info)
 	return tween
 end
 
--- The rebirth panel's level bar (Background.Level: Frame.TextLabel + TextShadow over a
--- BackFrame fill), driven like the main bar: "level/needed", filled to level / needed.
-function api:SetRebirthLevelBar(panel, level, needLevel)
-	local ui = self.RebirthLevelUI
+-- A panel's level bar (a Frame named Level anywhere in it: Frame.TextLabel + TextShadow over a
+-- BackFrame fill; Rebirth and Ascend both have one), driven like the main bar: "level/needed",
+-- filled to level / needed.
+function api:SetPanelLevelBar(panel, level, needLevel)
+	local ui = self.LevelBars[panel.Name]
 	if not ui or ui.Panel ~= panel or not ui.Fill.Parent then
 		ui = nil
-		local background = panel:FindFirstChild("Background")
-		for _, child in (background or panel):GetChildren() do
+		for _, child in panel:GetDescendants() do
 			if child.Name == "Level" and child:IsA("Frame") then
 				local holder = child:FindFirstChild("Frame")
 				local label = holder and holder:FindFirstChild("TextLabel")
@@ -1643,7 +1829,7 @@ function api:SetRebirthLevelBar(panel, level, needLevel)
 				end
 			end
 		end
-		self.RebirthLevelUI = ui
+		self.LevelBars[panel.Name] = ui
 		if not ui then
 			return
 		end
@@ -2083,9 +2269,9 @@ local function getRingVolume(circle)
 	end
 end
 
-local function isInsideRing(position, cf, size)
+local function isInsideRing(position, cf, size, pad)
 	local localPoint = cf:PointToObjectSpace(position)
-	local radius = math.max(size.X, size.Z) * 0.5
+	local radius = math.max(size.X, size.Z) * 0.5 + (pad or 0)
 	local halfH = size.Y * 0.5
 	return localPoint.X * localPoint.X + localPoint.Z * localPoint.Z <= radius * radius
 		and localPoint.Y >= -halfH - 2
@@ -2095,6 +2281,18 @@ end
 local function isRiding()
 	local folder = workspace:FindFirstChild("ActiveSnowballs")
 	return folder ~= nil and folder:FindFirstChild(Players.LocalPlayer.Name .. "_Snowball") ~= nil
+end
+
+-- Trigger models are looked up once and kept while they stay in the world (a recursive
+-- FindFirstChild over the whole mountain every frame is what this replaces).
+function api:GetCircleModel(name)
+	local cached = self.CircleCache[name]
+	if cached and cached.Parent and cached:IsDescendantOf(workspace) then
+		return cached
+	end
+	local found = findCircleModel(name)
+	self.CircleCache[name] = found
+	return found
 end
 
 function api:WatchCircles()
@@ -2113,12 +2311,12 @@ function api:WatchCircles()
 
 		local inside = nil
 		for circleName, panelName in CIRCLE_PANELS do
-			local circle = findCircleModel(circleName)
+			local circle = self:GetCircleModel(circleName)
 			if not circle then
 				continue
 			end
 			local cf, size = getRingVolume(circle)
-			if cf and isInsideRing(hrp.Position, cf, size) then
+			if cf and isInsideRing(hrp.Position, cf, size, CIRCLE_RADIUS_PAD[circleName]) then
 				inside = circleName
 				if self.InsideCircle ~= circleName then
 					self:OpenPanel(panelName)
@@ -2190,16 +2388,278 @@ function api:Initialize()
 			self:RefreshShopPanel()
 		end))
 	end
-	for _, name in { "Level", "Rebirths" } do
+	for _, name in { "Level", "Rebirths", "Ascensions" } do
 		table.insert(self.Connections, Players.LocalPlayer:GetAttributeChangedSignal(name):Connect(function()
 			self:RefreshRebirthPanel()
+			self:RefreshAscendPanel()
 		end))
 	end
 	self:RefreshShopPanel()
 	self:WatchCircles()
+	self:WatchAttention()
 	PurchaseFX.WatchPlayers()
 
 	print("[CLIENT]: HUD ready")
+end
+
+----------------------------------------------------------------------------------------------
+-- Attention: a small bobbing arrow above the Shop / Rebirth buttons and an "ASCEND!" billboard
+-- over the wings while that action is available, plus one quiet toast the first time each
+-- becomes available. Hidden while that panel is open and during a ride.
+----------------------------------------------------------------------------------------------
+
+-- The next item of a catalog that can be bought right now (in order, mountain open,
+-- affordable), or nil.
+local function buyableItem(tab, coins)
+	local owned = shopOwnedMap(tab)
+	local order = nextShopOrder(tab, owned)
+	if not order then
+		return nil
+	end
+	for _, def in shopCatalog(tab) do
+		if def.Order == order then
+			if shopOrderForSale(order, owned, tab) and coins >= math.max(0, math.floor(tonumber(def.Price) or 0)) then
+				return def
+			end
+			return nil
+		end
+	end
+	return nil
+end
+
+local function attentionArrow(button)
+	local arrow = button:FindFirstChild("Attention")
+	if arrow and arrow:IsA("ImageLabel") then
+		return arrow
+	end
+	arrow = Instance.new("ImageLabel")
+	arrow.Name = "Attention"
+	arrow.BackgroundTransparency = 1
+	-- Beside the button, pointing at it: above it sits the coin counter / the button before.
+	arrow.AnchorPoint = Vector2.new(0, 0.5)
+	arrow.Position = UDim2.new(1, ATTENTION_GAP, 0.5, 0)
+	arrow.Size = UDim2.fromOffset(ATTENTION_SIZE, ATTENTION_SIZE)
+	arrow.Image = ATTENTION_ARROW
+	arrow.ImageColor3 = ATTENTION_COLOR
+	arrow.Rotation = 180 -- the panel's "next" arrow points right; turned to point left at the button
+	arrow.ZIndex = (button.ZIndex or 1) + 5
+	arrow.Visible = false
+	arrow.Parent = button
+	return arrow
+end
+
+function api:AttentionState()
+	local player = Players.LocalPlayer
+	local coins = math.max(0, math.floor(tonumber(player:GetAttribute("Coins")) or 0))
+	local level = math.max(1, math.floor(tonumber(player:GetAttribute("Level")) or 1))
+	local rebirths = math.max(0, math.floor(tonumber(player:GetAttribute("Rebirths")) or 0))
+	local ascensions = math.max(0, math.floor(tonumber(player:GetAttribute("Ascensions")) or 0))
+	local state = { Shop = {}, Rebirth = nil, Ascend = nil }
+	for _, tab in { "Snowballs", "Blasters" } do
+		local def = buyableItem(tab, coins)
+		if def then
+			state.Shop[tab] = def.Name
+		end
+	end
+	if level >= playerProgress.RebirthLevel(rebirths) then
+		state.Rebirth = rebirths + 1
+	end
+	if level >= playerProgress.AscendLevel() then
+		state.Ascend = ascensions + 1
+	end
+	return state
+end
+
+-- One toast per key (item name, rebirth number, ascension number) per session, only once the
+-- HUD has been up for ATTENTION_SETTLE seconds, and one at a time ATTENTION_TOAST_GAP apart:
+-- a join with a full shop and a rebirth ready shows them one by one, never as a stack.
+function api:AttentionToast(key, text)
+	if self.AttentionToasted[key] then
+		return
+	end
+	-- Not marked during the settle: the check that runs at ATTENTION_SETTLE shows these once.
+	if os.clock() - (self.AttentionStarted or 0) < ATTENTION_SETTLE then
+		return
+	end
+	self.AttentionToasted[key] = true
+	table.insert(self.AttentionToastQueue, text)
+	self:DrainAttentionToasts()
+end
+
+function api:DrainAttentionToasts()
+	if self.AttentionDraining then
+		return
+	end
+	self.AttentionDraining = true
+	task.spawn(function()
+		while #self.AttentionToastQueue > 0 do
+			local wait = ATTENTION_TOAST_GAP - (os.clock() - (self.AttentionLastToast or -ATTENTION_TOAST_GAP))
+			if wait > 0 then
+				task.wait(wait)
+			end
+			local text = table.remove(self.AttentionToastQueue, 1)
+			if text then
+				self.AttentionLastToast = os.clock()
+				Notify.Info(text)
+			end
+		end
+		self.AttentionDraining = false
+	end)
+end
+
+function api:UpdateAttention()
+	self.AttentionQueued = false
+	local main = self.MainUI
+	if not main or not main.Parent then
+		return
+	end
+	local state = self:AttentionState()
+	local riding = isRiding()
+
+	local shopReady = next(state.Shop) ~= nil
+	local shopButton = main:FindFirstChild("Shop", true)
+	if shopButton and shopButton:IsA("GuiButton") then
+		local arrow = attentionArrow(shopButton)
+		arrow.Visible = shopReady and not self.PanelShown.Shop and not riding
+		self.Attention.Shop = if arrow.Visible then arrow else nil
+	end
+	for tab, itemName in state.Shop do
+		if not self.PanelShown.Shop then
+			self:AttentionToast("Shop:" .. itemName, ATTENTION_TOASTS[tab])
+		end
+	end
+
+	local rebirthButton = main:FindFirstChild("Rebirth", true)
+	if rebirthButton and rebirthButton:IsA("GuiButton") then
+		local arrow = attentionArrow(rebirthButton)
+		arrow.Visible = state.Rebirth ~= nil and not self.PanelShown.Rebirth and not riding
+		self.Attention.Rebirth = if arrow.Visible then arrow else nil
+	end
+	if state.Rebirth and not self.PanelShown.Rebirth then
+		self:AttentionToast("Rebirth:" .. tostring(state.Rebirth), ATTENTION_TOASTS.Rebirth)
+	end
+
+	self:SetAscendBillboard(state.Ascend ~= nil and not self.PanelShown.Ascend and not riding)
+	if state.Ascend and not self.PanelShown.Ascend then
+		self:AttentionToast("Ascend:" .. tostring(state.Ascend), ATTENTION_TOASTS.Ascend)
+	end
+end
+
+function api:QueueAttention()
+	if self.AttentionQueued then
+		return
+	end
+	self.AttentionQueued = true
+	task.defer(function()
+		if self.AttentionQueued then
+			self:UpdateAttention()
+		end
+	end)
+end
+
+-- A bobbing "ASCEND!" over the wings (BillboardGui on the tallest part of the Ascend model).
+function api:SetAscendBillboard(on)
+	local billboard = self.AscendBillboard
+	if not on then
+		if billboard then
+			billboard:Destroy()
+			self.AscendBillboard = nil
+		end
+		return
+	end
+	if billboard and billboard.Parent and billboard.Adornee and billboard.Adornee.Parent then
+		return
+	end
+	local model = self:GetCircleModel("Ascend")
+	if not model then
+		return
+	end
+	local adornee = model:FindFirstChild("Ascend_05_Wings", true) or model:FindFirstChildWhichIsA("BasePart", true)
+	if not adornee then
+		return
+	end
+	if billboard then
+		billboard:Destroy()
+	end
+	billboard = Instance.new("BillboardGui")
+	billboard.Name = "AscendAttention"
+	billboard.Adornee = adornee
+	billboard.Size = UDim2.fromOffset(120, 78)
+	billboard.StudsOffsetWorldSpace = Vector3.new(0, adornee.Size.Y / 2 + 4, 0)
+	billboard.MaxDistance = 140
+	billboard.AlwaysOnTop = false
+	billboard.ResetOnSpawn = false
+	local arrow = Instance.new("ImageLabel")
+	arrow.Name = "Arrow"
+	arrow.BackgroundTransparency = 1
+	arrow.AnchorPoint = Vector2.new(0.5, 1)
+	arrow.Position = UDim2.new(0.5, 0, 1, 0)
+	arrow.Size = UDim2.fromOffset(40, 40)
+	arrow.Image = ATTENTION_ARROW
+	arrow.ImageColor3 = ATTENTION_COLOR
+	arrow.Rotation = 90
+	arrow.Parent = billboard
+	local label = Instance.new("TextLabel")
+	label.Name = "Label"
+	label.BackgroundTransparency = 1
+	label.Position = UDim2.new(0, 0, 0, 0)
+	label.Size = UDim2.new(1, 0, 0, 34)
+	label.Font = Enum.Font.FredokaOne
+	label.Text = ASCEND_BILLBOARD_TEXT
+	label.TextSize = 30
+	label.TextColor3 = ATTENTION_COLOR
+	label.Parent = billboard
+	local stroke = Instance.new("UIStroke")
+	stroke.Color = Color3.fromRGB(36, 25, 29)
+	stroke.Thickness = 3
+	stroke.Parent = label
+	billboard.Parent = getPlayerGui()
+	self.AscendBillboard = billboard
+end
+
+function api:ClearAttention()
+	self.AttentionQueued = false
+	table.clear(self.AttentionToastQueue)
+	for _, arrow in self.Attention do
+		if arrow and arrow.Parent then
+			arrow.Visible = false
+		end
+	end
+	table.clear(self.Attention)
+	self:SetAscendBillboard(false)
+end
+
+function api:WatchAttention()
+	self.AttentionStarted = os.clock()
+	local player = Players.LocalPlayer
+	for _, name in { "Coins", "Level", "Rebirths", "Ascensions", "UnlockedSnowballs", "UnlockedLaunchers", "UnlockedMountains" } do
+		table.insert(self.Connections, player:GetAttributeChangedSignal(name):Connect(function()
+			self:QueueAttention()
+		end))
+	end
+	-- Bob the arrows on Heartbeat (tweens pause while Studio is unfocused; this does not), and
+	-- re-check the ride / wings state now and then (the lobby generates after the HUD starts).
+	local lastPoll = 0
+	table.insert(self.Connections, RunService.Heartbeat:Connect(function()
+		local bob = math.sin(os.clock() * ATTENTION_BOB_RATE) * ATTENTION_BOB
+		for _, arrow in self.Attention do
+			if arrow and arrow.Parent then
+				arrow.Position = UDim2.new(1, ATTENTION_GAP + bob, 0.5, 0)
+			end
+		end
+		local billboard = self.AscendBillboard
+		if billboard and billboard.Adornee then
+			billboard.StudsOffsetWorldSpace = Vector3.new(0, billboard.Adornee.Size.Y / 2 + 4 + bob * 0.2, 0)
+		end
+		if os.clock() - lastPoll >= 2 then
+			lastPoll = os.clock()
+			self:QueueAttention()
+		end
+	end))
+	task.delay(ATTENTION_SETTLE, function()
+		self:QueueAttention()
+	end)
+	self:QueueAttention()
 end
 
 return api

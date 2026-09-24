@@ -2,8 +2,9 @@
 	XP / coins / lifetime coins collected / lifetime distance rolled / rebirths /
 	mountain unlocks / owned equipment. Creates leaderstats.Coins and replicates
 	Level, XP, XPNeeded, Coins, the lifetime totals, Rebirths, RebirthLevel (the
-	level the next rebirth needs), UnlockedMountains, owned snowballs / launchers,
-	the equipped names, and the gear multiplier as player attributes.
+	level the next rebirth needs), Ascensions, AscendLevel, AscendMultiplier,
+	UnlockedMountains, owned snowballs / launchers, the equipped names, and the
+	gear multiplier as player attributes.
 	UnlockedMountains is PlayerProgress.EffectiveUnlocks: the same map the shop's
 	purchase gate reads (Studio UnlockAll included).
 
@@ -60,6 +61,9 @@ function m_sapi:ReplicateProgress(player)
 	playerProgress.EnsureUnlocks(data)
 	player:SetAttribute("Rebirths", data.Rebirths or 0)
 	player:SetAttribute("RebirthLevel", playerProgress.RebirthLevel(data.Rebirths))
+	player:SetAttribute("Ascensions", data.Ascensions or 0)
+	player:SetAttribute("AscendLevel", playerProgress.AscendLevel())
+	player:SetAttribute("AscendMultiplier", playerProgress.AscendMultiplier(data.Ascensions))
 	player:SetAttribute("UnlockedMountains", playerProgress.EncodeUnlocks(playerProgress.EffectiveUnlocks(data)))
 	player:SetAttribute("UnlockedSnowballs", playerProgress.EncodeNames(data.UnlockedSnowballs, playerProgress.STARTER_SNOWBALL))
 	player:SetAttribute("UnlockedLaunchers", playerProgress.EncodeNames(data.UnlockedLaunchers, playerProgress.STARTER_LAUNCHER))
