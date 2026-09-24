@@ -436,4 +436,308 @@ function PurchaseFX.Confirmed(text)
 	PurchaseFX.Burst(Players.LocalPlayer.Character)
 end
 
+----------------------------------------------------------------------------------------------
+-- Shop celebration extras (2026-09-24): screen-space confetti, a shockwave ring, a shine
+-- sweep, the EQUIPPED stamp and coins flying into the balance. All Heartbeat-stepped.
+----------------------------------------------------------------------------------------------
+
+PurchaseFX.SOUND_IDS["Stamp"] = "rbxassetid://9118616114" -- MountainConfig.SOUNDS.Thud
+PurchaseFX.STAMP_SOUND = { "Stamp", 0.9 }
+PurchaseFX.COIN_ICON = "rbxassetid://138813916097806"
+PurchaseFX.CONFETTI_COLORS = {
+	Color3.fromRGB(255, 221, 51),
+	Color3.fromRGB(255, 255, 255),
+	Color3.fromRGB(125, 227, 244),
+	Color3.fromRGB(120, 255, 140),
+	Color3.fromRGB(255, 130, 200),
+	Color3.fromRGB(139, 92, 246),
+}
+PurchaseFX.FX_ZINDEX = 70
+
+local function screenOf(gui)
+	return gui and gui:FindFirstAncestorWhichIsA("LayerCollector")
+end
+
+local function centerOf(gui, screen)
+	return gui.AbsolutePosition + gui.AbsoluteSize * 0.5 - screen.AbsolutePosition
+end
+
+-- A full-screen transparent holder for one effect, above the panels.
+local function fxLayer(screen, name)
+	local holder = Instance.new("Frame")
+	holder.Name = name
+	holder.BackgroundTransparency = 1
+	holder.BorderSizePixel = 0
+	holder.Size = UDim2.fromScale(1, 1)
+	holder.ZIndex = PurchaseFX.FX_ZINDEX
+	holder.Parent = screen
+	return holder
+end
+
+-- Paper confetti fanning up and out of the gui's centre, falling under gravity, spinning, fading.
+function PurchaseFX.Confetti(gui, count)
+	local screen = screenOf(gui)
+	if not (screen and gui.Parent) then
+		return
+	end
+	local origin = centerOf(gui, screen)
+	local size = gui.AbsoluteSize.Y
+	local base = math.clamp(size * 0.055, 6, 16)
+	local holder = fxLayer(screen, "FXConfetti")
+	local colors = PurchaseFX.CONFETTI_COLORS
+	local rng = Random.new()
+	local pieces = {}
+	for index = 1, count or 30 do
+		local piece = Instance.new("Frame")
+		piece.BorderSizePixel = 0
+		piece.AnchorPoint = Vector2.new(0.5, 0.5)
+		local w = base * rng:NextNumber(0.7, 1.4)
+		local h = base * rng:NextNumber(0.5, 1.1)
+		piece.Size = UDim2.fromOffset(w, h)
+		piece.Position = UDim2.fromOffset(origin.X, origin.Y)
+		piece.BackgroundColor3 = colors[rng:NextInteger(1, #colors)]
+		piece.Rotation = rng:NextNumber(0, 360)
+		piece.ZIndex = PurchaseFX.FX_ZINDEX + 1
+		local corner = Instance.new("UICorner")
+		corner.CornerRadius = UDim.new(0, math.max(2, h * 0.3))
+		corner.Parent = piece
+		piece.Parent = holder
+		local angle = math.rad(rng:NextNumber(200, 340)) -- an upward fan (screen y points down)
+		local speed = size * rng:NextNumber(1.6, 3.4)
+		pieces[index] = {
+			Gui = piece,
+			X = origin.X,
+			Y = origin.Y,
+			VX = math.cos(angle) * speed,
+			VY = math.sin(angle) * speed,
+			Spin = rng:NextNumber(-540, 540),
+			Life = rng:NextNumber(0.7, 1.15),
+			Age = 0,
+		}
+	end
+	task.spawn(function()
+		local gravity = size * 4.2
+		local alive = true
+		while alive and holder.Parent do
+			local dt = RunService.Heartbeat:Wait()
+			alive = false
+			for _, p in pieces do
+				if p.Age < p.Life then
+					alive = true
+					p.Age += dt
+					p.VY += gravity * dt
+					p.VX *= math.max(0, 1 - 1.8 * dt)
+					p.X += p.VX * dt
+					p.Y += p.VY * dt
+					local piece = p.Gui
+					piece.Position = UDim2.fromOffset(p.X, p.Y)
+					piece.Rotation += p.Spin * dt
+					local f = p.Age / p.Life
+					piece.BackgroundTransparency = if f > 0.6 then (f - 0.6) / 0.4 else 0
+				elseif p.Gui.Visible then
+					p.Gui.Visible = false
+				end
+			end
+		end
+		holder:Destroy()
+	end)
+end
+
+-- A ring that expands out of the gui and fades.
+function PurchaseFX.Shockwave(gui, color)
+	local screen = screenOf(gui)
+	if not (screen and gui.Parent) then
+		return
+	end
+	local center = centerOf(gui, screen)
+	local size = math.max(gui.AbsoluteSize.X, gui.AbsoluteSize.Y)
+	local thickness = math.clamp(size * 0.05, 3, 10)
+	local ring = Instance.new("Frame")
+	ring.Name = "FXShockwave"
+	ring.AnchorPoint = Vector2.new(0.5, 0.5)
+	ring.Position = UDim2.fromOffset(center.X, center.Y)
+	ring.Size = UDim2.fromOffset(size * 0.3, size * 0.3)
+	ring.BackgroundTransparency = 1
+	ring.BorderSizePixel = 0
+	ring.ZIndex = PurchaseFX.FX_ZINDEX - 1
+	local corner = Instance.new("UICorner")
+	corner.CornerRadius = UDim.new(1, 0)
+	corner.Parent = ring
+	local stroke = Instance.new("UIStroke")
+	stroke.Thickness = thickness
+	stroke.Color = color or PurchaseFX.FLOAT_COLOR
+	stroke.Parent = ring
+	ring.Parent = screen
+	task.spawn(function()
+		animate(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, function(a)
+			local s = size * (0.3 + 1.4 * a)
+			ring.Size = UDim2.fromOffset(s, s)
+			stroke.Transparency = a
+			stroke.Thickness = thickness * (1 - a) + 1
+		end, function()
+			return ring.Parent ~= nil
+		end)
+		ring:Destroy()
+	end)
+end
+
+-- A diagonal white gleam sweeping across the gui (clipped to its rounded corners).
+function PurchaseFX.Shine(gui, duration)
+	if not (gui and gui:IsA("GuiObject") and gui.Parent) then
+		return
+	end
+	local clip = Instance.new("Frame")
+	clip.Name = "FXShine"
+	clip.BackgroundTransparency = 1
+	clip.BorderSizePixel = 0
+	clip.Size = UDim2.fromScale(1, 1)
+	clip.ClipsDescendants = true
+	clip.ZIndex = gui.ZIndex + 6
+	local corner = gui:FindFirstChildOfClass("UICorner")
+	if corner then
+		corner:Clone().Parent = clip
+	end
+	local bar = Instance.new("Frame")
+	bar.BorderSizePixel = 0
+	bar.BackgroundColor3 = Color3.new(1, 1, 1)
+	bar.AnchorPoint = Vector2.new(0.5, 0.5)
+	bar.Size = UDim2.new(0.35, 0, 1.8, 0)
+	bar.Rotation = 20
+	bar.Position = UDim2.fromScale(-0.4, 0.5)
+	bar.ZIndex = clip.ZIndex + 1
+	local gradient = Instance.new("UIGradient")
+	gradient.Transparency = NumberSequence.new({
+		NumberSequenceKeypoint.new(0, 1),
+		NumberSequenceKeypoint.new(0.5, 0.35),
+		NumberSequenceKeypoint.new(1, 1),
+	})
+	gradient.Parent = bar
+	bar.Parent = clip
+	clip.Parent = gui
+	task.spawn(function()
+		animate(duration or 0.55, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, function(a)
+			bar.Position = UDim2.fromScale(-0.4 + 1.8 * a, 0.5)
+		end, function()
+			return clip.Parent ~= nil
+		end)
+		clip:Destroy()
+	end)
+end
+
+-- Slams a ribbon onto the screen: shows it from 2.6x, turned, settling with a thud.
+function PurchaseFX.Stamp(gui)
+	if not (gui and gui:IsA("GuiObject")) then
+		return
+	end
+	local scale = gui:FindFirstChild("Stamp")
+	if not (scale and scale:IsA("UIScale")) then
+		scale = Instance.new("UIScale")
+		scale.Name = "Stamp"
+		scale.Parent = gui
+	end
+	local rest = gui:GetAttribute("FXRestRotation") or gui.Rotation
+	gui:SetAttribute("FXRestRotation", rest)
+	gui.Visible = true
+	scale.Scale = 2.6
+	gui.Rotation = rest - 24
+	PurchaseFX.Sound(PurchaseFX.STAMP_SOUND)
+	local token = (tokens[gui] or 0) + 1
+	tokens[gui] = token
+	task.spawn(function()
+		local finished = animate(0.22, Enum.EasingStyle.Back, Enum.EasingDirection.Out, function(a)
+			scale.Scale = 2.6 - 1.6 * a
+			gui.Rotation = rest - 24 * (1 - a)
+		end, function()
+			return gui.Parent ~= nil and tokens[gui] == token
+		end)
+		if finished then
+			scale.Scale = 1
+			gui.Rotation = rest
+		end
+	end)
+end
+
+-- The ribbon shrinks away and hides.
+function PurchaseFX.Unstamp(gui)
+	if not (gui and gui:IsA("GuiObject")) then
+		return
+	end
+	local scale = gui:FindFirstChild("Stamp")
+	if not (scale and scale:IsA("UIScale")) then
+		gui.Visible = false
+		return
+	end
+	local token = (tokens[gui] or 0) + 1
+	tokens[gui] = token
+	task.spawn(function()
+		local from = scale.Scale
+		local finished = animate(0.12, Enum.EasingStyle.Quad, Enum.EasingDirection.In, function(a)
+			scale.Scale = from * (1 - a)
+		end, function()
+			return gui.Parent ~= nil and tokens[gui] == token
+		end)
+		if finished then
+			gui.Visible = false
+			scale.Scale = 1
+			local rest = gui:GetAttribute("FXRestRotation")
+			if rest then
+				gui.Rotation = rest
+			end
+		end
+	end)
+end
+
+-- Coins arc from one gui into another (the price pill into the balance). onArrive(index)
+-- fires as each coin lands.
+function PurchaseFX.CoinFly(from, to, count, onArrive)
+	local screen = screenOf(from)
+	if not (screen and to and from.Parent and to.Parent) then
+		return
+	end
+	local a = centerOf(from, screen)
+	local b = centerOf(to, screen)
+	local holder = fxLayer(screen, "FXCoins")
+	holder.ZIndex = PurchaseFX.FX_ZINDEX + 2
+	local size = math.clamp(from.AbsoluteSize.Y * 0.65, 18, 40)
+	local rng = Random.new()
+	local total = count or 8
+	local remaining = total
+	for index = 1, total do
+		task.delay((index - 1) * 0.045, function()
+			if not holder.Parent then
+				return
+			end
+			local coin = Instance.new("ImageLabel")
+			coin.BackgroundTransparency = 1
+			coin.Image = PurchaseFX.COIN_ICON
+			coin.ScaleType = Enum.ScaleType.Fit
+			coin.AnchorPoint = Vector2.new(0.5, 0.5)
+			coin.Size = UDim2.fromOffset(size, size)
+			coin.Position = UDim2.fromOffset(a.X, a.Y)
+			coin.ZIndex = holder.ZIndex + 1
+			coin.Parent = holder
+			local start = a + Vector2.new(rng:NextNumber(-18, 18), rng:NextNumber(-10, 10))
+			local control = (a + b) * 0.5 + Vector2.new(rng:NextNumber(-120, 120), -rng:NextNumber(60, 160)) * (size / 28)
+			animate(rng:NextNumber(0.5, 0.65), Enum.EasingStyle.Quad, Enum.EasingDirection.In, function(t)
+				local u = 1 - t
+				local p = start * (u * u) + control * (2 * u * t) + b * (t * t)
+				coin.Position = UDim2.fromOffset(p.X, p.Y)
+				local s = size * (1 - 0.45 * t)
+				coin.Size = UDim2.fromOffset(s, s)
+				coin.Rotation = 360 * t
+			end, function()
+				return coin.Parent ~= nil
+			end)
+			coin:Destroy()
+			if onArrive then
+				pcall(onArrive, index)
+			end
+			remaining -= 1
+			if remaining <= 0 then
+				holder:Destroy()
+			end
+		end)
+	end
+end
+
 return PurchaseFX

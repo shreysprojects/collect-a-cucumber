@@ -595,3 +595,61 @@ permanent x13 power multiplier, its own UI, opened by stepping near the heavenly
   (loopback, GetAsync + `Source =` in the edit DM, checksummed) until the user reconnects the
   plugin. Also seen in the console: the user rebirthed twice on the test account between my
   playtests (profile now rebirths 2, level 22, 7,691 coins).
+
+## 2026-09-24 (later still): the shop remade in the New Map look, buy / equip made satisfying
+
+User: "backup all frames and everything, and remake the shops taking inspiration from frames from
+another open place 'new map cucumber game'. Also make sure purchasing/equipping things is smooth
+and even more satisfying effects for that."
+
+- **Backups first:** every UI frame + module of the place exported to
+  `backups/RASDev_ui-before-shop-remake_2026-09-24.rbxm` (RobloxGames repo: ServerStorage.Assets
+  .UserInterfaces, ServerStorage.Modules.UserInterfaces, ReplicatedStorage.Assets.UserInterfaces
+  + .Modules, StarterGui HUD/Menu/Graphics); the old Shop frame itself lives on as
+  `ServerStorage.Backups.UI_Shop_before-remake_2026-09-24`.
+- **Reference:** the New Map's `StarterGui.CucumberMenus.ShopPanel` / `BuyShopPanel` / card
+  templates (dumped with properties, plus an edit-mode capture): a left tab rail of square gradient
+  tabs with a stud texture, a ribbon header overlapping the body, a chunky red X plate, rounded
+  stud-textured cards with an inner rim, a green purchase pill, FredokaOne with an ink outline.
+- **New frame** `ServerStorage.Assets.UserInterfaces.HUD.Shop` (Studio-only, built by
+  `ras-dev/shop-remake/build_shop_frames.lua`, copy in the RAS repo at
+  `extras/panels/build_shop_frames.lua`; idempotent, tagged with the attribute `ShopRemake`): the
+  same structure on the RAS icy palette (navy #102A43 outlines, frost body gradient, blue ribbon
+  with the shop icon, purple / blue tabs with the existing snowball + blaster icons, gold balance
+  pill with the coin icon, cards 296 x 236 in a 3-column grid, rarity gradients Common ice blue ->
+  Uncommon green -> Rare blue -> Epic purple -> Legendary gold, gold "x8" multiplier chip, padlock
+  over locked icons, an EQUIPPED ribbon stamp, a Buy pill with a coin icon). Authored at 1140 x
+  735 design px; `Panel.Fit` (UIScale) = min((W-40)/1140, (H-120)/735) clamped 0.35..1.1 and the
+  panel sits at y 0.46 so the Notify strip (91.5 %) stays clear below it. The full-screen root
+  keeps HUD.luau's PanelScale pop; an oversized Dimmer button behind the panel closes it.
+- **Logic** moved out of HUD.luau into the new `ReplicatedStorage/Assets/Modules/Client/UI/
+  ShopPanel.luau` (HUD.luau keeps OpenPanel / HidePanel / PanelManager / circles and delegates:
+  SetupShopPanel -> ShopPanel.Setup, RefreshShopPanel -> Refresh, DisconnectShop -> Teardown,
+  DevPress -> ShopPanel.DevPress; the four rule wrappers shopCatalog / nextShopOrder /
+  shopOrderForSale / shopOwnedMap stay for the attention arrows). States per card: EQUIPPED (gold,
+  inert) / EQUIP (green) / price green when affordable, amber when not / price grey + padlock when
+  an earlier item must be bought first / "BEAT <MOUNTAIN>" grey + padlock. The next card for sale
+  pulses a gold outline and the grid scrolls to it on open (row geometry from the UIGridLayout,
+  not AbsolutePosition: a card mid pop-in reports its shrunken rect). Cards pop in with a 30 ms
+  stagger, lift 3.5 % on hover (mouse only). Buying is client-checked first (mountain, order,
+  coins -> Fail shake + toast) then invoked; a purchase plays Success on the pill, pops the card,
+  floats UNLOCKED!, bursts 34 confetti pieces + a gold shockwave ring, sweeps a shine, flies 8
+  coins from the pill into the balance pill which then rolls down in red, and toasts. Equipping is
+  optimistic: the EQUIPPED ribbon stamps onto the card (2.6x -> 1, -24 deg -> -8 deg, thud) with a
+  shimmer + shine, the old card's ribbon shrinks away, the replicated attribute confirms (revert
+  after 2.5 s if it never does). `PurchaseFX` gained Confetti / Shockwave / Shine / Stamp /
+  Unstamp / CoinFly (Heartbeat-stepped, parented to the LayerCollector at ZIndex 70+).
+- **Verified in solo playtests** (test account awesomeotheraccount, rebirths 2 / level 22 / 7,691
+  coins): 30 cards per tab, correct states, buy Rocky (7,691 -> 5,191, EQUIP, toast, all five
+  effect layers present at 0.2 s), equip Rocky (stamp 2.02 -> 1.38 -> 1.00 -> 0.85 -> 1.00, server
+  attribute confirmed) and back, Blasters tab + buy Snow Scoop (2,691, Snowball Flipper amber),
+  reopen keeps the tab, canvas 0 on open after the scroll fix, toast clear of the panel. Profile
+  restored to exactly rebirths 2 / level 22 / 7,691 coins / starter gear and force-saved.
+- **Gotchas:** `card.Name` is the instance name, so the card's name label is `Title`; a UIScale'd
+  child of a UIGridLayout reports the top-left of its scaled rect (the layout centres it in the
+  cell), so scroll targets come from the layout maths; the Notify strip at 91.5 % of the screen
+  bounds how tall a centred panel can be (FIT_MARGIN.Y 120 + centre 0.46 at 1301 x 611 leaves 14
+  px); another session (Ascend / attention arrows) was editing HUD.luau in the same clone at the
+  same time - pulled its 1003c19 first, patched only the shop hunks with exact-match Python
+  patches, kept its wrappers, pushed through a checksum-guarded loopback GET (port 8797); the Rojo
+  plugin was disconnected the whole time (the user has to click Connect).

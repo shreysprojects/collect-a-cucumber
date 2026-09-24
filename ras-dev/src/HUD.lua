@@ -45,36 +45,12 @@
 	when not. Travel invokes TravelToMountain (teleport to that mountain's place).
 	Frostpeak starts unlocked; other unlocks persist on the player DataStore.
 
-	Shop clones Foreground.Template.Item into ScrollingFrame for every snowball
-	or snowball launcher. Blasters / Snowballs switch the list; the active tab
-	is grayed out and cannot be pressed again until the other tab is selected.
-	Each item's Foreground Name label is the snowball or launcher name. The
-	Multiplier label is the catalog multiplier (2 ^ (Order - 1): 1x, 2x, 4x, 8x). Snowball cards set
-	Foreground.Info.Icon from the catalog image. Classic and
-	Wooden Shovel start owned and equipped; their Buy button reads EQUIPPED
-	and its UIGradients (including the UIStroke gradient) are shifted to red.
-	Owned (but not equipped) items say EQUIP, keep those gradients' original
-	green, and invoke EquipSnowball / EquipLauncher. Only the next locked item
-	can be bought, and only once its mountain difficulty is unlocked. Later
-	ones stay unavailable, with the same gradients desaturated to a darker gray,
-	until the one before them is unlocked. Snowball order N and launcher order N
-	share that mountain. A card whose mountain is still locked reads
-	"BEAT <previous mountain>" instead of its price (PlayerProgress.GearLockedBy
-	on the replicated UnlockedMountains: the same gate the server applies).
-	Prices use a $ prefix.
-	The Buy label and its TextShadow always show the same string (the Buy
-	TextButton's own Text stays empty when it has a label). The Buy button grows
-	slightly on hover while it can be pressed (attribute ShopCanBuy). Gray cards
-	and an unaffordable Rebirth stay Active (Active = false would stop Activated)
-	so a press explains itself; only an EQUIPPED card is inert.
-
-	Buying goes through ReFunction BuySnowball / BuyLauncher, which answer true or
-	false and a reason. Every press pops (PurchaseFX.Press); a purchase plays
-	PurchaseFX.Success on the button, pops the card with a gold "UNLOCKED!" and
-	shows a green toast (Notify); a refusal shakes the button red and says why
-	("Need $120 more", "Beat Frostpeak to unlock Coal", "Buy Muddy first").
-	A bought card then reads EQUIP (PlayerProgress.EQUIP_ON_BUY = true makes the
-	server equip it instead). Rebirth plays the same press / success / fail
+	Shop: the frame (ServerStorage.Assets.UserInterfaces.HUD.Shop, built by
+	ras-dev/shop-remake/build_shop_frames.lua) is filled and animated by
+	ReplicatedStorage.Assets.Modules.Client.UI.ShopPanel (tabs, rarity cards, buy /
+	equip, the celebration effects). This module only opens and closes it:
+	OpenPanel -> ShopPanel.Setup, RefreshShopPanel -> ShopPanel.Refresh,
+	DisconnectShop -> ShopPanel.Teardown. Rebirth plays the same press / success / fail
 	effects with a "REBIRTH!" float. PurchaseFX.WatchPlayers bursts sparkles off
 	any player whose gear or rebirths go up by one.
 
@@ -99,12 +75,11 @@ local UserInputService = game:GetService("UserInputService")
 local mountainPlaces = require(ReplicatedStorage.Assets.Modules.Shared.MountainPlaces)()
 local mountainConfig = require(ReplicatedStorage.Assets.Modules.Shared.MountainConfig)()
 local playerProgress = require(ReplicatedStorage.Assets.Modules.Shared.PlayerProgress)()
-local snowballs = require(ReplicatedStorage.Assets.Modules.Shared.Snowballs)
-local snowballLaunchers = require(ReplicatedStorage.Assets.Modules.Shared.SnowballLaunchers)
 local PanelManager = require(ReplicatedStorage.Assets.Modules.Client.UI.PanelManager)
 local UIUtils = require(ReplicatedStorage.Assets.Modules.Client.UI.UIUtils)
 local HUDLayout = require(ReplicatedStorage.Assets.Modules.Client.UI.HUDLayout)
 local PurchaseFX = require(ReplicatedStorage.Assets.Modules.Client.UI.PurchaseFX)
+local ShopPanel = require(ReplicatedStorage.Assets.Modules.Client.UI.ShopPanel)
 local Audio = require(ReplicatedStorage.Assets.Modules.Client.Audio)
 local Notify = require(ReplicatedStorage.Assets.Modules.Client.UI.Notify)
 
@@ -130,27 +105,10 @@ local HIDES_MAIN = {
 local REBIRTH_CAN = Color3.fromRGB(46, 160, 90)
 local REBIRTH_CANT = Color3.fromRGB(78, 84, 96)
 local MENU_DISPLAY_ORDER = 5 -- panels draw above the HUD buttons
-local DEFAULT_SHOP_TAB = "Snowballs"
 local TAB_GRAY = Color3.fromRGB(118, 118, 118)
 local TAB_GRAY_TEXT = Color3.fromRGB(188, 188, 188)
 local TAB_GRAY_MIX = 0.62
-local SHOP_BUY_OWNED = "EQUIP"
-local SHOP_BUY_EQUIPPED = "EQUIPPED"
-local SHOP_GRAY_DARKEN = 0.62
-local SHOP_HOVER_SCALE = 1.08
-local SHOP_HOVER = TweenInfo.new(0.12, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-local SHOP_LOCKED = "BEAT %s" -- button text while the item's mountain is locked (previous mountain)
-local SHOP_LOCKED_TOAST = "Beat %s to unlock %s"
-local SHOP_IN_ORDER_TOAST = "Buy %s first"
-local SHOP_BOUGHT_TOAST = "%s unlocked!"
-local SHOP_BOUGHT_FLOAT = "UNLOCKED!"
-local SHOP_CARD_POP = 1.12
-local NEED_MORE_TOAST = "Need %s more"
-local SHOP_REFUSED_TOAST = {
-	Owned = "You already own that",
-	Invalid = "Can't buy that",
-}
-local SHOP_ERROR_TOAST = "Can't buy that right now"
+local SHOP_GRAY_DARKEN = 0.62 -- grayColor: the grayed Rebirth / Ascend button gradients
 local REBIRTH_FLOAT = "REBIRTH!"
 local REBIRTH_TOAST = "Rebirth %d! Boost %s"
 local REBIRTH_BUY_TEXT = "REBIRTH!"
@@ -188,10 +146,6 @@ local api = {}
 api.Connections = {}
 api.Panels = {}
 api.MountainTravel = {}
-api.ShopConnections = {}
-api.ShopTabLooks = {}
-api.ShopBuyLooks = {}
-api.ShopGradientLooks = {}
 api.RebirthBuyLooks = {}
 api.RebirthGradientLooks = {}
 api.AscendBuyLooks = {}
@@ -518,123 +472,21 @@ local function formatBoost(value)
 	return "X" .. (formatRate(value):gsub("x$", ""))
 end
 
+-- Shop rules live in ShopPanel; these wrappers keep the attention arrows (buyableItem) on the same logic.
 local function shopCatalog(tab)
-	if tab == "Blasters" then
-		return snowballLaunchers.List
-	end
-	return snowballs.List
+	return ShopPanel.Catalog(tab).List
 end
 
 local function nextShopOrder(tab, owned)
-	for _, def in shopCatalog(tab) do
-		if owned[def.Name] ~= true then
-			return def.Order
-		end
-	end
-	return nil
+	return ShopPanel.NextOrder(tab, owned)
 end
 
 local function shopOrderForSale(order, owned, tab)
-	if order ~= nextShopOrder(tab, owned) then
-		return false
-	end
-	return playerProgress.GearLockedBy(unlockedMap(), order) == nil
+	return ShopPanel.OrderForSale(order, owned, tab)
 end
 
--- The mountain to beat before gear of this order is sold, or nil when its mountain is open.
-local function shopUnlockMountain(order)
-	local lockedBy = playerProgress.GearLockedBy(unlockedMap(), order)
-	if not lockedBy then
-		return nil
-	end
-	return mountainConfig:GetPreviousMountain(lockedBy) or lockedBy
-end
-
-local function shopLockText(order)
-	local beat = shopUnlockMountain(order)
-	if not beat then
-		return nil
-	end
-	return string.format(SHOP_LOCKED, string.upper(mountainConfig:GetDisplayName(beat)))
-end
-
-local function shopHoverScale(buy)
-	local hover = buy:FindFirstChild("HoverScale")
-	if hover and hover:IsA("UIScale") then
-		return hover
-	end
-	hover = Instance.new("UIScale")
-	hover.Name = "HoverScale"
-	hover.Scale = 1
-	hover.Parent = buy
-	return hover
-end
-
-local function bindShopBuyHover(buy)
-	if buy:GetAttribute("ShopHoverBound") then
-		return
-	end
-	buy:SetAttribute("ShopHoverBound", true)
-	buy:SetAttribute("HoverScaleBound", true)
-	local hover = shopHoverScale(buy)
-	hover.Scale = 1
-	local tween = nil
-	local function tweenTo(scale)
-		if tween then
-			tween:Cancel()
-		end
-		tween = TweenService:Create(hover, SHOP_HOVER, { Scale = scale })
-		tween:Play()
-	end
-	buy.MouseEnter:Connect(function()
-		if buy:GetAttribute("ShopCanBuy") == true and UserInputService.PreferredInput ~= Enum.PreferredInput.Touch then
-			tweenTo(SHOP_HOVER_SCALE)
-		end
-	end)
-	buy.MouseLeave:Connect(function()
-		tweenTo(1)
-	end)
-end
-
-local function findShopScroll(root)
-	return root and root:FindFirstChild("ScrollingFrame", true)
-end
-
-local function findShopItemTemplate(root)
-	if not root then
-		return nil
-	end
-	local templateFolder = root:FindFirstChild("Template", true)
-	if not templateFolder then
-		return nil
-	end
-	local item = templateFolder:FindFirstChild("Item")
-	if item and item:IsA("GuiObject") then
-		return item
-	end
-	return nil
-end
-
-local function findShopTabButton(root, name)
-	if not root then
-		return nil
-	end
-	local button = root:FindFirstChild(name)
-	if button and button:IsA("GuiButton") then
-		return button
-	end
-	return nil
-end
-
-local function findShopBuy(item)
-	if not item then
-		return nil
-	end
-	local buy = item:FindFirstChild("Buy", true)
-	if buy and buy:IsA("GuiButton") then
-		return buy
-	end
-	return nil
+local function shopOwnedMap(tab)
+	return ShopPanel.OwnedMap(tab)
 end
 
 local function eachShopBuyGradient(buy, callback)
@@ -684,45 +536,6 @@ local function setGuiText(gui, text)
 	end
 end
 
-local function setNamedImage(root, name, image)
-	if type(image) ~= "string" or image == "" then
-		return
-	end
-	local node = root and root:FindFirstChild(name, true)
-	if not node or node == root then
-		return
-	end
-	if node:IsA("ImageLabel") or node:IsA("ImageButton") then
-		node.Image = image
-		return
-	end
-	local imageLabel = node:FindFirstChildWhichIsA("ImageLabel", true)
-	if imageLabel then
-		imageLabel.Image = image
-	end
-end
-
-local function setNamedLabel(root, name, text)
-	local node = root and root:FindFirstChild(name, true)
-	if not node or node == root then
-		return
-	end
-
-	local label = node
-	if not (label:IsA("TextLabel") or label:IsA("TextButton")) then
-		label = node:FindFirstChildWhichIsA("TextLabel", true)
-	end
-	setGuiText(label, text)
-
-	local shadow = label and label:FindFirstChild("TextShadow")
-	if not (shadow and (shadow:IsA("TextLabel") or shadow:IsA("TextButton"))) and label and label.Parent then
-		shadow = label.Parent:FindFirstChild("TextShadow")
-	end
-	if shadow and shadow ~= label and (shadow == node or shadow:IsDescendantOf(node)) then
-		setGuiText(shadow, text)
-	end
-end
-
 local function setButtonText(button, text)
 	local label = button:FindFirstChild("TextLabel", true)
 	if button:IsA("TextButton") then
@@ -740,51 +553,6 @@ local function setButtonText(button, text)
 		shadow = button:FindFirstChild("TextShadow", true)
 	end
 	setGuiText(shadow, text)
-end
-
--- Shop prices live on a TextLabel plus its TextShadow (child or sibling). Rebirth uses the same pair.
-local function setPriceText(root, text)
-	if not root then
-		return
-	end
-	for _, desc in root:GetDescendants() do
-		if desc.Name ~= "TextLabel" or not (desc:IsA("TextLabel") or desc:IsA("TextButton")) then
-			continue
-		end
-		local shadow = desc:FindFirstChild("TextShadow")
-		if not (shadow and (shadow:IsA("TextLabel") or shadow:IsA("TextButton"))) and desc.Parent then
-			shadow = desc.Parent:FindFirstChild("TextShadow")
-		end
-		if shadow and shadow ~= desc and (shadow:IsA("TextLabel") or shadow:IsA("TextButton")) then
-			setGuiText(desc, text)
-			setGuiText(shadow, text)
-			return
-		end
-	end
-end
-
-local function shopOwnedMap(tab)
-	local player = Players.LocalPlayer
-	if tab == "Blasters" then
-		return playerProgress.DecodeNames(player:GetAttribute("UnlockedLaunchers"), playerProgress.STARTER_LAUNCHER)
-	end
-	return playerProgress.DecodeNames(player:GetAttribute("UnlockedSnowballs"), playerProgress.STARTER_SNOWBALL)
-end
-
-local function shopEquippedName(tab)
-	local player = Players.LocalPlayer
-	if tab == "Blasters" then
-		local name = player:GetAttribute("EquippedLauncher")
-		if type(name) == "string" and name ~= "" then
-			return name
-		end
-		return playerProgress.STARTER_LAUNCHER
-	end
-	local name = player:GetAttribute("EquippedSnowball")
-	if type(name) == "string" and name ~= "" then
-		return name
-	end
-	return playerProgress.STARTER_SNOWBALL
 end
 
 local function rememberButtonLook(store, button)
@@ -836,285 +604,26 @@ local function applyButtonLook(button, look, grayed)
 end
 
 function api:DisconnectShop()
-	for _, connection in self.ShopConnections do
-		if connection then
-			connection:Disconnect()
-		end
-	end
-	table.clear(self.ShopConnections)
-	table.clear(self.ShopBuyLooks)
-	table.clear(self.ShopGradientLooks)
+	ShopPanel.Teardown()
 	self.ShopWired = nil
-	self.ShopPanelFilled = nil
-end
-
-function api:ApplyShopTabButtons(panel, tab)
-	for _, name in { "Snowballs", "Blasters" } do
-		local button = findShopTabButton(panel, name)
-		if not (button and button:IsA("GuiButton")) then
-			continue
-		end
-
-		local look = rememberButtonLook(self.ShopTabLooks, button)
-		local selected = name == tab
-		button.Active = not selected
-		applyButtonLook(button, look, selected)
-	end
-end
-
-function api:ApplyShopItemState(item, owned, equipped, forSale, lockText)
-	local buy = findShopBuy(item)
-	if not (buy and buy:IsA("GuiButton")) then
-		return
-	end
-
-	local look = rememberButtonLook(self.ShopBuyLooks, buy)
-	local text
-	local active
-	local tint
-	if equipped then
-		text = SHOP_BUY_EQUIPPED
-		active = false
-		tint = "Red"
-	elseif owned then
-		text = SHOP_BUY_OWNED
-		active = true
-		tint = "Green"
-	elseif forSale then
-		text = formatPrice(item:GetAttribute("ShopPrice"))
-		active = true
-		tint = "Green"
-	else
-		text = lockText or formatPrice(item:GetAttribute("ShopPrice"))
-		active = false
-		tint = "Gray"
-	end
-
-	setButtonText(buy, text)
-	-- Active = false stops Activated, so a gray card stays Active to answer a press with its reason.
-	-- ShopCanBuy is the real "pressable" state (hover, colour); only EQUIPPED is inert.
-	buy.Active = not equipped
-	buy:SetAttribute("ShopCanBuy", active)
-	applyButtonLook(buy, look, false)
-	buy.AutoButtonColor = if active then look.AutoButtonColor else false
-
-	eachShopBuyGradient(buy, function(gradient)
-		local colors = rememberGradientLook(self.ShopGradientLooks, gradient)
-		gradient.Color = colors[tint]
-	end)
-	local hover = buy:FindFirstChild("HoverScale")
-	if hover and hover:IsA("UIScale") and not active then
-		hover.Scale = 1
-	end
-end
-
-function api:ApplyShopItemStates(panel, tab)
-	if not panel then
-		return
-	end
-	tab = tab or self.ShopTab or DEFAULT_SHOP_TAB
-	local owned = shopOwnedMap(tab)
-	local equipped = shopEquippedName(tab)
-	local scroll = findShopScroll(panel)
-	if not scroll then
-		return
-	end
-	for _, child in scroll:GetChildren() do
-		if child:GetAttribute("ShopItem") then
-			local order = child:GetAttribute("Order")
-			self:ApplyShopItemState(
-				child,
-				owned[child.Name] == true,
-				child.Name == equipped,
-				shopOrderForSale(order, owned, tab),
-				shopLockText(order)
-			)
-		end
-	end
 end
 
 function api:RefreshShopPanel()
-	local spawned = self.Panels.Shop
-	if spawned and spawned.Parent then
-		self:ApplyShopItemStates(spawned, self.ShopTab)
-	end
-end
-
--- Toast text for a purchase the client or the server refused.
-local function shopRefusalText(reason, def, tab)
-	if reason == "NotEnoughCoins" then
-		local coins = math.max(0, math.floor(tonumber(Players.LocalPlayer:GetAttribute("Coins")) or 0))
-		return string.format(NEED_MORE_TOAST, formatPrice(math.max(1, (def.Price or 0) - coins)))
-	end
-	if reason == "MountainLocked" then
-		local beat = shopUnlockMountain(def.Order) or mountainConfig:GetPreviousMountain(def.MountainId) or def.MountainId
-		return string.format(SHOP_LOCKED_TOAST, mountainConfig:GetDisplayName(beat), def.Name)
-	end
-	if reason == "BuyInOrder" then
-		local nextOrder = nextShopOrder(tab, shopOwnedMap(tab))
-		local catalog = if tab == "Blasters" then snowballLaunchers else snowballs
-		local nextDef = nextOrder and catalog:GetByOrder(nextOrder)
-		if nextDef then
-			return string.format(SHOP_IN_ORDER_TOAST, nextDef.Name)
-		end
-	end
-	return SHOP_REFUSED_TOAST[reason] or SHOP_ERROR_TOAST
-end
-
--- Equip an owned card, or buy the next one. Every press pops; the answer succeeds or fails loudly.
-function api:PressShopBuy(buy, item, def, tab)
-	if self.ShopBusy then
-		return
-	end
-	local owned = shopOwnedMap(tab)
-	if owned[def.Name] == true then
-		if def.Name == shopEquippedName(tab) then
-			return
-		end
-		PurchaseFX.Press(buy)
-		ReplicatedStorage.ReEvent:FireServer(if tab == "Blasters" then "EquipLauncher" else "EquipSnowball", def.Name)
-		return
-	end
-
-	PurchaseFX.Press(buy)
-	local refusal = nil
-	if shopUnlockMountain(def.Order) then
-		refusal = "MountainLocked"
-	elseif def.Order ~= nextShopOrder(tab, owned) then
-		refusal = "BuyInOrder"
-	end
-	if refusal then
-		PurchaseFX.Fail(buy)
-		Notify.Error(shopRefusalText(refusal, def, tab))
-		return
-	end
-
-	self.ShopBusy = true
-	local invoked, ok, reason = pcall(function()
-		return ReplicatedStorage.ReEvent.ReFunction:InvokeServer(if tab == "Blasters" then "BuyLauncher" else "BuySnowball", def.Name)
-	end)
-	self.ShopBusy = false
-	if invoked and ok == true then
-		PurchaseFX.Success(buy)
-		PurchaseFX.Celebrate(item:FindFirstChild("Foreground") or buy, SHOP_BOUGHT_FLOAT, SHOP_CARD_POP)
-		Notify.Success(string.format(SHOP_BOUGHT_TOAST, def.Name))
-	else
-		if not invoked then
-			warn("[CLIENT]: Shop purchase failed:", ok)
-		end
-		PurchaseFX.Fail(buy)
-		Notify.Error(shopRefusalText(if invoked then reason else nil, def, tab))
-	end
-	self:RefreshShopPanel()
-end
-
-function api:FillShopItems(panel, tab)
-	local scroll = findShopScroll(panel)
-	local template = findShopItemTemplate(panel)
-	if not scroll then
-		warn("[CLIENT]: Shop ScrollingFrame not found")
-		return
-	end
-	if not template then
-		warn("[CLIENT]: Shop Template.Item not found")
-		return
-	end
-
-	template.Visible = false
-	local templateFolder = template.Parent
-	if templateFolder and templateFolder:IsA("GuiObject") then
-		templateFolder.Visible = false
-	end
-
-	for _, child in scroll:GetChildren() do
-		if child:GetAttribute("ShopItem") then
-			child:Destroy()
-		elseif child:IsA("GuiObject") then
-			child.Visible = false
-		end
-	end
-
-	table.clear(self.ShopBuyLooks)
-	table.clear(self.ShopGradientLooks)
-
-	local catalog = shopCatalog(tab)
-	local owned = shopOwnedMap(tab)
-	local equipped = shopEquippedName(tab)
-	for _, def in catalog do
-		local item = template:Clone()
-		item.Name = def.Name
-		item.Visible = true
-		item.LayoutOrder = def.Order
-		item:SetAttribute("ShopItem", true)
-		item:SetAttribute("ShopTab", tab)
-		item:SetAttribute("Order", def.Order)
-		item:SetAttribute("ShopPrice", def.Price)
-
-		setNamedLabel(item, "Name", def.Name)
-		setNamedLabel(item, "Multiplier", formatMultiplier(def.Multiplier))
-		setNamedImage(item, "Icon", def.Icon)
-
-		local isOwned = owned[def.Name] == true
-		self:ApplyShopItemState(item, isOwned, def.Name == equipped, shopOrderForSale(def.Order, owned, tab), shopLockText(def.Order))
-
-		local buy = findShopBuy(item)
-		if buy and buy:IsA("GuiButton") then
-			bindShopBuyHover(buy)
-			buy.Activated:Connect(function()
-				self:PressShopBuy(buy, item, def, tab)
-			end)
-		end
-
-		item.Parent = scroll
-	end
+	ShopPanel.Refresh()
 end
 
 function api:SetShopTab(panel, tab)
-	if tab ~= "Snowballs" and tab ~= "Blasters" then
-		return
-	end
-	if self.ShopTab == tab and self.ShopPanelFilled == panel then
-		self:ApplyShopTabButtons(panel, tab)
-		self:ApplyShopItemStates(panel, tab)
-		return
-	end
-
-	self.ShopTab = tab
-	self.ShopPanelFilled = panel
-	Audio.Play("UITab")
-	self:ApplyShopTabButtons(panel, tab)
-	self:FillShopItems(panel, tab)
+	ShopPanel.SetTab(tab)
 end
 
-function api:WireShopTabs(panel)
-	local function wire(name, tab)
-		local button = findShopTabButton(panel, name)
-		if not (button and button:IsA("GuiButton")) then
-			warn("[CLIENT]: Shop tab not found:", name)
-			return
-		end
-		table.insert(self.ShopConnections, button.Activated:Connect(function()
-			if self.ShopTab == tab then
-				return
-			end
-			self:SetShopTab(panel, tab)
-		end))
-	end
-
-	wire("Snowballs", "Snowballs")
-	wire("Blasters", "Blasters")
-end
-
+-- The Shop frame's contents (tabs, cards, buying, equipping, effects) are ShopPanel's.
 function api:SetupShopPanel(panel)
 	if not panel then
 		return
 	end
-	if self.ShopWired ~= panel then
-		self:DisconnectShop()
+	if ShopPanel.Setup(panel, self) then
 		self.ShopWired = panel
-		self:WireShopTabs(panel)
 	end
-	self:SetShopTab(panel, self.ShopTab or DEFAULT_SHOP_TAB)
 end
 
 function api:DisconnectRebirth()
@@ -1578,20 +1087,13 @@ function api:DevPress(request)
 		return
 	end
 	local tab, name = string.match(request, "^(%a+):(.+)$")
-	local catalog = if tab == "Blasters" then snowballLaunchers elseif tab == "Snowballs" then snowballs else nil
-	local def = catalog and catalog:GetByName(name)
+	local def = (tab == "Blasters" or tab == "Snowballs") and ShopPanel.Catalog(tab):GetByName(name)
 	local panel = def and self:OpenPanel("Shop")
 	if not panel then
 		warn("[CLIENT]: DevPress: unknown request", request)
 		return
 	end
-	self:SetShopTab(panel, tab)
-	local scroll = findShopScroll(panel)
-	local item = scroll and scroll:FindFirstChild(def.Name)
-	local buy = item and findShopBuy(item)
-	if buy then
-		self:PressShopBuy(buy, item, def, tab)
-	end
+	ShopPanel.DevPress(tab, def.Name)
 end
 
 function api:OpenPanel(name)
