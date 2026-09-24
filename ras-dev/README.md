@@ -748,3 +748,40 @@ opposite direction".
   track"). Rewards keep accruing since they are awarded live during the ride.
 - kinqxz/RAS main: see the commit after f1814cc; the other session's uncommitted HUD.luau /
   builders were left untouched (only my three files were added).
+
+## 2026-09-24 (evening): "2x power!" gift checklist by the lobby present
+
+User: "build the UI for when you go near the gift model: a checklist with Like & Favorite and Join
+the group, plus a Claim button; Like & Favorite checks whether the game is favorited and prompts if
+not; Join checks Ricky's Realm membership and prompts to join; claiming gives 2x power; the title
+says '2x power!'."
+
+- **APIs (verified in the engine reference):** `AvatarEditorService:PromptAllowInventoryReadAccess`
+  (+ `PromptAllowInventoryReadAccessCompleted`) then `GetFavoriteAsync(game.PlaceId,
+  Enum.AvatarItemType.Asset)`; `PromptSetFavorite(placeId, Asset, true)` +
+  `PromptSetFavoriteCompleted` (itemId, itemType, Enum.AvatarPromptResult). No API can read or
+  prompt a LIKE, so the row asks for both and checks the favorite. Groups:
+  `GroupService:PromptJoinAsync(groupId)` (client, returns Enum.GroupMembershipStatus - shipped
+  Dec 2025); membership on the server with `Player:IsInGroupAsync` + `GetRolesInGroupAsync`
+  (both cached per peer). Ricky's Realm = the experience's owner group 695268911.
+- **Server:** `SERV_Gift.luau` - ReFunction modes GiftStatus(force) (membership check, cached
+  20 s, attribute GiftInGroup), GiftFavorited (the client's confirmed favorite, saved as
+  `GiftFavorited`), GiftClaim (verifies favorite + a fresh membership check, sets `GiftClaimed`,
+  saves). `PlayerProgress`: GIFT_POWER 2, GIFT_GROUP_ID / NAME, `GiftMultiplier(profile)` folded
+  into `RewardMultiplier` (with the rebirth boost and the ascension power); profile fields default
+  false, kept by a rebirth, wiped by an ascend (everything resets). Attributes GiftFavorited /
+  GiftClaimed / GiftMultiplier (SERV_PlayerProgress) + GiftInGroup (SERV_Gift).
+- **UI:** its own whole-ScreenGui UI per the place rules - `ServerStorage/Modules/UserInterfaces/
+  Gift.luau` + `ServerStorage.Assets.UserInterfaces.Gift.Interface` (built by
+  `extras/panels/build_panels.lua` buildGiftPanel, green body / gold "2x power!" banner, two
+  checklist rows with a check box, label and FAVORITE / JOIN button, a note, CLAIM, X) + `Gift =
+  { Parent = {} }` in the Default manifest. Opens when the player enters the lobby ring model
+  `GiftCircle` (attribute LobbyRing, the NeonRing / InnerCylinder volume, same test as the HUD
+  circles); registers with PanelManager (one panel at a time, FOV + blur), hides the HUD's MainUI
+  via the HUD module's SetMainVisible, sets PlayerGui PanelOpen = "Gift". Buttons: FAVORITE runs
+  the favorite check / prompt and reports; JOIN runs PromptJoinAsync then a forced server
+  re-check; CLAIM invokes GiftClaim (PurchaseFX + toasts). Studio dev hooks: PlayerGui attribute
+  DevGift = Open / Close / Favorite / Group / Claim, DevGiftFavorited = true (the Roblox prompts
+  cannot be clicked from an eval).
+- HUD.luau untouched (the shop session owns it); the lobby-models session was told the trigger
+  depends on the `GiftCircle` name.

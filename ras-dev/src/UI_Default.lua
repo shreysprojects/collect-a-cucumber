@@ -20,4 +20,5 @@ return {
 	RaceProgressGui = { Parent = {} }, -- race bar, draws under the HUD (DisplayOrder -1)
 	ChargeHint = { Parent = {} }, -- "HOLD TO LAUNCH" above the ride controls
 	ChargeBar = { Parent = {} }, -- hold-to-launch bar, enabled while charging
+	Gift = { Parent = {} }, -- "2x power!" checklist by the lobby present (GiftCircle ring)
 }

@@ -358,10 +358,214 @@ local function buildPanel(name, theme)
 	return root
 end
 
+----------------------------------------------------------------------------------------------
+-- "2x power!" gift checklist (ServerStorage.Assets.UserInterfaces.Gift.Interface, a whole
+-- ScreenGui: manifest Parent = {}). Same look, green body, gold banner. Names the Gift module
+-- reads: Gift (frame) > ... Favorite / Group rows (Check.Mark, Button + TextLabel/TextShadow),
+-- Note, Claim (+ TextLabel/TextShadow), X.
+----------------------------------------------------------------------------------------------
+
+local GIFT = {
+	Shadow = Color3.fromRGB(20, 80, 30),
+	Border = Color3.fromRGB(20, 80, 30),
+	BodyTop = Color3.fromRGB(228, 255, 228),
+	BodyBottom = Color3.fromRGB(160, 235, 170),
+	Edge = Color3.fromRGB(60, 200, 90),
+	HeaderTop = Color3.fromRGB(255, 226, 120),
+	HeaderBottom = Color3.fromRGB(232, 150, 20),
+	RowTop = Color3.fromRGB(255, 255, 255),
+	RowBottom = Color3.fromRGB(215, 245, 220),
+	RowBorder = Color3.fromRGB(36, 72, 12),
+	RowRim = Color3.fromRGB(240, 255, 240),
+	ButtonTop = Color3.fromRGB(15, 224, 255),
+	ButtonBottom = Color3.fromRGB(0, 170, 240),
+	ButtonBorder = INK,
+	ButtonRim = Color3.fromRGB(190, 245, 255),
+	ClaimTop = Color3.fromRGB(255, 220, 80),
+	ClaimBottom = Color3.fromRGB(240, 160, 20),
+	ClaimBorder = Color3.fromRGB(110, 70, 0),
+	ClaimRim = Color3.fromRGB(255, 245, 200),
+	CheckInk = Color3.fromRGB(46, 160, 90),
+}
+
+local function buildGiftPanel()
+	local ui = ServerStorage.Assets.UserInterfaces
+	local folder = ui:FindFirstChild("Gift")
+	if folder then
+		folder:Destroy()
+	end
+	folder = Instance.new("Folder")
+	folder.Name = "Gift"
+	folder.Parent = ui
+
+	local screen = make("ScreenGui", "Interface", folder, {
+		DisplayOrder = 6,
+		IgnoreGuiInset = true,
+		ResetOnSpawn = false,
+		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
+		Enabled = true,
+	})
+	local root = make("Frame", "Gift", screen, {
+		AnchorPoint = Vector2.new(0.5, 0.5),
+		Position = UDim2.fromScale(0.5, 0.5),
+		Size = UDim2.fromScale(1, 1),
+		BackgroundTransparency = 1,
+		BorderSizePixel = 0,
+		Visible = false,
+		ZIndex = 5,
+	})
+
+	local function window(windowName, z, yOffset)
+		local frame = make("Frame", windowName, root, {
+			AnchorPoint = Vector2.new(0.5, 0.5),
+			Position = UDim2.new(0.5, 0, 0.53, yOffset),
+			Size = UDim2.fromScale(1, 0.8),
+			BorderSizePixel = 0,
+			ZIndex = z,
+		})
+		aspect(frame, 1.25)
+		return frame
+	end
+
+	local shadow = window("Shadow", 5, 9)
+	shadow.BackgroundColor3 = GIFT.Shadow
+	corner(shadow, 23)
+
+	local bg = window("Background", 6, 0)
+	bg.BackgroundColor3 = WHITE
+	bg.Active = true -- clicks on the panel stay on the panel
+	corner(bg, 22)
+	border(bg, GIFT.Border, 6)
+	gradient(bg, GIFT.BodyTop, GIFT.BodyBottom)
+	studs(bg, 0.89, 8, 180, 7)
+	rim(bg, Color3.fromRGB(250, 255, 250), 7, 17, 4, 8)
+	local edge = make("Frame", "Edge", bg, {
+		BackgroundTransparency = 1,
+		Position = UDim2.fromOffset(3, 3),
+		Size = UDim2.new(1, -6, 1, -6),
+		ZIndex = 8,
+	})
+	corner(edge, 20)
+	border(edge, GIFT.Edge, 3)
+
+	local header = make("Frame", "Header", bg, {
+		AnchorPoint = Vector2.new(0.5, 0.5),
+		Position = UDim2.fromScale(0.5, 0),
+		Size = UDim2.fromScale(0.6, 0.15),
+		BackgroundColor3 = WHITE,
+		BorderSizePixel = 0,
+		ZIndex = 12,
+	})
+	corner(header, 14)
+	border(header, INK, 3)
+	gradient(header, GIFT.HeaderTop, GIFT.HeaderBottom)
+	studs(header, 0.85, 12, 120, 13)
+	rim(header, Color3.fromRGB(255, 250, 230), 5, 10, 2, 13)
+	text("Title", header, "2x power!", UDim2.fromScale(0.08, 0.1), UDim2.fromScale(0.84, 0.8), 15, 5)
+
+	local close = make("TextButton", "X", bg, {
+		AnchorPoint = Vector2.new(0.5, 0.5),
+		Position = UDim2.fromScale(0.985, 0),
+		Size = UDim2.fromScale(0.13, 0.13),
+		BackgroundColor3 = WHITE,
+		BorderSizePixel = 0,
+		Text = "",
+		AutoButtonColor = false,
+		ZIndex = 14,
+	})
+	aspect(close, 1)
+	corner(close, 12)
+	border(close, INK, 3)
+	gradient(close, Color3.fromRGB(255, 103, 103), Color3.fromRGB(195, 41, 41))
+	rim(close, Color3.fromRGB(255, 220, 220), 4, 9, 2, 15)
+	shadowedText(close, "X", UDim2.fromScale(0.1, 0.1), UDim2.fromScale(0.8, 0.8), 16, 4)
+
+	local fg = make("Frame", "Foreground", bg, {
+		BackgroundTransparency = 1,
+		Position = UDim2.fromScale(0.06, 0.15),
+		Size = UDim2.fromScale(0.88, 0.8),
+		ZIndex = 9,
+	})
+
+	local function row(name, y, labelText, buttonText)
+		local frame = make("Frame", name, fg, {
+			Position = UDim2.fromScale(0, y),
+			Size = UDim2.fromScale(1, 0.25),
+			BackgroundColor3 = WHITE,
+			BorderSizePixel = 0,
+			ZIndex = 10,
+		})
+		corner(frame, 14)
+		border(frame, GIFT.RowBorder, 3)
+		gradient(frame, GIFT.RowTop, GIFT.RowBottom)
+		rim(frame, GIFT.RowRim, 5, 10, 2, 11)
+
+		local check = make("Frame", "Check", frame, {
+			AnchorPoint = Vector2.new(0.5, 0.5),
+			Position = UDim2.fromScale(0.09, 0.5),
+			Size = UDim2.fromScale(0.62, 0.62),
+			BackgroundColor3 = WHITE,
+			BorderSizePixel = 0,
+			ZIndex = 12,
+		})
+		aspect(check, 1)
+		corner(check, 10)
+		border(check, INK, 3)
+		local mark = text("Mark", check, "\u{2713}", UDim2.fromScale(0.05, 0.02), UDim2.fromScale(0.9, 0.96), 13, 2, GIFT.CheckInk)
+		mark.Visible = false
+
+		text("Label", frame, labelText, UDim2.fromScale(0.18, 0.2), UDim2.fromScale(0.46, 0.6), 12, 3)
+		local label = frame.Label
+		label.TextXAlignment = Enum.TextXAlignment.Left
+
+		local button = make("TextButton", "Button", frame, {
+			AnchorPoint = Vector2.new(1, 0.5),
+			Position = UDim2.fromScale(0.97, 0.5),
+			Size = UDim2.fromScale(0.3, 0.64),
+			BackgroundColor3 = WHITE,
+			BorderSizePixel = 0,
+			Text = "",
+			AutoButtonColor = false,
+			ZIndex = 12,
+		})
+		corner(button, 11)
+		border(button, GIFT.ButtonBorder, 3)
+		gradient(button, GIFT.ButtonTop, GIFT.ButtonBottom)
+		rim(button, GIFT.ButtonRim, 4, 8, 2, 13)
+		shadowedText(button, buttonText, UDim2.fromScale(0.06, 0.14), UDim2.fromScale(0.88, 0.72), 14, 4)
+		return frame
+	end
+
+	row("Favorite", 0.02, "Like & Favorite the game", "FAVORITE")
+	row("Group", 0.31, "Join Ricky's Realm", "JOIN")
+
+	text("Note", fg, "Do both, then claim your permanent 2x power on coins and XP!", UDim2.fromScale(0, 0.6), UDim2.fromScale(1, 0.12), 10, 2)
+
+	local claim = make("TextButton", "Claim", fg, {
+		Position = UDim2.fromScale(0, 0.78),
+		Size = UDim2.fromScale(1, 0.2),
+		BackgroundColor3 = WHITE,
+		BorderSizePixel = 0,
+		Text = "",
+		AutoButtonColor = false,
+		ZIndex = 10,
+	})
+	corner(claim, 12)
+	border(claim, GIFT.ClaimBorder, 3)
+	gradient(claim, GIFT.ClaimTop, GIFT.ClaimBottom)
+	studs(claim, 0.85, 10, 120, 11)
+	rim(claim, GIFT.ClaimRim, 5, 9, 2, 11)
+	shadowedText(claim, "CLAIM", UDim2.fromScale(0.05, 0.15), UDim2.fromScale(0.9, 0.7), 12, 5)
+
+	return screen
+end
+
 local built = {}
 for name, theme in THEMES do
 	buildPanel(name, theme)
 	table.insert(built, name)
 end
+buildGiftPanel()
+table.insert(built, "Gift")
 table.sort(built)
 return "built " .. table.concat(built, ", ")
