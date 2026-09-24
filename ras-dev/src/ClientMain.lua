@@ -26,6 +26,7 @@ local mountainConfig = require(ReplicatedStorage.Assets.Modules.Shared.MountainC
 local UIUtils = require(ReplicatedStorage.Assets.Modules.Client.UI.UIUtils)
 local HUDLayout = require(ReplicatedStorage.Assets.Modules.Client.UI.HUDLayout)
 local Audio = require(ReplicatedStorage.Assets.Modules.Client.Audio)
+local Notify = require(ReplicatedStorage.Assets.Modules.Client.UI.Notify)
 
 print("[CLIENT]: You're in:", placeInfo.Index)
 
@@ -166,6 +167,7 @@ styleButton(
 stopButton.MouseButton1Click:Connect(function()
 	func:StopRide()
 end)
+Notify.AvoidAbove(stopButton) -- toasts stay above the ride controls while they show
 
 vars.LaunchGui = gui
 vars.StopButton = stopButton

@@ -1851,6 +1851,8 @@ function api:Initialize()
 	self.MainUI = main
 	if main then
 		main.Visible = true
+		-- Toasts stay above the level bar while the HUD shows (a panel hides MainUI).
+		Notify.AvoidAbove(main:FindFirstChild("BottomDock") or main:FindFirstChild("Level", true))
 		table.insert(self.Connections, HUDLayout.BindMain(main))
 		self:WireButtons(main)
 		self.ProgressUI = self:FindProgressWidgets(main)

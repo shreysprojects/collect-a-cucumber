@@ -653,3 +653,21 @@ and even more satisfying effects for that."
   same time - pulled its 1003c19 first, patched only the shop hunks with exact-match Python
   patches, kept its wrappers, pushed through a checksum-guarded loopback GET (port 8797); the Rojo
   plugin was disconnected the whole time (the user has to click Connect).
+
+## 2026-09-24 (night): toasts above the level bar
+
+User: "put all notifications above level bar". Every notification is a Notify toast (shop buys and
+refusals, rebirth / ascend, the attention toasts, PurchaseFX.Confirmed), and the stack used to sit
+at 91.5 % of the screen - on top of the level bar whenever the HUD was showing.
+
+- `Notify.AvoidAbove(guiObject)`: the stack stays `AVOID_GAP` (1.2 % of the screen) above the
+  highest registered HUD element that is visible right now (checked through every GuiObject
+  ancestor and the ScreenGui's Enabled), re-laid out when any of them shows, hides or moves;
+  with none visible it falls back to POSITION (91.5 %, below the panels, which hide MainUI).
+  Registered: HUD.luau Initialize -> `MainUI.BottomDock` (the level bar), ClientMain -> the Stop
+  button (ride controls), ChargeHint -> its "HOLD TO LAUNCH" label. Coordinates are compared in
+  AbsolutePosition space minus the Notify gui's own AbsolutePosition, so the IgnoreGuiInset
+  offset cancels.
+- The Rojo plugin was reconnected by the user mid-way: the four edited files (Notify, HUD,
+  ClientMain, ChargeHint) reached Studio through the sync (checksums matched before the loopback
+  push ran, which aborted on its guard as intended).
