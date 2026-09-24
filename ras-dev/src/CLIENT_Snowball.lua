@@ -19,6 +19,7 @@ local mountainConfig = require(ReplicatedStorage.Assets.Modules.Shared.MountainC
 local launcherCatalog = require(ReplicatedStorage.Assets.Modules.Shared.SnowballLaunchers)
 local playerProgress = require(ReplicatedStorage.Assets.Modules.Shared.PlayerProgress)()
 local ChargeController = require(ReplicatedStorage.Assets.SnowballAnimations.ChargeController)
+local Audio = require(ReplicatedStorage.Assets.Modules.Client.Audio)
 
 local api = {}
 
@@ -1000,6 +1001,10 @@ function api:UnbindSnowballCamera()
 		self.GUIFramework:InvokeUI("HUD", "EndRunReadout")
 	end
 	local vars = getVars(self)
+	if vars and vars.SnowballCamera and os.clock() - (vars.FinishSoundedAt or 0) > 4 then
+		Audio.Play("RideEnd") -- a ride that just ended (a finish played its own sting)
+	end
+	Audio.SetMusic("Lobby")
 	if self.StopAirPhysics then
 		self:StopAirPhysics()
 	end
@@ -1040,6 +1045,13 @@ end
 function api:HoldAtFinish(standCF)
 	if typeof(standCF) ~= "CFrame" then
 		return
+	end
+	local finishVars = getVars(self)
+	if finishVars and os.clock() - (finishVars.FinishSoundedAt or 0) > 4 then
+		finishVars.FinishSoundedAt = os.clock()
+		Audio.Duck(5, 0.25)
+		Audio.Play("Finish")
+		Audio.Play("Cheer")
 	end
 
 	local folder = workspace:FindFirstChild("ActiveSnowballs")
@@ -1158,6 +1170,7 @@ function api:BindSnowballCamera(snowball)
 		return
 	end
 	startStopButtonDelay(vars)
+	Audio.SetMusic("Ride")
 	-- Snapshot coins before the root wait so snow collected while the ball
 	-- streams in still counts toward this run.
 	if self.GUIFramework then
@@ -1180,6 +1193,8 @@ function api:BindSnowballCamera(snowball)
 		end
 		return
 	end
+
+	Audio.PlayAt("BallAway", root)
 
 	local camera = workspace.CurrentCamera
 	-- Launched from the pad: the chase looks at the ball from this very frame (no hold on

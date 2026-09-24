@@ -312,10 +312,6 @@ end
 
 local growConnection = nil
 
-local function sphereVolume(radius)
-	return (4 / 3) * math.pi * radius ^ 3
-end
-
 local function getModel(state)
 	return state.Model or state
 end
@@ -334,6 +330,15 @@ local function carveWidth(state)
 	return width
 end
 
+-- Scale for the snow eaten so far: fast at first, then ever slower, never capped
+-- (LAUNCH.GrowStep / GrowDecay; the rate decays exponentially with the scale reached).
+local function growthScale(snow)
+	local launch = mountainConfig.LAUNCH
+	local decay = math.max(tonumber(launch.GrowDecay) or 1.9, 0.05)
+	local step = math.max(tonumber(launch.GrowStep) or 0.18, 0)
+	return 1 + decay * math.log(1 + math.max(snow, 0) * step / decay)
+end
+
 -- Growth is driven by the snow that was actually removed, so a pass over bare
 -- track adds nothing.
 local function applySnow(state, gained)
@@ -341,14 +346,8 @@ local function applySnow(state, gained)
 		return 0
 	end
 
-	local launch = mountainConfig.LAUNCH
-	local maxVolume = sphereVolume(state.StartRadius * launch.GrowMaxScale)
-	state.Volume = math.min(maxVolume, state.Volume + gained * launch.GrowVolumePerSnow)
-	state.TargetScale = math.clamp(
-		(state.Volume / math.max(state.StartVolume, 0.01)) ^ (1 / 3),
-		1,
-		launch.GrowMaxScale
-	)
+	state.Snow = (state.Snow or 0) + gained
+	state.TargetScale = growthScale(state.Snow)
 	state.Scale = state.TargetScale
 	if state.Model and state.Model.Parent then
 		state.Model:SetAttribute("TargetSnowScale", state.TargetScale)
@@ -1160,8 +1159,7 @@ function m_api:Launch(player, requestedSpeed, requestedOrigin)
 		Model = clone,
 		Root = root,
 		StartRadius = radius,
-		StartVolume = sphereVolume(radius),
-		Volume = sphereVolume(radius),
+		Snow = 0, -- snow units eaten (growth curve input; SnowCollected is the reward counter)
 		Scale = 1,
 		TargetScale = 1,
 		BaseScale = if clone:IsA("Model") then clone:GetScale() else 1,

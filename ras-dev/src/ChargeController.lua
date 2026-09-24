@@ -31,6 +31,13 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Math = require(script.Parent.AnimationMath)
 local ClipPlayer = require(script.Parent.ClipPlayer)
 local LauncherBall = require(script.Parent.LauncherBall)
+-- Sounds are optional: a place without the Audio module still animates.
+local audioOk, Audio = pcall(function()
+	return require(ReplicatedStorage.Assets.Modules.Client.Audio)
+end)
+if not audioOk then
+	Audio = nil
+end
 
 local mountainConfig = require(ReplicatedStorage.Assets.Modules.Shared.MountainConfig)()
 
@@ -224,6 +231,62 @@ function Controller.new(character, launcherId, options)
 	return self
 end
 
+-- Sounds. The charge loop sits on the launcher (or the root) and rises in pitch with the
+-- charge; the throw is the launcher family's sound at the launcher. Both are 3D, and every
+-- observer's controller plays them for its player, so the whole server hears each throw.
+local function soundHost(self)
+	local launcher = self.Character:FindFirstChild(mountainConfig.LAUNCHER.InstanceName)
+	local part = nil
+	if launcher then
+		part = if launcher:IsA("BasePart") then launcher else launcher:FindFirstChildWhichIsA("BasePart", true)
+	end
+	return part or self.Character:FindFirstChild("HumanoidRootPart")
+end
+
+function Controller:_startChargeSound()
+	if not Audio or self.ChargeSound then
+		return
+	end
+	local host = soundHost(self)
+	if not host then
+		return
+	end
+	self.ChargeSound = Audio.Attach(host, "ChargeLoop", { Volume = 0 })
+end
+
+function Controller:_updateChargeSound(dt)
+	local sound = self.ChargeSound
+	if not (sound and sound.Parent) then
+		return
+	end
+	local base = 0.4
+	local entry = mountainConfig.SOUNDS and mountainConfig.SOUNDS.Library and mountainConfig.SOUNDS.Library.ChargeLoop
+	if entry and entry.Volume then
+		base = entry.Volume
+	end
+	local target = if self.Holding then base else 0
+	sound.Volume += (target - sound.Volume) * (1 - math.exp(-10 * dt))
+	sound.PlaybackSpeed = 0.7 + 0.7 * math.clamp(self.Charge or 0, 0, 1)
+end
+
+function Controller:_stopChargeSound()
+	local sound = self.ChargeSound
+	self.ChargeSound = nil
+	if sound and Audio then
+		Audio.Release(sound, 0.15)
+	end
+end
+
+function Controller:_playThrowSound()
+	if not Audio then
+		return
+	end
+	local host = soundHost(self)
+	if host then
+		Audio.PlayAt(Audio.ThrowSoundFor(self.Profile and self.Profile.id), host)
+	end
+end
+
 function Controller:BeginCharge()
 	-- a press while the last pose is still fading out picks the charge up from there
 	if self.Destroyed or (self.State ~= "idle" and self.State ~= "fading") then
@@ -244,8 +307,12 @@ function Controller:SetHolding(holding)
 	if holding and not self.Holding then
 		self.HoldStart = os.clock()
 		self.ChargeTime = 0
+		self:_startChargeSound()
 	end
 	self.Holding = holding
+	if not holding then
+		self:_stopChargeSound()
+	end
 end
 
 function Controller:SetChargePercent(percent)
@@ -267,6 +334,7 @@ function Controller:Release(expectedBall)
 		return false
 	end
 	self.State, self.Elapsed, self.DidFire = "firing", 0, false
+	self:_stopChargeSound()
 	if self.Ball then
 		self.Ball:Arm(expectedBall)
 	end
@@ -284,6 +352,7 @@ function Controller:Cancel()
 	self.State, self.Elapsed = "fading", 0
 	self.FadeWeight = self.Weight
 	self.Holding = false
+	self:_stopChargeSound()
 end
 
 -- The launcher currently in the hand and its grip joint (the model is replaced on re-equip).
@@ -368,6 +437,7 @@ end
 
 function Controller:_fire()
 	self.DidFire = true
+	self:_playThrowSound()
 	local origin, direction
 	if self.Ball then
 		origin, direction = self.Ball:Launch(self.Options.PredictSpeed and self.Options.PredictSpeed(self.ReleaseCharge) or nil)
@@ -394,6 +464,7 @@ function Controller:_step(dt)
 		local from = self.StartWeight or 0
 		self.Weight = from + (1 - from) * smooth(self.Elapsed / 0.2)
 		self.Charge += (self.TargetCharge - self.Charge) * (1 - math.exp(-dt / 0.10))
+		self:_updateChargeSound(dt)
 		if self.Clip then
 			self.Pose = self:_clipPose(dt)
 			self.ExpectedTip = self:_expectedTip()
@@ -551,6 +622,7 @@ function Controller:Destroy()
 		return
 	end
 	self.Destroyed = true
+	self:_stopChargeSound()
 	for _, connection in ipairs(self.Connections) do
 		connection:Disconnect()
 	end

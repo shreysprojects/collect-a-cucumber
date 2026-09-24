@@ -469,7 +469,7 @@ config.SMASH = {
 	EnergyLoss = { Building = 0.055, Landmark = 0.065, SkiLift = 0.03, Default = 0.022 },
 	Kick = { Building = 1.2, Landmark = 1.4, SkiLift = 0.6, Default = 0.35 },
 	ServerReach = 140, -- extra studs of tolerance when the server validates a hit
-	SmashSound = false, -- smashes are silent (the white burst is the feedback)
+	SmashSound = true, -- a soft crunch per smash (CrashSmall / CrashBig, pitched up with the combo)
 	Explosion = { -- soft white burst on every destroyed structure
 		Scale = 1,
 		Density = 1,
@@ -495,13 +495,73 @@ config.SMASH = {
 	ComboPitchPerStack = 0.025, -- crash sound pitch rises with the combo
 }
 
+-- Every sound in the game. The flat keys are the ride rig's own set (CLIENT_SnowballFX);
+-- Library is everything played through the Audio module (ReplicatedStorage.Assets.Modules
+-- .Client.Audio): Id, base Volume, mix Group (Music / SFX / UI / Ambience), Pitch and a
+-- random PitchSpread, MinInterval between plays, RollOff = { min, max } studs for 3D plays,
+-- Looped for beds. Assets: the Roblox UI sound set (Roblox_UI_*), the Pro Sound Effects
+-- library and APM Music from the Creator Store - all free and licensed for any experience.
 config.SOUNDS = {
 	Whoosh = "rbxassetid://9126229255",
 	Thud = "rbxassetid://9118616114",
 	BigThud = "rbxassetid://9113480915",
 	CrashBig = "rbxassetid://9120957636",
 	CrashSmall = "rbxassetid://9126267420",
-	Volume = { Whoosh = 1.2, Thud = 2, BigThud = 2.2, CrashBig = 1.8, CrashSmall = 1.6 },
+	Volume = { Whoosh = 1.2, Thud = 2, BigThud = 2.2, CrashBig = 1.2, CrashSmall = 0.9 },
+	Library = {
+		-- interface
+		UIClick = { Id = 15675059323, Volume = 0.55, Group = "UI", PitchSpread = 0.04, MinInterval = 0.04 },
+		UIOpen = { Id = 15675024286, Volume = 0.5, Group = "UI", MinInterval = 0.1 },
+		UIClose = { Id = 15675012262, Volume = 0.45, Group = "UI", MinInterval = 0.1 },
+		UITab = { Id = 15675046931, Volume = 0.4, Group = "UI", MinInterval = 0.08 },
+		UISuccess = { Id = 15675043410, Volume = 0.6, Group = "UI", MinInterval = 0.2 },
+		UIError = { Id = 550209561, Volume = 0.6, Group = "UI", MinInterval = 0.2 },
+		UIInfo = { Id = 15675085146, Volume = 0.3, Group = "UI", MinInterval = 0.2 },
+		CoinPop = { Id = 9113849492, Volume = 0.25, Group = "UI", Pitch = 1.1, PitchSpread = 0.1, MinInterval = 0.35 },
+		ComboPop = { Id = 9113263444, Volume = 0.5, Group = "SFX", MinInterval = 0.05 },
+		LevelUp = { Id = 3199238931, Volume = 0.9, Group = "UI", Pitch = 1.05 },
+		Rebirth = { Id = 1841209502, Volume = 0.8, Group = "SFX" },
+		Teleport = { Id = 15674975792, Volume = 0.7, Group = "UI" },
+		RideEnd = { Id = 15675028888, Volume = 0.5, Group = "UI", Pitch = 0.8 },
+		-- the throw, by launcher family (Audio.ThrowSoundFor), played at the launcher
+		ChargeLoop = { Id = 9119462416, Volume = 0.4, Group = "SFX", Looped = true, RollOff = { 20, 160 } },
+		ThrowSwing = { Id = 9126283592, Volume = 0.9, Group = "SFX", PitchSpread = 0.08, RollOff = { 25, 250 } },
+		ThrowSlingshot = { Id = 12222103, Volume = 0.8, Group = "SFX", PitchSpread = 0.06, RollOff = { 25, 250 } },
+		ThrowCrossbow = { Id = 9114001369, Volume = 0.8, Group = "SFX", PitchSpread = 0.05, RollOff = { 25, 250 } },
+		ThrowBlaster = { Id = 9117663349, Volume = 0.9, Group = "SFX", PitchSpread = 0.08, RollOff = { 25, 250 } },
+		ThrowCannon = { Id = 3149249837, Volume = 0.55, Group = "SFX", PitchSpread = 0.05, RollOff = { 30, 320 } },
+		ThrowMortar = { Id = 3149249837, Volume = 0.5, Group = "SFX", Pitch = 0.8, PitchSpread = 0.05, RollOff = { 30, 320 } },
+		ThrowEnergy = { Id = 9116231442, Volume = 0.6, Group = "SFX", PitchSpread = 0.05, RollOff = { 30, 320 } },
+		ThrowRocket = { Id = 9126010351, Volume = 0.8, Group = "SFX", Pitch = 0.95, RollOff = { 30, 320 } },
+		BallAway = { Id = 9120718689, Volume = 0.6, Group = "SFX", RollOff = { 25, 300 } },
+		-- the ride (loops sit on each ball's FX rig and are driven by speed / size)
+		RideRoll = { Id = 9117899124, Volume = 0.9, Group = "SFX", Looped = true, RollOff = { 30, 320 } },
+		RideWind = { Id = 9116939168, Volume = 0.5, Group = "SFX", Looped = true, RollOff = { 30, 320 } },
+		SizeUp = { Id = 9125965076, Volume = 0.7, Group = "SFX", MinInterval = 0.3, RollOff = { 25, 300 } },
+		HelperLaunch = { Id = 3149249837, Volume = 0.55, Group = "SFX", RollOff = { 30, 260 } },
+		HelperBounce = { Id = 9120733724, Volume = 0.7, Group = "SFX", Pitch = 1.2, RollOff = { 30, 260 } },
+		HelperDash = { Id = 9126009936, Volume = 0.7, Group = "SFX", RollOff = { 30, 260 } },
+		HelperGrant = { Id = 9120733724, Volume = 0.45, Group = "SFX", MinInterval = 0.5 },
+		Finish = { Id = 1836860398, Volume = 0.9, Group = "SFX" },
+		Cheer = { Id = 1841221347, Volume = 0.7, Group = "SFX" },
+		-- beds
+		WindLobby = { Id = 9114057104, Volume = 0.22, Group = "Ambience", Looped = true },
+	},
+}
+
+-- Music (APM, one artist so the loops belong together): calm on the pad, bouncy on the ride.
+config.MUSIC = {
+	Lobby = { Id = 1836057733, Volume = 0.5 }, -- "Leisure Simulation Game", 2:29 loop
+	Ride = { Id = 1836039989, Volume = 0.55 }, -- "Bouncy Way", 1:11 loop
+	Crossfade = 1.2,
+}
+
+-- Mix: SoundGroup levels, the ambience bed, the opening music state.
+config.AUDIO = {
+	Groups = { Music = 0.4, SFX = 1, UI = 0.9, Ambience = 0.7 },
+	Ambience = { Sound = "WindLobby", Volume = 1 },
+	StartMusic = "Lobby",
+	Preload = true,
 }
 
 -- LaunchPoint is on the rolling surface; ExtraHeight sits the character above snow.
@@ -631,9 +691,14 @@ config.LAUNCH = {
 	StopSpeed = 8, -- studs/s horizontal; at or below this counts as barely moving
 	StopHold = 0.75, -- seconds it must stay that slow before the ride ends
 	StopGrace = 1.25, -- ignore auto-stop this long after launch (stream/physics hitch)
-	-- Each eaten patch adds this volume; radius grows with the cube root.
-	GrowVolumePerSnow = 1.6,
-	GrowMaxScale = 8,
+	-- Snow growth, no cap. Every unit of snow eaten grows the ball by GrowStep at 1x, and e
+	-- times less for each GrowDecay of scale gained since (an exponentially decaying rate):
+	--   scale = 1 + GrowDecay * ln(1 + snow * GrowStep / GrowDecay)
+	-- Fitted to a measured Frostpeak ride (one snow unit = 16 studs^2 of snow, ~0.8 per
+	-- tile): ~40 snow at 400 m -> 3.7x, ~420 at 1.7 km -> 7.7x (where the old cap sat), ~1,600
+	-- at 4.6 km -> 10.2x, a full 10 km run -> ~12.5x, and it keeps creeping up after that.
+	GrowStep = 0.15,
+	GrowDecay = 1.9,
 	GrowLerp = 10,
 	GrowCollectPadding = 0.35,
 }

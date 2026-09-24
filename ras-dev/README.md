@@ -462,3 +462,45 @@ the `Default` manifest; backups in one folder. Done (kinqxz/RAS main `a0d20a4`, 
   panel blocks charging; close with `vars.Functions.GUIFramework:InvokeUI("HUD", "ClosePanels")`.
 - Another session committed `99b3d07` ("chase camera stays behind the ball") into the same clone meanwhile;
   Rojo synced it, main carries both.
+
+## 2026-09-24: sound design for every feature + snowball growth without a cap
+
+- **Growth (user: "gets noticeably bigger but there seems to be a cap; remove it, grow fast first then
+  really slow"):** the old model was Volume += 1.6 per snow unit, scale = cbrt(volume ratio) clamped to
+  8. Measured on a Frostpeak ride the ball hit 8x after ~420 snow units (1.7 km) and stayed flat for the
+  remaining 3 km. New model (SERV_Snowball `growthScale`, `LAUNCH.GrowStep` 0.15 / `GrowDecay` 1.9):
+  `scale = 1 + Decay * ln(1 + snow * Step / Decay)` = the growth per snow unit decays e-fold for every
+  Decay of scale gained; no cap. Measured: 40 snow (400 m) 3.7x, 430 (1 km) 7.8x, 1,000 9.3x, 1,600 ~10.2x,
+  a full 10 km run ~12.5x. One snow unit = 16 studs^2 of snow (~0.8 per 3.5-stud tile);
+  `state.Snow` accumulates it (SnowCollected stays the reward counter). Camera distance/height still
+  grow linearly with scale (Eric's CameraGrow*), so a 12x ball sits ~120 studs back.
+- **Audio module** `ReplicatedStorage.Assets.Modules.Client.Audio` (repo `Client/Audio.luau`, Eric's
+  plain-module layout like LaunchPropAnimations): catalog `MountainConfig.SOUNDS.Library` (37 entries),
+  `MUSIC` (Lobby "Leisure Simulation Game" 2:29 / Ride "Bouncy Way" 1:11, both APM Sylvain Michel Ott
+  video-game loops, crossfade 1.2 s), `AUDIO.Groups` (Music 0.4 / SFX 1 / UI 0.9 / Ambience 0.7 as
+  SoundGroups), a wind bed (`WindLobby`, Pro Sound Effects). `Play` (2D), `PlayAt` (3D on a part or a
+  point), `Attach` (a loop you drive; attribute BaseVolume = catalog base), `Release`, `Loop`/`SetLoop`/
+  `StopLoop`, `SetMusic`, `Duck`, `ThrowSoundFor(launcherId)`. Player attributes `SFXEnabled` /
+  `MusicEnabled` = false mute a side. Sources: Roblox_UI_* set (creator Roblox), Pro Sound Effects
+  (9xxxxxxxxx ids), APM Music (18xxxxxxxx), classic Roblox (12222103 slingshot, 3149249837 cannon); all
+  53 candidates load in Studio (`IsLoaded`/`TimeLength` probe in the edit DM).
+- **Hooks:** ChargeController = charge loop on the launcher (pitch 0.7 -> 1.4 with the charge, 3D) +
+  the throw by launcher family (scoop/flipper/catapult/sling swish, bow rubber band, crossbow, blaster/
+  pistol pneumatic, heavy cannon, mortar low cannon, energy laser cannon, rocket jet) - every observer's
+  controller plays them so the whole server hears each throw; CLIENT_Snowball = music Ride/Lobby on
+  bind/unbind, BallAway swish at the ball, RideEnd whoosh, Finish sting + kids' "Yeah" + music duck in
+  HoldAtFinish; CLIENT_SnowballFX = RideRoll (crunchy rumble, volume with speed and size, pitch down as
+  it grows) + RideWind loops on the FX rig (attached AFTER the rig is parented), SizeUp whump per whole
+  scale step, ComboPop per smash stack (pitch up), smashes audible again (`SMASH.SmashSound = true`,
+  Crash volumes 1.2 / 0.9), HelperGrant for the owner; LaunchPropAnimations = HelperLaunch / Bounce /
+  Dash by catalog kind (replaces the Whoosh/Thud hardcode); HUD = UIClick on the main buttons, UIOpen /
+  UIClose on panels, UITab, LevelUp (+ UISuccess), Rebirth shimmer, Teleport on travel, CoinPop on the
+  run readout (rate-limited 0.35 s); Notify = UIError / UISuccess / UIInfo per toast kind; PurchaseFX
+  sounds routed into the SFX group.
+- **Eric bug fixed on the way:** CLIENT_SnowballFX called `powerMultiplier` inside `checkSmash` before
+  its `local function` line (his 4c40820 fast-smash change) -> "attempt to call a nil value" on every
+  smash, aborting that frame's stepBall. Hoisted above checkSmash.
+- **Test recipe:** client eval counts Sound instances by name (`Audio_*`, `Music_*`) via
+  SoundService/workspace DescendantAdded while DevChargeHold launches a ride; server eval samples
+  `sapi.SNOWBALLS[player].Snow/TargetScale` every 2 s. Gotcha found: a loop attached with `Volume = 0`
+  must keep the catalog base in BaseVolume (first version stored the zero and stayed silent).
