@@ -504,3 +504,45 @@ the `Default` manifest; backups in one folder. Done (kinqxz/RAS main `a0d20a4`, 
   SoundService/workspace DescendantAdded while DevChargeHold launches a ride; server eval samples
   `sapi.SNOWBALLS[player].Snow/TargetScale` every 2 s. Gotcha found: a loop attached with `Volume = 0`
   must keep the catalog base in BaseVolume (first version stored the zero and stayed silent).
+
+## 2026-09-24: level bar, level-gated rebirth, free-look camera
+
+User: "make level bar work (XP as the ball rolls, very easy to level up), make the rebirth system
+(reach certain levels, each rebirth more power / whatever the UI says, easy), let the camera be
+moveable/draggable. Push everything." kinqxz/RAS main, Studio == repo == mirrors.
+
+- **Why the bar looked dead:** the XP system was complete (snow 1 XP/unit, smashes, run multiplier,
+  ApplyXp, HUD SetProgress) but the test account sat at the old `MAX_LEVEL` 100 with an empty
+  "0/4060" bar and every award discarded. Measured on a ride at 5x gear: level 1 -> 17 in 22 s over
+  2.7 km (~0.5 XP per stud at 1x). Fix: `MAX_LEVEL` 1000, a full "Level N: MAX" bar at the cap,
+  plus distance XP (`PlayerProgress.DISTANCE_XP` 0.25 per stud x the run multiplier, fraction carried
+  in `SERV_Snowball.updateDistance`, awarded through AwardProgress with 0 coins). Starter gear after a
+  rebirth (2x gear x 1.5 boost): level 6 after a 430 m ride, level 10 in about one full ride.
+- **Rebirth by level:** `RebirthLevel(rebirths)` = `REBIRTH_LEVEL_BASE` 10 + `REBIRTH_LEVEL_STEP` 5
+  per rebirth done (capped at MAX_LEVEL); `CanRebirth` / `ApplyRebirth` gate on it; the coin cost and
+  `RebirthCost` are gone. A rebirth still resets level, coins (`REBIRTH_KEEPS_COINS = false`),
+  mountains and gear, keeps the lifetime totals, and adds `REBIRTH_EARNINGS_PER` 0.5x coins + XP (the
+  boost the panel shows) and `REBIRTH_LAUNCH_PER` 0.15x launch. Server (`SERV_PlayerData.Rebirth`)
+  answers "Reach level N first"; `RebirthLevel` is a replicated player attribute. HUD now drives the
+  Studio frame `HUD/Rebirth` the way it was designed: CurrentBoost / UpcomingBoost = "X1" -> "X1.5",
+  Background.Level bar = "level/needed" with the BackFrame filled (pinFillLeft + tweenFill, same as
+  the main bar, `api:SetRebirthLevelBar`), Buy = "REBIRTH!" grayed below the level (was showing
+  "$25K"). Verified: press at level 100 -> level 1, rebirth 1, X1.5 -> X2, bar 1/15 at 6.5 %, coins 0,
+  Classic + Wooden Shovel; the test profile was restored + saved afterwards.
+- **Free look:** `LAUNCH.CameraOrbit` (Enabled, Sensitivity 0.28 deg/px, TouchSensitivity 0.4,
+  GamepadRate 150 deg/s, PitchMin -30 / PitchMax 45, ReturnDelay 1.5 s, ReturnRate 3, Zoom 0.5-2.5 by
+  0.12 per notch). CLIENT_Snowball keeps `vars.CameraOrbit` {Yaw, Pitch, Zoom}: right-mouse drag
+  (MouseBehavior LockCurrentPosition while held, Default on release / focus loss), touch drag off the
+  GUI, right stick; `orbitVector` rotates the framing vector (camera minus look target) in heading +
+  elevation and scales it by the zoom, applied in BindPadCamera (about the pad look point) and in the
+  chase loop (`anchor + orbitVector(offset)`, before the ground-clearance lift), so follow / slope
+  tilt / clearance are untouched. The chase starts from `vars.PadCameraBase` (the un-orbited pad
+  framing) so a dragged pad view carries over as the same orbit, no jump. Verified numerically: yaw
+  -30 deg turns the view 30 deg to the right (Roblox convention), pitch +20 deg lifts the look-down
+  from 7 to 27 deg, zoom 2 doubles the distance, the angles return to 0 within 2.5 s; mid-ride yaw 90
+  put the camera 86 deg off the ball's heading and it settled back behind. Off the pad the default
+  Roblox camera is unchanged (already draggable).
+- **Tooling:** `ras-dev/tools/manifest.py` + `compare.lua` = the Studio == repo check (was a scratchpad
+  script). Architecture audit clean (ServerMain, ClientMain, ReEvent + ReFunction, no bindables,
+  ScreenGuis only as UI templates + the framework's three in StarterGui, ServerStorage = Assets /
+  Modules / Backups).

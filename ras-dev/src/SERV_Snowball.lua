@@ -419,6 +419,20 @@ local function rewardSnow(player, state, gained)
 	sself:AwardProgress(player, xp * multiplier, coins * multiplier)
 end
 
+-- XP for the studs rolled since the last distance tick (PlayerProgress.DISTANCE_XP per
+-- stud, times the run multiplier). The fraction carries, so nothing is floored away.
+local function rewardDistance(player, state, studs)
+	if studs <= 0 then
+		return
+	end
+	local carry = (state.DistanceXpCarry or 0) + playerProgress.RewardsForDistance(studs) * runMultiplier(player, state)
+	local whole = math.floor(carry)
+	state.DistanceXpCarry = carry - whole
+	if whole > 0 then
+		sself:AwardProgress(player, whole, 0)
+	end
+end
+
 local function stepCarve(player, state, contact, minGap)
 	local now = os.clock()
 	if now - (state.LastCarve or 0) < minGap then
@@ -573,6 +587,7 @@ local function updateDistance(player, state)
 		if distance > recorded then
 			sself:AddRolledDistance(player, distance - recorded)
 			state.RecordedDistance = distance
+			rewardDistance(player, state, distance - recorded)
 		end
 	end
 	if not state.Finishing and run.Total > 0 and along >= (run.FinishAt or run.Total) - 4 then

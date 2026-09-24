@@ -8,6 +8,11 @@
 	While riding: Left / Stop / Right on LaunchGui, plus A/D and the left stick.
 	If the ball sits still or crawls for a moment, the ride ends the same as Stop.
 
+	Free look (MountainConfig.LAUNCH.CameraOrbit): on the pad and during the ride a
+	right-mouse drag, a touch drag off the buttons or the right stick orbits the camera
+	around the character / ball and the wheel zooms. The angles sit on top of the
+	scripted framing and ease back behind the ball after ReturnDelay without input.
+
 --------------------------------------------------------------------------------------------]]--
 
 local Players = game:GetService("Players")
@@ -855,6 +860,197 @@ local function restoreCharacterRotate(character)
 	end
 end
 
+----------------------------------------------------------------------------------------------
+-- Free look (MountainConfig.LAUNCH.CameraOrbit). A yaw / pitch pair and a zoom factor that
+-- the pad and chase cameras apply to their own framing vector (camera position relative to
+-- what it looks at), so the follow, slope tilt and ground clearance are untouched. Right-mouse
+-- drag (cursor locked in place while held), touch drag off the GUI and the right stick turn
+-- it; the wheel zooms; after ReturnDelay without input the angles ease back to zero.
+----------------------------------------------------------------------------------------------
+
+local function orbitSettings()
+	local orbit = mountainConfig.LAUNCH.CameraOrbit
+	if orbit and orbit.Enabled ~= false then
+		return orbit
+	end
+	return nil
+end
+
+local function getOrbit(vars)
+	local orbit = vars.CameraOrbit
+	if not orbit then
+		orbit = { Yaw = 0, Pitch = 0, Zoom = 1, Dragging = nil, LastInput = 0, StickX = 0, StickY = 0 }
+		vars.CameraOrbit = orbit
+	end
+	return orbit
+end
+
+-- dx / dy in pixels (or stick units); sensitivity in degrees per unit. Dragging right turns
+-- the view right, dragging up lifts the camera over the target (the Roblox camera convention).
+local function orbitTurn(vars, dx, dy, sensitivity)
+	local settings = orbitSettings()
+	if not settings then
+		return
+	end
+	local orbit = getOrbit(vars)
+	orbit.Yaw -= math.rad(dx * sensitivity)
+	orbit.Pitch = math.clamp(
+		orbit.Pitch - math.rad(dy * sensitivity),
+		math.rad(settings.PitchMin or -30),
+		math.rad(settings.PitchMax or 45)
+	)
+	orbit.LastInput = os.clock()
+end
+
+-- The framing vector (camera position minus look target) turned by the orbit and scaled by
+-- the zoom. Elevation is clamped so the camera never flips over the top.
+local function orbitVector(vars, rel)
+	local settings = orbitSettings()
+	local orbit = vars and vars.CameraOrbit
+	if not settings or not orbit then
+		return rel
+	end
+	local length = rel.Magnitude
+	if length < 0.01 then
+		return rel
+	end
+	local zoom = orbit.Zoom or 1
+	if orbit.Yaw == 0 and orbit.Pitch == 0 then
+		return rel * zoom
+	end
+	local elevation = math.asin(math.clamp(rel.Y / length, -1, 1))
+	local heading = math.atan2(rel.X, rel.Z)
+	local pitch = math.clamp(elevation + orbit.Pitch, math.rad(-80), math.rad(85))
+	local yaw = heading + orbit.Yaw
+	return Vector3.new(math.sin(yaw) * math.cos(pitch), math.sin(pitch), math.cos(yaw) * math.cos(pitch)) * (length * zoom)
+end
+
+-- Per frame: the right stick turns at GamepadRate; otherwise, once the player has let go for
+-- ReturnDelay, the angles ease back behind the target.
+local function orbitSettle(vars, dt)
+	local settings = orbitSettings()
+	local orbit = vars and vars.CameraOrbit
+	if not settings or not orbit then
+		return
+	end
+	if orbit.StickX ~= 0 or orbit.StickY ~= 0 then
+		local rate = settings.GamepadRate or 150
+		orbitTurn(vars, orbit.StickX * rate * dt, orbit.StickY * rate * dt, 1)
+		return
+	end
+	if orbit.Dragging or settings.ReturnDelay == false then
+		return
+	end
+	if os.clock() - orbit.LastInput < (tonumber(settings.ReturnDelay) or 1.5) then
+		return
+	end
+	local k = 1 - math.exp(-(settings.ReturnRate or 3) * dt)
+	orbit.Yaw -= orbit.Yaw * k
+	orbit.Pitch -= orbit.Pitch * k
+	if math.abs(orbit.Yaw) < 1e-3 and math.abs(orbit.Pitch) < 1e-3 then
+		orbit.Yaw = 0
+		orbit.Pitch = 0
+	end
+end
+
+local function endOrbitDrag(orbit)
+	if orbit.Dragging == "Mouse" then
+		UserInputService.MouseBehavior = Enum.MouseBehavior.Default
+	end
+	orbit.Dragging = nil
+	orbit.Touch = nil
+	orbit.LastInput = os.clock()
+end
+
+local function setupOrbitInput(vars)
+	if not vars or vars.OrbitInputBound then
+		return
+	end
+	vars.OrbitInputBound = true
+	local orbit = getOrbit(vars)
+
+	local function active()
+		return orbitSettings() ~= nil and (vars.PadCamera ~= nil or vars.SnowballCamera ~= nil)
+	end
+
+	UserInputService.InputBegan:Connect(function(input, gameProcessed)
+		if gameProcessed or not active() then
+			return
+		end
+		if input.UserInputType == Enum.UserInputType.MouseButton2 then
+			if orbit.Dragging == "Touch" then
+				endOrbitDrag(orbit)
+			end
+			orbit.Dragging = "Mouse"
+			orbit.LastInput = os.clock()
+			UserInputService.MouseBehavior = Enum.MouseBehavior.LockCurrentPosition
+		elseif input.UserInputType == Enum.UserInputType.Touch and orbit.Dragging == nil then
+			orbit.Dragging = "Touch"
+			orbit.Touch = input
+			orbit.TouchPos = input.Position
+			orbit.LastInput = os.clock()
+		end
+	end)
+
+	UserInputService.InputChanged:Connect(function(input, gameProcessed)
+		local settings = orbitSettings()
+		if not settings then
+			return
+		end
+		if input.UserInputType == Enum.UserInputType.MouseMovement then
+			if orbit.Dragging == "Mouse" then
+				orbitTurn(vars, input.Delta.X, input.Delta.Y, settings.Sensitivity or 0.28)
+			end
+		elseif input.UserInputType == Enum.UserInputType.Touch then
+			if orbit.Dragging == "Touch" and input == orbit.Touch then
+				local delta = input.Position - (orbit.TouchPos or input.Position)
+				orbit.TouchPos = input.Position
+				orbitTurn(vars, delta.X, delta.Y, settings.TouchSensitivity or 0.4)
+			end
+		elseif input.UserInputType == Enum.UserInputType.MouseWheel then
+			if not gameProcessed and active() then
+				local step = settings.ZoomStep or 0.12
+				orbit.Zoom = math.clamp((orbit.Zoom or 1) - input.Position.Z * step, settings.ZoomMin or 0.5, settings.ZoomMax or 2.5)
+				orbit.LastInput = os.clock()
+			end
+		elseif input.KeyCode == Enum.KeyCode.Thumbstick2 then
+			local x, y = input.Position.X, input.Position.Y
+			if math.abs(x) < STICK_DEADZONE then
+				x = 0
+			end
+			if math.abs(y) < STICK_DEADZONE then
+				y = 0
+			end
+			local on = active()
+			orbit.StickX = if on then x else 0
+			orbit.StickY = if on then -y else 0
+		end
+	end)
+
+	UserInputService.InputEnded:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton2 then
+			if orbit.Dragging == "Mouse" then
+				endOrbitDrag(orbit)
+			end
+		elseif input.UserInputType == Enum.UserInputType.Touch then
+			if orbit.Dragging == "Touch" and input == orbit.Touch then
+				endOrbitDrag(orbit)
+			end
+		elseif input.KeyCode == Enum.KeyCode.Thumbstick2 then
+			orbit.StickX = 0
+			orbit.StickY = 0
+		end
+	end)
+
+	UserInputService.WindowFocusReleased:Connect(function()
+		if orbit.Dragging then
+			endOrbitDrag(orbit)
+		end
+		orbit.StickX = 0
+		orbit.StickY = 0
+	end)
+end
+
 local function unbindPadCamera(vars)
 	if vars and vars.PadCamera then
 		vars.PadCamera:Disconnect()
@@ -880,6 +1076,7 @@ function api:BindPadCamera()
 		return
 	end
 	camera.CameraType = Enum.CameraType.Scriptable
+	setupOrbitInput(vars)
 
 	local launch = mountainConfig.LAUNCH
 	local camPos = nil
@@ -915,7 +1112,11 @@ function api:BindPadCamera()
 		end
 
 		local lookAt = hrp.Position + Vector3.yAxis * 2 + forward * launch.PadLookAhead
-		camera.CFrame = CFrame.lookAt(camPos, lookAt, Vector3.yAxis)
+		-- The un-orbited framing: the chase camera starts its offset from here at launch, so a
+		-- dragged pad view carries over as the same orbit instead of a jump.
+		vars.PadCameraBase = camPos
+		orbitSettle(vars, dt)
+		camera.CFrame = CFrame.lookAt(lookAt + orbitVector(vars, camPos - lookAt), lookAt, Vector3.yAxis)
 	end)
 end
 
@@ -1203,6 +1404,7 @@ function api:BindSnowballCamera(snowball)
 	-- 0.4 s at any speed), so the launch reads as one continuous shot instead of a cut.
 	local fromPad = mountainConfig.LAUNCH.ChaseFromPadCamera ~= false and vars ~= nil and vars.OnLaunchPad == true
 	camera.CameraType = Enum.CameraType.Scriptable
+	setupOrbitInput(vars)
 	setRideButtons(vars, true)
 
 	-- Flight physics, tricks, smashing and effects live in CLIENT_SnowballFX.
@@ -1222,7 +1424,9 @@ function api:BindSnowballCamera(snowball)
 	-- the ball (a world-space lerp used to snap to the chase spot in one frame once the ball was
 	-- fast, which read as the camera leaping over the ball).
 	local anchor = nil
-	local offset = if fromPad then camera.CFrame.Position - root.Position else nil
+	-- From the pad: the un-orbited pad framing (the free-look orbit is applied on top each frame).
+	local padBase = if fromPad then (vars.PadCameraBase or camera.CFrame.Position) else nil
+	local offset = if padBase then padBase - root.Position else nil
 	local tilt = 0 -- eased travel pitch in radians (negative = descending)
 	local lift = 0 -- eased ground-clearance lift in studs
 	local followStarted = os.clock()
@@ -1326,7 +1530,8 @@ function api:BindSnowballCamera(snowball)
 		else
 			anchor = position
 		end
-		local camPos = anchor + offset
+		orbitSettle(vars, dt)
+		local camPos = anchor + orbitVector(vars, offset)
 		local ignore = { snowball }
 		local character = Players.LocalPlayer.Character
 		if character then

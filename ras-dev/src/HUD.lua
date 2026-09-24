@@ -18,10 +18,14 @@
 	     ServerStorage.Assets.UserInterfaces.HUD here: Shop, Mountains, ...),
 	  3. anything under ReplicatedStorage.Assets.UserInterfaces,
 	  4. any GuiObject of that name already in PlayerGui.
-	Rebirth uses the Studio frame when one exists. Its Foreground.Buy button is
-	the coin purchase: the label is the rebirth cost, grayed until the player
-	can afford it, and a press invokes Rebirth. A generated frame is only built
-	when Studio has not supplied one.
+	Rebirth uses the Studio frame when one exists: Foreground.CurrentBoost /
+	UpcomingBoost show the earnings boost now and after the next rebirth
+	("X1" -> "X1.5"), Background.Level is a level bar (Frame.TextLabel "12/10",
+	BackFrame fill) toward the level the next rebirth needs
+	(PlayerProgress.RebirthLevel: 10, 15, 20, ...), and Foreground.Buy reads
+	"REBIRTH!", grayed until that level is reached; a press invokes Rebirth. The
+	main level bar reads "MAX" with a full fill at PlayerProgress.MAX_LEVEL. A
+	generated frame is only built when Studio has not supplied one.
 
 	Mountains cards (Frostpeak, Candy, ...) show Travel when unlocked and Locked
 	when not. Travel invokes TravelToMountain (teleport to that mountain's place).
@@ -129,7 +133,10 @@ local SHOP_REFUSED_TOAST = {
 }
 local SHOP_ERROR_TOAST = "Can't buy that right now"
 local REBIRTH_FLOAT = "REBIRTH!"
-local REBIRTH_TOAST = "Rebirth %d!"
+local REBIRTH_TOAST = "Rebirth %d! Boost %s"
+local REBIRTH_BUY_TEXT = "REBIRTH!"
+local REBIRTH_NEED_TOAST = "Reach level %d first"
+local MAX_LEVEL_TEXT = "MAX"
 local RING_HEIGHT_PAD = 12
 local POP_IN = TweenInfo.new(0.28, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
 local POP_OUT = TweenInfo.new(0.18, Enum.EasingStyle.Quad, Enum.EasingDirection.In)
@@ -459,6 +466,11 @@ local function formatRate(value)
 	local text = string.format("%.2f", rounded)
 	text = text:gsub("0+$", ""):gsub("%.$", "")
 	return text .. "x"
+end
+
+-- The rebirth panel's boost labels: "X1", "X1.5", "X2".
+local function formatBoost(value)
+	return "X" .. (formatRate(value):gsub("x$", ""))
 end
 
 local function shopCatalog(tab)
@@ -1268,10 +1280,10 @@ function api:RefreshRebirthPanel()
 
 	local player = Players.LocalPlayer
 	local rebirths = math.max(0, math.floor(tonumber(player:GetAttribute("Rebirths")) or 0))
-	local coins = math.max(0, math.floor(tonumber(player:GetAttribute("Coins")) or 0))
-	local cost = playerProgress.RebirthCost(rebirths)
-	local canAfford = coins >= cost
-	local enabled = canAfford and not self.RebirthBusy
+	local level = math.max(1, math.floor(tonumber(player:GetAttribute("Level")) or 1))
+	local needLevel = playerProgress.RebirthLevel(rebirths)
+	local ready = level >= needLevel
+	local enabled = ready and not self.RebirthBusy
 
 	local function setText(name, text)
 		local label = panel:FindFirstChild(name, true)
@@ -1280,19 +1292,22 @@ function api:RefreshRebirthPanel()
 		end
 	end
 
+	-- Studio frame: boost now -> after the next rebirth, and the level bar toward the gate.
+	setText("CurrentBoost", formatBoost(playerProgress.EarningsMultiplier(rebirths)))
+	setText("UpcomingBoost", formatBoost(playerProgress.EarningsMultiplier(rebirths + 1)))
+	self:SetRebirthLevelBar(panel, level, needLevel)
+
+	-- Generated fallback frame.
 	setText("Count", "Rebirths: " .. tostring(rebirths))
 	setText("CurrentBonus", "Earnings " .. formatRate(playerProgress.EarningsMultiplier(rebirths)) .. "    Launch " .. formatRate(playerProgress.LaunchBoost(rebirths)))
 	setText("NextBonus", "Next: Earnings " .. formatRate(playerProgress.EarningsMultiplier(rebirths + 1)) .. "    Launch " .. formatRate(playerProgress.LaunchBoost(rebirths + 1)))
-	setText("Cost", "Cost: " .. formatPrice(cost))
-	setText("Balance", "You have: " .. formatPrice(coins))
-
-	local price = formatPrice(cost)
-	setPriceText(panel, price)
+	setText("Cost", "Needs level " .. tostring(needLevel))
+	setText("Balance", "You are level " .. tostring(level))
 
 	local buy = panel:FindFirstChild("Buy", true) or panel:FindFirstChild("Confirm", true)
 	if buy and buy:IsA("GuiButton") then
-		setButtonText(buy, price)
-		-- Grayed, not inert: an unaffordable press still reaches PressRebirth ("Need $X more").
+		setButtonText(buy, REBIRTH_BUY_TEXT)
+		-- Grayed, not inert: an early press still reaches PressRebirth ("Reach level N first").
 		buy.Active = not self.RebirthBusy
 		local tinted = false
 		eachShopBuyGradient(buy, function(gradient)
@@ -1316,12 +1331,12 @@ function api:PressRebirth(buy)
 	end
 	local player = Players.LocalPlayer
 	local rebirths = math.max(0, math.floor(tonumber(player:GetAttribute("Rebirths")) or 0))
-	local coins = math.max(0, math.floor(tonumber(player:GetAttribute("Coins")) or 0))
-	local cost = playerProgress.RebirthCost(rebirths)
+	local level = math.max(1, math.floor(tonumber(player:GetAttribute("Level")) or 1))
+	local needLevel = playerProgress.RebirthLevel(rebirths)
 	PurchaseFX.Press(buy)
-	if coins < cost then
+	if level < needLevel then
 		PurchaseFX.Fail(buy)
-		Notify.Error(string.format(NEED_MORE_TOAST, formatPrice(cost - coins)))
+		Notify.Error(string.format(REBIRTH_NEED_TOAST, needLevel))
 		self:RefreshRebirthPanel()
 		return
 	end
@@ -1339,7 +1354,7 @@ function api:PressRebirth(buy)
 		PurchaseFX.Success(buy)
 		PurchaseFX.FloatText(buy, REBIRTH_FLOAT)
 		Audio.Play("Rebirth")
-		Notify.Success(string.format(REBIRTH_TOAST, rebirths + 1))
+		Notify.Success(string.format(REBIRTH_TOAST, rebirths + 1, formatBoost(playerProgress.EarningsMultiplier(rebirths + 1))))
 	else
 		warn("[CLIENT]: Rebirth failed:", if invoked then err else ok)
 		PurchaseFX.Fail(buy)
@@ -1601,6 +1616,50 @@ local function tweenFill(ui, alpha, info)
 	end)
 	tween:Play()
 	return tween
+end
+
+-- The rebirth panel's level bar (Background.Level: Frame.TextLabel + TextShadow over a
+-- BackFrame fill), driven like the main bar: "level/needed", filled to level / needed.
+function api:SetRebirthLevelBar(panel, level, needLevel)
+	local ui = self.RebirthLevelUI
+	if not ui or ui.Panel ~= panel or not ui.Fill.Parent then
+		ui = nil
+		local background = panel:FindFirstChild("Background")
+		for _, child in (background or panel):GetChildren() do
+			if child.Name == "Level" and child:IsA("Frame") then
+				local holder = child:FindFirstChild("Frame")
+				local label = holder and holder:FindFirstChild("TextLabel")
+				local fill = child:FindFirstChild("BackFrame")
+				if label and label:IsA("TextLabel") and fill and fill:IsA("GuiObject") then
+					local shadow = holder:FindFirstChild("TextShadow")
+					ui = {
+						Panel = panel,
+						Bar = child,
+						Fill = fill,
+						LevelLabel = label,
+						ShadowLabel = if shadow and shadow:IsA("TextLabel") then shadow else nil,
+					}
+					break
+				end
+			end
+		end
+		self.RebirthLevelUI = ui
+		if not ui then
+			return
+		end
+	end
+
+	pinFillLeft(ui)
+	local need = math.max(1, math.floor(tonumber(needLevel) or 1))
+	local shown = math.max(1, math.floor(tonumber(level) or 1))
+	applyText(ui, string.format("%d/%d", shown, need))
+	local alpha = math.clamp(shown / need, 0, 1)
+	if not ui.FillReady then
+		ui.FillReady = true
+		snapFill(ui, alpha)
+		return
+	end
+	tweenFill(ui, alpha)
 end
 
 local function formatCoins(amount)
@@ -1919,6 +1978,11 @@ function api:SetProgress(data)
 	local needed = math.max(1, math.floor(tonumber(data.XPNeeded) or 100))
 	local alpha = math.clamp(xp / needed, 0, 1)
 	local text = string.format("Level %d: %d/%d", level, xp, needed)
+	if playerProgress.IsMaxLevel(level) then
+		-- The cap: a full bar that says so (the server stops awarding XP here).
+		alpha = 1
+		text = string.format("Level %d: %s", level, MAX_LEVEL_TEXT)
+	end
 
 	ui.PendingAlpha = alpha
 	ui.PendingText = text
@@ -2126,7 +2190,7 @@ function api:Initialize()
 			self:RefreshShopPanel()
 		end))
 	end
-	for _, name in { "Coins", "Rebirths" } do
+	for _, name in { "Level", "Rebirths" } do
 		table.insert(self.Connections, Players.LocalPlayer:GetAttributeChangedSignal(name):Connect(function()
 			self:RefreshRebirthPanel()
 		end))

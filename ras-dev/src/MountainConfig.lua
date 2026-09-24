@@ -678,6 +678,24 @@ config.LAUNCH = {
 	PadCameraDistance = 13,
 	PadCameraHeight = 3,
 	PadLookAhead = 3,
+	-- Free look on the pad and chase cameras: drag with the right mouse button (touch: drag
+	-- anywhere off the buttons; gamepad: right stick) to orbit around the character / ball,
+	-- scroll to zoom. The angles sit on top of the scripted framing and ease back behind the
+	-- ball ReturnDelay seconds after the last input at ReturnRate (1/s); ReturnDelay = false
+	-- keeps the dragged angle. Zoom is remembered. Enabled = false locks the cameras as before.
+	CameraOrbit = {
+		Enabled = true,
+		Sensitivity = 0.28, -- degrees per pixel of mouse drag
+		TouchSensitivity = 0.4, -- degrees per pixel of touch drag
+		GamepadRate = 150, -- degrees per second at full right-stick deflection
+		PitchMin = -30, -- degrees below the framing's own pitch (looking up at the ball)
+		PitchMax = 45, -- degrees above it (looking down onto the ball)
+		ReturnDelay = 1.5,
+		ReturnRate = 3,
+		ZoomMin = 0.5, -- scroll zoom, as a fraction of the framing distance
+		ZoomMax = 2.5,
+		ZoomStep = 0.12, -- per wheel notch
+	},
 	-- The chase camera follows the ball from the frame it leaves the launcher: no hold on
 	-- the throw and no delayed blend. With ChaseFromPadCamera the camera position starts
 	-- where the pad camera was and settles behind the ball at CameraOffsetRate (about
