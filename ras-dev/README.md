@@ -671,3 +671,38 @@ at 91.5 % of the screen - on top of the level bar whenever the HUD was showing.
 - The Rojo plugin was reconnected by the user mid-way: the four edited files (Notify, HUD,
   ClientMain, ChargeHint) reached Studio through the sync (checksums matched before the loopback
   push ran, which aborted on its guard as intended).
+
+## 2026-09-24 (night, later): Mountains panel remade, lobby rings, ride-end coin fly
+
+User: "remake mountain ui using our style; add ring around ascend and gift stuff in lobby; when game
+is done make the coins indicator at the top animate towards the middle (bigger) then 1 s later
+towards the left coin indicator."
+
+- **Mountains frame** `HUD.Mountains` rebuilt by `ras-dev/shop-remake/build_mountains_frame.lua`
+  (RAS repo copy `extras/panels/`): ribbon header, X, dimmer, frosty body, 2 x 4 grid (452 x 108
+  cells: the grid keeps 922 px after its scrollbar inset + padding, so 2 x 460 + 14 did not fit and
+  collapsed to one column on the first build) of cards on the mountain banner art (Crop) with a
+  dark left-to-right shade, Title / Difficulty / Length, a GO! / HERE pill (label named TextLabel
+  for HUD's setButtonText) and a Locked overlay (padlock + LOCKED pill + LockText). HUD.luau:
+  bindPanelFit (PANEL_FIT, Panel.Fit) + Dimmer wiring in WirePanel; ApplyMountainLocks paints the
+  pill (paintTravelPill), sets LockText to FINISH <previous>, gold outline on the current mountain,
+  PurchaseFX.Press on GO!. Old frame: ServerStorage.Backups.UI_Mountains_before-remake_2026-09-24.
+- **Rings:** on all 8 `Maps.StartPlatforms/*` the platform's ShopCircle (NeonRing + InnerCylinder +
+  GradientCylinder + LightCore, billboard and kiosk removed) is cloned as `AscendCircle` (ice blue
+  196,232,255; same radius; slid forward so it stays 0.6 studs inside the platform's rear edge) and
+  `GiftCircle` (gold 255,205,40; 1.15x, clipped to the launch-pad gap and the platform edge) around
+  the Group gift display. Studio-only assets: backups before / after in
+  `backups/RASDev_StartPlatforms+MountainsUI_before-rings-remake_2026-09-24.rbxm` and
+  `backups/RASDev_StartPlatforms_with-rings_2026-09-24.rbxm`. The Ascend trigger (bbox + pad) is
+  unchanged; the ring is visual.
+- **Ride end:** HUD.EndRunReadout -> FlyRunCoins clones the CoinsMade label into the HUD ScreenGui
+  (constraints stripped, strokes scaled), Back-eases it to (0.5, 0.42) of the screen at 1.9x over
+  0.55 s, holds 1.0 s (UISuccess), dives into LeftDock.Coins over 0.6 s (Quad in, 0.45x), then
+  PopCoinsCounter bumps Coins + CoinsImage (CounterPop UIScale 1.3 -> 1, gold flash, CoinPop).
+  BeginRunReadout cancels a fly in progress. Measured: 404 x 30 -> 767 x 57 px at (650, 256),
+  hold, landing at 2.15 s, counter pop 1.19 -> 1.00.
+- **Test gotchas:** the character spawns on the pad, where the pad camera rebinds every frame
+  (RenderStepped) - step off the pad AND out of LaunchPlatform.Collision (52 x 7.4 x 7.8 studs
+  around z -89 in the generated lobby) before framing a screenshot camera, and hold it per frame
+  because the client resets the camera to Custom once. The test account is the user's real
+  profile (level 119, 153K coins after the test ride).

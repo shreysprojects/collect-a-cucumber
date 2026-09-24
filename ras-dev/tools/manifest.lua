@@ -81,7 +81,7 @@ local SCRIPTS = {
 	{"ServerStorage.Modules.SnowField","ModuleScript",8962,2114115820},
 	{"ServerStorage.Modules.UserInterfaces.ChargeBar","ModuleScript",1515,1201903706},
 	{"ServerStorage.Modules.UserInterfaces.ChargeHint","ModuleScript",1937,369415745},
-	{"ServerStorage.Modules.UserInterfaces.HUD","ModuleScript",66580,1087985301},
+	{"ServerStorage.Modules.UserInterfaces.HUD","ModuleScript",74890,773855679},
 	{"ServerStorage.Modules.UserInterfaces.RaceProgressGui","ModuleScript",18247,2093692540},
 	{"StarterPlayer.StarterPlayerScripts.ClientMain","LocalScript",6620,846678363},
 	{"StarterPlayer.StarterPlayerScripts.ClientMain.Utilities.Variables","ModuleScript",1641,1097372853},
