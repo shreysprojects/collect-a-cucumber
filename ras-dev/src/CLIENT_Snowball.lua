@@ -42,7 +42,8 @@ local function setRideButtons(vars, riding)
 	end
 	local chargeBar = vars.ChargeBar
 	if chargeBar and chargeBar.Hint then
-		chargeBar.Hint.Visible = onPad and not riding and not vars.Charging
+		local panelOpen = vars.PlayerGui and vars.PlayerGui:GetAttribute("PanelOpen") ~= nil
+		chargeBar.Hint.Visible = onPad and not riding and not vars.Charging and not panelOpen
 	end
 end
 
@@ -149,7 +150,7 @@ local function buildChargeBar(vars)
 	local hint = Instance.new("TextLabel")
 	hint.Name = "Hint"
 	hint.AnchorPoint = Vector2.new(0.5, 1)
-	hint.Position = UDim2.new(0.5, 0, 1, -48)
+	hint.Position = UDim2.new(0.5, 0, 0.86, 0) -- above the HUD level bar (y 0.88-0.98)
 	hint.Size = UDim2.fromOffset(420, 54)
 	hint.BackgroundTransparency = 1
 	hint.Font = Enum.Font.FredokaOne
@@ -227,6 +228,10 @@ local function beginCharge(self)
 	if not vars or vars.Charging or vars.SnowballCamera or not vars.OnLaunchPad then
 		return
 	end
+	-- A HUD panel (Shop / Mountains / ...) is open: clicks belong to it, not the launch.
+	if vars.PlayerGui and vars.PlayerGui:GetAttribute("PanelOpen") then
+		return
+	end
 	local chargeBar = vars.ChargeBar or buildChargeBar(vars)
 	local settings = mountainConfig.LAUNCH.Charge or {}
 	local chargeTime = math.max(settings.Time or 1.5, 0.1)
@@ -300,6 +305,10 @@ function api:SetupChargeLaunch()
 			else
 				endCharge(self, true)
 			end
+		end)
+		-- HUD panels (PanelOpen attribute) hide the launch hint while they are open.
+		playerGui:GetAttributeChangedSignal("PanelOpen"):Connect(function()
+			setRideButtons(vars, vars.SnowballCamera ~= nil)
 		end)
 	end
 end
