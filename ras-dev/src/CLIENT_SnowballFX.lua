@@ -35,6 +35,7 @@ local playerProgress = require(ReplicatedStorage.Assets.Modules.Shared.PlayerPro
 local COMBO_COLOR = Color3.fromRGB(255, 181, 38)
 local HUDLayout = require(ReplicatedStorage.Assets.Modules.Client.UI.HUDLayout)
 local SOUNDS = mountainConfig.SOUNDS
+local Audio = require(ReplicatedStorage.Assets.Modules.Client.Audio)
 local PROPS = mountainConfig.PROPS
 
 local SMOKE = "rbxasset://textures/particles/smoke_main.dds"
@@ -254,6 +255,7 @@ local function registerCombo()
 	combo.Count += 1
 	combo.Last = now
 	combo.Best = math.max(combo.Best, combo.Count)
+	Audio.Play("ComboPop", { Pitch = 1 + math.min(combo.Count, 12) * 0.045 })
 	combo.Token += 1
 	local token = combo.Token
 
@@ -553,7 +555,6 @@ local function buildRig(state)
 		CrashBig = makeSound(part, "CrashBig", SOUNDS.CrashBig, SOUNDS.Volume.CrashBig),
 		CrashSmall = makeSound(part, "CrashSmall", SOUNDS.CrashSmall, SOUNDS.Volume.CrashSmall),
 	}
-
 	state.Ground = ground
 	state.Contact = contact
 	state.TrailL = trailL
@@ -561,6 +562,11 @@ local function buildRig(state)
 	state.RigRadius = -1
 	part.Parent = getFxFolder()
 	state.Rig = part
+	-- Ride loops (3D, on the rig, so other players hear a ball go by): rolling crunch and
+	-- wind, driven every frame in stepBall from ground contact, speed and size.
+	state.Roll = Audio.Attach(part, "RideRoll", { Volume = 0 })
+	state.WindLoop = Audio.Attach(part, "RideWind", { Volume = 0 })
+	state.RollVol, state.WindVol = 0, 0
 end
 
 local function fitRig(state, radius)
@@ -628,6 +634,20 @@ local function applyTrick(state, radius)
 
 	root.AssemblyAngularVelocity = omega
 	state.LastTrick = trick
+end
+
+-- (defined before checkSmash, which calls it: a later definition would be an unset global)
+local function powerMultiplier(state)
+	local model = state.Model
+	local power = model and model:GetAttribute("PowerMultiplier")
+	if type(power) ~= "number" then
+		local player = Players.LocalPlayer
+		power = player and player:GetAttribute("Multiplier")
+	end
+	if type(power) ~= "number" or power < 1 then
+		return 1
+	end
+	return power
 end
 
 local function checkSmash(state, radius, prevPos, pos)
@@ -700,18 +720,6 @@ local function checkSmash(state, radius, prevPos, pos)
 	end
 end
 
-local function powerMultiplier(state)
-	local model = state.Model
-	local power = model and model:GetAttribute("PowerMultiplier")
-	if type(power) ~= "number" then
-		local player = Players.LocalPlayer
-		power = player and player:GetAttribute("Multiplier")
-	end
-	if type(power) ~= "number" or power < 1 then
-		return 1
-	end
-	return power
-end
 
 local function lerpPair(pair, t)
 	t = math.clamp(t, 0, 1)
@@ -1115,6 +1123,29 @@ local function stepBall(state, dt)
 	state.Rig.CFrame = CFrame.lookAt(pos, pos + state.Travel)
 	fitRig(state, radius)
 
+	-- Ride sound: rolling crunch while grounded (louder and deeper as the ball grows), wind
+	-- with speed (more in the air). Both ease so a bump never clicks.
+	if state.Roll and state.Roll.Parent and state.WindLoop and state.WindLoop.Parent then
+		local size = math.clamp((scale - 1) / 9, 0, 1)
+		local ease = 1 - math.exp(-8 * dt)
+		local rollTarget = if grounded and speed > 6 then math.clamp((speed - 6) / 140, 0, 1) else 0
+		state.RollVol += (rollTarget - state.RollVol) * ease
+		state.Roll.Volume = (state.Roll:GetAttribute("BaseVolume") or 0.9) * state.RollVol * (0.6 + 0.4 * size)
+		state.Roll.PlaybackSpeed = 0.85 + 0.45 * math.clamp(speed / 220, 0, 1) - 0.3 * size
+		local windTarget = math.clamp((speed - 45) / 220, 0, 1) * (if state.Airborne then 1.25 else 0.8)
+		state.WindVol += (windTarget - state.WindVol) * ease
+		state.WindLoop.Volume = (state.WindLoop:GetAttribute("BaseVolume") or 0.5) * state.WindVol
+		state.WindLoop.PlaybackSpeed = 0.9 + 0.35 * math.clamp(speed / 300, 0, 1)
+	end
+	-- Every whole size step the ball gains: a soft snow whump, deeper the bigger it gets.
+	local sizeStep = math.floor(scale)
+	if not state.SizeStep then
+		state.SizeStep = sizeStep
+	elseif sizeStep > state.SizeStep then
+		state.SizeStep = sizeStep
+		Audio.PlayAt("SizeUp", state.Rig, { Pitch = math.clamp(1.15 - sizeStep * 0.05, 0.6, 1.1) })
+	end
+
 	if grounded and speed > 25 then
 		state.Spray.Rate = math.clamp(speed * 0.35, 8, 90)
 		state.Spray.Enabled = true
@@ -1447,6 +1478,7 @@ end
 
 -- Server-approved helper. Strength comes from the shared catalog, not from the payload.
 function api:ApplyApprovedLaunchGrant(payload)
+	Audio.Play("HelperGrant") -- the owner's own rising whoosh on top of the helper's 3D sound
 	if type(payload) ~= "table" then
 		return false
 	end

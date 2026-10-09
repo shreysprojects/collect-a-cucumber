@@ -25,10 +25,12 @@ local placeInfo = vars.PlaceInfo
 local mountainConfig = require(ReplicatedStorage.Assets.Modules.Shared.MountainConfig)()
 local UIUtils = require(ReplicatedStorage.Assets.Modules.Client.UI.UIUtils)
 local HUDLayout = require(ReplicatedStorage.Assets.Modules.Client.UI.HUDLayout)
+local Audio = require(ReplicatedStorage.Assets.Modules.Client.Audio)
 
 print("[CLIENT]: You're in:", placeInfo.Index)
 
 func.GUIFramework:SetupUIs()
+Audio.Start(vars)
 if func.SetupPlayerProgress then
 	func:SetupPlayerProgress()
 end

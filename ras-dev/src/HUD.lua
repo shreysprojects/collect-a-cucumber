@@ -87,6 +87,7 @@ local PanelManager = require(ReplicatedStorage.Assets.Modules.Client.UI.PanelMan
 local UIUtils = require(ReplicatedStorage.Assets.Modules.Client.UI.UIUtils)
 local HUDLayout = require(ReplicatedStorage.Assets.Modules.Client.UI.HUDLayout)
 local PurchaseFX = require(ReplicatedStorage.Assets.Modules.Client.UI.PurchaseFX)
+local Audio = require(ReplicatedStorage.Assets.Modules.Client.Audio)
 local Notify = require(ReplicatedStorage.Assets.Modules.Client.UI.Notify)
 
 local BUTTON_PANELS = {
@@ -321,6 +322,7 @@ function api:TravelToMountain(mountainId)
 		return
 	end
 	self.Traveling = true
+	Audio.Play("Teleport")
 	task.spawn(function()
 		local ok, err = ReplicatedStorage.ReEvent.ReFunction:InvokeServer("TravelToMountain", mountainId)
 		if not ok then
@@ -1022,6 +1024,7 @@ function api:SetShopTab(panel, tab)
 
 	self.ShopTab = tab
 	self.ShopPanelFilled = panel
+	Audio.Play("UITab")
 	self:ApplyShopTabButtons(panel, tab)
 	self:FillShopItems(panel, tab)
 end
@@ -1099,6 +1102,7 @@ function api:HidePanel(name)
 
 	self.PanelShown[name] = false
 	PanelManager.notifyClosed(name)
+	Audio.Play("UIClose")
 	if getPlayerGui():GetAttribute("PanelOpen") == name then
 		setPanelOpen(nil)
 	end
@@ -1334,6 +1338,7 @@ function api:PressRebirth(buy)
 	if invoked and ok then
 		PurchaseFX.Success(buy)
 		PurchaseFX.FloatText(buy, REBIRTH_FLOAT)
+		Audio.Play("Rebirth")
 		Notify.Success(string.format(REBIRTH_TOAST, rebirths + 1))
 	else
 		warn("[CLIENT]: Rebirth failed:", if invoked then err else ok)
@@ -1403,6 +1408,7 @@ function api:OpenPanel(name)
 		warn("[CLIENT]: No frame named", name, "exists in the game yet")
 		return nil
 	end
+	Audio.Play("UIOpen")
 
 	local panel = template
 	if not alreadySpawned then
@@ -1748,6 +1754,7 @@ local function floatCoinGain(self, label, gain)
 end
 
 local function popCoinsMade(self, label, gain)
+	Audio.Play("CoinPop")
 	local scale = earnScale(label)
 	if self.CoinPopTween then
 		self.CoinPopTween:Cancel()
@@ -1935,6 +1942,8 @@ function api:SetProgress(data)
 	if ui.ShownLevel and level > ui.ShownLevel then
 		ui.ShownLevel = level
 		ui.LevelingUp = true
+		Audio.Play("LevelUp")
+		Audio.Play("UISuccess")
 		local token = (ui.FillToken or 0) + 1
 		ui.FillToken = token
 		task.spawn(function()
@@ -1967,6 +1976,7 @@ function api:WireButtons(main)
 		local button = main:FindFirstChild(buttonName, true)
 		if button and button:IsA("GuiButton") then
 			table.insert(self.Connections, button.Activated:Connect(function()
+				Audio.Play("UIClick")
 				if HIDES_MAIN[panelName] then
 					self:OpenPanel(panelName)
 				else
