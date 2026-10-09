@@ -1,6 +1,8 @@
 --[[---------------------------------------DESCRIPTION------------------------------------------
-	Builds a mountain from the shared Maps.Attachments library. Walks the shared
-	grammar, then snapModule clones each piece and aligns Entrance to the previous Exit.
+	Builds a mountain from the shared Maps.Attachments library. The first piece is
+	Maps.StartPlatforms/<MountainId>, or Frostpeak when that platform is missing.
+	Walks the shared grammar, then snapModule clones each piece and aligns
+	Entrance to the previous Exit.
 	Each mountain's Length is the finish distance in meters. Piece count is chosen
 	from that length, then the built course is scaled so the run lands on it.
 	Theme comes from props under Storage.Props/<MountainId>, not from unique terrain.
@@ -20,6 +22,7 @@ local snapModule = require(ServerStorage.Modules.SnapMountainModule)
 local buildMountainSnow = require(ServerStorage.Modules.BuildMountainSnow)
 local placeMountainProps = require(ServerStorage.Modules.PlaceMountainProps)
 local buildMountainBorders = require(ServerStorage.Modules.BuildMountainBorders)
+local placeMountainLaunchProps = require(ServerStorage.Modules.PlaceMountainLaunchProps)
 
 local MODULE = {}
 local m_api = {}
@@ -331,6 +334,81 @@ local function findMountainFolder()
 	return attachments
 end
 
+local function normalizePieceName(name)
+	return string.lower((string.gsub(name or "", "%s+", "")))
+end
+
+local function findNamedPiece(folder, mountainId)
+	local direct = folder:FindFirstChild(mountainId)
+	if direct then
+		return direct
+	end
+
+	local display = mountainConfig:GetDisplayName(mountainId)
+	if display ~= mountainId then
+		local byDisplay = folder:FindFirstChild(display)
+		if byDisplay then
+			return byDisplay
+		end
+	end
+
+	local want = normalizePieceName(mountainId)
+	local wantDisplay = normalizePieceName(display)
+	for _, child in folder:GetChildren() do
+		local key = normalizePieceName(child.Name)
+		if key == want or key == wantDisplay then
+			return child
+		end
+	end
+	return nil
+end
+
+local function validTemplates(node, entranceName, exitName)
+	local valid = {}
+	for _, variant in collectVariants(node) do
+		if hasSockets(variant, entranceName, exitName) then
+			table.insert(valid, variant)
+		else
+			warn("[SERVER]: Piece missing Entrance/Exit:", variant:GetFullName())
+		end
+	end
+	return valid
+end
+
+-- Opening piece. Maps.StartPlatforms holds one platform per mountain.
+-- Frostpeak is used when the mountain's own platform is missing or invalid.
+local function resolveStartPlatform(mountainId, entranceName, exitName)
+	local storage = ServerStorage.Assets.Storage
+	local mapsFolder = storage:FindFirstChild(mountainConfig.STORAGE_FOLDER)
+	local platforms = mapsFolder and mapsFolder:FindFirstChild(mountainConfig.START_PLATFORMS_FOLDER)
+	if not platforms then
+		return nil
+	end
+
+	local function variantsFor(id)
+		local node = findNamedPiece(platforms, id)
+		if not node then
+			return nil
+		end
+		local valid = validTemplates(node, entranceName, exitName)
+		if #valid == 0 then
+			return nil
+		end
+		return valid
+	end
+
+	local specific = variantsFor(mountainId)
+	if specific then
+		return specific
+	end
+
+	local baseId = mountainConfig.BASE_START_PLATFORM
+	if mountainId ~= baseId then
+		warn("[SERVER]: No start platform for", mountainId, "- using", baseId)
+	end
+	return variantsFor(baseId)
+end
+
 local function averagePieceSpan(variantsByType, entranceName, exitName)
 	local sum, count = 0, 0
 	for _, variants in variantsByType do
@@ -456,6 +534,11 @@ function m_sapi:GenerateMountain(mountainId)
 	local entranceName = mountainConfig.SOCKETS.Entrance
 	local exitName = mountainConfig.SOCKETS.Exit
 	local available, variantsByType = resolveAvailableTypes(mountainFolder, entranceName, exitName)
+	local startVariants = resolveStartPlatform(mountainId, entranceName, exitName)
+	if startVariants then
+		available[T.StartPlatform] = true
+		variantsByType[T.StartPlatform] = startVariants
+	end
 	local targetLength = mountainConfig:GetLength(mountainId)
 	if targetLength then
 		local span = averagePieceSpan(variantsByType, entranceName, exitName)
@@ -501,6 +584,12 @@ function m_sapi:GenerateMountain(mountainId)
 		oldBorders:Destroy()
 	end
 
+	-- Drop the previous launch-helper generation with the mountain. A failed
+	-- rebuild must not keep the old registry answering grants.
+	if sself.ClearMountainLaunchProps then
+		sself:ClearMountainLaunchProps()
+	end
+
 	local mountainModel = Instance.new("Model")
 	mountainModel.Name = mountainConfig.WORKSPACE_NAME
 	mountainModel:SetAttribute("MountainId", mountainId)
@@ -532,6 +621,9 @@ function m_sapi:GenerateMountain(mountainId)
 		if not ok then
 			warn("[SERVER]: Failed to snap", typeName, piece)
 			mountainModel:Destroy()
+			if sself.ClearMountainLaunchProps then
+				sself:ClearMountainLaunchProps()
+			end
 			return nil
 		end
 
@@ -544,6 +636,9 @@ function m_sapi:GenerateMountain(mountainId)
 		if not prevExit then
 			warn("[SERVER]: Snapped piece missing Exit:", piece:GetFullName())
 			mountainModel:Destroy()
+			if sself.ClearMountainLaunchProps then
+				sself:ClearMountainLaunchProps()
+			end
 			return nil
 		end
 	end
@@ -566,6 +661,18 @@ function m_sapi:GenerateMountain(mountainId)
 
 	local bordersPlaced = buildMountainBorders(mountainModel, mountainId, seed)
 	print("[SERVER]: Border clusters", bordersPlaced)
+
+	local launchPlaced = 0
+	local launchOk, launchResult = pcall(placeMountainLaunchProps, mountainModel, mountainId, seed)
+	if launchOk then
+		launchPlaced = launchResult or 0
+	else
+		warn("[SERVER]: Launch props failed:", launchResult)
+		if sself.ClearMountainLaunchProps then
+			sself:ClearMountainLaunchProps()
+		end
+	end
+	print("[SERVER]: Launch props", launchPlaced)
 
 	-- Stamp RunLength on the mountain for the race progress bar (SERV_Snowball:GetRun).
 	if sself.GetRun then

@@ -31,7 +31,7 @@
 	or snowball launcher. Blasters / Snowballs switch the list; the active tab
 	is grayed out and cannot be pressed again until the other tab is selected.
 	Each item's Foreground Name label is the snowball or launcher name. The
-	Multiplier label is the catalog multiplier (2 ^ Order). Snowball cards set
+	Multiplier label is the catalog multiplier (2 ^ (Order - 1): 1x, 2x, 4x, 8x). Snowball cards set
 	Foreground.Info.Icon from the catalog image. Classic and
 	Wooden Shovel start owned and equipped; their Buy button reads EQUIPPED
 	and its UIGradients (including the UIStroke gradient) are shifted to red.

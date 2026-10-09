@@ -26,6 +26,8 @@ local TweenService = game:GetService("TweenService")
 local GuiService = game:GetService("GuiService")
 
 local mountainConfig = require(ReplicatedStorage.Assets.Modules.Shared.MountainConfig)()
+local launchCatalog = require(ReplicatedStorage.Assets.Modules.Shared.LaunchPropCatalog)
+local launchMath = require(ReplicatedStorage.Assets.Modules.Shared.LaunchPropMath)
 local FLIGHT = mountainConfig.FLIGHT
 local COAST = mountainConfig.COAST or {}
 local SMASH = mountainConfig.SMASH
@@ -84,6 +86,10 @@ local function addCameraKick(self, strength)
 		current = existing.Strength * math.exp(-7 * (os.clock() - existing.Start))
 	end
 	vars.CameraKick = { Start = os.clock(), Strength = math.min(current + strength, 3) }
+end
+
+function api:AddCameraKick(strength)
+	addCameraKick(self, strength)
 end
 
 function api:GetCameraKick(_dt)
@@ -672,7 +678,7 @@ local function checkSmash(state, radius, prevPos, pos)
 			local loss = SMASH.SpeedLoss[category] or SMASH.SpeedLoss.Default
 			local energyLoss = (SMASH.EnergyLoss and (SMASH.EnergyLoss[category] or SMASH.EnergyLoss.Default)) or 0
 			-- Fast balls plow through; slower ones bleed speed and energy.
-			if speed >= (COAST.FastSpeed or 78) then
+			if speed >= (COAST.FastSpeed or 78) * powerMultiplier(state) then
 				local scale = COAST.FastSmashScale or 0.18
 				loss *= scale
 				energyLoss *= scale
@@ -739,9 +745,15 @@ end
 -- Arcade momentum keeper. A fast ball plows through kinks and keeps most of its
 -- speed. A slower one keeps the hit (and loses a little more) so objects can stop it.
 local function keepMomentum(state, dt, hit, speed, vel, radius)
+	-- While a launch-helper hold is active, do not treat the boost as an impact
+	-- and do not restore a pre-grant peak over it.
+	if state.GrantAt and os.clock() - state.GrantAt < (state.GrantHold or 0) then
+		state.SpeedPeak = speed
+		return
+	end
 	local peak = state.SpeedPeak or 0
 	peak = math.max(speed, peak - (FLIGHT.PeakDecay or 400) * dt)
-	local fast = math.max(speed, peak) >= (COAST.FastSpeed or 78)
+	local fast = math.max(speed, peak) >= (COAST.FastSpeed or 78) * powerMultiplier(state)
 	if fast and peak > (FLIGHT.ImpactMinSpeed or 60) and speed < peak * (FLIGHT.ImpactRatio or 0.7) then
 		local n = (hit and hit.Normal) or state.GroundNormal or Vector3.yAxis
 		local axis = state.Axis or Vector3.new(0, 0, -1)
@@ -823,6 +835,13 @@ local function applyCoast(state, dt, grounded, hit)
 	local cap = lerpPair(COAST.MaxSpeed, charge)
 	cap *= powerMultiplier(state)
 	cap *= (COAST.CapFloor or 0.32) + (1 - (COAST.CapFloor or 0.32)) * energy
+	if state.GrantCapSpeed and state.GrantAt then
+		local elapsed = os.clock() - state.GrantAt
+		cap = launchMath.easeCap(cap, state.GrantCapSpeed, elapsed, state.GrantHold, state.GrantFade)
+		if not launchMath.grantActive(elapsed, state.GrantHold, state.GrantFade) then
+			state.GrantCapSpeed = nil
+		end
+	end
 
 	local newSpeed = math.min(speedH, cap)
 	newSpeed *= math.exp(-damp * dt)
@@ -948,9 +967,12 @@ local function stepPhysics(state, dt, grounded, radius, pos, hit)
 				if farHit then
 					state.GapGuard = true
 					liftFraction = 1
+					local lofting = state.GrantLoftUntil and os.clock() < state.GrantLoftUntil and vel.Y > 0
 					local targetVy = if farHit.Position.Y + radius + 2 > pos.Y then (G.ClimbSpeed or 45) else 0
-					local newVy = vel.Y + (targetVy - vel.Y) * math.min(1, (G.Blend or 5) * dt)
-					root.AssemblyLinearVelocity = Vector3.new(vel.X, newVy, vel.Z)
+					if not (lofting and targetVy < vel.Y) then
+						local newVy = vel.Y + (targetVy - vel.Y) * math.min(1, (G.Blend or 5) * dt)
+						root.AssemblyLinearVelocity = Vector3.new(vel.X, newVy, vel.Z)
+					end
 				end
 			end
 		end
@@ -1123,6 +1145,9 @@ local function stepBall(state, dt)
 		end
 
 		stepPhysics(state, dt, grounded, radius, pos, hit)
+		if state.Self and state.Self.ScanLaunchProps and not model:GetAttribute("Finishing") then
+			state.Self:ScanLaunchProps(state, prevPos, pos, radius, dt)
+		end
 		checkSmash(state, radius, prevPos, pos)
 
 		-- The server owns snow removal, but it only sees this ball at replication
@@ -1259,6 +1284,10 @@ function api:StartSnowballFX()
 			hookFolder(child)
 		end
 	end)
+
+	if self.StartLaunchProps then
+		self:StartLaunchProps()
+	end
 end
 
 -- Race progress bar (the RaceProgressGui UI: ServerStorage.Modules.UserInterfaces + its
@@ -1326,7 +1355,16 @@ function api:StartAirPhysics(snowball, root)
 	state.SmashCount = 0
 	state.Charge = nil
 	state.Energy = 1
+	state.LaunchGrantSeq = 0
+	state.GrantCapSpeed = nil
+	state.GrantAt = nil
+	state.GrantHold = nil
+	state.GrantFade = nil
+	state.GrantLoftUntil = nil
 	resolveCharge(state)
+	if self.ResetLaunchPropLocal then
+		self:ResetLaunchPropLocal()
+	end
 
 	local mountain = workspace:FindFirstChild(mountainConfig.WORKSPACE_NAME)
 	local startPiece = mountain and mountain:FindFirstChild(mountainConfig.Attachment.StartPlatform .. "_1")
@@ -1396,6 +1434,88 @@ function api:StopAirPhysics()
 			end
 		end)
 	end
+end
+
+local function ownerBall()
+	for _, state in balls do
+		if state.Physics and state.Root and state.Root.Parent and state.Model and state.Model.Parent then
+			return state
+		end
+	end
+	return nil
+end
+
+-- Server-approved helper. Strength comes from the shared catalog, not from the payload.
+function api:ApplyApprovedLaunchGrant(payload)
+	if type(payload) ~= "table" then
+		return false
+	end
+	local seq = payload.Seq
+	if type(seq) ~= "number" or seq ~= seq or seq <= 0 then
+		return false
+	end
+	local state = ownerBall()
+	if not state or not state.Physics then
+		return false
+	end
+	local model = state.Model
+	if model:GetAttribute("Finishing") or typeof(model:GetAttribute("FinishCFrame")) == "CFrame" then
+		return false
+	end
+	if type(payload.RideToken) ~= "string" or model:GetAttribute("RideToken") ~= payload.RideToken then
+		return false
+	end
+	if type(payload.PropId) ~= "string" or type(payload.Kind) ~= "string" then
+		return false
+	end
+	if seq <= (state.LaunchGrantSeq or 0) then
+		return false
+	end
+	local mechanics = launchCatalog.Mechanic(payload.Kind)
+	if not mechanics or not launchMath.finiteVector(payload.Forward) then
+		return false
+	end
+	if payload.Route ~= nil and not launchMath.finiteVector(payload.Route) then
+		return false
+	end
+
+	state.LaunchGrantSeq = seq
+	local limits = {
+		MaxForward = mountainConfig.LAUNCH.MaxPoweredSpeed or 12000,
+		MaxUp = launchCatalog.Settings.MaxUpSpeed or 140,
+		LateralFraction = launchCatalog.Settings.LateralFraction or 0.45,
+		HeadingBlend = launchCatalog.Settings.HeadingBlend or 0.25,
+	}
+	local newVel, _, capSpeed = launchMath.computeGrant(
+		state.Root.AssemblyLinearVelocity,
+		payload.Forward,
+		payload.Route,
+		mechanics,
+		limits
+	)
+	state.Root.AssemblyLinearVelocity = newVel
+	local radius = (model:GetAttribute("StartRadius") or 1) * (model:GetAttribute("SnowScale") or 1)
+	if state.GroundNormal and not state.Airborne then
+		state.Root.AssemblyAngularVelocity = state.GroundNormal:Cross(newVel) / math.max(radius, 0.5)
+	end
+	state.Energy = math.clamp((state.Energy or 0) + (mechanics.EnergyAdd or 0), 0, 1)
+	state.SpeedPeak = newVel.Magnitude
+	local now = os.clock()
+	if capSpeed and capSpeed > 0 then
+		state.GrantCapSpeed = capSpeed
+		state.GrantAt = now
+		state.GrantHold = mechanics.CapHold or 0.5
+		state.GrantFade = mechanics.CapFade or 0.4
+	end
+	if (mechanics.UpSpeed or 0) > 0 then
+		state.GrantLoftUntil = now + (mechanics.CapHold or 0.5)
+	end
+	local vars = getVars(state.Self)
+	if vars then
+		local grace = mechanics.StopGrace or 0.7
+		vars.LaunchPropStopGraceUntil = math.max(vars.LaunchPropStopGraceUntil or 0, now + grace)
+	end
+	return true
 end
 
 return api

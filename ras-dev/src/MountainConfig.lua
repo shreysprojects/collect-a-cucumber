@@ -1,11 +1,13 @@
 --[[---------------------------------------DESCRIPTION------------------------------------------
 	Mountain types, difficulty order, and the shared attachment pieces they use.
 	Terrain pieces live in ServerStorage.Assets.Storage.Maps.Attachments.
+	Each mountain's opening piece lives in Maps.StartPlatforms/<MountainId>.
+	Frostpeak is the start platform used when that mountain's piece is missing.
 	Themed props live in ServerStorage.Assets.Storage.Props/<MountainId>.
 
 	Difficulty 1–8 is the mountain order. Later mountains are steeper, and their
-	coast resistance matches the snowball × launcher power you can own from the
-	previous mountain. Each mountain also has its own Length in meters (studs).
+	coast resistance sits above the throw speed you can reach with the previous
+	mountain's gear. Each mountain also has its own Length in meters (studs).
 	Snowballs and launchers share one 30-step ladder split across those 8
 	difficulties (see OrderDifficulty).
 
@@ -16,6 +18,8 @@ local config = {}
 config.WORKSPACE_NAME = "GeneratedMountain"
 config.STORAGE_FOLDER = "Maps"
 config.ATTACHMENTS_MODEL = "Attachments"
+config.START_PLATFORMS_FOLDER = "StartPlatforms"
+config.BASE_START_PLATFORM = "Frostpeak"
 
 config.SOCKETS = {
 	Root = "Root",
@@ -449,7 +453,7 @@ config.COAST = {
 	GroundDamp = { 0.55, 0.14 }, -- exponential speed decay /s
 	AirDamp = { 0.35, 0.1 },
 	EmptyDragBonus = 2.2, -- drag multiplier added as energy 1 → 0
-	EnergyDrain = { 0.085, 0.024 }, -- energy/s (weak ~12s, strong ~42s before brakes)
+	EnergyDrain = { 0.085, 0.036 }, -- energy/s (weak ~12s, strong ~28s before brakes)
 	BrakeBelow = 0.2, -- extra braking starts under this remaining energy
 	BrakeAccel = 36, -- extra linear studs/s^2 once spent
 	BrakeDamp = 5, -- extra exponential decay /s once spent
@@ -577,11 +581,12 @@ config.LAUNCH = {
 		MinCharge = 0.03, -- taps shorter than this do nothing
 		HintText = "HOLD TO LAUNCH",
 	},
-	-- EquipmentMultiplier (snowball order × launcher order) scales launch speed.
-	-- Above 1x the throw levels out and lofts, so the ball flies before it falls.
+	-- Throw speed is LaunchPower (sqrt of the shop total), not the raw sum.
+	-- Above ~1.8x the throw levels out and lofts a short hop, then falls.
 	MaxPoweredSpeed = 12000,
-	LoftPerMultiplier = 26, -- extra upward studs/s for each point of multiplier above 1
-	MaxLoft = 120,
+	LoftPerMultiplier = 12, -- extra upward studs/s per point of launch power above 1
+	MaxLoft = 56,
+	LoftFrom = 1.8, -- starters (~1.4x) stay on the slope; a 4x loadout (2x throw) hops
 	ForwardOffset = 8,
 	ExitOffset = 8,
 	-- Chase framing: behind the ball along its launch heading and a little above it (8 up over
@@ -847,9 +852,10 @@ function config:MountainIdForOrder(order)
 	return self.MountainOrder[config.DifficultyForOrder(order)]
 end
 
--- Power the previous mountain's shop can reach (snowball order × launcher order).
--- Mountain 1 expects the free starters. Later mountains expect that gear, clamped
--- to the launch-speed cap so a maxed throw can still finish the course.
+-- Throw speed the previous mountain's shop can reach (sqrt of snowball + launcher).
+-- Mountain 1 expects the free starters. A 1.4 pressure makes a matched loadout
+-- run out of momentum before it cruises the whole course. Clamped to the
+-- launch-speed cap so a maxed throw can still finish.
 function config:CoastResistance(mountainId)
 	local mountain = self.Mountains[mountainId]
 	local difficulty = mountain and mountain.Difficulty or 1
@@ -858,9 +864,11 @@ function config:CoastResistance(mountainId)
 		local previous = self.Mountains[self.MountainOrder[difficulty - 1]]
 		order = previous and previous.LastOrder or 1
 	end
+	local expectedGear = 2 ^ math.max(order, 0)
+	local expectedLaunch = math.sqrt(expectedGear)
 	local maxSpeed = self.LAUNCH.Charge and self.LAUNCH.Charge.MaxSpeed or 78
 	local cap = (self.LAUNCH.MaxPoweredSpeed or 12000) / math.max(maxSpeed, 1)
-	return math.clamp(order * order, 1, cap)
+	return math.clamp(expectedLaunch * 1.4, 1, cap)
 end
 
 function config:EffectivePower(multiplier)

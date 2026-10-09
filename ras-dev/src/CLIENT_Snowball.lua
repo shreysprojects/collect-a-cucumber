@@ -275,7 +275,7 @@ local function predictLaunchSpeed(charge)
 	local player = Players.LocalPlayer
 	local gear = player:GetAttribute("Multiplier")
 	local ok, boost = pcall(playerProgress.LaunchBoost, player:GetAttribute("Rebirths") or 0)
-	gear = if type(gear) == "number" and gear > 0 then gear else 1
+	gear = if type(gear) == "number" and gear > 0 then playerProgress.LaunchPower(gear) else 1
 	boost = if ok and type(boost) == "number" then boost else 1
 	return base * gear * boost
 end
@@ -1340,7 +1340,7 @@ function api:BindSnowballCamera(snowball)
 			return
 		end
 
-		if smoothSpeed > stopSpeed then
+		if smoothSpeed > stopSpeed or os.clock() < (vars.LaunchPropStopGraceUntil or 0) then
 			lastFast = os.clock()
 		end
 
