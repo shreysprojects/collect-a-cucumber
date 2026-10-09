@@ -3,6 +3,12 @@
 	Terrain pieces live in ServerStorage.Assets.Storage.Maps.Attachments.
 	Themed props live in ServerStorage.Assets.Storage.Props/<MountainId>.
 
+	Difficulty 1–8 is the mountain order. Later mountains are steeper, and their
+	coast resistance matches the snowball × launcher power you can own from the
+	previous mountain. Each mountain also has its own Length in meters (studs).
+	Snowballs and launchers share one 30-step ladder split across those 8
+	difficulties (see OrderDifficulty).
+
 --------------------------------------------------------------------------------------------]]--
 
 local config = {}
@@ -22,6 +28,13 @@ config.SOCKETS = {
 config.LAUNCH_PAD = {
 	Model = "LaunchPlatform",
 	Collision = "Collision",
+}
+
+-- CollisionBox parts on StartPlatform block players, not the snowball.
+config.PHYSICS = {
+	SnowballGroup = "Snowball",
+	PlayerBarrierGroup = "PlayerBarrier",
+	PlayerBarrierName = "CollisionBox",
 }
 
 -- Piece types. Every mountain can use these; generation uses whichever models exist.
@@ -60,6 +73,7 @@ config.MountainOrder = {
 config.Mountains = {
 	Frostpeak = {
 		DisplayName = "Frostpeak",
+		Length = 10000,
 		Description = "A traditional snowy mountain filled with pine trees, cabins, ski lifts and frozen lakes. Its wide slopes and gentle hills introduce players to the game.",
 		Props = {
 			Trees = { "Pine_Small", "Pine_Tall", "Pine_SnowCovered" },
@@ -87,39 +101,70 @@ config.Mountains = {
 	},
 	Christmas = {
 		DisplayName = "Christmas",
+		Length = 12847,
 		Description = "A festive nighttime mountain covered in colorful lights, presents, candy canes and holiday decorations, ending at Santa’s Workshop.",
 	},
 	Candy = {
 		DisplayName = "Candy",
+		Length = 14763,
 		Description = "A bright fantasy mountain made from frosting, chocolate and candy. Players roll past giant lollipops, cookies, gumdrops and gingerbread buildings.",
 	},
 	PirateGlacier = {
 		DisplayName = "Pirate Glacier",
+		Length = 15000,
 		Description = "A frozen coastal mountain containing shipwrecks, treasure chests, cannons and icy pirate villages, ending at a massive frozen pirate ship.",
 	},
 	Haunted = {
 		DisplayName = "Haunted",
+		Length = 18620,
 		Description = "A mysterious moonlit mountain filled with blue snow, dead forests, pumpkins, gravestones and ghosts, with a haunted castle waiting at the end.",
 	},
 	Volcano = {
 		DisplayName = "Volcano",
+		Length = 20000,
 		Description = "A dangerous mountain covered in ash, volcanic rocks, lava rivers and ancient ruins. The snowball becomes increasingly meteor-like as it travels.",
 	},
 	Tech = {
 		DisplayName = "Tech",
+		Length = 24173,
 		Description = "A futuristic metal mountain featuring neon tracks, robots, drones, laser gates and powerful energy reactors.",
 	},
 	Cosmic = {
 		DisplayName = "Cosmic",
+		Length = 28940,
 		Description = "The final mountain, stretching through space across asteroids, planets and floating space stations, ending at an enormous alien mothership.",
 	},
 }
 
+-- Same ladder for snowballs and launchers: 30 orders split across 8 mountains.
+config.PROGRESSION_ORDERS = 30
+config.DifficultyNames = {
+	"Easy",
+	"Medium",
+	"Tricky",
+	"Hard",
+	"Intense",
+	"Extreme",
+	"Brutal",
+	"Cosmic",
+}
+
+config.OrderDifficulty = {}
+local mountainCount = #config.MountainOrder
 for index, mountainId in config.MountainOrder do
+	local firstOrder = math.floor((index - 1) * config.PROGRESSION_ORDERS / mountainCount) + 1
+	local lastOrder = math.floor(index * config.PROGRESSION_ORDERS / mountainCount)
+	for order = firstOrder, lastOrder do
+		config.OrderDifficulty[order] = index
+	end
+
 	local mountain = config.Mountains[mountainId]
 	if mountain then
 		mountain.Id = mountainId
 		mountain.Difficulty = index
+		mountain.DifficultyName = config.DifficultyNames[index] or tostring(index)
+		mountain.FirstOrder = firstOrder
+		mountain.LastOrder = lastOrder
 	end
 end
 
@@ -138,6 +183,36 @@ config.SNOW = {
 	AmountDivisor = 200,
 	CoverStartPlatform = false,
 	CollectStartPlatform = false,
+	-- Grid of carvable tiles laid by BuildMountainSnow.
+	TileSize = 2,
+	Layers = 1,
+	TileOverlap = 0,
+	Budget = {
+		MaxTiles = 80000,
+		TilesPerStep = 1500,
+	},
+	Grid = {
+		CellSize = 8, -- SnowField hash-grid cell size
+	},
+	-- Rolling carves this trail (SERV_Snowball, SnowField, the riding client).
+	Carve = {
+		Interval = 0.05, -- seconds between carve steps
+		Depth = 1, -- snow layers removed per column per step
+		Width = 0, -- 0 = ball diameter * WidthScale + WidthPadding*2
+		WidthScale = 1,
+		WidthPadding = 0,
+		MinWidth = 2,
+		MaxWidth = 48,
+		SampleLift = 4, -- studs above a reported contact to start the ground ray
+		GroundProbe = 2.5, -- extra ray reach below the ball / contact
+		ClientReach = 60, -- max distance a client CarveSnow point may be from the ball
+		SurfaceTolerance = 2.5, -- how far a column may sit off the contact plane
+		NormalDot = 0.5, -- min alignment with the contact normal
+		MaxColumnsPerStep = 400,
+		MaxSweep = 240, -- skip filling the trail if the last contact is farther than this
+		MaxSamples = 16, -- samples along the sweep between last and current contact
+		MaxDrop = 6, -- extra downward reach when sampling the sweep
+	},
 }
 
 -- Props are scattered procedurally per piece (see ServerStorage.Modules.PlaceMountainProps).
@@ -208,6 +283,111 @@ config.PROPS = {
 	FadeRise = 0,
 }
 
+-- Visual rock borders along both playable edges. Independent of PROPS.Enabled.
+-- Templates live in ServerStorage.Assets.Storage.BorderClusters. Generated clones
+-- go to workspace.MountainBorders and are never smashable or carvable snow.
+config.BORDERS = {
+	Enabled = true,
+	LibraryFolder = "Storage",
+	LibraryName = "BorderClusters",
+	WorkspaceFolder = "MountainBorders",
+
+	ScaleMin = 1.5,
+	ScaleMax = 2.0,
+	Spacing = 18, -- floor on pivot travel so a bad footprint cannot stack clusters
+	OverlapFraction = 0.3, -- share of the smaller rock footprint that overlaps the next
+	EdgeClearance = 1.5,
+	MaxYaw = 6, -- degrees
+	TallOutset = 4, -- extra studs so tall peaks sit further outside the lane
+	BaseSink = 0.15,
+
+	-- Continuous base under the clusters. When MaxParts is tight these sections
+	-- get longer; they are not spread apart into gaps.
+	FoundationLength = 24,
+	FoundationOverlap = 8,
+	FoundationMinLength = 7,
+	FoundationWidth = 16,
+	FoundationHeight = 11, -- body below the edge; grown where the chord leaves the polyline
+	FoundationLip = 1, -- studs of the edge buried into the top of a section
+	FoundationBite = 0.25, -- inner face may kiss the lip, not the playable lane
+	FoundationWedgeDrop = 6, -- wedge once the edge rises at least this much along a section
+	FoundationChord = 3.5, -- max studs a section may leave the edge polyline
+	FoundationLengthMax = 80,
+	FoundationChordMax = 14,
+	FoundationCap = 1.35,
+
+	CapChance = 0.9,
+	RockColor = Color3.fromRGB(104, 113, 124),
+	CapColor = Color3.fromRGB(244, 250, 255),
+
+	MaxClusters = 500,
+	MaxParts = 6000,
+	ClustersPerYield = 12,
+
+	SampleStep = 4,
+	Dedup = 2.5,
+	GapBreak = 14, -- split an edge run when the surface jumps this far
+	SeamJoin = 12, -- join section edges that meet within this distance
+	ProbeXZ = 2,
+	ProbeY = 4,
+	MinSurfaceY = 0.3, -- skip near-vertical faces; 0.3 is about a 72° slope
+
+	LipClearance = 8,
+	FlightClearance = 22,
+	LaunchClearance = 26,
+	FinishClearance = 22,
+	TransitionMargin = 18,
+	SteepAngle = 12,
+	TallChance = 0.18,
+	SteepTallChance = 0.85,
+
+	LowTemplates = { "LowRidge", "WideRidge" },
+	TallTemplates = { "SteppedCliff", "TallPeak", "TwinPeak" },
+}
+
+config.BorderThemes = {
+	Frostpeak = {
+		RockColor = Color3.fromRGB(104, 113, 124),
+		CapColor = Color3.fromRGB(244, 250, 255),
+		CapChance = 0.90,
+	},
+	Christmas = {
+		RockColor = Color3.fromRGB(68, 100, 89),
+		CapColor = Color3.fromRGB(250, 252, 255),
+		CapChance = 0.95,
+	},
+	Candy = {
+		RockColor = Color3.fromRGB(173, 109, 154),
+		CapColor = Color3.fromRGB(255, 237, 247),
+		CapChance = 0.90,
+	},
+	PirateGlacier = {
+		RockColor = Color3.fromRGB(81, 148, 174),
+		CapColor = Color3.fromRGB(222, 248, 255),
+		CapChance = 0.80,
+	},
+	Haunted = {
+		RockColor = Color3.fromRGB(80, 67, 102),
+		CapColor = Color3.fromRGB(196, 205, 234),
+		CapChance = 0.45,
+	},
+	Volcano = {
+		RockColor = Color3.fromRGB(66, 60, 59),
+		CapColor = Color3.fromRGB(167, 159, 151),
+		CapChance = 0.15,
+	},
+	Tech = {
+		RockColor = Color3.fromRGB(87, 109, 129),
+		CapColor = Color3.fromRGB(217, 243, 250),
+		CapChance = 0.35,
+	},
+	Cosmic = {
+		RockColor = Color3.fromRGB(104, 77, 148),
+		CapColor = Color3.fromRGB(225, 217, 255),
+		CapChance = 0.35,
+	},
+}
+
 -- Snowball air physics + landing feel. Forces run on the network-owning client.
 config.FLIGHT = {
 	LiftFraction = 0.26, -- fraction of gravity cancelled while falling (glide)
@@ -228,8 +408,8 @@ config.FLIGHT = {
 	TumbleSpin = 14,
 	BackspinFactor = -0.6, -- multiple of the natural rolling spin
 	PreLandTime = 0.07, -- seconds of look-ahead used to restore a rolling spin before touchdown
-	-- Momentum keeper (impacts only): speed that collapses below ImpactRatio of its
-	-- recent peak gets ImpactKeep of that peak back along the slope, pointing downhill.
+	-- Momentum keeper: only a fast ball plows through kinks. Slower impacts keep
+	-- the speed they lost (and a little more) so the ride can actually stop.
 	PeakDecay = 400, -- studs/s^2 the remembered peak may fall without counting as an impact
 	ImpactMinSpeed = 60,
 	ImpactRatio = 0.7,
@@ -245,26 +425,44 @@ config.FLIGHT = {
 		ClimbSpeed = 45, -- upward speed used when the landing is higher than the ball
 		Blend = 5, -- per-second blend of vertical speed toward the target
 	},
-	-- Left/right wandering across the 100-stud track (smooth noise + a pull toward
-	-- structures ahead) so the ball carves instead of rolling a straight line.
+	-- Track edges + optional player steer while rolling. No auto left/right weave;
+	-- flight is vertical only (AirBlend bleeds leftover sideways speed).
 	Wander = {
-		Amplitude = 38, -- studs either side of the centre line the wander target reaches
-		Speed = 0.5, -- how fast the wander target changes (noise time scale)
-		Gain = 2.4, -- lateral speed per stud of offset from the target
-		MaxHeading = 0.45, -- lateral speed cap as a fraction of forward speed
-		GroundBlend = 3.5, -- per-second blend toward the wanted lateral speed on the ground
-		AirBlend = 0.9, -- ...and in the air
+		Gain = 2.4, -- lateral speed per stud of offset from a player steer target
+		MaxHeading = 0.45, -- leftover lateral speed cap as a fraction of forward speed
+		GroundBlend = 3.5, -- per-second blend toward 0 (or player steer) on the ground
+		AirBlend = 2.2, -- bleed sideways speed in the air so flight stays up/down
 		EdgeLimit = 40, -- beyond this |x| the ball is pushed back hard
-		Seek = 0.55, -- 0..1 pull of the wander target toward the nearest structure ahead
-		SeekRange = 110, -- studs ahead to look for structures
-		SeekWidth = 34, -- half-width of that search box
-		SeekInterval = 0.12, -- seconds between structure searches
+		PlayerHeading = 0.28, -- extra lateral speed as a fraction of forward speed at full input
+		PlayerMaxHeading = 0.7, -- heading cap while the player is steering
+		PlayerBlend = 7, -- ground blend while steering
 	},
 }
 
+-- Rolling resistance + energy. Launch charge (0..1) lerps each {weak, strong} pair.
+-- Energy drains over the ride; when it runs out the ball brakes to a stop even on slopes.
+config.COAST = {
+	MaxSpeed = { 48, 86 }, -- hard horizontal cap at charge 0 / charge 1
+	CapFloor = 0.32, -- cap stays at least this fraction of MaxSpeed as energy fades
+	GroundDrag = { 16, 5 }, -- studs/s^2 rolling resistance
+	AirDrag = { 10, 3.5 },
+	GroundDamp = { 0.55, 0.14 }, -- exponential speed decay /s
+	AirDamp = { 0.35, 0.1 },
+	EmptyDragBonus = 2.2, -- drag multiplier added as energy 1 → 0
+	EnergyDrain = { 0.085, 0.024 }, -- energy/s (weak ~12s, strong ~42s before brakes)
+	BrakeBelow = 0.2, -- extra braking starts under this remaining energy
+	BrakeAccel = 36, -- extra linear studs/s^2 once spent
+	BrakeDamp = 5, -- extra exponential decay /s once spent
+	SpinDamp = 4, -- angular-velocity fade /s while braking
+	FastSpeed = 78, -- at/above this, hits barely slow the ball (it plows through)
+	FastSmashScale = 0.18, -- remaining smash / hit penalty when fast
+	HitSlow = 0.08, -- extra fraction lost on a slow object/terrain impact
+}
+
 config.SMASH = {
-	-- Tiny: dozens of hits per run must not bleed the ball dry (47 hits at 1.5-6% cost ~70% speed)
-	SpeedLoss = { Building = 0.012, Landmark = 0.012, SkiLift = 0.006, Default = 0.002 },
+	-- Hits bleed speed unless the ball is already going COAST.FastSpeed (it plows through).
+	SpeedLoss = { Building = 0.1, Landmark = 0.12, SkiLift = 0.055, Default = 0.05 },
+	EnergyLoss = { Building = 0.055, Landmark = 0.065, SkiLift = 0.03, Default = 0.022 },
 	Kick = { Building = 1.2, Landmark = 1.4, SkiLift = 0.6, Default = 0.35 },
 	ServerReach = 140, -- extra studs of tolerance when the server validates a hit
 	SmashSound = false, -- smashes are silent (the white burst is the feedback)
@@ -304,23 +502,48 @@ config.SPAWN = {
 	ExtraHeight = 3,
 }
 
+-- Reaching FinishPlatform parks the ball in front of it (chase camera stays on
+-- the ball), then unlocks the next mountain.
+config.FINISH = {
+	StandBack = 16, -- studs uphill of the finish entrance, facing the platform
+	ArriveHold = 2, -- seconds to stand there before unlock + teleport
+	ReportInterval = 0.6, -- how often the rider re-reports the finish while the server catches up
+	ReportWindow = 6, -- give up and end the ride normally if the server never accepts
+}
+
+config.LAUNCHER = {
+	StorageFolder = "SnowballLaunchers",
+	InstanceName = "EquippedLauncher",
+	Grip = "Grip",
+	HandGrip = "RightGripAttachment",
+}
+
 config.LAUNCH = {
 	StorageFolder = "Snowballs",
 	CollisionTemplate = "BallCollision",
 	ThrustSpeed = 90,
 	UpSpeed = 0,
-	ThrustDuration = 0.35,
+	ThrustDuration = 0.22,
+	ThrustBoost = 0.22, -- extra speed added over ThrustDuration, as a fraction of launch speed
 	Elasticity = 0.35, -- ball bounce on landing (snow is soft)
 	ElasticityWeight = 3,
+	Friction = 0.55,
+	FrictionWeight = 2,
 	BallScale = 1 / 1.5, -- the launched ball is 1.5x smaller than the template
-	-- Hold-to-launch: hold click/touch on the pad, the bar fills to 100%, release fires.
+	-- Hold-to-launch: bar fills to 100% quickly, then ping-pongs 100% ↔ 0% until release.
 	Charge = {
-		Time = 1.5, -- seconds of holding to reach 100%
-		MinSpeed = 30, -- launch speed at 0%
-		MaxSpeed = 150, -- launch speed at 100%
+		FillTime = 0.42, -- seconds to first reach 100%
+		Time = 1.2, -- seconds for 100% → 0% (and 0% → 100%) while holding
+		MinSpeed = 22, -- launch speed at 0%
+		MaxSpeed = 78, -- launch speed at 100%
 		MinCharge = 0.03, -- taps shorter than this do nothing
 		HintText = "HOLD TO LAUNCH",
 	},
+	-- EquipmentMultiplier (snowball order × launcher order) scales launch speed.
+	-- Above 1x the throw levels out and lofts, so the ball flies before it falls.
+	MaxPoweredSpeed = 12000,
+	LoftPerMultiplier = 26, -- extra upward studs/s for each point of multiplier above 1
+	MaxLoft = 120,
 	ForwardOffset = 8,
 	ExitOffset = 8,
 	CameraDistance = 18,
@@ -329,10 +552,10 @@ config.LAUNCH = {
 	PadCameraDistance = 24,
 	PadCameraHeight = 8,
 	PadLookAhead = 10,
-	StopSpeed = 0.45,
-	StopSpin = 0.6,
-	StopHold = 1,
-	StopGrace = 1,
+	-- Auto-stop (same as the Stop button) once the ball is idle or crawling.
+	StopSpeed = 8, -- studs/s horizontal; at or below this counts as barely moving
+	StopHold = 0.75, -- seconds it must stay that slow before the ride ends
+	StopGrace = 1.25, -- ignore auto-stop this long after launch (stream/physics hitch)
 	-- Each eaten patch adds this volume; radius grows with the cube root.
 	GrowVolumePerSnow = 1.6,
 	GrowMaxScale = 8,
@@ -444,6 +667,64 @@ function config:GetMountain(mountainId)
 	return self.Mountains[mountainId]
 end
 
+function config.FindFinishPlatform(mountain)
+	if typeof(mountain) ~= "Instance" then
+		return nil
+	end
+
+	local name = config.Attachment.FinishPlatform
+	for _, child in mountain:GetChildren() do
+		if child:GetAttribute("AttachmentType") == name or string.sub(child.Name, 1, #name) == name then
+			return child
+		end
+	end
+	return nil
+end
+
+function config.IsOnFinishPiece(piece, position, padding)
+	if typeof(piece) ~= "Instance" or typeof(position) ~= "Vector3" then
+		return false
+	end
+
+	local ok, cf, size = pcall(piece.GetBoundingBox, piece)
+	if not ok or typeof(cf) ~= "CFrame" or typeof(size) ~= "Vector3" then
+		return false
+	end
+
+	padding = tonumber(padding) or 8
+	local localPos = cf:PointToObjectSpace(position)
+	local half = size * 0.5
+	return math.abs(localPos.X) <= half.X + padding
+		and math.abs(localPos.Z) <= half.Z + padding
+		and localPos.Y <= half.Y + padding + 40
+		and localPos.Y >= -half.Y - padding
+end
+
+-- A fast ball can cross the whole finish piece in one frame. Returns a point on it.
+function config.FinishContact(piece, fromPos, toPos, padding)
+	if typeof(toPos) ~= "Vector3" then
+		return nil
+	end
+	if config.IsOnFinishPiece(piece, toPos, padding) then
+		return toPos
+	end
+	if typeof(fromPos) ~= "Vector3" then
+		return nil
+	end
+	if config.IsOnFinishPiece(piece, fromPos, padding) then
+		return fromPos
+	end
+
+	local steps = math.clamp(math.ceil((toPos - fromPos).Magnitude / 25), 1, 16)
+	for step = 1, steps - 1 do
+		local point = fromPos:Lerp(toPos, step / steps)
+		if config.IsOnFinishPiece(piece, point, padding) then
+			return point
+		end
+	end
+	return nil
+end
+
 function config.IsOnLaunchPad(position, collision)
 	if typeof(position) ~= "Vector3" or not collision or not collision:IsA("BasePart") then
 		return false
@@ -465,6 +746,95 @@ end
 function config:GetDifficulty(mountainId)
 	local mountain = self.Mountains[mountainId]
 	return if mountain then mountain.Difficulty else nil
+end
+
+function config:GetLength(mountainId)
+	local mountain = self.Mountains[mountainId]
+	local length = mountain and mountain.Length
+	if type(length) ~= "number" or length <= 0 then
+		return nil
+	end
+	return math.floor(length)
+end
+
+function config:GetDifficultyName(mountainId)
+	local mountain = self.Mountains[mountainId]
+	return if mountain then mountain.DifficultyName else nil
+end
+
+function config.DifficultyForOrder(order)
+	local difficulty = config.OrderDifficulty[order]
+	if difficulty then
+		return difficulty
+	end
+	if type(order) ~= "number" or order < 1 then
+		return 1
+	end
+	return #config.MountainOrder
+end
+
+function config:MountainIdForOrder(order)
+	return self.MountainOrder[config.DifficultyForOrder(order)]
+end
+
+-- Power the previous mountain's shop can reach (snowball order × launcher order).
+-- Mountain 1 expects the free starters. Later mountains expect that gear, clamped
+-- to the launch-speed cap so a maxed throw can still finish the course.
+function config:CoastResistance(mountainId)
+	local mountain = self.Mountains[mountainId]
+	local difficulty = mountain and mountain.Difficulty or 1
+	local order = 1
+	if difficulty > 1 then
+		local previous = self.Mountains[self.MountainOrder[difficulty - 1]]
+		order = previous and previous.LastOrder or 1
+	end
+	local maxSpeed = self.LAUNCH.Charge and self.LAUNCH.Charge.MaxSpeed or 78
+	local cap = (self.LAUNCH.MaxPoweredSpeed or 12000) / math.max(maxSpeed, 1)
+	return math.clamp(order * order, 1, cap)
+end
+
+function config:EffectivePower(multiplier)
+	local maxSpeed = self.LAUNCH.Charge and self.LAUNCH.Charge.MaxSpeed or 78
+	local cap = (self.LAUNCH.MaxPoweredSpeed or 12000) / math.max(maxSpeed, 1)
+	local power = tonumber(multiplier) or 1
+	if power < 1 then
+		power = 1
+	end
+	return math.min(power, cap)
+end
+
+local function mix(easy, hard, t)
+	return easy + (hard - easy) * t
+end
+
+function config:ApplyDifficulty(grammar, difficulty)
+	local count = #self.MountainOrder
+	difficulty = math.clamp(math.floor(tonumber(difficulty) or 1), 1, count)
+	local steps = difficulty - 1
+	local t = steps / math.max(count - 1, 1)
+	grammar.MinPieces += steps * 6
+	grammar.MaxPieces += steps * 8
+
+	local weights = grammar.Weights
+	local piece = self.Attachment
+	weights[piece.Downhill_Gentle] = mix(weights[piece.Downhill_Gentle] or 4, 1, t)
+	weights[piece.Downhill_Steep] = mix(weights[piece.Downhill_Steep] or 3, 6, t)
+	weights[piece.Valley_Large] = mix(weights[piece.Valley_Large] or 1, 3, t)
+	weights[piece.Uphill_Small] = mix(weights[piece.Uphill_Small] or 2, 3, t)
+	weights[piece.Uphill_Large] = mix(weights[piece.Uphill_Large] or 1, 5, t)
+	weights[piece.Drop] = mix(weights[piece.Drop] or 1, 4, t)
+	weights[piece.JumpRamp] = mix(weights[piece.JumpRamp] or 2, 3, t)
+	weights[piece.Flat_Transition] = mix(weights[piece.Flat_Transition] or 3, 2, t)
+	weights[piece.DestructionZone] = mix(weights[piece.DestructionZone] or 1, 4, t)
+
+	local function bump(name, perStep)
+		grammar.MaxCount[name] = (grammar.MaxCount[name] or 0) + steps * perStep
+	end
+	bump(piece.DestructionZone, 1)
+	bump(piece.Drop, 2)
+	bump(piece.JumpRamp, 2)
+	bump(piece.Valley_Large, 2)
+	bump(piece.Uphill_Large, 2)
 end
 
 function config:GetNextMountain(mountainId)
@@ -505,15 +875,56 @@ end
 function config:GetPropSettings(mountainId)
 	local settings = table.clone(self.PROPS)
 	local mountain = self.Mountains[mountainId]
-	if not mountain or not mountain.Props then
+	if not mountain then
 		settings.Enabled = false
 		return settings
 	end
 
+	-- Every mountain place loads Storage.Props/<MountainId>. Named Frostpeak
+	-- recipes are optional; category scatter still runs from whatever is in the library.
 	settings.Enabled = true
-	settings.LibraryName = mountain.Props.LibraryName or mountainId
-	for key, value in mountain.Props do
-		settings[key] = value
+	settings.LibraryName = mountainId
+	if mountain.Props then
+		settings.LibraryName = mountain.Props.LibraryName or mountainId
+		for key, value in mountain.Props do
+			settings[key] = value
+		end
+	end
+
+	return settings
+end
+
+function config:GetBorderSettings(mountainId)
+	local settings = table.clone(self.BORDERS)
+	settings.LowTemplates = table.clone(self.BORDERS.LowTemplates)
+	settings.TallTemplates = table.clone(self.BORDERS.TallTemplates)
+
+	local theme = self.BorderThemes[mountainId]
+	if theme then
+		for key, value in theme do
+			settings[key] = value
+		end
+	end
+
+	local mountain = self.Mountains[mountainId]
+	if not mountain then
+		settings.Enabled = false
+		return settings
+	end
+
+	if mountain.BuildBorders ~= nil then
+		settings.Enabled = mountain.BuildBorders
+	end
+	if mountain.Borders then
+		for key, value in mountain.Borders do
+			settings[key] = value
+		end
+		if mountain.Borders.LowTemplates then
+			settings.LowTemplates = table.clone(mountain.Borders.LowTemplates)
+		end
+		if mountain.Borders.TallTemplates then
+			settings.TallTemplates = table.clone(mountain.Borders.TallTemplates)
+		end
 	end
 
 	return settings
@@ -522,6 +933,7 @@ end
 function config:GetGrammar(mountainId)
 	local grammar = copyGrammar(self.DEFAULT_GRAMMAR)
 	local mountain = self.Mountains[mountainId]
+	self:ApplyDifficulty(grammar, mountain and mountain.Difficulty or 1)
 	if not mountain then
 		return grammar
 	end
