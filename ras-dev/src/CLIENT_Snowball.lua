@@ -896,6 +896,15 @@ function api:WatchLaunchPad()
 		local riding = vars.SnowballCamera ~= nil
 
 		if onPad == vars.OnLaunchPad then
+			-- Standing on the pad with nothing in hand (the equip request can race the
+			-- replicated position on the server): ask again, at most every 2 s.
+			if onPad and not riding and os.clock() - (vars.LauncherRequestAt or 0) >= 2 then
+				local humanoid = character:FindFirstChildOfClass("Humanoid")
+				if humanoid and humanoid.Health > 0 and not character:FindFirstChild(mountainConfig.LAUNCHER.InstanceName) then
+					vars.LauncherRequestAt = os.clock()
+					ReplicatedStorage.ReEvent:FireServer("EquipLauncher")
+				end
+			end
 			return
 		end
 
@@ -908,6 +917,7 @@ function api:WatchLaunchPad()
 
 		if onPad then
 			api.BindPadCamera(self)
+			vars.LauncherRequestAt = os.clock()
 			ReplicatedStorage.ReEvent:FireServer("EquipLauncher")
 		else
 			unbindPadCamera(vars)

@@ -18,8 +18,16 @@ local sself = m_sapi
 function MODULE.new(r_sapi)
 	sself = r_sapi
 	sself.LAUNCHERS = sself.LAUNCHERS or {}
+	-- Per-player request counter: a later equip / unequip cancels an equip still waiting.
+	sself.LAUNCHER_REQUEST = sself.LAUNCHER_REQUEST or setmetatable({}, { __mode = "k" })
 	return m_api, m_sapi
 end
+
+-- The client asks for the launcher the frame its own pad check passes, a few
+-- replication ticks before the server sees that position. Give the position
+-- this long to catch up before treating the request as "not on the pad".
+local EQUIP_GRACE = 1.0
+local EQUIP_POLL = 0.1
 
 local function getCatalog()
 	return sself.DEF_GVARS.SnowballLaunchers
@@ -309,10 +317,19 @@ function m_api:EquipLauncher(player, requestedName)
 		sself:ReplicateProgress(player)
 	end
 
-	if sself:IsPlayerOnLaunchPad(player) then
-		return sself:GiveLauncher(player)
+	local token = (sself.LAUNCHER_REQUEST[player] or 0) + 1
+	sself.LAUNCHER_REQUEST[player] = token
+	local deadline = os.clock() + EQUIP_GRACE
+	while not sself:IsPlayerOnLaunchPad(player) do
+		if os.clock() >= deadline or not player.Parent then
+			return true
+		end
+		task.wait(EQUIP_POLL)
+		if sself.LAUNCHER_REQUEST[player] ~= token then
+			return true -- superseded by a later equip or an unequip
+		end
 	end
-	return true
+	return sself:GiveLauncher(player)
 end
 
 -- ReFunction: true, or false and a PlayerProgress.PurchaseInOrder reason for the shop to show.
@@ -349,6 +366,8 @@ function m_api:BuyLauncher(player, requestedName)
 end
 
 function m_api:UnequipLauncher(player)
+	-- Cancels an equip that is still waiting for the position to catch up.
+	sself.LAUNCHER_REQUEST[player] = (sself.LAUNCHER_REQUEST[player] or 0) + 1
 	sself:ClearLauncher(player)
 	return true
 end
