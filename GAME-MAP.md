@@ -1,6 +1,6 @@
 # Collect a Cucumber: Complete Game Map
 
-**Snapshot date:** 2026-09-01
+**Snapshot date:** 2026-09-01 (updated the same evening after the unused-code cleanup, see `backups/Cleanup_2026-09-01/MANIFEST.md`)
 **Source of truth:** the LIVE place as read directly from Roblox Studio (`[NEW] Collect a Cucumber 🥒`, place `116126086405931`, universe `10439954561`, owned by the Group Frenzy group `14583228`). Every number and behaviour in this document was read from the live scripts and dictionaries on the snapshot date. Where design documents or older notes disagree with the live code, the live code wins and the difference is called out.
 
 This is the reference for "what is going on right now and how it all ties together". Read Part 1 for the player's journey, Part 2 for every system in depth, Part 3 for the code map you need when adding features.
@@ -112,7 +112,7 @@ Portals teleport you into private copies of a map spawned far above the world: C
 
 1. `ReplicatedFirst.LoadingBootstrap` throws up the custom loading cover on the first client frame, removes Roblox's default one, and creeps the percentage to 40% until the real loader takes over. A SKIP button becomes a hard escape at 20 s and the cover is force-cleared at 60 s.
 2. The server loads the profile (`ProfileService`, store `CucumberData_Launch3`), builds the replicated stat tree, then `DoorService.PlayerJoined` removes owned doors on the client and teleports the character: fresh players to the furthest owned biome pad (Spawn for a new account), finished-tutorial players straight to their vault stall. The loading screen waits for the `InitialAreaTeleportComplete` attribute before it lifts.
-3. The intro cutscene is **disabled on live** (`IntroCutsceneClient` has `Enabled = false` and the tutorial immediately publishes "cutscene decided, inactive").
+3. There is no intro cutscene: the retired `IntroCutsceneClient` was deleted in the 2026-09-01 cleanup, and the tutorial publishes the "cutscene decided, inactive" attributes itself so the guards in other scripts stay harmless.
 
 ### 3.2 The tutorial (new accounts only)
 
@@ -553,7 +553,7 @@ Two independent skip mechanics with one contract each: the quote already include
 - **Cucumber time skips** (`TimeSkipRateService`): a deterministic expected Cukes-per-second from your pickaxe (0.25 s tick), pet strike (0.6 s tick), 10% crit ×5 and the highest unlocked zone's baseline spawn mixture, times the full Cuke multiplier stack once. Consumers: Robux products (1 m / 5 m / 30 m / 5 h / 1 d / 1 w), playtime tiers, quest claims, spinner cards, Cucumber Smash runner-ups, offline farming.
 - **Vault time skips** (`VaultTimeSkipService`): Σ stored EffectiveRate × ownerMult × seconds. Consumers: Robux vault products (same 6 durations, ids live), quest claims (capped variant), spinner coin cards. `TimeSkipQuoteServer` serves both quotes to the Store via `GetTimeSkipQuote` / `GetVaultTimeSkipQuote`.
 
-`WalkCucumberService` (walk-over time-skip pickups on the map) exists but is switched off.
+The old walk-over map pickups (`WalkCucumberService`) were deleted in the 2026-09-01 cleanup.
 
 ## 17. Monetization
 
@@ -596,7 +596,7 @@ The **Store** panel (SHOP button) has tabs Pickles (Cuke skips), Vault (coin ski
 - **Loading:** `LoadingBootstrap` (ReplicatedFirst) → `UserInterfaceLoader.LoadingScreen` preloads and lifts the cover after the server's initial teleport (10 s cap in the loader, 20/60 s watchdogs in the bootstrap).
 - **Tutorial:** section 3.2. Server side: `TutorialProgressServer` (funnel analytics, `TutorialStep` persistence and attribute, `wantcarry` / `wantupgradecukes` gifts), `PetShopGiftServer` (2,500 Coins once, must be within 20 studs of an egg stand), `PickaxeShopGiftServer` (500 Coins once at the shopkeeper), `TutorialTestOverride` (applies `ServerStorage.ForceTutorialOnJoin` for replays), and the `Tutorial` handler in `ServerNetwork` (completion, Lil Pickle, 250 Coins).
 - **Intro cutscene:** `IntroCutsceneClient` is present but disabled.
-- **First-session prompts:** `FavoritePromptService` + `FavoritePromptClient` (native favourite prompt, first session only), `GroupOfferService` + `GroupOfferClient` (Group Frenzy popup), Starter Pack offer (`GetStarterOffer`, 30-min countdown, `StarterPackClient` is disabled so the Offers panel carries it), `LikePromptClient` (the "LIKE THE GAME!" banner once per session after a new pet, a rebirth or a big win, 5-min session gate), chat tips every 4 to 10 minutes.
+- **First-session prompts:** `FavoritePromptService` + `FavoritePromptClient` (native favourite prompt, first session only), `GroupOfferService` + `GroupOfferClient` (Group Frenzy popup), Starter Pack offer (`GetStarterOffer` and the receipt handler still exist server-side, but the timed popup client was deleted in the 2026-09-01 cleanup and no panel currently sells the pack), `LikePromptClient` (the "LIKE THE GAME!" banner once per session after a new pet, a rebirth or a big win, 5-min session gate), chat tips every 4 to 10 minutes.
 
 ## 19. HUD, panels and every ScreenGui
 
@@ -617,13 +617,13 @@ Device classes: phone (short axis under 620 px, scale 0.36 to 0.46), tablet and 
 
 ### 19.2 `StarterGui.Display.Frame.Frames` panels (opened by `UserInterfaceLoader.Main.OpenFrame`, one module each under `ReplicatedStorage.Modules.UserInterfaceLoader`)
 
-Offers · Teleport (orphaned, unreachable) · Shop (pickaxes, via the shopkeeper dialog) · Evolving · Vault (offline "Keep Farming" claim) · Index · Trade · Shards · Settings · Door (purchase prompt) · Store (Robux) · Pets (inventory, equip, Equip Best, Unequip All) · Rebirth · Playtime.
+Offers · Shop (pickaxes, via the shopkeeper dialog) · Evolving · Vault (offline "Keep Farming" claim) · Index · Trade · Shards · Settings · Door (purchase prompt) · Store (Robux) · Pets (inventory, equip, Equip Best, Unequip All) · Rebirth · Playtime.
 
 Settings rows: Mute Music, Mute Sfx, Disable Pop Ups, Low Quality, Disable Haptics, Hide My Pets, Hide Other Pets, Auto Delete Common / Uncommon / Rare. `PanelMetrics` keeps every panel on a shared canvas scale; `PanelMetricsTest` (run by `PanelMetricsWatchdog` in playtests) asserts ZIndex ordering.
 
 ### 19.3 Other ScreenGuis
 
-EggUi (world hatch billboard) · EggRevealUI · SellBloom · HallOfGreen (season hall, placeholder text) · ShardsGodUI · GroupRewardsGui · RebirthArrow · RewardArrow (client disabled) · TutorialGui + TutorialWorldArrow · ShopVendorUI + ShopVendorDialogBubble · CucumberVendorUI + VendorDialogBubble (with `NewPetSellController`) · ShardsGodDialogBubble · AutoHatchControls · HudTooltip (client disabled) · EffectBursts · UITemplates (DamageNumber, ComboPopup and other templates) · NukeUI · SelectingReward · GamepassPopup · AdminPanel · BiomeActivityPrompt · PostTutorialQuests (discarded at tutorial end) · SmashLeaderboard · CarryControls (style source only; the live carry UI is a billboard on the carried cucumber) · PromotedPets (folder holding `PromoteHandler`).
+EggUi (world hatch billboard) · EggRevealUI · SellBloom · HallOfGreen (season hall, placeholder text) · ShardsGodUI · GroupRewardsGui · TutorialGui + TutorialWorldArrow · ShopVendorUI + ShopVendorDialogBubble · CucumberVendorUI + VendorDialogBubble (with `NewPetSellController`) · ShardsGodDialogBubble · AutoHatchControls · EffectBursts · UITemplates (DamageNumber, ComboPopup, ClickCooldown, Viewport3D, HPBar, BossFaceGui) · NukeUI · SelectingReward · GamepassPopup · AdminPanel · BiomeActivityPrompt · SmashLeaderboard · CarryControls (style source only; the live carry UI is a billboard on the carried cucumber) · PromotedPets (folder holding `PromoteHandler`). The orphan RebirthArrow, RewardArrow, ShardArrow, HudTooltip and PostTutorialQuests guis were deleted in the 2026-09-01 cleanup.
 
 Client-built guis at runtime: CarryBillboardHost, CarryShowcase, VaultFXGui, VaultOpenToast, QuestBoardGuiLocal, the heist HP bars, the like banner.
 
@@ -704,15 +704,15 @@ Migrations already in place: EggPity number → table, vault `RateV` stamps, `Co
 
 ### 25.1 Loaders
 
-- `ReplicatedStorage.Modules.ControllerLoader`: shared utilities (`Custom`: ComponentController, SoundController, NumberController, TweenController, SettingsController, BadgeController, ProductController; `Imported`: CameraShaker, Module3D, ZonePlus, Network, MyTimer, FastWait). `GetController(name)` requires and caches.
-- `ReplicatedStorage.Modules.FrameworkLoader`: client gameplay modules (`Client`: ClientHandler → CollectionClient, ToolClient, DoorClient, ChestClient; ClientNetwork; PetController; EggController; CraftController).
+- `ReplicatedStorage.Modules.ControllerLoader`: shared utilities (`Custom`: ComponentController, SoundController, NumberController, TweenController, SettingsController, BadgeController, ProductController; `Imported`: CameraShaker, Module3D, ZonePlus, Network, FastWait). `GetController(name)` requires and caches.
+- `ReplicatedStorage.Modules.FrameworkLoader`: client gameplay modules (`Client`: ClientHandler → ToolClient, DoorClient, ChestClient; ClientNetwork; PetController; EggController).
 - `ReplicatedStorage.Modules.UserInterfaceLoader`: one module per panel plus Main, Animations, PopUps, Stats, Notifications, LoadingScreen.
 - `ServerStorage.ServerController`: the server module registry. `GetModule(name)` requires and caches a child; `GetDictionary(name)` caches `Dictionaries.*`; `InitializeModulesWithBlacklist`, `PlayerJoinedWithWhitelist`, `PlayerLeftWithWhitelist`, `CharacterJoinedWithWhitelist` (after a 3 s wait) dispatch lifecycle calls.
 
 ### 25.2 Server boot (`ServerScriptService.Server`)
 
-1. `InitializeModulesWithBlacklist({ProfileService, CharacterModule, GamepassHandler, CollectionService, PickaxeService, TeleportService, UpgradeService})` calls `.Initialize()` on every other ServerController module in parallel coroutines.
-2. `PlayerAdded` (0.5 s later): `PlayerJoined` on ProfileService, GamepassHandler, DoorService, BoostHandler, PetService, ChestHandler, UpgradeService, SeasonService, OfflineService, PlaytimeRewards, StreakService, GoalService, VaultService, GroupOfferService, FavoritePromptService.
+1. `InitializeModulesWithBlacklist({ProfileService, CharacterModule, GamepassHandler, PickaxeService, TeleportService, UpgradeService})` calls `.Initialize()` on every other ServerController module in parallel coroutines. One pcall wraps the whole loop, so a synchronous error in one module's Initialize aborts the rest: keep Initialize functions non-throwing.
+2. `PlayerAdded` (0.5 s later): `PlayerJoined` on ProfileService, GamepassHandler, DoorService, BoostHandler, PetService, ChestHandler, UpgradeService, SeasonService, OfflineService, PlaytimeRewards, StreakService, GoalService, GroupOfferService, FavoritePromptService. (VaultService was removed from this list on 2026-09-01: it defines no `PlayerJoined` and assigns stalls from its own Initialize, and the nil call used to abort the loop silently for any later module.)
 3. `CharacterAdded` (3 s later, sequential): CharacterModule, GamepassHandler, PickaxeService, PetService, SeasonService, RebirthService, UpgradeService.
 4. `PlayerRemoving`: ProfileService only (everything else writes through to the live profile table).
 5. `CharacterResetRequest` remote implements the clean reset used by Roblox's Reset button.
@@ -731,7 +731,7 @@ The EasyNetwork-style `Network` module multiplexes named events and functions ov
 
 Line counts are from the live place. Backups, HD Admin and third-party library internals are omitted.
 
-### ServerStorage.ServerController (39 modules + Dictionaries)
+### ServerStorage.ServerController (35 modules + Dictionaries)
 
 | Module | Lines | Role |
 |---|---|---|
@@ -769,29 +769,24 @@ Line counts are from the live place. Backups, HD Admin and third-party library i
 | TeleportService | 48 | zone teleports |
 | ServerHandler | 140 | shop/sell teleports, legacy pad wiring |
 | CharacterModule | 146 | avatar normalisation, overhead tag |
-| ChatHandler | 14 | chat tags |
-| CollectionService | 230 | legacy walk-over orbs (mostly dormant) |
-| ArmorHandler | 86 | strips accessories except the pickaxe |
 | Leaderboards (+Coins, Orbs, Breaks, Time, Excluded) | 53 | world leaderboards |
-| WalkCucumberService | 343 | map time-skip pickups (disabled) |
-| PathService | 67 | "choose your path" starter pet (orphaned) |
 | Dictionaries: Pickaxes 308, Doors 252, Pets 1109, Eggs 311, Chests 97, Upgrades 163 | | data tables |
 
 ### ServerStorage (standalone modules)
 
-PortalCucumberProgress 255 · PortalUnlockService 216 · BaseBreakInService 146. Also `ForceTutorialOnJoin` BoolValue, minigame templates (Avalanche, LavaRun, Wild_West, Revolver, BloxoutIncorporated, Classic Obby), `Assets` (BreakableModels, Collectables, Tag), and many dated backup folders.
+PortalCucumberProgress 255 · PortalUnlockService 216 · BaseBreakInService 146. Also `ForceTutorialOnJoin` BoolValue, minigame templates (Avalanche, LavaRun, Wild_West, Revolver, BloxoutIncorporated, Classic Obby), `Assets` (BreakableModels, Collectables, Tag). All dated backup folders were removed on 2026-09-01 (exported to `backups/Cleanup_2026-09-01/`).
 
-### ServerScriptService (27 scripts)
+### ServerScriptService (26 scripts)
 
-Server 177 · Shutdown 51 · DisableCollisoins 44 · GoldenCucumberStatue 1 · SellVendorServer 340 · ShopVendorServer 79 · PetShopGiftServer 122 · PickaxeShopGiftServer 108 · JetpackSystem 413 · StarterPortalService 449 · SnowPortalService 557 · LavaPortalService 517 · DesertPortalService 692 · VoidPortalService 525 · MinigameCompletionService 317 · ShardsGodServer 35 · MinigameTimeService 236 · TutorialTestOverride 22 · TimeSkipQuoteServer 18 · AdminPanelService 340 · TutorialProgressServer 181 · PetRosterValidator 29 · VaultPickaxeGuard 85 · QuestBoardService 297 · TelemetryRelayServer 38 · BadgeAwardService 67 · DeviceStreamingServer 95.
+Server 177 · Shutdown 51 · DisableCollisoins 44 · SellVendorServer 340 · ShopVendorServer 79 · PetShopGiftServer 122 · PickaxeShopGiftServer 108 · JetpackSystem 413 · StarterPortalService 449 · SnowPortalService 557 · LavaPortalService 517 · DesertPortalService 692 · VoidPortalService 525 · MinigameCompletionService 317 · ShardsGodServer 35 · MinigameTimeService 236 · TutorialTestOverride 22 · TimeSkipQuoteServer 18 · AdminPanelService 340 · TutorialProgressServer 181 · PetRosterValidator 29 · VaultPickaxeGuard 85 · QuestBoardService 297 · TelemetryRelayServer 38 · BadgeAwardService 67 · DeviceStreamingServer 95.
 
 ### ReplicatedStorage.Modules
 
-ControllerLoader 31 (Custom: ComponentController 87, SoundController 143, NumberController 112 + Data, TweenController 39 + Data, SettingsController 357, BadgeController 122, ProductController 387; Imported: Module3D 247, Network 1086, MyTimer 199, FastWait 43, CameraShaker, ZonePlus) · FrameworkLoader 49 (ClientHandler 51, CollectionClient 118 + OrbTween, ZoneDetection, ToolClient 36, DoorClient 334, ChestClient 77, ClientNetwork 379, PetController 112 + Movement 440, EggController 167 + UiController 892 + Single 695 + Triple 426 + RarityController 56, CraftController 22) · UserInterfaceLoader 155 (Animations 84, PopUps 181, Stats 112, Store 505, Door 159, Teleport 208, Shop 88 + Pickaxes 364, LoadingScreen 324, Trade 186, Offers 135, Settings 191, Pets 823, Notifications 155, Evolving 356, Main 810, Vault 158, Index 357, PlaytimeNewFrame 162, Shards 187, RebirthNewFrame 332) · HudMetrics 130 · PetSellValues 57 · PetDisplayNames 66 · PanelMetrics 289 · PanelMetricsTest 331 · MusicManager 158 · HapticUtil 43 · PortalFXShared 117 · MutationColors 45. Plus `Shared` (Promise, Module3D), `topbarplus`, `Jetpack` (JetpackService, JetpackController), `Rat.AIScript` 317.
+ControllerLoader 31 (Custom: ComponentController 87, SoundController 143, NumberController 112 + Data, TweenController 39 + Data, SettingsController 357, BadgeController 122, ProductController 387; Imported: Module3D 247, Network 1086, FastWait 43, CameraShaker, ZonePlus) · FrameworkLoader 49 (ClientHandler 51, ToolClient 36, DoorClient 334, ChestClient 77, ClientNetwork 379, PetController 112 + Movement 440, EggController 167 + UiController 892 + Single 695 + Triple 426 + RarityController 56) · UserInterfaceLoader 155 (Animations 84, PopUps 181, Store 505, Door 159, Shop 88 + Pickaxes 364, LoadingScreen 324, Trade 186, Offers 135, Settings 191, Pets 823, Notifications 155, Evolving 356, Main 810, Vault 158, Index 357, PlaytimeNewFrame 162, Shards 187, RebirthNewFrame 332) · HudMetrics 130 · PetSellValues 57 · PetDisplayNames 66 · PanelMetrics 289 · PanelMetricsTest 331 · MusicManager 158 · HapticUtil 43 · PortalFXShared 117 · MutationColors 45. Plus `Shared` (Promise, Module3D), `topbarplus`, `Jetpack` (JetpackService, JetpackController), `Rat.AIScript` 317.
 
-### StarterPlayer.StarterPlayerScripts (58 LocalScripts)
+### StarterPlayer.StarterPlayerScripts (51 LocalScripts)
 
-Client 72 · CucumberVendorClient 1264 · ShopVendorClient 250 · VendorHeadTrack 121 · BreakablesClient 2569 · NukeClient 244 · UpgraderBoardClient 154 · FriendBoostClient 383 · FavoritePromptClient 36 · BossBarClient 538 · GroupOfferClient 248 · RebirthArrowClient 88 · HudScaler 60 · TutorialClient 1194 · DoorArrowClient 297 · PerformanceClient 129 · RingBeamSpinnerClient 53 · JetpackClient 140 · StarterPortalClient 380 · SnowPortalClient 264 · LavaPortalClient 252 · DesertPortalClient 373 · VoidPortalClient 171 · MinigameMusicController 66 · MinigameCompletionClient 92 · MinigameHudController 237 · PlaytimeReadyClient 119 · HoverboardPresentationClient 192 · UIPreloaderClient 211 · ShardsGodClient 217 · PortalArrowClient 306 · MinigameIsolationClient 160 · BackpackHotbarDisable 45 · BossMotionClient 261 · PortalUnlockClient 105 · LikePromptClient 299 · OfflineEarnsBannerClient 165 · VaultFXClient 751 · PanelMetricsWatchdog 90 · SmashEventClient 289 · TopbarSettingsButtonClient 84 · CarryClient 515 · VaultTextClient 249 · CarryShowcaseClient 470 · StreamTierClient 183 · BossTrophyChatClient 33 · QuestBoardClient 291 · HideOwnTagClient 28 · HeistCombatClient 164 · CarryVaultTrailClient 310 · MessageHandler 14. Disabled: IntroCutsceneClient 1812, StarterPackClient 249, HudTooltips 111, RewardArrowClient 120, ShardArrowClient 78, ObjectTween 32. StarterCharacterScripts: chat tips LocalScript 24.
+Client 52 · CucumberVendorClient 1264 · ShopVendorClient 250 · VendorHeadTrack 121 · BreakablesClient 2569 · NukeClient 244 · UpgraderBoardClient 154 · FriendBoostClient 383 · FavoritePromptClient 36 · BossBarClient 538 · GroupOfferClient 248 · RebirthArrowClient 88 · HudScaler 60 · TutorialClient 1194 · DoorArrowClient 297 · PerformanceClient 129 · RingBeamSpinnerClient 53 · JetpackClient 140 · StarterPortalClient 380 · SnowPortalClient 264 · LavaPortalClient 252 · DesertPortalClient 373 · VoidPortalClient 171 · MinigameMusicController 66 · MinigameCompletionClient 92 · MinigameHudController 237 · PlaytimeReadyClient 119 · HoverboardPresentationClient 192 · UIPreloaderClient 211 · ShardsGodClient 217 · PortalArrowClient 306 · MinigameIsolationClient 160 · BackpackHotbarDisable 45 · BossMotionClient 261 · PortalUnlockClient 105 · LikePromptClient 299 · OfflineEarnsBannerClient 165 · VaultFXClient 751 · PanelMetricsWatchdog 90 · SmashEventClient 289 · TopbarSettingsButtonClient 84 · CarryClient 515 · VaultTextClient 249 · CarryShowcaseClient 470 · StreamTierClient 183 · BossTrophyChatClient 33 · QuestBoardClient 291 · HideOwnTagClient 28 · HeistCombatClient 164 · CarryVaultTrailClient 310 · MessageHandler 14. (The six disabled scripts that used to sit here were deleted on 2026-09-01.) StarterCharacterScripts: chat tips LocalScript 24.
 
 ### StarterGui scripts
 
@@ -807,18 +802,13 @@ ChatCustomization 13 · PromotedPets.PromoteHandler 131 · HallOfGreen.Controlle
 
 ## 28. Dormant, disabled and orphaned systems
 
+The 2026-09-01 cleanup deleted everything that had been sitting here as disabled or orphaned: the intro cutscene client, the path-picker service, the map pickup service, the whole walk-over orb system, the Teleport panel, the six disabled client scripts, the PostTutorialQuests gui, the podium sign template and every in-Studio backup folder. The full list with evidence and restore steps is `backups/Cleanup_2026-09-01/MANIFEST.md`. What remains dormant:
+
 | Item | State | Notes |
 |---|---|---|
-| Intro cutscene (`IntroCutsceneClient`) | disabled | tutorial publishes the inactive state immediately |
 | Seasons / Hall of Green | built, `SEASON_ENABLED = false` | placeholder text in the hall; season pets have no live grant path |
 | Diamond Gherkin | in the dictionary and models, no grant path | reserved for a future reward |
-| PathService ("choose your path" pet) | orphaned, no client callers | referenced pets were deleted |
-| WalkCucumberService | `MAP_PICKUPS_ENABLED = false` | |
-| CollectionService walk-over orbs | replaced by breakables; `Collect` / `ChangedZones` bound as no-ops | |
-| Teleport panel | unreachable | HUD pills replaced it |
-| StarterPackClient, HudTooltips, RewardArrowClient, ShardArrowClient, ObjectTween | disabled scripts | |
-| PostTutorialQuests gui | discarded at tutorial end | quests live on the board now |
-| `UpgradeSignTemplate` (ReplicatedStorage and workspace copy) | leftover from the removed podium signs | pill on the card replaced them |
+| Starter Pack product | server handlers and product entry exist, no client sells it | the timed popup client was deleted; add a card to Offers if the pack should return |
 | `VaultLoot` / `VaultService.Skim` | draft field, function never implemented | CurrencyHandler's call is guarded |
 | `Multi2` pet stat | still in the live dictionary and UI ("cash" side of the tooltip) | only affects direct coin drops; replaced by WalkSpeed on the dev save |
 | Gamepass bypass ids | three user ids own every pass | review before any economy relaunch |
@@ -839,9 +829,9 @@ On the live place, `Dictionaries.Pets` still has `Multi2`, the pills still exist
 
 ## 30. Backups and revert points
 
-**In this repo:** `backups/EconomyRedesign_2026-08-28/` (full rbxm exports of ServerController, all services, Workspace, plus 106 pre-redesign `.lua` dumps and baseline values), `backups/CucumberBank_v1/v2_backup_2026-08-26.rbxm`, `backups/LobbyArea1_backup_2026-08-25.rbxm`, `backups/misc/petsim99_destroy_vfx.rbxm`, `economy-redesign-2026-08-28/` (REDESIGN-REPORT.md, final-design.json, audits, simulator), `HANDOVER-cucumber-vault-bank.md`, `SFX-PROPOSAL-cucumber.md`, `pets-remake/`.
+**In this repo:** `backups/Cleanup_2026-09-01/` (four rbxm exports of everything removed from the place on 2026-09-01, pre-edit copies of the five edited scripts, and `MANIFEST.md` with restore steps), `backups/EconomyRedesign_2026-08-28/` (full rbxm exports of ServerController, all services, Workspace, plus 106 pre-redesign `.lua` dumps and baseline values), `backups/CucumberBank_v1/v2_backup_2026-08-26.rbxm`, `backups/LobbyArea1_backup_2026-08-25.rbxm`, `backups/misc/petsim99_destroy_vfx.rbxm`, `economy-redesign-2026-08-28/` (REDESIGN-REPORT.md, final-design.json, audits, simulator), `HANDOVER-cucumber-vault-bank.md`, `SFX-PROPOSAL-cucumber.md`, `pets-remake/`.
 
-**In ServerStorage (live place):** `__OldPetsBackup`, `__OldBossPetsBackup`, `UIFrameBackups`, `__BrokenPanelBackup_2026-08-24`, `LobbyBackup_20260825`, `CucumberBankBackup_v1`, `BankUserWalls_v1_backup`, `VaultBackup_PreFloors_2026_08_26`, `SFXPassBackup_2026_08_26`, `RecoveredVaultCucumbers`, `UpgradeBoardsBackup_2026_08_27`, `MegaCucumberBackup_2026_08_27`, `EconomyBackup_PreRedesign_2026_08_28`, `DoorLockModelBackup_2026_08_30`, `changeinblender_original_2in1_backup_2026_08_27`. Each dated folder has a README with revert steps. Roblox cloud version history is the nuclear option.
+**In ServerStorage (live place):** none. Every in-Studio backup folder was exported to `backups/Cleanup_2026-09-01/` and deleted on 2026-09-01; keep it that way and put future safety copies in this repo instead. Roblox cloud version history is the nuclear option.
 
 ## 31. Rules to keep when adding features
 
