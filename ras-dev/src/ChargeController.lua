@@ -348,7 +348,9 @@ function Controller:_clipPose(dt)
 	local ready = ClipPlayer.Sample(clip, "Ready", self.ReadyTime, s.Ready)
 	local target = if self.Holding then 1 else 0
 	local step = dt / HOLD_BLEND
-	self.HoldBlend = math.clamp(self.HoldBlend + (if target > self.HoldBlend then step else -step), 0, 1)
+	-- toward the target by at most step, resting AT it (stepping past it and back every
+	-- other frame flickered the pose between the ready and charge loops while holding)
+	self.HoldBlend = math.clamp(target, self.HoldBlend - step, self.HoldBlend + step)
 	if self.HoldBlend <= 0 then
 		return ready
 	end
@@ -435,7 +437,9 @@ function Controller:_step(dt)
 			legTarget = 0
 		end
 		local rate = dt / LEGS_BLEND
-		self.LegWeight = math.clamp(self.LegWeight + (if legTarget > self.LegWeight then rate else -rate), 0, 1)
+		-- toward the target by at most rate, resting AT it (an `if target > weight` step
+		-- overshot 1 and came back every other frame: a 30 Hz shiver of the lower body)
+		self.LegWeight = math.clamp(legTarget, self.LegWeight - rate, self.LegWeight + rate)
 	end
 
 	local legScale = if self.Clip then self:_legScale() else 1
