@@ -1,0 +1,2553 @@
+{
+ "key": "Shop",
+ "size_studs": {
+  "width_x": 17.22,
+  "depth_y": 7.68,
+  "height_z": 14.94
+ },
+ "min": [
+  -8.612,
+  -3.84,
+  -0.025
+ ],
+ "max": [
+  8.612,
+  3.84,
+  14.92
+ ],
+ "parts": 249,
+ "meshes_after_merge": 33,
+ "labels": [
+  "Awning",
+  "Coins",
+  "Counter",
+  "CounterTop",
+  "Deck",
+  "Drifts",
+  "Frost",
+  "Lantern",
+  "Launchers",
+  "Pegboard",
+  "Posts",
+  "Props",
+  "Sign",
+  "SignFrame",
+  "SignLetters",
+  "SnowCap",
+  "Snowballs",
+  "Sparkles",
+  "Trim"
+ ],
+ "tris_total": 28088,
+ "meshes": [
+  {
+   "label": "Awning",
+   "hex": "ff8c1a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 1520
+  },
+  {
+   "label": "Awning",
+   "hex": "ffe6b8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 896
+  },
+  {
+   "label": "Coins",
+   "hex": "d4861e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 884
+  },
+  {
+   "label": "Coins",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 2828
+  },
+  {
+   "label": "Counter",
+   "hex": "9a6238",
+   "material": "WoodPlanks",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 176
+  },
+  {
+   "label": "CounterTop",
+   "hex": "c68c52",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 132
+  },
+  {
+   "label": "Deck",
+   "hex": "6b4226",
+   "material": "WoodPlanks",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "label": "Drifts",
+   "hex": "f4f8fc",
+   "material": "Snow",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 560
+  },
+  {
+   "label": "Frost",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 196
+  },
+  {
+   "label": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 2824
+  },
+  {
+   "label": "Lantern",
+   "hex": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 144
+  },
+  {
+   "label": "Lantern",
+   "hex": "ffa82e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "label": "Launchers",
+   "hex": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 484
+  },
+  {
+   "label": "Launchers",
+   "hex": "2f5fbf",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 256
+  },
+  {
+   "label": "Launchers",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 464
+  },
+  {
+   "label": "Launchers",
+   "hex": "c68c52",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 212
+  },
+  {
+   "label": "Launchers",
+   "hex": "e8413c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 220
+  },
+  {
+   "label": "Launchers",
+   "hex": "ff8c1a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 76
+  },
+  {
+   "label": "Pegboard",
+   "hex": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 156
+  },
+  {
+   "label": "Pegboard",
+   "hex": "6f9fd6",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "label": "Posts",
+   "hex": "c68c52",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 176
+  },
+  {
+   "label": "Props",
+   "hex": "9a6238",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 224
+  },
+  {
+   "label": "Props",
+   "hex": "c68c52",
+   "material": "WoodPlanks",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 88
+  },
+  {
+   "label": "Sign",
+   "hex": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 272
+  },
+  {
+   "label": "SignFrame",
+   "hex": "d4861e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 272
+  },
+  {
+   "label": "SignLetters",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 3920
+  },
+  {
+   "label": "SnowCap",
+   "hex": "f4f8fc",
+   "material": "Snow",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 2984
+  },
+  {
+   "label": "Snowballs",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 1600
+  },
+  {
+   "label": "Snowballs",
+   "hex": "a39382",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 800
+  },
+  {
+   "label": "Snowballs",
+   "hex": "f4f8fc",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 2452
+  },
+  {
+   "label": "Snowballs",
+   "hex": "ff9ecd",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 1040
+  },
+  {
+   "label": "Sparkles",
+   "hex": "ffa82e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 368
+  },
+  {
+   "label": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 1732
+  }
+ ],
+ "attrs": {},
+ "problems": [],
+ "part_list": [
+  {
+   "name": "Deck",
+   "mesh": "Deck",
+   "hex": "6b4226",
+   "material": "WoodPlanks",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "CounterBody",
+   "mesh": "Counter",
+   "hex": "9a6238",
+   "material": "WoodPlanks",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "CounterTop",
+   "mesh": "CounterTop",
+   "hex": "c68c52",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "Kick",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "Rail",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "Pilaster1",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "MidPost1",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "Pilaster-1",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "MidPost-1",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "SidePanel1",
+   "mesh": "Counter",
+   "hex": "9a6238",
+   "material": "WoodPlanks",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "SideTop1",
+   "mesh": "CounterTop",
+   "hex": "c68c52",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "SidePanel-1",
+   "mesh": "Counter",
+   "hex": "9a6238",
+   "material": "WoodPlanks",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "SideTop-1",
+   "mesh": "CounterTop",
+   "hex": "c68c52",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "Emblem",
+   "mesh": "Coins",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 280
+  },
+  {
+   "name": "EmblemStar",
+   "mesh": "Coins",
+   "hex": "d4861e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "Flake1Arm0",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake1Br0_1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake1Br0_-1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake1Arm1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake1Br1_1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake1Br1_-1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake1Arm2",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake1Br2_1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake1Br2_-1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake1Arm3",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake1Br3_1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake1Br3_-1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake1Arm4",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake1Br4_1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake1Br4_-1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake1Arm5",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake1Br5_1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake1Br5_-1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake1Hub",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 68
+  },
+  {
+   "name": "Flake-1Arm0",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake-1Br0_1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake-1Br0_-1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake-1Arm1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake-1Br1_1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake-1Br1_-1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake-1Arm2",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake-1Br2_1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake-1Br2_-1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake-1Arm3",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake-1Br3_1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake-1Br3_-1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake-1Arm4",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake-1Br4_1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake-1Br4_-1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake-1Arm5",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake-1Br5_1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake-1Br5_-1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "Flake-1Hub",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 68
+  },
+  {
+   "name": "PostF1",
+   "mesh": "Posts",
+   "hex": "c68c52",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "PostB1",
+   "mesh": "Posts",
+   "hex": "c68c52",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "PostFoot1",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "PostCap1",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "FinialStem1",
+   "mesh": "Coins",
+   "hex": "d4861e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 36
+  },
+  {
+   "name": "Finial1",
+   "mesh": "Coins",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 76
+  },
+  {
+   "name": "Finial1Star",
+   "mesh": "Coins",
+   "hex": "d4861e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "CornerBrace1",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 32
+  },
+  {
+   "name": "PostF-1",
+   "mesh": "Posts",
+   "hex": "c68c52",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "PostB-1",
+   "mesh": "Posts",
+   "hex": "c68c52",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "PostFoot-1",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "PostCap-1",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "FinialStem-1",
+   "mesh": "Coins",
+   "hex": "d4861e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 36
+  },
+  {
+   "name": "Finial-1",
+   "mesh": "Coins",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 76
+  },
+  {
+   "name": "Finial-1Star",
+   "mesh": "Coins",
+   "hex": "d4861e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "CornerBrace-1",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 32
+  },
+  {
+   "name": "BackWall",
+   "mesh": "Counter",
+   "hex": "9a6238",
+   "material": "WoodPlanks",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "Batten0",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "Batten1",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "BackRail1",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "BackRail-1",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "DoorFrame",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "Door",
+   "mesh": "Props",
+   "hex": "c68c52",
+   "material": "WoodPlanks",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "DoorWindowRim",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 76
+  },
+  {
+   "name": "DoorWindow",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 76
+  },
+  {
+   "name": "DoorKnob",
+   "mesh": "Coins",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "BackFlakeArm0",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "BackFlakeBr0_1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "BackFlakeBr0_-1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "BackFlakeArm1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "BackFlakeBr1_1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "BackFlakeBr1_-1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "BackFlakeArm2",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "BackFlakeBr2_1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "BackFlakeBr2_-1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "BackFlakeArm3",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "BackFlakeBr3_1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "BackFlakeBr3_-1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "BackFlakeArm4",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "BackFlakeBr4_1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "BackFlakeBr4_-1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "BackFlakeArm5",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "BackFlakeBr5_1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "BackFlakeBr5_-1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "BackFlakeHub",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 68
+  },
+  {
+   "name": "WinFrame1",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "WinPane1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "WinMullion1",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "Shutter1_1",
+   "mesh": "Awning",
+   "hex": "ff8c1a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "Shutter1_-1",
+   "mesh": "Awning",
+   "hex": "ff8c1a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "WinSill1",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "WinSnow1",
+   "mesh": "SnowCap",
+   "hex": "f4f8fc",
+   "material": "Snow",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "WinFrame-1",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "WinPane-1",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "WinMullion-1",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "Shutter-1_1",
+   "mesh": "Awning",
+   "hex": "ff8c1a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "Shutter-1_-1",
+   "mesh": "Awning",
+   "hex": "ff8c1a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "WinSill-1",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "WinSnow-1",
+   "mesh": "SnowCap",
+   "hex": "f4f8fc",
+   "material": "Snow",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "Pegboard",
+   "mesh": "Pegboard",
+   "hex": "6f9fd6",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "PegTrim",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "PegBatten1",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "PegBatten-1",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "PegHoles",
+   "mesh": "Pegboard",
+   "hex": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 112
+  },
+  {
+   "name": "ShovelBlade",
+   "mesh": "Launchers",
+   "hex": "e8413c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 176
+  },
+  {
+   "name": "ShovelRib",
+   "mesh": "Launchers",
+   "hex": "e8413c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "ShovelCollar",
+   "mesh": "Launchers",
+   "hex": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "ShovelHandle",
+   "mesh": "Launchers",
+   "hex": "c68c52",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 36
+  },
+  {
+   "name": "ShovelGrip",
+   "mesh": "Launchers",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 36
+  },
+  {
+   "name": "SlingArmL",
+   "mesh": "Launchers",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 76
+  },
+  {
+   "name": "SlingArmR",
+   "mesh": "Launchers",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 56
+  },
+  {
+   "name": "SlingTip1",
+   "mesh": "Launchers",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "SlingTip-1",
+   "mesh": "Launchers",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "SlingWrap",
+   "mesh": "Launchers",
+   "hex": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 36
+  },
+  {
+   "name": "SlingBand",
+   "mesh": "Launchers",
+   "hex": "ff8c1a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 76
+  },
+  {
+   "name": "SlingBall",
+   "mesh": "Snowballs",
+   "hex": "ff9ecd",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 320
+  },
+  {
+   "name": "ScoopBowl",
+   "mesh": "Launchers",
+   "hex": "2f5fbf",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 256
+  },
+  {
+   "name": "ScoopBall",
+   "mesh": "Snowballs",
+   "hex": "f4f8fc",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 320
+  },
+  {
+   "name": "ScoopHandle",
+   "mesh": "Launchers",
+   "hex": "c68c52",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 56
+  },
+  {
+   "name": "ScoopGrip",
+   "mesh": "Launchers",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 36
+  },
+  {
+   "name": "ScoopPeg1",
+   "mesh": "Launchers",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 28
+  },
+  {
+   "name": "ScoopPeg-1",
+   "mesh": "Launchers",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 28
+  },
+  {
+   "name": "ChalkFrame",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "Chalkboard",
+   "mesh": "Pegboard",
+   "hex": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "ChalkCoin",
+   "mesh": "Coins",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 52
+  },
+  {
+   "name": "ChalkBall",
+   "mesh": "Snowballs",
+   "hex": "f4f8fc",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 52
+  },
+  {
+   "name": "ChalkArrow",
+   "mesh": "Frost",
+   "hex": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "CannonCarriage",
+   "mesh": "Launchers",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "CannonWheel1",
+   "mesh": "Launchers",
+   "hex": "c68c52",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 60
+  },
+  {
+   "name": "CannonHub1",
+   "mesh": "Coins",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "CannonWheel-1",
+   "mesh": "Launchers",
+   "hex": "c68c52",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 60
+  },
+  {
+   "name": "CannonHub-1",
+   "mesh": "Coins",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "CannonBarrel",
+   "mesh": "Launchers",
+   "hex": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 324
+  },
+  {
+   "name": "CannonKnob",
+   "mesh": "Launchers",
+   "hex": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "CannonBall",
+   "mesh": "Snowballs",
+   "hex": "f4f8fc",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 320
+  },
+  {
+   "name": "Stripe0",
+   "mesh": "Awning",
+   "hex": "ff8c1a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 48
+  },
+  {
+   "name": "Flap0",
+   "mesh": "Awning",
+   "hex": "ff8c1a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 176
+  },
+  {
+   "name": "Stripe1",
+   "mesh": "Awning",
+   "hex": "ffe6b8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 48
+  },
+  {
+   "name": "Flap1",
+   "mesh": "Awning",
+   "hex": "ffe6b8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 176
+  },
+  {
+   "name": "Stripe2",
+   "mesh": "Awning",
+   "hex": "ff8c1a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 48
+  },
+  {
+   "name": "Flap2",
+   "mesh": "Awning",
+   "hex": "ff8c1a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 176
+  },
+  {
+   "name": "Stripe3",
+   "mesh": "Awning",
+   "hex": "ffe6b8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 48
+  },
+  {
+   "name": "Flap3",
+   "mesh": "Awning",
+   "hex": "ffe6b8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 176
+  },
+  {
+   "name": "Stripe4",
+   "mesh": "Awning",
+   "hex": "ff8c1a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 48
+  },
+  {
+   "name": "Flap4",
+   "mesh": "Awning",
+   "hex": "ff8c1a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 176
+  },
+  {
+   "name": "Stripe5",
+   "mesh": "Awning",
+   "hex": "ffe6b8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 48
+  },
+  {
+   "name": "Flap5",
+   "mesh": "Awning",
+   "hex": "ffe6b8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 176
+  },
+  {
+   "name": "Stripe6",
+   "mesh": "Awning",
+   "hex": "ff8c1a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 48
+  },
+  {
+   "name": "Flap6",
+   "mesh": "Awning",
+   "hex": "ff8c1a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 176
+  },
+  {
+   "name": "SnowCap",
+   "mesh": "SnowCap",
+   "hex": "f4f8fc",
+   "material": "Snow",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 1976
+  },
+  {
+   "name": "Icicle0",
+   "mesh": "Frost",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 28
+  },
+  {
+   "name": "Icicle1",
+   "mesh": "Frost",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 28
+  },
+  {
+   "name": "Icicle2",
+   "mesh": "Frost",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 28
+  },
+  {
+   "name": "Icicle3",
+   "mesh": "Frost",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 28
+  },
+  {
+   "name": "Icicle4",
+   "mesh": "Frost",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 28
+  },
+  {
+   "name": "Icicle5",
+   "mesh": "Frost",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 28
+  },
+  {
+   "name": "Icicle6",
+   "mesh": "Frost",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 28
+  },
+  {
+   "name": "DoorStripe0",
+   "mesh": "Awning",
+   "hex": "ff8c1a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 48
+  },
+  {
+   "name": "DoorFlap0",
+   "mesh": "Awning",
+   "hex": "ff8c1a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 176
+  },
+  {
+   "name": "DoorStripe1",
+   "mesh": "Awning",
+   "hex": "ffe6b8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 48
+  },
+  {
+   "name": "DoorFlap1",
+   "mesh": "Awning",
+   "hex": "ffe6b8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 176
+  },
+  {
+   "name": "DoorStripe2",
+   "mesh": "Awning",
+   "hex": "ff8c1a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 48
+  },
+  {
+   "name": "DoorFlap2",
+   "mesh": "Awning",
+   "hex": "ff8c1a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 176
+  },
+  {
+   "name": "DoorSnowCap",
+   "mesh": "SnowCap",
+   "hex": "f4f8fc",
+   "material": "Snow",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 584
+  },
+  {
+   "name": "DoorBracket1",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 32
+  },
+  {
+   "name": "DoorBracket-1",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 32
+  },
+  {
+   "name": "SignFrame",
+   "mesh": "SignFrame",
+   "hex": "d4861e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 272
+  },
+  {
+   "name": "SignBoard",
+   "mesh": "Sign",
+   "hex": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 272
+  },
+  {
+   "name": "SignWord",
+   "mesh": "SignLetters",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 1960
+  },
+  {
+   "name": "SignWordBack",
+   "mesh": "SignLetters",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 1960
+  },
+  {
+   "name": "SignCoin1",
+   "mesh": "Coins",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 280
+  },
+  {
+   "name": "SignCoin1Star",
+   "mesh": "Coins",
+   "hex": "d4861e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "SignCoinB1",
+   "mesh": "Coins",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 280
+  },
+  {
+   "name": "SignCoinB1Star",
+   "mesh": "Coins",
+   "hex": "d4861e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "SignCoin-1",
+   "mesh": "Coins",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 280
+  },
+  {
+   "name": "SignCoin-1Star",
+   "mesh": "Coins",
+   "hex": "d4861e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "SignCoinB-1",
+   "mesh": "Coins",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 280
+  },
+  {
+   "name": "SignCoinB-1Star",
+   "mesh": "Coins",
+   "hex": "d4861e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 116
+  },
+  {
+   "name": "SignSnow",
+   "mesh": "SnowCap",
+   "hex": "f4f8fc",
+   "material": "Snow",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 336
+  },
+  {
+   "name": "Sparkle0",
+   "mesh": "Sparkles",
+   "hex": "ffa82e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "Sparkle1",
+   "mesh": "Sparkles",
+   "hex": "ffa82e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "Sparkle2",
+   "mesh": "Sparkles",
+   "hex": "ffa82e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "Sparkle3",
+   "mesh": "Sparkles",
+   "hex": "ffa82e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 92
+  },
+  {
+   "name": "Tray",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "Ball0",
+   "mesh": "Snowballs",
+   "hex": "f4f8fc",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Ball1",
+   "mesh": "Snowballs",
+   "hex": "a39382",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 320
+  },
+  {
+   "name": "Ball2",
+   "mesh": "Snowballs",
+   "hex": "f4f8fc",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 320
+  },
+  {
+   "name": "Ball3",
+   "mesh": "Snowballs",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Ball4",
+   "mesh": "Snowballs",
+   "hex": "ff9ecd",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 320
+  },
+  {
+   "name": "Ball5",
+   "mesh": "Snowballs",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 320
+  },
+  {
+   "name": "Ball6",
+   "mesh": "Snowballs",
+   "hex": "a39382",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Ball7",
+   "mesh": "Snowballs",
+   "hex": "f4f8fc",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 320
+  },
+  {
+   "name": "Ball8",
+   "mesh": "Snowballs",
+   "hex": "a39382",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 320
+  },
+  {
+   "name": "Ball9",
+   "mesh": "Snowballs",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Ball10",
+   "mesh": "Snowballs",
+   "hex": "ff9ecd",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Ball11",
+   "mesh": "Snowballs",
+   "hex": "a39382",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Ball12",
+   "mesh": "Snowballs",
+   "hex": "f4f8fc",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "Ball13",
+   "mesh": "Snowballs",
+   "hex": "ff9ecd",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 320
+  },
+  {
+   "name": "StackCoin0",
+   "mesh": "Coins",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 96
+  },
+  {
+   "name": "StackCoin1",
+   "mesh": "Coins",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 96
+  },
+  {
+   "name": "StackCoin2",
+   "mesh": "Coins",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 96
+  },
+  {
+   "name": "StackCoin3",
+   "mesh": "Coins",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 96
+  },
+  {
+   "name": "StackCoin4",
+   "mesh": "Coins",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 96
+  },
+  {
+   "name": "StackCoin5",
+   "mesh": "Coins",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 96
+  },
+  {
+   "name": "StackCoin6",
+   "mesh": "Coins",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 96
+  },
+  {
+   "name": "StackCoin7",
+   "mesh": "Coins",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 96
+  },
+  {
+   "name": "StackCoin8",
+   "mesh": "Coins",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 96
+  },
+  {
+   "name": "StackCoin9",
+   "mesh": "Coins",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 96
+  },
+  {
+   "name": "StackCoin10",
+   "mesh": "Coins",
+   "hex": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 96
+  },
+  {
+   "name": "Barrel",
+   "mesh": "Props",
+   "hex": "9a6238",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 224
+  },
+  {
+   "name": "Hoop2",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 60
+  },
+  {
+   "name": "Hoop16",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 60
+  },
+  {
+   "name": "BarrelBall0",
+   "mesh": "Snowballs",
+   "hex": "f4f8fc",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 320
+  },
+  {
+   "name": "BarrelBall1",
+   "mesh": "Snowballs",
+   "hex": "f4f8fc",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 320
+  },
+  {
+   "name": "BarrelBall2",
+   "mesh": "Snowballs",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 320
+  },
+  {
+   "name": "BarrelBall3",
+   "mesh": "Snowballs",
+   "hex": "f4f8fc",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 320
+  },
+  {
+   "name": "Crate",
+   "mesh": "Props",
+   "hex": "c68c52",
+   "material": "WoodPlanks",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "CrateCorner11",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "CrateCorner1-1",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "CrateCorner-11",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "CrateCorner-1-1",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "CrateBand",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "CrateBall0",
+   "mesh": "Snowballs",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 320
+  },
+  {
+   "name": "CrateBall1",
+   "mesh": "Snowballs",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 320
+  },
+  {
+   "name": "CrateBall2",
+   "mesh": "Snowballs",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "CrateBall3",
+   "mesh": "Snowballs",
+   "hex": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 80
+  },
+  {
+   "name": "LanternArm",
+   "mesh": "Trim",
+   "hex": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "collide": true,
+   "tris": 44
+  },
+  {
+   "name": "LanternHook",
+   "mesh": "Lantern",
+   "hex": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 28
+  },
+  {
+   "name": "LanternCap",
+   "mesh": "Lantern",
+   "hex": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 28
+  },
+  {
+   "name": "LanternTop",
+   "mesh": "Lantern",
+   "hex": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LanternGlow",
+   "mesh": "Lantern",
+   "hex": "ffa82e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "LanternBase",
+   "mesh": "Lantern",
+   "hex": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 44
+  },
+  {
+   "name": "DriftFL",
+   "mesh": "Drifts",
+   "hex": "f4f8fc",
+   "material": "Snow",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 140
+  },
+  {
+   "name": "DriftFR",
+   "mesh": "Drifts",
+   "hex": "f4f8fc",
+   "material": "Snow",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 140
+  },
+  {
+   "name": "DriftBL",
+   "mesh": "Drifts",
+   "hex": "f4f8fc",
+   "material": "Snow",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 140
+  },
+  {
+   "name": "DriftBR",
+   "mesh": "Drifts",
+   "hex": "f4f8fc",
+   "material": "Snow",
+   "transparency": 0.0,
+   "collide": false,
+   "tris": 140
+  }
+ ]
+}

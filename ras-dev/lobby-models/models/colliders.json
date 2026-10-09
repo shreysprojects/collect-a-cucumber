@@ -1,0 +1,7 @@
+{
+ "_doc": "Invisible box colliders per model (export_mesh.py -> out/<Key>.mesh.json colliders -> install_lobby.lua). fnmatch patterns on part names; each matching part's axis-aligned box becomes one CanCollide Part and every MeshPart ships non-colliding.",
+ "Shop": ["Deck", "CounterBody", "CounterTop", "SidePanel*", "SideTop*", "BackWall", "PostB*", "PostF*", "Barrel", "Crate",
+          {"name": "StallVolume", "min": [-6.1, -2.44, 0.28], "max": [6.1, 2.63, 7.4]}],
+ "Ascend": ["DaisBody", "DaisTop", "Step0", "Step1", "ShaftL", "ShaftR", "PlinthL", "PlinthR", "LintelBlock", "Crest", "PortalFrame"],
+ "Gift": ["Body", "Lid", "MiniBlue", "MiniRed", "MiniPurple", "PostL", "PostR", "FootL", "FootR", "PlaqueL", "PlaqueR", "Badge", "Board"]
+}

@@ -1,0 +1,774 @@
+{
+ "key": "Shop",
+ "build_hash": "86f5a3f96525",
+ "size_studs": {
+  "width_x": 17.22,
+  "depth_y": 7.68,
+  "height_z": 14.94
+ },
+ "min": [
+  -8.612,
+  -3.84,
+  -0.025
+ ],
+ "max": [
+  8.612,
+  3.84,
+  14.92
+ ],
+ "attrs": {},
+ "tris_total": 28088,
+ "objects": [
+  {
+   "name": "Awning",
+   "color": "ff8c1a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 1520,
+   "parts": 16,
+   "size": [
+    14.6,
+    6.292,
+    7.598
+   ]
+  },
+  {
+   "name": "Awning_2",
+   "color": "ffe6b8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 896,
+   "parts": 8,
+   "size": [
+    10.429,
+    6.292,
+    7.598
+   ]
+  },
+  {
+   "name": "Coins",
+   "color": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 2828,
+   "parts": 22,
+   "size": [
+    13.62,
+    14.15,
+    5.59
+   ]
+  },
+  {
+   "name": "Coins_2",
+   "color": "d4861e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 884,
+   "parts": 9,
+   "size": [
+    13.115,
+    13.339,
+    5.398
+   ]
+  },
+  {
+   "name": "Counter",
+   "color": "9a6238",
+   "material": "WoodPlanks",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 176,
+   "parts": 4,
+   "size": [
+    11.96,
+    10.82,
+    4.75
+   ]
+  },
+  {
+   "name": "CounterTop",
+   "color": "c68c52",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 132,
+   "parts": 3,
+   "size": [
+    12.2,
+    0.36,
+    4.74
+   ]
+  },
+  {
+   "name": "Deck",
+   "color": "6b4226",
+   "material": "WoodPlanks",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 44,
+   "parts": 1,
+   "size": [
+    13.5,
+    0.3,
+    6.0
+   ]
+  },
+  {
+   "name": "Drifts",
+   "color": "f4f8fc",
+   "material": "Snow",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 560,
+   "parts": 4,
+   "size": [
+    16.457,
+    0.44,
+    7.339
+   ]
+  },
+  {
+   "name": "Frost",
+   "color": "c4e8ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 2824,
+   "parts": 61,
+   "size": [
+    10.3,
+    8.06,
+    5.279
+   ]
+  },
+  {
+   "name": "Frost_2",
+   "color": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 196,
+   "parts": 7,
+   "size": [
+    12.954,
+    0.969,
+    0.44
+   ]
+  },
+  {
+   "name": "Lantern",
+   "color": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 144,
+   "parts": 4,
+   "size": [
+    0.84,
+    1.37,
+    0.84
+   ]
+  },
+  {
+   "name": "Lantern_2",
+   "color": "ffa82e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "tris": 44,
+   "parts": 1,
+   "size": [
+    0.56,
+    0.67,
+    0.56
+   ]
+  },
+  {
+   "name": "Launchers",
+   "color": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 484,
+   "parts": 4,
+   "size": [
+    15.539,
+    4.055,
+    2.891
+   ]
+  },
+  {
+   "name": "Launchers_2",
+   "color": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 464,
+   "parts": 9,
+   "size": [
+    15.476,
+    5.569,
+    5.264
+   ]
+  },
+  {
+   "name": "Launchers_3",
+   "color": "2f5fbf",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 256,
+   "parts": 1,
+   "size": [
+    1.066,
+    1.257,
+    1.224
+   ]
+  },
+  {
+   "name": "Launchers_4",
+   "color": "e8413c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 220,
+   "parts": 2,
+   "size": [
+    1.831,
+    1.932,
+    0.46
+   ]
+  },
+  {
+   "name": "Launchers_5",
+   "color": "c68c52",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 212,
+   "parts": 4,
+   "size": [
+    9.206,
+    4.361,
+    4.887
+   ]
+  },
+  {
+   "name": "Launchers_6",
+   "color": "ff8c1a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 76,
+   "parts": 1,
+   "size": [
+    1.962,
+    1.098,
+    0.623
+   ]
+  },
+  {
+   "name": "Pegboard",
+   "color": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "tris": 156,
+   "parts": 2,
+   "size": [
+    9.516,
+    4.38,
+    0.13
+   ]
+  },
+  {
+   "name": "Pegboard_2",
+   "color": "6f9fd6",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 44,
+   "parts": 1,
+   "size": [
+    10.6,
+    6.05,
+    0.19
+   ]
+  },
+  {
+   "name": "Posts",
+   "color": "c68c52",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 176,
+   "parts": 4,
+   "size": [
+    13.1,
+    13.32,
+    5.65
+   ]
+  },
+  {
+   "name": "Props",
+   "color": "9a6238",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 224,
+   "parts": 1,
+   "size": [
+    1.9,
+    2.2,
+    1.9
+   ]
+  },
+  {
+   "name": "Props_2",
+   "color": "c68c52",
+   "material": "WoodPlanks",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 88,
+   "parts": 2,
+   "size": [
+    9.468,
+    4.28,
+    5.098
+   ]
+  },
+  {
+   "name": "Sign",
+   "color": "2c3a55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 272,
+   "parts": 1,
+   "size": [
+    11.44,
+    2.7,
+    0.6
+   ]
+  },
+  {
+   "name": "SignFrame",
+   "color": "d4861e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 272,
+   "parts": 1,
+   "size": [
+    12.04,
+    3.26,
+    0.4
+   ]
+  },
+  {
+   "name": "SignLetters",
+   "color": "ffad2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 3920,
+   "parts": 2,
+   "size": [
+    6.335,
+    1.493,
+    1.45
+   ]
+  },
+  {
+   "name": "SnowCap",
+   "color": "f4f8fc",
+   "material": "Snow",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 2984,
+   "parts": 5,
+   "size": [
+    14.74,
+    9.016,
+    3.983
+   ]
+  },
+  {
+   "name": "Snowballs",
+   "color": "f4f8fc",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 2452,
+   "parts": 10,
+   "size": [
+    12.023,
+    3.694,
+    4.272
+   ]
+  },
+  {
+   "name": "Snowballs_2",
+   "color": "9fd3ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 1600,
+   "parts": 8,
+   "size": [
+    16.223,
+    3.59,
+    2.265
+   ]
+  },
+  {
+   "name": "Snowballs_3",
+   "color": "ff9ecd",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 1040,
+   "parts": 4,
+   "size": [
+    12.613,
+    2.352,
+    1.282
+   ]
+  },
+  {
+   "name": "Snowballs_4",
+   "color": "a39382",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "tris": 800,
+   "parts": 4,
+   "size": [
+    2.265,
+    1.282,
+    2.265
+   ]
+  },
+  {
+   "name": "Sparkles",
+   "color": "ffa82e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "tris": 368,
+   "parts": 4,
+   "size": [
+    16.192,
+    3.172,
+    0.3
+   ]
+  },
+  {
+   "name": "Trim",
+   "color": "6b4226",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "tris": 1732,
+   "parts": 39,
+   "size": [
+    17.193,
+    13.8,
+    6.594
+   ]
+  }
+ ],
+ "colliders": [
+  {
+   "name": "BackWall",
+   "centre": [
+    0.012,
+    5.69,
+    2.268
+   ],
+   "size": [
+    11.96,
+    10.82,
+    0.35
+   ]
+  },
+  {
+   "name": "Barrel",
+   "centre": [
+    7.662,
+    1.1,
+    -1.507
+   ],
+   "size": [
+    1.9,
+    2.2,
+    1.9
+   ]
+  },
+  {
+   "name": "CounterBody",
+   "centre": [
+    0.012,
+    1.69,
+    -1.182
+   ],
+   "size": [
+    11.9,
+    2.82,
+    2.25
+   ]
+  },
+  {
+   "name": "CounterTop",
+   "centre": [
+    0.012,
+    3.27,
+    -1.267
+   ],
+   "size": [
+    12.2,
+    0.36,
+    2.72
+   ]
+  },
+  {
+   "name": "Crate",
+   "centre": [
+    -7.488,
+    0.81,
+    -1.457
+   ],
+   "size": [
+    1.896,
+    1.62,
+    1.896
+   ]
+  },
+  {
+   "name": "Deck",
+   "centre": [
+    0.012,
+    0.15,
+    -0.357
+   ],
+   "size": [
+    13.5,
+    0.3,
+    6.0
+   ]
+  },
+  {
+   "name": "PostB-1",
+   "centre": [
+    -6.238,
+    6.94,
+    2.243
+   ],
+   "size": [
+    0.6,
+    13.32,
+    0.6
+   ]
+  },
+  {
+   "name": "PostB1",
+   "centre": [
+    6.262,
+    6.94,
+    2.243
+   ],
+   "size": [
+    0.6,
+    13.32,
+    0.6
+   ]
+  },
+  {
+   "name": "PostF-1",
+   "centre": [
+    -6.238,
+    4.605,
+    -2.807
+   ],
+   "size": [
+    0.6,
+    8.649,
+    0.6
+   ]
+  },
+  {
+   "name": "PostF1",
+   "centre": [
+    6.262,
+    4.605,
+    -2.807
+   ],
+   "size": [
+    0.6,
+    8.649,
+    0.6
+   ]
+  },
+  {
+   "name": "PostFoot-1",
+   "centre": [
+    -6.238,
+    0.515,
+    -2.807
+   ],
+   "size": [
+    0.84,
+    0.47,
+    0.84
+   ]
+  },
+  {
+   "name": "PostFoot1",
+   "centre": [
+    6.262,
+    0.515,
+    -2.807
+   ],
+   "size": [
+    0.84,
+    0.47,
+    0.84
+   ]
+  },
+  {
+   "name": "SidePanel-1",
+   "centre": [
+    -5.728,
+    1.69,
+    1.018
+   ],
+   "size": [
+    0.38,
+    2.82,
+    2.19
+   ]
+  },
+  {
+   "name": "SidePanel1",
+   "centre": [
+    5.752,
+    1.69,
+    1.018
+   ],
+   "size": [
+    0.38,
+    2.82,
+    2.19
+   ]
+  },
+  {
+   "name": "SideTop-1",
+   "centre": [
+    -5.728,
+    3.245,
+    1.028
+   ],
+   "size": [
+    0.58,
+    0.31,
+    2.17
+   ]
+  },
+  {
+   "name": "SideTop1",
+   "centre": [
+    5.752,
+    3.245,
+    1.028
+   ],
+   "size": [
+    0.58,
+    0.31,
+    2.17
+   ]
+  },
+  {
+   "name": "StallVolume",
+   "centre": [
+    0.0,
+    3.84,
+    -0.095
+   ],
+   "size": [
+    12.2,
+    7.12,
+    5.07
+   ]
+  }
+ ]
+}
