@@ -78,6 +78,12 @@ config.REBIRTH_LAUNCH_PER = 0.15
 config.ASCEND_LEVEL = 100
 config.ASCEND_POWER = 13
 
+-- The lobby gift (SERV_Gift + the Gift UI): favorite the game and join the group, claim a
+-- permanent GIFT_POWER on coins and XP. Group = the experience's owner, Ricky's Realm.
+config.GIFT_POWER = 2
+config.GIFT_GROUP_ID = 695268911
+config.GIFT_GROUP_NAME = "Ricky's Realm"
+
 -- Combo adds this fraction of the smash reward per extra hit, capped.
 config.COMBO_BONUS = 0.08
 config.COMBO_BONUS_CAP = 0.8
@@ -123,6 +129,8 @@ function config.DefaultProfile()
 		EquippedLauncher = config.STARTER_LAUNCHER,
 		Rebirths = 0,
 		Ascensions = 0,
+		GiftFavorited = false,
+		GiftClaimed = false,
 	}
 end
 
@@ -205,6 +213,8 @@ function config.EnsureUnlocks(profile)
 	else
 		profile.Ascensions = math.max(0, math.floor(profile.Ascensions))
 	end
+	profile.GiftFavorited = profile.GiftFavorited == true
+	profile.GiftClaimed = profile.GiftClaimed == true
 	return profile
 end
 
@@ -239,12 +249,20 @@ function config.AscendMultiplier(ascensions)
 	return config.ASCEND_POWER ^ rebirthCount(ascensions)
 end
 
+-- 2x once the lobby gift is claimed.
+function config.GiftMultiplier(profile)
+	if type(profile) == "table" and profile.GiftClaimed == true then
+		return config.GIFT_POWER
+	end
+	return 1
+end
+
 -- The run's coin / XP multiplier from progression (the gear total is added by the caller).
 function config.RewardMultiplier(profile)
 	if type(profile) ~= "table" then
 		return 1
 	end
-	return config.EarningsMultiplier(profile.Rebirths) * config.AscendMultiplier(profile.Ascensions)
+	return config.EarningsMultiplier(profile.Rebirths) * config.AscendMultiplier(profile.Ascensions) * config.GiftMultiplier(profile)
 end
 
 function config.AscendLevel()

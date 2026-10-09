@@ -89,6 +89,8 @@ local function toStore(data)
 		EquippedLauncher = data.EquippedLauncher,
 		Rebirths = data.Rebirths,
 		Ascensions = data.Ascensions,
+		GiftFavorited = data.GiftFavorited == true,
+		GiftClaimed = data.GiftClaimed == true,
 	}
 end
 
@@ -134,6 +136,8 @@ local function applySaved(data, saved)
 	if type(saved.Ascensions) == "number" then
 		data.Ascensions = math.max(0, math.floor(saved.Ascensions))
 	end
+	data.GiftFavorited = saved.GiftFavorited == true
+	data.GiftClaimed = saved.GiftClaimed == true
 	playerProgress.EnsureUnlocks(data)
 	return data
 end
