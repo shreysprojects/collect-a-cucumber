@@ -226,6 +226,17 @@ end
 
 local ANIMATION_FADE = 0.25 -- a little longer than the controller's own fade
 
+-- A release parks its charge in vars.PendingLaunch; the controller's OnFire (or the
+-- fallback timer in endCharge) sends it. Whichever comes first, once.
+local function firePendingLaunch(vars)
+	local charge = vars and vars.PendingLaunch
+	if charge == nil then
+		return
+	end
+	vars.PendingLaunch = nil
+	ReplicatedStorage.ReEvent:FireServer("Launch", charge)
+end
+
 local function destroyChargeAnimation(vars)
 	local controller = vars and vars.ChargeAnimation
 	if not controller then
@@ -288,7 +299,12 @@ local function chargeAnimation(vars)
 		return nil
 	end
 
-	local ok, result = pcall(ChargeController.new, character, launcherId)
+	local ok, result = pcall(ChargeController.new, character, launcherId, {
+		-- The ball leaves at the profile's fire moment, so the swing and the launch line up.
+		OnFire = function()
+			firePendingLaunch(vars)
+		end,
+	})
 	if not ok then
 		if not animationWarned then
 			animationWarned = true
@@ -489,17 +505,23 @@ local function endCharge(self, fire)
 	local charge = vars.Charge or 0
 	local settings = mountainConfig.LAUNCH.Charge or {}
 	local fired = false
-	if fire and charge >= (settings.MinCharge or 0.03) and vars.OnLaunchPad and not vars.SnowballCamera then
-		ReplicatedStorage.ReEvent:FireServer("Launch", charge)
-		fired = true
-	end
 	local animation = vars.ChargeAnimation
-	if animation and not animation.Destroyed then
-		if fired then
-			animation:Release()
+	if animation and animation.Destroyed then
+		animation = nil
+	end
+	if fire and charge >= (settings.MinCharge or 0.03) and vars.OnLaunchPad and not vars.SnowballCamera then
+		fired = true
+		-- With the release animation running, the ball leaves at its fire moment (OnFire).
+		-- A timer covers a controller that dies mid-release; without one, launch now.
+		vars.PendingLaunch = charge
+		if animation and animation.State == "charging" and animation:Release() then
+			local fireAt = animation.Profile and animation.Profile.fireAt or 0.15
+			task.delay(fireAt + 0.25, firePendingLaunch, vars)
 		else
-			animation:Cancel()
+			firePendingLaunch(vars)
 		end
+	elseif animation then
+		animation:Cancel()
 	end
 	if chargeBar then
 		if fired then
@@ -1093,6 +1115,12 @@ function api:BindSnowballCamera(snowball)
 	end
 
 	local camera = workspace.CurrentCamera
+	-- Launched from the pad: keep the pad frame on the character for the throw, then
+	-- blend into the chase (LAUNCH.ReleaseCamera) instead of cutting to the ball.
+	local releaseCamera = mountainConfig.LAUNCH.ReleaseCamera
+	local holdFrame = if releaseCamera and vars and vars.OnLaunchPad then camera.CFrame else nil
+	local bindTime = os.clock()
+	local blendChecked = false
 	camera.CameraType = Enum.CameraType.Scriptable
 	setRideButtons(vars, true)
 
@@ -1193,7 +1221,30 @@ function api:BindSnowballCamera(snowball)
 			table.insert(ignore, decor)
 		end
 		camPos = liftAboveGround(camPos, ignore)
-		camera.CFrame = CFrame.lookAt(camPos, position, Vector3.yAxis)
+		local chase = CFrame.lookAt(camPos, position, Vector3.yAxis)
+		if holdFrame and not holdSnapped then
+			local age = os.clock() - bindTime
+			local hold = releaseCamera.Hold or 0
+			local blend = math.max(releaseCamera.Blend or 0, 0.01)
+			if age < hold then
+				chase = holdFrame
+			elseif age < hold + blend then
+				if not blendChecked then
+					blendChecked = true
+					local reach = releaseCamera.BlendMaxDistance or 150
+					if (holdFrame.Position - chase.Position).Magnitude > reach then
+						holdFrame = nil -- the ball is already far downhill: cut
+					end
+				end
+				if holdFrame then
+					local t = (age - hold) / blend
+					chase = holdFrame:Lerp(chase, t * t * (3 - 2 * t))
+				end
+			else
+				holdFrame = nil
+			end
+		end
+		camera.CFrame = chase
 		if self.GetCameraKick then
 			camera.CFrame = camera.CFrame * self:GetCameraKick(dt)
 		end

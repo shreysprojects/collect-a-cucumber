@@ -541,6 +541,9 @@ config.LAUNCHER = {
 	InstanceName = "EquippedLauncher",
 	Grip = "Grip",
 	HandGrip = "RightGripAttachment",
+	-- The launcher model is scaled about its grip pivot when it is handed out, so it
+	-- reads from the pad camera (the templates are 2-4 studs long at 1x).
+	Scale = 1.5,
 	-- Launch pad stance: standing still, charging or releasing on the pad turns the
 	-- character side-on so the pad camera (behind, looking down the track) sees the
 	-- launcher and its charge animation. Walking hands turning back to the Humanoid.
@@ -584,9 +587,16 @@ config.LAUNCH = {
 	CameraDistance = 18,
 	CameraHeight = 16,
 	CameraClearance = 4,
-	PadCameraDistance = 24,
-	PadCameraHeight = 8,
-	PadLookAhead = 10,
+	-- Pad camera: behind the pad centre (which sits ~3 studs above the floor), looking
+	-- a little past the character. Close enough that the launcher and the throw read.
+	PadCameraDistance = 13,
+	PadCameraHeight = 3,
+	PadLookAhead = 3,
+	-- After a launch the camera stays on the character for Hold seconds (the throw),
+	-- then blends to the ball chase over Blend seconds instead of cutting. A ball that
+	-- is already further than BlendMaxDistance studs away when the blend would start
+	-- (high gear) gets a cut: a dolly over hundreds of studs reads as a glitch.
+	ReleaseCamera = { Hold = 0.45, Blend = 0.6, BlendMaxDistance = 150 },
 	-- Auto-stop (same as the Stop button) once the ball is idle or crawling.
 	StopSpeed = 8, -- studs/s horizontal; at or below this counts as barely moving
 	StopHold = 0.75, -- seconds it must stay that slow before the ride ends
