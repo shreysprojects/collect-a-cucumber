@@ -6,7 +6,7 @@ local SCRIPTS = {
 	{"ReplicatedStorage.Assets.Modules.Client.Functions.ClientFunctions.Modules.CLIENT_LauncherObservers","ModuleScript",8324,2100263221},
 	{"ReplicatedStorage.Assets.Modules.Client.Functions.ClientFunctions.Modules.CLIENT_PlayerProgress","ModuleScript",2249,987466629},
 	{"ReplicatedStorage.Assets.Modules.Client.Functions.ClientFunctions.Modules.CLIENT_Snowball","ModuleScript",51405,1081423361},
-	{"ReplicatedStorage.Assets.Modules.Client.Functions.ClientFunctions.Modules.CLIENT_SnowballFX","ModuleScript",54074,1274805125},
+	{"ReplicatedStorage.Assets.Modules.Client.Functions.ClientFunctions.Modules.CLIENT_SnowballFX","ModuleScript",58133,1478651551},
 	{"ReplicatedStorage.Assets.Modules.Client.Functions.ClientFunctions.Modules.CLIENT_SpawnGuard","ModuleScript",5680,554350317},
 	{"ReplicatedStorage.Assets.Modules.Client.Functions.ClientFunctions.Modules.GUIFramework.CLIENT_GUIFramework","ModuleScript",1918,2052667778},
 	{"ReplicatedStorage.Assets.Modules.Client.LaunchPropAnimations","ModuleScript",24290,419385099},
