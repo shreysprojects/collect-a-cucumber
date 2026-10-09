@@ -22,6 +22,12 @@
 	REBIRTH_EARNINGS_PER (0.5x) coins and XP - the "boost" the rebirth panel
 	shows - and REBIRTH_LAUNCH_PER (0.15x) launch speed on top of the gear.
 
+	Ascend (the heavenly wings in the lobby) needs ASCEND_LEVEL (100). It resets
+	EVERYTHING - level, coins, rebirths, mountains, gear, the lifetime totals -
+	and adds one Ascension: a permanent ASCEND_POWER (13x) multiplier on coins and
+	XP per ascension (AscendMultiplier = 13 ^ Ascensions). RewardMultiplier is
+	the rebirth boost times that, applied to every run.
+
 	Snowballs and launchers share one order ladder, split across the 8 mountain
 	difficulties. A step can be bought only while its mountain is unlocked, and
 	only after every earlier step of that catalog is owned.
@@ -68,6 +74,10 @@ config.REBIRTH_KEEPS_COINS = false -- true: a rebirth leaves the coin balance al
 config.REBIRTH_EARNINGS_PER = 0.5
 config.REBIRTH_LAUNCH_PER = 0.15
 
+-- Ascend: level needed, and the permanent power multiplier each ascension multiplies in.
+config.ASCEND_LEVEL = 100
+config.ASCEND_POWER = 13
+
 -- Combo adds this fraction of the smash reward per extra hit, capped.
 config.COMBO_BONUS = 0.08
 config.COMBO_BONUS_CAP = 0.8
@@ -112,6 +122,7 @@ function config.DefaultProfile()
 		EquippedSnowball = config.STARTER_SNOWBALL,
 		EquippedLauncher = config.STARTER_LAUNCHER,
 		Rebirths = 0,
+		Ascensions = 0,
 	}
 end
 
@@ -189,6 +200,11 @@ function config.EnsureUnlocks(profile)
 	else
 		profile.Rebirths = math.max(0, math.floor(profile.Rebirths))
 	end
+	if type(profile.Ascensions) ~= "number" then
+		profile.Ascensions = 0
+	else
+		profile.Ascensions = math.max(0, math.floor(profile.Ascensions))
+	end
 	return profile
 end
 
@@ -216,6 +232,53 @@ end
 
 function config.LaunchBoost(rebirths)
 	return 1 + rebirthCount(rebirths) * config.REBIRTH_LAUNCH_PER
+end
+
+-- 13x per ascension, permanent.
+function config.AscendMultiplier(ascensions)
+	return config.ASCEND_POWER ^ rebirthCount(ascensions)
+end
+
+-- The run's coin / XP multiplier from progression (the gear total is added by the caller).
+function config.RewardMultiplier(profile)
+	if type(profile) ~= "table" then
+		return 1
+	end
+	return config.EarningsMultiplier(profile.Rebirths) * config.AscendMultiplier(profile.Ascensions)
+end
+
+function config.AscendLevel()
+	return math.clamp(math.floor(config.ASCEND_LEVEL), 1, config.MAX_LEVEL)
+end
+
+-- true when the level reaches AscendLevel; always returns that level too.
+function config.CanAscend(profile)
+	local need = config.AscendLevel()
+	local level = type(profile) == "table" and math.floor(tonumber(profile.Level) or 1) or 1
+	return level >= need, need
+end
+
+-- Everything resets to a fresh profile; only the ascension count carries over, plus one.
+function config.ApplyAscend(profile)
+	if type(profile) ~= "table" then
+		return false
+	end
+	config.EnsureUnlocks(profile)
+	if not config.CanAscend(profile) then
+		return false
+	end
+	local ascensions = profile.Ascensions + 1
+	local fresh = config.DefaultProfile()
+	for key in profile do
+		if key ~= "Loaded" and key ~= "LoadFailed" and key ~= "Dirty" then
+			profile[key] = nil
+		end
+	end
+	for key, value in fresh do
+		profile[key] = value
+	end
+	profile.Ascensions = ascensions
+	return true
 end
 
 -- The level is the gate. Success resets the climb (and the coins unless

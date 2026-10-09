@@ -63,7 +63,7 @@ PurchaseFX.SPARK_COLOR = ColorSequence.new({
 })
 PurchaseFX.SPARK_COUNT = 45
 PurchaseFX.WATCH_SETTLE = 4 -- s after a player is first seen before gains count (belt and braces)
-PurchaseFX.WATCHED = { "UnlockedSnowballs", "UnlockedLaunchers", "Rebirths" }
+PurchaseFX.WATCHED = { "UnlockedSnowballs", "UnlockedLaunchers", "Rebirths", "Ascensions" }
 PurchaseFX.CONFIRMED_TEXT = "Purchase complete!"
 
 local templates = {}

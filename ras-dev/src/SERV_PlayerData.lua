@@ -4,10 +4,11 @@
 	mountain places. Load on join, save on leave / autosave / BindToClose. Classic
 	and Wooden Shovel are always granted.
 
-	TravelToMountain and Rebirth are the client-callable APIs here. UnlockMountain
-	is server-only; finishing a run (SERV_Snowball) grants the next mountain.
-	Rebirth needs the level PlayerProgress.RebirthLevel(rebirths) (10, 15, 20, ...)
-	and answers false plus "Reach level N first" below it.
+	TravelToMountain, Rebirth and Ascend are the client-callable APIs here.
+	UnlockMountain is server-only; finishing a run (SERV_Snowball) grants the next
+	mountain. Rebirth needs the level PlayerProgress.RebirthLevel(rebirths) (10, 15,
+	20, ...), Ascend needs ASCEND_LEVEL (100) and resets everything for a permanent
+	13x; both answer false plus "Reach level N first" below their level.
 
 	Save safety: a profile is only saved once its DataStore read succeeded
 	(data.Loaded). Until then DATAFILES holds a default placeholder, so a leave /
@@ -87,6 +88,7 @@ local function toStore(data)
 		EquippedSnowball = data.EquippedSnowball,
 		EquippedLauncher = data.EquippedLauncher,
 		Rebirths = data.Rebirths,
+		Ascensions = data.Ascensions,
 	}
 end
 
@@ -129,15 +131,25 @@ local function applySaved(data, saved)
 	if type(saved.Rebirths) == "number" then
 		data.Rebirths = math.max(0, math.floor(saved.Rebirths))
 	end
+	if type(saved.Ascensions) == "number" then
+		data.Ascensions = math.max(0, math.floor(saved.Ascensions))
+	end
 	playerProgress.EnsureUnlocks(data)
 	return data
 end
 
 -- Lifetime totals only grow (ApplyRebirth keeps them), so a stored save that is
--- ahead of the payload came from a newer session: never write over it.
+-- ahead of the payload came from a newer session: never write over it. An ascension
+-- resets the totals but bumps Ascensions, which only ever grows: a payload with more
+-- ascensions is the newer one whatever its totals say; one with fewer is stale.
 local function isBehind(stored, payload)
 	if type(stored) ~= "table" then
 		return false
+	end
+	local storedAscensions = math.floor(tonumber(stored.Ascensions) or 0)
+	local payloadAscensions = math.floor(tonumber(payload.Ascensions) or 0)
+	if payloadAscensions ~= storedAscensions then
+		return payloadAscensions < storedAscensions
 	end
 	local storedCoins = math.floor(tonumber(stored.TotalCoinsCollected) or 0)
 	local storedRolled = math.floor(tonumber(stored.TotalDistanceRolled) or 0)
@@ -383,6 +395,26 @@ function m_sapi:EnforceMountainAccess(player)
 	end)
 end
 
+-- After a rebirth / ascension reset: save, end any ride, hand back the starter launcher.
+local function finishReset(player, label)
+	local callOk, callErr = pcall(function()
+		sself:SavePlayerData(player, true)
+		if sself.MountainFinishing then
+			sself.MountainFinishing[player] = nil
+		end
+		sself:ClearSnowball(player)
+		ReplicatedStorage.ReEvent:FireClient(player, "UnbindSnowballCamera")
+		sself:ClearLauncher(player)
+		if sself:IsPlayerOnLaunchPad(player) then
+			sself:GiveLauncher(player, playerProgress.STARTER_LAUNCHER)
+		end
+		sself:EnforceMountainAccess(player)
+	end)
+	if not callOk then
+		warn("[SERVER]:", label, "reset saved in memory, but a follow-up step failed:", callErr)
+	end
+end
+
 function m_api:Rebirth(player)
 	if not player or rebirthing[player] then
 		return false, "Already rebirthing"
@@ -403,25 +435,38 @@ function m_api:Rebirth(player)
 	rebirthing[player] = true
 	data.Dirty = true
 	sself:ReplicateProgress(player)
-	local callOk, callErr = pcall(function()
-		sself:SavePlayerData(player, true)
-		if sself.MountainFinishing then
-			sself.MountainFinishing[player] = nil
-		end
-		sself:ClearSnowball(player)
-		ReplicatedStorage.ReEvent:FireClient(player, "UnbindSnowballCamera")
-		sself:ClearLauncher(player)
-		if sself:IsPlayerOnLaunchPad(player) then
-			sself:GiveLauncher(player, playerProgress.STARTER_LAUNCHER)
-		end
-		sself:EnforceMountainAccess(player)
-	end)
+	finishReset(player, "Rebirth")
 	rebirthing[player] = nil
-	if not callOk then
-		warn("[SERVER]: Rebirth reset saved in memory, but a follow-up step failed:", callErr)
-	end
 
 	print("[SERVER]:", player.Name, "rebirthed to", data.Rebirths)
+	return true
+end
+
+-- The heavenly wings: level ASCEND_LEVEL resets everything for a permanent 13x per ascension.
+function m_api:Ascend(player)
+	if not player or rebirthing[player] then
+		return false, "Already ascending"
+	end
+
+	local data = sself:GetPlayerProgress(player)
+	if not data then
+		return false, "Ascend failed"
+	end
+	local ready, needLevel = playerProgress.CanAscend(data)
+	if not ready then
+		return false, string.format("Reach level %d first", needLevel)
+	end
+	if not playerProgress.ApplyAscend(data) then
+		return false, "Ascend failed"
+	end
+
+	rebirthing[player] = true
+	data.Dirty = true
+	sself:ReplicateProgress(player)
+	finishReset(player, "Ascend")
+	rebirthing[player] = nil
+
+	print("[SERVER]:", player.Name, "ascended to", data.Ascensions, "power x" .. tostring(playerProgress.AscendMultiplier(data.Ascensions)))
 	return true
 end
 
