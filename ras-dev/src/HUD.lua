@@ -346,8 +346,28 @@ function api:WireMountainTravel(button, mountainId)
 		return
 	end
 	self.MountainTravel[button] = button.Activated:Connect(function()
+		PurchaseFX.Press(button)
 		self:TravelToMountain(mountainId)
 	end)
+end
+
+local MOUNTAIN_HERE_COLOR = Color3.fromRGB(255, 224, 68)
+local TRAVEL_PILL = {
+	Go = { Top = Color3.fromRGB(159, 255, 66), Bottom = Color3.fromRGB(64, 214, 0), Stroke = Color3.fromRGB(34, 71, 10) },
+	Here = { Top = Color3.fromRGB(255, 233, 107), Bottom = Color3.fromRGB(255, 184, 0), Stroke = Color3.fromRGB(107, 74, 0) },
+}
+
+-- The remade Mountains frame: GO! green, HERE gold (Gradient + Outline children). Older frames have neither.
+local function paintTravelPill(travel, isHere)
+	local look = if isHere then TRAVEL_PILL.Here else TRAVEL_PILL.Go
+	local gradient = travel:FindFirstChild("Gradient")
+	if gradient and gradient:IsA("UIGradient") then
+		gradient.Color = ColorSequence.new(look.Top, look.Bottom)
+	end
+	local outline = travel:FindFirstChild("Outline")
+	if outline and outline:IsA("UIStroke") then
+		outline.Color = look.Stroke
+	end
 end
 
 function api:ApplyMountainLocks(root)
@@ -376,6 +396,20 @@ function api:ApplyMountainLocks(root)
 
 		if locked then
 			locked.Visible = not isUnlocked
+			local lockText = locked:FindFirstChild("LockText", true)
+			if lockText and (lockText:IsA("TextLabel") or lockText:IsA("TextButton")) then
+				local previous = mountainConfig:GetPreviousMountain(mountainId)
+				lockText.Text = if previous then "FINISH " .. string.upper(mountainConfig:GetDisplayName(previous)) else ""
+			end
+		end
+		-- The mountain you are on gets a gold outline (remade frame; older frames have no Outline).
+		local outline = card:FindFirstChild("Outline")
+		if outline and outline:IsA("UIStroke") then
+			if not card:GetAttribute("OutlineColor") then
+				card:SetAttribute("OutlineColor", outline.Color)
+			end
+			outline.Color = if isHere then MOUNTAIN_HERE_COLOR else card:GetAttribute("OutlineColor")
+			outline.Thickness = if isHere then 4.5 else 3
 		end
 		local difficultyLabel = card:FindFirstChild("Difficulty", true)
 		if difficultyLabel and (difficultyLabel:IsA("TextLabel") or difficultyLabel:IsA("TextButton")) then
@@ -395,9 +429,21 @@ function api:ApplyMountainLocks(root)
 			if travel:IsA("GuiButton") then
 				travel.Active = isUnlocked and not isHere
 				travel.AutoButtonColor = travel.Active
-				if travel:IsA("TextButton") then
-					travel.Text = if isHere then "HERE" else "Travel"
+				local travelText = if isHere then "HERE" else "GO!"
+				local travelLabel = travel:FindFirstChild("TextLabel", true)
+				if travelLabel and travelLabel:IsA("TextLabel") then
+					travelLabel.Text = travelText
+					local shadow = travel:FindFirstChild("TextShadow", true)
+					if shadow and shadow:IsA("TextLabel") then
+						shadow.Text = travelText
+					end
+					if travel:IsA("TextButton") then
+						travel.Text = ""
+					end
+				elseif travel:IsA("TextButton") then
+					travel.Text = travelText
 				end
+				paintTravelPill(travel, isHere)
 				if root ~= script:FindFirstChild("Mountains") then
 					self:WireMountainTravel(travel, mountainId)
 				end
@@ -709,6 +755,30 @@ function api:HidePanel(name)
 	self:QueueAttention()
 end
 
+-- Remade panels (Shop, Mountains) are authored at a design size under Panel.Fit (UIScale):
+-- fitted to the screen with a margin, centred a little above the middle so the toast strip
+-- stays clear (ShopPanel does the same for the shop).
+local PANEL_FIT = { Width = 1140, Height = 735, MarginX = 40, MarginY = 120, Min = 0.35, Max = 1.1, CenterY = 0.46 }
+
+local function bindPanelFit(self, panel)
+	local inner = panel:FindFirstChild("Panel")
+	local fit = inner and inner:FindFirstChild("Fit")
+	local screen = panel:FindFirstAncestorWhichIsA("ScreenGui")
+	if not (fit and fit:IsA("UIScale") and screen) then
+		return
+	end
+	local function apply()
+		local size = screen.AbsoluteSize
+		local designWidth = tonumber(inner:GetAttribute("DesignWidth")) or PANEL_FIT.Width
+		local designHeight = tonumber(inner:GetAttribute("DesignHeight")) or PANEL_FIT.Height
+		local scale = math.min((size.X - PANEL_FIT.MarginX) / designWidth, (size.Y - PANEL_FIT.MarginY) / designHeight)
+		fit.Scale = math.clamp(scale, PANEL_FIT.Min, PANEL_FIT.Max)
+		inner.Position = UDim2.fromScale(0.5, PANEL_FIT.CenterY)
+	end
+	apply()
+	table.insert(self.Connections, screen:GetPropertyChangedSignal("AbsoluteSize"):Connect(apply))
+end
+
 function api:WirePanel(panel)
 	local close = panel:FindFirstChild("X", true)
 	if close and close:IsA("GuiButton") then
@@ -716,6 +786,13 @@ function api:WirePanel(panel)
 			self:HidePanel(panel.Name)
 		end))
 	end
+	local dimmer = panel:FindFirstChild("Dimmer")
+	if dimmer and dimmer:IsA("GuiButton") then
+		table.insert(self.Connections, dimmer.Activated:Connect(function()
+			self:HidePanel(panel.Name)
+		end))
+	end
+	bindPanelFit(self, panel)
 	local hoverWatch = UIUtils.bindHoverScaleAll(panel, nil, true)
 	if hoverWatch then
 		table.insert(self.Connections, hoverWatch)
@@ -1583,6 +1660,159 @@ function api:SetCoins(amount)
 	setLabelText(label, formatCoins(amount))
 end
 
+-- Ride over: the "+N $" readout (top centre) swings to the middle of the screen and grows,
+-- holds a second, then dives into the coin counter (top left), which pops.
+local RUN_FLY = {
+	Grow = 1.9,
+	ToCenter = 0.55,
+	Hold = 1.0,
+	ToCounter = 0.6,
+	Center = Vector2.new(0.5, 0.42),
+	EndScale = 0.45,
+	CounterPop = 1.3,
+}
+
+function api:CancelRunCoinsFly()
+	self.RunFlyToken = (self.RunFlyToken or 0) + 1
+	if self.RunFlyLabel then
+		self.RunFlyLabel:Destroy()
+		self.RunFlyLabel = nil
+	end
+end
+
+-- The coin counter (LeftDock.Coins + CoinsImage) pops gold when the flown readout lands.
+function api:PopCoinsCounter()
+	local main = self.MainUI
+	if not main then
+		return
+	end
+	local coinsLabel = self.CoinsLabel
+	if not (coinsLabel and coinsLabel.Parent) then
+		coinsLabel = main:FindFirstChild("Coins", true)
+	end
+	local targets = {}
+	if coinsLabel and coinsLabel:IsA("TextLabel") then
+		table.insert(targets, coinsLabel)
+	end
+	local image = main:FindFirstChild("CoinsImage", true)
+	if image and image:IsA("GuiObject") then
+		table.insert(targets, image)
+	end
+	if #targets == 0 then
+		return
+	end
+	Audio.Play("CoinPop")
+	local token = (self.CounterPopToken or 0) + 1
+	self.CounterPopToken = token
+	local scales = {}
+	for _, target in targets do
+		local scale = target:FindFirstChild("CounterPop")
+		if not (scale and scale:IsA("UIScale")) then
+			scale = Instance.new("UIScale")
+			scale.Name = "CounterPop"
+			scale.Parent = target
+		end
+		table.insert(scales, scale)
+	end
+	if coinsLabel and coinsLabel:IsA("TextLabel") and not self.CoinsBaseColor then
+		self.CoinsBaseColor = coinsLabel.TextColor3
+	end
+	local baseColor = self.CoinsBaseColor
+	task.spawn(function()
+		PurchaseFX.Animate(0.4, Enum.EasingStyle.Back, Enum.EasingDirection.Out, function(a)
+			local k = RUN_FLY.CounterPop - (RUN_FLY.CounterPop - 1) * a
+			for _, scale in scales do
+				scale.Scale = k
+			end
+			if coinsLabel and baseColor then
+				coinsLabel.TextColor3 = COIN_FLASH:Lerp(baseColor, a)
+			end
+		end, function()
+			return self.CounterPopToken == token
+		end)
+		if self.CounterPopToken == token then
+			for _, scale in scales do
+				scale.Scale = 1
+			end
+			if coinsLabel and baseColor then
+				coinsLabel.TextColor3 = baseColor
+			end
+		end
+	end)
+end
+
+function api:FlyRunCoins(label)
+	local screen = label:FindFirstAncestorWhichIsA("ScreenGui")
+	if not screen then
+		return
+	end
+	self:CancelRunCoinsFly()
+	local token = self.RunFlyToken
+	local size = label.AbsoluteSize
+	local start = label.AbsolutePosition + size * 0.5 - screen.AbsolutePosition
+	local clone = label:Clone()
+	clone.Name = "RunCoinsFly"
+	local strokes = {}
+	for _, child in clone:GetChildren() do
+		if child:IsA("UIScale") or child:IsA("UITextSizeConstraint") then
+			child:Destroy()
+		elseif child:IsA("UIStroke") then
+			table.insert(strokes, { Stroke = child, Thickness = child.Thickness })
+		end
+	end
+	clone.AnchorPoint = Vector2.new(0.5, 0.5)
+	clone.Position = UDim2.fromOffset(start.X, start.Y)
+	clone.Size = UDim2.fromOffset(size.X, size.Y)
+	clone.TextScaled = true
+	clone.TextTransparency = 0
+	clone.Visible = true
+	clone.ZIndex = 60
+	clone.Parent = screen
+	self.RunFlyLabel = clone
+	local grow = RUN_FLY.Grow
+	local function place(point, k)
+		clone.Position = UDim2.fromOffset(point.X, point.Y)
+		clone.Size = UDim2.fromOffset(size.X * k, size.Y * k)
+		for _, entry in strokes do
+			entry.Stroke.Thickness = entry.Thickness * k
+		end
+	end
+	task.spawn(function()
+		local function alive()
+			return self.RunFlyToken == token and clone.Parent ~= nil
+		end
+		local screenSize = screen.AbsoluteSize
+		local center = Vector2.new(screenSize.X * RUN_FLY.Center.X, screenSize.Y * RUN_FLY.Center.Y)
+		PurchaseFX.Animate(RUN_FLY.ToCenter, Enum.EasingStyle.Back, Enum.EasingDirection.Out, function(a)
+			place(start:Lerp(center, a), 1 + (grow - 1) * a)
+		end, alive)
+		if not alive() then
+			return
+		end
+		Audio.Play("UISuccess")
+		local holdUntil = os.clock() + RUN_FLY.Hold
+		while alive() and os.clock() < holdUntil do
+			RunService.Heartbeat:Wait()
+		end
+		if not alive() then
+			return
+		end
+		local target = self.CoinsLabel
+		if not (target and target.Parent) and self.MainUI then
+			target = self.MainUI:FindFirstChild("Coins", true)
+		end
+		local dest = if target and target:IsA("GuiObject") then target.AbsolutePosition + target.AbsoluteSize * 0.5 - screen.AbsolutePosition else Vector2.new(80, 80)
+		PurchaseFX.Animate(RUN_FLY.ToCounter, Enum.EasingStyle.Quad, Enum.EasingDirection.In, function(a)
+			place(center:Lerp(dest, a), grow + (RUN_FLY.EndScale - grow) * a)
+		end, alive)
+		if self.RunFlyToken == token then
+			clone:Destroy()
+			self.RunFlyLabel = nil
+			self:PopCoinsCounter()
+		end
+	end)
+end
+
 function api:BeginRunReadout()
 	local player = Players.LocalPlayer
 	self.RunActive = true
@@ -1590,6 +1820,7 @@ function api:BeginRunReadout()
 	self.RunLastCoins = self.RunStartCoins
 	self.RunCoinsShown = 0
 	settleCoinPop(self)
+	self:CancelRunCoinsFly()
 
 	local coins = self:GetRunLabel("CoinsMade")
 	if coins then
@@ -1631,6 +1862,9 @@ function api:EndRunReadout()
 
 	local coins = self:GetRunLabel("CoinsMade")
 	if coins then
+		if coins.Visible and (self.RunCoinsShown or 0) > 0 then
+			self:FlyRunCoins(coins)
+		end
 		coins.Visible = false
 	end
 	local distance = self:GetRunLabel("DistanceRolled")
