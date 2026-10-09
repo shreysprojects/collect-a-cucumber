@@ -23,6 +23,7 @@ local RunService = game:GetService("RunService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local CollectionService = game:GetService("CollectionService")
 local TweenService = game:GetService("TweenService")
+local GuiService = game:GetService("GuiService")
 
 local mountainConfig = require(ReplicatedStorage.Assets.Modules.Shared.MountainConfig)()
 local FLIGHT = mountainConfig.FLIGHT
@@ -168,6 +169,38 @@ local function baseComboScale()
 	return math.clamp(height / 900, 0.55, 1.15)
 end
 
+-- Where the label settles: ComboTopY + ComboTopOffset at the least, and always under the
+-- HUD's ride readouts (MainUI.DistanceRolled / CoinsMade scale with the screen, so a
+-- fixed offset covered CoinsMade on most screens). Both guis ignore the inset, so the
+-- labels' AbsolutePosition (inset-relative) is shifted by the inset to screen space.
+local function comboSettlePosition()
+	local camera = workspace.CurrentCamera
+	local height = if camera then camera.ViewportSize.Y else 900
+	local y = (SMASH.ComboTopY or 0) * height + (SMASH.ComboTopOffset or 0)
+	local playerGui = Players.LocalPlayer:FindFirstChild("PlayerGui")
+	local hud = playerGui and playerGui:FindFirstChild("HUD")
+	if hud then
+		local insetY = GuiService:GetGuiInset().Y
+		local halfLabel = 0.5 * 64 * baseComboScale() + 4 -- TextSize 64 under the base UIScale, plus the stroke
+		for _, name in SMASH.ComboAvoid or { "DistanceRolled", "CoinsMade" } do
+			local label = hud:FindFirstChild(name, true)
+			if label and label:IsA("GuiObject") and label.Visible and label.AbsoluteSize.Y > 0 then
+				-- The HUD pops CoinsMade with an "EarnPop" UIScale (around its anchor) on every
+				-- coin gain: measure the resting box and leave room for the biggest pop, so the
+				-- combo lands at the same height every hit and a later pop cannot cover it.
+				local pop = label:FindFirstChild("EarnPop")
+				local k = if pop and pop:IsA("UIScale") and pop.Scale > 0 then pop.Scale else 1
+				local restH = label.AbsoluteSize.Y / k
+				local anchorY = label.AbsolutePosition.Y + label.AbsoluteSize.Y * label.AnchorPoint.Y
+				local grow = if pop then (SMASH.ComboAvoidPop or 1.45) else 1
+				local bottom = anchorY + restH * grow * (1 - label.AnchorPoint.Y) + insetY
+				y = math.max(y, bottom + (SMASH.ComboClearGap or 6) + halfLabel)
+			end
+		end
+	end
+	return UDim2.new(0.5, 0, 0, math.floor(y + 0.5))
+end
+
 local function cancelComboTweens()
 	for _, tween in combo.Tweens do
 		tween:Cancel()
@@ -225,7 +258,7 @@ local function registerCombo()
 	c.Scale.Scale = base * SMASH.ComboPopScale
 
 	local pop = TweenInfo.new(SMASH.ComboPopTime, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
-	local t1 = TweenService:Create(c.Frame, pop, { Position = UDim2.new(0.5, 0, SMASH.ComboTopY, SMASH.ComboTopOffset or 0), Rotation = 0 })
+	local t1 = TweenService:Create(c.Frame, pop, { Position = comboSettlePosition(), Rotation = 0 })
 	local t2 = TweenService:Create(c.Scale, pop, { Scale = base })
 	local t3 = TweenService:Create(c.Label, TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { TextColor3 = SMASH.ComboColor })
 	combo.Tweens = { t1, t2, t3 }

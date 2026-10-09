@@ -5,6 +5,10 @@
 	from that length, then the built course is scaled so the run lands on it.
 	Theme comes from props under Storage.Props/<MountainId>, not from unique terrain.
 
+	Once built, SetupMountainSpawn puts an invisible SpawnLocation on the launch pad
+	(so respawns never start off the map) and stamps the spawn / StartPlatform box
+	on GameInfo for SERV_PlayerEvents and CLIENT_SpawnGuard.
+
 --------------------------------------------------------------------------------------------]]--
 
 local ServerStorage = game:GetService("ServerStorage")
@@ -487,6 +491,7 @@ function m_sapi:GenerateMountain(mountainId)
 	if existing then
 		existing:Destroy()
 	end
+	sself:ClearMountainSpawn()
 
 	-- Drop the previous visual border pass with the mountain. BuildMountainBorders
 	-- clears this folder again before it places, including when borders are disabled.
@@ -570,7 +575,96 @@ function m_sapi:GenerateMountain(mountainId)
 		end
 	end
 
+	local spawnInfo = sself:SetupMountainSpawn()
+	if spawnInfo then
+		print("[SERVER]: Spawn", spawnInfo.CFrame.Position, "mountain bottom", math.floor(spawnInfo.MountainBottom))
+	else
+		warn("[SERVER]: No launch pad spawn on", mountainId, "- characters keep the default spawn")
+	end
+
 	return mountainModel, sequence
+end
+
+local function boxBottom(cf, size)
+	local half = size * 0.5
+	local bottom = math.huge
+	for _, x in { -half.X, half.X } do
+		for _, y in { -half.Y, half.Y } do
+			for _, z in { -half.Z, half.Z } do
+				bottom = math.min(bottom, (cf * Vector3.new(x, y, z)).Y)
+			end
+		end
+	end
+	return bottom
+end
+
+local function gameInfo()
+	local assets = ReplicatedStorage:FindFirstChild("Assets")
+	return assets and assets:FindFirstChild("GameInfo")
+end
+
+function m_sapi:ClearMountainSpawn()
+	local settings = mountainConfig.SPAWN
+	sself.MountainSpawn = nil
+	local old = workspace:FindFirstChild(settings.SpawnLocationName)
+	if old then
+		old:Destroy()
+	end
+	local info = gameInfo()
+	if info then
+		info:SetAttribute(settings.InfoSpawnCFrame, nil)
+		info:SetAttribute(settings.InfoStartBoxCFrame, nil)
+		info:SetAttribute(settings.InfoStartBoxSize, nil)
+	end
+end
+
+-- Neutral, invisible, non-colliding SpawnLocation on the launch pad, facing the
+-- same way SpawnCharacterAtStart does. Also caches the boxes the fall failsafe uses.
+function m_sapi:SetupMountainSpawn()
+	sself:ClearMountainSpawn()
+
+	local settings = mountainConfig.SPAWN
+	local startPiece, mountain = sself:GetStartPlatform()
+	local spawnCF = sself:GetMountainSpawnCFrame()
+	if not startPiece or not mountain or not spawnCF then
+		return nil
+	end
+
+	local startCF, startSize = startPiece:GetBoundingBox()
+	local mountainCF, mountainSize = mountain:GetBoundingBox()
+	local spawnInfo = {
+		CFrame = spawnCF,
+		StartBoxCFrame = startCF,
+		StartBoxSize = startSize,
+		MountainBottom = boxBottom(mountainCF, mountainSize),
+	}
+
+	local spawnPart = Instance.new("SpawnLocation")
+	spawnPart.Name = settings.SpawnLocationName
+	spawnPart.Anchored = true
+	spawnPart.CanCollide = false
+	spawnPart.CanTouch = false
+	spawnPart.CanQuery = false
+	spawnPart.CastShadow = false
+	spawnPart.Transparency = 1
+	spawnPart.Neutral = true
+	spawnPart.AllowTeamChangeOnTouch = false
+	spawnPart.Duration = 0
+	spawnPart.Enabled = true
+	spawnPart.Size = settings.SpawnLocationSize
+	-- Top face flush with the pad floor.
+	spawnPart.CFrame = spawnCF * CFrame.new(0, -spawnPart.Size.Y / 2, 0)
+	spawnPart.Parent = workspace
+
+	local info = gameInfo()
+	if info then
+		info:SetAttribute(settings.InfoSpawnCFrame, spawnCF)
+		info:SetAttribute(settings.InfoStartBoxCFrame, startCF)
+		info:SetAttribute(settings.InfoStartBoxSize, startSize)
+	end
+
+	sself.MountainSpawn = spawnInfo
+	return spawnInfo
 end
 
 function m_sapi:GetStartPlatform()

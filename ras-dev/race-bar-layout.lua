@@ -6,6 +6,12 @@
 --
 -- Layout: bar half the screen wide at the very top (y 14, 34 px tall), labels just
 -- below the bar ends, markers frame sharing the bar box.
+--
+-- 2026-09-22: do NOT re-run this on the current Studio gui - it resets the team's 58 px
+-- Track to 34 px. Only use it on a fresh import of assets/RaceProgressGui.rbxm. The
+-- controller now handles the rest at runtime: DisplayOrder -1 (under HUD / Menu), a
+-- UIScale that keeps the bar above MainUI.DistanceRolled / CoinsMade, and the slide-out
+-- while PlayerGui "PanelOpen" is set.
 
 local gui = game.StarterGui.RaceProgressGui
 local root = gui.Root

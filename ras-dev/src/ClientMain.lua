@@ -7,6 +7,14 @@
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
+-- Before the ServerReady wait; a missing guard must not stop the rest of the client.
+local guardOk, guardErr = pcall(function()
+	require(ReplicatedStorage.Assets.Modules.Client.Functions.ClientFunctions.Modules.CLIENT_SpawnGuard):StartSpawnGuard()
+end)
+if not guardOk then
+	warn("[CLIENT]: CLIENT_SpawnGuard not started:", guardErr)
+end
+
 repeat
 	task.wait()
 until ReplicatedStorage.Assets.GameInfo.ServerReady.Value
@@ -125,6 +133,9 @@ end
 func:WatchLaunchPad()
 if func.SetupChargeLaunch then
 	func:SetupChargeLaunch()
+end
+if func.StartLauncherObservers then
+	func:StartLauncherObservers()
 end
 if func.StartSnowballFX then
 	func:StartSnowballFX()

@@ -1,7 +1,9 @@
 --[[---------------------------------------DESCRIPTION------------------------------------------
 	Launch pad camera, snowball chase camera, and ride UI. Launch is only
 	available while standing on StartPlatform.LaunchPlatform. Entering the
-	pad also asks the server to weld the equipped launcher to the hand.
+	pad also asks the server to weld the equipped launcher to the hand. Standing
+	still or charging there turns the character side-on to the pad camera so the
+	launcher shows (MountainConfig.LAUNCHER.PadStance).
 
 	While riding: Left / Stop / Right on LaunchGui, plus A/D and the left stick.
 	If the ball sits still or crawls for a moment, the ride ends the same as Stop.
@@ -695,17 +697,84 @@ local function getRampLook(startPiece, collision)
 	return Vector3.new(0, 0, -1)
 end
 
-local function setCharacterFacing(character, look)
-	local hrp = character and character:FindFirstChild("HumanoidRootPart")
-	local humanoid = character and character:FindFirstChildOfClass("Humanoid")
-	if not hrp then
-		return
+----------------------------------------------------------------------------------------------
+-- Pad stance (MountainConfig.LAUNCHER.PadStance). Standing still, charging or releasing on
+-- the pad turns the character side-on (Yaw -90: right side, the launcher hand, toward the
+-- pad camera) so the launcher and its charge animation are in view. Walking hands turning
+-- back to the Humanoid. This client owns its character, so the root CFrame replicates. The
+-- ball does not follow the character's facing: the server aims it from the Exit socket.
+----------------------------------------------------------------------------------------------
+
+local STANCE_SNAP = math.rad(0.5) -- closer than this finishes the turn in one step
+local STANCE_DONE = 1e-3 -- radians; already facing the stance, write nothing
+
+local function padStanceSettings()
+	local stance = mountainConfig.LAUNCHER.PadStance
+	return if stance and stance.Enabled then stance else nil
+end
+
+-- Yaw (radians) of a CFrame that looks along this flat direction.
+local function yawOf(look)
+	return math.atan2(-look.X, -look.Z)
+end
+
+local function padStanceLook(forward)
+	local stance = padStanceSettings()
+	if not stance then
+		return forward
 	end
-	if humanoid then
-		humanoid.AutoRotate = false
+	return CFrame.Angles(0, math.rad(stance.Yaw or -90), 0):VectorToWorldSpace(forward)
+end
+
+-- Eases the root's yaw toward look (alpha 1 snaps). Once it faces look nothing is written,
+-- so a settled stance does not touch the character every frame.
+local function turnCharacter(hrp, look, alpha)
+	local target = yawOf(look)
+	local yaw = target
+	local current = hrp.CFrame.LookVector
+	if Vector3.new(current.X, 0, current.Z).Magnitude > 0.05 then
+		local from = yawOf(current)
+		local delta = (target - from + math.pi) % (2 * math.pi) - math.pi
+		if math.abs(delta) < STANCE_DONE then
+			return
+		end
+		if math.abs(delta) > STANCE_SNAP then
+			yaw = from + delta * alpha
+		end
 	end
 	local position = hrp.Position
-	hrp.CFrame = CFrame.lookAt(position, position + look)
+	hrp.CFrame = CFrame.new(position) * CFrame.Angles(0, yaw, 0)
+	-- With AutoRotate off nothing damps yaw spin (left over from walking, or a bump), so
+	-- the ease would chase it every frame and settle off target. Clear it with the turn.
+	local spin = hrp.AssemblyAngularVelocity
+	if math.abs(spin.Y) > 1e-3 then
+		hrp.AssemblyAngularVelocity = Vector3.new(spin.X, 0, spin.Z)
+	end
+end
+
+local function updatePadStance(vars, character, forward, dt)
+	local hrp = character:FindFirstChild("HumanoidRootPart")
+	local humanoid = character:FindFirstChildOfClass("Humanoid")
+	if not (hrp and humanoid) or humanoid.Health <= 0 or humanoid.SeatPart then
+		return
+	end
+
+	local stance = padStanceSettings()
+	local animation = vars.ChargeAnimation
+	local releasing = animation ~= nil and not animation.Destroyed and animation.State == "firing"
+	local walking = stance ~= nil and humanoid.MoveDirection.Magnitude > (stance.WalkThreshold or 0.1)
+	if walking and not vars.Charging and not releasing then
+		if not humanoid.AutoRotate then
+			humanoid.AutoRotate = true
+		end
+		return
+	end
+
+	if humanoid.AutoRotate then
+		humanoid.AutoRotate = false
+	end
+	local alpha = if stance then 1 - math.exp(-(stance.TurnRate or 10) * dt) else 1
+	turnCharacter(hrp, padStanceLook(forward), alpha)
 end
 
 local function restoreCharacterRotate(character)
@@ -743,10 +812,6 @@ function api:BindPadCamera()
 
 	local launch = mountainConfig.LAUNCH
 	local camPos = nil
-	local collision, startPiece = findLaunchCollision()
-	if collision then
-		setCharacterFacing(Players.LocalPlayer.Character, getRampLook(startPiece, collision))
-	end
 
 	vars.PadCamera = vars.RNS.RenderStepped:Connect(function(dt)
 		if vars.SnowballCamera then
@@ -768,10 +833,7 @@ function api:BindPadCamera()
 			right = right.Unit
 		end
 
-		local humanoid = character:FindFirstChildOfClass("Humanoid")
-		if humanoid and humanoid.AutoRotate then
-			setCharacterFacing(character, forward)
-		end
+		updatePadStance(vars, character, forward, dt)
 
 		local lateral = (hrp.Position - collision.Position):Dot(right)
 		local desired = collision.Position - forward * launch.PadCameraDistance + right * lateral + Vector3.yAxis * launch.PadCameraHeight

@@ -39,10 +39,25 @@
 	can be bought, and only once its mountain difficulty is unlocked. Later
 	ones stay unavailable, with the same gradients desaturated to a darker gray,
 	until the one before them is unlocked. Snowball order N and launcher order N
-	share that mountain.
+	share that mountain. A card whose mountain is still locked reads
+	"BEAT <previous mountain>" instead of its price (PlayerProgress.GearLockedBy
+	on the replicated UnlockedMountains: the same gate the server applies).
 	Prices use a $ prefix.
-	The Buy label and its TextShadow always show the same string. The Buy
-	button grows slightly on hover while it can be pressed.
+	The Buy label and its TextShadow always show the same string (the Buy
+	TextButton's own Text stays empty when it has a label). The Buy button grows
+	slightly on hover while it can be pressed (attribute ShopCanBuy). Gray cards
+	and an unaffordable Rebirth stay Active (Active = false would stop Activated)
+	so a press explains itself; only an EQUIPPED card is inert.
+
+	Buying goes through ReFunction BuySnowball / BuyLauncher, which answer true or
+	false and a reason. Every press pops (PurchaseFX.Press); a purchase plays
+	PurchaseFX.Success on the button, pops the card with a gold "UNLOCKED!" and
+	shows a green toast (Notify); a refusal shakes the button red and says why
+	("Need $120 more", "Beat Frostpeak to unlock Coal", "Buy Muddy first").
+	A bought card then reads EQUIP (PlayerProgress.EQUIP_ON_BUY = true makes the
+	server equip it instead). Rebirth plays the same press / success / fail
+	effects with a "REBIRTH!" float. PurchaseFX.WatchPlayers bursts sparkles off
+	any player whose gear or rebirths go up by one.
 
 	Panels pop in from the center (UIScale 0.85 -> 1) and pop out on close.
 	PanelManager keeps one open at a time and applies FOV + world blur.
@@ -50,7 +65,9 @@
 	Walking into StartPlatform.Circles.ShopCircle / MountainCircle opens that
 	panel on enter. PlayerGui attribute "PanelOpen" holds the open panel's name
 	(hold-to-launch ignores presses while it is set). Dev hook: set the
-	PlayerGui attribute "DevPanel" to a panel name to toggle it.
+	PlayerGui attribute "DevPanel" to a panel name to toggle it, or "DevPress"
+	to "Snowballs:Coal" / "Blasters:Leather Sling" / "Rebirth" to press that
+	Buy button exactly as a click would (evals cannot FireServer).
 
 --------------------------------------------------------------------------------------------]]--
 
@@ -67,6 +84,8 @@ local snowballs = require(ReplicatedStorage.Assets.Modules.Shared.Snowballs)
 local snowballLaunchers = require(ReplicatedStorage.Assets.Modules.Shared.SnowballLaunchers)
 local PanelManager = require(ReplicatedStorage.Assets.Modules.Client.UI.PanelManager)
 local UIUtils = require(ReplicatedStorage.Assets.Modules.Client.UI.UIUtils)
+local PurchaseFX = require(ReplicatedStorage.Assets.Modules.Client.UI.PurchaseFX)
+local Notify = require(ReplicatedStorage.Assets.Modules.Client.UI.Notify)
 
 local BUTTON_PANELS = {
 	Shop = "Shop",
@@ -94,6 +113,20 @@ local SHOP_BUY_EQUIPPED = "EQUIPPED"
 local SHOP_GRAY_DARKEN = 0.62
 local SHOP_HOVER_SCALE = 1.08
 local SHOP_HOVER = TweenInfo.new(0.12, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+local SHOP_LOCKED = "BEAT %s" -- button text while the item's mountain is locked (previous mountain)
+local SHOP_LOCKED_TOAST = "Beat %s to unlock %s"
+local SHOP_IN_ORDER_TOAST = "Buy %s first"
+local SHOP_BOUGHT_TOAST = "%s unlocked!"
+local SHOP_BOUGHT_FLOAT = "UNLOCKED!"
+local SHOP_CARD_POP = 1.12
+local NEED_MORE_TOAST = "Need %s more"
+local SHOP_REFUSED_TOAST = {
+	Owned = "You already own that",
+	Invalid = "Can't buy that",
+}
+local SHOP_ERROR_TOAST = "Can't buy that right now"
+local REBIRTH_FLOAT = "REBIRTH!"
+local REBIRTH_TOAST = "Rebirth %d!"
 local RING_HEIGHT_PAD = 12
 local POP_IN = TweenInfo.new(0.28, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
 local POP_OUT = TweenInfo.new(0.18, Enum.EasingStyle.Quad, Enum.EasingDirection.In)
@@ -444,8 +477,24 @@ local function shopOrderForSale(order, owned, tab)
 	if order ~= nextShopOrder(tab, owned) then
 		return false
 	end
-	local mountainId = mountainConfig:MountainIdForOrder(order)
-	return unlockedMap()[mountainId] == true
+	return playerProgress.GearLockedBy(unlockedMap(), order) == nil
+end
+
+-- The mountain to beat before gear of this order is sold, or nil when its mountain is open.
+local function shopUnlockMountain(order)
+	local lockedBy = playerProgress.GearLockedBy(unlockedMap(), order)
+	if not lockedBy then
+		return nil
+	end
+	return mountainConfig:GetPreviousMountain(lockedBy) or lockedBy
+end
+
+local function shopLockText(order)
+	local beat = shopUnlockMountain(order)
+	if not beat then
+		return nil
+	end
+	return string.format(SHOP_LOCKED, string.upper(mountainConfig:GetDisplayName(beat)))
 end
 
 local function shopHoverScale(buy)
@@ -477,7 +526,7 @@ local function bindShopBuyHover(buy)
 		tween:Play()
 	end
 	buy.MouseEnter:Connect(function()
-		if buy.Active and UserInputService.PreferredInput ~= Enum.PreferredInput.Touch then
+		if buy:GetAttribute("ShopCanBuy") == true and UserInputService.PreferredInput ~= Enum.PreferredInput.Touch then
 			tweenTo(SHOP_HOVER_SCALE)
 		end
 	end)
@@ -614,10 +663,12 @@ local function setNamedLabel(root, name, text)
 end
 
 local function setButtonText(button, text)
-	if button:IsA("TextButton") then
-		button.Text = text
-	end
 	local label = button:FindFirstChild("TextLabel", true)
+	if button:IsA("TextButton") then
+		-- A Studio button draws its text with a TextLabel (+ TextShadow); its own Text stays empty.
+		local drawn = label and (label:IsA("TextLabel") or label:IsA("TextButton"))
+		button.Text = if drawn then "" else text
+	end
 	setGuiText(label, text)
 
 	local shadow = label and label:FindFirstChild("TextShadow")
@@ -750,7 +801,7 @@ function api:ApplyShopTabButtons(panel, tab)
 	end
 end
 
-function api:ApplyShopItemState(item, owned, equipped, forSale)
+function api:ApplyShopItemState(item, owned, equipped, forSale, lockText)
 	local buy = findShopBuy(item)
 	if not (buy and buy:IsA("GuiButton")) then
 		return
@@ -773,13 +824,16 @@ function api:ApplyShopItemState(item, owned, equipped, forSale)
 		active = true
 		tint = "Green"
 	else
-		text = formatPrice(item:GetAttribute("ShopPrice"))
+		text = lockText or formatPrice(item:GetAttribute("ShopPrice"))
 		active = false
 		tint = "Gray"
 	end
 
 	setButtonText(buy, text)
-	buy.Active = active
+	-- Active = false stops Activated, so a gray card stays Active to answer a press with its reason.
+	-- ShopCanBuy is the real "pressable" state (hover, colour); only EQUIPPED is inert.
+	buy.Active = not equipped
+	buy:SetAttribute("ShopCanBuy", active)
 	applyButtonLook(buy, look, false)
 	buy.AutoButtonColor = if active then look.AutoButtonColor else false
 
@@ -788,7 +842,7 @@ function api:ApplyShopItemState(item, owned, equipped, forSale)
 		gradient.Color = colors[tint]
 	end)
 	local hover = buy:FindFirstChild("HoverScale")
-	if hover and hover:IsA("UIScale") and not buy.Active then
+	if hover and hover:IsA("UIScale") and not active then
 		hover.Scale = 1
 	end
 end
@@ -811,7 +865,8 @@ function api:ApplyShopItemStates(panel, tab)
 				child,
 				owned[child.Name] == true,
 				child.Name == equipped,
-				shopOrderForSale(order, owned, tab)
+				shopOrderForSale(order, owned, tab),
+				shopLockText(order)
 			)
 		end
 	end
@@ -822,6 +877,74 @@ function api:RefreshShopPanel()
 	if spawned and spawned.Parent then
 		self:ApplyShopItemStates(spawned, self.ShopTab)
 	end
+end
+
+-- Toast text for a purchase the client or the server refused.
+local function shopRefusalText(reason, def, tab)
+	if reason == "NotEnoughCoins" then
+		local coins = math.max(0, math.floor(tonumber(Players.LocalPlayer:GetAttribute("Coins")) or 0))
+		return string.format(NEED_MORE_TOAST, formatPrice(math.max(1, (def.Price or 0) - coins)))
+	end
+	if reason == "MountainLocked" then
+		local beat = shopUnlockMountain(def.Order) or mountainConfig:GetPreviousMountain(def.MountainId) or def.MountainId
+		return string.format(SHOP_LOCKED_TOAST, mountainConfig:GetDisplayName(beat), def.Name)
+	end
+	if reason == "BuyInOrder" then
+		local nextOrder = nextShopOrder(tab, shopOwnedMap(tab))
+		local catalog = if tab == "Blasters" then snowballLaunchers else snowballs
+		local nextDef = nextOrder and catalog:GetByOrder(nextOrder)
+		if nextDef then
+			return string.format(SHOP_IN_ORDER_TOAST, nextDef.Name)
+		end
+	end
+	return SHOP_REFUSED_TOAST[reason] or SHOP_ERROR_TOAST
+end
+
+-- Equip an owned card, or buy the next one. Every press pops; the answer succeeds or fails loudly.
+function api:PressShopBuy(buy, item, def, tab)
+	if self.ShopBusy then
+		return
+	end
+	local owned = shopOwnedMap(tab)
+	if owned[def.Name] == true then
+		if def.Name == shopEquippedName(tab) then
+			return
+		end
+		PurchaseFX.Press(buy)
+		ReplicatedStorage.ReEvent:FireServer(if tab == "Blasters" then "EquipLauncher" else "EquipSnowball", def.Name)
+		return
+	end
+
+	PurchaseFX.Press(buy)
+	local refusal = nil
+	if shopUnlockMountain(def.Order) then
+		refusal = "MountainLocked"
+	elseif def.Order ~= nextShopOrder(tab, owned) then
+		refusal = "BuyInOrder"
+	end
+	if refusal then
+		PurchaseFX.Fail(buy)
+		Notify.Error(shopRefusalText(refusal, def, tab))
+		return
+	end
+
+	self.ShopBusy = true
+	local invoked, ok, reason = pcall(function()
+		return ReplicatedStorage.ReEvent.ReFunction:InvokeServer(if tab == "Blasters" then "BuyLauncher" else "BuySnowball", def.Name)
+	end)
+	self.ShopBusy = false
+	if invoked and ok == true then
+		PurchaseFX.Success(buy)
+		PurchaseFX.Celebrate(item:FindFirstChild("Foreground") or buy, SHOP_BOUGHT_FLOAT, SHOP_CARD_POP)
+		Notify.Success(string.format(SHOP_BOUGHT_TOAST, def.Name))
+	else
+		if not invoked then
+			warn("[CLIENT]: Shop purchase failed:", ok)
+		end
+		PurchaseFX.Fail(buy)
+		Notify.Error(shopRefusalText(if invoked then reason else nil, def, tab))
+	end
+	self:RefreshShopPanel()
 end
 
 function api:FillShopItems(panel, tab)
@@ -871,32 +994,13 @@ function api:FillShopItems(panel, tab)
 		setNamedImage(item, "Icon", def.Icon)
 
 		local isOwned = owned[def.Name] == true
-		self:ApplyShopItemState(item, isOwned, def.Name == equipped, shopOrderForSale(def.Order, owned, tab))
+		self:ApplyShopItemState(item, isOwned, def.Name == equipped, shopOrderForSale(def.Order, owned, tab), shopLockText(def.Order))
 
 		local buy = findShopBuy(item)
 		if buy and buy:IsA("GuiButton") then
 			bindShopBuyHover(buy)
 			buy.Activated:Connect(function()
-				local ownedNow = shopOwnedMap(tab)
-				if ownedNow[def.Name] == true then
-					if def.Name == shopEquippedName(tab) then
-						return
-					end
-					if tab == "Blasters" then
-						ReplicatedStorage.ReEvent:FireServer("EquipLauncher", def.Name)
-					else
-						ReplicatedStorage.ReEvent:FireServer("EquipSnowball", def.Name)
-					end
-					return
-				end
-				if not shopOrderForSale(def.Order, ownedNow, tab) then
-					return
-				end
-				if tab == "Blasters" then
-					ReplicatedStorage.ReEvent:FireServer("BuyLauncher", def.Name)
-				else
-					ReplicatedStorage.ReEvent:FireServer("BuySnowball", def.Name)
-				end
+				self:PressShopBuy(buy, item, def, tab)
 			end)
 		end
 
@@ -1182,7 +1286,8 @@ function api:RefreshRebirthPanel()
 	local buy = panel:FindFirstChild("Buy", true) or panel:FindFirstChild("Confirm", true)
 	if buy and buy:IsA("GuiButton") then
 		setButtonText(buy, price)
-		buy.Active = enabled
+		-- Grayed, not inert: an unaffordable press still reaches PressRebirth ("Need $X more").
+		buy.Active = not self.RebirthBusy
 		local tinted = false
 		eachShopBuyGradient(buy, function(gradient)
 			tinted = true
@@ -1199,42 +1304,91 @@ function api:RefreshRebirthPanel()
 	end
 end
 
+function api:PressRebirth(buy)
+	if self.RebirthBusy then
+		return
+	end
+	local player = Players.LocalPlayer
+	local rebirths = math.max(0, math.floor(tonumber(player:GetAttribute("Rebirths")) or 0))
+	local coins = math.max(0, math.floor(tonumber(player:GetAttribute("Coins")) or 0))
+	local cost = playerProgress.RebirthCost(rebirths)
+	PurchaseFX.Press(buy)
+	if coins < cost then
+		PurchaseFX.Fail(buy)
+		Notify.Error(string.format(NEED_MORE_TOAST, formatPrice(cost - coins)))
+		self:RefreshRebirthPanel()
+		return
+	end
+
+	self.RebirthBusy = true
+	self:RefreshRebirthPanel()
+	local invoked, ok, err = pcall(function()
+		return ReplicatedStorage.ReEvent.ReFunction:InvokeServer("Rebirth")
+	end)
+	self.RebirthBusy = false
+	self:RefreshRebirthPanel()
+	self:RefreshShopPanel()
+	self:RefreshMountainsPanel()
+	if invoked and ok then
+		PurchaseFX.Success(buy)
+		PurchaseFX.FloatText(buy, REBIRTH_FLOAT)
+		Notify.Success(string.format(REBIRTH_TOAST, rebirths + 1))
+	else
+		warn("[CLIENT]: Rebirth failed:", if invoked then err else ok)
+		PurchaseFX.Fail(buy)
+		Notify.Error(if invoked and type(err) == "string" then err else "Rebirth failed")
+	end
+end
+
+local function findRebirthBuy(panel)
+	local buy = panel and (panel:FindFirstChild("Buy", true) or panel:FindFirstChild("Confirm", true))
+	if buy and buy:IsA("GuiButton") then
+		return buy
+	end
+	return nil
+end
+
 function api:SetupRebirthPanel(panel)
 	if not panel then
 		return
 	end
 	self:RefreshRebirthPanel()
 
-	local buy = panel:FindFirstChild("Buy", true) or panel:FindFirstChild("Confirm", true)
-	if not buy or not buy:IsA("GuiButton") or buy:GetAttribute("RebirthWired") then
+	local buy = findRebirthBuy(panel)
+	if not buy or buy:GetAttribute("RebirthWired") then
 		return
 	end
 	buy:SetAttribute("RebirthWired", true)
 	self.RebirthConnection = buy.Activated:Connect(function()
-		if self.RebirthBusy then
-			return
-		end
-		local player = Players.LocalPlayer
-		local rebirths = math.max(0, math.floor(tonumber(player:GetAttribute("Rebirths")) or 0))
-		local coins = math.max(0, math.floor(tonumber(player:GetAttribute("Coins")) or 0))
-		if coins < playerProgress.RebirthCost(rebirths) then
-			self:RefreshRebirthPanel()
-			return
-		end
-
-		self.RebirthBusy = true
-		self:RefreshRebirthPanel()
-		local invoked, ok, err = pcall(function()
-			return ReplicatedStorage.ReEvent.ReFunction:InvokeServer("Rebirth")
-		end)
-		self.RebirthBusy = false
-		self:RefreshRebirthPanel()
-		self:RefreshShopPanel()
-		self:RefreshMountainsPanel()
-		if not invoked or not ok then
-			warn("[CLIENT]: Rebirth failed:", if invoked then err else ok)
-		end
+		self:PressRebirth(buy)
 	end)
+end
+
+-- Dev hook (PlayerGui attribute "DevPress"): "<Snowballs|Blasters>:<item>" or "Rebirth" opens that
+-- panel and presses the button as a click would, so a playtest eval can buy without FireServer.
+function api:DevPress(request)
+	if request == "Rebirth" then
+		local buy = findRebirthBuy(self:OpenPanel("Rebirth"))
+		if buy then
+			self:PressRebirth(buy)
+		end
+		return
+	end
+	local tab, name = string.match(request, "^(%a+):(.+)$")
+	local catalog = if tab == "Blasters" then snowballLaunchers elseif tab == "Snowballs" then snowballs else nil
+	local def = catalog and catalog:GetByName(name)
+	local panel = def and self:OpenPanel("Shop")
+	if not panel then
+		warn("[CLIENT]: DevPress: unknown request", request)
+		return
+	end
+	self:SetShopTab(panel, tab)
+	local scroll = findShopScroll(panel)
+	local item = scroll and scroll:FindFirstChild(def.Name)
+	local buy = item and findShopBuy(item)
+	if buy then
+		self:PressShopBuy(buy, item, def, tab)
+	end
 end
 
 function api:OpenPanel(name)
@@ -1617,9 +1771,13 @@ local function noteRunCoins(self, amount)
 		return
 	end
 
+	-- Count only the increases since the last update, so spending mid-ride (a shop buy)
+	-- never pulls the readout down or hides later earnings.
 	local total = math.max(0, math.floor(tonumber(amount) or 0))
-	local made = math.max(0, total - (self.RunStartCoins or 0))
+	local last = self.RunLastCoins or total
+	self.RunLastCoins = total
 	local previous = self.RunCoinsShown or 0
+	local made = previous + math.max(0, total - last)
 	if made == previous and self.CoinsMadeLabel and self.CoinsMadeLabel.Parent then
 		return
 	end
@@ -1663,6 +1821,7 @@ function api:BeginRunReadout()
 	local player = Players.LocalPlayer
 	self.RunActive = true
 	self.RunStartCoins = math.max(0, math.floor(tonumber(player:GetAttribute("Coins")) or 0))
+	self.RunLastCoins = self.RunStartCoins
 	self.RunCoinsShown = 0
 	settleCoinPop(self)
 
@@ -1924,6 +2083,13 @@ function api:Initialize()
 			self:TogglePanel(name)
 		end
 	end))
+	table.insert(self.Connections, playerGui:GetAttributeChangedSignal("DevPress"):Connect(function()
+		local request = playerGui:GetAttribute("DevPress")
+		if typeof(request) == "string" and request ~= "" then
+			playerGui:SetAttribute("DevPress", nil)
+			self:DevPress(request)
+		end
+	end))
 	table.insert(self.Connections, Players.LocalPlayer:GetAttributeChangedSignal("UnlockedMountains"):Connect(function()
 		self:RefreshMountainsPanel()
 	end))
@@ -1940,6 +2106,7 @@ function api:Initialize()
 	end
 	self:RefreshShopPanel()
 	self:WatchCircles()
+	PurchaseFX.WatchPlayers()
 
 	print("[CLIENT]: HUD ready")
 end
