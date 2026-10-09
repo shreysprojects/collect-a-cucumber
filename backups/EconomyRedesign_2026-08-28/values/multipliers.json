@@ -1,0 +1,176 @@
+{
+  "generated": "2026-08-28",
+  "sourceDir": "backups/EconomyRedesign_2026-08-28/scripts",
+  "currencies": {
+    "Cucumbers": {
+      "id": "Cucumbers",
+      "leaderstatName": "Cukes",
+      "note": "Currency id and save key stay 'Cucumbers'; displayed leaderstat renamed 'Cukes' 2026-07-30 (CurrencyHandler.lua:22-28). Stored as NumberValue (double) - no cap, precision loss past 2^53 (InstanceValues.lua:38)."
+    },
+    "Coins": {
+      "id": "Coins",
+      "leaderstatName": "Coins",
+      "note": "NumberValue (double), no cap (InstanceValues.lua:33). Sell vendor converts Cukes->Coins 1:1 pre-multiplier (SellVendorServer.lua:78-81)."
+    },
+    "BossShards": {
+      "id": "BossShards",
+      "note": "Not a leaderstat; per-zone counters in profile.BossShards, 10 forge that zone's boss pet (BreakablesService.lua:1026-1045). Spent on forge."
+    },
+    "Orbs": {
+      "note": "Legacy name only - code variable 'Orbs' points at the Cukes leaderstat; Leaderboards__Orbs.lua is the cucumber leaderboard."
+    }
+  },
+  "addCurrency": {
+    "file": "ServerStorage__ServerController__CurrencyHandler.lua",
+    "signature": "AddCurrency({Player, Currency, Amount, HasTotal, WasPurchase, MultipliersApplied, Hide}) -> finalAmount (line 105-179)",
+    "multiplierFunction": "GetMulipliers (typo is canonical) line 66-103; skipped entirely when WasPurchase OR MultipliersApplied (line 72)",
+    "flagSemantics": {
+      "WasPurchase": "skips multipliers AND season accrual AND offline NoteEarnings AND vault skim (lines 72, 140-156)",
+      "MultipliersApplied": "skips multipliers ONLY; still accrues SeasonService.AddSeasonStat etc. (used by vault collect pads deliberately, VaultService.lua:1667-1672)",
+      "HasTotal": "also increments Total<Currency> in profile TotalStats (line 171-173)",
+      "Hide": "suppresses the client 'Indicate' popup (line 158-160)"
+    },
+    "rounding": "NumberController.RoundNumber(Amount, 1) = math.round to whole number (CurrencyHandler.lua:102, NumberController.lua:15-20)",
+    "capsOrOverflowGuards": "NONE. leaderstats '+=' on NumberValue doubles; no clamp, no int-limit guard. RemoveCurrency (line 181-206) has no floor - balances can go negative.",
+    "guardQuirk": "If leaderstats or PlayerData is missing (join window), the grant is silently dropped (line 115-119)."
+  },
+  "multiplierSources": [
+    {"name": "Rebirths", "type": "permanent", "currency": "Cucumbers+Coins", "magnitude": "x(1 + 0.5*rebirths), cap 50 rebirths => x1..x26", "stacking": "multiplicative", "file": "RebirthService.lua", "line": "17,175-180; applied CurrencyHandler.lua:77,80,95"},
+    {"name": "2x Cucumbers gamepass", "type": "gamepass", "currency": "Cucumbers", "magnitude": "x2", "stacking": "multiplicative", "file": "CurrencyHandler.lua", "line": "81-83; id in ProductController.lua:31-36"},
+    {"name": "Pet Multi1", "type": "pets", "currency": "Cucumbers", "magnitude": "x(1 + sum of equipped pets' Multi1); pet Multi1 ranges 1..30 (x1.5 on golden-evolved)", "stacking": "multiplicative vs other sources; additive across equipped pets", "file": "CurrencyHandler.lua:84; EquipService.lua:45-58; InstanceValues.lua:142-145; PetDefaults.lua:82", "line": "84"},
+    {"name": "2x Cucumbers boost", "type": "timed boost", "currency": "Cucumbers", "magnitude": "x2 while UserData.Boosts['2x Cucumbers'] > 0", "stacking": "multiplicative with gamepass of same name (=> x4 together); durations stack additively", "file": "CurrencyHandler.lua:85-87; BoostHandler.lua:50-85", "line": "85"},
+    {"name": "GROUP FRENZY membership", "type": "group", "currency": "Cucumbers", "magnitude": "x1.5, permanent, free", "stacking": "multiplicative", "file": "CurrencyHandler.lua:88-93; GroupOfferService.lua:10,45-79 (group 14583228); ChestHandler.lua:149-165", "line": "91-92"},
+    {"name": "Pet Multi2 (coin drops)", "type": "pets", "currency": "Coins (direct drops in Break only)", "magnitude": "x(1 + sum equipped Multi2), applied OUTSIDE AddCurrency", "stacking": "multiplies BonusCoins before AddCurrency, which then applies rebirth again", "file": "BreakablesService.lua", "line": "1127-1134"},
+    {"name": "Friend boost", "type": "social", "currency": "indirect (pickaxe damage)", "magnitude": "+10% pickaxe damage per friend in server, cap 5 (x1.5)", "stacking": "multiplies damage, not currency; excluded from time-skip/offline quotes", "file": "BreakablesService.lua", "line": "1503-1558; TimeSkipRateService.lua:216-218"},
+    {"name": "Zone economy", "type": "progression", "currency": "Cucumbers (base reward)", "magnitude": "reward x Orb x Multi per zone: Spawn 1x1 .. Narmek 7x6 (=42x)", "stacking": "multiplies base before the personal stack", "file": "Dictionaries__Doors.lua", "line": "29-239; applied BreakablesService.lua:1065-1067, CollectionService.lua:178"},
+    {"name": "Boss x6", "type": "event", "currency": "Cucumbers", "magnitude": "x6 per-HP payout (kill or escape)", "stacking": "multiplies base", "file": "BreakablesService.lua", "line": "1070-1072, 3903-3912"},
+    {"name": "Mutation / Prismatic / Lightning", "type": "event", "currency": "Cucumbers", "magnitude": "mutation x25, PRISMATIC x100, lightning x(rolled bolt multiplier)", "stacking": "multiplies base", "file": "BreakablesService.lua", "line": "1074-1103"},
+    {"name": "Vault upgrade level", "type": "vault", "currency": "Coins (vault rate)", "magnitude": "rate x 1.18^(level-1); FROZEN x0.8; golden x3, diamond x8, mutation x5/PRISMATIC x20, charged x4; biome tier x1.6^(tier-1)", "stacking": "multiplies the stored cucumber's coins/sec", "file": "CarryService.lua", "line": "76-88, 417-423"}
+  ],
+  "gamepasses": [
+    {"name": "2x Cucumbers", "id": 1902852565, "effect": "x2 all multiplied cucumber income", "detection": "ProductController.CheckGamepassCached (hot path; pessimistic false until async check lands)", "file": "ProductController.lua:31-36, 304-330; CurrencyHandler.lua:81"},
+    {"name": "Sprint", "id": 1899183262, "effect": "2x walkspeed (no direct income)", "file": "ProductController.lua:37-66"},
+    {"name": "Jetpack", "id": 1919180303, "effect": "mobility", "file": "ProductController.lua:67-80"},
+    {"name": "Autofarm", "id": 1919162313, "effect": "AFK auto-strike farming (indirect income)", "file": "ProductController.lua:81-94; BreakablesService.lua:1054-1055"},
+    {"name": "Auto Egg Hatch", "id": 1898883147, "effect": "egg QoL", "file": "ProductController.lua:95-100"},
+    {"name": "Triple Egg Hatch", "id": 1903566581, "effect": "hatch 3 eggs at once", "file": "ProductController.lua:101-106"},
+    {"name": "Instant Egg Hatch", "id": 1911700950, "effect": "skip hatch animation", "file": "ProductController.lua:107-112"},
+    {"name": "+75 Pet Storage", "id": 1899609194, "effect": "MaxInventory += 75 (applied on purchase commit)", "file": "ProductController.lua:113-127"},
+    {"name": "+4 Pet Slots", "id": 1903134517, "effect": "+4 equipped-pet slots via Upgrades.SetPetEquips PassBonus -> more Multi1", "file": "ProductController.lua:128-140; Dictionaries__Upgrades.lua:66-81"}
+  ],
+  "gamepassBypass": {"userIds": [1, 1660029941, 1196256323], "effect": "own ALL passes free (test accounts)", "file": "ProductController.lua:24-28"},
+  "products": [
+    {"name": "2x Cucumbers Boost 15 Minutes", "id": 3609774448, "effect": "+900s of x2 cucumber boost", "file": "ProductController.lua:148-151; ProductHandler.lua:57-69"},
+    {"name": "2x Cucumbers Boost 1 Hour", "id": 3609774551, "effect": "+3600s boost", "file": "ProductController.lua:152-155"},
+    {"name": "2x Cucumbers Boost 5 Hours", "id": 3609774625, "effect": "+18000s boost", "file": "ProductController.lua:156-159"},
+    {"name": "Red Demon pet", "id": 3609774225, "effect": "pet Multi1/Multi2 25, Damage 500", "file": "ProductController.lua:194-197; Dictionaries__Pets.lua:704-717"},
+    {"name": "Purple Hydra pet", "id": 3609774320, "effect": "pet Multi1/Multi2 30, Damage 500", "file": "ProductController.lua:198-200; Dictionaries__Pets.lua:719-732"},
+    {"name": "Heavenly Angel pet", "id": 3609773882, "effect": "pet Multi1/Multi2 30, Damage 500", "file": "ProductController.lua:202-205; Dictionaries__Pets.lua:733-746"},
+    {"name": "Starter Pack", "id": 3609836817, "effect": "20,000 Coins flat (WasPurchase) + Red Demon pet; one-time, expiry burned on purchase", "file": "ProductController.lua:176-187; ProductHandler.lua:87-116"},
+    {"name": "+10 Pet Inventory", "id": 3609836686, "effect": "MaxInventory +10 (persisted increment)", "file": "ProductController.lua:211-213; ProductHandler.lua:157-162"},
+    {"name": "+2 Pets Equip", "id": 3609836815, "effect": "MaxEquipIncrement +2, capped at +6 total", "file": "ProductController.lua:215-217; ProductHandler.lua:164-175"},
+    {"name": "Time Skip 1 Minute", "id": 3609921759, "seconds": 60, "effect": "grants Quote(rate*60) cucumbers flat; rate already fully multiplied", "file": "ProductController.lua:222-229; TimeSkipRateService.lua:310-337"},
+    {"name": "Time Skip 5 Minutes", "id": 3609921779, "seconds": 300},
+    {"name": "Time Skip 30 Minutes", "id": 3609921799, "seconds": 1800},
+    {"name": "Time Skip 5 Hours", "id": 3609921818, "seconds": 18000},
+    {"name": "Time Skip 1 Day", "id": 3609921841, "seconds": 86400},
+    {"name": "Time Skip 1 Week", "id": 3609921920, "seconds": 604800},
+    {"name": "Vault Time Skips (6 durations)", "id": 0, "effect": "PLACEHOLDER ids - skipped by ProductHandler until dashboard products exist; would grant vault coins/sec x seconds", "file": "ProductController.lua:236-243; VaultTimeSkipService.lua; ProductHandler.lua:140-152"},
+    {"name": "Skip Boss/Event Requirement", "id": 3709040752, "effect": "BreakablesService.GrantRequirementSkip", "file": "ProductController.lua:245-247; ProductHandler.lua:179-181"},
+    {"name": "Unlock Portal Now!", "id": 3709119039, "effect": "PortalUnlockService.GrantPending", "file": "ProductController.lua:249-251; ProductHandler.lua:185-187"},
+    {"name": "Nuke Server", "id": 3610280695, "effect": "purchaser gets 100% damage credit for EVERY live breakable in server -> full multiplied cucumber payout for the entire field", "file": "NukeService.lua:12,386; ProductHandler.lua:191-193; BreakablesService.lua:1324-1349"}
+  ],
+  "boosts": {
+    "types": ["2x Cucumbers (only boost in use)"],
+    "magnitude": "x2 cucumbers while remaining seconds > 0 (binary; magnitude never stacks)",
+    "durationStacking": "additive: AddBoost adds seconds to remaining (BoostHandler.lua:68-85)",
+    "tick": "Initialize loop decrements 1/sec per boost key while player online (BoostHandler.lua:88-108); time paused while offline",
+    "sources": ["Robux products 15m/1h/5h", "Playtime reward #3: 10 min free (PlaytimeRewards.lua:150-154)"],
+    "validateCrashRisk": "ValidateBoosts does Boosts[BoostName] > 0 with no nil guard (BoostHandler.lua:58) - errors if the key is absent from the profile"
+  },
+  "offline": {
+    "file": "OfflineService.lua",
+    "pays": "Cucumbers (into OfflineData.Vault; claimed via ClaimVault -> AddCurrency WasPurchase flat, line 80-93)",
+    "tiers": [
+      {"window": "first 6h away", "credit": 0.50, "line": "15-16"},
+      {"window": "next 10h away (until 6h of full-rate income is banked)", "credit": 0.30, "line": "17-26"}
+    ],
+    "caps": {"maxAwaySecondsCredited": 57600, "maxEquivalentFullRateSeconds": 21600, "minAwaySeconds": 120},
+    "rate": "PET-ONLY rate (TimeSkipRateService.GetPetRate) checkpointed every 30s; includes ALL cucumber multipliers at checkpoint time (OfflineService.lua:54-70; TimeSkipRateService.lua:300-308)",
+    "petInteraction": "0 income with no pets equipped (GetPetStrike returns 0, TimeSkipRateService.lua:230-241); pickaxe rate deliberately excluded 2026-08-22"
+  },
+  "playtime": [
+    {"index": 1, "time": "30s", "reward": "2,500 Coins FLAT (MultipliersApplied)", "line": "PlaytimeRewards.lua:139-143"},
+    {"index": 2, "time": "2m", "reward": "1x Food Cuke Egg (real hatch roll)", "line": "145-147"},
+    {"index": 3, "time": "5m", "reward": "10 min of 2x Cucumbers boost", "line": "149-154"},
+    {"index": 4, "time": "10m", "reward": "15-minute time skip (multiplied quote, flat grant)", "line": "156-161"},
+    {"index": 5, "time": "18m", "reward": "3x Food Cuke Eggs", "line": "163-165"},
+    {"index": 6, "time": "30m", "reward": "Blazing Pickle pet (Multi1/Multi2 8, Damage 100)", "line": "167-175; Dictionaries__Pets.lua:1063"},
+    {"index": 7, "time": "45m", "reward": "+1 FREE rebirth (permanent +50% income, no cost/reset)", "line": "177-181; RebirthService.lua:143-173"},
+    {"index": 8, "time": "1h", "reward": "2-hour time skip", "line": "183-188"},
+    {"index": 9, "time": "1h30m", "reward": "King Cuke pet (Multi1/Multi2 15, Damage 300)", "line": "190-197; Dictionaries__Pets.lua:1071"}
+  ],
+  "playtimeQuirk": "SESSION-ONLY ladder: timer and claim set reset on every rejoin (PlaytimeRewards.lua:9-13, 211-214) - free rebirth and both exclusive pets are re-earnable every session, indefinitely.",
+  "chests": [
+    {"name": "Treasure", "zone": "Spawn/Treasure", "cooldown": 43200, "reward": {"Coins": 1500}, "type": "Daily", "line": "Dictionaries__Chests.lua:18-30"},
+    {"name": "Volcano", "zone": "Volcano", "cooldown": 43200, "reward": {"Coins": 15000}, "type": "Daily", "line": "31-43"},
+    {"name": "Samurai", "zone": "Samurai", "cooldown": 43200, "reward": {"Coins": 4000}, "type": "Daily", "line": "44-56"},
+    {"name": "Snow", "zone": "Snow", "cooldown": 43200, "reward": {"Coins": 10000}, "type": "Daily", "line": "57-69"},
+    {"name": "Group", "zone": "Spawn (group chest)", "cooldown": 43200, "reward": {"Coins": 1000}, "type": "Group (requires group 14583228; refreshes InGroupFrenzy attr)", "line": "70-82; ChestHandler.lua:148-166"},
+    {"name": "Daily", "zone": "Spawn", "cooldown": 43200, "reward": {"Coins": 500}, "type": "Daily", "line": "83-95"}
+  ],
+  "chestsNote": "All payouts FLAT (WasPurchase, ChestHandler.lua:33-37); per-player cooldown persisted in profile.Chests; collection fires QuestChestCollected for the quest board.",
+  "season": {
+    "enabled": false,
+    "masterSwitch": "SEASON_ENABLED = false (SeasonService.lua:16)",
+    "length": "7 days, epoch 1783296000 (lua:19-20)",
+    "xpSources": "AddSeasonStat(Player, Currency, Amount) called from AddCurrency for every NON-WasPurchase grant of Cucumbers or Coins - i.e. post-multiplier earned amounts (CurrencyHandler.lua:140-144; SeasonService.lua:76-84)",
+    "rewards": {
+      "CucumbersChampion": {"pet": "Golden Cucumber", "stats": "Multi1/Multi2 8.2, Damage 400", "extra": "GoldenChampion crown + aura"},
+      "CoinsChampion": {"pet": "Solid Gold Coin", "stats": "Multi1/Multi2 4.4, Damage 120"},
+      "CucumbersTop10": {"pet": "Silver Pickle", "stats": "Multi1/Multi2 2.2, Damage 16"}
+    },
+    "incomeEffect": "None directly; reward pets add Multi1/Multi2 when equipped.",
+    "line": "SeasonService.lua:24-28, 159-196"
+  },
+  "goals": [
+    {"name": "Smash 10 cucumbers", "coins": 200},
+    {"name": "Hatch your first egg", "coins": 400},
+    {"name": "Sell 2,500 cucumbers to the vendor", "coins": 600},
+    {"name": "Smash a GOLDEN cucumber", "coins": 1000},
+    {"name": "Unlock The Wild West", "coins": 2000}
+  ],
+  "goalsNote": "Flat (WasPurchase, HasTotal=false) - GoalService.lua:17-23, 63-87",
+  "streak": {
+    "rewards": [300, 500, 800, 1200, 1800, 2600, 4000],
+    "note": "Coins on daily login, day 7 value repeats; missed day resets to day 1. Flat (WasPurchase). StreakService.lua:15, 31-45"
+  },
+  "otherGrants": [
+    {"name": "Breakable smash", "detail": "Type.Reward x zoneOrb x zoneMulti (x6 boss, x25 mutation, x100 PRISMATIC, xN lightning), split by damage share, then FULL cucumber multiplier stack in AddCurrency", "file": "BreakablesService.lua:1065-1123"},
+    {"name": "Direct coin drops", "detail": "Type.BonusCoins x zoneMulti x share x petMulti2 -> AddCurrency (rebirth applies again)", "file": "BreakablesService.lua:1127-1134"},
+    {"name": "Boss escape payout", "detail": "same 6x per-HP rate as a kill, full multiplier path", "file": "BreakablesService.lua:3901-3913"},
+    {"name": "Boss pickup chunks", "detail": "500 base Cukes or Coins per chunk, FULL multiplier path (no WasPurchase)", "file": "BreakablesService.lua:3187, 3208-3214"},
+    {"name": "Collection orbs", "detail": "zoneOrb x zoneMulti cucumbers per orb, full multiplier path", "file": "CollectionService.lua:177-180"},
+    {"name": "CUCUMBER SMASH podium", "detail": "winner: minigame spinner; runner-up: 5 min of own production, flat", "file": "SmashEventService.lua:54-81"},
+    {"name": "Minigame reward spinner", "detail": "cucumber cards 2/5/15/30 min production (flat), coin cards from vault production (flat), boss shards 1/3, food egg", "file": "MinigameCompletionService.lua:55-150"},
+    {"name": "Quest board claims", "detail": "per quest: rolled 1/3/5/10-min time skip of cucumbers (TimeSkipRateService.Grant) AND vault coins (min 500), flat; 3 quests per 6h cycle", "file": "QuestBoardService.lua:40-46, 130-139"},
+    {"name": "Vault collect pads", "detail": "stored cucumbers print coins/sec = EarnRate x 1.18^(level-1); pad payout FLAT via MultipliersApplied but still season-tracked", "file": "VaultService.lua:1647-1682; CarryService.lua:417-428"},
+    {"name": "Carried-cucumber sale", "detail": "vendor pays EffectiveRate x 250 coins, no multipliers", "file": "SellVendorServer.lua:105-151; CarryService.lua:427-429"},
+    {"name": "Sell all Cukes", "detail": "Cukes -> Coins 1:1, then coin path applies rebirth multiplier", "file": "SellVendorServer.lua:70-90"},
+    {"name": "Pet selling", "detail": "PetSellValues.GetValue per pet, flat (MultipliersApplied)", "file": "SellVendorServer.lua:170-290"},
+    {"name": "Pet index milestones", "detail": "500 x milestone# coins per 5 pets discovered, flat", "file": "IndexService.lua:14-15, 61-74"},
+    {"name": "Tutorial cuke top-up", "detail": "one-time grant up to cheapest vault upgrade cost, flat", "file": "TutorialProgressServer.lua:131-155"}
+  ],
+  "stackingFormulas": {
+    "Cucumbers": "final = round(base x (1 + 0.5xRebirths) x (2 if 2xCukes gamepass) x Pets.Multi1 x (2 if 2xCukes boost active) x (1.5 if in group)) ; skipped when WasPurchase/MultipliersApplied",
+    "Coins": "final = round(base x (1 + 0.5xRebirths)) ; Multi2 applies only pre-AddCurrency on direct Break() coin drops"
+  },
+  "rangeEstimates": {
+    "Cucumbers": {
+      "freshPlayer": "x1",
+      "freeCeiling": "~x9,000-13,500 (26 rebirth x ~115 Multi1 [7 slots, best free pets] x2 boost x1.5 group; no gamepass)",
+      "whaleCeiling": "~x45,000 realistic; ~x119,500 theoretical (26 x 2 x 766 [17 slots x golden 45] x 2 x 1.5)"
+    },
+    "Coins": {"range": "x1..x26 (rebirths only) at AddCurrency; direct drops additionally x Multi2 (up to ~x287+)"}
+  }
+}
