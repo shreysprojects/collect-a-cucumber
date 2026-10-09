@@ -12,6 +12,11 @@
 	Background spans ~19 %..84 % of the screen at any size, it is height-bound by
 	its 1.5 aspect), where MainUI's level bar is hidden while a panel is open.
 
+	Notify.AvoidAbove(guiObject) keeps the stack above a HUD element while it shows:
+	the HUD registers its bottom dock (the level bar), ClientMain the Stop button and
+	ChargeHint its "HOLD TO LAUNCH" label, so a toast never covers them. With all of
+	them hidden (a panel is open) the stack falls back to POSITION, below the panels.
+
 	One ScreenGui "PurchaseNotify" (IgnoreGuiInset, DisplayOrder 2000: above the
 	launch buttons and race bar at 1000). Text is TextScaled and capped at
 	TEXT_HEIGHT of the screen (MAX_TEXT_PX), so a short message is one big line and
@@ -50,9 +55,11 @@ Notify.DISPLAY_ORDER = 2000
 Notify.MAX_STACK = 3
 Notify.STACK_GAP = 0.012 -- of the screen height
 Notify.SHIFT_TIME = 0.12
+Notify.AVOID_GAP = 0.012 -- of the screen height between the newest toast and the HUD element it stays above
 
 local gui = nil
 local entries = {} -- oldest .. newest: { Label, Stroke, Limit, Scale, Tweens, Placed }
+local avoids = {} -- [GuiObject] = connections: HUD elements the stack stays above while they show
 
 local function textPx()
 	return math.clamp(gui.AbsoluteSize.Y * Notify.TEXT_HEIGHT, 12, Notify.MAX_TEXT_PX)
@@ -69,6 +76,39 @@ local function heightOf(entry)
 	return math.max(textPx(), entry.Label.TextBounds.Y)
 end
 
+-- Visible through every GuiObject ancestor, inside an enabled LayerCollector.
+local function isShown(object)
+	local node = object
+	while node do
+		if node:IsA("LayerCollector") then
+			return node.Enabled
+		end
+		if node:IsA("GuiObject") and not node.Visible then
+			return false
+		end
+		node = node.Parent
+	end
+	return false
+end
+
+-- The lowest centre y (this gui's space) the newest toast may take: AVOID_GAP above the
+-- highest registered HUD element that shows right now, or nil when none does.
+local function avoidLimit(newestHalf)
+	local top = nil
+	for object in avoids do
+		if object.Parent and isShown(object) then
+			local objectTop = object.AbsolutePosition.Y - gui.AbsolutePosition.Y
+			if not top or objectTop < top then
+				top = objectTop
+			end
+		end
+	end
+	if not top then
+		return nil
+	end
+	return top - Notify.AVOID_GAP * gui.AbsoluteSize.Y - newestHalf
+end
+
 local function layout(animate)
 	if not gui then
 		return
@@ -76,6 +116,13 @@ local function layout(animate)
 	local screenHeight = gui.AbsoluteSize.Y
 	local gap = Notify.STACK_GAP * screenHeight
 	local y = Notify.POSITION.Y.Scale * screenHeight + Notify.POSITION.Y.Offset
+	local newest = entries[#entries]
+	if newest then
+		local limit = avoidLimit(heightOf(newest) * 0.5)
+		if limit and limit < y then
+			y = limit
+		end
+	end
 	local previousHalf = nil
 	for index = #entries, 1, -1 do
 		local entry = entries[index]
@@ -236,6 +283,52 @@ end
 
 function Notify.Info(text, seconds)
 	Notify.Show(text, Notify.COLORS.Info, seconds)
+end
+
+-- Keep the stack above this GuiObject whenever it (and every ancestor) is visible: the level
+-- bar, the Stop button, the launch hint. The stack re-lays out as it shows, hides or moves.
+function Notify.AvoidAbove(object)
+	if not (object and object:IsA("GuiObject")) or avoids[object] then
+		return
+	end
+	local connections = {}
+	avoids[object] = connections
+	local function relayout()
+		if gui then
+			layout(true)
+		end
+	end
+	local node = object
+	while node and not node:IsA("LayerCollector") do
+		if node:IsA("GuiObject") then
+			table.insert(connections, node:GetPropertyChangedSignal("Visible"):Connect(relayout))
+		end
+		node = node.Parent
+	end
+	table.insert(connections, object:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
+		if gui then
+			layout(false)
+		end
+	end))
+	table.insert(connections, object.AncestryChanged:Connect(function()
+		if not object:IsDescendantOf(Players.LocalPlayer) then
+			Notify.StopAvoiding(object)
+		end
+	end))
+end
+
+function Notify.StopAvoiding(object)
+	local connections = avoids[object]
+	if not connections then
+		return
+	end
+	avoids[object] = nil
+	for _, connection in connections do
+		connection:Disconnect()
+	end
+	if gui then
+		layout(true)
+	end
 end
 
 -- The newest label, for layout checks. nil while nothing is on screen.

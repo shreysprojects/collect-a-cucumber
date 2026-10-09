@@ -11,6 +11,7 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local HUDLayout = require(ReplicatedStorage.Assets.Modules.Client.UI.HUDLayout)
+local Notify = require(ReplicatedStorage.Assets.Modules.Client.UI.Notify)
 local mountainConfig = require(ReplicatedStorage.Assets.Modules.Shared.MountainConfig)()
 
 local api = {}
@@ -50,6 +51,7 @@ function api:Initialize()
 	local charge = mountainConfig.LAUNCH.Charge
 	label.Text = (charge and charge.HintText) or "HOLD TO LAUNCH"
 	label.Visible = false
+	Notify.AvoidAbove(label) -- toasts stay above the hint while it shows
 	table.insert(self.Connections, HUDLayout.BindHint(gui))
 end
 

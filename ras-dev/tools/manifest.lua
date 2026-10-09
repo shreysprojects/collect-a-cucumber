@@ -11,7 +11,7 @@ local SCRIPTS = {
 	{"ReplicatedStorage.Assets.Modules.Client.Functions.ClientFunctions.Modules.GUIFramework.CLIENT_GUIFramework","ModuleScript",1918,2052667778},
 	{"ReplicatedStorage.Assets.Modules.Client.LaunchPropAnimations","ModuleScript",24290,419385099},
 	{"ReplicatedStorage.Assets.Modules.Client.UI.HUDLayout","ModuleScript",2885,60816307},
-	{"ReplicatedStorage.Assets.Modules.Client.UI.Notify","ModuleScript",7815,1632875868},
+	{"ReplicatedStorage.Assets.Modules.Client.UI.Notify","ModuleScript",10593,31075174},
 	{"ReplicatedStorage.Assets.Modules.Client.UI.PanelCameraEffects","ModuleScript",2493,94442354},
 	{"ReplicatedStorage.Assets.Modules.Client.UI.PanelManager","ModuleScript",1452,731704599},
 	{"ReplicatedStorage.Assets.Modules.Client.UI.PurchaseFX","ModuleScript",23942,1954715866},
@@ -80,10 +80,10 @@ local SCRIPTS = {
 	{"ServerStorage.Modules.SnapMountainModule","ModuleScript",1997,933605589},
 	{"ServerStorage.Modules.SnowField","ModuleScript",8962,2114115820},
 	{"ServerStorage.Modules.UserInterfaces.ChargeBar","ModuleScript",1515,1201903706},
-	{"ServerStorage.Modules.UserInterfaces.ChargeHint","ModuleScript",1792,206830757},
-	{"ServerStorage.Modules.UserInterfaces.HUD","ModuleScript",66406,490264686},
+	{"ServerStorage.Modules.UserInterfaces.ChargeHint","ModuleScript",1937,369415745},
+	{"ServerStorage.Modules.UserInterfaces.HUD","ModuleScript",66580,1087985301},
 	{"ServerStorage.Modules.UserInterfaces.RaceProgressGui","ModuleScript",18247,2093692540},
-	{"StarterPlayer.StarterPlayerScripts.ClientMain","LocalScript",6461,768361192},
+	{"StarterPlayer.StarterPlayerScripts.ClientMain","LocalScript",6620,846678363},
 	{"StarterPlayer.StarterPlayerScripts.ClientMain.Utilities.Variables","ModuleScript",1641,1097372853},
 }
 local DIRS = {
