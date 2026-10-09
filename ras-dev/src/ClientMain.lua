@@ -24,6 +24,7 @@ local func = vars.Functions
 local placeInfo = vars.PlaceInfo
 local mountainConfig = require(ReplicatedStorage.Assets.Modules.Shared.MountainConfig)()
 local UIUtils = require(ReplicatedStorage.Assets.Modules.Client.UI.UIUtils)
+local HUDLayout = require(ReplicatedStorage.Assets.Modules.Client.UI.HUDLayout)
 
 print("[CLIENT]: You're in:", placeInfo.Index)
 
@@ -32,34 +33,68 @@ if func.SetupPlayerProgress then
 	func:SetupPlayerProgress()
 end
 
-local BUTTON_Y = 0.86 -- above the HUD level bar (y 0.88-0.98)
-local STOP_SIZE = Vector2.new(260, 80)
-local STEER_SIZE = Vector2.new(100, 80)
-local STEER_GAP = 16
+local BUTTON_Y = 1 -- bottom of the uniformly scaled ride-control group
+local STOP_SIZE = Vector2.new(160, 44)
+local STEER_SIZE = Vector2.new(44, 44)
+local STEER_GAP = 35
 
 local function styleButton(button, text, background, strokeColor, position, size, anchor, textSize)
 	button.AnchorPoint = anchor or Vector2.new(0.5, 1)
 	button.Position = position or UDim2.new(0.5, 0, BUTTON_Y, 0)
 	button.Size = size or UDim2.fromOffset(STOP_SIZE.X, STOP_SIZE.Y)
-	button.BackgroundColor3 = background
+	button.BackgroundTransparency = 1
 	button.BorderSizePixel = 0
-	button.Font = Enum.Font.SourceSansBold
-	button.Text = text
-	button.TextColor3 = Color3.fromRGB(28, 48, 72)
-	button.TextSize = textSize or 32
 	button.ZIndex = 10
 	button.Active = true
-	button.AutoButtonColor = true
+	button.AutoButtonColor = false
 	button.Selectable = false
-
-	local corner = Instance.new("UICorner")
-	corner.CornerRadius = UDim.new(0, 16)
-	corner.Parent = button
-
-	local stroke = Instance.new("UIStroke")
-	stroke.Thickness = 2
-	stroke.Color = strokeColor
-	stroke.Parent = button
+	for _, child in button:GetChildren() do
+		if child:IsA("UICorner") or child:IsA("UIStroke") or child:IsA("UIGradient") or child.Name == "Face" or child.Name == "Label" then
+			child:Destroy()
+		end
+	end
+	if button.Name == "Stop" then
+		button.Text = ""
+		local face = Instance.new("Frame")
+		face.Name = "Face"
+		face.Size = UDim2.fromScale(1, 1)
+		face.BackgroundColor3 = Color3.new(1, 1, 1)
+		face.BorderSizePixel = 0
+		face.ZIndex = 10
+		face.Parent = button
+		local corner = Instance.new("UICorner", face)
+		corner.CornerRadius = UDim.new(0, 8)
+		local outline = Instance.new("UIStroke", face)
+		outline.Thickness = 3
+		outline.Color = Color3.fromRGB(24, 24, 28)
+		outline.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+		local gradient = Instance.new("UIGradient", face)
+		gradient.Rotation = 90
+		gradient.Color = ColorSequence.new(Color3.fromRGB(255, 69, 61), Color3.fromRGB(219, 14, 17))
+		local label = Instance.new("TextLabel")
+		label.Name = "Label"
+		label.BackgroundTransparency = 1
+		label.Size = UDim2.fromScale(1, 1)
+		label.Font = Enum.Font.FredokaOne
+		label.Text = "STOP"
+		label.TextSize = 26
+		label.TextColor3 = Color3.new(1, 1, 1)
+		label.ZIndex = 12
+		label.Parent = button
+		local textOutline = Instance.new("UIStroke", label)
+		textOutline.Thickness = 2
+		textOutline.Color = Color3.fromRGB(24, 24, 28)
+	else
+		button.Font = Enum.Font.SourceSansBold
+		button.Text = text
+		button.TextColor3 = Color3.fromRGB(245, 250, 252)
+		button.TextSize = 44
+		button.TextStrokeTransparency = 1
+		local outline = Instance.new("UIStroke", button)
+		outline.Thickness = 3
+		outline.Color = Color3.fromRGB(39, 51, 56)
+		outline.LineJoinMode = Enum.LineJoinMode.Round
+	end
 end
 
 local playerGui = Players.LocalPlayer:WaitForChild("PlayerGui")
@@ -77,12 +112,20 @@ gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 gui.Enabled = true
 gui.Parent = playerGui
 
+local rideControls = Instance.new("Frame")
+rideControls.Name = "RideControls"
+rideControls.BackgroundTransparency = 1
+rideControls.BorderSizePixel = 0
+rideControls.Parent = gui
+HUDLayout.BindRide(rideControls, gui)
+HUDLayout.BindHint(playerGui:WaitForChild("ChargeHint"))
+
 -- Launching is hold-to-charge now (CLIENT_Snowball.SetupChargeLaunch).
 -- Ride controls: Left / Stop / Right, created here so they sit above the HUD.
 local stopButton = Instance.new("TextButton")
 stopButton.Name = "Stop"
 stopButton.Visible = false
-stopButton.Parent = gui
+stopButton.Parent = rideControls
 styleButton(stopButton, "Stop", Color3.fromRGB(255, 214, 214), Color3.fromRGB(200, 110, 110))
 
 local steerOffset = STOP_SIZE.X / 2 + STEER_GAP
@@ -92,7 +135,7 @@ local steerStroke = Color3.fromRGB(90, 140, 190)
 local leftButton = Instance.new("TextButton")
 leftButton.Name = "Left"
 leftButton.Visible = false
-leftButton.Parent = gui
+leftButton.Parent = rideControls
 styleButton(
 	leftButton,
 	"◀",
@@ -107,7 +150,7 @@ styleButton(
 local rightButton = Instance.new("TextButton")
 rightButton.Name = "Right"
 rightButton.Visible = false
-rightButton.Parent = gui
+rightButton.Parent = rideControls
 styleButton(
 	rightButton,
 	"▶",

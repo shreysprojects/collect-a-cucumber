@@ -29,6 +29,9 @@ local mountainConfig = require(ReplicatedStorage.Assets.Modules.Shared.MountainC
 local FLIGHT = mountainConfig.FLIGHT
 local COAST = mountainConfig.COAST or {}
 local SMASH = mountainConfig.SMASH
+local playerProgress = require(ReplicatedStorage.Assets.Modules.Shared.PlayerProgress)()
+local COMBO_COLOR = Color3.fromRGB(255, 181, 38)
+local HUDLayout = require(ReplicatedStorage.Assets.Modules.Client.UI.HUDLayout)
 local SOUNDS = mountainConfig.SOUNDS
 local PROPS = mountainConfig.PROPS
 
@@ -102,11 +105,12 @@ function api:GetCameraKick(_dt)
 end
 
 ----------------------------------------------------------------------------------------------
--- Combo counter: every smash stacks while hits keep coming. Each hit pops the
--- label big in the middle of the screen and tweens it up to a small orange label
--- at the top; it fades out ComboWindow seconds after the last hit.
+-- Each hit holds large and rocks in the middle for two seconds, then shrinks
+-- into the compact gold label below the run readouts. The extra visual hold
+-- does not extend ComboWindow for chaining hits or earning bonuses.
 ----------------------------------------------------------------------------------------------
 
+local COMBO_CENTER_HOLD = 2
 local combo = { Count = 0, Best = 0, Last = 0, Token = 0, Tweens = {} }
 
 local function ensureComboGui()
@@ -130,7 +134,7 @@ local function ensureComboGui()
 	frame.Name = "Combo"
 	frame.AnchorPoint = Vector2.new(0.5, 0.5)
 	frame.Position = UDim2.new(0.5, 0, SMASH.ComboTopY, SMASH.ComboTopOffset or 0)
-	frame.Size = UDim2.fromOffset(520, 96)
+	frame.Size = UDim2.fromOffset(520, 48)
 	frame.BackgroundTransparency = 1
 	frame.Visible = false
 	frame.Parent = gui
@@ -146,15 +150,16 @@ local function ensureComboGui()
 	label.Size = UDim2.fromScale(1, 1)
 	label.Font = Enum.Font.FredokaOne
 	label.TextScaled = false
-	label.TextSize = 64
+	label.TextSize = 32
+	label.RichText = true
 	label.Text = ""
-	label.TextColor3 = SMASH.ComboColor
+	label.TextColor3 = COMBO_COLOR
 	label.TextStrokeTransparency = 1
 	label.Parent = frame
 
 	local stroke = Instance.new("UIStroke")
-	stroke.Color = SMASH.ComboStrokeColor
-	stroke.Thickness = 4
+	stroke.Color = Color3.fromRGB(28, 26, 32)
+	stroke.Thickness = 3
 	stroke.LineJoinMode = Enum.LineJoinMode.Round
 	stroke.Parent = label
 
@@ -165,8 +170,8 @@ end
 
 local function baseComboScale()
 	local camera = workspace.CurrentCamera
-	local height = if camera then camera.ViewportSize.Y else 900
-	return math.clamp(height / 900, 0.55, 1.15)
+	local viewport = if combo.Gui then combo.Gui.AbsoluteSize elseif camera then camera.ViewportSize else Vector2.new(1301, 611)
+	return HUDLayout.GetScale(viewport) * (611 / 941)
 end
 
 -- Where the label settles: ComboTopY + ComboTopOffset at the least, and always under the
@@ -175,13 +180,14 @@ end
 -- labels' AbsolutePosition (inset-relative) is shifted by the inset to screen space.
 local function comboSettlePosition()
 	local camera = workspace.CurrentCamera
-	local height = if camera then camera.ViewportSize.Y else 900
-	local y = (SMASH.ComboTopY or 0) * height + (SMASH.ComboTopOffset or 0)
+	local viewport = if combo.Gui then combo.Gui.AbsoluteSize elseif camera then camera.ViewportSize else Vector2.new(1301, 611)
+	local hudScale = HUDLayout.GetScale(viewport)
+	local y = HUDLayout.GetTopInset(viewport) + 186 * hudScale
 	local playerGui = Players.LocalPlayer:FindFirstChild("PlayerGui")
 	local hud = playerGui and playerGui:FindFirstChild("HUD")
 	if hud then
 		local insetY = GuiService:GetGuiInset().Y
-		local halfLabel = 0.5 * 64 * baseComboScale() + 4 -- TextSize 64 under the base UIScale, plus the stroke
+		local halfLabel = 0.5 * 32 * baseComboScale() + 3 * hudScale
 		for _, name in SMASH.ComboAvoid or { "DistanceRolled", "CoinsMade" } do
 			local label = hud:FindFirstChild(name, true)
 			if label and label:IsA("GuiObject") and label.Visible and label.AbsoluteSize.Y > 0 then
@@ -194,7 +200,7 @@ local function comboSettlePosition()
 				local anchorY = label.AbsolutePosition.Y + label.AbsoluteSize.Y * label.AnchorPoint.Y
 				local grow = if pop then (SMASH.ComboAvoidPop or 1.45) else 1
 				local bottom = anchorY + restH * grow * (1 - label.AnchorPoint.Y) + insetY
-				y = math.max(y, bottom + (SMASH.ComboClearGap or 6) + halfLabel)
+				y = math.max(y, bottom + (SMASH.ComboClearGap or 6) * hudScale + halfLabel)
 			end
 		end
 	end
@@ -248,25 +254,41 @@ local function registerCombo()
 	local c = ensureComboGui()
 	cancelComboTweens()
 	local base = baseComboScale()
-	c.Label.Text = if combo.Count == 1 then "SMASH!" else string.format("x%d COMBO!", combo.Count)
+	local bonus = math.floor(math.min(math.max(combo.Count - 1, 0) * playerProgress.COMBO_BONUS, playerProgress.COMBO_BONUS_CAP) * 100 + 0.5)
+	c.Label.Text = string.format('🔥 COMBO %d <font size="26">+%d%% $</font>', combo.Count, bonus)
 	c.Label.TextColor3 = SMASH.ComboFlashColor
 	c.Label.TextTransparency = 0
 	c.Stroke.Transparency = 0
 	c.Frame.Visible = true
 	c.Frame.Position = UDim2.fromScale(0.5, SMASH.ComboStartY)
-	c.Frame.Rotation = math.random(-7, 7)
-	c.Scale.Scale = base * SMASH.ComboPopScale
+	c.Frame.Rotation = -7
+	-- Reduce the center pop by 25%, including on screens where its width is capped.
+	local viewport = c.Gui.AbsoluteSize
+	local plainText = c.Label.Text:gsub("<.->", "")
+	local textSize = game:GetService("TextService"):GetTextSize(plainText, c.Label.TextSize, c.Label.Font, Vector2.new(10000, 1000))
+	local fitScale = viewport.X * 0.85 / math.max(textSize.X + 12, 1)
+	c.Scale.Scale = math.min(base * SMASH.ComboPopScale * (64 / c.Label.TextSize), fitScale) * 0.75
 
-	local pop = TweenInfo.new(SMASH.ComboPopTime, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
-	local t1 = TweenService:Create(c.Frame, pop, { Position = comboSettlePosition(), Rotation = 0 })
-	local t2 = TweenService:Create(c.Scale, pop, { Scale = base })
-	local t3 = TweenService:Create(c.Label, TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { TextColor3 = SMASH.ComboColor })
-	combo.Tweens = { t1, t2, t3 }
-	t1:Play()
-	t2:Play()
-	t3:Play()
+	local rock = TweenService:Create(c.Frame, TweenInfo.new(0.3, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, true), { Rotation = 7 })
+	local flash = TweenService:Create(c.Label, TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { TextColor3 = COMBO_COLOR })
+	combo.Tweens = { rock, flash }
+	rock:Play()
+	flash:Play()
 
-	task.delay(SMASH.ComboWindow, function()
+	task.delay(COMBO_CENTER_HOLD, function()
+		if combo.Token ~= token or not c.Frame.Parent then
+			return
+		end
+		cancelComboTweens()
+		local pop = TweenInfo.new(SMASH.ComboPopTime, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
+		local move = TweenService:Create(c.Frame, pop, { Position = comboSettlePosition(), Rotation = 0 })
+		local shrink = TweenService:Create(c.Scale, pop, { Scale = baseComboScale() })
+		combo.Tweens = { move, shrink }
+		move:Play()
+		shrink:Play()
+	end)
+
+	task.delay(COMBO_CENTER_HOLD + SMASH.ComboWindow, function()
 		if combo.Token == token then
 			expireCombo()
 		end
@@ -1363,11 +1385,11 @@ function api:StopAirPhysics()
 			end
 		end
 	end
-	-- Ride over: let the final combo linger briefly, then clear it.
+	-- Let the last center hold and upward transition finish before clearing it.
 	if combo.Count > 0 then
-		combo.Token += 1
 		local token = combo.Token
-		task.delay(1.5, function()
+		local remainingAnimation = COMBO_CENTER_HOLD + SMASH.ComboPopTime - (os.clock() - combo.Last)
+		task.delay(math.max(1.5, remainingAnimation + 0.5), function()
 			if combo.Token == token then
 				expireCombo()
 			end
