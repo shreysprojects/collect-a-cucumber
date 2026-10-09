@@ -1,0 +1,25 @@
+=== Garden/Pond
+  @AssetId = 74220745597257
+  @Cost = 600
+  @Notes = RAISED FEATURE - NOTHING SITS BELOW z = 0, so the pond drops straight onto flat ground with no excavation and no hole to dig.  A plinth slab (0 - 0.12) carries an earth rim whose crest RISES AND FALLS between 0.66 and 0.91 and is capped with turf to 0.79 - 1.04, and THAT RIM is what holds the water: the surface sits at z 0.50, about 0.8 above the ground the prop stands on.  Footprint 9.2 (x) x 6.6 (y) at the plinth from a 9-point D.ngon_pts ring jittered hard with random.Random(20260909) - ellipse-normalised radii run 0.71 to 1.18 - and then scaled back to that footprint, so the outline is a genuinely irregular shore, NOT a polygon.  ONE POINT (index BAY_AT) is hauled right in, which makes the ring CONCAVE on the +Y (camera) side: a bay in the waterline with a spit of turf reaching into it.  Open water 7.0 x 5.0; the bank between rim and water is 0.4 - 1.3 wide.  Pond mass is 1.45 tall a
+  @Pivot_Fish1 = (1.42, 0.34, -0.16)
+  @Pivot_Fish2 = (-1.04, 0.34, 1.14)
+  @Pivot_Fish3 = (-2.12, 0.34, -0.16)
+  @Pivot_WaterSurface = (0.00, 0.50, -0.00)
+  @PropSet = plot
+  @Tris = 1565
+  Bank [MeshPart] pos (0.00, 0.44, 0.00) size (9.23, 0.89, 6.55) Ground 6d5138 T0.00 collide=true
+  Bed [MeshPart] pos (0.27, 0.13, -0.13) size (7.13, 0.06, 5.04) Slate 1d6f9c T0.00 collide=true
+  CattailHeads [MeshPart] pos (-3.05, 1.55, -0.31) size (1.47, 0.93, 3.12) Fabric 5a3d20 T0.00 collide=true
+  Fish1 [MeshPart] pos (1.32, 0.35, -0.01) size (0.78, 0.36, 1.09) SmoothPlastic ff8a3d T0.00 collide=true
+  Fish2 [MeshPart] pos (-0.96, 0.36, 0.99) size (0.63, 0.28, 1.07) SmoothPlastic f2efe4 T0.00 collide=true
+  Fish3 [MeshPart] pos (-1.98, 0.33, -0.11) size (1.00, 0.25, 0.49) SmoothPlastic ff8a3d T0.00 collide=true
+  FishEyes [MeshPart] pos (-0.34, 0.39, 0.48) size (4.26, 0.17, 2.11) SmoothPlastic 23262c T0.00 collide=true
+  FishMarks [MeshPart] pos (-0.37, 0.44, -0.17) size (3.92, 0.07, 0.42) SmoothPlastic f2efe4 T0.00 collide=true
+  LilyLotus [MeshPart] pos (-0.45, 0.64, 0.22) size (3.80, 0.24, 3.77) SmoothPlastic e878a8 T0.00 collide=true
+  LilyPads [MeshPart] pos (0.05, 0.54, -0.05) size (5.40, 0.09, 4.30) Grass 2f6b2c T0.00 collide=true
+  Reeds [MeshPart] pos (-3.04, 1.51, -0.30) size (1.44, 1.57, 3.11) Grass 4a8b34 T0.00 collide=true
+  RimGrass [MeshPart] pos (-0.00, 1.04, -0.00) size (9.03, 0.81, 6.41) LeafyGrass 5f9e42 T0.00 collide=true
+  RocksDark [MeshPart] pos (0.83, 0.97, -0.39) size (6.02, 0.71, 4.90) Slate 6b675f T0.00 collide=true
+  RocksMid [MeshPart] pos (0.78, 0.97, -0.11) size (7.25, 0.91, 5.39) Slate 8f8a80 T0.00 collide=true
+  Water [MeshPart] pos (0.26, 0.50, -0.13) size (7.05, 0.00, 4.98) Glass 2f9ec4 T0.50 collide=true

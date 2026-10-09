@@ -1,0 +1,27 @@
+=== Defences/Minigun
+  @AssetId = 135523957568572
+  @Cost = 5000000000
+  @Notes = Rig by name prefix: Base* is static, Head* yaws about the world Z axis through (0, 0) (YawPivot is the collar top at z 1.70), Spin* rolls about BarrelAxis - a line parallel to +Y through (x 0.45, z 4.10) - in the same direction as the barrels point. Built at zero yaw with the barrels level and pointing +Y. Muzzle flash at MuzzleTip (0.45, 3.80, 4.10); tracers tan / yellow. No Neon parts. Static footprint 6.84 x 6.84 (the octagon plate; the tan corner blocks stand 0.18 proud of its diagonal faces at radius 3.60). Total height 5.60 (top of the carry handle). Yaw sweep: the farthest Head*/Spin* point is a barrel-tip edge at (1.11, 3.80) = radius 3.96, so a full 360 deg spin stays inside the 8 x 8 tile; the ammo-lid corner sweeps radius 3.52. Departures from the brief, all for clearance or read: (1) the barrels end at y 3.80 (brief 4.30) and the muzzle ring sits at y 2.95..3.50 (brief 3.35..
+  @Pivot_BarrelAxis = (0.45, 4.10, -0.00)
+  @Pivot_MuzzleTip = (0.45, 4.10, -3.80)
+  @Pivot_YawPivot = (0.00, 1.70, -0.00)
+  @PropSet = defence2
+  @Tris = 1576
+  BaseBolts [MeshPart] pos (0.00, 1.13, 0.00) size (5.73, 1.58, 5.73) Metal 2f3136 T0.00 collide=true
+  BaseCollar [MeshPart] pos (-0.00, 1.30, -0.00) size (4.60, 0.80, 4.60) SmoothPlastic 565962 T0.00 collide=true
+  BaseCorners [MeshPart] pos (-0.00, 0.57, -0.00) size (6.10, 1.05, 6.10) SmoothPlastic c8b276 T0.00 collide=true
+  BasePlate [MeshPart] pos (-0.00, 0.45, -0.00) size (6.84, 0.90, 6.84) SmoothPlastic 45474d T0.00 collide=true
+  HeadAmmoBox [MeshPart] pos (-2.25, 2.64, 0.95) size (1.50, 1.32, 1.50) SmoothPlastic 45474d T0.00 collide=true
+  HeadAmmoBracket [MeshPart] pos (-1.40, 2.82, 0.80) size (0.50, 0.55, 0.70) SmoothPlastic 565962 T0.00 collide=true
+  HeadAmmoLid [MeshPart] pos (-2.25, 3.47, 0.95) size (1.60, 0.35, 1.60) SmoothPlastic c8b276 T0.00 collide=true
+  HeadBelt [MeshPart] pos (-1.50, 4.08, 1.10) size (1.82, 1.02, 0.50) SmoothPlastic c8b276 T0.00 collide=true
+  HeadHandle [MeshPart] pos (0.40, 5.28, 1.06) size (0.28, 0.65, 1.58) SmoothPlastic 565962 T0.00 collide=true
+  HeadPedestal [MeshPart] pos (-0.00, 2.10, -0.00) size (3.10, 0.80, 3.10) SmoothPlastic 45474d T0.00 collide=true
+  HeadPivotDisc [MeshPart] pos (-1.33, 4.10, -0.00) size (0.25, 1.20, 1.20) SmoothPlastic c8b276 T0.00 collide=true
+  HeadPort [MeshPart] pos (-0.77, 4.45, 1.10) size (0.55, 0.70, 0.70) SmoothPlastic 565962 T0.00 collide=true
+  HeadReceiver [MeshPart] pos (0.40, 4.10, 0.55) size (1.90, 1.80, 2.90) SmoothPlastic 45474d T0.00 collide=true
+  HeadYoke [MeshPart] pos (-0.90, 3.70, -0.00) size (0.70, 2.40, 1.80) SmoothPlastic 565962 T0.00 collide=true
+  SpinBarrels [MeshPart] pos (0.45, 4.10, -2.35) size (1.32, 1.46, 2.90) Metal 6a6e78 T0.00 collide=true
+  SpinBores [MeshPart] pos (0.45, 4.10, -3.78) size (1.11, 1.28, 0.08) Metal 2f3136 T0.00 collide=true
+  SpinHousing [MeshPart] pos (0.45, 4.10, -1.05) size (1.80, 1.80, 0.90) SmoothPlastic 565962 T0.00 collide=true
+  SpinMuzzleRing [MeshPart] pos (0.45, 4.10, -3.23) size (1.60, 1.60, 0.55) SmoothPlastic c8b276 T0.00 collide=true

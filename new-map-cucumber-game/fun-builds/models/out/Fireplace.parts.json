@@ -1,0 +1,2665 @@
+{
+ "key": "Fireplace",
+ "category": "Home",
+ "parts": [
+  {
+   "name": "Plinth",
+   "shape": "Block",
+   "size": [
+    7.1,
+    0.45,
+    2.35
+   ],
+   "cf": [
+    0.0,
+    0.225,
+    0.125,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "a9a397",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Hearth",
+   "shape": "Block",
+   "size": [
+    6.6,
+    0.45,
+    1.0
+   ],
+   "cf": [
+    0.0,
+    0.225,
+    -1.55,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "a9a397",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HearthEdge",
+   "shape": "Cylinder",
+   "size": [
+    6.6,
+    0.45,
+    0.45
+   ],
+   "cf": [
+    0.0,
+    0.225,
+    -2.05,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "a9a397",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PierL",
+   "shape": "Block",
+   "size": [
+    1.75,
+    3.62,
+    2.25
+   ],
+   "cf": [
+    2.625,
+    2.24,
+    0.125,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "b4553d",
+   "material": "Brick",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PierR",
+   "shape": "Block",
+   "size": [
+    1.75,
+    3.62,
+    2.25
+   ],
+   "cf": [
+    -2.625,
+    2.24,
+    0.125,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "b4553d",
+   "material": "Brick",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Lintel",
+   "shape": "Block",
+   "size": [
+    3.6,
+    0.8,
+    2.25
+   ],
+   "cf": [
+    0.0,
+    3.65,
+    0.125,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "b4553d",
+   "material": "Brick",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BackSkin",
+   "shape": "Block",
+   "size": [
+    3.6,
+    2.87,
+    0.3
+   ],
+   "cf": [
+    0.0,
+    1.865,
+    1.1,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "b4553d",
+   "material": "Brick",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "FireboxBack",
+   "shape": "Block",
+   "size": [
+    2.6,
+    2.83,
+    0.57
+   ],
+   "cf": [
+    0.0,
+    1.865,
+    0.685,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "2b2624",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "FireboxSideL",
+   "shape": "Block",
+   "size": [
+    0.08,
+    2.83,
+    1.5055
+   ],
+   "cf": [
+    1.49,
+    1.865,
+    -0.27,
+    -0.94324,
+    0.0,
+    0.33213,
+    0.0,
+    1.0,
+    -0.0,
+    -0.33213,
+    0.0,
+    -0.94324
+   ],
+   "color": "2b2624",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "FireboxSideR",
+   "shape": "Block",
+   "size": [
+    0.08,
+    2.83,
+    1.5055
+   ],
+   "cf": [
+    -1.49,
+    1.865,
+    -0.27,
+    -0.94324,
+    0.0,
+    -0.33213,
+    0.0,
+    1.0,
+    -0.0,
+    0.33213,
+    -0.0,
+    -0.94324
+   ],
+   "color": "2b2624",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "FireboxFloor",
+   "shape": "Block",
+   "size": [
+    3.5,
+    0.06,
+    1.5
+   ],
+   "cf": [
+    0.0,
+    0.47,
+    -0.22,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "2b2624",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Ash",
+   "shape": "Block",
+   "size": [
+    2.9,
+    0.05,
+    1.2
+   ],
+   "cf": [
+    0.0,
+    0.515,
+    -0.3,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "8c8580",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SurroundL",
+   "shape": "Block",
+   "size": [
+    0.6,
+    2.8,
+    0.18
+   ],
+   "cf": [
+    2.04,
+    1.85,
+    -1.07,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9d2c3",
+   "material": "Limestone",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "SurroundR",
+   "shape": "Block",
+   "size": [
+    0.6,
+    2.8,
+    0.18
+   ],
+   "cf": [
+    -2.04,
+    1.85,
+    -1.07,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9d2c3",
+   "material": "Limestone",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "SurroundTop",
+   "shape": "Block",
+   "size": [
+    4.68,
+    0.58,
+    0.18
+   ],
+   "cf": [
+    0.0,
+    3.51,
+    -1.07,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9d2c3",
+   "material": "Limestone",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Keystone",
+   "shape": "Block",
+   "size": [
+    0.56,
+    0.7,
+    0.28
+   ],
+   "cf": [
+    0.0,
+    3.51,
+    -1.12,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e8e1d2",
+   "material": "Limestone",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MantelShelf",
+   "shape": "Block",
+   "size": [
+    7.6,
+    0.35,
+    1.15
+   ],
+   "cf": [
+    0.0,
+    4.2,
+    -1.025,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MantelEdge",
+   "shape": "Cylinder",
+   "size": [
+    7.6,
+    0.35,
+    0.35
+   ],
+   "cf": [
+    0.0,
+    4.2,
+    -1.6,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MantelCove",
+   "shape": "Block",
+   "size": [
+    7.2,
+    0.14,
+    0.62
+   ],
+   "cf": [
+    0.0,
+    3.97,
+    -1.27,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CorbelL",
+   "shape": "Block",
+   "size": [
+    0.42,
+    0.56,
+    0.49
+   ],
+   "cf": [
+    3.05,
+    3.62,
+    -1.215,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CorbelFootL",
+   "shape": "Wedge",
+   "size": [
+    0.42,
+    0.5,
+    0.49
+   ],
+   "cf": [
+    3.05,
+    3.1,
+    -1.215,
+    -1.0,
+    -0.0,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CorbelR",
+   "shape": "Block",
+   "size": [
+    0.42,
+    0.56,
+    0.49
+   ],
+   "cf": [
+    -3.05,
+    3.62,
+    -1.215,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CorbelFootR",
+   "shape": "Wedge",
+   "size": [
+    0.42,
+    0.5,
+    0.49
+   ],
+   "cf": [
+    -3.05,
+    3.1,
+    -1.215,
+    -1.0,
+    -0.0,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Breast",
+   "shape": "Block",
+   "size": [
+    5.4,
+    2.6,
+    1.95
+   ],
+   "cf": [
+    0.0,
+    5.33,
+    0.275,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "b4553d",
+   "material": "Brick",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ShoulderL",
+   "shape": "Wedge",
+   "size": [
+    1.95,
+    0.75,
+    0.84
+   ],
+   "cf": [
+    3.09,
+    4.4,
+    0.275,
+    -0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "color": "b4553d",
+   "material": "Brick",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ShoulderR",
+   "shape": "Wedge",
+   "size": [
+    1.95,
+    0.75,
+    0.84
+   ],
+   "cf": [
+    -3.09,
+    4.4,
+    0.275,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "b4553d",
+   "material": "Brick",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Crown",
+   "shape": "Block",
+   "size": [
+    5.8,
+    0.2,
+    2.2
+   ],
+   "cf": [
+    0.0,
+    6.72,
+    0.2,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9d2c3",
+   "material": "Limestone",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CrownCap",
+   "shape": "Block",
+   "size": [
+    5.4,
+    0.2,
+    1.9
+   ],
+   "cf": [
+    0.0,
+    6.9,
+    0.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "a9a397",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "AndironBarL",
+   "shape": "Block",
+   "size": [
+    0.13,
+    0.16,
+    1.32
+   ],
+   "cf": [
+    0.95,
+    0.58,
+    -0.27,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "2f3640",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "AndironPostL",
+   "shape": "Cylinder",
+   "size": [
+    0.71,
+    0.15,
+    0.15
+   ],
+   "cf": [
+    0.95,
+    0.845,
+    -0.86,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "2f3640",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "AndironKnobL",
+   "shape": "Ball",
+   "size": [
+    0.24,
+    0.24,
+    0.24
+   ],
+   "cf": [
+    0.95,
+    1.24,
+    -0.86,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9a227",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "AndironBarR",
+   "shape": "Block",
+   "size": [
+    0.13,
+    0.16,
+    1.32
+   ],
+   "cf": [
+    -0.95,
+    0.58,
+    -0.27,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "2f3640",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "AndironPostR",
+   "shape": "Cylinder",
+   "size": [
+    0.71,
+    0.15,
+    0.15
+   ],
+   "cf": [
+    -0.95,
+    0.845,
+    -0.86,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "2f3640",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "AndironKnobR",
+   "shape": "Ball",
+   "size": [
+    0.24,
+    0.24,
+    0.24
+   ],
+   "cf": [
+    -0.95,
+    1.24,
+    -0.86,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9a227",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Log1",
+   "shape": "Cylinder",
+   "size": [
+    2.5,
+    0.5,
+    0.5
+   ],
+   "cf": [
+    0.05,
+    0.91,
+    -0.45,
+    0.99756,
+    0.0,
+    0.06976,
+    0.0,
+    1.0,
+    0.0,
+    -0.06976,
+    0.0,
+    0.99756
+   ],
+   "color": "5e3b1f",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Log1CapA",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.4,
+    0.4
+   ],
+   "cf": [
+    1.29695,
+    0.91,
+    -0.5372,
+    0.99756,
+    0.0,
+    0.06976,
+    0.0,
+    1.0,
+    -0.0,
+    -0.06976,
+    0.0,
+    0.99756
+   ],
+   "color": "d8b077",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Log1CapB",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.4,
+    0.4
+   ],
+   "cf": [
+    -1.19696,
+    0.91,
+    -0.3628,
+    0.99756,
+    0.0,
+    0.06976,
+    0.0,
+    1.0,
+    -0.0,
+    -0.06976,
+    0.0,
+    0.99756
+   ],
+   "color": "d8b077",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Log2",
+   "shape": "Cylinder",
+   "size": [
+    2.4,
+    0.54,
+    0.54
+   ],
+   "cf": [
+    -0.05,
+    0.93,
+    0.1,
+    0.99863,
+    0.0,
+    -0.05234,
+    0.0,
+    1.0,
+    0.0,
+    0.05234,
+    0.0,
+    0.99863
+   ],
+   "color": "5e3b1f",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Log3",
+   "shape": "Cylinder",
+   "size": [
+    2.2,
+    0.46,
+    0.46
+   ],
+   "cf": [
+    0.0,
+    1.31,
+    -0.17,
+    0.9703,
+    0.0,
+    -0.24192,
+    0.0,
+    1.0,
+    0.0,
+    0.24192,
+    0.0,
+    0.9703
+   ],
+   "color": "5e3b1f",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Log3CapA",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.36,
+    0.36
+   ],
+   "cf": [
+    1.06733,
+    1.31,
+    0.09611,
+    0.9703,
+    0.0,
+    -0.24192,
+    0.0,
+    1.0,
+    0.0,
+    0.24192,
+    -0.0,
+    0.9703
+   ],
+   "color": "d8b077",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Log3CapB",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.36,
+    0.36
+   ],
+   "cf": [
+    -1.06733,
+    1.31,
+    -0.43611,
+    0.9703,
+    0.0,
+    -0.24192,
+    0.0,
+    1.0,
+    0.0,
+    0.24192,
+    -0.0,
+    0.9703
+   ],
+   "color": "d8b077",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Ember1",
+   "shape": "Ball",
+   "size": [
+    0.36,
+    0.36,
+    0.36
+   ],
+   "cf": [
+    0.42,
+    0.57,
+    -0.8,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3a2f2a",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Ember2",
+   "shape": "Ball",
+   "size": [
+    0.32,
+    0.32,
+    0.32
+   ],
+   "cf": [
+    -0.4,
+    0.56,
+    -0.82,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3a2f2a",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Ember3",
+   "shape": "Block",
+   "size": [
+    0.42,
+    0.16,
+    0.3
+   ],
+   "cf": [
+    0.02,
+    0.56,
+    -0.86,
+    0.90631,
+    0.0,
+    0.42262,
+    0.0,
+    1.0,
+    0.0,
+    -0.42262,
+    0.0,
+    0.90631
+   ],
+   "color": "3a2f2a",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Ember4",
+   "shape": "Ball",
+   "size": [
+    0.36,
+    0.36,
+    0.36
+   ],
+   "cf": [
+    -0.68,
+    0.58,
+    -0.7,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3a2f2a",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Ember5",
+   "shape": "Block",
+   "size": [
+    0.36,
+    0.15,
+    0.28
+   ],
+   "cf": [
+    0.72,
+    0.56,
+    -0.66,
+    0.93969,
+    0.0,
+    -0.34202,
+    0.0,
+    1.0,
+    0.0,
+    0.34202,
+    0.0,
+    0.93969
+   ],
+   "color": "3a2f2a",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "EmberSeam1",
+   "shape": "Block",
+   "size": [
+    1.7,
+    0.07,
+    0.09
+   ],
+   "cf": [
+    0.05,
+    0.74,
+    -0.62,
+    0.99756,
+    0.0,
+    0.06976,
+    0.04933,
+    0.70711,
+    -0.70538,
+    -0.04933,
+    0.70711,
+    0.70538
+   ],
+   "color": "3a2f2a",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "EmberSeam2",
+   "shape": "Block",
+   "size": [
+    1.1,
+    0.07,
+    0.05
+   ],
+   "cf": [
+    0.02,
+    0.93,
+    -0.695,
+    0.99756,
+    0.0,
+    0.06976,
+    0.0,
+    1.0,
+    0.0,
+    -0.06976,
+    0.0,
+    0.99756
+   ],
+   "color": "3a2f2a",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "EmberSeam3",
+   "shape": "Block",
+   "size": [
+    1.2,
+    0.07,
+    0.05
+   ],
+   "cf": [
+    0.0,
+    1.23,
+    -0.385,
+    0.9703,
+    0.0,
+    -0.24192,
+    0.0,
+    1.0,
+    0.0,
+    0.24192,
+    0.0,
+    0.9703
+   ],
+   "color": "3a2f2a",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ClockBase",
+   "shape": "Block",
+   "size": [
+    1.4,
+    0.1,
+    0.62
+   ],
+   "cf": [
+    0.0,
+    4.415,
+    -1.1,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "ClockBody",
+   "shape": "Block",
+   "size": [
+    1.2,
+    0.85,
+    0.5
+   ],
+   "cf": [
+    0.0,
+    4.89,
+    -1.1,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "ClockArch",
+   "shape": "Cylinder",
+   "size": [
+    0.5,
+    1.2,
+    1.2
+   ],
+   "cf": [
+    0.0,
+    5.315,
+    -1.1,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "color": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "ClockFinial",
+   "shape": "Ball",
+   "size": [
+    0.16,
+    0.16,
+    0.16
+   ],
+   "cf": [
+    0.0,
+    5.935,
+    -1.1,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9a227",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "ClockBezel",
+   "shape": "Cylinder",
+   "size": [
+    0.08,
+    0.92,
+    0.92
+   ],
+   "cf": [
+    0.0,
+    5.175,
+    -1.37,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "color": "c9a227",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "ClockFace",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.76,
+    0.76
+   ],
+   "cf": [
+    0.0,
+    5.175,
+    -1.41,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "ClockHour",
+   "shape": "Block",
+   "size": [
+    0.07,
+    0.24,
+    0.05
+   ],
+   "cf": [
+    0.07372,
+    5.22662,
+    -1.445,
+    0.57358,
+    0.81915,
+    0.0,
+    -0.81915,
+    0.57358,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ClockMinute",
+   "shape": "Block",
+   "size": [
+    0.05,
+    0.34,
+    0.05
+   ],
+   "cf": [
+    -0.12124,
+    5.245,
+    -1.455,
+    0.5,
+    -0.86603,
+    0.0,
+    0.86603,
+    0.5,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ClockPin",
+   "shape": "Ball",
+   "size": [
+    0.09,
+    0.09,
+    0.09
+   ],
+   "cf": [
+    0.0,
+    5.175,
+    -1.47,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9a227",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PicFrame",
+   "shape": "Block",
+   "size": [
+    1.35,
+    1.1,
+    0.1
+   ],
+   "cf": [
+    -1.55,
+    4.899,
+    -0.865,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.97815,
+    -0.20791,
+    0.0,
+    0.20791,
+    0.97815
+   ],
+   "color": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PicCanvas",
+   "shape": "Block",
+   "size": [
+    1.07,
+    0.82,
+    0.08
+   ],
+   "cf": [
+    -1.55,
+    4.90524,
+    -0.89434,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.97815,
+    -0.20791,
+    0.0,
+    0.20791,
+    0.97815
+   ],
+   "color": "9fd4e6",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PicHill",
+   "shape": "Ellipsoid",
+   "size": [
+    1.05,
+    0.5,
+    0.05
+   ],
+   "cf": [
+    -1.43,
+    4.56142,
+    -1.00832,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.97815,
+    -0.20791,
+    0.0,
+    0.20791,
+    0.97815
+   ],
+   "color": "5aa845",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PicSun",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.24,
+    0.24
+   ],
+   "cf": [
+    -1.85,
+    5.11022,
+    -0.89678,
+    0.0,
+    0.0,
+    -1.0,
+    -0.20792,
+    0.97815,
+    0.0,
+    0.97815,
+    0.20792,
+    0.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Candle1Saucer",
+   "shape": "Cylinder",
+   "size": [
+    0.08,
+    0.46,
+    0.46
+   ],
+   "cf": [
+    2.95,
+    4.395,
+    -1.2,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "c9a227",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Candle1Holder",
+   "shape": "Cylinder",
+   "size": [
+    0.15,
+    0.28,
+    0.28
+   ],
+   "cf": [
+    2.95,
+    4.5,
+    -1.2,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "c9a227",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Candle1",
+   "shape": "Cylinder",
+   "size": [
+    0.95,
+    0.2,
+    0.2
+   ],
+   "cf": [
+    2.95,
+    5.03,
+    -1.2,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CandleFlame1",
+   "shape": "Ellipsoid",
+   "size": [
+    0.15,
+    0.3,
+    0.15
+   ],
+   "cf": [
+    2.95,
+    5.645,
+    -1.2,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ffb347",
+   "material": "Neon",
+   "transparency": 1.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Candle2Saucer",
+   "shape": "Cylinder",
+   "size": [
+    0.08,
+    0.46,
+    0.46
+   ],
+   "cf": [
+    2.35,
+    4.395,
+    -1.3,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "c9a227",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Candle2Holder",
+   "shape": "Cylinder",
+   "size": [
+    0.15,
+    0.28,
+    0.28
+   ],
+   "cf": [
+    2.35,
+    4.5,
+    -1.3,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "c9a227",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Candle2",
+   "shape": "Cylinder",
+   "size": [
+    0.6,
+    0.2,
+    0.2
+   ],
+   "cf": [
+    2.35,
+    4.855,
+    -1.3,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CandleFlame2",
+   "shape": "Ellipsoid",
+   "size": [
+    0.15,
+    0.3,
+    0.15
+   ],
+   "cf": [
+    2.35,
+    5.295,
+    -1.3,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ffb347",
+   "material": "Neon",
+   "transparency": 1.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Candle3Saucer",
+   "shape": "Cylinder",
+   "size": [
+    0.08,
+    0.46,
+    0.46
+   ],
+   "cf": [
+    -2.95,
+    4.395,
+    -1.2,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "c9a227",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Candle3Holder",
+   "shape": "Cylinder",
+   "size": [
+    0.15,
+    0.28,
+    0.28
+   ],
+   "cf": [
+    -2.95,
+    4.5,
+    -1.2,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "c9a227",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Candle3",
+   "shape": "Cylinder",
+   "size": [
+    0.95,
+    0.2,
+    0.2
+   ],
+   "cf": [
+    -2.95,
+    5.03,
+    -1.2,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CandleFlame3",
+   "shape": "Ellipsoid",
+   "size": [
+    0.15,
+    0.3,
+    0.15
+   ],
+   "cf": [
+    -2.95,
+    5.645,
+    -1.2,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ffb347",
+   "material": "Neon",
+   "transparency": 1.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "CukeStand",
+   "shape": "Block",
+   "size": [
+    0.62,
+    0.12,
+    0.34
+   ],
+   "cf": [
+    1.4,
+    4.425,
+    -1.2,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "GoldenCuke",
+   "shape": "Ellipsoid",
+   "size": [
+    0.78,
+    0.28,
+    0.28
+   ],
+   "cf": [
+    1.4,
+    4.605,
+    -1.2,
+    0.9418,
+    -0.13236,
+    -0.30902,
+    0.13917,
+    0.99027,
+    0.0,
+    0.30601,
+    -0.04301,
+    0.95106
+   ],
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "ToolBase",
+   "shape": "Cylinder",
+   "size": [
+    0.08,
+    0.6,
+    0.6
+   ],
+   "cf": [
+    -2.85,
+    0.48,
+    -1.55,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "2f3640",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "ToolPole",
+   "shape": "Cylinder",
+   "size": [
+    1.95,
+    0.1,
+    0.1
+   ],
+   "cf": [
+    -2.85,
+    1.475,
+    -1.55,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "2f3640",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "ToolKnob",
+   "shape": "Ball",
+   "size": [
+    0.2,
+    0.2,
+    0.2
+   ],
+   "cf": [
+    -2.85,
+    2.51,
+    -1.55,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9a227",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "ToolBar",
+   "shape": "Block",
+   "size": [
+    0.62,
+    0.06,
+    0.06
+   ],
+   "cf": [
+    -2.85,
+    2.3,
+    -1.55,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "2f3640",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "ToolPoker",
+   "shape": "Cylinder",
+   "size": [
+    1.52,
+    0.06,
+    0.06
+   ],
+   "cf": [
+    -2.57,
+    1.56,
+    -1.55,
+    0.0,
+    0.0,
+    -1.0,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "2f3640",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "ToolPokerHook",
+   "shape": "Block",
+   "size": [
+    0.14,
+    0.05,
+    0.05
+   ],
+   "cf": [
+    -2.51,
+    0.87,
+    -1.55,
+    0.81915,
+    -0.57358,
+    0.0,
+    0.57358,
+    0.81915,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "2f3640",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ToolShovel",
+   "shape": "Cylinder",
+   "size": [
+    1.32,
+    0.06,
+    0.06
+   ],
+   "cf": [
+    -3.13,
+    1.66,
+    -1.55,
+    0.0,
+    0.0,
+    -1.0,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "2f3640",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "ToolShovelBlade",
+   "shape": "Block",
+   "size": [
+    0.3,
+    0.32,
+    0.05
+   ],
+   "cf": [
+    -3.13,
+    0.85,
+    -1.57,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.99027,
+    -0.13917,
+    0.0,
+    0.13917,
+    0.99027
+   ],
+   "color": "2f3640",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SpareLog1",
+   "shape": "Cylinder",
+   "size": [
+    0.8,
+    0.44,
+    0.44
+   ],
+   "cf": [
+    2.52,
+    0.67,
+    -1.58,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "5e3b1f",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SpareLog1Cap",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.34,
+    0.34
+   ],
+   "cf": [
+    2.52,
+    0.67,
+    -1.98,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "color": "d8b077",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SpareLog2",
+   "shape": "Cylinder",
+   "size": [
+    0.8,
+    0.42,
+    0.42
+   ],
+   "cf": [
+    2.98,
+    0.66,
+    -1.58,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "5e3b1f",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SpareLog2Cap",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.32,
+    0.32
+   ],
+   "cf": [
+    2.98,
+    0.66,
+    -1.98,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "color": "d8b077",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SpareLog3",
+   "shape": "Cylinder",
+   "size": [
+    0.8,
+    0.42,
+    0.42
+   ],
+   "cf": [
+    2.75,
+    1.05,
+    -1.58,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "5e3b1f",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SpareLog3Cap",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.32,
+    0.32
+   ],
+   "cf": [
+    2.75,
+    1.05,
+    -1.98,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "color": "d8b077",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  }
+ ],
+ "pivots": {
+  "ClockCentre": [
+   0.0,
+   5.175,
+   -1.47
+  ],
+  "Fire": [
+   0.0,
+   0.95,
+   -0.2
+  ],
+  "Light": [
+   0.0,
+   1.7,
+   -1.55
+  ],
+  "Chimney": [
+   0.0,
+   7.0,
+   0.25
+  ],
+  "Prompt": [
+   0.0,
+   1.9,
+   -1.95
+  ]
+ },
+ "attrs": {
+  "Cost": 1500,
+  "DisplayName": "Fireplace",
+  "Notes": "Brick fireplace (primlib parts, fun-builds HomeHearth). Prompt 'Light fire' / 'Put out' toggles Fun_Lit: Fire + sparks at Pivot_Fire, a flickering PointLight at Pivot_Light, Ember* parts glow Neon, CandleFlame1..3 appear, chimney smoke at Pivot_Chimney. The mantel clock's ClockHour / ClockMinute hands turn about Pivot_ClockCentre (authored 10:10) to Lighting.ClockTime. Built by fun-builds/models/build_Fireplace.py."
+ },
+ "size_studs": [
+  7.6,
+  7.0,
+  3.575
+ ],
+ "min": [
+  -3.8,
+  0.0,
+  -2.275
+ ],
+ "max": [
+  3.8,
+  7.0,
+  1.3
+ ],
+ "part_count": 90,
+ "duplicate_names": []
+}

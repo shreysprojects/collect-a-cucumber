@@ -1,0 +1,296 @@
+-- Controls the authored StarterGui.HeadbandShop copied directly from Zombie Cucumber Game.
+-- UI instances, card layouts, textures, type, viewports and cameras live in StarterGui.
+-- Runtime code only binds input/state, animates existing instances and swaps 3D preview models.
+-- Stats.Tier reads "<N>x strength" (HeadbandsCatalog.StrengthMult, the bench-press multiplier the selected
+-- band gives) and fills the whole row above the buy button, with the authored Stats.BoostIcon image on its
+-- left. The old Stats.Price label ("15K CASH" / "OWNED") was removed on 2026-09-09; the button carries the price,
+-- as the authored BuyButton.CashIcon (rbxassetid://15402839520) + "BUY 15K"; the icon only shows beside a price.
+-- Remotes.OpenShopDialog (the booth prompt, fired by HeadbandService) opens the panel directly: the shopkeeper
+-- dialogue was removed on 2026-09-09 (StarterPlayerScripts.ShopDialogClient is Disabled, kept for reference).
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+
+local player = Players.LocalPlayer
+local gui = player:WaitForChild("PlayerGui"):WaitForChild("HeadbandShop")
+local panel = gui:WaitForChild("Shop")
+local scroll = panel.Body.Scroll
+local preview = panel.Body.Preview
+local stats = preview.Stats
+local buy = stats.BuyButton
+local scale = panel.UIScale
+local backdrop = gui.Backdrop
+local blur = game:GetService("Lighting"):WaitForChild("HeadbandShopBlur")
+local Catalog = require(ReplicatedStorage:WaitForChild("Modules"):WaitForChild("HeadbandsCatalog"))
+local Notify = require(ReplicatedStorage.Modules.Notify)
+local bands = Catalog.List()
+local cards = {}
+local selected
+local remote
+local busy = false
+local opened = false
+local token = 0
+local rootTween, fadeTween, blurTween, bounceTween, spinConnection
+local previewBase, spinAngle
+local HOVER = TweenInfo.new(.12, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+local READY = ColorSequence.new(Color3.fromRGB(253,252,71), Color3.fromRGB(36,254,65))
+local EQUIPPED = ColorSequence.new(Color3.fromRGB(116,222,110), Color3.fromRGB(30,150,70))
+local REST = preview.Icon.Size
+local DESIGN = panel.Size
+
+-- the authored BuyButton.CashIcon shows only beside a price ("[cash] BUY 15K", user 2026-09-09): the label
+-- gives up the icon's width on its left so the pair stays centred in the button; the other states
+-- (EQUIP / EQUIPPED / FREE / BUYING...) get the whole width back and no icon
+local cash = buy.CashIcon
+local LABEL_SIZE, LABEL_POS = buy.Label.Size, buy.Label.Position
+local CASH_GAP = 8
+local function showCash(priced)
+	cash.Visible = priced
+	if priced then
+		local width = LABEL_SIZE.X.Offset - cash.Size.X.Offset - CASH_GAP
+		local left = LABEL_POS.X.Offset - LABEL_SIZE.X.Offset * buy.Label.AnchorPoint.X
+		buy.Label.Size = UDim2.fromOffset(width, LABEL_SIZE.Y.Offset)
+		buy.Label.Position = UDim2.fromOffset(left + cash.Size.X.Offset + CASH_GAP + width * buy.Label.AnchorPoint.X, LABEL_POS.Y.Offset)
+	else
+		buy.Label.Size, buy.Label.Position = LABEL_SIZE, LABEL_POS
+	end
+end
+
+local function bindCamera(viewport)
+	-- Cameras do not replicate from StarterGui; only this non-UI render object is made locally.
+	local camera = viewport:FindFirstChild("Camera")
+	if not camera then camera=Instance.new("Camera") camera.Name="Camera" camera.Parent=viewport end
+	camera.FieldOfView=viewport:GetAttribute("PreviewFieldOfView") or 22
+	camera.CFrame=viewport:GetAttribute("PreviewCameraCFrame") or CFrame.new(0,0,5)
+	viewport.CurrentCamera=camera
+	return camera
+end
+bindCamera(preview.Icon.Model3D)
+
+local function money(value)
+	if value < 1000 then return tostring(math.floor(value)) end
+	for _, unit in {{1e12,"T"},{1e9,"B"},{1e6,"M"},{1e3,"K"}} do
+		if value >= unit[1] then
+			local text = string.format("%.2f", value/unit[1]):gsub("0+$",""):gsub("%.$","")
+			return text .. unit[2]
+		end
+	end
+	return tostring(value)
+end
+
+local function ownership()
+	local owned = {}
+	for name in tostring(player:GetAttribute("OwnedHeadbands") or ""):gmatch("[^,]+") do owned[name] = true end
+	return owned
+end
+
+-- Every band is on sale from day one (user 2026-09-09): nothing is locked behind the tier below it, so
+-- the authored "Locked" card state never shows. Kept as a function so a lock could return later.
+local function unlocked(entry, owned)
+	return true
+end
+
+local function fitScale()
+	local size = gui.AbsoluteSize
+	return math.min(size.X*.86/DESIGN.X.Offset, size.Y*.84/DESIGN.Y.Offset, 1)
+end
+
+local function stopSpin()
+	if spinConnection then spinConnection:Disconnect() spinConnection=nil end
+end
+
+local function startSpin()
+	stopSpin()
+	if not opened or not previewBase then return end
+	local model = preview.Icon.Model3D.World:FindFirstChild("PreviewModel")
+	if not model then return end
+	spinConnection = RunService.RenderStepped:Connect(function(dt)
+		spinAngle = (spinAngle + dt*.7) % (math.pi*2)
+		model:PivotTo(CFrame.Angles(0,spinAngle,0)*previewBase)
+	end)
+end
+
+local function refresh()
+	local owned = ownership()
+	local equipped = player:GetAttribute("EquippedHeadband")
+	for _, entry in bands do
+		local card = cards[entry.Name]
+		if card then
+			local reachable = unlocked(entry,owned)
+			card.Content.Enabled.Visible = reachable
+			card.Content.Locked.Visible = not reachable
+			local pill = card.Content.Enabled.Pill
+			pill.Label.Text = equipped == entry.Name and "EQUIPPED" or owned[entry.Name] and "EQUIP" or "BUY"
+			pill.Fill.UIGradient.Color = equipped == entry.Name and EQUIPPED or READY
+		end
+	end
+	if not selected then return end
+	stats.Tier.Text = Catalog.StrengthMultOf(selected.Name) .. "x strength" -- fills the row above the button; Stats.BoostIcon on its left
+	if busy then return end
+	local wearing = equipped == selected.Name
+	buy.Label.Text = wearing and "EQUIPPED" or owned[selected.Name] and "EQUIP" or selected.Price == 0 and "FREE" or "BUY " .. money(selected.Price)
+	showCash(not wearing and not owned[selected.Name] and selected.Price > 0)
+	buy.Fill.UIGradient.Color = wearing and EQUIPPED or READY
+end
+
+local function selectBand(entry, animate)
+	if not entry or busy then return end
+	if not unlocked(entry,ownership()) then
+		Notify.Warn("Buy the previous headband first!")
+		return
+	end
+	local card = cards[entry.Name]
+	if not card then return end
+	selected = entry
+	stopSpin()
+	local destination = preview.Icon.Model3D
+	local source = card.Content.Enabled.Icon.Model3D
+	destination.World:ClearAllChildren()
+	local model = source.World:FindFirstChild("PreviewModel")
+	previewBase = nil
+	if model then
+		local copy = model:Clone() -- only the 3D artwork is cloned, never the UI
+		copy.Parent = destination.World
+		previewBase = copy:GetPivot()
+		destination.Camera.CFrame = source.Camera.CFrame
+		destination.Camera.FieldOfView = source.Camera.FieldOfView
+		destination.CurrentCamera = destination.Camera
+	end
+	spinAngle = 0
+	preview.ItemName.Text = string.upper(entry.DisplayName or entry.Name)
+	if bounceTween then bounceTween:Cancel() end
+	preview.Icon.Size = animate and UDim2.fromOffset(302,302) or REST
+	if animate then
+		bounceTween = TweenService:Create(preview.Icon,TweenInfo.new(.5,Enum.EasingStyle.Elastic,Enum.EasingDirection.Out),{Size=REST})
+		bounceTween:Play()
+	end
+	refresh()
+	startSpin()
+end
+
+local function preferred()
+	local owned, equipped = ownership(), player:GetAttribute("EquippedHeadband")
+	for _, entry in bands do if entry.Name == equipped and owned[entry.Name] then return entry end end
+	local best = bands[1]
+	for _, entry in bands do if owned[entry.Name] then best = entry end end
+	return best
+end
+
+local function pop(button, targetScale)
+	button.MouseEnter:Connect(function() TweenService:Create(targetScale,HOVER,{Scale=1.05}):Play() end)
+	button.MouseLeave:Connect(function() TweenService:Create(targetScale,HOVER,{Scale=1}):Play() end)
+	button.MouseButton1Down:Connect(function() TweenService:Create(targetScale,HOVER,{Scale=.94}):Play() end)
+	button.MouseButton1Up:Connect(function() TweenService:Create(targetScale,HOVER,{Scale=1.05}):Play() end)
+end
+
+local function cancelTweens()
+	for _, tween in {rootTween,fadeTween,blurTween} do if tween then tween:Cancel() end end
+end
+
+local function open()
+	token += 1
+	cancelTweens()
+	if not opened then scale.Scale=fitScale()*.9 backdrop.BackgroundTransparency=1 end
+	opened=true
+	gui.Enabled=true
+	selectBand(selected and unlocked(selected,ownership()) and selected or preferred(),false)
+	rootTween=TweenService:Create(scale,TweenInfo.new(.2,Enum.EasingStyle.Back,Enum.EasingDirection.Out),{Scale=fitScale()})
+	fadeTween=TweenService:Create(backdrop,TweenInfo.new(.18),{BackgroundTransparency=.8})
+	blurTween=TweenService:Create(blur,TweenInfo.new(.18),{Size=18})
+	rootTween:Play() fadeTween:Play() blurTween:Play()
+	startSpin()
+end
+
+local function close()
+	if not opened then return end
+	opened=false
+	token+=1
+	local closing=token
+	stopSpin()
+	cancelTweens()
+	rootTween=TweenService:Create(scale,TweenInfo.new(.15),{Scale=fitScale()*.9})
+	fadeTween=TweenService:Create(backdrop,TweenInfo.new(.15),{BackgroundTransparency=1})
+	blurTween=TweenService:Create(blur,TweenInfo.new(.15),{Size=0})
+	rootTween:Play() fadeTween:Play() blurTween:Play()
+	task.delay(.17,function() if token==closing and not opened then gui.Enabled=false end end)
+end
+
+local function submit()
+	if busy or not opened or not selected then return end
+	local owned=ownership()
+	if not unlocked(selected,owned) then return end
+	if player:GetAttribute("EquippedHeadband")==selected.Name then return end
+	if not remote then Notify.Error("The shop is still loading. Try again.") return end
+	local entry=selected
+	local verb=owned[entry.Name] and "Equip" or "Buy"
+	busy=true
+	buy.Active=false
+	buy.Label.Text=verb=="Buy" and "BUYING..." or "EQUIPPING..."
+	showCash(false)
+	local sent,ok,message=pcall(function() return remote:InvokeServer(verb,entry.Name) end)
+	if not sent then Notify.Error("The shop is busy. Try again.")
+	elseif ok then Notify.Success(type(message)=="string" and message or "Done!")
+	else Notify.Error(type(message)=="string" and message or "That did not work.") end
+	busy=false
+	buy.Active=true
+	refresh()
+end
+
+for _, entry in bands do
+	local card=scroll:FindFirstChild(entry.Name)
+	if card then
+		cards[entry.Name]=card
+		bindCamera(card.Content.Enabled.Icon.Model3D)
+		pop(card,card.Content.UIScale)
+		card.Activated:Connect(function() selectBand(entry,true) end)
+		card.MouseEnter:Connect(function() TweenService:Create(card.Content.Enabled.Icon,HOVER,{Rotation=-25}):Play() end)
+		card.MouseLeave:Connect(function() TweenService:Create(card.Content.Enabled.Icon,HOVER,{Rotation=0}):Play() end)
+	else warn("[HeadbandShop] Missing authored StarterGui card: "..entry.Name) end
+end
+pop(buy,buy.UIScale)
+pop(panel.CloseButton,panel.CloseButton.UIScale)
+buy.Activated:Connect(submit)
+panel.CloseButton.Activated:Connect(close)
+backdrop.Activated:Connect(close)
+gui:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
+	if rootTween then rootTween:Cancel() end
+	scale.Scale=fitScale()
+end)
+player:GetAttributeChangedSignal("OpenHeadbandShop"):Connect(function()
+	if player:GetAttribute("OpenHeadbandShop")~=nil then open() end
+end)
+for _,attribute in {"OwnedHeadbands","EquippedHeadband"} do
+	player:GetAttributeChangedSignal(attribute):Connect(function()
+		if selected and not unlocked(selected,ownership()) then selectBand(preferred(),false) end
+		refresh()
+	end)
+end
+player.CharacterRemoving:Connect(close)
+UserInputService.InputBegan:Connect(function(input)
+	if input.KeyCode==Enum.KeyCode.Escape then close() end
+end)
+task.spawn(function()
+	local remotes=ReplicatedStorage:WaitForChild("Remotes")
+	remote=remotes:WaitForChild("HeadbandAction")
+	-- the booth's "Open" prompt opens this panel straight away (user 2026-09-09: no shopkeeper dialogue in between)
+	remotes:WaitForChild("OpenShopDialog").OnClientEvent:Connect(open)
+end)
+gui.Enabled=false
+blur.Size=0
+scale.Scale=fitScale()
+selectBand(preferred(),false)
+
+-- Studio-only inspection hooks operate the same controller as player input.
+if RunService:IsStudio() then
+	gui:GetAttributeChangedSignal("HeadbandShopDev"):Connect(function()
+		local command=gui:GetAttribute("HeadbandShopDev")
+		if type(command)~="string" then return end
+		gui:SetAttribute("HeadbandShopDev",nil)
+		if command=="open" then open()
+		elseif command=="close" then close()
+		elseif command:sub(1,7)=="select:" then selectBand(Catalog.Get(command:sub(8)),false) end
+	end)
+end
+print("[HeadbandShop] Authored StarterGui shop ready; "..#bands.." headbands")

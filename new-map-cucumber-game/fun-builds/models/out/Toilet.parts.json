@@ -1,0 +1,1030 @@
+{
+ "key": "Toilet",
+ "category": "Home",
+ "parts": [
+  {
+   "name": "Mat",
+   "shape": "Ellipsoid",
+   "size": [
+    2.9,
+    0.06,
+    2.3
+   ],
+   "cf": [
+    0.0,
+    0.03,
+    -0.55,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3f79d4",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MatStripe",
+   "shape": "Ellipsoid",
+   "size": [
+    2.3,
+    0.06,
+    1.7
+   ],
+   "cf": [
+    0.0,
+    0.045,
+    -0.55,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "6a9ef0",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Foot",
+   "shape": "Ellipsoid",
+   "size": [
+    1.7,
+    0.4,
+    2.1
+   ],
+   "cf": [
+    0.0,
+    0.2,
+    0.15,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f6f4ee",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Pedestal",
+   "shape": "Ellipsoid",
+   "size": [
+    1.25,
+    1.9,
+    1.75
+   ],
+   "cf": [
+    0.0,
+    0.95,
+    0.05,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f6f4ee",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BoltCapL",
+   "shape": "Ellipsoid",
+   "size": [
+    0.24,
+    0.2,
+    0.24
+   ],
+   "cf": [
+    0.72,
+    0.3,
+    0.55,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e2dfd6",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BoltCapR",
+   "shape": "Ellipsoid",
+   "size": [
+    0.24,
+    0.2,
+    0.24
+   ],
+   "cf": [
+    -0.72,
+    0.3,
+    0.55,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e2dfd6",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Bowl",
+   "shape": "Ellipsoid",
+   "size": [
+    2.1,
+    1.3,
+    2.55
+   ],
+   "cf": [
+    0.0,
+    1.52,
+    -0.3,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f6f4ee",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BowlNeck",
+   "shape": "Block",
+   "size": [
+    1.3,
+    0.7,
+    0.4
+   ],
+   "cf": [
+    0.0,
+    1.85,
+    0.62,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f6f4ee",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Seat",
+   "shape": "Ellipsoid",
+   "size": [
+    2.22,
+    0.24,
+    2.6
+   ],
+   "cf": [
+    0.0,
+    2.01,
+    -0.3,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "a8733d",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BowlInner",
+   "shape": "Ellipsoid",
+   "size": [
+    1.4,
+    0.05,
+    1.72
+   ],
+   "cf": [
+    0.0,
+    2.125,
+    -0.35,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d6dbe2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BowlWater",
+   "shape": "Ellipsoid",
+   "size": [
+    1.0,
+    0.05,
+    1.2
+   ],
+   "cf": [
+    0.0,
+    2.14,
+    -0.42,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "5fc3ec",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HingeL",
+   "shape": "Cylinder",
+   "size": [
+    0.34,
+    0.2,
+    0.2
+   ],
+   "cf": [
+    0.55,
+    2.1,
+    0.84,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d2de",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HingeR",
+   "shape": "Cylinder",
+   "size": [
+    0.34,
+    0.2,
+    0.2
+   ],
+   "cf": [
+    -0.55,
+    2.1,
+    0.84,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "c9d2de",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Lid",
+   "shape": "Ellipsoid",
+   "size": [
+    1.85,
+    2.2,
+    0.2
+   ],
+   "cf": [
+    0.0,
+    3.2443,
+    0.43698,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.99756,
+    -0.06976,
+    0.0,
+    0.06976,
+    0.99756
+   ],
+   "color": "a8733d",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "LidRim",
+   "shape": "Ellipsoid",
+   "size": [
+    1.5,
+    1.86,
+    0.2
+   ],
+   "cf": [
+    0.0,
+    3.2443,
+    0.40698,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.99756,
+    -0.06976,
+    0.0,
+    0.06976,
+    0.99756
+   ],
+   "color": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Tank",
+   "shape": "Block",
+   "size": [
+    2.3,
+    1.58,
+    0.86
+   ],
+   "cf": [
+    0.0,
+    2.99,
+    1.15,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f6f4ee",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "TankTrim",
+   "shape": "Block",
+   "size": [
+    2.38,
+    0.16,
+    0.94
+   ],
+   "cf": [
+    0.0,
+    2.28,
+    1.15,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e2dfd6",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "TankLid",
+   "shape": "Block",
+   "size": [
+    2.44,
+    0.2,
+    1.0
+   ],
+   "cf": [
+    0.0,
+    3.88,
+    1.15,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f6f4ee",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "TankLidEdgeF",
+   "shape": "Cylinder",
+   "size": [
+    2.44,
+    0.2,
+    0.2
+   ],
+   "cf": [
+    0.0,
+    3.88,
+    0.65,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f6f4ee",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "TankLidEdgeB",
+   "shape": "Cylinder",
+   "size": [
+    2.44,
+    0.2,
+    0.2
+   ],
+   "cf": [
+    0.0,
+    3.88,
+    1.65,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f6f4ee",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "FlushPlate",
+   "shape": "Cylinder",
+   "size": [
+    0.07,
+    0.4,
+    0.4
+   ],
+   "cf": [
+    0.98,
+    3.42,
+    0.67,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "c9d2de",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HandleLever",
+   "shape": "Cylinder",
+   "size": [
+    0.5,
+    0.15,
+    0.15
+   ],
+   "cf": [
+    1.23,
+    3.42,
+    0.58,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d2de",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HandleKnob",
+   "shape": "Ball",
+   "size": [
+    0.24,
+    0.24,
+    0.24
+   ],
+   "cf": [
+    1.52,
+    3.42,
+    0.58,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d2de",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HandleHub",
+   "shape": "Cylinder",
+   "size": [
+    0.16,
+    0.2,
+    0.2
+   ],
+   "cf": [
+    0.98,
+    3.42,
+    0.6,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "c9d2de",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SupplyPipe",
+   "shape": "Cylinder",
+   "size": [
+    2.23,
+    0.12,
+    0.12
+   ],
+   "cf": [
+    -0.75,
+    1.135,
+    1.38,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "c9d2de",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SupplyValve",
+   "shape": "Ball",
+   "size": [
+    0.26,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    -0.75,
+    0.62,
+    1.38,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d2de",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SupplyKnob",
+   "shape": "Cylinder",
+   "size": [
+    0.3,
+    0.1,
+    0.1
+   ],
+   "cf": [
+    -0.75,
+    0.62,
+    1.53,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "color": "c9d2de",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SupplyFlange",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    -0.75,
+    0.03,
+    1.38,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "c9d2de",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PaperRoll",
+   "shape": "Cylinder",
+   "size": [
+    0.62,
+    0.72,
+    0.72
+   ],
+   "cf": [
+    -0.52,
+    4.29,
+    1.15,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "ffffff",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PaperCore",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.28,
+    0.28
+   ],
+   "cf": [
+    -0.52,
+    4.6,
+    1.15,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "b98d5a",
+   "material": "Cardboard",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PlantPot",
+   "shape": "Cylinder",
+   "size": [
+    0.42,
+    0.44,
+    0.44
+   ],
+   "cf": [
+    0.55,
+    4.19,
+    1.15,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PlantPotRim",
+   "shape": "Cylinder",
+   "size": [
+    0.1,
+    0.52,
+    0.52
+   ],
+   "cf": [
+    0.55,
+    4.39,
+    1.15,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PlantLeaf1",
+   "shape": "Ball",
+   "size": [
+    0.5,
+    0.5,
+    0.5
+   ],
+   "cf": [
+    0.55,
+    4.66,
+    1.15,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "4caf50",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PlantLeaf2",
+   "shape": "Ball",
+   "size": [
+    0.34,
+    0.34,
+    0.34
+   ],
+   "cf": [
+    0.73,
+    4.88,
+    1.07,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "5cc75f",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  }
+ ],
+ "pivots": {
+  "Seat": [
+   0.0,
+   2.12,
+   -0.15
+  ],
+  "Bowl": [
+   0.0,
+   2.165,
+   -0.42
+  ],
+  "Handle": [
+   0.98,
+   3.42,
+   0.6
+  ]
+ },
+ "attrs": {
+  "Cost": 300,
+  "Notes": "Toilet (primlib parts): seat at Pivot_Seat (faces -Z, prompt Sit), Flush prompt on the FlushPlate -> the Handle* parts dip about Pivot_Handle, a blue swirl spins in the bowl (Pivot_Bowl) and the flush sound plays. Built by fun-builds/models/build_Toilet.py."
+ },
+ "size_studs": [
+  3.09,
+  5.05,
+  3.45
+ ],
+ "min": [
+  -1.45,
+  0.0,
+  -1.7
+ ],
+ "max": [
+  1.64,
+  5.05,
+  1.75
+ ],
+ "part_count": 34,
+ "duplicate_names": []
+}

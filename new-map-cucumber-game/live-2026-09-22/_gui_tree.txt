@@ -1,0 +1,262 @@
+=== StarterGui children ===
+ScreenGui EggRevealUI
+ScreenGui FreeGiftGui
+ScreenGui HeadbandShop
+ScreenGui CucumberHUDDesign
+ScreenGui CucumberMenus
+ScreenGui AdminPanel
+ScreenGui BuildMenu
+=== CucumberHUDDesign ===
+ScreenGui CucumberHUDDesign Enabled=true DO=20 IgnoreInset=false @{BaseMode=false, BenchMode=false, Reference=HUD: Shop/Index openers (MenuController), live Strength + Cash counters and the night timer (HUDClient), + button -> Shop > Strength, StrengthImageAssetId=15403007921, StudTextureAssetId=14905298664}
+  LocalScript HUDClient
+  ModuleScript BaseHUDController
+  LocalScript BaseHUDClient
+  LocalScript SlowModeClient
+  Frame LeftMenu S={0.0938,0,0.154,0} P={0.009,0,0.47,0} A=(0,0.5) V=true Z=1
+    UIAspectRatioConstraint Proportions
+    UISizeConstraint SizeLimits
+    Frame Shop S={1,0,0.455,0} P={0,0,0,0} A=(0,0) V=true Z=2
+      UICorner Corners
+      UIStroke Outline
+      Frame Fill S={0.964,0,0.91,0} P={0.018,0,0.045,0} A=(0,0) V=true Z=3
+        UICorner Corners
+        UIGradient ColorGradient
+        ImageLabel StudTexture S={1,0,1,0} P={0,0,0,0} A=(0,0) V=true Z=4 I=rbxassetid://14905298636
+        Frame InnerHighlight S={0.966,0,0.91,0} P={0.017,0,0.045,0} A=(0,0) V=true Z=5
+          ... 2 children
+      TextLabel Label S={0.59,0,0.65,0} P={0.38,0,0.15,0} A=(0,0) V=true Z=10 T="Shop" F=BuilderSansExtraBold
+        UIStroke TextOutline
+      ImageLabel CartOutline1 S={0.25,0,0.54,0} P={0.065,-1,0.22,0} A=(0,0) V=true Z=6 I=rbxassetid://11385395241
+      ImageLabel CartOutline2 S={0.25,0,0.54,0} P={0.065,1,0.22,0} A=(0,0) V=true Z=6 I=rbxassetid://11385395241
+      ImageLabel CartOutline3 S={0.25,0,0.54,0} P={0.065,0,0.22,-1} A=(0,0) V=true Z=6 I=rbxassetid://11385395241
+      ImageLabel CartOutline4 S={0.25,0,0.54,0} P={0.065,0,0.22,1} A=(0,0) V=true Z=6 I=rbxassetid://11385395241
+      ImageLabel CartOutline5 S={0.25,0,0.54,0} P={0.065,-1,0.22,-1} A=(0,0) V=true Z=6 I=rbxassetid://11385395241
+      ImageLabel CartOutline6 S={0.25,0,0.54,0} P={0.065,1,0.22,1} A=(0,0) V=true Z=6 I=rbxassetid://11385395241
+      ImageLabel CartIcon S={0.25,0,0.54,0} P={0.065,0,0.22,0} A=(0,0) V=true Z=7 I=rbxassetid://11385395241
+      TextButton OpenShop S={1,0,1,0} P={0,0,0,0} A=(0,0) V=true Z=30 T="" F=Legacy
+    Frame Index S={1,0,0.455,0} P={0,0,0.545,0} A=(0,0) V=true Z=2
+      UICorner Corners
+      UIStroke Outline
+      Frame Fill S={0.964,0,0.91,0} P={0.018,0,0.045,0} A=(0,0) V=true Z=3
+        UICorner Corners
+        UIGradient ColorGradient
+        ImageLabel StudTexture S={1,0,1,0} P={0,0,0,0} A=(0,0) V=true Z=4 I=rbxassetid://14905298636
+        Frame InnerHighlight S={0.966,0,0.91,0} P={0.017,0,0.045,0} A=(0,0) V=true Z=5
+          ... 2 children
+      TextLabel Label S={0.59,0,0.65,0} P={0.38,0,0.15,0} A=(0,0) V=true Z=10 T="Index" F=BuilderSansExtraBold
+        UIStroke TextOutline
+      ImageLabel BookIcon S={0.32,0,0.84,0} P={0.025,0,0.07,0} A=(0,0) V=true Z=7 I=rbxassetid://114745649194031
+      TextButton OpenIndex S={1,0,1,0} P={0,0,0,0} A=(0,0) V=true Z=30 T="" F=Legacy
+    Frame Build S={1,0,0.455,0} P={0,0,0,0} A=(0,0) V=false Z=2 @{Placeholder=true}
+      UICorner Corners
+      UIStroke Outline
+      Frame Fill S={0.964,0,0.91,0} P={0.018,0,0.045,0} A=(0,0) V=true Z=3
+        UICorner Corners
+        UIGradient ColorGradient
+        ImageLabel StudTexture S={1,0,1,0} P={0,0,0,0} A=(0,0) V=true Z=4 I=rbxassetid://14905298636
+        Frame InnerHighlight S={0.966,0,0.91,0} P={0.017,0,0.045,0} A=(0,0) V=true Z=5
+          ... 2 children
+      TextLabel Label S={0.59,0,0.65,0} P={0.38,0,0.15,0} A=(0,0) V=true Z=10 T="Build" F=BuilderSansExtraBold
+        UIStroke TextOutline
+      TextButton BuildButton S={1,0,1,0} P={0,0,0,0} A=(0,0) V=true Z=30 T="" F=Legacy @{Placeholder=true}
+      Frame BuildIcon S={0.27,0,0.68,0} P={0.055,0,0.16,0} A=(0,0) V=true Z=12
+        UIAspectRatioConstraint UIAspectRatioConstraint
+        Frame Hammer S={1,0,1,0} P={0,0,0,0} A=(0,0) V=true Z=13
+          ... 2 children
+    Frame Manage S={1,0,0.455,0} P={0,0,0.545,0} A=(0,0) V=false Z=2 @{Placeholder=true}
+      UICorner Corners
+      UIStroke Outline
+      Frame Fill S={0.964,0,0.91,0} P={0.018,0,0.045,0} A=(0,0) V=true Z=3
+        UICorner Corners
+        UIGradient ColorGradient
+        ImageLabel StudTexture S={1,0,1,0} P={0,0,0,0} A=(0,0) V=true Z=4 I=rbxassetid://14905298636
+        Frame InnerHighlight S={0.966,0,0.91,0} P={0.017,0,0.045,0} A=(0,0) V=true Z=5
+          ... 2 children
+      TextLabel Label S={0.59,0,0.65,0} P={0.38,0,0.15,0} A=(0,0) V=true Z=10 T="Manage" F=BuilderSansExtraBold
+        UIStroke TextOutline
+      TextButton ManageButton S={1,0,1,0} P={0,0,0,0} A=(0,0) V=true Z=30 T="" F=Legacy @{Placeholder=true}
+      Frame ManageIcon S={0.27,0,0.68,0} P={0.055,0,0.16,0} A=(0,0) V=true Z=12
+        UIAspectRatioConstraint UIAspectRatioConstraint
+        Frame Rail1 S={0.075,0,0.8,0} P={0.22,0,0.5,0} A=(0.5,0.5) V=true Z=13
+          ... 2 children
+        Frame Knob1 S={0.25,0,0.22,0} P={0.22,0,0.32,0} A=(0.5,0.5) V=true Z=14
+          ... 2 children
+        Frame Rail2 S={0.075,0,0.8,0} P={0.5,0,0.5,0} A=(0.5,0.5) V=true Z=13
+          ... 2 children
+        Frame Knob2 S={0.25,0,0.22,0} P={0.5,0,0.67,0} A=(0.5,0.5) V=true Z=14
+          ... 2 children
+        Frame Rail3 S={0.075,0,0.8,0} P={0.78,0,0.5,0} A=(0.5,0.5) V=true Z=13
+          ... 2 children
+        Frame Knob3 S={0.25,0,0.22,0} P={0.78,0,0.42,0} A=(0.5,0.5) V=true Z=14
+          ... 2 children
+    Frame BenchStrength S={1.35,0,0.48,0} P={0,0,0.545,0} A=(0,0) V=false Z=2 @{Multiplier=16, Placeholder=true, PriceRobux=49, ProductId=0}
+      UICorner Corners
+      UIStroke Outline
+      Frame Fill S={0.964,0,0.91,0} P={0.018,0,0.045,0} A=(0,0) V=true Z=3
+        UICorner Corners
+        ImageLabel StudTexture S={1,0,1,0} P={0,0,0,0} A=(0,0) V=true Z=4 I=rbxassetid://14905298636
+          ... 1 children
+        UIGradient RainbowGradient
+        Frame InnerHighlight S={0.966,0,0.91,0} P={0.017,0,0.045,0} A=(0,0) V=true Z=5
+          ... 2 children
+      TextButton OfferButton S={1,0,1,0} P={0,0,0,0} A=(0,0) V=true Z=30 T="" F=Legacy @{Placeholder=true}
+      ImageLabel StrengthBackdrop S={0.44,0,1.26,0} P={0.53,0,0.36,0} A=(0.5,0.5) V=true Z=8 I=rbxassetid://15403007921
+      TextLabel Title S={0.89,0,0.48,0} P={0.055,0,0.28,0} A=(0,0) V=true Z=12 T="x16 Strength" F=FredokaOne
+        UIStroke UIStroke
+      TextLabel Price S={0.55,0,0.35,0} P={0.16,0,0.79,0} A=(0,0) V=true Z=14 T="ONLY 49" F=FredokaOne
+        UIStroke UIStroke
+      ImageLabel RobuxIcon S={0.1,0,0.3,0} P={0.72,0,0.81,0} A=(0,0) V=true Z=14 I=rbxassetid://11560341132
+      Frame RayClip S={0.96,0,0.9,0} P={0.02,0,0.05,0} A=(0,0) V=true Z=6
+        Frame Sunburst S={0.84,0,2.6,0} P={0.53,0,0.36,0} A=(0.5,0.5) V=true Z=6
+          ... 36 children
+      UIScale ButtonScale Scale=1
+    Frame SlowMode S={1.4,0,0.29,0} P={0,0,1.1,0} A=(0,0) V=true Z=1
+      Frame Track S={0.44,0,1,0} P={0,0,0,0} A=(0,0) V=true Z=1
+        UICorner Corners
+        UIStroke Outline
+        Frame Thumb S={0.33,0,0.8,0} P={0.05,0,0.5,0} A=(0,0.5) V=true Z=1
+          ... 3 children
+      TextLabel Label S={0.49,0,0.72,0} P={0.5,0,0.14,0} A=(0,0) V=true Z=1 T="Slow Mode" F=FredokaOne
+        UIStroke Outline
+      TextButton Toggle S={1,0,1,0} P={0,0,0,0} A=(0,0) V=true Z=5 T="" F=Legacy
+  Frame Counters S={0.3,0,0.09,0} P={0.5,0,0,14} A=(0.5,0) V=true Z=1
+    UIAspectRatioConstraint Proportions
+    UISizeConstraint SizeLimits
+    ImageLabel StrengthIcon S={0.14,0,0.94,0} P={0,0,0.03,0} A=(0,0) V=true Z=5 I=rbxassetid://15403007921
+    TextLabel StrengthValue S={0.3,0,0.76,0} P={0.16,0,0.5,0} A=(0,0.5) V=true Z=10 T="0" F=Unknown
+      UIStroke TextOutline
+      UIScale PopScale Scale=1
+    Frame AddStrength S={0.065,0,0.455,0} P={0.112,0,0.8,0} A=(0.5,0.5) V=true Z=8
+      UICorner Corners
+      UIStroke Outline
+      Frame InnerHighlight S={0.8,0,0.8,0} P={0.1,0,0.1,0} A=(0,0) V=true Z=9
+        UICorner Corners
+        UIStroke Outline
+      TextLabel Plus S={0.78,0,1.05,0} P={0.12,0,-0.07,0} A=(0,0) V=true Z=10 T="+" F=BuilderSansExtraBold
+        UIStroke TextOutline
+      TextButton OpenStrengthShop S={1,0,1,0} P={0,0,0,0} A=(0,0) V=true Z=30 T="" F=Legacy
+    ImageLabel CashIcon S={0.14,0,0.94,0} P={0.54,0,0.03,0} A=(0,0) V=true Z=5 I=rbxassetid://15402858705
+    TextLabel CashValue S={0.3,0,0.76,0} P={0.7,0,0.5,0} A=(0,0.5) V=true Z=10 T="0" F=Unknown
+      UIStroke TextOutline
+      UIScale PopScale Scale=1
+  Frame NightTimer S={0.15,0,0.055,0} P={0.009,0,1,-12} A=(0,1) V=true Z=1
+    UIAspectRatioConstraint Proportions
+    UISizeConstraint SizeLimits
+    ImageLabel MoonOutline1 S={0.22,0,0.88,0} P={0,-1,0.06,0} A=(0,0) V=true Z=5 I=rbxassetid://240651261
+    ImageLabel MoonOutline2 S={0.22,0,0.88,0} P={0,1,0.06,0} A=(0,0) V=true Z=5 I=rbxassetid://240651261
+    ImageLabel MoonOutline3 S={0.22,0,0.88,0} P={0,0,0.06,-1} A=(0,0) V=true Z=5 I=rbxassetid://240651261
+    ImageLabel MoonOutline4 S={0.22,0,0.88,0} P={0,0,0.06,1} A=(0,0) V=true Z=5 I=rbxassetid://240651261
+    ImageLabel MoonAndCloud S={0.22,0,0.88,0} P={0.00468,0,0.06,0} A=(0,0) V=true Z=6 I=rbxassetid://240651261
+    TextLabel TimeLabel S={0.74,0,0.74,0} P={0.265,0,0.12,0} A=(0,0) V=true Z=10 T="in --" F=Unknown
+      UIStroke TextOutline
+=== CucumberMenus ===
+ScreenGui CucumberMenus Enabled=true DO=60 IgnoreInset=false @{CollectionIntegration=Uses existing CucumberCollectionBook, EquipCucumberCollection and CucumberAdventure remotes, OpenPanel=, PurchaseIntegration=Templates only: ProductId 0, no purchase prompts}
+  ModuleScript MenuController
+  LocalScript MenuClient
+  ModuleScript IndexView
+  ModuleScript IndexController
+  ModuleScript ShopController
+  TextButton Dimmer S={1,0,1,0} P={0,0,0,0} A=(0,0) V=false Z=1 T="" F=Legacy
+  Frame ShopPanel S={0,1140,0,735} P={0.5,0,0.5,0} A=(0.5,0.5) V=true Z=2 @{Reference=Zombie Cucumber Game Store look (Display.Frame.Frames.Store); built by hud-shop/build_shop.lua; ShopController wires it, RequestedTab=Strength}
+    UIScale ResponsiveScale Scale=0.663428544998169
+    CanvasGroup Content S={1,0,1,0} P={0.5,0,0.5,0} A=(0.5,0.5) V=false Z=2
+      UIScale MotionScale Scale=1
+      ImageLabel Background S={0,969,0,686} P={0,106,0,47} A=(0,0) V=true Z=2 I=rbxassetid://75881657992560
+      ImageLabel Header S={0,333,0,93} P={0,70,0,0} A=(0,0) V=true Z=3 I=rbxassetid://75227340977908
+        ... 1 children
+      Frame ContentPanel S={0,917,0,590} P={0,133,0,109} A=(0,0) V=true Z=5
+        ... 3 children
+      Frame TabRail S={1,0,1,0} P={0,0,0,0} A=(0,0) V=true Z=5
+        ... 3 children
+      ImageButton CloseButton S={0,86,0,86} P={0,1067,0,56} A=(0.5,0.5) V=true Z=30 I=
+        ... 3 children
+  Frame IndexPanel S={0,1140,0,735} P={0.5,0,0.5,0} A=(0.5,0.5) V=true Z=2
+    UIScale ResponsiveScale Scale=0.663428544998169
+    CanvasGroup Content S={1,0,1,0} P={0.5,0,0.5,0} A=(0.5,0.5) V=false Z=2
+      UIScale MotionScale Scale=1
+      Frame Shadow S={0,1120,0,694} P={0,10,0,30} A=(0,0) V=true Z=2
+        ... 1 children
+      Frame Body S={0,1120,0,690} P={0,10,0,23} A=(0,0) V=true Z=3
+        ... 6 children
+      TextLabel CollectionCount S={0,750,0,37} P={0,36,0,206} A=(0,0) V=true Z=10 T="Spawn   0 / 6" F=FredokaOne
+        ... 1 children
+      Frame CollectionProgress S={0,1067,0,21} P={0,36,0,250} A=(0,0) V=true Z=5
+        ... 4 children
+      ScrollingFrame CucumberGrid S={0,1080,0,340} P={0,30,0,287} A=(0,0) V=true Z=5
+        ... 8 children
+      TextLabel Footer S={0,704,0,25} P={0,44,0,646} A=(0,0) V=true Z=10 T="Complete this biome to unlock its title " F=FredokaOne
+        ... 2 children
+      ScrollingFrame BiomeTabs S={0,1076,0,60} P={0,31,0,143} A=(0,0) V=true Z=8
+        ... 12 children
+      TextLabel BestLift S={0,704,0,23} P={0,44,0,674} A=(0,0) V=true Z=10 T="Best lift: None yet" F=FredokaOne
+        ... 1 children
+      TextButton EquipReward S={0,305,0,54} P={0,796,0,645} A=(0,0) V=true Z=10 T="" F=Legacy @{Unlocked=false}
+        ... 7 children
+      Frame RewardBar S={0,1090,0,69} P={0,25,0,637} A=(0,0) V=true Z=8
+        ... 3 children
+      ImageLabel Header S={0,390,0,103} P={0,22,0,0} A=(0,0) V=true Z=12 I=rbxassetid://75227340977908
+        ... 2 children
+      ImageButton CloseButton S={0,86,0,86} P={0,1082,0,55} A=(0.5,0.5) V=true Z=30 I=
+        ... 3 children
+  Folder Templates
+    Frame CucumberCard S={0,254,0,244} P={0,0,0,0} A=(0,0) V=false Z=5 @{CucumberName=Spawn Cucumber, PreviewCollected=true}
+      UICorner Corners
+      UIStroke Border
+      UIGradient Gradient
+      ImageLabel StudTexture S={1,0,1,0} P={0,0,0,0} A=(0,0) V=true Z=6 I=rbxassetid://14905298636
+        ... 1 children
+      TextLabel Number S={0,75,0,30} P={0,12,0,8} A=(0,0) V=true Z=10 T="#001" F=FredokaOne
+        ... 1 children
+      ViewportFrame CucumberViewport S={0,232,0,151} P={0,11,0,28} A=(0,0) V=true Z=7
+      Frame NamePlate S={0,244,0,61} P={0,5,0,177} A=(0,0) V=true Z=8
+        ... 6 children
+      Frame CollectedCheck S={0,43,0,43} P={0,200,0,9} A=(0,0) V=true Z=10
+        ... 5 children
+      Frame InnerRim S={1,-10,1,-10} P={0,5,0,5} A=(0,0) V=true Z=6
+        ... 2 children
+    TextButton BiomeTab S={0,145,0,47} P={0,0,0,0} A=(0,0) V=false Z=8 T="" F=BuilderSansExtraBold
+      UICorner UICorner
+      UIStroke UIStroke
+      UIGradient Gradient
+      Frame InnerRim S={1,-10,1,-10} P={0,5,0,5} A=(0,0) V=false Z=9
+        ... 2 children
+      TextLabel Label S={1,-8,1,-4} P={0,4,0,2} A=(0,0) V=true Z=11 T="Spawn" F=FredokaOne
+        ... 2 children
+  Frame ManagePanel S={0,1140,0,735} P={0.5,0,0.5,0} A=(0.5,0.5) V=true Z=2 @{DefaultTab=Pets, IntendedOpener=StarterGui.CucumberHUDDesign.LeftMenu.Manage.ManageButton, UIOnly=true}
+    UIScale ResponsiveScale Scale=0.663428544998169
+    CanvasGroup Content S={1,0,1,0} P={0.5,0,0.5,0} A=(0.5,0.5) V=false Z=2
+      UIScale MotionScale Scale=1
+      Frame Shadow S={0,1120,0,694} P={0,10,0,30} A=(0,0) V=true Z=2
+        ... 1 children
+      Frame Body S={0,1120,0,690} P={0,10,0,23} A=(0,0) V=true Z=3
+        ... 6 children
+      ImageLabel Header S={0,390,0,103} P={0,22,0,0} A=(0,0) V=true Z=12 I=rbxassetid://75227340977908
+        ... 2 children
+      ImageButton CloseButton S={0,86,0,86} P={0,1082,0,55} A=(0.5,0.5) V=true Z=30 I=
+        ... 3 children
+      Frame Tabs S={0,1076,0,60} P={0,31,0,143} A=(0,0) V=true Z=7
+        ... 3 children
+      Frame Pages S={0,1076,0,500} P={0,31,0,207} A=(0,0) V=true Z=7
+        ... 3 children
+    Folder Templates
+      Frame PetRow S={0,1044,0,102} P={0,0,0,0} A=(0,0) V=false Z=5 @{CucumberName=Spawn Cucumber, PreviewCollected=true}
+        ... 9 children
+      Frame CucumberRow S={0,1044,0,102} P={0,0,0,0} A=(0,0) V=false Z=5 @{CucumberName=Spawn Cucumber, PreviewCollected=true}
+        ... 9 children
+    ObjectValue IntendedOpener
+=== EggRevealUI ===
+ScreenGui EggRevealUI Enabled=true DO=50 IgnoreInset=true
+  Frame SingleLayer S={1,0,1,0} P={0,0,0,0} A=(0,0) V=true Z=1
+  Frame TripleLayer S={1,0,1,0} P={0,0,0,0} A=(0,0) V=true Z=2
+  TextButton ClickCatcher S={1,0,1,0} P={0,0,0,0} A=(0,0) V=false Z=5 T="" F=Legacy
+    TextLabel Prompt S={0.7,0,0.085,0} P={0.5,0,0.92,0} A=(0.5,1) V=true Z=6 T="Click to open!" F=FredokaOne
+      UIStroke UIStroke
+  Frame SingleTemplate S={0,0,0,0} P={0.5,0,0.5,0} A=(0.5,0.5) V=false Z=1
+    TextLabel PetName S={0.25,0,0.093,0} P={0.5,0,0.88,0} A=(0.5,0.5) V=true Z=1 T="HYDRA" F=GothamBlack
+      UIGradient UIGradient
+    TextLabel PetRarity S={0.2,0,0.035,0} P={0.5,0,0.94,0} A=(0.5,0.5) V=true Z=1 T="[nil]" F=GothamBlack
+      UIGradient UIGradient
+    TextLabel PetUnlocked S={0.2,0,0.035,0} P={0.5,0,0.82,0} A=(0.5,0.5) V=false Z=1 T="PET UNLOCKED" F=GothamBlack
+      UIGradient UIGradient
+    TextLabel PetChance S={0.24,0,0.05,0} P={0.655,0,0.315,0} A=(0.5,0.5) V=false Z=5 T="[1 in 100]" F=FredokaOne
+      UIStroke ChanceStroke

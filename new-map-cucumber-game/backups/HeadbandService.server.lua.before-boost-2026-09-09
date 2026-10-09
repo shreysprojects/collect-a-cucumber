@@ -1,0 +1,558 @@
+--[[
+	HeadbandService  (Script, ServerScriptService)
+	The lobby headband shop, server half (user 2026-09-09). Ported in spirit from the Zombie
+	Cucumber Game's shop booth: a shopkeeper prompt on the empty "BUY YOUR TOOLS!" stall opens the
+	dialogue on the client, and the shop UI buys / equips through one RemoteFunction.
+
+	  * THE BOOTH. Waits for Map.Lobby.LayoutReady (ServerScriptService.LobbyLayoutServer sets it
+	    once LobbyLayout.Apply() has slid every shop along Z), then builds an invisible anchored
+	    "TalkAnchor" Part just inside the open front of Workspace.Map.Lobby.Shops["Buy Shop"] --
+	    as a CHILD of the stall, so it rides along if the layout ever moves the booth -- and parents
+	    a ProximityPrompt to it (ActionText "Talk", ObjectText "Shopkeeper", tag "ShopBoothPrompt").
+	    Nothing is hard-coded: the anchor comes from the booth's runtime pivot + part bounds.
+	    Triggered -> Remotes.OpenShopDialog:FireClient(player).
+	  * SHOPPING. Remotes.HeadbandAction (RemoteFunction), the PlotUpgradeService shape:
+	    InvokeServer("Buy", name) / ("Equip", name) / ("Unequip") -> ok, message, with a 0.3 s
+	    per-player debounce. Prices come from ReplicatedStorage.Modules.HeadbandsCatalog and Coins
+	    from ServerStorage.DataService (never leaderstats). Buying does NOT auto-equip unless the
+	    player is currently wearing nothing.
+	  * SAVED, in the CucumberAdventure shape:
+	        profile.Data.Headbands = {Owned = {[name] = true, ...}, Equipped = "<name>" or ""}
+	    The sub-table is normalised lazily, so this service works before "Headbands" is added to
+	    DataService's TEMPLATE (the exact edit is in headband-shop/INSTALL-notes.md). Tier 1
+	    (Sweatband) is granted to every profile on load; nothing is worn until the player equips.
+	  * REPLICATED to clients as player attributes, not a polling remote:
+	        "EquippedHeadband"  the collection name, "" when bare-headed
+	        "OwnedHeadbands"    the owned collection names, comma-joined
+	  * WORN through ServerStorage.HeadbandFitter: each fresh clone fits the head's width,
+	    depth, height and collision envelope, with a head-local AccessoryWeld. Refit listeners
+	    follow appearance loading, Head replacement and avatar/physique scales without changing
+	    ownership or writing profile data. Unusual legacy FileMesh heads can supply visual
+	    HeadbandBoundsSize / HeadbandBoundsOffset attributes on Head.
+	  * Studio dev hook: workspace attribute "HeadbandDev" = "give:CucumberBand" / "equip:GoldBand"
+	    / "coins:5000" / "reset".
+]]
+
+--..Services..--
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local ServerStorage = game:GetService("ServerStorage")
+local CollectionService = game:GetService("CollectionService")
+local RunService = game:GetService("RunService")
+
+--..Modules..--
+local DataService = require(ServerStorage:WaitForChild("DataService"))
+local Modules = ReplicatedStorage:WaitForChild("Modules")
+local Catalog = require(Modules:WaitForChild("HeadbandsCatalog"))
+local NumberAbbrev = require(Modules:WaitForChild("NumberAbbrev"))
+local HeadbandFitter = require(ServerStorage:WaitForChild("HeadbandFitter"))
+
+--..Config..--
+local BOOTH_NAME = "Buy Shop" --.. Workspace.Map.Lobby.Shops["Buy Shop"], the empty open-fronted stall
+local ANCHOR_NAME = "TalkAnchor" --.. our prompt host, a child of that stall
+local PROMPT_NAME = "TalkPrompt"
+local PROMPT_TAG = "ShopBoothPrompt"
+local PROMPT_DISTANCE = 12
+local PROMPT_HOLD = 0 --.. talking is free, so no hold (a purchase inside the UI is the guarded step)
+local TALK_FORWARD = 2 --.. studs from the stall's centre toward its open front: the shopkeeper's spot
+local TALK_HEIGHT = 3.2 --.. studs above the lobby floor: about an R15 chest
+local ANCHOR_SIZE = Vector3.new(1, 1, 1)
+local LAYOUT_WAIT = 5 --.. seconds to spin on Map.Lobby.LayoutReady (same as PlotUpgradeService)
+local STREAM_WAIT = 30 --.. seconds for every WaitForChild: workspace.StreamingEnabled is true
+
+local ACTION_COOLDOWN = 0.3 --.. seconds per player across Buy / Equip / Unequip
+local STATE_KEY = "Headbands" --.. profile.Data.Headbands
+local EQUIPPED_ATTR = "EquippedHeadband"
+local OWNED_ATTR = "OwnedHeadbands"
+
+local ACCESSORY_PREFIX = "Headband_" --.. teardown finds our accessories by this name prefix
+--..Remotes.. (find-or-create: ReplicatedStorage.Remotes does not exist at edit time)--
+local Remotes = ReplicatedStorage:FindFirstChild("Remotes")
+if not Remotes then
+	Remotes = Instance.new("Folder")
+	Remotes.Name = "Remotes"
+	Remotes.Parent = ReplicatedStorage
+end
+local function Remote(class, name)
+	local r = Remotes:FindFirstChild(name)
+	if not r then
+		r = Instance.new(class)
+		r.Name = name
+		r.Parent = Remotes
+	end
+	return r
+end
+local Action = Remote("RemoteFunction", "HeadbandAction")
+local OpenShopDialog = Remote("RemoteEvent", "OpenShopDialog")
+
+--..Variables..--
+local LastAction = {} --.. [player] = os.clock() of the last Buy / Equip / Unequip
+local FitRevision = {} -- prevents a slow mesh bake from replacing a newer equip/refit
+local Tracked = {} -- per-player lifecycle connections and pending refit
+
+--..Functions..--
+
+--.. the saved sub-table, normalised lazily so this works before DataService.TEMPLATE gains the key.
+--.. Returns (state, created) -- `created` is true when anything had to be filled in.
+local function State(player)
+	local data = DataService.GetData(player)
+	if not data then return nil, false end
+	local created = false
+	if type(data[STATE_KEY]) ~= "table" then
+		data[STATE_KEY] = {}
+		created = true
+	end
+	local s = data[STATE_KEY]
+	if type(s.Owned) ~= "table" then
+		s.Owned = {}
+		created = true
+	end
+	if type(s.Equipped) ~= "string" then
+		s.Equipped = ""
+		created = true
+	end
+	--.. tier 1 is free: every profile owns it
+	if not s.Owned[Catalog.DEFAULT] then
+		s.Owned[Catalog.DEFAULT] = true
+		created = true
+	end
+	--.. drop anything that is no longer in the catalogue, so the attributes stay clean
+	for name in pairs(s.Owned) do
+		if not Catalog.IsValid(name) then
+			s.Owned[name] = nil
+			created = true
+		end
+	end
+	if s.Equipped ~= "" and not Catalog.IsValid(s.Equipped) then
+		s.Equipped = ""
+		created = true
+	end
+	return s, created
+end
+
+--.. server -> client state without a remote: two player attributes the shop UI reads directly
+local function Publish(player)
+	local s = State(player)
+	if not s then return end
+	local owned = {}
+	for _, entry in ipairs(Catalog.List()) do
+		if s.Owned[entry.Name] then table.insert(owned, entry.Name) end
+	end
+	player:SetAttribute(OWNED_ATTR, table.concat(owned, ","))
+	player:SetAttribute(EQUIPPED_ATTR, s.Equipped)
+end
+
+local function ClearHeadbands(character)
+	for _, child in ipairs(character:GetChildren()) do
+		if child:IsA("Accessory") and child.Name:sub(1, #ACCESSORY_PREFIX) == ACCESSORY_PREFIX then
+			child:Destroy()
+		end
+	end
+end
+
+-- Build a fresh fit from the original art; repeated avatar changes never accumulate scale.
+local function ApplyToCharacter(player, character)
+	FitRevision[player] = (FitRevision[player] or 0) + 1
+	local revision = FitRevision[player]
+	character = character or player.Character
+	if not character or character ~= player.Character or not character.Parent then return end
+	local humanoid = character:FindFirstChildOfClass("Humanoid")
+	local head = character:FindFirstChild("Head")
+	if not humanoid or not head or not head:IsA("BasePart") or humanoid.Health <= 0 then return end
+	local state = State(player)
+	local name = state and state.Equipped or ""
+	if name == "" or not Catalog.IsValid(name) then
+		ClearHeadbands(character)
+		return
+	end
+	local template = Catalog.ModelOf(name)
+	if not template then
+		ClearHeadbands(character)
+		warn(("[HeadbandService] no model for %s"):format(name))
+		return
+	end
+	local measuredSize = head.Size
+	local ok, accessory = pcall(HeadbandFitter.Build, template, name, head)
+	if not ok then
+		warn("[HeadbandService] fit failed for " .. player.Name .. ": " .. tostring(accessory))
+		return
+	end
+	if not accessory then return end
+	if FitRevision[player] ~= revision or player.Character ~= character or character:FindFirstChild("Head") ~= head
+		or head.Size ~= measuredSize or not State(player) or State(player).Equipped ~= name then
+		accessory:Destroy()
+		return
+	end
+	ClearHeadbands(character)
+	accessory.Parent = character
+end
+
+local function PriceText(amount)
+	return NumberAbbrev.Abbrev(amount)
+end
+
+--..Buying / equipping.. (all three return ok, message -- the PlotUpgradeService shape)--
+
+local function Buy(player, name)
+	local entry = Catalog.Get(name)
+	if not entry then return false, "Unknown headband" end
+	local s = State(player)
+	if not s then return false, "Your data is still loading" end
+	if s.Owned[entry.Name] then return false, ("You already own the %s"):format(entry.DisplayName) end
+	local coins = DataService.Get(player, "Coins")
+	if coins == nil then return false, "Your data is still loading" end
+	if coins < entry.Price then
+		return false, ("Need %s more Coins"):format(PriceText(entry.Price - coins))
+	end
+	if entry.Price > 0 then
+		DataService.Increment(player, "Coins", -entry.Price)
+	end
+	s.Owned[entry.Name] = true
+	--.. buying does not auto-equip -- unless the player is wearing nothing at all
+	local wearItNow = (s.Equipped == "")
+	if wearItNow then s.Equipped = entry.Name end
+	DataService.RequestSave(player)
+	Publish(player)
+	if wearItNow then
+		ApplyToCharacter(player)
+		return true, ("%s bought and equipped!"):format(entry.DisplayName)
+	end
+	return true, ("%s bought!"):format(entry.DisplayName)
+end
+
+local function Equip(player, name)
+	local entry = Catalog.Get(name)
+	if not entry then return false, "Unknown headband" end
+	local s = State(player)
+	if not s then return false, "Your data is still loading" end
+	if not s.Owned[entry.Name] then
+		return false, ("Buy the %s first (%s Coins)"):format(entry.DisplayName, PriceText(entry.Price))
+	end
+	if s.Equipped == entry.Name then
+		ApplyToCharacter(player) --.. already chosen, but make sure it is actually on the head
+		return true, ("%s is already on"):format(entry.DisplayName)
+	end
+	s.Equipped = entry.Name
+	DataService.RequestSave(player)
+	Publish(player)
+	ApplyToCharacter(player)
+	return true, ("%s equipped!"):format(entry.DisplayName)
+end
+
+local function Unequip(player)
+	local s = State(player)
+	if not s then return false, "Your data is still loading" end
+	if s.Equipped == "" then return false, "You are not wearing a headband" end
+	local was = Catalog.DisplayNameOf(s.Equipped)
+	s.Equipped = ""
+	DataService.RequestSave(player)
+	Publish(player)
+	ApplyToCharacter(player)
+	return true, ("%s taken off"):format(was)
+end
+
+--..The booth.. (never hard-code the stall's coordinates: LobbyLayout slides it every server start)--
+
+--.. world-axis bounds over the stall's parts. Model:GetBoundingBox() is oriented and the shells are
+--.. UnionOperations, so this plain AABB is the honest way to find the stall's centre.
+local function WorldBounds(model)
+	local min, max
+	for _, d in ipairs(model:GetDescendants()) do
+		if d:IsA("BasePart") then
+			local cf, half = d.CFrame, d.Size * 0.5
+			local ext = Vector3.new(
+				math.abs(cf.RightVector.X) * half.X + math.abs(cf.UpVector.X) * half.Y + math.abs(cf.LookVector.X) * half.Z,
+				math.abs(cf.RightVector.Y) * half.X + math.abs(cf.UpVector.Y) * half.Y + math.abs(cf.LookVector.Y) * half.Z,
+				math.abs(cf.RightVector.Z) * half.X + math.abs(cf.UpVector.Z) * half.Y + math.abs(cf.LookVector.Z) * half.Z
+			)
+			local lo, hi = cf.Position - ext, cf.Position + ext
+			min = min and Vector3.new(math.min(min.X, lo.X), math.min(min.Y, lo.Y), math.min(min.Z, lo.Z)) or lo
+			max = max and Vector3.new(math.max(max.X, hi.X), math.max(max.Y, hi.Y), math.max(max.Z, hi.Z)) or hi
+		end
+	end
+	return min, max
+end
+
+--.. the walkable floor under the stall: the lobby Floor part if it is there, else a ray that ignores
+--.. the stall itself (its Circle Light disc is CanQuery and eats every probe), else the AABB's bottom
+local function FloorTopY(lobby, model, at, fallback)
+	local floor = lobby:FindFirstChild("Floor")
+	local part = floor and (floor:IsA("BasePart") and floor or floor:FindFirstChildWhichIsA("BasePart", true))
+	if part then return part.Position.Y + part.Size.Y * 0.5 end
+	local params = RaycastParams.new()
+	params.FilterType = Enum.RaycastFilterType.Exclude
+	params.FilterDescendantsInstances = {model}
+	local hit = workspace:Raycast(at + Vector3.new(0, 30, 0), Vector3.new(0, -120, 0), params)
+	return hit and hit.Position.Y or fallback
+end
+
+local function SetupBooth()
+	local map = workspace:WaitForChild("Map", STREAM_WAIT)
+	local lobby = map and map:WaitForChild("Lobby", STREAM_WAIT)
+	if not lobby then
+		warn("[HeadbandService] no Map.Lobby -- the shopkeeper prompt was not built")
+		return
+	end
+	--.. LobbyLayout.Apply() moves every shop along Z first; measure only after it has finished
+	local deadline = os.clock() + LAYOUT_WAIT
+	while not lobby:GetAttribute("LayoutReady") and os.clock() < deadline do task.wait(0.05) end
+
+	local shops = lobby:WaitForChild("Shops", STREAM_WAIT)
+	local booth = shops and shops:WaitForChild(BOOTH_NAME, STREAM_WAIT)
+	if not booth then
+		warn(("[HeadbandService] no Lobby.Shops[%q] -- the shopkeeper prompt was not built"):format(BOOTH_NAME))
+		return
+	end
+
+	--.. the stall's solid back wall is behind its pivot LookVector, so the open front is -LookVector
+	local pivot = booth:GetPivot()
+	local open = Vector3.new(-pivot.LookVector.X, 0, -pivot.LookVector.Z)
+	open = open.Magnitude > 0.1 and open.Unit or Vector3.xAxis
+	local min, max = WorldBounds(booth)
+	if not min then
+		warn("[HeadbandService] the booth has no parts -- the shopkeeper prompt was not built")
+		return
+	end
+	local centre = (min + max) * 0.5
+	local floorY = FloorTopY(lobby, booth, centre, min.Y)
+	local spot = Vector3.new(centre.X, floorY + TALK_HEIGHT, centre.Z) + open * TALK_FORWARD
+
+	local old = booth:FindFirstChild(ANCHOR_NAME)
+	if old then old:Destroy() end
+	local anchor = Instance.new("Part")
+	anchor.Name = ANCHOR_NAME
+	anchor.Size = ANCHOR_SIZE
+	anchor.CFrame = CFrame.lookAt(spot, spot + open) --.. facing out of the stall, at the customer
+	anchor.Transparency = 1
+	anchor.Anchored = true
+	anchor.CanCollide = false
+	anchor.CanQuery = false
+	anchor.CanTouch = false
+	anchor.Parent = booth --.. a CHILD of the stall, so a re-run of LobbyLayout.Apply() carries it along
+
+	local prompt = Instance.new("ProximityPrompt")
+	prompt.Name = PROMPT_NAME
+	prompt.ActionText = "Talk"
+	prompt.ObjectText = "Shopkeeper"
+	prompt.HoldDuration = PROMPT_HOLD
+	prompt.MaxActivationDistance = PROMPT_DISTANCE
+	prompt.RequiresLineOfSight = false
+	prompt.Exclusivity = Enum.ProximityPromptExclusivity.OnePerButton
+	prompt.KeyboardKeyCode = Enum.KeyCode.E
+	prompt.Style = Enum.ProximityPromptStyle.Default --.. NOT Custom: CucumberPromptClient draws those
+	prompt:SetAttribute("Shop", "Headbands")
+	CollectionService:AddTag(prompt, PROMPT_TAG)
+	prompt.Triggered:Connect(function(player)
+		OpenShopDialog:FireClient(player)
+	end)
+	prompt.Parent = anchor
+
+	print(("[HeadbandService] shopkeeper prompt on %s at %.1f, %.1f, %.1f (tag %s)")
+		:format(BOOTH_NAME, spot.X, spot.Y, spot.Z, PROMPT_TAG))
+end
+
+--..Wiring..--
+
+Action.OnServerInvoke = function(player, kind, name)
+	local now = os.clock()
+	if LastAction[player] and now - LastAction[player] < ACTION_COOLDOWN then return false, "Slow down" end
+	LastAction[player] = now
+	if type(kind) ~= "string" then return false, "Unknown action" end
+	if name ~= nil and type(name) ~= "string" then return false, "Unknown headband" end
+	local handler
+	if kind == "Buy" then
+		handler = Buy
+	elseif kind == "Equip" then
+		handler = Equip
+	elseif kind == "Unequip" then
+		handler = Unequip
+	else
+		return false, "Unknown action"
+	end
+	local ok, result, message = pcall(handler, player, name)
+	if not ok then
+		warn("[HeadbandService] " .. tostring(result))
+		return false, "Something went wrong"
+	end
+	return result == true, message
+end
+
+--.. rejoin: the profile is the source of truth, the attributes are the replication
+DataService.OnProfileLoaded(function(player)
+	local _, created = State(player)
+	if created then DataService.RequestSave(player) end
+	Publish(player)
+	if player.Character then ApplyToCharacter(player, player.Character) end
+end)
+
+-- Refit after spawn, appearance loading, physique scaling, and replacement heads.
+-- Connections belong to one character and are disconnected on respawn/removal.
+local function DisconnectAll(connections)
+	for _, connection in connections do connection:Disconnect() end
+	table.clear(connections)
+end
+
+local function Track(player)
+	if Tracked[player] then return end
+	local state = {Connections = {}, CharacterConnections = {}, Pending = nil, Character = nil}
+	Tracked[player] = state
+
+	local function CancelPending()
+		if state.Pending then
+			task.cancel(state.Pending)
+			state.Pending = nil
+		end
+	end
+	local function QueueFit()
+		if state.Pending then return end
+		local character = state.Character
+		state.Pending = task.delay(0.1, function()
+			state.Pending = nil
+			if Tracked[player] == state and character == state.Character and character == player.Character then
+				ApplyToCharacter(player, character)
+			end
+		end)
+	end
+
+	local BindCharacter
+	BindCharacter = function(character)
+		CancelPending()
+		DisconnectAll(state.CharacterConnections)
+		state.Character = character
+		if not character then return end
+		local function Connect(signal, callback)
+			table.insert(state.CharacterConnections, signal:Connect(callback or QueueFit))
+		end
+		local function Rebind()
+			-- Defer to let a replaced head/mesh finish parenting before inspecting it.
+			task.defer(function()
+				if Tracked[player] == state and state.Character == character and player.Character == character then
+					BindCharacter(character)
+				end
+			end)
+		end
+		Connect(character.ChildAdded, function(child)
+			if child.Name == "Head" or child:IsA("Humanoid") then Rebind() end
+		end)
+		Connect(character.ChildRemoved, function(child)
+			if child.Name == "Head" or child:IsA("Humanoid") then Rebind() end
+		end)
+		local head = character:FindFirstChild("Head")
+		if head and head:IsA("BasePart") then
+			Connect(head:GetPropertyChangedSignal("Size"))
+			Connect(head:GetPropertyChangedSignal("CanQuery"))
+			Connect(head:GetAttributeChangedSignal("HeadbandBoundsSize"))
+			Connect(head:GetAttributeChangedSignal("HeadbandBoundsOffset"))
+			if head:IsA("MeshPart") then Connect(head:GetPropertyChangedSignal("MeshId")) end
+			for _, mesh in head:GetChildren() do
+				if mesh:IsA("DataModelMesh") then
+					Connect(mesh:GetPropertyChangedSignal("Scale"))
+					Connect(mesh:GetPropertyChangedSignal("Offset"))
+					if mesh:IsA("SpecialMesh") then
+						Connect(mesh:GetPropertyChangedSignal("MeshType"))
+						Connect(mesh:GetPropertyChangedSignal("MeshId"))
+					end
+				end
+			end
+			Connect(head.ChildAdded, function(child) if child:IsA("DataModelMesh") then Rebind() end end)
+			Connect(head.ChildRemoved, function(child) if child:IsA("DataModelMesh") then Rebind() end end)
+		end
+		local humanoid = character:FindFirstChildOfClass("Humanoid")
+		if humanoid then
+			Connect(humanoid.ApplyDescriptionFinished, Rebind)
+			for _, value in humanoid:GetChildren() do
+				if value:IsA("NumberValue") and value.Name:match("Scale$") then Connect(value.Changed) end
+			end
+			Connect(humanoid.ChildAdded, function(child)
+				if child:IsA("NumberValue") and child.Name:match("Scale$") then Rebind() end
+			end)
+		end
+		QueueFit()
+	end
+
+	state.Cleanup = function()
+		CancelPending()
+		DisconnectAll(state.CharacterConnections)
+		DisconnectAll(state.Connections)
+		state.Character = nil
+	end
+	table.insert(state.Connections, player.CharacterAdded:Connect(BindCharacter))
+	table.insert(state.Connections, player.CharacterRemoving:Connect(function(character)
+		if state.Character == character then BindCharacter(nil) end
+	end))
+	table.insert(state.Connections, player.CharacterAppearanceLoaded:Connect(function(character)
+		if player.Character == character then BindCharacter(character) end
+	end))
+	if player.Character then BindCharacter(player.Character) end
+end
+Players.PlayerAdded:Connect(Track)
+for _, player in Players:GetPlayers() do Track(player) end
+Players.PlayerRemoving:Connect(function(player)
+	local state = Tracked[player]
+	if state then state.Cleanup() end
+	LastAction[player] = nil
+	FitRevision[player] = nil
+	Tracked[player] = nil
+end)
+
+task.spawn(SetupBooth)
+
+--..Studio dev hook..--
+if RunService:IsStudio() then
+	workspace:GetAttributeChangedSignal("HeadbandDev"):Connect(function()
+		local cmd = workspace:GetAttribute("HeadbandDev")
+		if type(cmd) ~= "string" or cmd == "" then return end
+		workspace:SetAttribute("HeadbandDev", nil)
+		local player = Players:GetPlayers()[1]
+		if not player then
+			warn("[HeadbandService] dev: nobody is in the server")
+			return
+		end
+		if cmd == "reset" then
+			local s = State(player)
+			if not s then return end
+			s.Owned = {[Catalog.DEFAULT] = true}
+			s.Equipped = ""
+			DataService.RequestSave(player)
+			Publish(player)
+			ApplyToCharacter(player)
+			print(("[HeadbandService] dev: reset %s to just the %s"):format(player.Name, Catalog.DEFAULT))
+			return
+		end
+		local give = cmd:match("^give:(.+)$")
+		if give then
+			local s = State(player)
+			if not s or not Catalog.IsValid(give) then
+				warn("[HeadbandService] dev: unknown headband " .. tostring(give))
+				return
+			end
+			s.Owned[give] = true
+			DataService.RequestSave(player)
+			Publish(player)
+			print(("[HeadbandService] dev: gave %s the %s"):format(player.Name, Catalog.DisplayNameOf(give)))
+			return
+		end
+		local equip = cmd:match("^equip:(.+)$")
+		if equip then
+			local s = State(player)
+			if s and Catalog.IsValid(equip) then s.Owned[equip] = true end
+			local ok, message = Equip(player, equip)
+			print(("[HeadbandService] dev: equip %s -> %s %s"):format(tostring(equip), tostring(ok), tostring(message or "")))
+			return
+		end
+		local coins = tonumber(cmd:match("^coins:(%-?%d+)$"))
+		if coins then
+			DataService.Increment(player, "Coins", coins)
+			print(("[HeadbandService] dev: %+d Coins for %s -> %s"):format(coins, player.Name, tostring(DataService.Get(player, "Coins"))))
+			return
+		end
+		warn("[HeadbandService] dev: use give:<Name> / equip:<Name> / coins:<n> / reset")
+	end)
+end
+
+do
+	local list = Catalog.List()
+	local dearest = list[#list]
+	print(("[HeadbandService] %d headbands (%s free .. %s %s Coins), Remotes.HeadbandAction + Remotes.OpenShopDialog ready")
+		:format(#list, Catalog.DisplayNameOf(Catalog.DEFAULT), dearest.DisplayName, NumberAbbrev.Abbrev(dearest.Price)))
+end

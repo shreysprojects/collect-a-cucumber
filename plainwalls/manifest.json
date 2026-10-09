@@ -1,0 +1,182 @@
+{
+ "set": "plainwalls",
+ "convention": "1 unit = 1 stud, Z up, faces +Y; Roblox = (x, z, -y) after the importer's 180 yaw fix",
+ "roblox_names": {
+  "PlainWoodenWall": "WoodenWall",
+  "PlainStoneWall": "StoneWall",
+  "PlainIronWall": "IronWall",
+  "PlainBarbedStoneWall": "BarbedStoneWall"
+ },
+ "props": {
+  "PlainWoodenWall": {
+   "collection": "PlainWoodenWall",
+   "parts": 3,
+   "tris": 412,
+   "size_studs": [
+    8.0,
+    1.2,
+    12.0
+   ],
+   "min_z": -0.0,
+   "roblox_name": "WoodenWall"
+  },
+  "PlainStoneWall": {
+   "collection": "PlainStoneWall",
+   "parts": 3,
+   "tris": 936,
+   "size_studs": [
+    8.06,
+    2.03,
+    12.0
+   ],
+   "min_z": 0.0,
+   "roblox_name": "StoneWall"
+  },
+  "PlainIronWall": {
+   "collection": "PlainIronWall",
+   "parts": 4,
+   "tris": 624,
+   "size_studs": [
+    8.0,
+    1.16,
+    12.0
+   ],
+   "min_z": -0.0,
+   "roblox_name": "IronWall"
+  },
+  "PlainBarbedStoneWall": {
+   "collection": "PlainBarbedStoneWall",
+   "parts": 5,
+   "tris": 992,
+   "size_studs": [
+    8.06,
+    2.54,
+    12.0
+   ],
+   "min_z": 0.0,
+   "roblox_name": "BarbedStoneWall"
+  }
+ },
+ "parts": [
+  {
+   "collection": "PlainWoodenWall",
+   "name": "PlainWoodenWall.Frame",
+   "hex": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 36
+  },
+  {
+   "collection": "PlainWoodenWall",
+   "name": "PlainWoodenWall.Planks",
+   "hex": "c08a4f",
+   "material": "WoodPlanks",
+   "transparency": 0.0,
+   "tris": 352
+  },
+  {
+   "collection": "PlainWoodenWall",
+   "name": "PlainWoodenWall.Rails",
+   "hex": "a87343",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 24
+  },
+  {
+   "collection": "PlainStoneWall",
+   "name": "PlainStoneWall.Core",
+   "hex": "5f5b55",
+   "material": "Concrete",
+   "transparency": 0.0,
+   "tris": 12
+  },
+  {
+   "collection": "PlainStoneWall",
+   "name": "PlainStoneWall.StonesA",
+   "hex": "8f8b84",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 396
+  },
+  {
+   "collection": "PlainStoneWall",
+   "name": "PlainStoneWall.StonesB",
+   "hex": "9c988f",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 528
+  },
+  {
+   "collection": "PlainIronWall",
+   "name": "PlainIronWall.Frame",
+   "hex": "2d3138",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 60
+  },
+  {
+   "collection": "PlainIronWall",
+   "name": "PlainIronWall.Plates",
+   "hex": "5a6068",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "tris": 220
+  },
+  {
+   "collection": "PlainIronWall",
+   "name": "PlainIronWall.Rivets",
+   "hex": "b8bec8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 320
+  },
+  {
+   "collection": "PlainIronWall",
+   "name": "PlainIronWall.Straps",
+   "hex": "2d3138",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 24
+  },
+  {
+   "collection": "PlainBarbedStoneWall",
+   "name": "PlainBarbedStoneWall.Coping",
+   "hex": "7a7670",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "PlainBarbedStoneWall",
+   "name": "PlainBarbedStoneWall.Core",
+   "hex": "4e4a45",
+   "material": "Concrete",
+   "transparency": 0.0,
+   "tris": 12
+  },
+  {
+   "collection": "PlainBarbedStoneWall",
+   "name": "PlainBarbedStoneWall.Plinth",
+   "hex": "86827b",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 12
+  },
+  {
+   "collection": "PlainBarbedStoneWall",
+   "name": "PlainBarbedStoneWall.StonesA",
+   "hex": "7a7670",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 396
+  },
+  {
+   "collection": "PlainBarbedStoneWall",
+   "name": "PlainBarbedStoneWall.StonesB",
+   "hex": "86827b",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 528
+  }
+ ]
+}

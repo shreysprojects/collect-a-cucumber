@@ -1,0 +1,4160 @@
+{
+ "key": "LaserGate",
+ "category": "Defences",
+ "parts": [
+  {
+   "name": "PylonLFootBase",
+   "shape": "Block",
+   "size": [
+    1.25,
+    0.3,
+    3.0
+   ],
+   "cf": [
+    -5.475,
+    0.15,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonLFootArmour",
+   "shape": "Block",
+   "size": [
+    1.12,
+    0.6,
+    1.6
+   ],
+   "cf": [
+    -5.43,
+    0.6,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonLToeF",
+   "shape": "Wedge",
+   "size": [
+    1.12,
+    0.6,
+    0.45
+   ],
+   "cf": [
+    -5.43,
+    0.6,
+    -1.025,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonLToeB",
+   "shape": "Wedge",
+   "size": [
+    1.12,
+    0.6,
+    0.45
+   ],
+   "cf": [
+    -5.43,
+    0.6,
+    1.025,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonLBolt1",
+   "shape": "Cylinder",
+   "size": [
+    0.1,
+    0.16,
+    0.16
+   ],
+   "cf": [
+    -5.45,
+    0.33,
+    -1.38,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonLBolt2",
+   "shape": "Cylinder",
+   "size": [
+    0.1,
+    0.16,
+    0.16
+   ],
+   "cf": [
+    -5.45,
+    0.33,
+    1.38,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonLCollarLo",
+   "shape": "Block",
+   "size": [
+    0.96,
+    0.5,
+    1.44
+   ],
+   "cf": [
+    -5.45,
+    1.15,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonLCollarLoRailLo",
+   "shape": "Block",
+   "size": [
+    1.08,
+    0.12,
+    1.56
+   ],
+   "cf": [
+    -5.48,
+    0.9,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonLCollarLoRailHi",
+   "shape": "Block",
+   "size": [
+    1.08,
+    0.12,
+    1.56
+   ],
+   "cf": [
+    -5.48,
+    1.4,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonLCollarLoStripeF1",
+   "shape": "Block",
+   "size": [
+    0.13,
+    0.5771,
+    0.05
+   ],
+   "cf": [
+    -5.25,
+    1.15,
+    -0.735,
+    0.70711,
+    -0.70711,
+    0.0,
+    0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonLCollarLoStripeF2",
+   "shape": "Block",
+   "size": [
+    0.13,
+    0.5771,
+    0.05
+   ],
+   "cf": [
+    -5.65,
+    1.15,
+    -0.735,
+    0.70711,
+    -0.70711,
+    0.0,
+    0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonLCollarLoStripeB1",
+   "shape": "Block",
+   "size": [
+    0.13,
+    0.5771,
+    0.05
+   ],
+   "cf": [
+    -5.25,
+    1.15,
+    0.735,
+    0.70711,
+    0.70711,
+    0.0,
+    -0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonLCollarLoStripeB2",
+   "shape": "Block",
+   "size": [
+    0.13,
+    0.5771,
+    0.05
+   ],
+   "cf": [
+    -5.65,
+    1.15,
+    0.735,
+    0.70711,
+    0.70711,
+    0.0,
+    -0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonLCollarLoStripeS1",
+   "shape": "Block",
+   "size": [
+    0.05,
+    0.5771,
+    0.13
+   ],
+   "cf": [
+    -5.945,
+    1.15,
+    -0.4,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.70711,
+    0.70711,
+    0.0,
+    -0.70711,
+    0.70711
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonLCollarLoStripeS2",
+   "shape": "Block",
+   "size": [
+    0.05,
+    0.5771,
+    0.13
+   ],
+   "cf": [
+    -5.945,
+    1.15,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.70711,
+    0.70711,
+    0.0,
+    -0.70711,
+    0.70711
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonLCollarLoStripeS3",
+   "shape": "Block",
+   "size": [
+    0.05,
+    0.5771,
+    0.13
+   ],
+   "cf": [
+    -5.945,
+    1.15,
+    0.4,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.70711,
+    0.70711,
+    0.0,
+    -0.70711,
+    0.70711
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonLCore",
+   "shape": "Block",
+   "size": [
+    0.9,
+    7.54,
+    1.2
+   ],
+   "cf": [
+    -5.45,
+    5.15,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonLPlateF",
+   "shape": "Block",
+   "size": [
+    0.74,
+    7.26,
+    0.1
+   ],
+   "cf": [
+    -5.45,
+    5.15,
+    -0.63,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonLPlateB",
+   "shape": "Block",
+   "size": [
+    0.74,
+    7.26,
+    0.1
+   ],
+   "cf": [
+    -5.45,
+    5.15,
+    0.63,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonLPlateS",
+   "shape": "Block",
+   "size": [
+    0.1,
+    7.26,
+    1.0
+   ],
+   "cf": [
+    -5.93,
+    5.15,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonLBelt1",
+   "shape": "Block",
+   "size": [
+    1.04,
+    0.14,
+    1.42
+   ],
+   "cf": [
+    -5.49,
+    3.95,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonLBelt2",
+   "shape": "Block",
+   "size": [
+    1.04,
+    0.14,
+    1.42
+   ],
+   "cf": [
+    -5.49,
+    6.35,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonLSignFBorder",
+   "shape": "Block",
+   "size": [
+    0.5,
+    0.5,
+    0.05
+   ],
+   "cf": [
+    -5.45,
+    5.15,
+    -0.695,
+    0.70711,
+    -0.70711,
+    0.0,
+    0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonLSignF",
+   "shape": "Block",
+   "size": [
+    0.38,
+    0.38,
+    0.05
+   ],
+   "cf": [
+    -5.45,
+    5.15,
+    -0.715,
+    0.70711,
+    -0.70711,
+    0.0,
+    0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonLSignFBang",
+   "shape": "Block",
+   "size": [
+    0.065,
+    0.18,
+    0.05
+   ],
+   "cf": [
+    -5.45,
+    5.195,
+    -0.735,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonLSignFDot",
+   "shape": "Block",
+   "size": [
+    0.065,
+    0.065,
+    0.05
+   ],
+   "cf": [
+    -5.45,
+    5.03,
+    -0.735,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonLSignBBorder",
+   "shape": "Block",
+   "size": [
+    0.5,
+    0.5,
+    0.05
+   ],
+   "cf": [
+    -5.45,
+    5.15,
+    0.695,
+    0.70711,
+    -0.70711,
+    0.0,
+    0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonLSignB",
+   "shape": "Block",
+   "size": [
+    0.38,
+    0.38,
+    0.05
+   ],
+   "cf": [
+    -5.45,
+    5.15,
+    0.715,
+    0.70711,
+    -0.70711,
+    0.0,
+    0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonLSignBBang",
+   "shape": "Block",
+   "size": [
+    0.065,
+    0.18,
+    0.05
+   ],
+   "cf": [
+    -5.45,
+    5.195,
+    0.735,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonLSignBDot",
+   "shape": "Block",
+   "size": [
+    0.065,
+    0.065,
+    0.05
+   ],
+   "cf": [
+    -5.45,
+    5.03,
+    0.735,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "GlowEdgeLF",
+   "shape": "Block",
+   "size": [
+    0.11,
+    7.32,
+    0.13
+   ],
+   "cf": [
+    -5.035,
+    5.2,
+    -0.635,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "GlowEdgeLB",
+   "shape": "Block",
+   "size": [
+    0.11,
+    7.32,
+    0.13
+   ],
+   "cf": [
+    -5.035,
+    5.2,
+    0.635,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PylonLVent1",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.1,
+    0.7
+   ],
+   "cf": [
+    -5.99,
+    7.35,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonLVent2",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.1,
+    0.7
+   ],
+   "cf": [
+    -5.99,
+    7.6,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonLHandleMount1",
+   "shape": "Block",
+   "size": [
+    0.1,
+    0.1,
+    0.12
+   ],
+   "cf": [
+    -6.01,
+    2.5,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonLHandleMount2",
+   "shape": "Block",
+   "size": [
+    0.1,
+    0.1,
+    0.12
+   ],
+   "cf": [
+    -6.01,
+    3.4,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonLHandle",
+   "shape": "Cylinder",
+   "size": [
+    1.04,
+    0.08,
+    0.08
+   ],
+   "cf": [
+    -6.04,
+    2.95,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonLSpine",
+   "shape": "Block",
+   "size": [
+    0.13,
+    8.62,
+    0.6
+   ],
+   "cf": [
+    -4.955,
+    5.19,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonLBezel1",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.46,
+    0.46
+   ],
+   "cf": [
+    -4.88,
+    1.5,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "GlowLensL1",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    -4.8,
+    1.5,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PylonLBezel2",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.46,
+    0.46
+   ],
+   "cf": [
+    -4.88,
+    3.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "GlowLensL2",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    -4.8,
+    3.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PylonLBezel3",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.46,
+    0.46
+   ],
+   "cf": [
+    -4.88,
+    4.5,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "GlowLensL3",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    -4.8,
+    4.5,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PylonLBezel4",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.46,
+    0.46
+   ],
+   "cf": [
+    -4.88,
+    6.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "GlowLensL4",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    -4.8,
+    6.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PylonLBezel5",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.46,
+    0.46
+   ],
+   "cf": [
+    -4.88,
+    7.5,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "GlowLensL5",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    -4.8,
+    7.5,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PylonLBezel6",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.46,
+    0.46
+   ],
+   "cf": [
+    -4.88,
+    9.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "GlowLensL6",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    -4.8,
+    9.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PylonLCollarHi",
+   "shape": "Block",
+   "size": [
+    0.96,
+    0.5,
+    1.44
+   ],
+   "cf": [
+    -5.45,
+    9.15,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonLCollarHiRailLo",
+   "shape": "Block",
+   "size": [
+    1.08,
+    0.12,
+    1.56
+   ],
+   "cf": [
+    -5.48,
+    8.9,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonLCollarHiRailHi",
+   "shape": "Block",
+   "size": [
+    1.08,
+    0.12,
+    1.56
+   ],
+   "cf": [
+    -5.48,
+    9.4,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonLCollarHiStripeF1",
+   "shape": "Block",
+   "size": [
+    0.12,
+    0.5871,
+    0.05
+   ],
+   "cf": [
+    -5.26,
+    9.15,
+    -0.735,
+    0.70711,
+    -0.70711,
+    0.0,
+    0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonLCollarHiStripeF2",
+   "shape": "Block",
+   "size": [
+    0.12,
+    0.5871,
+    0.05
+   ],
+   "cf": [
+    -5.64,
+    9.15,
+    -0.735,
+    0.70711,
+    -0.70711,
+    0.0,
+    0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonLCollarHiStripeB1",
+   "shape": "Block",
+   "size": [
+    0.12,
+    0.5871,
+    0.05
+   ],
+   "cf": [
+    -5.26,
+    9.15,
+    0.735,
+    0.70711,
+    0.70711,
+    0.0,
+    -0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonLCollarHiStripeB2",
+   "shape": "Block",
+   "size": [
+    0.12,
+    0.5871,
+    0.05
+   ],
+   "cf": [
+    -5.64,
+    9.15,
+    0.735,
+    0.70711,
+    0.70711,
+    0.0,
+    -0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonLHead",
+   "shape": "Block",
+   "size": [
+    1.21,
+    0.58,
+    1.6
+   ],
+   "cf": [
+    -5.455,
+    9.73,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonLRoof",
+   "shape": "Wedge",
+   "size": [
+    1.6,
+    0.55,
+    1.46
+   ],
+   "cf": [
+    -5.33,
+    10.295,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "GlowBrowL",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.16,
+    1.24
+   ],
+   "cf": [
+    -4.6,
+    10.28,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "GlowCapLF",
+   "shape": "Block",
+   "size": [
+    0.8,
+    0.1,
+    0.06
+   ],
+   "cf": [
+    -5.45,
+    9.73,
+    -0.81,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "GlowCapLB",
+   "shape": "Block",
+   "size": [
+    0.8,
+    0.1,
+    0.06
+   ],
+   "cf": [
+    -5.45,
+    9.73,
+    0.81,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PylonLAntenna",
+   "shape": "Cylinder",
+   "size": [
+    0.84,
+    0.08,
+    0.08
+   ],
+   "cf": [
+    -5.8,
+    10.5,
+    0.4,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "GlowBeaconL",
+   "shape": "Ball",
+   "size": [
+    0.22,
+    0.22,
+    0.22
+   ],
+   "cf": [
+    -5.8,
+    10.98,
+    0.4,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PylonRFootBase",
+   "shape": "Block",
+   "size": [
+    1.25,
+    0.3,
+    3.0
+   ],
+   "cf": [
+    5.475,
+    0.15,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonRFootArmour",
+   "shape": "Block",
+   "size": [
+    1.12,
+    0.6,
+    1.6
+   ],
+   "cf": [
+    5.43,
+    0.6,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonRToeF",
+   "shape": "Wedge",
+   "size": [
+    1.12,
+    0.6,
+    0.45
+   ],
+   "cf": [
+    5.43,
+    0.6,
+    -1.025,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonRToeB",
+   "shape": "Wedge",
+   "size": [
+    1.12,
+    0.6,
+    0.45
+   ],
+   "cf": [
+    5.43,
+    0.6,
+    1.025,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonRBolt1",
+   "shape": "Cylinder",
+   "size": [
+    0.1,
+    0.16,
+    0.16
+   ],
+   "cf": [
+    5.45,
+    0.33,
+    -1.38,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonRBolt2",
+   "shape": "Cylinder",
+   "size": [
+    0.1,
+    0.16,
+    0.16
+   ],
+   "cf": [
+    5.45,
+    0.33,
+    1.38,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonRCollarLo",
+   "shape": "Block",
+   "size": [
+    0.96,
+    0.5,
+    1.44
+   ],
+   "cf": [
+    5.45,
+    1.15,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonRCollarLoRailLo",
+   "shape": "Block",
+   "size": [
+    1.08,
+    0.12,
+    1.56
+   ],
+   "cf": [
+    5.48,
+    0.9,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonRCollarLoRailHi",
+   "shape": "Block",
+   "size": [
+    1.08,
+    0.12,
+    1.56
+   ],
+   "cf": [
+    5.48,
+    1.4,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonRCollarLoStripeF1",
+   "shape": "Block",
+   "size": [
+    0.13,
+    0.5771,
+    0.05
+   ],
+   "cf": [
+    5.25,
+    1.15,
+    -0.735,
+    0.70711,
+    0.70711,
+    0.0,
+    -0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonRCollarLoStripeF2",
+   "shape": "Block",
+   "size": [
+    0.13,
+    0.5771,
+    0.05
+   ],
+   "cf": [
+    5.65,
+    1.15,
+    -0.735,
+    0.70711,
+    0.70711,
+    0.0,
+    -0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonRCollarLoStripeB1",
+   "shape": "Block",
+   "size": [
+    0.13,
+    0.5771,
+    0.05
+   ],
+   "cf": [
+    5.25,
+    1.15,
+    0.735,
+    0.70711,
+    -0.70711,
+    0.0,
+    0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonRCollarLoStripeB2",
+   "shape": "Block",
+   "size": [
+    0.13,
+    0.5771,
+    0.05
+   ],
+   "cf": [
+    5.65,
+    1.15,
+    0.735,
+    0.70711,
+    -0.70711,
+    0.0,
+    0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonRCollarLoStripeS1",
+   "shape": "Block",
+   "size": [
+    0.05,
+    0.5771,
+    0.13
+   ],
+   "cf": [
+    5.945,
+    1.15,
+    -0.4,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.70711,
+    -0.70711,
+    0.0,
+    0.70711,
+    0.70711
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonRCollarLoStripeS2",
+   "shape": "Block",
+   "size": [
+    0.05,
+    0.5771,
+    0.13
+   ],
+   "cf": [
+    5.945,
+    1.15,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.70711,
+    -0.70711,
+    0.0,
+    0.70711,
+    0.70711
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonRCollarLoStripeS3",
+   "shape": "Block",
+   "size": [
+    0.05,
+    0.5771,
+    0.13
+   ],
+   "cf": [
+    5.945,
+    1.15,
+    0.4,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.70711,
+    -0.70711,
+    0.0,
+    0.70711,
+    0.70711
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonRCore",
+   "shape": "Block",
+   "size": [
+    0.9,
+    7.54,
+    1.2
+   ],
+   "cf": [
+    5.45,
+    5.15,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonRPlateF",
+   "shape": "Block",
+   "size": [
+    0.74,
+    7.26,
+    0.1
+   ],
+   "cf": [
+    5.45,
+    5.15,
+    -0.63,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonRPlateB",
+   "shape": "Block",
+   "size": [
+    0.74,
+    7.26,
+    0.1
+   ],
+   "cf": [
+    5.45,
+    5.15,
+    0.63,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonRPlateS",
+   "shape": "Block",
+   "size": [
+    0.1,
+    7.26,
+    1.0
+   ],
+   "cf": [
+    5.93,
+    5.15,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonRBelt1",
+   "shape": "Block",
+   "size": [
+    1.04,
+    0.14,
+    1.42
+   ],
+   "cf": [
+    5.49,
+    3.95,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonRBelt2",
+   "shape": "Block",
+   "size": [
+    1.04,
+    0.14,
+    1.42
+   ],
+   "cf": [
+    5.49,
+    6.35,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonRSignFBorder",
+   "shape": "Block",
+   "size": [
+    0.5,
+    0.5,
+    0.05
+   ],
+   "cf": [
+    5.45,
+    5.15,
+    -0.695,
+    0.70711,
+    -0.70711,
+    0.0,
+    0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonRSignF",
+   "shape": "Block",
+   "size": [
+    0.38,
+    0.38,
+    0.05
+   ],
+   "cf": [
+    5.45,
+    5.15,
+    -0.715,
+    0.70711,
+    -0.70711,
+    0.0,
+    0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonRSignFBang",
+   "shape": "Block",
+   "size": [
+    0.065,
+    0.18,
+    0.05
+   ],
+   "cf": [
+    5.45,
+    5.195,
+    -0.735,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonRSignFDot",
+   "shape": "Block",
+   "size": [
+    0.065,
+    0.065,
+    0.05
+   ],
+   "cf": [
+    5.45,
+    5.03,
+    -0.735,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonRSignBBorder",
+   "shape": "Block",
+   "size": [
+    0.5,
+    0.5,
+    0.05
+   ],
+   "cf": [
+    5.45,
+    5.15,
+    0.695,
+    0.70711,
+    -0.70711,
+    0.0,
+    0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonRSignB",
+   "shape": "Block",
+   "size": [
+    0.38,
+    0.38,
+    0.05
+   ],
+   "cf": [
+    5.45,
+    5.15,
+    0.715,
+    0.70711,
+    -0.70711,
+    0.0,
+    0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonRSignBBang",
+   "shape": "Block",
+   "size": [
+    0.065,
+    0.18,
+    0.05
+   ],
+   "cf": [
+    5.45,
+    5.195,
+    0.735,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonRSignBDot",
+   "shape": "Block",
+   "size": [
+    0.065,
+    0.065,
+    0.05
+   ],
+   "cf": [
+    5.45,
+    5.03,
+    0.735,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "GlowEdgeRF",
+   "shape": "Block",
+   "size": [
+    0.11,
+    7.32,
+    0.13
+   ],
+   "cf": [
+    5.035,
+    5.2,
+    -0.635,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "GlowEdgeRB",
+   "shape": "Block",
+   "size": [
+    0.11,
+    7.32,
+    0.13
+   ],
+   "cf": [
+    5.035,
+    5.2,
+    0.635,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PylonRVent1",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.1,
+    0.7
+   ],
+   "cf": [
+    5.99,
+    7.35,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonRVent2",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.1,
+    0.7
+   ],
+   "cf": [
+    5.99,
+    7.6,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonRHandleMount1",
+   "shape": "Block",
+   "size": [
+    0.1,
+    0.1,
+    0.12
+   ],
+   "cf": [
+    6.01,
+    2.5,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonRHandleMount2",
+   "shape": "Block",
+   "size": [
+    0.1,
+    0.1,
+    0.12
+   ],
+   "cf": [
+    6.01,
+    3.4,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonRHandle",
+   "shape": "Cylinder",
+   "size": [
+    1.04,
+    0.08,
+    0.08
+   ],
+   "cf": [
+    6.04,
+    2.95,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonRSpine",
+   "shape": "Block",
+   "size": [
+    0.13,
+    8.62,
+    0.6
+   ],
+   "cf": [
+    4.955,
+    5.19,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonRBezel1",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.46,
+    0.46
+   ],
+   "cf": [
+    4.88,
+    1.5,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "GlowLensR1",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    4.8,
+    1.5,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PylonRBezel2",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.46,
+    0.46
+   ],
+   "cf": [
+    4.88,
+    3.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "GlowLensR2",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    4.8,
+    3.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PylonRBezel3",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.46,
+    0.46
+   ],
+   "cf": [
+    4.88,
+    4.5,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "GlowLensR3",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    4.8,
+    4.5,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PylonRBezel4",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.46,
+    0.46
+   ],
+   "cf": [
+    4.88,
+    6.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "GlowLensR4",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    4.8,
+    6.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PylonRBezel5",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.46,
+    0.46
+   ],
+   "cf": [
+    4.88,
+    7.5,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "GlowLensR5",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    4.8,
+    7.5,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PylonRBezel6",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.46,
+    0.46
+   ],
+   "cf": [
+    4.88,
+    9.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "GlowLensR6",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    4.8,
+    9.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PylonRCollarHi",
+   "shape": "Block",
+   "size": [
+    0.96,
+    0.5,
+    1.44
+   ],
+   "cf": [
+    5.45,
+    9.15,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonRCollarHiRailLo",
+   "shape": "Block",
+   "size": [
+    1.08,
+    0.12,
+    1.56
+   ],
+   "cf": [
+    5.48,
+    8.9,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonRCollarHiRailHi",
+   "shape": "Block",
+   "size": [
+    1.08,
+    0.12,
+    1.56
+   ],
+   "cf": [
+    5.48,
+    9.4,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonRCollarHiStripeF1",
+   "shape": "Block",
+   "size": [
+    0.12,
+    0.5871,
+    0.05
+   ],
+   "cf": [
+    5.26,
+    9.15,
+    -0.735,
+    0.70711,
+    0.70711,
+    0.0,
+    -0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonRCollarHiStripeF2",
+   "shape": "Block",
+   "size": [
+    0.12,
+    0.5871,
+    0.05
+   ],
+   "cf": [
+    5.64,
+    9.15,
+    -0.735,
+    0.70711,
+    0.70711,
+    0.0,
+    -0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonRCollarHiStripeB1",
+   "shape": "Block",
+   "size": [
+    0.12,
+    0.5871,
+    0.05
+   ],
+   "cf": [
+    5.26,
+    9.15,
+    0.735,
+    0.70711,
+    -0.70711,
+    0.0,
+    0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonRCollarHiStripeB2",
+   "shape": "Block",
+   "size": [
+    0.12,
+    0.5871,
+    0.05
+   ],
+   "cf": [
+    5.64,
+    9.15,
+    0.735,
+    0.70711,
+    -0.70711,
+    0.0,
+    0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PylonRHead",
+   "shape": "Block",
+   "size": [
+    1.21,
+    0.58,
+    1.6
+   ],
+   "cf": [
+    5.455,
+    9.73,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PylonRRoof",
+   "shape": "Wedge",
+   "size": [
+    1.6,
+    0.55,
+    1.46
+   ],
+   "cf": [
+    5.33,
+    10.295,
+    0.0,
+    -0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "GlowBrowR",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.16,
+    1.24
+   ],
+   "cf": [
+    4.6,
+    10.28,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "GlowCapRF",
+   "shape": "Block",
+   "size": [
+    0.8,
+    0.1,
+    0.06
+   ],
+   "cf": [
+    5.45,
+    9.73,
+    -0.81,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "GlowCapRB",
+   "shape": "Block",
+   "size": [
+    0.8,
+    0.1,
+    0.06
+   ],
+   "cf": [
+    5.45,
+    9.73,
+    0.81,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PylonRAntenna",
+   "shape": "Cylinder",
+   "size": [
+    0.84,
+    0.08,
+    0.08
+   ],
+   "cf": [
+    5.8,
+    10.5,
+    0.4,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "GlowBeaconR",
+   "shape": "Ball",
+   "size": [
+    0.22,
+    0.22,
+    0.22
+   ],
+   "cf": [
+    5.8,
+    10.98,
+    0.4,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Beam1",
+   "shape": "Cylinder",
+   "size": [
+    9.5,
+    0.16,
+    0.16
+   ],
+   "cf": [
+    0.0,
+    1.5,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Beam2",
+   "shape": "Cylinder",
+   "size": [
+    9.5,
+    0.16,
+    0.16
+   ],
+   "cf": [
+    0.0,
+    3.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Beam3",
+   "shape": "Cylinder",
+   "size": [
+    9.5,
+    0.16,
+    0.16
+   ],
+   "cf": [
+    0.0,
+    4.5,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Beam4",
+   "shape": "Cylinder",
+   "size": [
+    9.5,
+    0.16,
+    0.16
+   ],
+   "cf": [
+    0.0,
+    6.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Beam5",
+   "shape": "Cylinder",
+   "size": [
+    9.5,
+    0.16,
+    0.16
+   ],
+   "cf": [
+    0.0,
+    7.5,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Beam6",
+   "shape": "Cylinder",
+   "size": [
+    9.5,
+    0.16,
+    0.16
+   ],
+   "cf": [
+    0.0,
+    9.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "CableF",
+   "shape": "Cylinder",
+   "size": [
+    9.8,
+    0.18,
+    0.18
+   ],
+   "cf": [
+    0.0,
+    0.09,
+    -1.4,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Rubber",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CableFClamp1",
+   "shape": "Block",
+   "size": [
+    0.22,
+    0.22,
+    0.19
+   ],
+   "cf": [
+    -2.4,
+    0.11,
+    -1.4,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CableFClamp2",
+   "shape": "Block",
+   "size": [
+    0.22,
+    0.22,
+    0.19
+   ],
+   "cf": [
+    2.4,
+    0.11,
+    -1.4,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CableB",
+   "shape": "Cylinder",
+   "size": [
+    9.8,
+    0.18,
+    0.18
+   ],
+   "cf": [
+    0.0,
+    0.09,
+    1.4,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Rubber",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CableBClamp1",
+   "shape": "Block",
+   "size": [
+    0.22,
+    0.22,
+    0.19
+   ],
+   "cf": [
+    -2.4,
+    0.11,
+    1.4,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CableBClamp2",
+   "shape": "Block",
+   "size": [
+    0.22,
+    0.22,
+    0.19
+   ],
+   "cf": [
+    2.4,
+    0.11,
+    1.4,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  }
+ ],
+ "pivots": {
+  "Spark1": [
+   -4.75,
+   1.5,
+   0.0
+  ],
+  "Spark2": [
+   4.75,
+   1.5,
+   0.0
+  ],
+  "Spark3": [
+   -4.75,
+   3.0,
+   0.0
+  ],
+  "Spark4": [
+   4.75,
+   3.0,
+   0.0
+  ],
+  "Spark5": [
+   -4.75,
+   4.5,
+   0.0
+  ],
+  "Spark6": [
+   4.75,
+   4.5,
+   0.0
+  ],
+  "Spark7": [
+   -4.75,
+   6.0,
+   0.0
+  ],
+  "Spark8": [
+   4.75,
+   6.0,
+   0.0
+  ],
+  "Spark9": [
+   -4.75,
+   7.5,
+   0.0
+  ],
+  "Spark10": [
+   4.75,
+   7.5,
+   0.0
+  ],
+  "Spark11": [
+   -4.75,
+   9.0,
+   0.0
+  ],
+  "Spark12": [
+   4.75,
+   9.0,
+   0.0
+  ],
+  "BeamLeft": [
+   -4.75,
+   5.25,
+   0.0
+  ],
+  "BeamRight": [
+   4.75,
+   5.25,
+   0.0
+  ]
+ },
+ "attrs": {
+  "Cost": 250000,
+  "PropSet": "defence2",
+  "Notes": "LaserGate v2 2026-09-24 (fun-builds/models/build_LaserGate.py, primlib parts): tall wide slim laser fence, two emitter pylons (PylonL* at x -5.45, PylonR* at x +5.45, inner faces |x| 4.85). Static prop. Beam1..Beam6 (bottom to top) = ONE Neon ff2f2f Cylinder each, d 0.16, x -4.75..4.75 at z 0, y 1.5/3/4.5/6/7.5/9 - the server shimmers them. Nothing solid within |x| <= 4.8, |z| <= 1.3, y 0..10 except the beams (zombies walk through along Z). Glow* = neon parts the DefenceFX client pulses (GlowLens<L|R>1-6 at the beam ends, GlowEdge, GlowBrow, GlowCap, GlowBeacon); Pivot_Spark1..12 = beam ends (odd -X, even +X, beam i -> 2i-1 / 2i)."
+ },
+ "size_studs": [
+  12.2,
+  11.09,
+  3.0
+ ],
+ "min": [
+  -6.1,
+  0.0,
+  -1.5
+ ],
+ "max": [
+  6.1,
+  11.09,
+  1.5
+ ],
+ "part_count": 140,
+ "duplicate_names": []
+}

@@ -1,0 +1,1674 @@
+{
+ "key": "FloorLamp",
+ "category": "Home",
+ "parts": [
+  {
+   "name": "BaseFoot",
+   "shape": "Cylinder",
+   "size": [
+    0.16,
+    2.0,
+    2.0
+   ],
+   "cf": [
+    0.0,
+    0.08,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseWeight",
+   "shape": "Ellipsoid",
+   "size": [
+    1.76,
+    0.56,
+    1.76
+   ],
+   "cf": [
+    0.0,
+    0.28,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseTrim",
+   "shape": "Cylinder",
+   "size": [
+    0.07,
+    1.86,
+    1.86
+   ],
+   "cf": [
+    0.0,
+    0.17,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "c9a227",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseCollar",
+   "shape": "Cylinder",
+   "size": [
+    0.26,
+    0.36,
+    0.36
+   ],
+   "cf": [
+    0.0,
+    0.53,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "c9a227",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Pole",
+   "shape": "Cylinder",
+   "size": [
+    5.15,
+    0.2,
+    0.2
+   ],
+   "cf": [
+    0.0,
+    3.075,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "c9a227",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Collar1",
+   "shape": "Cylinder",
+   "size": [
+    0.16,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    0.0,
+    2.08,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "a8841c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Collar2",
+   "shape": "Cylinder",
+   "size": [
+    0.16,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    0.0,
+    4.43,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "a8841c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Tray",
+   "shape": "Cylinder",
+   "size": [
+    0.08,
+    1.5,
+    1.5
+   ],
+   "cf": [
+    0.0,
+    3.05,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "TrayRim",
+   "shape": "Cylinder",
+   "size": [
+    0.1,
+    1.58,
+    1.58
+   ],
+   "cf": [
+    0.0,
+    3.02,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "c9a227",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "TrayHub",
+   "shape": "Cylinder",
+   "size": [
+    0.18,
+    0.32,
+    0.32
+   ],
+   "cf": [
+    0.0,
+    2.94,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "a8841c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Book",
+   "shape": "Block",
+   "size": [
+    0.5,
+    0.12,
+    0.38
+   ],
+   "cf": [
+    -0.38,
+    3.14,
+    0.2,
+    0.97815,
+    0.0,
+    0.20791,
+    0.0,
+    1.0,
+    0.0,
+    -0.20791,
+    0.0,
+    0.97815
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BookPages",
+   "shape": "Block",
+   "size": [
+    0.46,
+    0.08,
+    0.42
+   ],
+   "cf": [
+    -0.38,
+    3.14,
+    0.2,
+    0.97815,
+    0.0,
+    0.20791,
+    0.0,
+    1.0,
+    0.0,
+    -0.20791,
+    0.0,
+    0.97815
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Mug",
+   "shape": "Cylinder",
+   "size": [
+    0.31,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    0.3,
+    3.235,
+    -0.22,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MugHandle",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.16,
+    0.16
+   ],
+   "cf": [
+    0.46,
+    3.24,
+    -0.22,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "MugCoffee",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.2,
+    0.2
+   ],
+   "cf": [
+    0.3,
+    3.37,
+    -0.22,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "6b4423",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Socket",
+   "shape": "Cylinder",
+   "size": [
+    0.4,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    0.0,
+    5.65,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Bulb",
+   "shape": "Ball",
+   "size": [
+    0.6,
+    0.6,
+    0.6
+   ],
+   "cf": [
+    0.0,
+    6.1,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f4efe0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ShadePanel01",
+   "shape": "Block",
+   "size": [
+    0.5868,
+    1.82,
+    0.06
+   ],
+   "cf": [
+    0.23411,
+    6.425,
+    1.17694,
+    0.98079,
+    -0.0536,
+    0.18758,
+    0.0,
+    0.96152,
+    0.27472,
+    -0.19509,
+    -0.26944,
+    0.94305
+   ],
+   "color": "f3e7cc",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ShadeTrim01",
+   "shape": "Block",
+   "size": [
+    0.6068,
+    0.14,
+    0.1
+   ],
+   "cf": [
+    0.27913,
+    5.61731,
+    1.40328,
+    0.98079,
+    -0.0536,
+    0.18758,
+    0.0,
+    0.96152,
+    0.27472,
+    -0.19509,
+    -0.26944,
+    0.94305
+   ],
+   "color": "c9a227",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ShadePanel02",
+   "shape": "Block",
+   "size": [
+    0.5868,
+    1.82,
+    0.06
+   ],
+   "cf": [
+    0.66668,
+    6.425,
+    0.99776,
+    0.83147,
+    -0.15263,
+    0.53419,
+    0.0,
+    0.96152,
+    0.27472,
+    -0.55557,
+    -0.22842,
+    0.79948
+   ],
+   "color": "f3e7cc",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ShadeTrim02",
+   "shape": "Block",
+   "size": [
+    0.6068,
+    0.14,
+    0.1
+   ],
+   "cf": [
+    0.79489,
+    5.61731,
+    1.18964,
+    0.83147,
+    -0.15263,
+    0.53419,
+    0.0,
+    0.96152,
+    0.27472,
+    -0.55557,
+    -0.22842,
+    0.79948
+   ],
+   "color": "c9a227",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ShadePanel03",
+   "shape": "Block",
+   "size": [
+    0.5868,
+    1.82,
+    0.06
+   ],
+   "cf": [
+    0.99776,
+    6.425,
+    0.66668,
+    0.55557,
+    -0.22842,
+    0.79948,
+    0.0,
+    0.96152,
+    0.27472,
+    -0.83147,
+    -0.15263,
+    0.53419
+   ],
+   "color": "f3e7cc",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ShadeTrim03",
+   "shape": "Block",
+   "size": [
+    0.6068,
+    0.14,
+    0.1
+   ],
+   "cf": [
+    1.18964,
+    5.61731,
+    0.79489,
+    0.55557,
+    -0.22842,
+    0.79948,
+    0.0,
+    0.96152,
+    0.27472,
+    -0.83147,
+    -0.15263,
+    0.53419
+   ],
+   "color": "c9a227",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ShadePanel04",
+   "shape": "Block",
+   "size": [
+    0.5868,
+    1.82,
+    0.06
+   ],
+   "cf": [
+    1.17694,
+    6.425,
+    0.23411,
+    0.19509,
+    -0.26944,
+    0.94305,
+    0.0,
+    0.96152,
+    0.27472,
+    -0.98079,
+    -0.0536,
+    0.18758
+   ],
+   "color": "f3e7cc",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ShadeTrim04",
+   "shape": "Block",
+   "size": [
+    0.6068,
+    0.14,
+    0.1
+   ],
+   "cf": [
+    1.40328,
+    5.61731,
+    0.27913,
+    0.19509,
+    -0.26944,
+    0.94305,
+    0.0,
+    0.96152,
+    0.27472,
+    -0.98079,
+    -0.0536,
+    0.18758
+   ],
+   "color": "c9a227",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ShadePanel05",
+   "shape": "Block",
+   "size": [
+    0.5868,
+    1.82,
+    0.06
+   ],
+   "cf": [
+    1.17694,
+    6.425,
+    -0.23411,
+    -0.19509,
+    -0.26944,
+    0.94305,
+    0.0,
+    0.96152,
+    0.27472,
+    -0.98079,
+    0.0536,
+    -0.18758
+   ],
+   "color": "f3e7cc",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ShadeTrim05",
+   "shape": "Block",
+   "size": [
+    0.6068,
+    0.14,
+    0.1
+   ],
+   "cf": [
+    1.40328,
+    5.61731,
+    -0.27913,
+    -0.19509,
+    -0.26944,
+    0.94305,
+    0.0,
+    0.96152,
+    0.27472,
+    -0.98079,
+    0.0536,
+    -0.18758
+   ],
+   "color": "c9a227",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ShadePanel06",
+   "shape": "Block",
+   "size": [
+    0.5868,
+    1.82,
+    0.06
+   ],
+   "cf": [
+    0.99776,
+    6.425,
+    -0.66668,
+    -0.55557,
+    -0.22842,
+    0.79948,
+    0.0,
+    0.96152,
+    0.27472,
+    -0.83147,
+    0.15263,
+    -0.53419
+   ],
+   "color": "f3e7cc",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ShadeTrim06",
+   "shape": "Block",
+   "size": [
+    0.6068,
+    0.14,
+    0.1
+   ],
+   "cf": [
+    1.18964,
+    5.61731,
+    -0.79489,
+    -0.55557,
+    -0.22842,
+    0.79948,
+    0.0,
+    0.96152,
+    0.27472,
+    -0.83147,
+    0.15263,
+    -0.53419
+   ],
+   "color": "c9a227",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ShadePanel07",
+   "shape": "Block",
+   "size": [
+    0.5868,
+    1.82,
+    0.06
+   ],
+   "cf": [
+    0.66668,
+    6.425,
+    -0.99776,
+    -0.83147,
+    -0.15263,
+    0.53419,
+    0.0,
+    0.96152,
+    0.27472,
+    -0.55557,
+    0.22842,
+    -0.79948
+   ],
+   "color": "f3e7cc",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ShadeTrim07",
+   "shape": "Block",
+   "size": [
+    0.6068,
+    0.14,
+    0.1
+   ],
+   "cf": [
+    0.79489,
+    5.61731,
+    -1.18964,
+    -0.83147,
+    -0.15263,
+    0.53419,
+    0.0,
+    0.96152,
+    0.27472,
+    -0.55557,
+    0.22842,
+    -0.79948
+   ],
+   "color": "c9a227",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ShadePanel08",
+   "shape": "Block",
+   "size": [
+    0.5868,
+    1.82,
+    0.06
+   ],
+   "cf": [
+    0.23411,
+    6.425,
+    -1.17694,
+    -0.98079,
+    -0.0536,
+    0.18758,
+    0.0,
+    0.96152,
+    0.27472,
+    -0.19509,
+    0.26944,
+    -0.94305
+   ],
+   "color": "f3e7cc",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ShadeTrim08",
+   "shape": "Block",
+   "size": [
+    0.6068,
+    0.14,
+    0.1
+   ],
+   "cf": [
+    0.27913,
+    5.61731,
+    -1.40328,
+    -0.98079,
+    -0.0536,
+    0.18758,
+    0.0,
+    0.96152,
+    0.27472,
+    -0.19509,
+    0.26944,
+    -0.94305
+   ],
+   "color": "c9a227",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ShadePanel09",
+   "shape": "Block",
+   "size": [
+    0.5868,
+    1.82,
+    0.06
+   ],
+   "cf": [
+    -0.23411,
+    6.425,
+    -1.17694,
+    -0.98079,
+    0.0536,
+    -0.18758,
+    0.0,
+    0.96152,
+    0.27472,
+    0.19509,
+    0.26944,
+    -0.94305
+   ],
+   "color": "f3e7cc",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ShadeTrim09",
+   "shape": "Block",
+   "size": [
+    0.6068,
+    0.14,
+    0.1
+   ],
+   "cf": [
+    -0.27913,
+    5.61731,
+    -1.40328,
+    -0.98079,
+    0.0536,
+    -0.18758,
+    0.0,
+    0.96152,
+    0.27472,
+    0.19509,
+    0.26944,
+    -0.94305
+   ],
+   "color": "c9a227",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ShadePanel10",
+   "shape": "Block",
+   "size": [
+    0.5868,
+    1.82,
+    0.06
+   ],
+   "cf": [
+    -0.66668,
+    6.425,
+    -0.99776,
+    -0.83147,
+    0.15263,
+    -0.53419,
+    0.0,
+    0.96152,
+    0.27472,
+    0.55557,
+    0.22842,
+    -0.79948
+   ],
+   "color": "f3e7cc",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ShadeTrim10",
+   "shape": "Block",
+   "size": [
+    0.6068,
+    0.14,
+    0.1
+   ],
+   "cf": [
+    -0.79489,
+    5.61731,
+    -1.18964,
+    -0.83147,
+    0.15263,
+    -0.53419,
+    0.0,
+    0.96152,
+    0.27472,
+    0.55557,
+    0.22842,
+    -0.79948
+   ],
+   "color": "c9a227",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ShadePanel11",
+   "shape": "Block",
+   "size": [
+    0.5868,
+    1.82,
+    0.06
+   ],
+   "cf": [
+    -0.99776,
+    6.425,
+    -0.66668,
+    -0.55557,
+    0.22842,
+    -0.79948,
+    0.0,
+    0.96152,
+    0.27472,
+    0.83147,
+    0.15263,
+    -0.53419
+   ],
+   "color": "f3e7cc",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ShadeTrim11",
+   "shape": "Block",
+   "size": [
+    0.6068,
+    0.14,
+    0.1
+   ],
+   "cf": [
+    -1.18964,
+    5.61731,
+    -0.79489,
+    -0.55557,
+    0.22842,
+    -0.79948,
+    0.0,
+    0.96152,
+    0.27472,
+    0.83147,
+    0.15263,
+    -0.53419
+   ],
+   "color": "c9a227",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ShadePanel12",
+   "shape": "Block",
+   "size": [
+    0.5868,
+    1.82,
+    0.06
+   ],
+   "cf": [
+    -1.17694,
+    6.425,
+    -0.23411,
+    -0.19509,
+    0.26944,
+    -0.94305,
+    0.0,
+    0.96152,
+    0.27472,
+    0.98079,
+    0.0536,
+    -0.18758
+   ],
+   "color": "f3e7cc",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ShadeTrim12",
+   "shape": "Block",
+   "size": [
+    0.6068,
+    0.14,
+    0.1
+   ],
+   "cf": [
+    -1.40328,
+    5.61731,
+    -0.27913,
+    -0.19509,
+    0.26944,
+    -0.94305,
+    0.0,
+    0.96152,
+    0.27472,
+    0.98079,
+    0.0536,
+    -0.18758
+   ],
+   "color": "c9a227",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ShadePanel13",
+   "shape": "Block",
+   "size": [
+    0.5868,
+    1.82,
+    0.06
+   ],
+   "cf": [
+    -1.17694,
+    6.425,
+    0.23411,
+    0.19509,
+    0.26944,
+    -0.94305,
+    0.0,
+    0.96152,
+    0.27472,
+    0.98079,
+    -0.0536,
+    0.18758
+   ],
+   "color": "f3e7cc",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ShadeTrim13",
+   "shape": "Block",
+   "size": [
+    0.6068,
+    0.14,
+    0.1
+   ],
+   "cf": [
+    -1.40328,
+    5.61731,
+    0.27913,
+    0.19509,
+    0.26944,
+    -0.94305,
+    0.0,
+    0.96152,
+    0.27472,
+    0.98079,
+    -0.0536,
+    0.18758
+   ],
+   "color": "c9a227",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ShadePanel14",
+   "shape": "Block",
+   "size": [
+    0.5868,
+    1.82,
+    0.06
+   ],
+   "cf": [
+    -0.99776,
+    6.425,
+    0.66668,
+    0.55557,
+    0.22842,
+    -0.79948,
+    0.0,
+    0.96152,
+    0.27472,
+    0.83147,
+    -0.15263,
+    0.53419
+   ],
+   "color": "f3e7cc",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ShadeTrim14",
+   "shape": "Block",
+   "size": [
+    0.6068,
+    0.14,
+    0.1
+   ],
+   "cf": [
+    -1.18964,
+    5.61731,
+    0.79489,
+    0.55557,
+    0.22842,
+    -0.79948,
+    0.0,
+    0.96152,
+    0.27472,
+    0.83147,
+    -0.15263,
+    0.53419
+   ],
+   "color": "c9a227",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ShadePanel15",
+   "shape": "Block",
+   "size": [
+    0.5868,
+    1.82,
+    0.06
+   ],
+   "cf": [
+    -0.66668,
+    6.425,
+    0.99776,
+    0.83147,
+    0.15263,
+    -0.53419,
+    0.0,
+    0.96152,
+    0.27472,
+    0.55557,
+    -0.22842,
+    0.79948
+   ],
+   "color": "f3e7cc",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ShadeTrim15",
+   "shape": "Block",
+   "size": [
+    0.6068,
+    0.14,
+    0.1
+   ],
+   "cf": [
+    -0.79489,
+    5.61731,
+    1.18964,
+    0.83147,
+    0.15263,
+    -0.53419,
+    0.0,
+    0.96152,
+    0.27472,
+    0.55557,
+    -0.22842,
+    0.79948
+   ],
+   "color": "c9a227",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ShadePanel16",
+   "shape": "Block",
+   "size": [
+    0.5868,
+    1.82,
+    0.06
+   ],
+   "cf": [
+    -0.23411,
+    6.425,
+    1.17694,
+    0.98079,
+    0.0536,
+    -0.18758,
+    0.0,
+    0.96152,
+    0.27472,
+    0.19509,
+    -0.26944,
+    0.94305
+   ],
+   "color": "f3e7cc",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ShadeTrim16",
+   "shape": "Block",
+   "size": [
+    0.6068,
+    0.14,
+    0.1
+   ],
+   "cf": [
+    -0.27913,
+    5.61731,
+    1.40328,
+    0.98079,
+    0.0536,
+    -0.18758,
+    0.0,
+    0.96152,
+    0.27472,
+    0.19509,
+    -0.26944,
+    0.94305
+   ],
+   "color": "c9a227",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ShadeRim",
+   "shape": "Cylinder",
+   "size": [
+    0.22,
+    2.17,
+    2.17
+   ],
+   "cf": [
+    0.0,
+    7.23,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "c9a227",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "ShadeGlowTop",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    1.8,
+    1.8
+   ],
+   "cf": [
+    0.0,
+    7.35,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "e9dcbd",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "FinialStem",
+   "shape": "Cylinder",
+   "size": [
+    0.15,
+    0.08,
+    0.08
+   ],
+   "cf": [
+    0.0,
+    7.425,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "c9a227",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Finial",
+   "shape": "Ball",
+   "size": [
+    0.2,
+    0.2,
+    0.2
+   ],
+   "cf": [
+    0.0,
+    7.56,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9a227",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PullChain",
+   "shape": "Cylinder",
+   "size": [
+    1.0,
+    0.05,
+    0.05
+   ],
+   "cf": [
+    0.3,
+    5.2,
+    -0.3,
+    0.0,
+    0.0,
+    -1.0,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "c9a227",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PullBead",
+   "shape": "Ball",
+   "size": [
+    0.16,
+    0.16,
+    0.16
+   ],
+   "cf": [
+    0.3,
+    4.64,
+    -0.3,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9a227",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "SwitchArm",
+   "shape": "Cylinder",
+   "size": [
+    0.3536,
+    0.09,
+    0.09
+   ],
+   "cf": [
+    0.205,
+    5.72,
+    -0.205,
+    0.70711,
+    0.0,
+    0.70711,
+    0.0,
+    1.0,
+    -0.0,
+    -0.70711,
+    0.0,
+    0.70711
+   ],
+   "color": "a8841c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  }
+ ],
+ "pivots": {
+  "Light": [
+   0.0,
+   6.1,
+   0.0
+  ],
+  "Spot": [
+   0.0,
+   5.75,
+   -0.36
+  ],
+  "Switch": [
+   0.3,
+   4.64,
+   -0.3
+  ],
+  "ChainTop": [
+   0.3,
+   5.7,
+   -0.3
+  ]
+ },
+ "attrs": {
+  "Cost": 300,
+  "DisplayName": "Floor Lamp",
+  "Notes": "Reading floor lamp (primlib parts, fun-builds HomeHearth). Prompt 'Lamp on' / 'Lamp off' at the pull-chain (Pivot_Switch) toggles Fun_On (the server also switches it on at night, off at day). While on: PointLight at Pivot_Light, downward SpotLight at Pivot_Spot, the ShadePanel* fabric, ShadeGlowTop + Bulb go Neon (warm cream glow). Built by fun-builds/models/build_FloorLamp.py."
+ },
+ "size_studs": [
+  3.057,
+  7.66,
+  3.057
+ ],
+ "min": [
+  -1.528,
+  0.0,
+  -1.528
+ ],
+ "max": [
+  1.528,
+  7.66,
+  1.528
+ ],
+ "part_count": 56,
+ "duplicate_names": []
+}

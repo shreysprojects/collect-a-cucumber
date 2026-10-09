@@ -1,0 +1,2680 @@
+{
+ "key": "Dryer",
+ "category": "Home",
+ "parts": [
+  {
+   "name": "Foot1",
+   "shape": "Cylinder",
+   "size": [
+    0.2,
+    0.36,
+    0.36
+   ],
+   "cf": [
+    1.3,
+    0.1,
+    -1.22,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "Rubber",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Foot2",
+   "shape": "Cylinder",
+   "size": [
+    0.2,
+    0.36,
+    0.36
+   ],
+   "cf": [
+    -1.3,
+    0.1,
+    -1.22,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "Rubber",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Foot3",
+   "shape": "Cylinder",
+   "size": [
+    0.2,
+    0.36,
+    0.36
+   ],
+   "cf": [
+    1.3,
+    0.1,
+    1.25,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "Rubber",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Foot4",
+   "shape": "Cylinder",
+   "size": [
+    0.2,
+    0.36,
+    0.36
+   ],
+   "cf": [
+    -1.3,
+    0.1,
+    1.25,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "Rubber",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Plinth",
+   "shape": "Block",
+   "size": [
+    3.26,
+    0.23,
+    3.08
+   ],
+   "cf": [
+    0.0,
+    0.285,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Body",
+   "shape": "Block",
+   "size": [
+    3.38,
+    3.5,
+    1.94
+   ],
+   "cf": [
+    0.0,
+    2.13,
+    0.63,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "SideL",
+   "shape": "Block",
+   "size": [
+    0.1,
+    3.5,
+    1.3
+   ],
+   "cf": [
+    1.65,
+    2.13,
+    -0.95,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "EdgeL",
+   "shape": "Cylinder",
+   "size": [
+    3.5,
+    0.14,
+    0.14
+   ],
+   "cf": [
+    1.66,
+    2.13,
+    -1.585,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "SideR",
+   "shape": "Block",
+   "size": [
+    0.1,
+    3.5,
+    1.3
+   ],
+   "cf": [
+    -1.65,
+    2.13,
+    -0.95,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "EdgeR",
+   "shape": "Cylinder",
+   "size": [
+    3.5,
+    0.14,
+    0.14
+   ],
+   "cf": [
+    -1.66,
+    2.13,
+    -1.585,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Top",
+   "shape": "Block",
+   "size": [
+    3.46,
+    0.14,
+    3.3
+   ],
+   "cf": [
+    0.0,
+    3.93,
+    -0.02,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "TopEdge",
+   "shape": "Cylinder",
+   "size": [
+    3.46,
+    0.14,
+    0.14
+   ],
+   "cf": [
+    0.0,
+    3.93,
+    -1.67,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "FrontTop",
+   "shape": "Block",
+   "size": [
+    3.26,
+    0.44,
+    0.12
+   ],
+   "cf": [
+    0.0,
+    2.89,
+    -1.56,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "FrontBot",
+   "shape": "Block",
+   "size": [
+    3.26,
+    0.5,
+    0.12
+   ],
+   "cf": [
+    0.0,
+    0.63,
+    -1.56,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "FrontL",
+   "shape": "Block",
+   "size": [
+    0.73,
+    1.82,
+    0.12
+   ],
+   "cf": [
+    1.265,
+    1.78,
+    -1.56,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "FrontR",
+   "shape": "Block",
+   "size": [
+    0.73,
+    1.82,
+    0.12
+   ],
+   "cf": [
+    -1.265,
+    1.78,
+    -1.56,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "FrontCorner1",
+   "shape": "Wedge",
+   "size": [
+    0.12,
+    0.5272,
+    0.5272
+   ],
+   "cf": [
+    0.6364,
+    1.1436,
+    -1.56,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "FrontCorner2",
+   "shape": "Wedge",
+   "size": [
+    0.12,
+    0.5272,
+    0.5272
+   ],
+   "cf": [
+    0.6364,
+    2.4164,
+    -1.56,
+    0.0,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "FrontCorner3",
+   "shape": "Wedge",
+   "size": [
+    0.12,
+    0.5272,
+    0.5272
+   ],
+   "cf": [
+    -0.6364,
+    2.4164,
+    -1.56,
+    -0.0,
+    -0.0,
+    -1.0,
+    0.0,
+    -1.0,
+    0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "FrontCorner4",
+   "shape": "Wedge",
+   "size": [
+    0.12,
+    0.5272,
+    0.5272
+   ],
+   "cf": [
+    -0.6364,
+    1.1436,
+    -1.56,
+    0.0,
+    1.0,
+    0.0,
+    -0.0,
+    0.0,
+    -1.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Panel",
+   "shape": "Block",
+   "size": [
+    3.26,
+    0.76,
+    0.34
+   ],
+   "cf": [
+    0.0,
+    3.48,
+    -1.47,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e3e7ec",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PanelTrim",
+   "shape": "Block",
+   "size": [
+    3.36,
+    0.09,
+    0.17
+   ],
+   "cf": [
+    0.0,
+    3.07,
+    -1.585,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "LintTrap",
+   "shape": "Block",
+   "size": [
+    0.72,
+    0.5,
+    0.06
+   ],
+   "cf": [
+    1.15,
+    3.48,
+    -1.665,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "LintTab",
+   "shape": "Block",
+   "size": [
+    0.3,
+    0.1,
+    0.05
+   ],
+   "cf": [
+    1.15,
+    3.62,
+    -1.71,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "ScreenBezel",
+   "shape": "Block",
+   "size": [
+    0.86,
+    0.52,
+    0.06
+   ],
+   "cf": [
+    0.2,
+    3.48,
+    -1.66,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "a8322c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Screen",
+   "shape": "Block",
+   "size": [
+    0.72,
+    0.4,
+    0.06
+   ],
+   "cf": [
+    0.2,
+    3.48,
+    -1.69,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1b2229",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Led",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.11,
+    0.11
+   ],
+   "cf": [
+    -0.42,
+    3.68,
+    -1.66,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "color": "2d5a2a",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ButtonStart",
+   "shape": "Cylinder",
+   "size": [
+    0.07,
+    0.22,
+    0.22
+   ],
+   "cf": [
+    -0.42,
+    3.38,
+    -1.67,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "color": "5aa845",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DialRing",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.62,
+    0.62
+   ],
+   "cf": [
+    -1.02,
+    3.49,
+    -1.655,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "color": "c9d1da",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DialTick",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.11,
+    0.05
+   ],
+   "cf": [
+    -1.02,
+    3.86,
+    -1.65,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "DialKnob",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.46,
+    0.46
+   ],
+   "cf": [
+    -1.02,
+    3.49,
+    -1.72,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DialCap",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    -1.02,
+    3.49,
+    -1.8,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DialPointer",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.15,
+    0.05
+   ],
+   "cf": [
+    -1.02,
+    3.565,
+    -1.825,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "BadgePlate",
+   "shape": "Block",
+   "size": [
+    0.7,
+    0.24,
+    0.05
+   ],
+   "cf": [
+    -1.02,
+    0.63,
+    -1.635,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BadgeCuke",
+   "shape": "Ellipsoid",
+   "size": [
+    0.44,
+    0.13,
+    0.05
+   ],
+   "cf": [
+    -1.02,
+    0.63,
+    -1.66,
+    0.98481,
+    -0.17365,
+    0.0,
+    0.17365,
+    0.98481,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "5aa845",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "HingePlate",
+   "shape": "Block",
+   "size": [
+    0.22,
+    0.86,
+    0.05
+   ],
+   "cf": [
+    1.38,
+    1.78,
+    -1.64,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d1da",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HingePin",
+   "shape": "Cylinder",
+   "size": [
+    0.72,
+    0.13,
+    0.13
+   ],
+   "cf": [
+    1.36,
+    1.78,
+    -1.72,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "c9d1da",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorRing01",
+   "shape": "Cylinder",
+   "size": [
+    0.4658,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    1.00042,
+    1.979,
+    -1.79,
+    -0.19509,
+    0.0,
+    0.98079,
+    0.98079,
+    0.0,
+    0.19509,
+    0.0,
+    1.0,
+    -0.0
+   ],
+   "color": "c9d1da",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorRing02",
+   "shape": "Cylinder",
+   "size": [
+    0.4658,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    0.84811,
+    2.34669,
+    -1.79,
+    -0.55557,
+    0.83147,
+    0.0,
+    0.83147,
+    0.55557,
+    0.0,
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "c9d1da",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorRing03",
+   "shape": "Cylinder",
+   "size": [
+    0.4658,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    0.56669,
+    2.62811,
+    -1.79,
+    -0.83147,
+    0.55557,
+    0.0,
+    0.55557,
+    0.83147,
+    0.0,
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "c9d1da",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorRing04",
+   "shape": "Cylinder",
+   "size": [
+    0.4658,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    0.199,
+    2.78042,
+    -1.79,
+    -0.98079,
+    0.19509,
+    0.0,
+    0.19509,
+    0.98079,
+    0.0,
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "c9d1da",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorRing05",
+   "shape": "Cylinder",
+   "size": [
+    0.4658,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    -0.199,
+    2.78042,
+    -1.79,
+    -0.98079,
+    -0.19509,
+    -0.0,
+    -0.19509,
+    0.98079,
+    0.0,
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "c9d1da",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorRing06",
+   "shape": "Cylinder",
+   "size": [
+    0.4658,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    -0.56669,
+    2.62811,
+    -1.79,
+    -0.83147,
+    -0.55557,
+    -0.0,
+    -0.55557,
+    0.83147,
+    0.0,
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "c9d1da",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorRing07",
+   "shape": "Cylinder",
+   "size": [
+    0.4658,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    -0.84811,
+    2.34669,
+    -1.79,
+    -0.55557,
+    -0.83147,
+    -0.0,
+    -0.83147,
+    0.55557,
+    0.0,
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "c9d1da",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorRing08",
+   "shape": "Cylinder",
+   "size": [
+    0.4658,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    -1.00042,
+    1.979,
+    -1.79,
+    -0.19509,
+    0.0,
+    -0.98079,
+    -0.98079,
+    0.0,
+    0.19509,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "c9d1da",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorRing09",
+   "shape": "Cylinder",
+   "size": [
+    0.4658,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    -1.00042,
+    1.581,
+    -1.79,
+    0.19509,
+    0.0,
+    -0.98079,
+    -0.98079,
+    0.0,
+    -0.19509,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "c9d1da",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorRing10",
+   "shape": "Cylinder",
+   "size": [
+    0.4658,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    -0.84811,
+    1.21331,
+    -1.79,
+    0.55557,
+    0.83147,
+    -0.0,
+    -0.83147,
+    0.55557,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d1da",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorRing11",
+   "shape": "Cylinder",
+   "size": [
+    0.4658,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    -0.56669,
+    0.93189,
+    -1.79,
+    0.83147,
+    0.55557,
+    -0.0,
+    -0.55557,
+    0.83147,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d1da",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorRing12",
+   "shape": "Cylinder",
+   "size": [
+    0.4658,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    -0.199,
+    0.77958,
+    -1.79,
+    0.98079,
+    0.19509,
+    -0.0,
+    -0.19509,
+    0.98079,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d1da",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorRing13",
+   "shape": "Cylinder",
+   "size": [
+    0.4658,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    0.199,
+    0.77958,
+    -1.79,
+    0.98079,
+    -0.19509,
+    0.0,
+    0.19509,
+    0.98079,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d1da",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorRing14",
+   "shape": "Cylinder",
+   "size": [
+    0.4658,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    0.56669,
+    0.93189,
+    -1.79,
+    0.83147,
+    -0.55557,
+    0.0,
+    0.55557,
+    0.83147,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d1da",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorRing15",
+   "shape": "Cylinder",
+   "size": [
+    0.4658,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    0.84811,
+    1.21331,
+    -1.79,
+    0.55557,
+    -0.83147,
+    0.0,
+    0.83147,
+    0.55557,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d1da",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorRing16",
+   "shape": "Cylinder",
+   "size": [
+    0.4658,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    1.00042,
+    1.581,
+    -1.79,
+    0.19509,
+    -0.0,
+    0.98079,
+    0.98079,
+    0.0,
+    -0.19509,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "c9d1da",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorGlass",
+   "shape": "Ellipsoid",
+   "size": [
+    1.92,
+    1.92,
+    0.4
+   ],
+   "cf": [
+    0.0,
+    1.78,
+    -1.76,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d4eeff",
+   "material": "SmoothPlastic",
+   "transparency": 0.55,
+   "reflectance": 0.15,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "DoorShine",
+   "shape": "Ellipsoid",
+   "size": [
+    0.11,
+    0.46,
+    0.05
+   ],
+   "cf": [
+    0.42,
+    2.2,
+    -1.925,
+    0.70711,
+    -0.70711,
+    0.0,
+    0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.25,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "DoorHandle",
+   "shape": "Block",
+   "size": [
+    0.18,
+    0.66,
+    0.16
+   ],
+   "cf": [
+    -1.26,
+    1.78,
+    -1.84,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorArm",
+   "shape": "Block",
+   "size": [
+    0.4,
+    0.44,
+    0.1
+   ],
+   "cf": [
+    1.23,
+    1.78,
+    -1.72,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d1da",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DrumBack",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    1.86,
+    1.86
+   ],
+   "cf": [
+    0.0,
+    1.78,
+    -0.4,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "color": "bcc5cf",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DrumSlat01",
+   "shape": "Block",
+   "size": [
+    0.6697,
+    0.08,
+    1.06
+   ],
+   "cf": [
+    0.0,
+    2.66,
+    -0.96,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "a9b4c0",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DrumSlat02",
+   "shape": "Block",
+   "size": [
+    0.6697,
+    0.08,
+    1.06
+   ],
+   "cf": [
+    -0.56565,
+    2.45412,
+    -0.96,
+    0.76604,
+    -0.64279,
+    0.0,
+    0.64279,
+    0.76604,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "a9b4c0",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DrumSlat03",
+   "shape": "Block",
+   "size": [
+    0.6697,
+    0.08,
+    1.06
+   ],
+   "cf": [
+    -0.86663,
+    1.93281,
+    -0.96,
+    0.17365,
+    -0.98481,
+    0.0,
+    0.98481,
+    0.17365,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "a9b4c0",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DrumSlat04",
+   "shape": "Block",
+   "size": [
+    0.6697,
+    0.08,
+    1.06
+   ],
+   "cf": [
+    -0.7621,
+    1.34,
+    -0.96,
+    -0.5,
+    -0.86603,
+    0.0,
+    0.86603,
+    -0.5,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "a9b4c0",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DrumSlat05",
+   "shape": "Block",
+   "size": [
+    0.6697,
+    0.08,
+    1.06
+   ],
+   "cf": [
+    -0.30098,
+    0.95307,
+    -0.96,
+    -0.93969,
+    -0.34202,
+    0.0,
+    0.34202,
+    -0.93969,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "a9b4c0",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DrumSlat06",
+   "shape": "Block",
+   "size": [
+    0.6697,
+    0.08,
+    1.06
+   ],
+   "cf": [
+    0.30098,
+    0.95307,
+    -0.96,
+    -0.93969,
+    0.34202,
+    0.0,
+    -0.34202,
+    -0.93969,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "a9b4c0",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DrumSlat07",
+   "shape": "Block",
+   "size": [
+    0.6697,
+    0.08,
+    1.06
+   ],
+   "cf": [
+    0.7621,
+    1.34,
+    -0.96,
+    -0.5,
+    0.86603,
+    0.0,
+    -0.86603,
+    -0.5,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "a9b4c0",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DrumSlat08",
+   "shape": "Block",
+   "size": [
+    0.6697,
+    0.08,
+    1.06
+   ],
+   "cf": [
+    0.86663,
+    1.93281,
+    -0.96,
+    0.17365,
+    0.98481,
+    0.0,
+    -0.98481,
+    0.17365,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "a9b4c0",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DrumSlat09",
+   "shape": "Block",
+   "size": [
+    0.6697,
+    0.08,
+    1.06
+   ],
+   "cf": [
+    0.56565,
+    2.45412,
+    -0.96,
+    0.76604,
+    0.64279,
+    0.0,
+    -0.64279,
+    0.76604,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "a9b4c0",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DrumBaffle1",
+   "shape": "Block",
+   "size": [
+    0.16,
+    0.2,
+    0.98
+   ],
+   "cf": [
+    0.0,
+    2.53,
+    -0.94,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e9edf2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DrumBaffle2",
+   "shape": "Block",
+   "size": [
+    0.16,
+    0.2,
+    0.98
+   ],
+   "cf": [
+    -0.64952,
+    1.405,
+    -0.94,
+    -0.5,
+    -0.86603,
+    0.0,
+    0.86603,
+    -0.5,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e9edf2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DrumBaffle3",
+   "shape": "Block",
+   "size": [
+    0.16,
+    0.2,
+    0.98
+   ],
+   "cf": [
+    0.64952,
+    1.405,
+    -0.94,
+    -0.5,
+    0.86603,
+    0.0,
+    -0.86603,
+    -0.5,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e9edf2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DrumSpoke1",
+   "shape": "Block",
+   "size": [
+    0.12,
+    0.78,
+    0.05
+   ],
+   "cf": [
+    0.38971,
+    2.005,
+    -0.445,
+    0.5,
+    0.86603,
+    0.0,
+    -0.86603,
+    0.5,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "6e7a88",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "DrumSpoke2",
+   "shape": "Block",
+   "size": [
+    0.12,
+    0.78,
+    0.05
+   ],
+   "cf": [
+    -0.38971,
+    2.005,
+    -0.445,
+    0.5,
+    -0.86603,
+    0.0,
+    0.86603,
+    0.5,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "6e7a88",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "DrumSpoke3",
+   "shape": "Block",
+   "size": [
+    0.12,
+    0.78,
+    0.05
+   ],
+   "cf": [
+    -0.0,
+    1.33,
+    -0.445,
+    -1.0,
+    -0.0,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "6e7a88",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "DrumCloth1",
+   "shape": "Ellipsoid",
+   "size": [
+    0.66,
+    0.24,
+    0.42
+   ],
+   "cf": [
+    -0.32,
+    1.22574,
+    -0.8,
+    0.86603,
+    0.5,
+    0.0,
+    -0.5,
+    0.86603,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e87fa8",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DrumCloth2",
+   "shape": "Ellipsoid",
+   "size": [
+    0.56,
+    0.2,
+    0.3
+   ],
+   "cf": [
+    0.20395,
+    1.1523,
+    -1.06,
+    0.95106,
+    -0.30902,
+    0.0,
+    0.30902,
+    0.95106,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DrumCloth3",
+   "shape": "Ellipsoid",
+   "size": [
+    0.74,
+    0.24,
+    0.5
+   ],
+   "cf": [
+    0.46075,
+    1.36514,
+    -0.72,
+    0.66913,
+    -0.74314,
+    0.0,
+    0.74314,
+    0.66913,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "2f9e9e",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DrumCloth4",
+   "shape": "Ellipsoid",
+   "size": [
+    0.6,
+    0.22,
+    0.22
+   ],
+   "cf": [
+    -0.07317,
+    1.08383,
+    -1.3,
+    0.99452,
+    0.10453,
+    0.0,
+    -0.10453,
+    0.99452,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "5aa845",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PowerCord",
+   "shape": "Cylinder",
+   "size": [
+    2.9,
+    0.09,
+    0.09
+   ],
+   "cf": [
+    1.25,
+    1.45,
+    1.625,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "Rubber",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PowerPlug",
+   "shape": "Block",
+   "size": [
+    0.2,
+    0.26,
+    0.1
+   ],
+   "cf": [
+    1.25,
+    2.95,
+    1.63,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "VentRing",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.84,
+    0.84
+   ],
+   "cf": [
+    -1.73,
+    3.05,
+    0.85,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d1da",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "VentHole",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.64,
+    0.64
+   ],
+   "cf": [
+    -1.81,
+    3.05,
+    0.85,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "VentSlat1",
+   "shape": "Block",
+   "size": [
+    0.05,
+    0.12,
+    0.4692
+   ],
+   "cf": [
+    -1.865,
+    3.23,
+    0.85,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d1da",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "VentSlat2",
+   "shape": "Block",
+   "size": [
+    0.05,
+    0.12,
+    0.58
+   ],
+   "cf": [
+    -1.865,
+    3.05,
+    0.85,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d1da",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "VentSlat3",
+   "shape": "Block",
+   "size": [
+    0.05,
+    0.12,
+    0.4692
+   ],
+   "cf": [
+    -1.865,
+    2.87,
+    0.85,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d1da",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "BasketFront",
+   "shape": "Block",
+   "size": [
+    1.64,
+    0.6,
+    0.08
+   ],
+   "cf": [
+    0.5,
+    4.3,
+    -0.3,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BasketBack",
+   "shape": "Block",
+   "size": [
+    1.64,
+    0.6,
+    0.08
+   ],
+   "cf": [
+    0.5,
+    4.3,
+    0.7,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BasketL",
+   "shape": "Block",
+   "size": [
+    0.08,
+    0.6,
+    0.94
+   ],
+   "cf": [
+    1.28,
+    4.3,
+    0.2,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BasketR",
+   "shape": "Block",
+   "size": [
+    0.08,
+    0.6,
+    0.94
+   ],
+   "cf": [
+    -0.28,
+    4.3,
+    0.2,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BasketLaundry",
+   "shape": "Ellipsoid",
+   "size": [
+    1.5,
+    0.56,
+    0.94
+   ],
+   "cf": [
+    0.5,
+    4.5,
+    0.2,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BasketSock",
+   "shape": "Ellipsoid",
+   "size": [
+    0.18,
+    0.56,
+    0.12
+   ],
+   "cf": [
+    0.15,
+    4.5,
+    -0.36,
+    0.99027,
+    -0.13917,
+    0.0,
+    0.13613,
+    0.96863,
+    0.20791,
+    -0.02894,
+    -0.20589,
+    0.97815
+   ],
+   "color": "3f79d4",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  }
+ ],
+ "pivots": {
+  "Drum": [
+   0.0,
+   1.78,
+   -0.96
+  ],
+  "DoorHinge": [
+   1.36,
+   1.78,
+   -1.72
+  ],
+  "DoorCentre": [
+   0.0,
+   1.78,
+   -1.97
+  ],
+  "Dial": [
+   -1.02,
+   3.49,
+   -1.72
+  ],
+  "StartPrompt": [
+   0.2,
+   3.48,
+   -2.0
+  ],
+  "DoorPrompt": [
+   0.0,
+   1.78,
+   -2.2
+  ],
+  "Vent": [
+   -1.93,
+   3.05,
+   0.85
+  ],
+  "VentOut": [
+   -2.93,
+   3.3,
+   0.85
+  ]
+ },
+ "attrs": {
+  "Cost": 1000,
+  "DisplayName": "Dryer",
+  "Notes": "Tumble dryer matching the WashingMachine (primlib parts, fun-builds/models/build_Dryer.py + laundrylib.py). Drum* spins about Pivot_Drum (authored Z axis), DrumCloth1..4 tumble, Door* swings about Pivot_DoorHinge (vertical), Dial* turns about Pivot_Dial, Screen shows the countdown on its Front face, VentSlat1..3 flutter and lint puffs from Pivot_Vent toward Pivot_VentOut."
+ },
+ "size_studs": [
+  3.62,
+  4.796,
+  3.64
+ ],
+ "min": [
+  -1.89,
+  0.0,
+  -1.96
+ ],
+ "max": [
+  1.73,
+  4.796,
+  1.68
+ ],
+ "part_count": 90,
+ "duplicate_names": []
+}

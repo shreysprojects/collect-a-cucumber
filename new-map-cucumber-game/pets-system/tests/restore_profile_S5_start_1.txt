@@ -1,0 +1,15 @@
+restore_profile STEP 2 OK <- profile_S5_start.json at 2026-09-22 21:13:42
+session key PetTest_140977250 (test key)
+staged JSON: 9679 bytes, nonce 71ee2404, staged 27s ago
+JSON (envelope): Cash=2180670488.3707447 Playtime=125 PlotLevel=2 Pets=8 Eggs=3 Cucumbers=2 Builds=51 Base.Version=2
+PASS plot level (Plot 3 = 2, want 2)
+PASS Cash written (2180670488.3707447)
+PASS BaseSaveAPI.Reload (true true  in 0.9 s)
+Base table rebuilt by BaseSave (Collect)
+PASS #Base.Pets (8, want 8)
+PASS #Base.Eggs (3, want 3)
+PASS #Base.Cucumbers (2, want 2)
+PASS #Base.Builds (51, want 51)
+world on Plot 3: Pets=6 Eggs=3 Cucumbers=2 Builds=51
+PASS Cash after (2180680135.3382664 (+9646.96752166748 income since the write))
+PlotLevel=2 Strength=0 Playtime=731 (session clock)

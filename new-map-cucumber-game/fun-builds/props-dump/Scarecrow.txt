@@ -1,0 +1,20 @@
+=== Garden/Scarecrow
+  @AssetId = 94028525938092
+  @Cost = 200
+  @Notes = Free-standing garden dressing, ~5.55 studs tall on a low dirt mound; footprint ~3.6 wide across the arms x ~1.3 deep (the hat brim and the mound are the deep parts).  The post runs from z 0 up to z 4.72 inside the sack head; the cross-arm is lashed on at z 3.66 and tilts 6 deg, so the -X end - the viewer's RIGHT - rides high and carries the crow.  The shirt yoke swallows the beam (top at z 3.70, beam underside 3.44 at the shoulder) and the sleeves wrap it out to the wrist, so the arms grow out of the body, not the neck; the rope shows at the throat and the two wrists, not at the post, which the shirt now covers.  Nothing moves; sink the mound ~0.05 into the turf so its rim does not float.  Parts are merged by colour, so a few objects carry more than one feature: 'RedCloth' = shirt body + yoke + both sleeves + both mitten cuffs + hat band + nose, 'Denim' = both trouser legs + the blue pat
+  @Pivot_ArmCentre = (0.00, 3.66, -0.08)
+  @Pivot_CrowPerch = (-1.13, 4.18, -0.18)
+  @Pivot_HatBase = (0.05, 4.86, -0.06)
+  @PropSet = plot
+  @Tris = 1406
+  Burlap [MeshPart] pos (0.08, 3.93, -0.10) size (1.01, 2.15, 0.86) Fabric cbb99a T0.00 collide=true
+  Crow [MeshPart] pos (-1.08, 4.26, -0.18) size (1.01, 0.61, 0.40) SmoothPlastic 23262c T0.00 collide=true
+  CrowBeak [MeshPart] pos (-1.54, 4.41, -0.35) size (0.22, 0.17, 0.19) SmoothPlastic f2c13d T0.00 collide=true
+  Denim [MeshPart] pos (-0.01, 1.90, -0.09) size (1.30, 1.77, 0.70) Fabric 3d6fb5 T0.00 collide=true
+  DirtMound [MeshPart] pos (0.08, 0.19, 0.05) size (1.51, 0.39, 1.01) Ground 6d5138 T0.00 collide=true
+  Frame [MeshPart] pos (-0.00, 2.36, -0.02) size (3.10, 4.72, 0.41) Wood 6b4423 T0.00 collide=true
+  Lashing [MeshPart] pos (0.01, 3.66, -0.10) size (2.56, 0.73, 0.51) Fabric b99a63 T0.00 collide=true
+  RedCloth [MeshPart] pos (0.01, 3.72, -0.15) size (3.17, 2.92, 1.11) Fabric c0392b T0.00 collide=true
+  Stitching [MeshPart] pos (-0.03, 3.59, -0.51) size (1.17, 2.30, 0.24) Fabric 23262c T0.00 collide=true
+  StrawHat [MeshPart] pos (0.05, 5.09, -0.05) size (1.35, 0.95, 1.34) Grass c9a33f T0.00 collide=true
+  StrawTufts [MeshPart] pos (-0.03, 2.03, -0.15) size (3.41, 3.78, 1.13) Grass d9b45b T0.00 collide=true

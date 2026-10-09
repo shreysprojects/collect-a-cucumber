@@ -1,0 +1,262 @@
+{
+ "key": "GrandfatherClock",
+ "category": "Home",
+ "parts_hash": "4ef48fcda9cb",
+ "pivots": {
+  "PendulumPivot": [
+   0.0,
+   5.12,
+   -0.22
+  ],
+  "FaceCentre": [
+   0.0,
+   6.25,
+   -0.93
+  ],
+  "MoonCentre": [
+   0.0,
+   7.5,
+   -0.625
+  ],
+  "Chime": [
+   0.0,
+   6.3,
+   0.0
+  ]
+ },
+ "attrs": {
+  "State_HourAngle": 305.0,
+  "State_MinuteAngle": 60.0,
+  "State_MoonAngle": 0.0,
+  "State_PendulumSwing": 6.0,
+  "Cost": 1500,
+  "DisplayName": "Grandfather Clock"
+ },
+ "size_studs": [
+  2.66,
+  8.5,
+  1.86
+ ],
+ "objects": [
+  {
+   "name": "Foot1_m",
+   "color": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 12
+  },
+  {
+   "name": "Plinth_m",
+   "color": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 9
+  },
+  {
+   "name": "TrunkBack_m",
+   "color": "4e311a",
+   "material": "WoodPlanks",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "DoorGlass_m",
+   "color": "cfe6f2",
+   "material": "Glass",
+   "transparency": 0.72,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "DoorKnob_m",
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 17
+  },
+  {
+   "name": "Chain1_m",
+   "color": "7d6a45",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 3
+  },
+  {
+   "name": "PendulumRod",
+   "color": "c9962a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "PendulumBob",
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "PendulumBobFace",
+   "color": "ffd76a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "DialPlate_m",
+   "color": "2c3e7a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "DialFace_m",
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Mark12_m",
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 12
+  },
+  {
+   "name": "HourHand",
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "HourHandTip",
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "MinuteHand",
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "MinuteHandTip",
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "CrownRim_m",
+   "color": "c9962a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "MoonDisc",
+   "color": "2c3e7a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "MoonSun",
+   "color": "ffb530",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "MoonMoon",
+   "color": "fbf1c8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "MoonStarA",
+   "color": "fff6d0",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "MoonStarB",
+   "color": "fff6d0",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  }
+ ]
+}

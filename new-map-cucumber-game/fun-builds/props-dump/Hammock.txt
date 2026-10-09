@@ -1,0 +1,15 @@
+=== Fun/Hammock
+  @AssetId = 80623653959976
+  @Cost = 300
+  @Notes = 10.64 wide (x) x 2.18 deep (y) x 3.16 tall, centred on the origin, sitting flat on z=0 via two foot sleds at x +/-2.48..5.32.  The bed is a slung sheet: its two long edges hang on their own catenary from z=2.14 at the throats (x +/-2.60) down to z=1.55 amidships, while the centreline drops further to z=1.25, so every cross-section is a shallow crescent and the underside bottoms at z=1.20 - a player drops into it from standing height and their feet still clear the ground. In plan the sheet is a lens: 2.18 wide at x=0, narrowing to 0.35 at the throats. Usable lie-down area is x -2.2..2.2, y -0.9..0.9 amidships.  The pillow is at the -X end only (x -2.15..-1.35) - that end is the head end, orient the sit/lie animation so the avatar's head goes to -X.  One rigid prop, no moving parts: if anyone wants a swinging version, hang the Bed/Weave/Cords objects off the two ring pivots below and leave
+  @Pivot_BedLow = (0.00, 1.20, -0.00)
+  @Pivot_RingMinusX = (-3.04, 2.10, -0.00)
+  @Pivot_RingPlusX = (3.04, 2.10, -0.00)
+  @PropSet = plot
+  @Tris = 1216
+  Bed [MeshPart] pos (-0.00, 1.71, -0.00) size (5.20, 0.86, 2.11) Fabric 2f9e9e T0.00 collide=true
+  Cords [MeshPart] pos (0.01, 2.39, -0.00) size (7.46, 0.81, 0.69) Fabric b99a63 T0.00 collide=true
+  Rails [MeshPart] pos (-0.00, 1.58, -0.00) size (10.64, 3.16, 0.70) Wood c08a4e T0.00 collide=true
+  Rings [MeshPart] pos (-0.00, 2.32, -0.00) size (7.63, 1.02, 0.52) Metal 9aa7b8 T0.00 collide=true
+  Timber [MeshPart] pos (-0.00, 1.50, -0.00) size (10.36, 3.00, 1.00) Wood 8a5a2b T0.00 collide=true
+  Weave [MeshPart] pos (-0.00, 1.71, -0.00) size (4.40, 0.96, 2.18) Fabric e8e0cc T0.00 collide=true

@@ -1,0 +1,20 @@
+{
+  "_note": "Rev 3 (2026-09-18): the 14 Toyland + Neon models -> the template names CucumberSpawner builds as '<Zone> <TypeName>' from its RAW pools. 'target' = the in-field size of the DOMINANT axis after the spawner's x0.75 (install_game.lua TARGET: cuke 5.0, slice 3.4, tree 8.6, prop 4.6); the two landmark types (weight 1) and the floating hologram get a little more so they read at their rarity.",
+  "map": {
+    "ToylandToySlice":             { "slots": ["Toyland Toy Slice"],                "target": 3.4 },
+    "ToylandLegoCucumber":         { "slots": ["Toyland Lego Cucumber"],            "target": 5.0 },
+    "ToylandJackInTheBoxCucumber": { "slots": ["Toyland Jack-in-the-Box Cucumber"], "target": 5.4 },
+    "ToylandToyRocketCucumber":    { "slots": ["Toyland Toy Rocket Cucumber"],      "target": 5.2 },
+    "ToylandPinwheelPlant":        { "slots": ["Toyland Pinwheel Plant"],           "target": 5.6 },
+    "ToylandBuildingBlockTree":    { "slots": ["Toyland Building Block Tree"],      "target": 8.6 },
+    "ToylandToyTrainCucumber":     { "slots": ["Toyland Toy Train Cucumber"],       "target": 6.2 },
+
+    "NeonNeonSlice":               { "slots": ["Neon Neon Slice"],                  "target": 3.4 },
+    "NeonElectroCucumber":         { "slots": ["Neon Electro Cucumber"],            "target": 5.0 },
+    "NeonGridCucumber":            { "slots": ["Neon Neon Grid Cucumber"],          "target": 5.0 },
+    "NeonHologramCucumber":        { "slots": ["Neon Hologram Cucumber"],           "target": 5.6 },
+    "NeonPalm":                    { "slots": ["Neon Neon Palm"],                   "target": 8.6 },
+    "NeonTree":                    { "slots": ["Neon Neon Tree"],                   "target": 8.6 },
+    "NeonCyberCucumber":           { "slots": ["Neon Cyber Cucumber"],              "target": 5.8 }
+  }
+}

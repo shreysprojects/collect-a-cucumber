@@ -1,0 +1,636 @@
+{
+ "key": "_VendSnacks",
+ "category": "Test",
+ "parts": [
+  {
+   "name": "SodaCan",
+   "shape": "Cylinder",
+   "size": [
+    1.6,
+    0.88,
+    0.88
+   ],
+   "cf": [
+    -2.5,
+    1.65,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "56c440",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "SodaBand",
+   "shape": "Cylinder",
+   "size": [
+    0.6,
+    0.904,
+    0.904
+   ],
+   "cf": [
+    -2.5,
+    1.69,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "SodaLid",
+   "shape": "Cylinder",
+   "size": [
+    0.08,
+    0.74,
+    0.74
+   ],
+   "cf": [
+    -2.5,
+    2.47,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c4cbd4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "SodaRim",
+   "shape": "Cylinder",
+   "size": [
+    0.08,
+    0.74,
+    0.74
+   ],
+   "cf": [
+    -2.5,
+    0.83,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c4cbd4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "SodaTab",
+   "shape": "Block",
+   "size": [
+    0.16,
+    0.06,
+    0.26
+   ],
+   "cf": [
+    -2.5,
+    2.52,
+    -0.1,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c4cbd4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "SodaLogo",
+   "shape": "Ellipsoid",
+   "size": [
+    0.2,
+    0.48,
+    0.12
+   ],
+   "cf": [
+    -2.5,
+    1.69,
+    -0.456,
+    0.90631,
+    0.42262,
+    0.0,
+    -0.42262,
+    0.90631,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "2f6b2c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ColaCan",
+   "shape": "Cylinder",
+   "size": [
+    1.6,
+    0.88,
+    0.88
+   ],
+   "cf": [
+    0.0,
+    1.65,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c82028",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ColaBand",
+   "shape": "Cylinder",
+   "size": [
+    0.6,
+    0.904,
+    0.904
+   ],
+   "cf": [
+    0.0,
+    1.69,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ColaStripe",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.916,
+    0.916
+   ],
+   "cf": [
+    0.0,
+    1.69,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c82028",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ColaLid",
+   "shape": "Cylinder",
+   "size": [
+    0.08,
+    0.74,
+    0.74
+   ],
+   "cf": [
+    0.0,
+    2.47,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c4cbd4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ColaRim",
+   "shape": "Cylinder",
+   "size": [
+    0.08,
+    0.74,
+    0.74
+   ],
+   "cf": [
+    0.0,
+    0.83,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c4cbd4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ColaTab",
+   "shape": "Block",
+   "size": [
+    0.16,
+    0.06,
+    0.26
+   ],
+   "cf": [
+    0.0,
+    2.52,
+    -0.1,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c4cbd4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ChipsBag",
+   "shape": "Block",
+   "size": [
+    1.12,
+    1.4,
+    0.24
+   ],
+   "cf": [
+    2.6,
+    1.65,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ChipsPuff",
+   "shape": "Ellipsoid",
+   "size": [
+    1.1,
+    1.32,
+    0.64
+   ],
+   "cf": [
+    2.6,
+    1.65,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ChipsCrimpTop",
+   "shape": "Block",
+   "size": [
+    1.16,
+    0.14,
+    0.18
+   ],
+   "cf": [
+    2.6,
+    2.42,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ChipsCrimpBottom",
+   "shape": "Block",
+   "size": [
+    1.16,
+    0.14,
+    0.18
+   ],
+   "cf": [
+    2.6,
+    0.88,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ChipsBanner",
+   "shape": "Ellipsoid",
+   "size": [
+    0.8,
+    0.44,
+    0.12
+   ],
+   "cf": [
+    2.6,
+    1.81,
+    -0.3,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ChipsBannerInk",
+   "shape": "Ellipsoid",
+   "size": [
+    0.6,
+    0.22,
+    0.12
+   ],
+   "cf": [
+    2.6,
+    1.81,
+    -0.324,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ChipsChipA",
+   "shape": "Ellipsoid",
+   "size": [
+    0.28,
+    0.2,
+    0.08
+   ],
+   "cf": [
+    2.46,
+    1.27,
+    -0.27,
+    0.93969,
+    -0.34202,
+    0.0,
+    0.34202,
+    0.93969,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ffe27a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ChipsChipB",
+   "shape": "Ellipsoid",
+   "size": [
+    0.24,
+    0.18,
+    0.08
+   ],
+   "cf": [
+    2.78,
+    1.23,
+    -0.26,
+    0.90631,
+    0.42262,
+    0.0,
+    -0.42262,
+    0.90631,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e9c45a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Floor",
+   "shape": "Block",
+   "size": [
+    7.5,
+    0.05,
+    3.0
+   ],
+   "cf": [
+    0.0,
+    0.025,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "5c6672",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  }
+ ],
+ "pivots": {},
+ "attrs": {
+  "Cost": 0
+ },
+ "size_studs": [
+  7.5,
+  2.55,
+  3.0
+ ],
+ "min": [
+  -3.75,
+  0.0,
+  -1.5
+ ],
+ "max": [
+  3.75,
+  2.55,
+  1.5
+ ],
+ "part_count": 21,
+ "duplicate_names": []
+}

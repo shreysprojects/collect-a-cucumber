@@ -1,0 +1,2210 @@
+{
+  "_note": "Idle FX spec for 19 of the 57 cucumbers, produced by the gauntlet (48 candidates -> 3-lens screen -> head-to-head -> assignment) and translated here from the winners' prose into typed properties. Total ParticleEmitter Rate across all 19 models is ~20.8/s.",
+  "_treatments": [
+    "Speckle Wave",
+    "Governor Spin",
+    "Three Leaves Down",
+    "Settle Skirt",
+    "The Vent Breathes",
+    "Orbits Keep Time",
+    "Shared Plot Wind",
+    "Hanging Weight",
+    "Loose Speckles (reserve)"
+  ],
+  "_dropped": [
+    "A live per-frame wind vector shared across a plot: a constant Acceleration reads the same at these amplitudes and costs nothing.",
+    "Boosting the moon-tree light by 1.4x outside ClockTime 6-18: that couples the models to a day/night system this place does not have.",
+    "spin on NarmekGalaxyTree.Discs and NarmekMoonTree.Saucers: those MeshParts each hold several discs at different offsets, so a centroid spin swung the group around a meaningless midpoint and grew the footprint ~3 studs. Both now use twirl (about the mast), and the galaxy moonlet's orbit radius came in from 2.2 to 1.7."
+  ],
+  "models": {
+    "Cucumber": {
+      "treatment": "Shared Plot Wind",
+      "motion": [
+        {
+          "kind": "sway",
+          "target": "model",
+          "deg": 2.5,
+          "period": 5.5,
+          "phase": 0.0,
+          "axis": "X"
+        },
+        {
+          "kind": "sway",
+          "target": "model",
+          "deg": 1.2,
+          "period": 5.9,
+          "phase": 0.37,
+          "axis": "Z"
+        },
+        {
+          "kind": "bob",
+          "target": [
+            "Studs"
+          ],
+          "amp": 0.03,
+          "period": 4.8,
+          "phase": 0.0
+        }
+      ],
+      "vfx": [
+        {
+          "class": "ParticleEmitter",
+          "parent": "Body",
+          "name": "WindLeaf",
+          "props": {
+            "Texture": "leaf",
+            "Color": "7eb258",
+            "Rate": 0.7,
+            "Lifetime": [
+              1.6,
+              1.9
+            ],
+            "Speed": [
+              0.05,
+              0.12
+            ],
+            "SpreadAngle": [
+              25,
+              25
+            ],
+            "Drag": 1.6,
+            "Acceleration": [
+              0,
+              -1.1,
+              0
+            ],
+            "Size": [
+              [
+                0,
+                0
+              ],
+              [
+                0.1,
+                0.13
+              ],
+              [
+                1,
+                0.11
+              ]
+            ],
+            "Transparency": [
+              [
+                0,
+                1
+              ],
+              [
+                0.15,
+                0.25
+              ],
+              [
+                0.8,
+                0.25
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "Rotation": [
+              0,
+              360
+            ],
+            "RotSpeed": [
+              -70,
+              70
+            ],
+            "LightEmission": 0,
+            "LightInfluence": 0.6,
+            "EmissionDirection": "Top",
+            "Offset": [
+              0,
+              2.6,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    "CucumberTree": {
+      "treatment": "Settle Skirt",
+      "motion": [
+        {
+          "kind": "rock",
+          "target": [
+            "Crown",
+            "Cukes",
+            "CukeStuds"
+          ],
+          "deg": 2.0,
+          "period": 5.2,
+          "phase": 0.0,
+          "axis": "Y"
+        },
+        {
+          "kind": "rock",
+          "target": [
+            "CrownStuds"
+          ],
+          "deg": 2.0,
+          "period": 5.2,
+          "phase": 0.042,
+          "axis": "Y"
+        },
+        {
+          "kind": "bob",
+          "target": [
+            "Crown",
+            "CrownStuds",
+            "Cukes",
+            "CukeStuds"
+          ],
+          "amp": 0.05,
+          "period": 4.1,
+          "phase": 0.25
+        }
+      ],
+      "vfx": [
+        {
+          "class": "ParticleEmitter",
+          "parent": "Crown",
+          "name": "Shed",
+          "props": {
+            "Texture": "leaf",
+            "Color": "7eb258",
+            "Rate": 1.0,
+            "Lifetime": [
+              4.2,
+              5.0
+            ],
+            "Speed": [
+              0,
+              0.15
+            ],
+            "SpreadAngle": [
+              18,
+              18
+            ],
+            "Drag": 3.0,
+            "Acceleration": [
+              0,
+              -5.5,
+              0
+            ],
+            "Size": [
+              [
+                0,
+                0
+              ],
+              [
+                0.06,
+                0.26
+              ],
+              [
+                1,
+                0.26
+              ]
+            ],
+            "Transparency": [
+              [
+                0,
+                1
+              ],
+              [
+                0.08,
+                0.15
+              ],
+              [
+                0.82,
+                0.15
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "Rotation": [
+              0,
+              360
+            ],
+            "RotSpeed": [
+              -55,
+              55
+            ],
+            "LightEmission": 0,
+            "LightInfluence": 0.6,
+            "EmissionDirection": "Bottom",
+            "Shape": "Box",
+            "ShapeStyle": "Volume",
+            "EmitterSize": [
+              5.5,
+              0.3,
+              5.5
+            ],
+            "Offset": [
+              0,
+              7.3,
+              0
+            ]
+          }
+        },
+        {
+          "class": "ParticleEmitter",
+          "parent": "Trunk",
+          "name": "Settled",
+          "props": {
+            "Texture": "leaf",
+            "Color": "7eb258",
+            "Rate": 0.9,
+            "Lifetime": [
+              2.6,
+              2.6
+            ],
+            "Speed": [
+              0,
+              0
+            ],
+            "Drag": 0,
+            "Acceleration": [
+              0,
+              0,
+              0
+            ],
+            "LockedToPart": true,
+            "Size": [
+              0.3,
+              0.3
+            ],
+            "Transparency": [
+              [
+                0,
+                1
+              ],
+              [
+                0.25,
+                0.25
+              ],
+              [
+                0.7,
+                0.25
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "Rotation": [
+              0,
+              360
+            ],
+            "RotSpeed": [
+              0,
+              0
+            ],
+            "LightInfluence": 0.6,
+            "Shape": "Box",
+            "ShapeStyle": "Volume",
+            "EmitterSize": [
+              6.0,
+              0.1,
+              6.0
+            ],
+            "Offset": [
+              0,
+              0.06,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    "DesertCactusCucumber": {
+      "treatment": "Shared Plot Wind",
+      "motion": [
+        {
+          "kind": "sway",
+          "target": "model",
+          "deg": 2.0,
+          "period": 5.5,
+          "phase": 0.0,
+          "axis": "X"
+        },
+        {
+          "kind": "rock",
+          "target": [
+            "Arms"
+          ],
+          "deg": 2.5,
+          "period": 5.5,
+          "phase": 0.08,
+          "axis": "X"
+        },
+        {
+          "kind": "rock",
+          "target": [
+            "Petals",
+            "FlowerCentre"
+          ],
+          "deg": 4.0,
+          "period": 4.7,
+          "phase": 0.3,
+          "axis": "Z"
+        }
+      ],
+      "vfx": [
+        {
+          "class": "ParticleEmitter",
+          "parent": "Body",
+          "name": "SandGrains",
+          "props": {
+            "Texture": "snow",
+            "Color": "baa680",
+            "Rate": 0.7,
+            "Lifetime": [
+              1.6,
+              1.9
+            ],
+            "Speed": [
+              0.05,
+              0.12
+            ],
+            "SpreadAngle": [
+              25,
+              25
+            ],
+            "Drag": 1.6,
+            "Acceleration": [
+              0.6,
+              -1.1,
+              0
+            ],
+            "Size": [
+              [
+                0,
+                0
+              ],
+              [
+                0.1,
+                0.13
+              ],
+              [
+                1,
+                0.11
+              ]
+            ],
+            "Transparency": [
+              [
+                0,
+                1
+              ],
+              [
+                0.15,
+                0.25
+              ],
+              [
+                0.8,
+                0.25
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "RotSpeed": [
+              -70,
+              70
+            ],
+            "LightEmission": 0,
+            "LightInfluence": 0.7,
+            "EmissionDirection": "Top",
+            "Offset": [
+              0,
+              2.2,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    "DesertPalm": {
+      "treatment": "Hanging Weight",
+      "motion": [
+        {
+          "kind": "sway",
+          "target": [
+            "Trunk",
+            "Base"
+          ],
+          "deg": 0.6,
+          "period": 4.6,
+          "phase": 0.0,
+          "axis": "X"
+        },
+        {
+          "kind": "rock",
+          "target": [
+            "Fronds",
+            "FrondsBack"
+          ],
+          "deg": 3.2,
+          "period": 4.6,
+          "phase": 0.06,
+          "axis": "X"
+        },
+        {
+          "kind": "rock",
+          "target": [
+            "Coconuts"
+          ],
+          "deg": 2.2,
+          "period": 3.9,
+          "phase": 0.12,
+          "axis": "X"
+        }
+      ],
+      "vfx": []
+    },
+    "VolcanoMoltenCucumber": {
+      "treatment": "The Vent Breathes",
+      "motion": [
+        {
+          "kind": "bob",
+          "target": [
+            "LavaFlow"
+          ],
+          "amp": 0.05,
+          "period": 5.0,
+          "phase": 0.25
+        },
+        {
+          "kind": "pulse",
+          "target": [
+            "LavaFlow",
+            "LavaLip"
+          ],
+          "prop": "Transparency",
+          "from": 0.3,
+          "to": 0.05,
+          "period": 3.8,
+          "phase": 0.25
+        },
+        {
+          "kind": "flicker",
+          "target": [
+            "Body"
+          ],
+          "prop": "Brightness",
+          "base": 0.75,
+          "amp": 0.2,
+          "hz": 1.2
+        }
+      ],
+      "vfx": [
+        {
+          "class": "PointLight",
+          "parent": "Body",
+          "name": "InnerHeat",
+          "props": {
+            "Color": "ff8c28",
+            "Range": 7,
+            "Brightness": 0.75,
+            "Shadows": false
+          }
+        },
+        {
+          "class": "ParticleEmitter",
+          "parent": "LavaLip",
+          "name": "Embers",
+          "props": {
+            "Texture": "fire",
+            "Rate": 3,
+            "Lifetime": [
+              0.7,
+              1.1
+            ],
+            "Size": [
+              [
+                0,
+                0.14
+              ],
+              [
+                1,
+                0.02
+              ]
+            ],
+            "Speed": [
+              0.15,
+              0.15
+            ],
+            "SpreadAngle": [
+              12,
+              12
+            ],
+            "Acceleration": [
+              0,
+              -5,
+              0
+            ],
+            "Drag": 1,
+            "Transparency": [
+              [
+                0,
+                0.35
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "LightEmission": 0.35,
+            "Color": [
+              [
+                0,
+                "ff963c"
+              ],
+              [
+                1,
+                "78281c"
+              ]
+            ],
+            "EmissionDirection": "Top"
+          }
+        }
+      ]
+    },
+    "VolcanoFlameCucumber": {
+      "treatment": "The Vent Breathes",
+      "motion": [
+        {
+          "kind": "spin",
+          "target": [
+            "FlameRibbon"
+          ],
+          "speed": 8,
+          "axis": "Y"
+        },
+        {
+          "kind": "spin",
+          "target": [
+            "FlameLicks"
+          ],
+          "speed": -6,
+          "axis": "Y"
+        },
+        {
+          "kind": "breathe",
+          "target": [
+            "FlameCore"
+          ],
+          "scale": 1.06,
+          "period": 2.4,
+          "phase": 0.0
+        }
+      ],
+      "vfx": [
+        {
+          "class": "ParticleEmitter",
+          "parent": "FlameCore",
+          "name": "HeatWisp",
+          "props": {
+            "Texture": "smoke",
+            "Rate": 2,
+            "Lifetime": [
+              2.2,
+              2.2
+            ],
+            "Size": [
+              [
+                0,
+                0.25
+              ],
+              [
+                1,
+                0.8
+              ]
+            ],
+            "Speed": [
+              0.35,
+              0.35
+            ],
+            "SpreadAngle": [
+              10,
+              10
+            ],
+            "Transparency": [
+              [
+                0,
+                0.8
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "Color": "463c3a",
+            "LightEmission": 0,
+            "EmissionDirection": "Top",
+            "Offset": [
+              0,
+              4.2,
+              0
+            ]
+          }
+        },
+        {
+          "class": "PointLight",
+          "parent": "FlameCore",
+          "name": "FlameGlow",
+          "props": {
+            "Color": "ff963c",
+            "Range": 6,
+            "Brightness": 0.8,
+            "Shadows": false
+          }
+        }
+      ]
+    },
+    "VolcanoMagmaTree": {
+      "treatment": "Three Leaves Down",
+      "motion": [
+        {
+          "kind": "pulse",
+          "target": [
+            "CrownGlow"
+          ],
+          "prop": "Transparency",
+          "from": 0.35,
+          "to": 0.12,
+          "period": 4.6,
+          "phase": 0.0
+        },
+        {
+          "kind": "bob",
+          "target": [
+            "Veins"
+          ],
+          "amp": 0.06,
+          "period": 5.4,
+          "phase": 0.3
+        },
+        {
+          "kind": "rock",
+          "target": [
+            "Crown",
+            "Cukes",
+            "CukeStuds"
+          ],
+          "deg": 1.8,
+          "period": 5.0,
+          "phase": 0.15,
+          "axis": "Y"
+        }
+      ],
+      "vfx": [
+        {
+          "class": "ParticleEmitter",
+          "parent": "Crown",
+          "name": "CoolingEmbers",
+          "props": {
+            "Texture": "fire",
+            "Rate": 0.8,
+            "Lifetime": [
+              3.5,
+              4.2
+            ],
+            "Size": [
+              [
+                0,
+                0.18
+              ],
+              [
+                1,
+                0.05
+              ]
+            ],
+            "Speed": [
+              0.05,
+              0.05
+            ],
+            "SpreadAngle": [
+              20,
+              20
+            ],
+            "Drag": 2.5,
+            "Acceleration": [
+              0,
+              -3.0,
+              0
+            ],
+            "Color": [
+              [
+                0,
+                "ff8228"
+              ],
+              [
+                1,
+                "6e2319"
+              ]
+            ],
+            "Transparency": [
+              [
+                0,
+                1
+              ],
+              [
+                0.1,
+                0.25
+              ],
+              [
+                0.85,
+                0.4
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "LightEmission": 0.4,
+            "EmissionDirection": "Bottom",
+            "Shape": "Box",
+            "ShapeStyle": "Volume",
+            "EmitterSize": [
+              5.5,
+              0.3,
+              5.5
+            ],
+            "Offset": [
+              0,
+              7.6,
+              0
+            ]
+          }
+        },
+        {
+          "class": "PointLight",
+          "parent": "CrownGlow",
+          "name": "MagmaGlow",
+          "props": {
+            "Color": "ff7828",
+            "Range": 8,
+            "Brightness": 0.6,
+            "Shadows": false
+          }
+        }
+      ]
+    },
+    "NarmekGalaxyTree": {
+      "treatment": "Orbits Keep Time",
+      "motion": [
+        {
+          "kind": "twirl",
+          "target": [
+            "Discs"
+          ],
+          "speed": 14
+        },
+        {
+          "kind": "twirl",
+          "target": [
+            "Cores",
+            "Stars"
+          ],
+          "speed": -6
+        },
+        {
+          "kind": "orbit",
+          "target": [
+            "Moonlet"
+          ],
+          "speed": 22.5,
+          "axis": "Y"
+        },
+        {
+          "kind": "bob",
+          "target": [
+            "Moonlet"
+          ],
+          "amp": 0.1,
+          "period": 4.0,
+          "phase": 0.0
+        }
+      ],
+      "vfx": [
+        {
+          "class": "Part",
+          "parent": "Trunk",
+          "name": "Moonlet",
+          "props": {
+            "Shape": "Ball",
+            "Size": [
+              0.35,
+              0.35,
+              0.35
+            ],
+            "Color": "e1e6f5",
+            "Material": "SmoothPlastic",
+            "Offsets": [
+              [
+                1.7,
+                7.4,
+                0
+              ]
+            ]
+          }
+        },
+        {
+          "class": "Trail",
+          "parent": "Moonlet",
+          "name": "Wake",
+          "props": {
+            "Span": 0.12,
+            "Lifetime": 0.8,
+            "WidthScale": [
+              [
+                0,
+                0.15
+              ],
+              [
+                1,
+                0
+              ]
+            ],
+            "Color": "bed2ff",
+            "Transparency": [
+              [
+                0,
+                0.6
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "LightEmission": 0.2,
+            "FaceCamera": true
+          }
+        }
+      ]
+    },
+    "NarmekAstronautCucumber": {
+      "treatment": "Loose Speckles",
+      "motion": [
+        {
+          "kind": "orbit",
+          "target": [
+            "Motes"
+          ],
+          "speed": 11,
+          "axis": "Y"
+        },
+        {
+          "kind": "drift",
+          "target": [
+            "Motes"
+          ],
+          "amp": 0.08,
+          "period": 4.3,
+          "phase": 0.0,
+          "axis": "X"
+        },
+        {
+          "kind": "pulse",
+          "target": [
+            "Lights"
+          ],
+          "prop": "Transparency",
+          "from": 0.45,
+          "to": 0.1,
+          "period": 4.0,
+          "phase": 0.0
+        }
+      ],
+      "vfx": [
+        {
+          "class": "Part",
+          "parent": "Body",
+          "name": "Motes",
+          "props": {
+            "Size": [
+              0.22,
+              0.06,
+              0.22
+            ],
+            "Color": "c8a0ff",
+            "Material": "Neon",
+            "Transparency": 0.12,
+            "Offsets": [
+              [
+                1.0,
+                1.2,
+                0
+              ],
+              [
+                0,
+                2.1,
+                1.0
+              ],
+              [
+                -1.0,
+                3.0,
+                0
+              ],
+              [
+                0,
+                3.8,
+                -1.0
+              ]
+            ]
+          }
+        },
+        {
+          "class": "PointLight",
+          "parent": "Visor",
+          "name": "VisorFill",
+          "props": {
+            "Color": "96c8ff",
+            "Range": 4,
+            "Brightness": 0.4,
+            "Shadows": false
+          }
+        }
+      ]
+    },
+    "NarmekMoonTree": {
+      "treatment": "Governor Spin",
+      "motion": [
+        {
+          "kind": "twirl",
+          "target": [
+            "Saucers",
+            "SaucerStuds",
+            "Craters"
+          ],
+          "speed": 9
+        },
+        {
+          "kind": "twirl",
+          "target": [
+            "Glow"
+          ],
+          "speed": -4
+        },
+        {
+          "kind": "bob",
+          "target": [
+            "Saucers",
+            "SaucerStuds",
+            "Craters"
+          ],
+          "amp": 0.05,
+          "period": 3.7,
+          "phase": 0.25
+        }
+      ],
+      "vfx": [
+        {
+          "class": "PointLight",
+          "parent": "Glow",
+          "name": "SaucerGlow",
+          "props": {
+            "Color": "becdff",
+            "Range": 8,
+            "Brightness": 0.45,
+            "Shadows": false
+          }
+        },
+        {
+          "class": "ParticleEmitter",
+          "parent": "Saucers",
+          "name": "Starfield",
+          "props": {
+            "Texture": "starfield",
+            "Rate": 2,
+            "Lifetime": [
+              2.5,
+              2.5
+            ],
+            "Size": [
+              0.1,
+              0.1
+            ],
+            "Speed": [
+              0,
+              0
+            ],
+            "RotSpeed": [
+              15,
+              15
+            ],
+            "SpreadAngle": [
+              180,
+              180
+            ],
+            "Transparency": [
+              [
+                0,
+                1
+              ],
+              [
+                0.2,
+                0.4
+              ],
+              [
+                0.8,
+                0.4
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "Color": "d2dcff",
+            "LightEmission": 0.5,
+            "Drag": 0,
+            "Acceleration": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    "SamuraiKatanaCucumber": {
+      "treatment": "Hanging Weight",
+      "motion": [
+        {
+          "kind": "sway",
+          "target": "model",
+          "deg": 0.6,
+          "period": 4.6,
+          "phase": 0.0,
+          "axis": "Z"
+        },
+        {
+          "kind": "rock",
+          "target": [
+            "Sash"
+          ],
+          "deg": 5.0,
+          "period": 4.6,
+          "phase": 0.07,
+          "axis": "Z"
+        },
+        {
+          "kind": "rock",
+          "target": [
+            "Knot",
+            "Tag"
+          ],
+          "deg": 4.0,
+          "period": 4.6,
+          "phase": 0.12,
+          "axis": "Z"
+        }
+      ],
+      "vfx": [
+        {
+          "class": "ParticleEmitter",
+          "parent": "Blade",
+          "name": "EdgeGlint",
+          "props": {
+            "Texture": "sparkles",
+            "Rate": 0.6,
+            "Lifetime": [
+              1.2,
+              1.2
+            ],
+            "Size": [
+              [
+                0,
+                0.12
+              ],
+              [
+                1,
+                0
+              ]
+            ],
+            "Speed": [
+              0,
+              0
+            ],
+            "SpreadAngle": [
+              0,
+              0
+            ],
+            "Drag": 0,
+            "Acceleration": [
+              0,
+              0,
+              0
+            ],
+            "Transparency": [
+              [
+                0,
+                1
+              ],
+              [
+                0.3,
+                0.5
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "Color": "fff0dc",
+            "LightEmission": 0.6,
+            "RotSpeed": [
+              8,
+              8
+            ],
+            "Shape": "Box",
+            "ShapeStyle": "Volume",
+            "EmitterSize": [
+              0.1,
+              1.2,
+              0.1
+            ]
+          }
+        }
+      ]
+    },
+    "SamuraiSakuraTree": {
+      "treatment": "Three Leaves Down",
+      "motion": [
+        {
+          "kind": "rock",
+          "target": [
+            "Blossom",
+            "Tufts"
+          ],
+          "deg": 2.0,
+          "period": 5.2,
+          "phase": 0.0,
+          "axis": "Y"
+        },
+        {
+          "kind": "bob",
+          "target": [
+            "Blossom"
+          ],
+          "amp": 0.05,
+          "period": 4.1,
+          "phase": 0.25
+        },
+        {
+          "kind": "bob",
+          "target": [
+            "Tufts"
+          ],
+          "amp": 0.05,
+          "period": 4.1,
+          "phase": 0.3
+        }
+      ],
+      "vfx": [
+        {
+          "class": "ParticleEmitter",
+          "parent": "Blossom",
+          "name": "PetalFall",
+          "props": {
+            "Texture": "leaf",
+            "Color": [
+              [
+                0,
+                "ffd6e2"
+              ],
+              [
+                1,
+                "f4b0c6"
+              ]
+            ],
+            "Rate": 0.7,
+            "Lifetime": [
+              4.2,
+              5.0
+            ],
+            "Speed": [
+              0,
+              0.15
+            ],
+            "SpreadAngle": [
+              18,
+              18
+            ],
+            "Drag": 3.0,
+            "Acceleration": [
+              0,
+              -5.5,
+              0
+            ],
+            "Size": [
+              [
+                0,
+                0
+              ],
+              [
+                0.06,
+                0.24
+              ],
+              [
+                1,
+                0.24
+              ]
+            ],
+            "Transparency": [
+              [
+                0,
+                1
+              ],
+              [
+                0.08,
+                0.15
+              ],
+              [
+                0.82,
+                0.15
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "Rotation": [
+              0,
+              360
+            ],
+            "RotSpeed": [
+              -55,
+              55
+            ],
+            "LightInfluence": 0.6,
+            "EmissionDirection": "Bottom",
+            "Shape": "Box",
+            "ShapeStyle": "Volume",
+            "EmitterSize": [
+              5.5,
+              0.3,
+              5.5
+            ],
+            "Offset": [
+              0,
+              7.4,
+              0
+            ]
+          }
+        },
+        {
+          "class": "ParticleEmitter",
+          "parent": "Base",
+          "name": "Settled",
+          "props": {
+            "Texture": "leaf",
+            "Color": "f4b0c6",
+            "Rate": 0.9,
+            "Lifetime": [
+              2.6,
+              2.6
+            ],
+            "Speed": [
+              0,
+              0
+            ],
+            "Drag": 0,
+            "Acceleration": [
+              0,
+              0,
+              0
+            ],
+            "LockedToPart": true,
+            "Size": [
+              0.28,
+              0.28
+            ],
+            "Transparency": [
+              [
+                0,
+                1
+              ],
+              [
+                0.25,
+                0.25
+              ],
+              [
+                0.7,
+                0.25
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "Rotation": [
+              0,
+              360
+            ],
+            "RotSpeed": [
+              0,
+              0
+            ],
+            "LightInfluence": 0.6,
+            "Shape": "Box",
+            "ShapeStyle": "Volume",
+            "EmitterSize": [
+              5.5,
+              0.1,
+              5.5
+            ],
+            "Offset": [
+              0,
+              0.06,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    "FarmWindmillPlant": {
+      "treatment": "Governor Spin",
+      "motion": [
+        {
+          "kind": "spin",
+          "target": [
+            "Blades",
+            "BladeStuds",
+            "BladeBorders"
+          ],
+          "speed": 24,
+          "axis": "Z"
+        },
+        {
+          "kind": "spin",
+          "target": [
+            "HubCap"
+          ],
+          "speed": -3,
+          "axis": "Z"
+        },
+        {
+          "kind": "sway",
+          "target": [
+            "Stalk",
+            "Leaves",
+            "Studs"
+          ],
+          "deg": 1.4,
+          "period": 5.5,
+          "phase": 0.09,
+          "axis": "X"
+        }
+      ],
+      "vfx": [
+        {
+          "class": "ParticleEmitter",
+          "parent": "Leaves",
+          "name": "WindLeaf",
+          "props": {
+            "Texture": "leaf",
+            "Color": "7eb258",
+            "Rate": 0.7,
+            "Lifetime": [
+              1.8,
+              1.8
+            ],
+            "Speed": [
+              0.05,
+              0.12
+            ],
+            "SpreadAngle": [
+              25,
+              25
+            ],
+            "Drag": 1.6,
+            "Acceleration": [
+              0.5,
+              -1.1,
+              0
+            ],
+            "Size": [
+              [
+                0,
+                0
+              ],
+              [
+                0.1,
+                0.13
+              ],
+              [
+                1,
+                0.11
+              ]
+            ],
+            "Transparency": [
+              [
+                0,
+                1
+              ],
+              [
+                0.15,
+                0.25
+              ],
+              [
+                0.8,
+                0.25
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "RotSpeed": [
+              -70,
+              70
+            ],
+            "LightInfluence": 0.6,
+            "EmissionDirection": "Top"
+          }
+        }
+      ]
+    },
+    "FarmCucumberBasket": {
+      "treatment": "Speckle Wave",
+      "motion": [
+        {
+          "kind": "bob",
+          "target": [
+            "CukeStuds"
+          ],
+          "amp": 0.03,
+          "period": 4.8,
+          "phase": 0.0
+        },
+        {
+          "kind": "breathe",
+          "target": [
+            "CukeStuds"
+          ],
+          "scale": 1.012,
+          "period": 4.8,
+          "phase": 0.0
+        },
+        {
+          "kind": "pulse",
+          "target": [
+            "Basket"
+          ],
+          "prop": "Brightness",
+          "from": 0.15,
+          "to": 0.55,
+          "period": 5.6,
+          "phase": 0.12
+        }
+      ],
+      "vfx": [
+        {
+          "class": "PointLight",
+          "parent": "Basket",
+          "name": "WeaveSheen",
+          "props": {
+            "Color": "cef6a8",
+            "Range": 4.5,
+            "Brightness": 0.35,
+            "Shadows": false,
+            "Offset": [
+              0,
+              2.2,
+              0
+            ]
+          }
+        },
+        {
+          "class": "ParticleEmitter",
+          "parent": "Stems",
+          "name": "Freshness",
+          "props": {
+            "Texture": "sparkles",
+            "Color": "cef6a8",
+            "Rate": 0.6,
+            "Lifetime": [
+              1.4,
+              1.4
+            ],
+            "Size": [
+              [
+                0,
+                0.1
+              ],
+              [
+                1,
+                0
+              ]
+            ],
+            "Speed": [
+              0,
+              0
+            ],
+            "SpreadAngle": [
+              180,
+              180
+            ],
+            "Drag": 0,
+            "Acceleration": [
+              0,
+              0,
+              0
+            ],
+            "Transparency": [
+              [
+                0,
+                1
+              ],
+              [
+                0.3,
+                0.55
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "LightEmission": 0.3,
+            "RotSpeed": [
+              6,
+              6
+            ]
+          }
+        }
+      ]
+    },
+    "SnowCrystalCucumber": {
+      "treatment": "Speckle Wave",
+      "motion": [
+        {
+          "kind": "bob",
+          "target": [
+            "Studs"
+          ],
+          "amp": 0.03,
+          "period": 4.8,
+          "phase": 0.0
+        },
+        {
+          "kind": "bob",
+          "target": [
+            "CrystalStuds"
+          ],
+          "amp": 0.03,
+          "period": 4.8,
+          "phase": 0.24
+        },
+        {
+          "kind": "pulse",
+          "target": [
+            "Crystals"
+          ],
+          "prop": "Transparency",
+          "from": 0.3,
+          "to": 0.08,
+          "period": 4.8,
+          "phase": 0.24
+        }
+      ],
+      "vfx": [
+        {
+          "class": "PointLight",
+          "parent": "Crystals",
+          "name": "ColdFill",
+          "props": {
+            "Color": "beeeff",
+            "Range": 5,
+            "Brightness": 0.5,
+            "Shadows": false
+          }
+        },
+        {
+          "class": "ParticleEmitter",
+          "parent": "Crystals",
+          "name": "FrostGlint",
+          "props": {
+            "Texture": "sparkles",
+            "Color": "beeeff",
+            "Rate": 1.5,
+            "Lifetime": [
+              1.2,
+              1.2
+            ],
+            "Size": [
+              [
+                0,
+                0.1
+              ],
+              [
+                1,
+                0
+              ]
+            ],
+            "Speed": [
+              0,
+              0
+            ],
+            "SpreadAngle": [
+              180,
+              180
+            ],
+            "Drag": 0,
+            "Acceleration": [
+              0,
+              0,
+              0
+            ],
+            "Transparency": [
+              [
+                0,
+                1
+              ],
+              [
+                0.3,
+                0.4
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "LightEmission": 0.4,
+            "RotSpeed": [
+              10,
+              10
+            ]
+          }
+        }
+      ]
+    },
+    "SnowSnowballSlice": {
+      "treatment": "Settle Skirt",
+      "motion": [
+        {
+          "kind": "rock",
+          "target": "model",
+          "deg": 2.0,
+          "period": 5.2,
+          "phase": 0.0,
+          "axis": "Y"
+        },
+        {
+          "kind": "bob",
+          "target": "model",
+          "amp": 0.03,
+          "period": 4.4,
+          "phase": 0.3
+        }
+      ],
+      "vfx": [
+        {
+          "class": "ParticleEmitter",
+          "parent": "Ball",
+          "name": "Flurry",
+          "props": {
+            "Texture": "snow",
+            "Color": "ecf4ff",
+            "Rate": 1.2,
+            "Lifetime": [
+              2.6,
+              3.0
+            ],
+            "Speed": [
+              0,
+              0.1
+            ],
+            "SpreadAngle": [
+              18,
+              18
+            ],
+            "Drag": 3.0,
+            "Acceleration": [
+              0,
+              -2.2,
+              0
+            ],
+            "Size": [
+              [
+                0,
+                0
+              ],
+              [
+                0.08,
+                0.16
+              ],
+              [
+                1,
+                0.16
+              ]
+            ],
+            "Transparency": [
+              [
+                0,
+                1
+              ],
+              [
+                0.1,
+                0.2
+              ],
+              [
+                0.85,
+                0.2
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "Rotation": [
+              0,
+              360
+            ],
+            "RotSpeed": [
+              -40,
+              40
+            ],
+            "LightInfluence": 0.5,
+            "EmissionDirection": "Bottom",
+            "Shape": "Box",
+            "ShapeStyle": "Volume",
+            "EmitterSize": [
+              2.2,
+              0.2,
+              2.2
+            ],
+            "Offset": [
+              0,
+              2.3,
+              0
+            ]
+          }
+        },
+        {
+          "class": "ParticleEmitter",
+          "parent": "Rim",
+          "name": "Settled",
+          "props": {
+            "Texture": "snow",
+            "Color": "ecf4ff",
+            "Rate": 0.9,
+            "Lifetime": [
+              2.4,
+              2.4
+            ],
+            "Speed": [
+              0,
+              0
+            ],
+            "Drag": 0,
+            "Acceleration": [
+              0,
+              0,
+              0
+            ],
+            "LockedToPart": true,
+            "Size": [
+              0.22,
+              0.22
+            ],
+            "Transparency": [
+              [
+                0,
+                1
+              ],
+              [
+                0.25,
+                0.3
+              ],
+              [
+                0.7,
+                0.3
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "Rotation": [
+              0,
+              360
+            ],
+            "RotSpeed": [
+              0,
+              0
+            ],
+            "LightInfluence": 0.5,
+            "Shape": "Box",
+            "ShapeStyle": "Volume",
+            "EmitterSize": [
+              2.3,
+              0.1,
+              2.3
+            ],
+            "Offset": [
+              0,
+              0.06,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    "UnderwaterBubbleTree": {
+      "treatment": "Three Leaves Down",
+      "motion": [
+        {
+          "kind": "bob",
+          "target": [
+            "Bubbles",
+            "BubbleStuds"
+          ],
+          "amp": 0.06,
+          "period": 4.5,
+          "phase": 0.0
+        },
+        {
+          "kind": "rock",
+          "target": [
+            "Bubbles",
+            "BubbleStuds"
+          ],
+          "deg": 2.4,
+          "period": 5.6,
+          "phase": 0.2,
+          "axis": "X"
+        },
+        {
+          "kind": "bob",
+          "target": [
+            "TrunkStuds"
+          ],
+          "amp": 0.03,
+          "period": 4.8,
+          "phase": 0.5
+        }
+      ],
+      "vfx": [
+        {
+          "class": "ParticleEmitter",
+          "parent": "Trunk",
+          "name": "Rise",
+          "props": {
+            "Texture": "bubble",
+            "Color": "d2f5ff",
+            "Rate": 1.0,
+            "Lifetime": [
+              3.2,
+              4.0
+            ],
+            "Speed": [
+              0.05,
+              0.05
+            ],
+            "SpreadAngle": [
+              12,
+              12
+            ],
+            "Drag": 2.0,
+            "Acceleration": [
+              0,
+              2.2,
+              0
+            ],
+            "Size": [
+              [
+                0,
+                0
+              ],
+              [
+                0.1,
+                0.2
+              ],
+              [
+                1,
+                0.26
+              ]
+            ],
+            "Transparency": [
+              [
+                0,
+                1
+              ],
+              [
+                0.12,
+                0.45
+              ],
+              [
+                0.85,
+                0.45
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "RotSpeed": [
+              -15,
+              15
+            ],
+            "LightEmission": 0.2,
+            "EmissionDirection": "Top",
+            "Shape": "Box",
+            "ShapeStyle": "Volume",
+            "EmitterSize": [
+              1.0,
+              0.4,
+              1.0
+            ],
+            "Offset": [
+              0,
+              6.0,
+              0
+            ]
+          }
+        },
+        {
+          "class": "PointLight",
+          "parent": "Bubbles",
+          "name": "AquaFill",
+          "props": {
+            "Color": "8cffde",
+            "Range": 6,
+            "Brightness": 0.35,
+            "Shadows": false
+          }
+        }
+      ]
+    },
+    "UnderwaterCoralCucumber": {
+      "treatment": "Loose Speckles",
+      "motion": [
+        {
+          "kind": "rock",
+          "target": [
+            "Arms"
+          ],
+          "deg": 3.0,
+          "period": 5.0,
+          "phase": 0.0,
+          "axis": "X"
+        },
+        {
+          "kind": "orbit",
+          "target": [
+            "Motes"
+          ],
+          "speed": 9,
+          "axis": "Y"
+        },
+        {
+          "kind": "bob",
+          "target": [
+            "Motes"
+          ],
+          "amp": 0.05,
+          "period": 4.3,
+          "phase": 0.25
+        }
+      ],
+      "vfx": [
+        {
+          "class": "Part",
+          "parent": "Body",
+          "name": "Motes",
+          "props": {
+            "Size": [
+              0.22,
+              0.06,
+              0.22
+            ],
+            "Color": "96d2ff",
+            "Material": "Neon",
+            "Transparency": 0.12,
+            "Offsets": [
+              [
+                1.15,
+                0.9,
+                0
+              ],
+              [
+                0,
+                1.8,
+                1.15
+              ],
+              [
+                -1.15,
+                2.7,
+                0
+              ],
+              [
+                0,
+                3.5,
+                -1.15
+              ]
+            ]
+          }
+        },
+        {
+          "class": "ParticleEmitter",
+          "parent": "Body",
+          "name": "Silt",
+          "props": {
+            "Texture": "water",
+            "Color": "bee1f0",
+            "Rate": 0.8,
+            "Lifetime": [
+              2.2,
+              2.2
+            ],
+            "Speed": [
+              0.04,
+              0.04
+            ],
+            "SpreadAngle": [
+              180,
+              180
+            ],
+            "Drag": 1.0,
+            "Acceleration": [
+              0,
+              0.3,
+              0
+            ],
+            "Size": [
+              0.09,
+              0.09
+            ],
+            "Transparency": [
+              [
+                0,
+                1
+              ],
+              [
+                0.25,
+                0.6
+              ],
+              [
+                0.75,
+                0.6
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "RotSpeed": [
+              5,
+              5
+            ],
+            "Shape": "Box",
+            "ShapeStyle": "Volume",
+            "EmitterSize": [
+              1.6,
+              3.6,
+              1.6
+            ],
+            "Offset": [
+              0,
+              2.2,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    "UnderwaterPearlCucumber": {
+      "treatment": "Hanging Weight",
+      "motion": [
+        {
+          "kind": "sway",
+          "target": "model",
+          "deg": 0.6,
+          "period": 4.6,
+          "phase": 0.0,
+          "axis": "X"
+        },
+        {
+          "kind": "rock",
+          "target": [
+            "Pearls"
+          ],
+          "deg": 4.0,
+          "period": 4.0,
+          "phase": 0.1,
+          "axis": "X"
+        },
+        {
+          "kind": "bob",
+          "target": [
+            "Pearls"
+          ],
+          "amp": 0.04,
+          "period": 4.0,
+          "phase": 0.35
+        }
+      ],
+      "vfx": [
+        {
+          "class": "ParticleEmitter",
+          "parent": "Pearls",
+          "name": "PearlGlint",
+          "props": {
+            "Texture": "sparkles",
+            "Color": "d7f0ff",
+            "Rate": 0.8,
+            "Lifetime": [
+              1.4,
+              1.4
+            ],
+            "Size": [
+              [
+                0,
+                0.09
+              ],
+              [
+                1,
+                0
+              ]
+            ],
+            "Speed": [
+              0,
+              0
+            ],
+            "SpreadAngle": [
+              180,
+              180
+            ],
+            "Drag": 0,
+            "Acceleration": [
+              0,
+              0,
+              0
+            ],
+            "Transparency": [
+              [
+                0,
+                1
+              ],
+              [
+                0.3,
+                0.5
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "LightEmission": 0.3,
+            "RotSpeed": [
+              6,
+              6
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,14 @@
+=== Garden/Wheelbarrow
+  @AssetId = 135961427187830
+  @Cost = 120
+  @Notes = 2.0 wide x 3.85 long x ~2.16 tall (the trowel handle is the tallest thing; the tub rim tops out at 1.62).  It stands on the wheel (+Y end) and two splayed stub legs with foot pads at y=-1.22.  Handle grips are wooden cylinders at x=+/-0.70, y -1.74..-2.36, z 1.56..1.74 - just proud of the back rim, so the rails make a clean diagonal from the grips down to the axle and a player can actually be posed pushing it.  The tub is built square and then tipped 11 deg nose-down about PIVOTS['TubPivot'] (axis = X), so the rim and the bright lip run downhill toward the wheel: back rim z=1.53, front rim z=1.22.  In the tub's own (untipped) frame the interior is x +/-0.54..0.86, y -0.98..0.48, z 1.00..1.38; the Dirt object fills it and can be deleted on its own for an empty barrow (delete the Grips' trowel handle and the Trim blade too if you want it bare).  One rigid prop otherwise; the wheel is a sep
+  @Pivot_TubPivot = (0.00, 1.14, 0.25)
+  @Pivot_WheelAxle = (0.00, 0.55, -0.95)
+  @PropSet = plot
+  @Tris = 856
+  Dirt [MeshPart] pos (0.01, 1.25, 0.29) size (0.96, 0.60, 1.17) Ground 6d5138 T0.00 collide=true
+  Frame [MeshPart] pos (0.00, 0.91, 0.65) size (1.75, 1.84, 3.36) Metal 3b4350 T0.00 collide=true
+  Grips [MeshPart] pos (0.00, 1.78, 1.24) size (1.68, 0.71, 2.32) Wood 8a5a2b T0.00 collide=true
+  Tray [MeshPart] pos (0.00, 1.14, 0.25) size (1.92, 0.79, 1.72) Metal 4caf50 T0.00 collide=true
+  Trim [MeshPart] pos (0.00, 0.97, -0.10) size (1.98, 1.48, 2.31) Metal 9aa7b8 T0.00 collide=true
+  Tyre [MeshPart] pos (-0.00, 0.55, -0.95) size (0.30, 1.08, 1.08) Rubber 2a2d33 T0.00 collide=true

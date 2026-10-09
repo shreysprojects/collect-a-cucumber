@@ -1,0 +1,269 @@
+{
+ "key": "LaserGate",
+ "category": "Defences",
+ "parts_hash": "0f7f9a1a91ef",
+ "pivots": {
+  "Spark1": [
+   -4.75,
+   1.5,
+   0.0
+  ],
+  "Spark2": [
+   4.75,
+   1.5,
+   0.0
+  ],
+  "Spark3": [
+   -4.75,
+   3.0,
+   0.0
+  ],
+  "Spark4": [
+   4.75,
+   3.0,
+   0.0
+  ],
+  "Spark5": [
+   -4.75,
+   4.5,
+   0.0
+  ],
+  "Spark6": [
+   4.75,
+   4.5,
+   0.0
+  ],
+  "Spark7": [
+   -4.75,
+   6.0,
+   0.0
+  ],
+  "Spark8": [
+   4.75,
+   6.0,
+   0.0
+  ],
+  "Spark9": [
+   -4.75,
+   7.5,
+   0.0
+  ],
+  "Spark10": [
+   4.75,
+   7.5,
+   0.0
+  ],
+  "Spark11": [
+   -4.75,
+   9.0,
+   0.0
+  ],
+  "Spark12": [
+   4.75,
+   9.0,
+   0.0
+  ],
+  "BeamLeft": [
+   -4.75,
+   5.25,
+   0.0
+  ],
+  "BeamRight": [
+   4.75,
+   5.25,
+   0.0
+  ]
+ },
+ "attrs": {
+  "Cost": 250000,
+  "PropSet": "defence2",
+  "Notes": "LaserGate v2 2026-09-24 (fun-builds/models/build_LaserGate.py, primlib parts): tall wide slim laser fence, two emitter pylons (PylonL* at x -5.45, PylonR* at x +5.45, inner faces |x| 4.85). Static prop. Beam1..Beam6 (bottom to top) = ONE Neon ff2f2f Cylinder each, d 0.16, x -4.75..4.75 at z 0, y 1.5/3/4.5/6/7.5/9 - the server shimmers them. Nothing solid within |x| <= 4.8, |z| <= 1.3, y 0..10 except the beams (zombies walk through along Z). Glow* = neon parts the DefenceFX client pulses (GlowLens<L|R>1-6 at the beam ends, GlowEdge, GlowBrow, GlowCap, GlowBeacon); Pivot_Spark1..12 = beam ends (odd -X, even +X, beam i -> 2i-1 / 2i)."
+ },
+ "size_studs": [
+  12.2,
+  11.09,
+  3.0
+ ],
+ "objects": [
+  {
+   "name": "Base_1",
+   "color": "23262c",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "Base_2",
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 8
+  },
+  {
+   "name": "Base_3",
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 20
+  },
+  {
+   "name": "Base_4",
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 4
+  },
+  {
+   "name": "Base_5",
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 14
+  },
+  {
+   "name": "Base_6",
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 34
+  },
+  {
+   "name": "Base_7",
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 10
+  },
+  {
+   "name": "Base_8",
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 4
+  },
+  {
+   "name": "Glow_1",
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 24
+  },
+  {
+   "name": "Base_9",
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 8
+  },
+  {
+   "name": "Beam1",
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Beam2",
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Beam3",
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Beam4",
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Beam5",
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Beam6",
+   "color": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Base_10",
+   "color": "23262c",
+   "material": "Rubber",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "Base_11",
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 4
+  }
+ ]
+}

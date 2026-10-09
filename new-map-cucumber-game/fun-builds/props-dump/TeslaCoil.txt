@@ -1,0 +1,25 @@
+=== Defences/TeslaCoil
+  @AssetId = 76620249287317
+  @Cost = 30000000
+  @Notes = Static tower, nothing yaws. Footprint: the 8-gon plate is r 3.7 (7.4 across the vertices, 6.84 across the flats, flats face the axes AND the diagonals); the blue corner clamps ride the four diagonal flats and stay inside the plate's axis extent, so the bounding box is ~6.84 x 6.84. Height 9.85 to the top of the orb. Rig: 'Orb' spins in place about OrbCentre (0, 0, 9.00), radius 0.85, rbx_material Metal + smooth shading - the ONLY smooth part. Lightning: Beams run OrbCentre -> ProngTip1..4 (the centre of each blue tip block's top face; the prongs stand at radius 1.45 and lean 7 deg inward so the tips sit at radius ~1.21, z 9.59, and the orb crests them by 0.27), then on to the zombie. 'CoilGlow' is the one Neon part: two 12-gon rings (r 2.10, 0.23 tall) standing 0.05 proud of the blue 'CoilBands' (r 2.05) at z 3.46..3.69 and z 4.66..4.89 - flicker or pulse its transparency for the charge-
+  @Pivot_OrbCentre = (0.00, 9.00, -0.00)
+  @Pivot_ProngTip1 = (0.85, 9.59, -0.85)
+  @Pivot_ProngTip2 = (-0.85, 9.59, -0.85)
+  @Pivot_ProngTip3 = (-0.85, 9.59, 0.85)
+  @Pivot_ProngTip4 = (0.85, 9.59, 0.85)
+  @PropSet = defence2
+  @Tris = 1292
+  BaseBolts [MeshPart] pos (-0.00, 0.78, -0.00) size (6.42, 0.88, 6.48) Metal 2f3136 T0.00 collide=true
+  BaseCorners [MeshPart] pos (-0.00, 0.57, -0.00) size (6.10, 1.05, 6.10) SmoothPlastic 4f7fc2 T0.00 collide=true
+  BasePlate [MeshPart] pos (-0.00, 0.50, -0.00) size (6.84, 1.00, 6.84) Metal 45474d T0.00 collide=true
+  BaseRing [MeshPart] pos (-0.00, 1.80, -0.00) size (4.30, 0.40, 4.30) Metal 6a6e78 T0.00 collide=true
+  BaseTier [MeshPart] pos (-0.00, 1.30, -0.00) size (5.17, 0.60, 5.17) Metal 565962 T0.00 collide=true
+  Cap [MeshPart] pos (-0.00, 6.95, -0.00) size (3.90, 0.70, 3.90) Metal 565962 T0.00 collide=true
+  CapTop [MeshPart] pos (-0.00, 7.48, -0.00) size (2.90, 0.35, 2.90) Metal 6a6e78 T0.00 collide=true
+  CoilBands [MeshPart] pos (-0.00, 4.18, -0.00) size (4.10, 1.95, 4.10) SmoothPlastic 4f7fc2 T0.00 collide=true
+  CoilGlow [MeshPart] pos (-0.00, 4.18, -0.00) size (4.20, 1.43, 4.20) Neon 35a7ff T0.00 collide=true
+  Column [MeshPart] pos (-0.00, 4.30, -0.00) size (3.00, 4.60, 3.00) Metal 45474d T0.00 collide=true
+  Orb [MeshPart] pos (-0.00, 9.00, -0.00) size (1.70, 1.70, 1.70) Metal 7fb3e8 T0.00 collide=true
+  OrbStem [MeshPart] pos (-0.00, 8.05, -0.00) size (0.56, 0.80, 0.56) Metal 565962 T0.00 collide=true
+  ProngTips [MeshPart] pos (-0.00, 9.41, -0.00) size (2.77, 0.42, 2.77) SmoothPlastic 4f7fc2 T0.00 collide=true
+  Prongs [MeshPart] pos (-0.00, 8.44, -0.00) size (2.92, 1.75, 2.92) Metal 45474d T0.00 collide=true

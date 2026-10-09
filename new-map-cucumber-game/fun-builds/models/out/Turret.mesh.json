@@ -1,0 +1,379 @@
+{
+ "key": "Turret",
+ "category": "Defences",
+ "parts_hash": "1ba4fbae2682",
+ "pivots": {
+  "YawPivot": [
+   0.0,
+   2.2,
+   0.0
+  ],
+  "PitchPivot": [
+   0.0,
+   3.7,
+   0.0
+  ],
+  "MuzzleTipL": [
+   0.5,
+   3.7,
+   -3.85
+  ],
+  "MuzzleTipR": [
+   -0.5,
+   3.7,
+   -3.85
+  ],
+  "EyeLens": [
+   0.0,
+   5.4,
+   -0.33
+  ],
+  "DrumCentre": [
+   0.0,
+   3.55,
+   2.6
+  ]
+ },
+ "attrs": {
+  "Cost": 25000,
+  "PropSet": "defence",
+  "Notes": "Turret rebuilt 2026-09-24 (fun-builds/models/build_Turret.py, primlib parts). Rig by name prefix (DefenceService set 1): Base* static; Head* yaw about the vertical axis through BasePlinth (x = z = 0); Barrel* pitch about the X axis through HeadTrunnion (0, 3.70, 0). Barrels point -Z at rest; BarrelMuzzleGlow is centred between the muzzles (x = +/-0.5), shots leave its CFrame * (+/-0.5, 0, -0.15). Every yawing part stays within radius 4 at pitch -25..+45, and no moving part cuts another deeper than 0.03 at any yaw / pitch (build_Turret.py clash_sweep)."
+ },
+ "size_studs": [
+  7.2,
+  6.22,
+  7.4
+ ],
+ "objects": [
+  {
+   "name": "Base_1",
+   "color": "23262c",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 4
+  },
+  {
+   "name": "BasePlinth",
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Base_2",
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 7
+  },
+  {
+   "name": "Base_3",
+   "color": "ff8a2a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 4
+  },
+  {
+   "name": "Base_4",
+   "color": "56627a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 4
+  },
+  {
+   "name": "Base_5",
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Base_6",
+   "color": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 3
+  },
+  {
+   "name": "Base_7",
+   "color": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 12
+  },
+  {
+   "name": "Base_8",
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Head_1",
+   "color": "9aa7b8",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Head_2",
+   "color": "ff8a2a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 10
+  },
+  {
+   "name": "Head_3",
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 6
+  },
+  {
+   "name": "Head_4",
+   "color": "56627a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "Head_5",
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 15
+  },
+  {
+   "name": "Head_6",
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 4
+  },
+  {
+   "name": "Head_7",
+   "color": "56627a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Head_8",
+   "color": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Head_9",
+   "color": "f2f0ea",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Head_10",
+   "color": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 5
+  },
+  {
+   "name": "HeadTrunnion",
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Head_11",
+   "color": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "Head_12",
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "Head_13",
+   "color": "e0a93a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 4
+  },
+  {
+   "name": "Barrel_1",
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "Barrel_2",
+   "color": "56627a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 3
+  },
+  {
+   "name": "Barrel_3",
+   "color": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 4
+  },
+  {
+   "name": "Barrel_4",
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "Barrel_5",
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "Barrel_6",
+   "color": "ff8a2a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 4
+  },
+  {
+   "name": "Barrel_7",
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 4
+  },
+  {
+   "name": "Barrel_8",
+   "color": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "Barrel_9",
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "BarrelMuzzleGlow",
+   "color": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  }
+ ]
+}

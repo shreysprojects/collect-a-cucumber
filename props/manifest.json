@@ -1,0 +1,3402 @@
+{
+ "set": "plot props",
+ "convention": "1 unit = 1 stud, Z up, ground z=0, prop faces +Y, roblox (x,y,z)=(x,z,-y)",
+ "props": {
+  "IronWall": {
+   "collection": "IronWall",
+   "parts": 12,
+   "tris": 1208,
+   "size_studs": [
+    8.0,
+    1.6,
+    8.0
+   ],
+   "min_z": -0.0,
+   "file": "build_iron_wall.py",
+   "notes": "Tiling wall segment: exactly 8 wide (x -4.00..4.00), 8.00 tall, 1.60 deep (y -0.60..+1.00).  Faces +Y - the plates, straps, rivets, chevrons, rust and the leaning nosing with its barbs are all on the +Y (attacker) side; the -Y side is a flat web with four vertical stiffener ribs and nothing else.\nTOP.  The dark top rail and the dark leaning nosing in front of it make ONE flat coping at z 7.24 running from y -0.44 out to y +1.00, braced by four corbels.  The only bright thing up there is the row of eight barbs: 4-sided spikes 0.40 across, rooted at z 7.10 inside the nosing and raked out to a point at y 0.84 / z 8.00, so 0.76 of each barb stands clear of the coping as a sawtooth against the sky.\nTILING MATHS.  The full corner post is 0.90 wide and is centred ON the seam, so each tile carries HALF of it: x 3.55..4.00 at the +x end and -4.00..-3.55 at the -x end.  Butt two tiles (A on -4..4, B on 4..12) and A's 3.55..4.00 meets B's 4.00..4.45 to make one 0.90 post centred on x = 4.  Every element that reaches a tiling plane (back web, ground sill, kick plate, both straps, top rail, blade rail, weld beads, the posts) is a prism extruded ALONG x, so its x = +/-4 end faces are dead flat quads with no chamfer - a beveled_box there would cut a groove down the seam.  Everything else stops short: plates +/-3.55, ribs +/-3.16, chevrons +/-3.85, blade barbs +/-3.70, strap rivets +/-3.66, post rivets +/-3.91.  Repeating details use a period that divides 8 so the pattern continues across the joint: strap rivets and blade barbs every 1.00 (at x = +/-0.5, 1.5, 2.5, 3.5), chevrons, ribs and nosing corbels every 2.00 (at x = +/-1, 3).  The post rivet columns land at x = 3.78 and, from the next tile, 4.22 - i.e. +/-0.22 either side of the full post's centreline.\nPLATE FIELD.  The 7.10 between the posts is five 1.308 plates separated by four 0.14 seam gaps.  The gaps are the wall's darks: the plates are 0.36 thick and sit on the iron_dark back web, so each gap is a 0.14-wide slot 0.36 deep (0.26 at the mouth after the 0.06 chamfer) whose floor is the darkest colour in the prop.\nVALUE LADDER (5 colours).  iron_dark frame / kick / straps / blade rail (darkest), iron_mid plates and back ribs, iron_rust ONLY on the repair patch and its drips, metal_light rivets / weld beads / anti-climb barbs, warning_yellow chevrons (brightest).  Every stack steps in value: bright rivets on dark straps on mid plates, yellow chevrons on the dark kick plate, bright barbs against the sky and the dark coping they stand on.  The sill and the kick plate share iron_dark, but the sill stands 0.14 further out in y and is chamfered, so a shadow line separates them.\nASYMMETRY.  One iron_rust repair patch (x 0.86..2.46, z 3.20..4.80) bridges the seam between plates 4 and 5 with four of its own bright rivets, plus three rust streaks dripping from under the straps at x -1.55, +2.72 and -2.95.  Remember the render camera looks down -Y, so the patch and the +2.72 streak read on the LEFT of a front-on view.\nStatic prop - no moving parts, so no PIVOTS / STATES are exported."
+  },
+  "BarbedStoneWall": {
+   "collection": "BarbedStoneWall",
+   "parts": 9,
+   "tris": 2220,
+   "size_studs": [
+    8.28,
+    2.31,
+    7.56
+   ],
+   "min_z": 0.0,
+   "file": "build_barbed_stone_wall.py",
+   "notes": "Wall tile: 8.0 wide (x -4..4), ~2.3 deep, ~7.7 tall.  Copy it every 8 studs along X. Running bond: the B courses (1, 3) and the coping carry HALF stones that run 0.14 PAST the seam - more than their 0.07 chamfer, so a neighbour's chamfered end is buried instead of meeting it as a shadow-catching V-notch - and those halves are built with a fixed depth, a fixed seed and no vertex jitter so tile N's right half and tile N+1's left half are identical geometry and merge into one stone.  The A courses (0, 2, 4) instead put a REAL 0.05 mortar joint on the seam with a tone change across it, so the bond alternates joint / whole stone / joint all the way along a run.  The plinth and the two end capstones overlap by the same 0.14.  The two boundary iron arms are HALF arms so a neighbouring pair makes one whole arm on the shared joint, and the three wire strands start and stop exactly on x = +/-4 at identical heights, sampled on an even number of spans so their barbs step across the seam at the strand's own spacing and never land inside an arm.  Stone body tops out at z 5.20, capstone at 5.62, the arms at ~7.53, the top strand at 7.34 with its barbs reaching ~7.66.  A cheap hidden dark core box behind the courses stops daylight showing through the mortar joints.  Static prop, no moving parts."
+  },
+  "GlassCase": {
+   "collection": "GlassCase",
+   "parts": 10,
+   "tris": 1196,
+   "size_studs": [
+    4.0,
+    3.0,
+    5.98
+   ],
+   "min_z": 0.0,
+   "file": "build_glass_case.py",
+   "notes": "4 wide (x) x 3 deep (y) x 5.98 tall, centred on x=0/y=0, standing on z=0.  The front - the brass TROPHY nameplate and the lock plate - faces +Y.  The interior holds only the stepped display column, so the game can drop an item onto PIVOTS.DisplayPoint at runtime: that is the brass cap ring on top of the column at z 3.05, and the clear display volume above it is x -1.75..1.75, y -1.25..1.25, z 3.05..4.35 (the downlight collar hangs down to z 4.39).  Give GlassPanes and LightBeam CanCollide=false - LightBeam is the decorative cone of light between the downlight and the column and a spawned item stands inside it.  SpotLens carries BOTH Neon lenses: the downlight inside the case and the brass spotlight on the crown.",
+   "PIVOTS": {
+    "DisplayPoint": [
+     0.0,
+     0.0,
+     3.05
+    ]
+   }
+  },
+  "Catapult": {
+   "collection": "Catapult",
+   "parts": 12,
+   "tris": 1708,
+   "size_studs": [
+    4.82,
+    6.64,
+    5.14
+   ],
+   "min_z": 0.01,
+   "file": "build_catapult.py",
+   "notes": "About 4.8 wide x 6.7 long (y -4.1 .. 2.6) x 5.2 tall, standing on four wheels that touch z = 0.01.  Built in the LOADED pose: the arm rakes BACK and UP over the tail, so the bright beam and the loaded bucket are the silhouette and clear the dark A-frame by about a stud.  Every object whose name starts with 'Arm' (ArmBeam, ArmIron, ArmBucket, ArmRope, ArmLoad) is the swinging group: weld them together and rotate the lot about PIVOTS['ArmPivot'] on a horizontal axis parallel to world +X.  SIGN CONVENTION: STATES are degrees about that +X axis, right-handed, applied to the pose as built.  POSITIVE winds the arm further BACK and DOWN (cocking it harder); NEGATIVE swings the bucket forward and over the top toward +Y (firing).  'Loaded' = 0 (as built), 'Fired' = -92, which lays the front face of the arm beam onto the padded stop bar at (0, 0.34, 3.42) - that pad IS the mechanical stop, so do not rotate past it.  ArmLoad is the boulder - delete it on its own for an empty bucket, or swap it for a giant cucumber; it sits at world (0, -3.48, 4.79) with a 0.40 radius.  StopPad is the dark wrap on the stop bar.  RopeBundle holds the torsion skein at the hinge and the winch line; that line runs from the drum up to the arm at 2.3 studs out from the hinge and is what holds the arm cocked - hide or re-loft it once the arm moves.  The crank is on the -X side, i.e. the RIGHT of a player standing in front at +Y, and its dark handle deliberately stands proud of the tail.  Wheels are part of the rigid frame (Wheels / Timbers / Ironwork); spin them about the axles at y = -1.05 and y = 1.60, z = 0.96 if wanted.",
+   "PIVOTS": {
+    "ArmPivot": [
+     0.0,
+     -1.3,
+     2.3
+    ]
+   },
+   "STATES": {
+    "Loaded": 0.0,
+    "Fired": -92.0
+   }
+  },
+  "Lantern": {
+   "collection": "Lantern",
+   "parts": 19,
+   "tris": 1538,
+   "size_studs": [
+    11.04,
+    1.44,
+    4.62
+   ],
+   "min_z": 0.0,
+   "file": "build_lantern.py",
+   "notes": "Three separable lanterns, name-prefixed A_/B_/C_, standing along X with ~3.3 studs of air between them.  A PostLantern (x -5.2, 4.62 tall, 1.44 sq stone base) is a path/driveway lamp - the scroll bracket is deliberately on ONE side only, at negative x (the viewer's right).  B PaperLantern (x 0.0, 3.64 tall) hangs off a shepherd's hook: the post foot is at x +0.42 of its origin and the ball hangs at x -0.30, so the pair balances about the origin.  C GardenLantern (x +4.6, 1.32 tall, 1.04 across the flats) is a border/step light.  PIVOTS gives the point to parent a PointLight to in each, plus B's hang point if you want the ball to swing. Glass is tinted at transparency 0.58, the paper 0.25; every glow is a two-shell Neon flame - a saturated orange body with a white-hot tip rising out of it - so all three read switched ON from 40 studs.",
+   "PIVOTS": {
+    "A_Light": [
+     -5.2,
+     0.0,
+     3.46
+    ],
+    "B_Hang": [
+     -0.3,
+     0.0,
+     3.34
+    ],
+    "B_Light": [
+     -0.3,
+     0.0,
+     2.42
+    ],
+    "C_Light": [
+     4.6,
+     0.0,
+     0.64
+    ]
+   },
+   "VARIANTS": {
+    "A": {
+     "name": "PostLantern",
+     "x": -5.2
+    },
+    "B": {
+     "name": "PaperLantern",
+     "x": 0.0
+    },
+    "C": {
+     "name": "GardenLantern",
+     "x": 4.6
+    }
+   }
+  },
+  "TikiTorch": {
+   "collection": "TikiTorch",
+   "parts": 20,
+   "tris": 1388,
+   "size_studs": [
+    11.45,
+    1.84,
+    5.46
+   ],
+   "min_z": 0.0,
+   "file": "build_tiki_torch.py",
+   "notes": "Three separable torch variants in one collection, split by the A_ / B_ / C_ part-name prefix; each is modelled about its own origin and then offset along X.\nA BambooTorch: x=+5, footprint ~1.1 dia, 5.24 tall, flame tops out at z 5.24.\nB TikiHead:    x= 0, footprint 1.6 x 1.3, 5.46 tall, face on the +Y side, flame tops out at z 5.46.\nC Brazier:     x=-5, footprint 1.85 dia over the legs, 1.64 tall, flame tops out at z 1.64.\nNothing moves. The Neon parts (flames + coals) are the only emissive ones - hang a Roblox PointLight / Fire on the FlameAnchor pivot of each variant rather than on the mesh. Drop a variant into a game at its own origin (subtract its VARIANTS x).",
+   "PIVOTS": {
+    "A_FlameAnchor": [
+     5.0,
+     0.0,
+     4.18
+    ],
+    "B_FlameAnchor": [
+     0.0,
+     0.0,
+     4.6
+    ],
+    "C_FlameAnchor": [
+     -5.0,
+     0.0,
+     0.9
+    ]
+   },
+   "VARIANTS": {
+    "A": {
+     "name": "BambooTorch",
+     "x": 5.0
+    },
+    "B": {
+     "name": "TikiHead",
+     "x": 0.0
+    },
+    "C": {
+     "name": "Brazier",
+     "x": -5.0
+    }
+   }
+  },
+  "NeonSign": {
+   "collection": "NeonSign",
+   "parts": 17,
+   "tris": 1804,
+   "size_studs": [
+    23.55,
+    1.34,
+    6.25
+   ],
+   "min_z": 0.0,
+   "file": "build_neon_sign.py",
+   "notes": "Three variants side by side along X, each built about its own origin and then offset (A x=+9.8, B x=+2.3, C x=-7.4), so a variant drops into a game by name prefix and lands at its own origin.  Footprints / heights: A_OpenSign 4.7 wide x 2.4 tall (the sign box itself is 4.7 x 1.9, z 0.5-2.4); B_ArrowSign 4.0 wide x 4.8 tall on a 1.1-wide hex foot; C_Marquee 8.0 wide x 6.25 tall on two poles 6.6 apart.  Whole line-up spans x -11.4 to +12.2 with 3.2 studs of air A-B and 3.7 B-C.  Nothing goes below z=0.\nA is a WALL sign: the two metal_dark struts at its back are the standoff channel it bolts to, and they run to the floor only so the prop can stand on its own for the render - delete A_Struts and bolt A_Hardware's two brackets to a wall if you are hanging it.  B's arrow points toward -x, i.e. to the RIGHT of a player facing the sign; mirror the whole variant in X to send them left.  C's stepped crown is its own part, C_Crown: the profile runs 0.9 studs down behind the panel top so it reads as one solid mass, and it is matte steel so it never out-shines the tubes.\nEvery glow part is rbx_material Neon: A_Border + A_Text, B_Text + B_Arrow + B_Bulbs, C_Text + C_Bulbs.  To animate, flicker A_Text, or chase B_Bulbs / C_Bulbs by cycling their Neon parts' Transparency - the bulbs are separate little cylinders in one mesh, so split that mesh per bulb first if you want a running chase.",
+   "VARIANTS": {
+    "A": {
+     "name": "OpenSign",
+     "x": 9.8
+    },
+    "B": {
+     "name": "ArrowSign",
+     "x": 2.3
+    },
+    "C": {
+     "name": "Marquee",
+     "x": -7.4
+    }
+   }
+  },
+  "Sunflower": {
+   "collection": "Sunflower",
+   "parts": 16,
+   "tris": 1294,
+   "size_studs": [
+    13.07,
+    2.0,
+    4.57
+   ],
+   "min_z": 0.0,
+   "file": "build_sunflower.py",
+   "notes": "Three separable plants in one collection, split by the A_/B_/C_ name prefix; each is modelled about its own origin then offset along X.  A 'Tall' is 4.6 studs high on a 2.0-wide footprint, B 'Medium' 3.2 high with a bud on a side shoot, C 'Clump' is three splayed stems whose heads top out 2.0-2.8 up, spread 3.3 wide over a 2.4 x 2.0 domed dirt mound that already reads as its own ground patch, so C can be dropped straight onto grass with no base plate.  Nothing moves; PIVOTS marks each head's neck if an installer wants a sway or a sun-tracking nod.  Stems are thin (radius 0.08-0.15) - not walkable, not climbable, pure decor.",
+   "PIVOTS": {
+    "A_Neck": [
+     5.0,
+     0.02,
+     3.62
+    ],
+    "B_Neck": [
+     0.0,
+     0.02,
+     2.44
+    ],
+    "C_Neck1": [
+     -4.45,
+     -0.13,
+     2.1
+    ],
+    "C_Neck2": [
+     -5.52,
+     -0.68,
+     1.38
+    ],
+    "C_Neck3": [
+     -6.52,
+     0.08,
+     1.78
+    ]
+   },
+   "VARIANTS": {
+    "A": {
+     "name": "Tall",
+     "x": 5.0
+    },
+    "B": {
+     "name": "Medium",
+     "x": 0.0
+    },
+    "C": {
+     "name": "Clump",
+     "x": -5.4
+    }
+   }
+  },
+  "Bush": {
+   "collection": "Bush",
+   "parts": 15,
+   "tris": 850,
+   "size_studs": [
+    16.84,
+    2.96,
+    2.38
+   ],
+   "min_z": 0.0,
+   "file": "build_bush.py",
+   "notes": "Three separable variants, prefixed A_ / B_ / C_, each centred on its own origin and then moved to the X offset in VARIANTS.  All three stand on a gravel ground pad that IS the footprint.  A_Shrub: 3.04 pad, five-lobe canopy 2.53 wide x 2.56 deep, 2.24 tall, carried on three woody stems that run from the litter at z 0.12 up to 1.02-1.10 - half a stud INSIDE the foliage - so the join can never show daylight; the canopy underside rumples between 0.44 and 0.71 and its lowest vertex (0.35) sits down among the stem tops.  B_Hedge: 4.0 wide x 2.0 deep pad, body 3.76 x 1.56, clipped cap at 1.94 with three unclipped tufts scalloping the outline up to ~2.2 and one escaped sprig at 2.38; the pad and the dark base band are 4.00 / 3.96 wide so copies TILE cleanly at 4.0 stud spacing along X, and nothing on top crosses x +/-1.86.  C_FloweringBush: 2.84 pad, clump 2.35 across x 2.07 tall, sunk into a 0.34-tall mulch skirt so no daylight shows under it; 8 blooms and 3 berries are solved ONTO the clump surface, all on the +Y half (pink high in the light, red low against the skirt, berries on the +X shoulder) - move the clump and every one of them moves with it.  Nothing moves, no pivots.",
+   "VARIANTS": {
+    "A": {
+     "name": "Shrub",
+     "x": 7.0
+    },
+    "B": {
+     "name": "Hedge",
+     "x": 0.0
+    },
+    "C": {
+     "name": "FloweringBush",
+     "x": -7.0
+    }
+   }
+  },
+  "Tree": {
+   "collection": "Tree",
+   "parts": 11,
+   "tris": 1344,
+   "size_studs": [
+    23.88,
+    5.98,
+    12.85
+   ],
+   "min_z": 0.0,
+   "file": "build_tree.py",
+   "notes": "Three separable trees, prefixed A_/B_/C_.  A Oak: 11.0 tall, crown ~7 wide, trunk footprint 3.1 across at the roots, centred on x=+10.  B Pine: 12.9 tall, skirt 5.6 wide, centred on x=0.  C Sapling: 6.5 tall, crown 4.4 wide, centred on x=-9.5.  Move a variant by translating every part with its letter prefix; each one already sits with its trunk axis on its own declared x and on y=0, z=0.  No moving parts, no pit - all three stand on the ground plane.",
+   "VARIANTS": {
+    "A": {
+     "name": "Oak",
+     "x": 10.0,
+     "height": 11.0
+    },
+    "B": {
+     "name": "Pine",
+     "x": 0.0,
+     "height": 12.9
+    },
+    "C": {
+     "name": "Sapling",
+     "x": -9.5,
+     "height": 6.5
+    }
+   }
+  },
+  "Scarecrow": {
+   "collection": "Scarecrow",
+   "parts": 11,
+   "tris": 1406,
+   "size_studs": [
+    3.41,
+    1.34,
+    5.57
+   ],
+   "min_z": 0.0,
+   "file": "build_scarecrow.py",
+   "notes": "Free-standing garden dressing, ~5.55 studs tall on a low dirt mound; footprint ~3.6 wide across the arms x ~1.3 deep (the hat brim and the mound are the deep parts).  The post runs from z 0 up to z 4.72 inside the sack head; the cross-arm is lashed on at z 3.66 and tilts 6 deg, so the -X end - the viewer's RIGHT - rides high and carries the crow.  The shirt yoke swallows the beam (top at z 3.70, beam underside 3.44 at the shoulder) and the sleeves wrap it out to the wrist, so the arms grow out of the body, not the neck; the rope shows at the throat and the two wrists, not at the post, which the shirt now covers.  Nothing moves; sink the mound ~0.05 into the turf so its rim does not float.  Parts are merged by colour, so a few objects carry more than one feature: 'RedCloth' = shirt body + yoke + both sleeves + both mitten cuffs + hat band + nose, 'Denim' = both trouser legs + the blue patch, 'Burlap' = sack head + cinched neck + sackcloth patch, 'Stitching' = the face stitches and the dashes sewn round both patches.",
+   "PIVOTS": {
+    "ArmCentre": [
+     0.0,
+     0.08,
+     3.66
+    ],
+    "CrowPerch": [
+     -1.131724451227501,
+     0.18,
+     4.181152344803141
+    ],
+    "HatBase": [
+     0.05,
+     0.06,
+     4.86
+    ]
+   }
+  },
+  "Wheelbarrow": {
+   "collection": "Wheelbarrow",
+   "parts": 6,
+   "tris": 856,
+   "size_studs": [
+    1.98,
+    3.89,
+    2.15
+   ],
+   "min_z": -0.015,
+   "file": "build_wheelbarrow.py",
+   "notes": "2.0 wide x 3.85 long x ~2.16 tall (the trowel handle is the tallest thing; the tub rim tops out at 1.62).  It stands on the wheel (+Y end) and two splayed stub legs with foot pads at y=-1.22.  Handle grips are wooden cylinders at x=+/-0.70, y -1.74..-2.36, z 1.56..1.74 - just proud of the back rim, so the rails make a clean diagonal from the grips down to the axle and a player can actually be posed pushing it.  The tub is built square and then tipped 11 deg nose-down about PIVOTS['TubPivot'] (axis = X), so the rim and the bright lip run downhill toward the wheel: back rim z=1.53, front rim z=1.22.  In the tub's own (untipped) frame the interior is x +/-0.54..0.86, y -0.98..0.48, z 1.00..1.38; the Dirt object fills it and can be deleted on its own for an empty barrow (delete the Grips' trowel handle and the Trim blade too if you want it bare).  One rigid prop otherwise; the wheel is a separate object (Tyre + the hub half of Trim) if anyone wants to spin it about PIVOTS['WheelAxle'] (axis = X).",
+   "PIVOTS": {
+    "WheelAxle": [
+     0.0,
+     0.95,
+     0.55
+    ],
+    "TubPivot": [
+     0.0,
+     -0.25,
+     1.14
+    ]
+   }
+  },
+  "WateringCan": {
+   "collection": "WateringCan",
+   "parts": 7,
+   "tris": 858,
+   "size_studs": [
+    1.6,
+    3.41,
+    2.0
+   ],
+   "min_z": 0.0,
+   "file": "build_watering_can.py",
+   "notes": "Sits on the ground, 2.0 studs tall to the top of the carry handle, body 1.48 wide. The spout swings out to y +2.1 and the rose lip reaches y +2.49 (z 1.09..1.77), so leave ~2.6 studs of clear ground in front of it.  The carry bar spans x -0.46..0.46 at z 1.92; the back grip is at y -0.86.  All one rigid prop, no moving parts."
+  },
+  "HayBale": {
+   "collection": "HayBale",
+   "parts": 10,
+   "tris": 1294,
+   "size_studs": [
+    15.89,
+    4.16,
+    2.82
+   ],
+   "min_z": -0.0,
+   "file": "build_hay_bale.py",
+   "notes": "Three separable variants in one collection, prefixed A_/B_/C_; each is built about its own origin then offset along X (see VARIANTS), so a single variant drops into a game on its own. A RoundBale at x=-6.4: 2.4 long on X, 2.54 across, axis 1.198 up - a flat facet of the 12-gon rests ON z=0 and the net wrap is pulled in over that facet so nothing reaches below it. B SquareBale at x=0: 2.6 x 1.4 x 1.4 sitting flat, long axis on X, cut ends at x=+/-1.35; the body is four flake slabs with 0.07 grooves, not one box. C Stack at x=+6.4: two bales square on the ground at y=+0.71 and y=-0.71 (a 0.02 seam between them), a third yawed 90 deg lying across the pair at z=1.40, shifted +0.50 in Y and +0.20 in X so it is a quarter of a bale off centre and overhangs the front bale by 0.44; footprint about 2.9 x 3.3, 2.80 tall to the top bale. All static decor - no moving parts, no pit, nothing below z=0.",
+   "VARIANTS": {
+    "A": {
+     "name": "RoundBale",
+     "x": -6.4
+    },
+    "B": {
+     "name": "SquareBale",
+     "x": 0.0
+    },
+    "C": {
+     "name": "Stack",
+     "x": 6.4
+    }
+   }
+  },
+  "Fountain": {
+   "collection": "Fountain",
+   "parts": 10,
+   "tris": 1910,
+   "size_studs": [
+    6.87,
+    7.1,
+    4.2
+   ],
+   "min_z": 0.0,
+   "file": "build_fountain.py",
+   "notes": "Free-standing garden centrepiece, 7.3 studs across and 4.2 tall, centred on the origin and sitting flat on z = 0 (the basin is a RAISED wall, no pit needed). The coping rim is a continuous octagonal ledge 0.96 wide - eight radial trapezoid stones with hairline joints, not loose blocks - whose top face is at z 1.06, low enough to perch on. Basin water surface is at z 0.72 (over a darker water_deep bed at 0.41-0.70); the upper bowl's water is at z 2.50. Both water objects and the Jets object are transparent, so make them non-collidable in Roblox and let players walk into the basin. The Foam object is flat splash rings lying IN the two water planes plus a few flung droplets - it is decoration, leave it non-collidable too. PIVOTS gives the anchor points for ParticleEmitters / a looping water animation. One coping stone (front, index 1) is dropped 4 hundredths and skewed with a moss clump beside it - that is deliberate.",
+   "PIVOTS": {
+    "BasinWaterTop": [
+     0.0,
+     0.0,
+     0.72
+    ],
+    "BowlWaterTop": [
+     0.0,
+     0.0,
+     2.5
+    ],
+    "JetOrigin": [
+     0.0,
+     0.0,
+     3.62
+    ],
+    "JetTop": [
+     0.0,
+     0.0,
+     4.2
+    ]
+   }
+  },
+  "Pond": {
+   "collection": "Pond",
+   "parts": 15,
+   "tris": 1565,
+   "size_studs": [
+    9.23,
+    6.55,
+    2.3
+   ],
+   "min_z": 0.0,
+   "file": "build_pond.py",
+   "notes": "RAISED FEATURE - NOTHING SITS BELOW z = 0, so the pond drops straight onto flat ground with no excavation and no hole to dig.  A plinth slab (0 - 0.12) carries an earth rim whose crest RISES AND FALLS between 0.66 and 0.91 and is capped with turf to 0.79 - 1.04, and THAT RIM is what holds the water: the surface sits at z 0.50, about 0.8 above the ground the prop stands on.  Footprint 9.2 (x) x 6.6 (y) at the plinth from a 9-point D.ngon_pts ring jittered hard with random.Random(20260909) - ellipse-normalised radii run 0.71 to 1.18 - and then scaled back to that footprint, so the outline is a genuinely irregular shore, NOT a polygon.  ONE POINT (index BAY_AT) is hauled right in, which makes the ring CONCAVE on the +Y (camera) side: a bay in the waterline with a spit of turf reaching into it.  Open water 7.0 x 5.0; the bank between rim and water is 0.4 - 1.3 wide.  Pond mass is 1.45 tall at the crown of the tallest boulder.  THE ONE THING THAT BREAKS 1.45 is the cattail stand at the -X end (screen RIGHT from the +Y viewpoint), whose tallest whip reaches z 2.3 - delete Pond.Reeds and Pond.CattailHeads together if the prop must stay under 1.5.  The floor (Pond.Bed, water_deep) tops out at z 0.16, so the water column is 0.34 deep.  Fish2 and Fish3 are fully submerged; FISH1 IS THE EXCEPTION - its dorsal fin breaks the surface at z 0.53 on purpose, so the pond has one hard unveiled silhouette on top of the water.  ANIMATABLE PARTS: Fish1 / Fish2 / Fish3 are one object each, anchored at the PIVOTS points at z 0.34 - swim them by rotating/translating about those, keeping z between 0.30 and 0.38 (Fish1's fin then stays 0.01 - 0.07 proud of the water).  FishMarks (the two small white saddles on each orange koi) and FishEyes are shared objects; merge each fish's share into its body before animating, or animate the three fish as one group.  LilyPads and LilyLotus are separate objects so the pads can bob.  Everything else is static scenery.",
+   "PIVOTS": {
+    "Fish1": [
+     1.42,
+     0.16,
+     0.34
+    ],
+    "Fish2": [
+     -1.04,
+     -1.14,
+     0.34
+    ],
+    "Fish3": [
+     -2.12,
+     0.16,
+     0.34
+    ],
+    "WaterSurface": [
+     0.0,
+     0.0,
+     0.5
+    ]
+   }
+  },
+  "Trampoline": {
+   "collection": "Trampoline",
+   "parts": 7,
+   "tris": 1234,
+   "size_studs": [
+    8.0,
+    8.0,
+    1.64
+   ],
+   "min_z": 0.0,
+   "file": "build_trampoline.py",
+   "notes": "8.0 studs across (the pad rim is the widest thing, r = 4.00) and 1.62 tall at the pad; the six rubber feet plant flat on z = 0 inside that footprint so it drops straight onto a plot with no overhang.  The jump surface is MatSurface: a dish whose rim sits at z 1.20 (r 2.95) and drops to z 0.68 in the middle - stand-on height is ~0.7 at the centre, ~1.2 at the edge.  The pad is only a 0.70-wide collar (r 3.30 -> 4.00), so a 0.35-stud ring of daylight is left open between the mat rim and the pad's inner lip: the sixteen springs and the lower half of the frame tube read through it from any above-horizon angle, which is what makes it a trampoline and not a paddling pool.  DO NOT widen the pad inwards or sink the prop into the ground - both close that gap.  THE GAME ANIMATES THE Mat* PARTS: drop them straight down and spring them back for the bounce (see STATES; the frame, pad, springs and feet never move).  Bottom is -0.50, which leaves the mat's underside at z 0.09 - do not push it deeper or the mat goes through the floor.",
+   "PIVOTS": {
+    "MatCentre": [
+     0.0,
+     0.0,
+     0.68
+    ]
+   },
+   "STATES": {
+    "Rest": 0.0,
+    "Bottom": -0.5
+   }
+  },
+  "Slide": {
+   "collection": "Slide",
+   "parts": 6,
+   "tris": 1710,
+   "size_studs": [
+    3.56,
+    11.05,
+    5.98
+   ],
+   "min_z": 0.0,
+   "file": "build_slide.py",
+   "notes": "Footprint about 3.6 (x) x 11.1 (y) x 6.0 (z), centred on x=0.  Four ground-anchor pads sit flat on z=0: ladder pads at (+/-1.40, -5.04) and the splayed chute-post pads at (+/-1.30, 1.00); the red exit bumper at y 5.28..5.62 also touches the ground.  Deck walking surface z=4.40 spanning y -4.18..-2.45, x +/-1.70; step onto it from the top rung at z=4.24.  Deck is fenced on both sides by a top rail at z=5.66 (1.26 above the deck) and a mid rail at z=5.04, on three posts a side; the back is open under the grab hoop, whose apex clears the deck by 1.44 studs.  Chute riding surface runs z=4.40 at y=-2.45 down a parabola to z=0.40 at y=5.40, clear channel 2.24 wide and 0.74 deep - an R15 avatar fits.  The mid-span is carried by an A-frame: two dark posts splayed to x=+/-1.30 at the ground, tied at z=0.85, capped by saddles that lie flat against the chute underside.  ONE asymmetric detail: the red sit-down grab handle on the deck is at negative x only (screen RIGHT seen from the front).  Rigid prop, no moving parts."
+  },
+  "Seesaw": {
+   "collection": "Seesaw",
+   "parts": 9,
+   "tris": 944,
+   "size_studs": [
+    7.9,
+    1.6,
+    3.18
+   ],
+   "min_z": -0.0,
+   "file": "build_seesaw.py",
+   "notes": "7.90 long (x) x 1.60 wide (y) x 3.20 tall at the raised grab bar.  THE PLANK RUNS ALONG X and the axle along Y, so the long side-on profile faces the +Y camera and a player walks up to a seat from the front, not into the tip.  The A-frame stands on two foot rails spanning x +/-1.36, its bearing block tops out at z 1.26 and the axle pin runs along Y at z 1.32.  EVERYTHING NAMED Plank* IS ONE RIGID ASSEMBLY - PlankBeamRed, PlankBeamBlue, PlankSeats, PlankHandles, PlankPivotStrap - and swings about PIVOTS['PlankPivot'] = (0, 0, 1.35), axis = Y.  STATES are absolute angles applied as rot_euler(ry=angle) about that pivot; a POSITIVE angle drops the red +X end.  THE MODEL AS BUILT IS IN THE 'RedDown' POSE (+12 deg): the red +X end - screen LEFT in a front render - is down and resting on its tyre-stop, the blue -X end is up.  From the shipped pose subtract 12 deg to reach Level and 24 deg to reach BlueDown.  Seat pads land at z ~1.11 (down end) and z ~2.41 (up end), and each grab bar crowns 0.95 above its own seat pad - hand height for a seated R15.  The two rubber tyre-stops are holed rings 1.10 across, centred at x +/-3.40, whose tops are sheared to the 12-degree plank line, so the low tip sits dead flush on one and the high tip has a matching landing waiting under it.  The red/blue colour split is at x = 0, separated by the bright pivot strap band so the two mid-value plastics never touch.  One deliberate asymmetry: the yellow hazard chevron is on the +Y (camera-facing) A-frame plate only.",
+   "PIVOTS": {
+    "PlankPivot": [
+     0.0,
+     0.0,
+     1.35
+    ]
+   },
+   "STATES": {
+    "RedDown": 12.0,
+    "Level": 0.0,
+    "BlueDown": -12.0
+   }
+  },
+  "HotTub": {
+   "collection": "HotTub",
+   "parts": 9,
+   "tris": 1504,
+   "size_studs": [
+    6.52,
+    7.68,
+    3.04
+   ],
+   "min_z": 0.0,
+   "file": "build_hot_tub.py",
+   "notes": "6.40 studs across the coping rim - the two steel hoops are the widest thing on the tub at 6.52 - and 2.56 studs to the top of the rim, 3.05 to the top of the steam. The tub is a closed vessel sitting flat on z=0, nothing below the ground plane and no pit. Water surface is at z 2.25 (water_mid, transparency 0.30), 0.31 of freeboard under the rim, over a floor at z 0.28; the water disc runs out to r 2.70 so its edge is buried inside the 2.62..2.86 wall and meets the wood with no gap and no z-fight. The submerged bench ring is 1.98..2.58 out from the axis with its top at z 1.35, i.e. 0.90 under the surface - chest-deep on a seated player. The coping rim is 2.62..3.20 out (0.58 wide) with its top at z 2.56 - that is the sit surface, and its inner edge is flush with the cavity wall so it never overhangs the water. The two-step stair is on the +Y face, x -1.00..1.00, treads at z 0.62 and z 1.30, reaching out to y 4.42 at the lower steel nosing, so the whole prop's footprint is about 6.52 (X) x 7.68 (Y). The control panel is deliberately OFF-AXIS at 128 deg (front, negative X = the viewer's right), with the conduit that feeds it running from the ground up the outside of the staves and a flared drain nozzle at 118 deg - the only things that break the tub's radial symmetry. Steam is three pale transparency-0.88 pancake puffs floating over the middle of the water between z 2.60 and z 3.05; they never cross the rim line and are the only geometry above the rim, so delete the Steam part if the plot needs a clean 2.56-tall silhouette. Parts are merged by colour+material, so Shell also holds the coping rim and foot ring, StavesMid also holds the stair treads, StavesPale also holds the bench ring, and Steel also holds the conduit, the nozzle and the two step nosings.",
+   "PIVOTS": {
+    "WaterSurface": [
+     0.0,
+     0.0,
+     2.25
+    ],
+    "RimSeatFront": [
+     0.0,
+     2.91,
+     2.56
+    ],
+    "StepTop": [
+     0.0,
+     3.3,
+     1.3
+    ],
+    "PanelTop": [
+     -1.75,
+     2.24,
+     2.9
+    ]
+   }
+  },
+  "DJBooth": {
+   "collection": "DJBooth",
+   "parts": 11,
+   "tris": 2060,
+   "size_studs": [
+    8.08,
+    2.77,
+    4.19
+   ],
+   "min_z": 0.0,
+   "file": "build_dj_booth.py",
+   "notes": "Faces +Y.  Footprint 8.1 wide (x -4.04..4.04) x 2.7 deep (y -1.78..0.93), 4.21 tall to the top of the spot cans.  The desk is 4.44 wide (x -2.22..2.22), its work surface is at z 2.44 - hip height for a 5-stud avatar standing on the -y side - and each turntable is a 0.49-tall console standing proud of it: deck top 2.90, platter top 3.00 (sunk to 2.87), record face 3.09, label 3.14, spindle 3.22 - the decks read as machines sitting ON the desk rather than trays sunk into it.  The mixer stays sunk between them at 2.54.  Nothing below z 0.\nEvery part that rests on another sinks 0.03 INTO its host instead of butting flush (deck and mixer bottoms 2.41, yoke arms 3.43, cabinets 0.23, carcass and cheeks 0.27) and every slot is a proud track, not a flush inlay - two coplanar faces z-fight and render as a band of grainy dirt.  Keep 0.03 of overlap if you move anything.\nDeck A / stack A are at +x, deck B / stack B at -x.  A render is taken from +Y, so +x is SCREEN-LEFT: 'A' is the deck on the left of the picture.  The two decks are true mirror images, not copies - each tonearm pivots on its own OUTER rear corner so the arms swing away from the mixer, and each deck's pitch slot sits on its own INNER edge.\nSpeaker cabinets are 1.36 x 1.88 x 3.20 at x +/-3.30: woofer at z 1.16, a 4-slat grille at z 1.78-2.28, a mid at z 2.64 and a square horn tweeter at z 3.16.  Each spot can is clamped in a two-arm yoke above the cabinet - the arms are 0.08 thick at x +/-0.25 from the spot axis, so their inner faces bite into the 0.25-radius can wall instead of missing it, they run past its axis to z 3.98, and a 0.07 pivot boss bridges each arm into the can at z 3.88 - tilted 30 degrees below horizontal, so the beam lands about 6 studs out on the dance floor.\nEverything sharing a colour + material is ONE mesh, so this is 11 objects rather than 60. To move a speaker stack on its own, split that stack's islands out of Frame / Shell / Consoles / Hardware / Trim / SpotGlow first.  The greys are a deliberate value ladder - Records (darkest) < Shell < Consoles < Frame < Hardware < Knobs (brightest) - so no two touching parts share a value: black cabinet, mid plinth and cones, dark console, light platter, near-black matte vinyl on top of it.\nGlow parts: LedStrip (neon_cyan, emit 1.2 - the wide front strip plus the +x mixer level LED), Letters (neon_pink, emit 1.3 - the DJ letters plus the -x level LED) and SpotGlow (neon_purple, emit 1.15 - both spot lenses, the pinstripe along the top of the panel and the 3-bar VU ladder).  Beat-sync by cycling their Transparency; nothing else has to move.\nThe two ground cables are deliberately unequal - the -x run is longer and climbs higher up its cabinet - and the DJ letters sit off-centre at +x with the VU ladder at -x, so the prop never reads as a mirrored blank.",
+   "PIVOTS": {
+    "DeckAPlatter": [
+     1.3,
+     -0.44,
+     2.9
+    ],
+    "DeckBPlatter": [
+     -1.3,
+     -0.44,
+     2.9
+    ],
+    "DeckATonearm": [
+     1.74,
+     -1.0,
+     3.2
+    ],
+    "DeckBTonearm": [
+     -1.74,
+     -1.0,
+     3.2
+    ],
+    "SpotA": [
+     3.3,
+     -0.3,
+     3.88
+    ],
+    "SpotB": [
+     -3.3,
+     -0.3,
+     3.88
+    ]
+   },
+   "STATES": {
+    "SpotAimFloor": -120.0,
+    "SpotAimCrowd": -100.0,
+    "SpotAimSky": -55.0,
+    "ArmPlaying": 0.0,
+    "ArmParked": 20.0
+   }
+  },
+  "DanceFloor": {
+   "collection": "DanceFloor",
+   "parts": 20,
+   "tris": 1080,
+   "size_studs": [
+    8.0,
+    8.0,
+    0.43
+   ],
+   "min_z": 0.0,
+   "file": "build_dance_floor.py",
+   "notes": "Footprint 8.0 x 8.0 studs, x -4..4 and y -4..4, 0.43 studs tall, nothing below z=0. Walking surface is the tile tops at z=0.34; the black frame lip stands 0.02 proud of them at z=0.36 and the hex corner caps top out at 0.41 (the amber power dot at 0.43). Four copies butt cleanly on the 8-stud grid.\n\nGRID CONVENTION - this is the contract, do not re-derive it. The 16 tiles are named Tile_r<row>_c<col>, row and col 0..3, each one its OWN object so the game can recolour cells independently.  ROW 0 IS THE BACK of the floor (most negative y) and rows count forward toward the player: row 0 y=-2.61, row 1 y=-0.87, row 2 y=+0.87, row 3 y=+2.61. COL 0 IS THE +X EDGE, which is the viewer's LEFT because they stand on the +Y side and look down -Y: col 0 x=+2.61, col 1 x=+0.87, col 2 x=-0.87, col 3 x=-2.61.  So Tile_r0_c0 is the far corner on the player's left and Tile_r3_c3 is the near corner on their right.  Tiles are 1.60 square with a uniform 0.14 dark grout gap between them and the same 0.14 margin out to the frame, so the grid stays legible from directly above.  TILE_CENTRES in this module has every cell's top-face centre.\n\nBUILT STATE - a real lit floor is half dark, so the shipped look is PATTERNS['Checker']: the eight (row+col)-even cells ship LIT and the other eight ship unlit in DARK_TILE, a cool near-black that sits a step below the frame.  That lit/unlit step is what reads as a dance floor at 40 studs; hue alone cannot do it. The lit cells alternate CYCLE[0] neon_pink and CYCLE[2] neon_cyan down the diagonals, so the floor still shows two obviously different colours.\n\nCOLOUR - every tile is rbx_material Neon at emit 0.6 (EMIT), including the dark ones, so the animator can light ANY cell without swapping its material.  The build hexes come from GLOW, not straight from the palette: the palette neons are near-max-value, and a Neon face pointed straight up sums diffuse AND emission, so D.C('neon_pink') at emit 0.9 blew every channel past 1.0 and all sixteen tiles rendered as white squares.  GLOW holds the same four hues at ~45 % value, which is the headroom that emission needs; DO NOT re-raise emit or swap GLOW back for raw palette keys.  TILE_KEYS maps each part name to the palette key whose hue that cell carries in the cycle, and TILE_HEX to the exact hex it was built with, so a recolour can always get back to the shipped look.  Anything driving these at runtime should use GLOW[key] rather than the raw palette hex for the same reason.\n\nRECOLOUR INTENT - the animator should set BrickColor/Color on the tile parts (and optionally tween Transparency between the STATES values On 0.0 / Dim 0.45 / Off 0.85) rather than moving anything; no part of this prop is meant to hinge or slide. PATTERNS holds five ready-made phase maps in ROW-MAJOR order (index = row*4 + col): Checker (2 phases - the shipped built state), Cycle4 for a four-hue diagonal chase, Rows and Cols for wipes front-to-back or left-to-right, and Rings for an inner-2x2 / outer-ring pulse. Step a counter each beat and colour tile i by (PATTERNS[p][i] + beat) % phases.  Leave the grout, frame and trim alone: their darkness is what makes the tiles pop, and nothing on this prop may out-value a lit tile.\n\nPARTS - 20 objects. 16 Tile_* (Neon). Frame (plastic_black SmoothPlastic) is the four chamfered frame rails PLUS the grout deck slab under the tile field, merged because they share a colour and material.  Trim (metal_mid Metal) is the low plinth that shows as a 0.10-wide kick around the base, the four hex corner caps, and the controller plate - it is deliberately the brightest NON-emissive value on the prop so the caps read as bolted-down fittings against the black frame from every angle, not only the two that catch the key light.  EdgeStrip (metal_dark Metal) is the thin band round the frame's outer top; it is kept dark and rough on purpose - as bright chrome it out-valued the tiles and the eye went to the border instead of the floor. PowerLight (Neon, AMBER) is the single indicator dot.\n\nThe controller plate + power dot sit on the front rail at x=-2.05, i.e. OFF CENTRE to the viewer's RIGHT - the one deliberate asymmetry, and the thing that says 'this floor is powered'.  Mirror the prop in X if you need the controller on the other side; everything else is four-fold symmetric, but note that mirroring also swaps the meaning of the col index, so remap the tile names if you do.",
+   "PIVOTS": {
+    "FloorCentre": [
+     0.0,
+     0.0,
+     0.34
+    ],
+    "TileR0C0": [
+     2.61,
+     -2.61,
+     0.34
+    ],
+    "TileR3C3": [
+     -2.61,
+     2.61,
+     0.34
+    ],
+    "Controller": [
+     -2.05,
+     3.725,
+     0.43
+    ]
+   },
+   "STATES": {
+    "On": 0.0,
+    "Dim": 0.45,
+    "Off": 0.85
+   }
+  },
+  "Hammock": {
+   "collection": "Hammock",
+   "parts": 6,
+   "tris": 1216,
+   "size_studs": [
+    10.64,
+    2.18,
+    3.16
+   ],
+   "min_z": -0.0,
+   "file": "build_hammock.py",
+   "notes": "10.64 wide (x) x 2.18 deep (y) x 3.16 tall, centred on the origin, sitting flat on z=0 via two foot sleds at x +/-2.48..5.32.  The bed is a slung sheet: its two long edges hang on their own catenary from z=2.14 at the throats (x +/-2.60) down to z=1.55 amidships, while the centreline drops further to z=1.25, so every cross-section is a shallow crescent and the underside bottoms at z=1.20 - a player drops into it from standing height and their feet still clear the ground. In plan the sheet is a lens: 2.18 wide at x=0, narrowing to 0.35 at the throats. Usable lie-down area is x -2.2..2.2, y -0.9..0.9 amidships.  The pillow is at the -X end only (x -2.15..-1.35) - that end is the head end, orient the sit/lie animation so the avatar's head goes to -X.  One rigid prop, no moving parts: if anyone wants a swinging version, hang the Bed/Weave/Cords objects off the two ring pivots below and leave Timber + Rails static.  Nothing sits below z=0.",
+   "PIVOTS": {
+    "RingPlusX": [
+     3.04,
+     0.0,
+     2.1
+    ],
+    "RingMinusX": [
+     -3.04,
+     0.0,
+     2.1
+    ],
+    "BedLow": [
+     0.0,
+     0.0,
+     1.2
+    ]
+   }
+  },
+  "BeanBag": {
+   "collection": "BeanBag",
+   "parts": 15,
+   "tris": 1122,
+   "size_studs": [
+    14.2,
+    2.87,
+    1.8
+   ],
+   "min_z": 0.0,
+   "file": "build_bean_bag.py",
+   "notes": "Three separable soft-goods variants, prefixed A_ / B_ / C_, each built around its own origin and then moved to the X offset in VARIANTS.  Every one is a sit-on prop: no moving parts, no pivots, nothing below z = 0.  A_Pouf: 2.65 across x 1.64 tall (2.67 counting the leather tab hanging off the welt on the -X flank at z 0.54-0.82); a dark lathed base, a light welt ring at 0.62-0.94 that IS the widest point, a jittered purple dome over it and a tufted button set off-centre at plan (+0.16, -0.20), its disc standing proud to z 1.62 with four stitch creases cut INTO the fabric around it and dying out before the silhouette.  B_Slouch: 3.29 wide x 2.69 deep x 1.73 at the back bolster, 1.80 at the top of the carry strap; the back (-Y) is the tall end and the front (+Y) slumps.  The bag is a ring of four stuffed masses - tall back bolster, a big +X side roll, a smaller/lower -X one and a low front roll that closes the front - around a crater, and the sitting dent is a sag_sheet seat panel scooped into that crater: its rim is buried under all four masses at every corner and its underside clears the dark base crown by 0.15.  A back seam cord runs up the centre of the bolster and dies out below the crown; the zip run and its slider sit on the +X flank only, half-buried at z 0.79-0.95.  C_Ottoman: 2.16 x 2.16 x 1.48 including the button; one barrelled rounded-square body (widest at mid height, no plinth seam), a domed rounded-square top that overhangs it and dimples into a dark tufted button, ONE piping cord half-buried in the top seam, and four small wooden feet at (+-0.62, +-0.62) carrying z 0 to 0.10 under a body that starts at z 0.04.",
+   "VARIANTS": {
+    "A": {
+     "name": "Pouf",
+     "x": 6.0
+    },
+    "B": {
+     "name": "Slouch",
+     "x": 0.0
+    },
+    "C": {
+     "name": "Ottoman",
+     "x": -5.8
+    }
+   }
+  },
+  "TV": {
+   "collection": "TV",
+   "parts": 14,
+   "tris": 864,
+   "size_studs": [
+    6.4,
+    1.86,
+    4.86
+   ],
+   "min_z": 0.0,
+   "file": "build_tv.py",
+   "notes": "Footprint 6.4 x 1.8 studs (the black top slab is the widest part), 4.86 studs tall - console top surface at z 1.42, screen panel z 2.10..4.86, screen aperture x +/-2.34, z 2.37..4.73.  Stands flat on z=0 on four legs at (+/-2.58, +/-0.56); nothing dips below the ground plane.\nThe screen is four Neon objects stacked a hair proud of one another between y 0.03 and y 0.116, all inside the bezel (front face y 0.13): ScreenSky is the lit backdrop, ScreenLand the ground band + hill + tower block, ScreenSun the sun disc + horizon glow strip, and RedLights holds the stand-by dot on the bezel.  To switch the set OFF, recolour ScreenSky to screen_dark and set the three Screen* objects' material to SmoothPlastic (or just raise their Transparency); to play a channel, swap or re-tint ScreenLand / ScreenSun - they are the only content geometry.\nThe T-stand is meant to SHOW.  The oval foot plate is a chunky 0.24 thick (z 1.42..1.66) and the neck runs z 1.42..2.35 with its front face at y 0.08, proud of the panel chassis at y 0.02, so ~0.48 studs of bright metal read in the open air between the soundbar top (z 1.62) and the panel bottom (z 2.10).  Anything you move onto the console top must stay under z 1.62 or it swallows the stand again.\nSeparable sub-props, each its own object: Soundbar (+ its grille windows, the first eight slats in BlackTrim) sits loose on the console top at the front lip, y 0.54..0.88, z 1.42..1.62; Remote is a loose slab centred at (-2.48, 0.16, 1.49) yawed 24 deg, i.e. on the RIGHT as a player faces the prop, with its three dark buttons in BlackTrim and its red power button in RedLights.  Delete Remote + Soundbar for a bare console; delete Panel + Screen* + Stand for a plain media unit.\nThe door fronts are TWO objects on purpose: DoorRecess is the dark timber backing plate (y 0.78..0.84) and Doors is the pale louvre slats standing proud of it (y 0.84..0.90).  That value break is the only thing that makes the louvres read at 40 studs - do not merge them back into one colour.  The doors are decorative, not hinged; the carcass shows as a ~0.5-stud timber stile at each end and between the two doors.\nPIVOTS['ScreenSwivel'] is the top of the stand foot: turn Panel and the three Screen* objects about it (Z axis) by a STATES angle to swivel the picture toward a viewer.  The little metal logo bar under the screen is merged into Stand - split it off first if you want the swivel to be exact.",
+   "PIVOTS": {
+    "ScreenSwivel": [
+     0.0,
+     -0.1,
+     1.66
+    ]
+   },
+   "STATES": {
+    "Straight": 0.0,
+    "TurnedLeft": 20.0,
+    "TurnedRight": -20.0
+   }
+  },
+  "VendingMachine": {
+   "collection": "VendingMachine",
+   "parts": 12,
+   "tris": 1886,
+   "size_studs": [
+    3.2,
+    1.7,
+    6.56
+   ],
+   "min_z": 0.0,
+   "file": "build_vending_machine.py",
+   "notes": "3.20 wide (x) x 1.70 deep (y) x 6.56 tall, centred on x=0 / y=0, standing on z=0 on four short feet.  The whole front - glass, keypad, sign - faces +Y.\nMIRROR NOTE: the control column is at NEGATIVE x (x -1.34..-0.42), which is the player's RIGHT as they walk up to the machine; the glazed product bay is the wider bay at x -0.24..1.18.  Mirror the collection in X if you want a left-hand column.\nGlassPane (x -0.24..1.18, z 1.92..5.40, y 0.64..0.70) is Glass at transparency 0.6 - give it CanCollide=false if anything is ever meant to reach inside.  Behind it the cavity runs x -0.42..1.20, y -0.58..0.62, z 1.94..5.38 and its back / left / right walls are the WHITE Whitework liner, so the stock reads as bright colour against a lit field rather than against a black hole - do not repaint the liner dark.  The four Shelves are part of Steelwork; their top faces are z 2.02 / 2.88 / 3.74 / 4.60 and every product stands with its front face at y=0.50, 0.14 clear of the glass.  Shelf form alternates so the bay never reads as a bookshelf: cans (bottom), tall flat packets, cans, squat crisp bags (top).  Slot (shelf 1, position 3) is deliberately EMPTY - the sold-out gap - so do not 'fix' it.\nDeliveryFlap is the only moving part: a pale steel door with a grab lip along its bottom edge, modelled already tilted 22 deg back into the chute and hanging PROUD of the black chute wall (flap y 0.43..0.73, chute back wall at y 0.26) so the tilt and its shadow both read.  Hinge it on PIVOTS.FlapHinge about the WORLD X axis and drive it with STATES (degrees); items should be spawned at PIVOTS.DropPoint in the void between the chute wall and the flap (x -0.12..1.06, y 0.26..0.45, z 0.90..1.55).  Its own mesh is already at the Ajar angle, so a Motor6D/CFrame rig should treat STATES.FlapAjar as its rest pose.\nEmissive parts: SignPanel (neon_yellow, the light box face) and NeonText (neon_red - the SNACKS letters plus the 1.50 price readout in the column).  Flicker or recolour NeonText for a 'sold out' / 'exact change' state.  Nothing sits below z=0.",
+   "PIVOTS": {
+    "FlapHinge": [
+     0.47,
+     0.7,
+     1.58
+    ],
+    "DropPoint": [
+     0.47,
+     0.36,
+     1.05
+    ],
+    "CoinSlot": [
+     -0.87,
+     0.9,
+     3.47
+    ],
+    "CardSlot": [
+     -0.91,
+     0.9,
+     2.94
+    ],
+    "KeypadCentre": [
+     -0.88,
+     0.92,
+     4.4
+    ]
+   },
+   "STATES": {
+    "FlapShut": 0.0,
+    "FlapAjar": -22.0,
+    "FlapOpen": -78.0
+   }
+  },
+  "ArcadeCabinet": {
+   "collection": "ArcadeCabinet",
+   "parts": 13,
+   "tris": 1610,
+   "size_studs": [
+    2.84,
+    3.0,
+    6.4
+   ],
+   "min_z": 0.0,
+   "file": "build_arcade_cabinet.py",
+   "notes": "Upright cabinet, 2.84 wide (x) x 3.00 deep (y) x 6.42 tall over the T-molding bead; the body inside the bead is 2.76 x 3.00 x 6.40.  Centred on x=0, facing +Y. It stands on four feet, so the body floats 0.16 clear of the floor and the front kick space reads.  Both side panels are one prism of the classic cabinet profile - vertical back, marquee stepping forward at the top, screen recessed, control deck jutting out to y=+1.50, coin door and kick tucked back underneath.  Along the molded run (over the top and down the whole front) the panel stops EDGE_SET=0.13 short of that silhouette and the orange T-molding bead rides ON the set-back edge, so it caps it as a 0.30-wide half-round standing 0.15 proud of the panel edge and 0.04 proud of each side face - no blue edge strip is left showing (recolour TMolding for a cheap variant; it is the piece that names the object).  The panel's back and bottom edges are NOT set back: they carry no molding and have to stay flush with the body core and sit on the feet.\nThe front is three objects at three values so it reads with the neon off: DarkShell (near-black - control deck, its under-slope, the coin slots, the feet), FrontFrame (charcoal - marquee surround, the solid the screen recess is sunk into, the bezel) and Plinth (mid grey - coin-door face, kick, base).  The screen is a hole punched in a lighter frame, and the deck reads as a dark slab overhanging a grey plinth.\nThe player-facing layout is deliberately asymmetric: the joystick is at x=+0.62, i.e. the player's LEFT as they stand in front of the cabinet, and the six buttons run from x=-0.26 to x=-0.88; the two coin slots sit on the +x half of the coin door and the coin return on the -x half.  Control-deck surface is z 2.62-2.86 (waist height on an R15 avatar); a player stands at about y=+2.5.\nGlowing parts are rbx_material Neon: MarqueeText, PixelsCyan, PixelsLime.  Cycle their Transparency to flicker the marquee or animate the screen.  RedControls holds the joystick ball top AND the front row of three buttons (one colour + material = one part, per the merge rule); YellowButtons is the back row.  Metalwork holds the joystick base plate/washer/shaft plus the coin-door plate and its return lip.",
+   "PIVOTS": {
+    "JoystickPivot": [
+     0.62,
+     1.06,
+     2.74
+    ],
+    "CoinDoorHinge": [
+     -1.16,
+     0.76,
+     1.25
+    ],
+    "MarqueeCentre": [
+     0.0,
+     0.62,
+     5.675
+    ]
+   },
+   "STATES": {
+    "CoinDoorShut": 0.0,
+    "CoinDoorOpen": -100.0
+   }
+  }
+ },
+ "parts": [
+  {
+   "collection": "IronWall",
+   "name": "IronWall.BackRibs",
+   "hex": "4d5866",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 48
+  },
+  {
+   "collection": "IronWall",
+   "name": "IronWall.BladeBarbs",
+   "hex": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 48
+  },
+  {
+   "collection": "IronWall",
+   "name": "IronWall.BladeRail",
+   "hex": "2f3640",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 16
+  },
+  {
+   "collection": "IronWall",
+   "name": "IronWall.Chevrons",
+   "hex": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 80
+  },
+  {
+   "collection": "IronWall",
+   "name": "IronWall.Frame",
+   "hex": "2f3640",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 116
+  },
+  {
+   "collection": "IronWall",
+   "name": "IronWall.KickPlate",
+   "hex": "2f3640",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 16
+  },
+  {
+   "collection": "IronWall",
+   "name": "IronWall.Plates",
+   "hex": "4d5866",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "tris": 220
+  },
+  {
+   "collection": "IronWall",
+   "name": "IronWall.RepairPatch",
+   "hex": "8c5a3c",
+   "material": "CorrodedMetal",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "IronWall",
+   "name": "IronWall.Rivets",
+   "hex": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 520
+  },
+  {
+   "collection": "IronWall",
+   "name": "IronWall.RustStreaks",
+   "hex": "8c5a3c",
+   "material": "CorrodedMetal",
+   "transparency": 0.0,
+   "tris": 36
+  },
+  {
+   "collection": "IronWall",
+   "name": "IronWall.Straps",
+   "hex": "2f3640",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 40
+  },
+  {
+   "collection": "IronWall",
+   "name": "IronWall.WeldBeads",
+   "hex": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 24
+  },
+  {
+   "collection": "BarbedStoneWall",
+   "name": "BarbedStoneWall.AnchorPlate",
+   "hex": "8c5a3c",
+   "material": "CorrodedMetal",
+   "transparency": 0.0,
+   "tris": 188
+  },
+  {
+   "collection": "BarbedStoneWall",
+   "name": "BarbedStoneWall.BarbedWire",
+   "hex": "6c7789",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 716
+  },
+  {
+   "collection": "BarbedStoneWall",
+   "name": "BarbedStoneWall.Capstones",
+   "hex": "b9b3a7",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 176
+  },
+  {
+   "collection": "BarbedStoneWall",
+   "name": "BarbedStoneWall.CoursesDark",
+   "hex": "6b675f",
+   "material": "Cobblestone",
+   "transparency": 0.0,
+   "tris": 232
+  },
+  {
+   "collection": "BarbedStoneWall",
+   "name": "BarbedStoneWall.CoursesLight",
+   "hex": "b9b3a7",
+   "material": "Cobblestone",
+   "transparency": 0.0,
+   "tris": 264
+  },
+  {
+   "collection": "BarbedStoneWall",
+   "name": "BarbedStoneWall.CoursesMid",
+   "hex": "8f8a80",
+   "material": "Cobblestone",
+   "transparency": 0.0,
+   "tris": 264
+  },
+  {
+   "collection": "BarbedStoneWall",
+   "name": "BarbedStoneWall.Ironwork",
+   "hex": "2f3640",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 264
+  },
+  {
+   "collection": "BarbedStoneWall",
+   "name": "BarbedStoneWall.Moss",
+   "hex": "5f8f4a",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 72
+  },
+  {
+   "collection": "BarbedStoneWall",
+   "name": "BarbedStoneWall.Plinth",
+   "hex": "6b675f",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "GlassCase",
+   "name": "GlassCase.BrassFrame",
+   "hex": "c9a227",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 452
+  },
+  {
+   "collection": "GlassCase",
+   "name": "GlassCase.Engraving",
+   "hex": "2f3640",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 196
+  },
+  {
+   "collection": "GlassCase",
+   "name": "GlassCase.GlassPanes",
+   "hex": "9fd4e6",
+   "material": "Glass",
+   "transparency": 0.5,
+   "tris": 60
+  },
+  {
+   "collection": "GlassCase",
+   "name": "GlassCase.LampHood",
+   "hex": "2f3640",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "GlassCase",
+   "name": "GlassCase.LightBeam",
+   "hex": "ffd98a",
+   "material": "Neon",
+   "transparency": 0.8,
+   "tris": 20
+  },
+  {
+   "collection": "GlassCase",
+   "name": "GlassCase.Pedestal",
+   "hex": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 136
+  },
+  {
+   "collection": "GlassCase",
+   "name": "GlassCase.Plinth",
+   "hex": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 100
+  },
+  {
+   "collection": "GlassCase",
+   "name": "GlassCase.PlinthTrim",
+   "hex": "c9a227",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 104
+  },
+  {
+   "collection": "GlassCase",
+   "name": "GlassCase.SpotLens",
+   "hex": "ffd98a",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 56
+  },
+  {
+   "collection": "GlassCase",
+   "name": "GlassCase.VelvetPad",
+   "hex": "7e2029",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Catapult",
+   "name": "Catapult.ArmBeam",
+   "hex": "c08a4e",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "Catapult",
+   "name": "Catapult.ArmBucket",
+   "hex": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 64
+  },
+  {
+   "collection": "Catapult",
+   "name": "Catapult.ArmIron",
+   "hex": "2f3640",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 52
+  },
+  {
+   "collection": "Catapult",
+   "name": "Catapult.ArmLoad",
+   "hex": "8f8a80",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 20
+  },
+  {
+   "collection": "Catapult",
+   "name": "Catapult.ArmRope",
+   "hex": "b99a63",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Catapult",
+   "name": "Catapult.Deck",
+   "hex": "c08a4e",
+   "material": "WoodPlanks",
+   "transparency": 0.0,
+   "tris": 132
+  },
+  {
+   "collection": "Catapult",
+   "name": "Catapult.Frame",
+   "hex": "5b4230",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 280
+  },
+  {
+   "collection": "Catapult",
+   "name": "Catapult.Ironwork",
+   "hex": "2f3640",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 308
+  },
+  {
+   "collection": "Catapult",
+   "name": "Catapult.RopeBundle",
+   "hex": "b99a63",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 104
+  },
+  {
+   "collection": "Catapult",
+   "name": "Catapult.StopPad",
+   "hex": "2a2d33",
+   "material": "Leather",
+   "transparency": 0.0,
+   "tris": 36
+  },
+  {
+   "collection": "Catapult",
+   "name": "Catapult.Timbers",
+   "hex": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 324
+  },
+  {
+   "collection": "Catapult",
+   "name": "Catapult.Wheels",
+   "hex": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 256
+  },
+  {
+   "collection": "Lantern",
+   "name": "Lantern.A_Base",
+   "hex": "8f8a80",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "Lantern",
+   "name": "Lantern.A_Cap",
+   "hex": "c9a227",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 30
+  },
+  {
+   "collection": "Lantern",
+   "name": "Lantern.A_Flame",
+   "hex": "ff9c2e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Lantern",
+   "name": "Lantern.A_FlameTip",
+   "hex": "ffe9a8",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 34
+  },
+  {
+   "collection": "Lantern",
+   "name": "Lantern.A_Glass",
+   "hex": "9fd4e6",
+   "material": "Glass",
+   "transparency": 0.58,
+   "tris": 48
+  },
+  {
+   "collection": "Lantern",
+   "name": "Lantern.A_Iron",
+   "hex": "2f3640",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 256
+  },
+  {
+   "collection": "Lantern",
+   "name": "Lantern.B_Base",
+   "hex": "8f8a80",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Lantern",
+   "name": "Lantern.B_Brass",
+   "hex": "c9a227",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 140
+  },
+  {
+   "collection": "Lantern",
+   "name": "Lantern.B_Core",
+   "hex": "ff9c2e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Lantern",
+   "name": "Lantern.B_CoreTip",
+   "hex": "ffe9a8",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 34
+  },
+  {
+   "collection": "Lantern",
+   "name": "Lantern.B_Iron",
+   "hex": "2f3640",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "Lantern",
+   "name": "Lantern.B_Paper",
+   "hex": "cbb99a",
+   "material": "Fabric",
+   "transparency": 0.25,
+   "tris": 288
+  },
+  {
+   "collection": "Lantern",
+   "name": "Lantern.B_Tassel",
+   "hex": "e8e0cc",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 62
+  },
+  {
+   "collection": "Lantern",
+   "name": "Lantern.C_Base",
+   "hex": "8f8a80",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 40
+  },
+  {
+   "collection": "Lantern",
+   "name": "Lantern.C_Cap",
+   "hex": "c9a227",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 68
+  },
+  {
+   "collection": "Lantern",
+   "name": "Lantern.C_Flame",
+   "hex": "ff9c2e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Lantern",
+   "name": "Lantern.C_FlameTip",
+   "hex": "ffe9a8",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 34
+  },
+  {
+   "collection": "Lantern",
+   "name": "Lantern.C_Glass",
+   "hex": "9fd4e6",
+   "material": "Glass",
+   "transparency": 0.58,
+   "tris": 44
+  },
+  {
+   "collection": "Lantern",
+   "name": "Lantern.C_Iron",
+   "hex": "2f3640",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 108
+  },
+  {
+   "collection": "TikiTorch",
+   "name": "TikiTorch.A_Bowl",
+   "hex": "6c7789",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 80
+  },
+  {
+   "collection": "TikiTorch",
+   "name": "TikiTorch.A_FlameCore",
+   "hex": "ffe9a8",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "TikiTorch",
+   "name": "TikiTorch.A_FlameMid",
+   "hex": "ff9c2e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "TikiTorch",
+   "name": "TikiTorch.A_FlameTip",
+   "hex": "e04a1f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "TikiTorch",
+   "name": "TikiTorch.A_Lashing",
+   "hex": "6b4423",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 160
+  },
+  {
+   "collection": "TikiTorch",
+   "name": "TikiTorch.A_Pole",
+   "hex": "c8a75a",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 128
+  },
+  {
+   "collection": "TikiTorch",
+   "name": "TikiTorch.B_Bowl",
+   "hex": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 80
+  },
+  {
+   "collection": "TikiTorch",
+   "name": "TikiTorch.B_Brow",
+   "hex": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "TikiTorch",
+   "name": "TikiTorch.B_FlameCore",
+   "hex": "ffe9a8",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "TikiTorch",
+   "name": "TikiTorch.B_FlameMid",
+   "hex": "ff9c2e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "TikiTorch",
+   "name": "TikiTorch.B_FlameTip",
+   "hex": "e04a1f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "TikiTorch",
+   "name": "TikiTorch.B_Head",
+   "hex": "c08a4e",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 104
+  },
+  {
+   "collection": "TikiTorch",
+   "name": "TikiTorch.B_Post",
+   "hex": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 168
+  },
+  {
+   "collection": "TikiTorch",
+   "name": "TikiTorch.B_TeethEyes",
+   "hex": "e8e0cc",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 72
+  },
+  {
+   "collection": "TikiTorch",
+   "name": "TikiTorch.C_Bowl",
+   "hex": "8f8a80",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 96
+  },
+  {
+   "collection": "TikiTorch",
+   "name": "TikiTorch.C_Coals",
+   "hex": "ff8a3d",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 84
+  },
+  {
+   "collection": "TikiTorch",
+   "name": "TikiTorch.C_FlameCore",
+   "hex": "ffe9a8",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "TikiTorch",
+   "name": "TikiTorch.C_FlameMid",
+   "hex": "ff9c2e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "TikiTorch",
+   "name": "TikiTorch.C_FlameTip",
+   "hex": "e04a1f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "TikiTorch",
+   "name": "TikiTorch.C_Legs",
+   "hex": "2f3640",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 120
+  },
+  {
+   "collection": "NeonSign",
+   "name": "NeonSign.A_Border",
+   "hex": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 36
+  },
+  {
+   "collection": "NeonSign",
+   "name": "NeonSign.A_Hardware",
+   "hex": "6c7789",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 104
+  },
+  {
+   "collection": "NeonSign",
+   "name": "NeonSign.A_Panel",
+   "hex": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "NeonSign",
+   "name": "NeonSign.A_Struts",
+   "hex": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 24
+  },
+  {
+   "collection": "NeonSign",
+   "name": "NeonSign.A_Text",
+   "hex": "ff4fa3",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 180
+  },
+  {
+   "collection": "NeonSign",
+   "name": "NeonSign.B_Arrow",
+   "hex": "ff8a3d",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 20
+  },
+  {
+   "collection": "NeonSign",
+   "name": "NeonSign.B_Bulbs",
+   "hex": "ffe14d",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 160
+  },
+  {
+   "collection": "NeonSign",
+   "name": "NeonSign.B_Gear",
+   "hex": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "NeonSign",
+   "name": "NeonSign.B_Panel",
+   "hex": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "NeonSign",
+   "name": "NeonSign.B_Post",
+   "hex": "6c7789",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 48
+  },
+  {
+   "collection": "NeonSign",
+   "name": "NeonSign.B_Text",
+   "hex": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 288
+  },
+  {
+   "collection": "NeonSign",
+   "name": "NeonSign.C_Bulbs",
+   "hex": "ffe14d",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 192
+  },
+  {
+   "collection": "NeonSign",
+   "name": "NeonSign.C_Crown",
+   "hex": "6c7789",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "NeonSign",
+   "name": "NeonSign.C_Frame",
+   "hex": "6c7789",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 64
+  },
+  {
+   "collection": "NeonSign",
+   "name": "NeonSign.C_Panel",
+   "hex": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "NeonSign",
+   "name": "NeonSign.C_Rigging",
+   "hex": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 64
+  },
+  {
+   "collection": "NeonSign",
+   "name": "NeonSign.C_Text",
+   "hex": "9dff4d",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 420
+  },
+  {
+   "collection": "Sunflower",
+   "name": "Sunflower.A_Disc",
+   "hex": "5a3d20",
+   "material": "Pebble",
+   "transparency": 0.0,
+   "tris": 36
+  },
+  {
+   "collection": "Sunflower",
+   "name": "Sunflower.A_Leaves",
+   "hex": "78c05a",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 52
+  },
+  {
+   "collection": "Sunflower",
+   "name": "Sunflower.A_PetalsOrange",
+   "hex": "eb8f2a",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 60
+  },
+  {
+   "collection": "Sunflower",
+   "name": "Sunflower.A_PetalsYellow",
+   "hex": "f5c032",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 180
+  },
+  {
+   "collection": "Sunflower",
+   "name": "Sunflower.A_Stem",
+   "hex": "4a8b34",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 48
+  },
+  {
+   "collection": "Sunflower",
+   "name": "Sunflower.B_Disc",
+   "hex": "5a3d20",
+   "material": "Pebble",
+   "transparency": 0.0,
+   "tris": 32
+  },
+  {
+   "collection": "Sunflower",
+   "name": "Sunflower.B_Leaves",
+   "hex": "78c05a",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 40
+  },
+  {
+   "collection": "Sunflower",
+   "name": "Sunflower.B_PetalsOrange",
+   "hex": "eb8f2a",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 40
+  },
+  {
+   "collection": "Sunflower",
+   "name": "Sunflower.B_PetalsYellow",
+   "hex": "f5c032",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 168
+  },
+  {
+   "collection": "Sunflower",
+   "name": "Sunflower.B_Stem",
+   "hex": "4a8b34",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 102
+  },
+  {
+   "collection": "Sunflower",
+   "name": "Sunflower.C_Discs",
+   "hex": "5a3d20",
+   "material": "Pebble",
+   "transparency": 0.0,
+   "tris": 52
+  },
+  {
+   "collection": "Sunflower",
+   "name": "Sunflower.C_Leaves",
+   "hex": "78c05a",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 48
+  },
+  {
+   "collection": "Sunflower",
+   "name": "Sunflower.C_Mound",
+   "hex": "6d5138",
+   "material": "Ground",
+   "transparency": 0.0,
+   "tris": 40
+  },
+  {
+   "collection": "Sunflower",
+   "name": "Sunflower.C_PetalsOrange",
+   "hex": "eb8f2a",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 48
+  },
+  {
+   "collection": "Sunflower",
+   "name": "Sunflower.C_PetalsYellow",
+   "hex": "f5c032",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 216
+  },
+  {
+   "collection": "Sunflower",
+   "name": "Sunflower.C_Stems",
+   "hex": "4a8b34",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 132
+  },
+  {
+   "collection": "Bush",
+   "name": "Bush.A_Canopy",
+   "hex": "4f9c3e",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 100
+  },
+  {
+   "collection": "Bush",
+   "name": "Bush.A_Highlight",
+   "hex": "78c05a",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 20
+  },
+  {
+   "collection": "Bush",
+   "name": "Bush.A_Litter",
+   "hex": "2f6b2c",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "Bush",
+   "name": "Bush.A_Soil",
+   "hex": "7d7a72",
+   "material": "Ground",
+   "transparency": 0.0,
+   "tris": 32
+  },
+  {
+   "collection": "Bush",
+   "name": "Bush.A_Stems",
+   "hex": "c08a4e",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 48
+  },
+  {
+   "collection": "Bush",
+   "name": "Bush.B_Base",
+   "hex": "2f6b2c",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Bush",
+   "name": "Bush.B_Body",
+   "hex": "4f9c3e",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Bush",
+   "name": "Bush.B_Soil",
+   "hex": "7d7a72",
+   "material": "Ground",
+   "transparency": 0.0,
+   "tris": 12
+  },
+  {
+   "collection": "Bush",
+   "name": "Bush.B_Top",
+   "hex": "4caf50",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 120
+  },
+  {
+   "collection": "Bush",
+   "name": "Bush.C_Berries",
+   "hex": "5a3d20",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 30
+  },
+  {
+   "collection": "Bush",
+   "name": "Bush.C_Blooms",
+   "hex": "e878a8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 100
+  },
+  {
+   "collection": "Bush",
+   "name": "Bush.C_Buds",
+   "hex": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 60
+  },
+  {
+   "collection": "Bush",
+   "name": "Bush.C_Canopy",
+   "hex": "4f9c3e",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 80
+  },
+  {
+   "collection": "Bush",
+   "name": "Bush.C_Shade",
+   "hex": "2f6b2c",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Bush",
+   "name": "Bush.C_Soil",
+   "hex": "7d7a72",
+   "material": "Ground",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "Tree",
+   "name": "Tree.A_CrownBody",
+   "hex": "4f9c3e",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 140
+  },
+  {
+   "collection": "Tree",
+   "name": "Tree.A_CrownSun",
+   "hex": "78c05a",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 40
+  },
+  {
+   "collection": "Tree",
+   "name": "Tree.A_Roots",
+   "hex": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 108
+  },
+  {
+   "collection": "Tree",
+   "name": "Tree.A_Trunk",
+   "hex": "5b4230",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 180
+  },
+  {
+   "collection": "Tree",
+   "name": "Tree.B_CanopyBlue",
+   "hex": "3f7f57",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 128
+  },
+  {
+   "collection": "Tree",
+   "name": "Tree.B_CanopyDark",
+   "hex": "2f6b2c",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 202
+  },
+  {
+   "collection": "Tree",
+   "name": "Tree.B_Trunk",
+   "hex": "5b4230",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 82
+  },
+  {
+   "collection": "Tree",
+   "name": "Tree.C_CrownBody",
+   "hex": "4f9c3e",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 40
+  },
+  {
+   "collection": "Tree",
+   "name": "Tree.C_CrownSun",
+   "hex": "78c05a",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 20
+  },
+  {
+   "collection": "Tree",
+   "name": "Tree.C_Fruit",
+   "hex": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 288
+  },
+  {
+   "collection": "Tree",
+   "name": "Tree.C_Trunk",
+   "hex": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 116
+  },
+  {
+   "collection": "Scarecrow",
+   "name": "Scarecrow.Burlap",
+   "hex": "cbb99a",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 80
+  },
+  {
+   "collection": "Scarecrow",
+   "name": "Scarecrow.Crow",
+   "hex": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 72
+  },
+  {
+   "collection": "Scarecrow",
+   "name": "Scarecrow.CrowBeak",
+   "hex": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 18
+  },
+  {
+   "collection": "Scarecrow",
+   "name": "Scarecrow.Denim",
+   "hex": "3d6fb5",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 100
+  },
+  {
+   "collection": "Scarecrow",
+   "name": "Scarecrow.DirtMound",
+   "hex": "6d5138",
+   "material": "Ground",
+   "transparency": 0.0,
+   "tris": 52
+  },
+  {
+   "collection": "Scarecrow",
+   "name": "Scarecrow.Frame",
+   "hex": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "Scarecrow",
+   "name": "Scarecrow.Lashing",
+   "hex": "b99a63",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 144
+  },
+  {
+   "collection": "Scarecrow",
+   "name": "Scarecrow.RedCloth",
+   "hex": "c0392b",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 372
+  },
+  {
+   "collection": "Scarecrow",
+   "name": "Scarecrow.Stitching",
+   "hex": "23262c",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 252
+  },
+  {
+   "collection": "Scarecrow",
+   "name": "Scarecrow.StrawHat",
+   "hex": "c9a33f",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 108
+  },
+  {
+   "collection": "Scarecrow",
+   "name": "Scarecrow.StrawTufts",
+   "hex": "d9b45b",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 120
+  },
+  {
+   "collection": "Wheelbarrow",
+   "name": "Wheelbarrow.Dirt",
+   "hex": "6d5138",
+   "material": "Ground",
+   "transparency": 0.0,
+   "tris": 60
+  },
+  {
+   "collection": "Wheelbarrow",
+   "name": "Wheelbarrow.Frame",
+   "hex": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 324
+  },
+  {
+   "collection": "Wheelbarrow",
+   "name": "Wheelbarrow.Grips",
+   "hex": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 76
+  },
+  {
+   "collection": "Wheelbarrow",
+   "name": "Wheelbarrow.Tray",
+   "hex": "4caf50",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 52
+  },
+  {
+   "collection": "Wheelbarrow",
+   "name": "Wheelbarrow.Trim",
+   "hex": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 228
+  },
+  {
+   "collection": "Wheelbarrow",
+   "name": "Wheelbarrow.Tyre",
+   "hex": "2a2d33",
+   "material": "Rubber",
+   "transparency": 0.0,
+   "tris": 116
+  },
+  {
+   "collection": "WateringCan",
+   "name": "WateringCan.Bands",
+   "hex": "4d5866",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 216
+  },
+  {
+   "collection": "WateringCan",
+   "name": "WateringCan.Body",
+   "hex": "4caf50",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 192
+  },
+  {
+   "collection": "WateringCan",
+   "name": "WateringCan.Handles",
+   "hex": "4d5866",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 100
+  },
+  {
+   "collection": "WateringCan",
+   "name": "WateringCan.Rivets",
+   "hex": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 144
+  },
+  {
+   "collection": "WateringCan",
+   "name": "WateringCan.RoseFace",
+   "hex": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 36
+  },
+  {
+   "collection": "WateringCan",
+   "name": "WateringCan.RoseHead",
+   "hex": "4d5866",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 78
+  },
+  {
+   "collection": "WateringCan",
+   "name": "WateringCan.Spout",
+   "hex": "4d5866",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 92
+  },
+  {
+   "collection": "HayBale",
+   "name": "HayBale.A_Drum",
+   "hex": "c9a33f",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 148
+  },
+  {
+   "collection": "HayBale",
+   "name": "HayBale.A_Straw",
+   "hex": "d8c48c",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 250
+  },
+  {
+   "collection": "HayBale",
+   "name": "HayBale.B_Body",
+   "hex": "c9a33f",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 176
+  },
+  {
+   "collection": "HayBale",
+   "name": "HayBale.B_Core",
+   "hex": "8a5a2b",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 12
+  },
+  {
+   "collection": "HayBale",
+   "name": "HayBale.B_Straw",
+   "hex": "d8c48c",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 128
+  },
+  {
+   "collection": "HayBale",
+   "name": "HayBale.B_Twine",
+   "hex": "3d6fb5",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 52
+  },
+  {
+   "collection": "HayBale",
+   "name": "HayBale.C_Body",
+   "hex": "c9a33f",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 180
+  },
+  {
+   "collection": "HayBale",
+   "name": "HayBale.C_Core",
+   "hex": "8a5a2b",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 36
+  },
+  {
+   "collection": "HayBale",
+   "name": "HayBale.C_Straw",
+   "hex": "d8c48c",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 192
+  },
+  {
+   "collection": "HayBale",
+   "name": "HayBale.C_Twine",
+   "hex": "3d6fb5",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 120
+  },
+  {
+   "collection": "Fountain",
+   "name": "Fountain.BasinWall",
+   "hex": "7d7a72",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 64
+  },
+  {
+   "collection": "Fountain",
+   "name": "Fountain.BowlAndFinial",
+   "hex": "b9b3a7",
+   "material": "Concrete",
+   "transparency": 0.0,
+   "tris": 288
+  },
+  {
+   "collection": "Fountain",
+   "name": "Fountain.Coping",
+   "hex": "b9b3a7",
+   "material": "Concrete",
+   "transparency": 0.0,
+   "tris": 240
+  },
+  {
+   "collection": "Fountain",
+   "name": "Fountain.DarkStonework",
+   "hex": "56524b",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 264
+  },
+  {
+   "collection": "Fountain",
+   "name": "Fountain.Foam",
+   "hex": "eef7fb",
+   "material": "Plaster",
+   "transparency": 0.0,
+   "tris": 408
+  },
+  {
+   "collection": "Fountain",
+   "name": "Fountain.Jets",
+   "hex": "5fc8d8",
+   "material": "Glass",
+   "transparency": 0.35,
+   "tris": 324
+  },
+  {
+   "collection": "Fountain",
+   "name": "Fountain.Moss",
+   "hex": "2f6b2c",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 120
+  },
+  {
+   "collection": "Fountain",
+   "name": "Fountain.Pedestal",
+   "hex": "7d7a72",
+   "material": "Concrete",
+   "transparency": 0.0,
+   "tris": 160
+  },
+  {
+   "collection": "Fountain",
+   "name": "Fountain.WaterBed",
+   "hex": "1d6f9c",
+   "material": "Glass",
+   "transparency": 0.12,
+   "tris": 28
+  },
+  {
+   "collection": "Fountain",
+   "name": "Fountain.WaterSurface",
+   "hex": "2f9ec4",
+   "material": "Glass",
+   "transparency": 0.42,
+   "tris": 14
+  },
+  {
+   "collection": "Pond",
+   "name": "Pond.Bank",
+   "hex": "6d5138",
+   "material": "Ground",
+   "transparency": 0.0,
+   "tris": 140
+  },
+  {
+   "collection": "Pond",
+   "name": "Pond.Bed",
+   "hex": "1d6f9c",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 32
+  },
+  {
+   "collection": "Pond",
+   "name": "Pond.CattailHeads",
+   "hex": "5a3d20",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 180
+  },
+  {
+   "collection": "Pond",
+   "name": "Pond.Fish1",
+   "hex": "ff8a3d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 40
+  },
+  {
+   "collection": "Pond",
+   "name": "Pond.Fish2",
+   "hex": "f2efe4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 40
+  },
+  {
+   "collection": "Pond",
+   "name": "Pond.Fish3",
+   "hex": "ff8a3d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 40
+  },
+  {
+   "collection": "Pond",
+   "name": "Pond.FishEyes",
+   "hex": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 120
+  },
+  {
+   "collection": "Pond",
+   "name": "Pond.FishMarks",
+   "hex": "f2efe4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 80
+  },
+  {
+   "collection": "Pond",
+   "name": "Pond.LilyLotus",
+   "hex": "e878a8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 144
+  },
+  {
+   "collection": "Pond",
+   "name": "Pond.LilyPads",
+   "hex": "2f6b2c",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 240
+  },
+  {
+   "collection": "Pond",
+   "name": "Pond.Reeds",
+   "hex": "4a8b34",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 126
+  },
+  {
+   "collection": "Pond",
+   "name": "Pond.RimGrass",
+   "hex": "5f9e42",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 156
+  },
+  {
+   "collection": "Pond",
+   "name": "Pond.RocksDark",
+   "hex": "6b675f",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 100
+  },
+  {
+   "collection": "Pond",
+   "name": "Pond.RocksMid",
+   "hex": "8f8a80",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 120
+  },
+  {
+   "collection": "Pond",
+   "name": "Pond.Water",
+   "hex": "2f9ec4",
+   "material": "Glass",
+   "transparency": 0.5,
+   "tris": 7
+  },
+  {
+   "collection": "Trampoline",
+   "name": "Trampoline.Feet",
+   "hex": "2a2d33",
+   "material": "Rubber",
+   "transparency": 0.0,
+   "tris": 120
+  },
+  {
+   "collection": "Trampoline",
+   "name": "Trampoline.Frame",
+   "hex": "6c7789",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 358
+  },
+  {
+   "collection": "Trampoline",
+   "name": "Trampoline.LabelMarks",
+   "hex": "d9443c",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 24
+  },
+  {
+   "collection": "Trampoline",
+   "name": "Trampoline.LabelPatch",
+   "hex": "f2f0ea",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "Trampoline",
+   "name": "Trampoline.MatSurface",
+   "hex": "2a2d33",
+   "material": "Rubber",
+   "transparency": 0.0,
+   "tris": 256
+  },
+  {
+   "collection": "Trampoline",
+   "name": "Trampoline.Pad",
+   "hex": "3f79d4",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 192
+  },
+  {
+   "collection": "Trampoline",
+   "name": "Trampoline.Springs",
+   "hex": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 256
+  },
+  {
+   "collection": "Slide",
+   "name": "Slide.Chute",
+   "hex": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 280
+  },
+  {
+   "collection": "Slide",
+   "name": "Slide.FeetAndPosts",
+   "hex": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 340
+  },
+  {
+   "collection": "Slide",
+   "name": "Slide.Frame",
+   "hex": "6c7789",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 52
+  },
+  {
+   "collection": "Slide",
+   "name": "Slide.LadderRails",
+   "hex": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 120
+  },
+  {
+   "collection": "Slide",
+   "name": "Slide.Railings",
+   "hex": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 510
+  },
+  {
+   "collection": "Slide",
+   "name": "Slide.SlatsAndRungs",
+   "hex": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 408
+  },
+  {
+   "collection": "Seesaw",
+   "name": "Seesaw.Bearing",
+   "hex": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 104
+  },
+  {
+   "collection": "Seesaw",
+   "name": "Seesaw.Bumpers",
+   "hex": "5b5f66",
+   "material": "Rubber",
+   "transparency": 0.0,
+   "tris": 200
+  },
+  {
+   "collection": "Seesaw",
+   "name": "Seesaw.Frame",
+   "hex": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 268
+  },
+  {
+   "collection": "Seesaw",
+   "name": "Seesaw.FrameChevron",
+   "hex": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 20
+  },
+  {
+   "collection": "Seesaw",
+   "name": "Seesaw.PlankBeamBlue",
+   "hex": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Seesaw",
+   "name": "Seesaw.PlankBeamRed",
+   "hex": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Seesaw",
+   "name": "Seesaw.PlankHandles",
+   "hex": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 152
+  },
+  {
+   "collection": "Seesaw",
+   "name": "Seesaw.PlankPivotStrap",
+   "hex": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 56
+  },
+  {
+   "collection": "Seesaw",
+   "name": "Seesaw.PlankSeats",
+   "hex": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 56
+  },
+  {
+   "collection": "HotTub",
+   "name": "HotTub.Foam",
+   "hex": "eef7fb",
+   "material": "SmoothPlastic",
+   "transparency": 0.45,
+   "tris": 128
+  },
+  {
+   "collection": "HotTub",
+   "name": "HotTub.Panel",
+   "hex": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "HotTub",
+   "name": "HotTub.PanelLights",
+   "hex": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 48
+  },
+  {
+   "collection": "HotTub",
+   "name": "HotTub.Shell",
+   "hex": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 352
+  },
+  {
+   "collection": "HotTub",
+   "name": "HotTub.StavesMid",
+   "hex": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 208
+  },
+  {
+   "collection": "HotTub",
+   "name": "HotTub.StavesPale",
+   "hex": "c08a4e",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 216
+  },
+  {
+   "collection": "HotTub",
+   "name": "HotTub.Steam",
+   "hex": "eef7fb",
+   "material": "SmoothPlastic",
+   "transparency": 0.88,
+   "tris": 144
+  },
+  {
+   "collection": "HotTub",
+   "name": "HotTub.Steel",
+   "hex": "6c7789",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 304
+  },
+  {
+   "collection": "HotTub",
+   "name": "HotTub.Water",
+   "hex": "2f9ec4",
+   "material": "SmoothPlastic",
+   "transparency": 0.3,
+   "tris": 60
+  },
+  {
+   "collection": "DJBooth",
+   "name": "DJBooth.Cables",
+   "hex": "2a2d33",
+   "material": "Rubber",
+   "transparency": 0.0,
+   "tris": 96
+  },
+  {
+   "collection": "DJBooth",
+   "name": "DJBooth.Consoles",
+   "hex": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 260
+  },
+  {
+   "collection": "DJBooth",
+   "name": "DJBooth.Frame",
+   "hex": "6c7789",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 504
+  },
+  {
+   "collection": "DJBooth",
+   "name": "DJBooth.Hardware",
+   "hex": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 384
+  },
+  {
+   "collection": "DJBooth",
+   "name": "DJBooth.Knobs",
+   "hex": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 176
+  },
+  {
+   "collection": "DJBooth",
+   "name": "DJBooth.LedStrip",
+   "hex": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 56
+  },
+  {
+   "collection": "DJBooth",
+   "name": "DJBooth.Letters",
+   "hex": "ff4fa3",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 100
+  },
+  {
+   "collection": "DJBooth",
+   "name": "DJBooth.Records",
+   "hex": "10141c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 56
+  },
+  {
+   "collection": "DJBooth",
+   "name": "DJBooth.Shell",
+   "hex": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 236
+  },
+  {
+   "collection": "DJBooth",
+   "name": "DJBooth.SpotGlow",
+   "hex": "b45cff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "DJBooth",
+   "name": "DJBooth.Trim",
+   "hex": "ff8a3d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 104
+  },
+  {
+   "collection": "DanceFloor",
+   "name": "DanceFloor.EdgeStrip",
+   "hex": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 48
+  },
+  {
+   "collection": "DanceFloor",
+   "name": "DanceFloor.Frame",
+   "hex": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 188
+  },
+  {
+   "collection": "DanceFloor",
+   "name": "DanceFloor.PowerLight",
+   "hex": "7a421d",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 20
+  },
+  {
+   "collection": "DanceFloor",
+   "name": "DanceFloor.Tile_r0_c0",
+   "hex": "731e46",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "DanceFloor",
+   "name": "DanceFloor.Tile_r0_c1",
+   "hex": "070911",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "DanceFloor",
+   "name": "DanceFloor.Tile_r0_c2",
+   "hex": "1c5f76",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "DanceFloor",
+   "name": "DanceFloor.Tile_r0_c3",
+   "hex": "070911",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "DanceFloor",
+   "name": "DanceFloor.Tile_r1_c0",
+   "hex": "070911",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "DanceFloor",
+   "name": "DanceFloor.Tile_r1_c1",
+   "hex": "1c5f76",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "DanceFloor",
+   "name": "DanceFloor.Tile_r1_c2",
+   "hex": "070911",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "DanceFloor",
+   "name": "DanceFloor.Tile_r1_c3",
+   "hex": "731e46",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "DanceFloor",
+   "name": "DanceFloor.Tile_r2_c0",
+   "hex": "1c5f76",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "DanceFloor",
+   "name": "DanceFloor.Tile_r2_c1",
+   "hex": "070911",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "DanceFloor",
+   "name": "DanceFloor.Tile_r2_c2",
+   "hex": "731e46",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "DanceFloor",
+   "name": "DanceFloor.Tile_r2_c3",
+   "hex": "070911",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "DanceFloor",
+   "name": "DanceFloor.Tile_r3_c0",
+   "hex": "070911",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "DanceFloor",
+   "name": "DanceFloor.Tile_r3_c1",
+   "hex": "731e46",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "DanceFloor",
+   "name": "DanceFloor.Tile_r3_c2",
+   "hex": "070911",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "DanceFloor",
+   "name": "DanceFloor.Tile_r3_c3",
+   "hex": "1c5f76",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "DanceFloor",
+   "name": "DanceFloor.Trim",
+   "hex": "6c7789",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 120
+  },
+  {
+   "collection": "Hammock",
+   "name": "Hammock.Bed",
+   "hex": "2f9e9e",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 224
+  },
+  {
+   "collection": "Hammock",
+   "name": "Hammock.Cords",
+   "hex": "b99a63",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 232
+  },
+  {
+   "collection": "Hammock",
+   "name": "Hammock.Rails",
+   "hex": "c08a4e",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 264
+  },
+  {
+   "collection": "Hammock",
+   "name": "Hammock.Rings",
+   "hex": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 168
+  },
+  {
+   "collection": "Hammock",
+   "name": "Hammock.Timber",
+   "hex": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 144
+  },
+  {
+   "collection": "Hammock",
+   "name": "Hammock.Weave",
+   "hex": "e8e0cc",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 184
+  },
+  {
+   "collection": "BeanBag",
+   "name": "BeanBag.A_Base",
+   "hex": "5b3a91",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 94
+  },
+  {
+   "collection": "BeanBag",
+   "name": "BeanBag.A_Body",
+   "hex": "8b5cc7",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 20
+  },
+  {
+   "collection": "BeanBag",
+   "name": "BeanBag.A_Tag",
+   "hex": "b99a63",
+   "material": "Leather",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "BeanBag",
+   "name": "BeanBag.A_Tuft",
+   "hex": "3f2a66",
+   "material": "Leather",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "BeanBag",
+   "name": "BeanBag.A_Welt",
+   "hex": "b28ce0",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 48
+  },
+  {
+   "collection": "BeanBag",
+   "name": "BeanBag.B_Base",
+   "hex": "a8542a",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 64
+  },
+  {
+   "collection": "BeanBag",
+   "name": "BeanBag.B_Body",
+   "hex": "d4702a",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 260
+  },
+  {
+   "collection": "BeanBag",
+   "name": "BeanBag.B_Handle",
+   "hex": "a8542a",
+   "material": "Leather",
+   "transparency": 0.0,
+   "tris": 46
+  },
+  {
+   "collection": "BeanBag",
+   "name": "BeanBag.B_Seat",
+   "hex": "d8945a",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 116
+  },
+  {
+   "collection": "BeanBag",
+   "name": "BeanBag.B_Zip",
+   "hex": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 40
+  },
+  {
+   "collection": "BeanBag",
+   "name": "BeanBag.C_Body",
+   "hex": "2f9e9e",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 76
+  },
+  {
+   "collection": "BeanBag",
+   "name": "BeanBag.C_Button",
+   "hex": "1c6e70",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 32
+  },
+  {
+   "collection": "BeanBag",
+   "name": "BeanBag.C_Dome",
+   "hex": "5fc4bd",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 78
+  },
+  {
+   "collection": "BeanBag",
+   "name": "BeanBag.C_Feet",
+   "hex": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 48
+  },
+  {
+   "collection": "BeanBag",
+   "name": "BeanBag.C_Piping",
+   "hex": "a1c8c2",
+   "material": "Leather",
+   "transparency": 0.0,
+   "tris": 68
+  },
+  {
+   "collection": "TV",
+   "name": "TV.BlackTrim",
+   "hex": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 132
+  },
+  {
+   "collection": "TV",
+   "name": "TV.Cabinet",
+   "hex": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "TV",
+   "name": "TV.ConsoleTop",
+   "hex": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "TV",
+   "name": "TV.DoorRecess",
+   "hex": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 24
+  },
+  {
+   "collection": "TV",
+   "name": "TV.Doors",
+   "hex": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 96
+  },
+  {
+   "collection": "TV",
+   "name": "TV.Metalwork",
+   "hex": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 116
+  },
+  {
+   "collection": "TV",
+   "name": "TV.Panel",
+   "hex": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 92
+  },
+  {
+   "collection": "TV",
+   "name": "TV.RedLights",
+   "hex": "ff4d4d",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 32
+  },
+  {
+   "collection": "TV",
+   "name": "TV.Remote",
+   "hex": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "TV",
+   "name": "TV.ScreenLand",
+   "hex": "9dff4d",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 36
+  },
+  {
+   "collection": "TV",
+   "name": "TV.ScreenSky",
+   "hex": "6fd0ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 12
+  },
+  {
+   "collection": "TV",
+   "name": "TV.ScreenSun",
+   "hex": "ffe14d",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 48
+  },
+  {
+   "collection": "TV",
+   "name": "TV.Soundbar",
+   "hex": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "TV",
+   "name": "TV.Stand",
+   "hex": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 100
+  },
+  {
+   "collection": "VendingMachine",
+   "name": "VendingMachine.Body",
+   "hex": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 236
+  },
+  {
+   "collection": "VendingMachine",
+   "name": "VendingMachine.DarkShell",
+   "hex": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 320
+  },
+  {
+   "collection": "VendingMachine",
+   "name": "VendingMachine.DeliveryFlap",
+   "hex": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "VendingMachine",
+   "name": "VendingMachine.GlassPane",
+   "hex": "cfe8f2",
+   "material": "Glass",
+   "transparency": 0.6,
+   "tris": 12
+  },
+  {
+   "collection": "VendingMachine",
+   "name": "VendingMachine.NeonText",
+   "hex": "ff4d4d",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 366
+  },
+  {
+   "collection": "VendingMachine",
+   "name": "VendingMachine.ProductsBlue",
+   "hex": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 136
+  },
+  {
+   "collection": "VendingMachine",
+   "name": "VendingMachine.ProductsGreen",
+   "hex": "4caf50",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 104
+  },
+  {
+   "collection": "VendingMachine",
+   "name": "VendingMachine.ProductsOrange",
+   "hex": "ff8a3d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 92
+  },
+  {
+   "collection": "VendingMachine",
+   "name": "VendingMachine.ProductsYellow",
+   "hex": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 96
+  },
+  {
+   "collection": "VendingMachine",
+   "name": "VendingMachine.SignPanel",
+   "hex": "ffe14d",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "VendingMachine",
+   "name": "VendingMachine.Steelwork",
+   "hex": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 212
+  },
+  {
+   "collection": "VendingMachine",
+   "name": "VendingMachine.Whitework",
+   "hex": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 180
+  },
+  {
+   "collection": "ArcadeCabinet",
+   "name": "ArcadeCabinet.Cabinet",
+   "hex": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 196
+  },
+  {
+   "collection": "ArcadeCabinet",
+   "name": "ArcadeCabinet.DarkShell",
+   "hex": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 120
+  },
+  {
+   "collection": "ArcadeCabinet",
+   "name": "ArcadeCabinet.FrontFrame",
+   "hex": "3b4350",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 208
+  },
+  {
+   "collection": "ArcadeCabinet",
+   "name": "ArcadeCabinet.MarqueePanel",
+   "hex": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "ArcadeCabinet",
+   "name": "ArcadeCabinet.MarqueeText",
+   "hex": "ff4fa3",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 218
+  },
+  {
+   "collection": "ArcadeCabinet",
+   "name": "ArcadeCabinet.Metalwork",
+   "hex": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 140
+  },
+  {
+   "collection": "ArcadeCabinet",
+   "name": "ArcadeCabinet.PixelsCyan",
+   "hex": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 72
+  },
+  {
+   "collection": "ArcadeCabinet",
+   "name": "ArcadeCabinet.PixelsLime",
+   "hex": "9dff4d",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 36
+  },
+  {
+   "collection": "ArcadeCabinet",
+   "name": "ArcadeCabinet.Plinth",
+   "hex": "6c7789",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 20
+  },
+  {
+   "collection": "ArcadeCabinet",
+   "name": "ArcadeCabinet.RedControls",
+   "hex": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 148
+  },
+  {
+   "collection": "ArcadeCabinet",
+   "name": "ArcadeCabinet.Screen",
+   "hex": "10141c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "ArcadeCabinet",
+   "name": "ArcadeCabinet.TMolding",
+   "hex": "ff8a3d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 280
+  },
+  {
+   "collection": "ArcadeCabinet",
+   "name": "ArcadeCabinet.YellowButtons",
+   "hex": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 84
+  }
+ ],
+ "total_parts": 322,
+ "total_tris": 37669
+}

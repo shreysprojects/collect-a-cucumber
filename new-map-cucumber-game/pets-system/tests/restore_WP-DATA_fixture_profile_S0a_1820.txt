@@ -1,0 +1,30 @@
+S0a re-seed of the Studio test key PetTest_140977250 (playtest 3, 2026-09-22 18:19-18:20 local) - leaves the
+test key at the fixture state for S0b and removes the playtest-2 close probe key.
+edit peer (step 1):
+restore_profile STEP 1 OK <- WP-DATA_fixture_profile.json at 2026-09-22 18:19:30
+PASS staged in PetTestTransfer/Restore_140977250
+7755 bytes (envelope): Cash=2154397399.1093736 PlotLevel=2 Pets=4 Eggs=3 Cucumbers=2 Builds=51
+NEXT (server VM): local PROFILE_TOOL_OPTS = {Name = "WP-DATA_fixture_profile.json", Nonce = "bca9fb53"} + this file
+
+server VM (step 2):
+restore_profile STEP 2 OK <- WP-DATA_fixture_profile.json at 2026-09-22 18:20:12
+session key PetTest_140977250 (test key)
+staged JSON: 7755 bytes, nonce bca9fb53, staged 41s ago
+JSON (envelope): Cash=2154397399.1093736 Playtime=58874 PlotLevel=2 Pets=4 Eggs=3 Cucumbers=2 Builds=51 Base.Version=2
+PASS plot level (Plot 5 = 2, want 2)
+PASS Cash written (2154397399.1093736)
+keys removed (absent from the JSON): __S0aCloseProbe
+PASS BaseSaveAPI.Reload (true true  in 0.9 s)
+Base table rebuilt by BaseSave (Collect)
+PASS #Base.Pets (4, want 4)
+PASS #Base.Eggs (3, want 3)
+PASS #Base.Cucumbers (2, want 2)
+PASS #Base.Builds (51, want 51)
+world on Plot 5: Pets=4 Eggs=3 Cucumbers=2 Builds=51
+PASS Cash after (2154397399.1093736 (+0 income since the write))
+PlotLevel=2 Strength=0 Playtime=368 (session clock)
+
+After Stop (edit-mode GetAsync PlayerData_v1/PetTest_140977250, UseCache=false):
+Cash=2154558268.7457376 (fixture +160,869.6 = 4 s of 40.2K/s income) Playtime=372 PlotLevel=2 Pets=4 Eggs=3 Cuc=2
+Builds=51 LastUpdate=1790115617 SessionLoadCount=3 ActiveSession=nil; every non-Cash/Playtime/Base key deep-equal to the
+fixture; eggs / cucumbers / builds / pets record multisets equal. Saved as tests/S0a_testkey_after.json.

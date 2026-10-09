@@ -1,0 +1,1946 @@
+{
+ "key": "PottedPlant",
+ "category": "Home",
+ "parts": [
+  {
+   "name": "Saucer",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    2.0,
+    2.0
+   ],
+   "cf": [
+    0.0,
+    0.07,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "b8612f",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "SaucerLip",
+   "shape": "Cylinder",
+   "size": [
+    0.1,
+    2.08,
+    2.08
+   ],
+   "cf": [
+    0.0,
+    0.15,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "b8612f",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PotFoot",
+   "shape": "Cylinder",
+   "size": [
+    0.24,
+    1.42,
+    1.42
+   ],
+   "cf": [
+    0.0,
+    0.24,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "1d3f86",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PotBelly",
+   "shape": "Ellipsoid",
+   "size": [
+    2.5,
+    2.0,
+    2.5
+   ],
+   "cf": [
+    0.0,
+    1.25,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "2b5fc2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.15,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PotBand",
+   "shape": "Cylinder",
+   "size": [
+    0.2,
+    2.54,
+    2.54
+   ],
+   "cf": [
+    0.0,
+    1.25,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.1,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PotBandLow",
+   "shape": "Cylinder",
+   "size": [
+    0.1,
+    2.0585,
+    2.0585
+   ],
+   "cf": [
+    0.0,
+    0.66,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.1,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PotDot1",
+   "shape": "Ball",
+   "size": [
+    0.18,
+    0.18,
+    0.18
+   ],
+   "cf": [
+    0.40564,
+    1.78,
+    0.97931,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PotDot2",
+   "shape": "Ball",
+   "size": [
+    0.18,
+    0.18,
+    0.18
+   ],
+   "cf": [
+    0.97931,
+    1.78,
+    0.40564,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PotDot3",
+   "shape": "Ball",
+   "size": [
+    0.18,
+    0.18,
+    0.18
+   ],
+   "cf": [
+    0.97931,
+    1.78,
+    -0.40564,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PotDot4",
+   "shape": "Ball",
+   "size": [
+    0.18,
+    0.18,
+    0.18
+   ],
+   "cf": [
+    0.40564,
+    1.78,
+    -0.97931,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PotDot5",
+   "shape": "Ball",
+   "size": [
+    0.18,
+    0.18,
+    0.18
+   ],
+   "cf": [
+    -0.40564,
+    1.78,
+    -0.97931,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PotDot6",
+   "shape": "Ball",
+   "size": [
+    0.18,
+    0.18,
+    0.18
+   ],
+   "cf": [
+    -0.97931,
+    1.78,
+    -0.40564,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PotDot7",
+   "shape": "Ball",
+   "size": [
+    0.18,
+    0.18,
+    0.18
+   ],
+   "cf": [
+    -0.97931,
+    1.78,
+    0.40564,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PotDot8",
+   "shape": "Ball",
+   "size": [
+    0.18,
+    0.18,
+    0.18
+   ],
+   "cf": [
+    -0.40564,
+    1.78,
+    0.97931,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PotNeck",
+   "shape": "Cylinder",
+   "size": [
+    0.34,
+    1.9,
+    1.9
+   ],
+   "cf": [
+    0.0,
+    2.17,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "2b5fc2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.15,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PotLip",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    2.08,
+    2.08
+   ],
+   "cf": [
+    0.0,
+    2.37,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.1,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Soil",
+   "shape": "Cylinder",
+   "size": [
+    0.09,
+    1.84,
+    1.84
+   ],
+   "cf": [
+    0.0,
+    2.425,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "5a3b24",
+   "material": "Ground",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SoilPebble1",
+   "shape": "Ellipsoid",
+   "size": [
+    0.26,
+    0.14,
+    0.2
+   ],
+   "cf": [
+    0.52,
+    2.49,
+    -0.4,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9c3b8",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "SoilPebble2",
+   "shape": "Ellipsoid",
+   "size": [
+    0.22,
+    0.12,
+    0.2
+   ],
+   "cf": [
+    -0.45,
+    2.49,
+    0.5,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa0aa",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Frond1Stem",
+   "shape": "Cylinder",
+   "size": [
+    2.3195,
+    0.11,
+    0.11
+   ],
+   "cf": [
+    0.0,
+    3.52,
+    -0.25,
+    0.0,
+    0.0,
+    1.0,
+    0.9916,
+    0.12934,
+    -0.0,
+    -0.12934,
+    0.9916,
+    0.0
+   ],
+   "color": "4f8f3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Frond1LeafL",
+   "shape": "Ellipsoid",
+   "size": [
+    0.9088,
+    0.06,
+    1.6
+   ],
+   "cf": [
+    0.24309,
+    5.40231,
+    -0.7316,
+    0.90594,
+    -0.30902,
+    0.28945,
+    0.41075,
+    0.47553,
+    -0.77792,
+    0.10275,
+    0.82364,
+    0.55773
+   ],
+   "color": "2f9e44",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Frond1LeafR",
+   "shape": "Ellipsoid",
+   "size": [
+    0.9088,
+    0.06,
+    1.6
+   ],
+   "cf": [
+    -0.24309,
+    5.40231,
+    -0.7316,
+    0.90594,
+    0.30902,
+    -0.28945,
+    -0.41075,
+    0.47553,
+    -0.77792,
+    -0.10275,
+    0.82364,
+    0.55773
+   ],
+   "color": "2f9e44",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Frond1Rib",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.05,
+    1.28
+   ],
+   "cf": [
+    0.0,
+    5.26447,
+    -0.71435,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.5,
+    -0.86603,
+    0.0,
+    0.86603,
+    0.5
+   ],
+   "color": "8fd67a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Frond2Stem",
+   "shape": "Cylinder",
+   "size": [
+    2.1737,
+    0.11,
+    0.11
+   ],
+   "cf": [
+    -0.17998,
+    3.445,
+    0.21449,
+    -0.09463,
+    0.01074,
+    0.99545,
+    0.9891,
+    -0.11226,
+    0.09524,
+    0.11277,
+    0.99362,
+    -0.0
+   ],
+   "color": "4f8f3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Frond2LeafL",
+   "shape": "Ellipsoid",
+   "size": [
+    0.9344,
+    0.06,
+    1.65
+   ],
+   "cf": [
+    -0.7357,
+    5.24238,
+    0.48794,
+    -0.65105,
+    0.73749,
+    0.17955,
+    0.41751,
+    0.5455,
+    -0.72671,
+    -0.63389,
+    -0.39816,
+    -0.66306
+   ],
+   "color": "23823a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Frond2LeafR",
+   "shape": "Ellipsoid",
+   "size": [
+    0.9344,
+    0.06,
+    1.65
+   ],
+   "cf": [
+    -0.35277,
+    5.24238,
+    0.80925,
+    -0.73731,
+    0.26405,
+    0.62181,
+    -0.41751,
+    0.5455,
+    -0.72671,
+    -0.53109,
+    -0.79543,
+    -0.29196
+   ],
+   "color": "23823a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Frond2Rib",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.05,
+    1.32
+   ],
+   "cf": [
+    -0.52516,
+    5.10201,
+    0.62587,
+    -0.76604,
+    0.52654,
+    0.36869,
+    0.0,
+    0.57358,
+    -0.81915,
+    -0.64279,
+    -0.62751,
+    -0.43938
+   ],
+   "color": "8fd67a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Frond3Stem",
+   "shape": "Cylinder",
+   "size": [
+    1.9794,
+    0.11,
+    0.11
+   ],
+   "cf": [
+    0.27251,
+    3.345,
+    0.09919,
+    0.16141,
+    -0.0095,
+    0.98684,
+    0.98514,
+    -0.05797,
+    -0.16169,
+    0.05875,
+    0.99827,
+    0.0
+   ],
+   "color": "4f8f3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Frond3LeafL",
+   "shape": "Ellipsoid",
+   "size": [
+    0.9472,
+    0.06,
+    1.65
+   ],
+   "cf": [
+    0.79013,
+    4.99919,
+    0.5601,
+    -0.31607,
+    -0.59769,
+    -0.7368,
+    0.404,
+    0.61789,
+    -0.67454,
+    0.85842,
+    -0.51087,
+    0.04617
+   ],
+   "color": "2f9e44",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Frond3LeafR",
+   "shape": "Ellipsoid",
+   "size": [
+    0.9472,
+    0.06,
+    1.65
+   ],
+   "cf": [
+    0.9653,
+    4.99919,
+    0.07883,
+    -0.30965,
+    -0.78623,
+    -0.53474,
+    -0.404,
+    0.61789,
+    -0.67454,
+    0.86075,
+    0.00716,
+    -0.50897
+   ],
+   "color": "2f9e44",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Frond3Rib",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.05,
+    1.32
+   ],
+   "cf": [
+    0.83285,
+    4.86694,
+    0.30313,
+    -0.34202,
+    -0.71985,
+    -0.60402,
+    0.0,
+    0.64279,
+    -0.76604,
+    0.93969,
+    -0.262,
+    -0.21985
+   ],
+   "color": "8fd67a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Frond4Stem",
+   "shape": "Cylinder",
+   "size": [
+    1.6888,
+    0.11,
+    0.11
+   ],
+   "cf": [
+    -0.27189,
+    3.195,
+    -0.12679,
+    -0.1932,
+    0.88548,
+    0.42262,
+    0.97702,
+    0.21317,
+    0.0,
+    -0.09009,
+    0.4129,
+    -0.90631
+   ],
+   "color": "4f8f3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Frond4LeafL",
+   "shape": "Ellipsoid",
+   "size": [
+    0.96,
+    0.06,
+    1.7
+   ],
+   "cf": [
+    -0.8527,
+    4.64407,
+    -0.68399,
+    0.34259,
+    0.46646,
+    0.8155,
+    0.3978,
+    0.71436,
+    -0.57572,
+    -0.85111,
+    0.52164,
+    0.05918
+   ],
+   "color": "3fb957",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Frond4LeafR",
+   "shape": "Ellipsoid",
+   "size": [
+    0.96,
+    0.06,
+    1.7
+   ],
+   "cf": [
+    -1.07207,
+    4.64407,
+    -0.21354,
+    0.43177,
+    0.69944,
+    0.56953,
+    -0.3978,
+    0.71436,
+    -0.57572,
+    -0.80952,
+    0.02202,
+    0.58667
+   ],
+   "color": "3fb957",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Frond4Rib",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.05,
+    1.36
+   ],
+   "cf": [
+    -0.90076,
+    4.51634,
+    -0.42003,
+    0.42262,
+    0.60644,
+    0.67352,
+    0.0,
+    0.74314,
+    -0.66913,
+    -0.90631,
+    0.28279,
+    0.31407
+   ],
+   "color": "8fd67a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Frond5Stem",
+   "shape": "Cylinder",
+   "size": [
+    1.5426,
+    0.11,
+    0.11
+   ],
+   "cf": [
+    0.07765,
+    3.12,
+    0.28978,
+    0.0604,
+    -0.25167,
+    -0.96593,
+    0.97239,
+    0.23337,
+    0.0,
+    0.22542,
+    -0.93925,
+    0.25882
+   ],
+   "color": "4f8f3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Frond5LeafL",
+   "shape": "Ellipsoid",
+   "size": [
+    0.96,
+    0.06,
+    1.7
+   ],
+   "cf": [
+    0.03504,
+    4.45196,
+    1.13355,
+    -0.86505,
+    0.11307,
+    -0.48878,
+    0.3934,
+    0.75748,
+    -0.52101,
+    0.31133,
+    -0.64299,
+    -0.69975
+   ],
+   "color": "2f9e44",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Frond5LeafR",
+   "shape": "Ellipsoid",
+   "size": [
+    0.96,
+    0.06,
+    1.7
+   ],
+   "cf": [
+    0.53643,
+    4.45196,
+    0.9992,
+    -0.90482,
+    -0.41942,
+    0.07342,
+    -0.3934,
+    0.75748,
+    -0.52101,
+    0.16291,
+    -0.50031,
+    -0.85039
+   ],
+   "color": "2f9e44",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Frond5Rib",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.05,
+    1.36
+   ],
+   "cf": [
+    0.26587,
+    4.32928,
+    0.99225,
+    -0.96593,
+    -0.15934,
+    -0.20395,
+    0.0,
+    0.78801,
+    -0.61566,
+    0.25882,
+    -0.59468,
+    -0.76116
+   ],
+   "color": "8fd67a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Frond6Stem",
+   "shape": "Cylinder",
+   "size": [
+    1.3544,
+    0.11,
+    0.11
+   ],
+   "cf": [
+    0.25394,
+    3.02,
+    -0.17781,
+    0.22983,
+    -0.78625,
+    0.57358,
+    0.95983,
+    0.28057,
+    -0.0,
+    -0.16093,
+    0.55054,
+    0.81915
+   ],
+   "color": "4f8f3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Frond6LeafL",
+   "shape": "Ellipsoid",
+   "size": [
+    0.9344,
+    0.06,
+    1.65
+   ],
+   "cf": [
+    1.11506,
+    4.13756,
+    -0.46948,
+    0.65119,
+    -0.53617,
+    -0.5371,
+    0.35139,
+    0.8403,
+    -0.41282,
+    0.67267,
+    0.0801,
+    0.7356
+   ],
+   "color": "23823a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Frond6LeafR",
+   "shape": "Ellipsoid",
+   "size": [
+    0.9344,
+    0.06,
+    1.65
+   ],
+   "cf": [
+    0.82254,
+    4.13756,
+    -0.88724,
+    0.40938,
+    -0.25865,
+    -0.87493,
+    -0.35139,
+    0.8403,
+    -0.41282,
+    0.84198,
+    0.47644,
+    0.25311
+   ],
+   "color": "23823a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Frond6Rib",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.05,
+    1.32
+   ],
+   "cf": [
+    0.89096,
+    4.03815,
+    -0.62385,
+    0.57358,
+    -0.40958,
+    -0.70941,
+    0.0,
+    0.86603,
+    -0.5,
+    0.81915,
+    0.28679,
+    0.49673
+   ],
+   "color": "8fd67a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Frond7Stem",
+   "shape": "Cylinder",
+   "size": [
+    1.1166,
+    0.11,
+    0.11
+   ],
+   "cf": [
+    -0.28012,
+    2.895,
+    0.07506,
+    -0.32871,
+    0.90827,
+    -0.25882,
+    0.94032,
+    0.3403,
+    0.0,
+    0.08808,
+    -0.24337,
+    -0.96593
+   ],
+   "color": "4f8f3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Frond7LeafL",
+   "shape": "Ellipsoid",
+   "size": [
+    0.9088,
+    0.06,
+    1.6
+   ],
+   "cf": [
+    -1.23354,
+    3.75172,
+    0.07377,
+    -0.43933,
+    0.38317,
+    0.81251,
+    0.32064,
+    0.91178,
+    -0.25661,
+    -0.83915,
+    0.14779,
+    -0.52343
+   ],
+   "color": "2f9e44",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Frond7LeafR",
+   "shape": "Ellipsoid",
+   "size": [
+    0.9088,
+    0.06,
+    1.6
+   ],
+   "cf": [
+    -1.10517,
+    3.75172,
+    0.55288,
+    -0.0391,
+    0.25794,
+    0.96537,
+    -0.32064,
+    0.91178,
+    -0.25661,
+    -0.94639,
+    -0.31957,
+    0.04705
+   ],
+   "color": "2f9e44",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Frond7Rib",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.05,
+    1.28
+   ],
+   "cf": [
+    -1.06534,
+    3.67333,
+    0.28546,
+    -0.25882,
+    0.33037,
+    0.90767,
+    0.0,
+    0.93969,
+    -0.34202,
+    -0.96593,
+    -0.08852,
+    -0.24321
+   ],
+   "color": "8fd67a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Frond8Stem",
+   "shape": "Cylinder",
+   "size": [
+    0.9311,
+    0.11,
+    0.11
+   ],
+   "cf": [
+    0.20506,
+    2.795,
+    0.20506,
+    0.28859,
+    -0.64553,
+    -0.70711,
+    0.91292,
+    0.40813,
+    0.0,
+    0.28859,
+    -0.64553,
+    0.70711
+   ],
+   "color": "4f8f3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Frond8LeafL",
+   "shape": "Ellipsoid",
+   "size": [
+    0.8832,
+    0.06,
+    1.55
+   ],
+   "cf": [
+    0.70094,
+    3.40544,
+    1.04456,
+    -0.47042,
+    0.02691,
+    -0.88203,
+    0.24798,
+    0.96329,
+    -0.10287,
+    0.84688,
+    -0.26712,
+    -0.45982
+   ],
+   "color": "3fb957",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Frond8LeafR",
+   "shape": "Ellipsoid",
+   "size": [
+    0.8832,
+    0.06,
+    1.55
+   ],
+   "cf": [
+    1.04456,
+    3.40544,
+    0.70095,
+    -0.84688,
+    -0.26712,
+    -0.45982,
+    -0.24798,
+    0.96329,
+    -0.10287,
+    0.47042,
+    0.02691,
+    -0.88203
+   ],
+   "color": "3fb957",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Frond8Rib",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.05,
+    1.24
+   ],
+   "cf": [
+    0.78967,
+    3.35767,
+    0.78967,
+    -0.70711,
+    -0.12279,
+    -0.69636,
+    0.0,
+    0.98481,
+    -0.17365,
+    0.70711,
+    -0.12279,
+    -0.69636
+   ],
+   "color": "8fd67a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Frond9Stem",
+   "shape": "Cylinder",
+   "size": [
+    0.743,
+    0.11,
+    0.11
+   ],
+   "cf": [
+    0.07247,
+    2.695,
+    -0.27046,
+    0.1254,
+    -0.22641,
+    0.96593,
+    0.87479,
+    0.4845,
+    -0.0,
+    -0.46799,
+    0.84498,
+    0.25882
+   ],
+   "color": "4f8f3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Frond9LeafL",
+   "shape": "Ellipsoid",
+   "size": [
+    0.8576,
+    0.06,
+    1.5
+   ],
+   "cf": [
+    0.5414,
+    3.04394,
+    -1.10896,
+    0.98043,
+    -0.19199,
+    0.0436,
+    0.18712,
+    0.97755,
+    0.09684,
+    -0.06121,
+    -0.08679,
+    0.99434
+   ],
+   "color": "2f9e44",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Frond9LeafR",
+   "shape": "Ellipsoid",
+   "size": [
+    0.8576,
+    0.06,
+    1.5
+   ],
+   "cf": [
+    0.08562,
+    3.04394,
+    -1.23108,
+    0.81847,
+    0.20966,
+    -0.53493,
+    -0.18712,
+    0.97755,
+    0.09684,
+    0.54322,
+    0.02084,
+    0.83933
+   ],
+   "color": "2f9e44",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Frond9Rib",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.05,
+    1.2
+   ],
+   "cf": [
+    0.28224,
+    3.023,
+    -1.05333,
+    0.96593,
+    0.00903,
+    -0.25866,
+    0.0,
+    0.99939,
+    0.0349,
+    0.25882,
+    -0.03371,
+    0.96534
+   ],
+   "color": "8fd67a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Frond10Stem",
+   "shape": "Cylinder",
+   "size": [
+    0.6466,
+    0.11,
+    0.11
+   ],
+   "cf": [
+    -0.06988,
+    2.645,
+    0.2608,
+    -0.13609,
+    0.22015,
+    -0.96593,
+    0.85059,
+    0.52582,
+    0.0,
+    0.50791,
+    -0.82161,
+    -0.25882
+   ],
+   "color": "4f8f3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Frond10LeafL",
+   "shape": "Ellipsoid",
+   "size": [
+    0.832,
+    0.06,
+    1.45
+   ],
+   "cf": [
+    -0.52254,
+    2.86728,
+    1.06579,
+    -0.985,
+    0.16559,
+    -0.0486,
+    0.15319,
+    0.96863,
+    0.19569,
+    0.07948,
+    0.1853,
+    -0.97946
+   ],
+   "color": "23823a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Frond10LeafR",
+   "shape": "Ellipsoid",
+   "size": [
+    0.832,
+    0.06,
+    1.45
+   ],
+   "cf": [
+    -0.08036,
+    2.86728,
+    1.18427,
+    -0.81329,
+    -0.23606,
+    0.53182,
+    -0.15319,
+    0.96863,
+    0.19569,
+    -0.56133,
+    0.07768,
+    -0.82394
+   ],
+   "color": "23823a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Frond10Rib",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.05,
+    1.16
+   ],
+   "cf": [
+    -0.27087,
+    2.86,
+    1.01089,
+    -0.96593,
+    -0.03602,
+    0.2563,
+    0.0,
+    0.99027,
+    0.13917,
+    -0.25882,
+    0.13443,
+    -0.95653
+   ],
+   "color": "8fd67a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Frond11Stem",
+   "shape": "Cylinder",
+   "size": [
+    0.564,
+    0.11,
+    0.11
+   ],
+   "cf": [
+    -0.15487,
+    2.595,
+    -0.22117,
+    -0.34577,
+    0.45764,
+    0.81915,
+    0.79787,
+    0.60283,
+    0.0,
+    -0.49381,
+    0.65357,
+    -0.57358
+   ],
+   "color": "4f8f3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Frond11LeafL",
+   "shape": "Ellipsoid",
+   "size": [
+    0.8064,
+    0.06,
+    1.4
+   ],
+   "cf": [
+    -0.46677,
+    2.69641,
+    -1.05339,
+    0.56326,
+    -0.30604,
+    0.76752,
+    0.11735,
+    0.94909,
+    0.29232,
+    -0.81791,
+    -0.07459,
+    0.5705
+   ],
+   "color": "3fb957",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Frond11LeafR",
+   "shape": "Ellipsoid",
+   "size": [
+    0.8064,
+    0.06,
+    1.4
+   ],
+   "cf": [
+    -0.83022,
+    2.69641,
+    -0.7989,
+    0.96123,
+    0.03458,
+    0.27358,
+    -0.11735,
+    0.94909,
+    0.29232,
+    -0.24955,
+    -0.31309,
+    0.91635
+   ],
+   "color": "3fb957",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Frond11Rib",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.05,
+    1.12
+   ],
+   "cf": [
+    -0.58309,
+    2.70201,
+    -0.83274,
+    0.81915,
+    -0.13876,
+    0.55654,
+    0.0,
+    0.9703,
+    0.24192,
+    -0.57358,
+    -0.19817,
+    0.79482
+   ],
+   "color": "8fd67a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Frond0Spike",
+   "shape": "Ellipsoid",
+   "size": [
+    0.16,
+    1.8,
+    0.16
+   ],
+   "cf": [
+    0.05,
+    3.31124,
+    -0.07526,
+    0.86603,
+    0.0,
+    0.5,
+    -0.06959,
+    0.99027,
+    0.12053,
+    -0.49513,
+    -0.13917,
+    0.8576
+   ],
+   "color": "3fb957",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  }
+ ],
+ "pivots": {
+  "Frond1": [
+   0.0,
+   2.37,
+   -0.1
+  ],
+  "Frond2": [
+   -0.0771,
+   2.37,
+   0.0919
+  ],
+  "Frond3": [
+   0.1128,
+   2.37,
+   0.041
+  ],
+  "Frond4": [
+   -0.1088,
+   2.37,
+   -0.0507
+  ],
+  "Frond5": [
+   0.0311,
+   2.37,
+   0.1159
+  ],
+  "Frond6": [
+   0.0983,
+   2.37,
+   -0.0688
+  ],
+  "Frond7": [
+   -0.0966,
+   2.37,
+   0.0259
+  ],
+  "Frond8": [
+   0.0707,
+   2.37,
+   0.0707
+  ],
+  "Frond9": [
+   0.0259,
+   2.37,
+   -0.0966
+  ],
+  "Frond10": [
+   -0.0259,
+   2.37,
+   0.0966
+  ],
+  "Frond11": [
+   -0.0574,
+   2.37,
+   -0.0819
+  ],
+  "Frond0": [
+   0.05,
+   2.42,
+   0.05
+  ]
+ },
+ "attrs": {
+  "Cost": 200,
+  "DisplayName": "Potted Plant",
+  "Notes": "Monstera in a glazed pot (primlib parts, fun-builds HomeDecor). The client sways each Frond<N>* group gently about Pivot_Frond<N>. Built by fun-builds/models/build_PottedPlant.py."
+ },
+ "size_studs": [
+  3.973,
+  6.226,
+  4.112
+ ],
+ "min": [
+  -2.095,
+  0.0,
+  -2.094
+ ],
+ "max": [
+  1.878,
+  6.226,
+  2.017
+ ],
+ "part_count": 64,
+ "duplicate_names": []
+}

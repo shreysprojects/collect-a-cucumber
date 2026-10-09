@@ -1,0 +1,12 @@
+=== Fun/Slide
+  @AssetId = 114858705856513
+  @Cost = 1000
+  @Notes = Footprint about 3.6 (x) x 11.1 (y) x 6.0 (z), centred on x=0.  Four ground-anchor pads sit flat on z=0: ladder pads at (+/-1.40, -5.04) and the splayed chute-post pads at (+/-1.30, 1.00); the red exit bumper at y 5.28..5.62 also touches the ground.  Deck walking surface z=4.40 spanning y -4.18..-2.45, x +/-1.70; step onto it from the top rung at z=4.24.  Deck is fenced on both sides by a top rail at z=5.66 (1.26 above the deck) and a mid rail at z=5.04, on three posts a side; the back is open under the grab hoop, whose apex clears the deck by 1.44 studs.  Chute riding surface runs z=4.40 at y=-2.45 down a parabola to z=0.40 at y=5.40, clear channel 2.24 wide and 0.74 deep - an R15 avatar fits.  The mid-span is carried by an A-frame: two dark posts splayed to x=+/-1.30 at the ground, tied at z=0.85, capped by saddles that lie flat against the chute underside.  ONE asymmetric detail: the r
+  @PropSet = plot
+  @Tris = 1710
+  Chute [MeshPart] pos (-0.00, 2.55, -1.40) size (2.80, 4.88, 8.21) SmoothPlastic f2c13d T0.00 collide=true
+  FeetAndPosts [MeshPart] pos (0.00, 0.73, 1.99) size (3.56, 1.45, 6.78) Metal 3b4350 T0.00 collide=true
+  Frame [MeshPart] pos (0.00, 2.16, 3.76) size (3.32, 4.05, 2.70) Metal 6c7789 T0.00 collide=true
+  LadderRails [MeshPart] pos (0.00, 2.41, 1.90) size (3.12, 4.62, 6.56) Metal 9aa7b8 T0.00 collide=true
+  Railings [MeshPart] pos (-0.00, 3.40, -0.55) size (3.40, 5.16, 10.23) SmoothPlastic 3f79d4 T0.00 collide=true
+  SlatsAndRungs [MeshPart] pos (-0.00, 2.59, -0.29) size (3.40, 5.19, 10.66) SmoothPlastic d9443c T0.00 collide=true

@@ -1,0 +1,3482 @@
+{
+ "key": "Turret",
+ "category": "Defences",
+ "parts": [
+  {
+   "name": "BaseFoot",
+   "shape": "Block",
+   "size": [
+    7.2,
+    0.33,
+    2.9823
+   ],
+   "cf": [
+    0.0,
+    0.165,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseFootB",
+   "shape": "Block",
+   "size": [
+    2.9823,
+    0.33,
+    7.2
+   ],
+   "cf": [
+    0.0,
+    0.165,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseFootC",
+   "shape": "Block",
+   "size": [
+    7.2,
+    0.36,
+    2.9823
+   ],
+   "cf": [
+    0.0,
+    0.18,
+    0.0,
+    0.70711,
+    0.0,
+    0.70711,
+    0.0,
+    1.0,
+    0.0,
+    -0.70711,
+    0.0,
+    0.70711
+   ],
+   "color": "23262c",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseFootD",
+   "shape": "Block",
+   "size": [
+    7.2,
+    0.36,
+    2.9823
+   ],
+   "cf": [
+    0.0,
+    0.18,
+    0.0,
+    0.70711,
+    0.0,
+    -0.70711,
+    0.0,
+    1.0,
+    0.0,
+    0.70711,
+    0.0,
+    0.70711
+   ],
+   "color": "23262c",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BasePlinth",
+   "shape": "Block",
+   "size": [
+    5.6,
+    1.35,
+    2.3196
+   ],
+   "cf": [
+    0.0,
+    0.975,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BasePlinthB",
+   "shape": "Block",
+   "size": [
+    2.3196,
+    1.35,
+    5.6
+   ],
+   "cf": [
+    0.0,
+    0.975,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BasePlinthC",
+   "shape": "Block",
+   "size": [
+    5.6,
+    1.38,
+    2.3196
+   ],
+   "cf": [
+    0.0,
+    0.99,
+    0.0,
+    0.70711,
+    0.0,
+    0.70711,
+    0.0,
+    1.0,
+    0.0,
+    -0.70711,
+    0.0,
+    0.70711
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BasePlinthD",
+   "shape": "Block",
+   "size": [
+    5.6,
+    1.38,
+    2.3196
+   ],
+   "cf": [
+    0.0,
+    0.99,
+    0.0,
+    0.70711,
+    0.0,
+    -0.70711,
+    0.0,
+    1.0,
+    0.0,
+    0.70711,
+    0.0,
+    0.70711
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseLip",
+   "shape": "Block",
+   "size": [
+    6.0,
+    0.22,
+    2.4853
+   ],
+   "cf": [
+    0.0,
+    1.61,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff8a2a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseLipB",
+   "shape": "Block",
+   "size": [
+    2.4853,
+    0.22,
+    6.0
+   ],
+   "cf": [
+    0.0,
+    1.61,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff8a2a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseLipC",
+   "shape": "Block",
+   "size": [
+    6.0,
+    0.22,
+    2.4853
+   ],
+   "cf": [
+    0.0,
+    1.61,
+    0.0,
+    0.70711,
+    0.0,
+    0.70711,
+    0.0,
+    1.0,
+    0.0,
+    -0.70711,
+    0.0,
+    0.70711
+   ],
+   "color": "ff8a2a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseLipD",
+   "shape": "Block",
+   "size": [
+    6.0,
+    0.22,
+    2.4853
+   ],
+   "cf": [
+    0.0,
+    1.61,
+    0.0,
+    0.70711,
+    0.0,
+    -0.70711,
+    0.0,
+    1.0,
+    0.0,
+    0.70711,
+    0.0,
+    0.70711
+   ],
+   "color": "ff8a2a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BasePanel1",
+   "shape": "Block",
+   "size": [
+    1.8596,
+    0.96,
+    0.1
+   ],
+   "cf": [
+    0.0,
+    0.99,
+    -2.83,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "56627a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseGusset1",
+   "shape": "Wedge",
+   "size": [
+    0.95,
+    1.0,
+    0.6
+   ],
+   "cf": [
+    -2.19203,
+    0.86,
+    -2.19203,
+    0.70711,
+    0.0,
+    0.70711,
+    0.0,
+    1.0,
+    0.0,
+    -0.70711,
+    0.0,
+    0.70711
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BasePanel2",
+   "shape": "Block",
+   "size": [
+    1.8596,
+    0.96,
+    0.1
+   ],
+   "cf": [
+    -2.83,
+    0.99,
+    -0.0,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0
+   ],
+   "color": "56627a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseGusset2",
+   "shape": "Wedge",
+   "size": [
+    0.95,
+    1.0,
+    0.6
+   ],
+   "cf": [
+    -2.19203,
+    0.86,
+    2.19203,
+    -0.70711,
+    0.0,
+    0.70711,
+    0.0,
+    1.0,
+    0.0,
+    -0.70711,
+    0.0,
+    -0.70711
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BasePanel3",
+   "shape": "Block",
+   "size": [
+    1.8596,
+    0.96,
+    0.1
+   ],
+   "cf": [
+    -0.0,
+    0.99,
+    2.83,
+    1.0,
+    0.0,
+    -0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "56627a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseGusset3",
+   "shape": "Wedge",
+   "size": [
+    0.95,
+    1.0,
+    0.6
+   ],
+   "cf": [
+    2.19203,
+    0.86,
+    2.19203,
+    -0.70711,
+    0.0,
+    -0.70711,
+    0.0,
+    1.0,
+    0.0,
+    0.70711,
+    0.0,
+    -0.70711
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BasePanel4",
+   "shape": "Block",
+   "size": [
+    1.8596,
+    0.96,
+    0.1
+   ],
+   "cf": [
+    2.83,
+    0.99,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "56627a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseGusset4",
+   "shape": "Wedge",
+   "size": [
+    0.95,
+    1.0,
+    0.6
+   ],
+   "cf": [
+    2.19203,
+    0.86,
+    -2.19203,
+    0.70711,
+    0.0,
+    -0.70711,
+    0.0,
+    1.0,
+    0.0,
+    0.70711,
+    0.0,
+    0.70711
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseDisplay",
+   "shape": "Block",
+   "size": [
+    1.25,
+    0.36,
+    0.06
+   ],
+   "cf": [
+    0.0,
+    0.99,
+    -2.89,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseLight1",
+   "shape": "Block",
+   "size": [
+    0.2,
+    0.18,
+    0.06
+   ],
+   "cf": [
+    0.36,
+    0.99,
+    -2.92,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseLight2",
+   "shape": "Block",
+   "size": [
+    0.2,
+    0.18,
+    0.06
+   ],
+   "cf": [
+    0.0,
+    0.99,
+    -2.92,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseLight3",
+   "shape": "Block",
+   "size": [
+    0.2,
+    0.18,
+    0.06
+   ],
+   "cf": [
+    -0.36,
+    0.99,
+    -2.92,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseBolt1",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    0.0,
+    0.4,
+    -3.1,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseBolt2",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    -1.64049,
+    0.4,
+    -2.74357,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseBolt3",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    -2.74357,
+    0.4,
+    -1.64049,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseBolt4",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    -3.1,
+    0.4,
+    -0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseBolt5",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    -2.74357,
+    0.4,
+    1.64049,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseBolt6",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    -1.64049,
+    0.4,
+    2.74357,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseBolt7",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    -0.0,
+    0.4,
+    3.1,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseBolt8",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    1.64049,
+    0.4,
+    2.74357,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseBolt9",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    2.74357,
+    0.4,
+    1.64049,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseBolt10",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    3.1,
+    0.4,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseBolt11",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    2.74357,
+    0.4,
+    -1.64049,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseBolt12",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    1.64049,
+    0.4,
+    -2.74357,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseRing",
+   "shape": "Cylinder",
+   "size": [
+    0.52,
+    3.7,
+    3.7
+   ],
+   "cf": [
+    0.0,
+    1.94,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadTurntable",
+   "shape": "Cylinder",
+   "size": [
+    0.28,
+    4.0,
+    4.0
+   ],
+   "cf": [
+    0.0,
+    2.32,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "9aa7b8",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadCheekLowL",
+   "shape": "Block",
+   "size": [
+    1.02,
+    1.04,
+    3.1
+   ],
+   "cf": [
+    1.59,
+    2.98,
+    0.35,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff8a2a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadCheekHighL",
+   "shape": "Block",
+   "size": [
+    1.02,
+    1.2,
+    2.5
+   ],
+   "cf": [
+    1.59,
+    4.1,
+    0.65,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff8a2a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadCheekSlopeL",
+   "shape": "Wedge",
+   "size": [
+    1.02,
+    1.2,
+    0.6
+   ],
+   "cf": [
+    1.59,
+    4.1,
+    -0.9,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff8a2a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadRoofBevelL",
+   "shape": "Wedge",
+   "size": [
+    1.02,
+    0.26,
+    0.46
+   ],
+   "cf": [
+    1.59,
+    4.83,
+    -0.37,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff8a2a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadCheekBumperL",
+   "shape": "Block",
+   "size": [
+    1.08,
+    0.3,
+    0.1
+   ],
+   "cf": [
+    1.59,
+    2.64,
+    -1.23,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadSidePanelL",
+   "shape": "Block",
+   "size": [
+    0.1,
+    1.5,
+    1.1
+   ],
+   "cf": [
+    2.13,
+    3.62,
+    1.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "56627a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadVentL1",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.14,
+    0.8
+   ],
+   "cf": [
+    2.19,
+    3.22,
+    1.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadVentL2",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.14,
+    0.8
+   ],
+   "cf": [
+    2.19,
+    3.62,
+    1.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadVentL3",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.14,
+    0.8
+   ],
+   "cf": [
+    2.19,
+    4.02,
+    1.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadCheekLowR",
+   "shape": "Block",
+   "size": [
+    1.02,
+    1.04,
+    3.1
+   ],
+   "cf": [
+    -1.59,
+    2.98,
+    0.35,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff8a2a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadCheekHighR",
+   "shape": "Block",
+   "size": [
+    1.02,
+    1.2,
+    2.5
+   ],
+   "cf": [
+    -1.59,
+    4.1,
+    0.65,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff8a2a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadCheekSlopeR",
+   "shape": "Wedge",
+   "size": [
+    1.02,
+    1.2,
+    0.6
+   ],
+   "cf": [
+    -1.59,
+    4.1,
+    -0.9,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff8a2a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadRoofBevelR",
+   "shape": "Wedge",
+   "size": [
+    1.02,
+    0.26,
+    0.46
+   ],
+   "cf": [
+    -1.59,
+    4.83,
+    -0.37,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff8a2a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadCheekBumperR",
+   "shape": "Block",
+   "size": [
+    1.08,
+    0.3,
+    0.1
+   ],
+   "cf": [
+    -1.59,
+    2.64,
+    -1.23,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadSidePanelR",
+   "shape": "Block",
+   "size": [
+    0.1,
+    1.5,
+    1.1
+   ],
+   "cf": [
+    -2.13,
+    3.62,
+    1.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "56627a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadVentR1",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.14,
+    0.8
+   ],
+   "cf": [
+    -2.19,
+    3.22,
+    1.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadVentR2",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.14,
+    0.8
+   ],
+   "cf": [
+    -2.19,
+    3.62,
+    1.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadVentR3",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.14,
+    0.8
+   ],
+   "cf": [
+    -2.19,
+    4.02,
+    1.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadChin",
+   "shape": "Block",
+   "size": [
+    2.2,
+    0.4,
+    1.8
+   ],
+   "cf": [
+    0.0,
+    2.66,
+    0.5,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadRear",
+   "shape": "Block",
+   "size": [
+    2.2,
+    1.9,
+    0.94
+   ],
+   "cf": [
+    0.0,
+    3.79,
+    1.41,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadRoof",
+   "shape": "Block",
+   "size": [
+    4.32,
+    0.26,
+    2.11
+   ],
+   "cf": [
+    0.0,
+    4.83,
+    0.905,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff8a2a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadHatch",
+   "shape": "Cylinder",
+   "size": [
+    0.08,
+    0.95,
+    0.95
+   ],
+   "cf": [
+    1.27,
+    4.98,
+    1.35,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "56627a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadHatchHandle",
+   "shape": "Block",
+   "size": [
+    0.5,
+    0.08,
+    0.12
+   ],
+   "cf": [
+    1.27,
+    5.06,
+    1.35,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadSensor",
+   "shape": "Block",
+   "size": [
+    1.5,
+    0.9,
+    1.1
+   ],
+   "cf": [
+    0.0,
+    5.4,
+    0.4,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadSensorHood",
+   "shape": "Block",
+   "size": [
+    1.3,
+    0.12,
+    0.5
+   ],
+   "cf": [
+    0.0,
+    5.9,
+    -0.02,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadEyeBezel",
+   "shape": "Cylinder",
+   "size": [
+    0.16,
+    0.84,
+    0.84
+   ],
+   "cf": [
+    0.0,
+    5.4,
+    -0.2,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadEye",
+   "shape": "Cylinder",
+   "size": [
+    0.09,
+    0.62,
+    0.62
+   ],
+   "cf": [
+    0.0,
+    5.4,
+    -0.285,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadEyeGlint",
+   "shape": "Ball",
+   "size": [
+    0.14,
+    0.14,
+    0.14
+   ],
+   "cf": [
+    0.13,
+    5.53,
+    -0.33,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadSensorLedL",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.14,
+    0.34
+   ],
+   "cf": [
+    0.77,
+    5.4,
+    0.15,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadSensorLedR",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.14,
+    0.34
+   ],
+   "cf": [
+    -0.77,
+    5.4,
+    0.15,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadTrunnion",
+   "shape": "Cylinder",
+   "size": [
+    4.44,
+    0.8,
+    0.8
+   ],
+   "cf": [
+    0.0,
+    3.7,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadHubL",
+   "shape": "Cylinder",
+   "size": [
+    0.2,
+    1.2,
+    1.2
+   ],
+   "cf": [
+    2.2,
+    3.7,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadHubBoltL",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.46,
+    0.46
+   ],
+   "cf": [
+    2.33,
+    3.7,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadHubR",
+   "shape": "Cylinder",
+   "size": [
+    0.2,
+    1.2,
+    1.2
+   ],
+   "cf": [
+    -2.2,
+    3.7,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadHubBoltR",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.46,
+    0.46
+   ],
+   "cf": [
+    -2.33,
+    3.7,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadDrumMount",
+   "shape": "Block",
+   "size": [
+    1.0,
+    0.36,
+    0.9
+   ],
+   "cf": [
+    0.0,
+    2.62,
+    2.1,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadDrum",
+   "shape": "Cylinder",
+   "size": [
+    2.3,
+    1.7,
+    1.7
+   ],
+   "cf": [
+    0.0,
+    3.55,
+    2.6,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadDrumBand",
+   "shape": "Cylinder",
+   "size": [
+    0.46,
+    1.78,
+    1.78
+   ],
+   "cf": [
+    0.0,
+    3.55,
+    2.6,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff8a2a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadDrumCapL",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    1.1,
+    1.1
+   ],
+   "cf": [
+    1.2,
+    3.55,
+    2.6,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadDrumSpokeL1",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.9,
+    0.16
+   ],
+   "cf": [
+    1.28,
+    3.55,
+    2.6,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.70711,
+    -0.70711,
+    0.0,
+    0.70711,
+    0.70711
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadDrumSpokeL2",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.9,
+    0.16
+   ],
+   "cf": [
+    1.28,
+    3.55,
+    2.6,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.70711,
+    -0.70711,
+    0.0,
+    0.70711,
+    -0.70711
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadTailLightL",
+   "shape": "Block",
+   "size": [
+    0.5,
+    0.16,
+    0.06
+   ],
+   "cf": [
+    1.6,
+    4.3,
+    1.92,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadDrumCapR",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    1.1,
+    1.1
+   ],
+   "cf": [
+    -1.2,
+    3.55,
+    2.6,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HeadDrumSpokeR1",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.9,
+    0.16
+   ],
+   "cf": [
+    -1.28,
+    3.55,
+    2.6,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.70711,
+    -0.70711,
+    0.0,
+    0.70711,
+    0.70711
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadDrumSpokeR2",
+   "shape": "Block",
+   "size": [
+    0.06,
+    0.9,
+    0.16
+   ],
+   "cf": [
+    -1.28,
+    3.55,
+    2.6,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.70711,
+    -0.70711,
+    0.0,
+    0.70711,
+    -0.70711
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadTailLightR",
+   "shape": "Block",
+   "size": [
+    0.5,
+    0.16,
+    0.06
+   ],
+   "cf": [
+    -1.6,
+    4.3,
+    1.92,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadFeedChute",
+   "shape": "Block",
+   "size": [
+    0.5,
+    0.14,
+    1.0942
+   ],
+   "cf": [
+    0.62,
+    4.45,
+    2.38,
+    1.0,
+    0.0,
+    -0.0,
+    -0.0,
+    0.9505,
+    -0.31074,
+    0.0,
+    0.31074,
+    0.9505
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadRound1",
+   "shape": "Cylinder",
+   "size": [
+    0.42,
+    0.14,
+    0.14
+   ],
+   "cf": [
+    0.62,
+    4.42605,
+    2.77507,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e0a93a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadRound2",
+   "shape": "Cylinder",
+   "size": [
+    0.42,
+    0.14,
+    0.14
+   ],
+   "cf": [
+    0.62,
+    4.50085,
+    2.54627,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e0a93a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadRound3",
+   "shape": "Cylinder",
+   "size": [
+    0.42,
+    0.14,
+    0.14
+   ],
+   "cf": [
+    0.62,
+    4.57565,
+    2.31747,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e0a93a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadRound4",
+   "shape": "Cylinder",
+   "size": [
+    0.42,
+    0.14,
+    0.14
+   ],
+   "cf": [
+    0.62,
+    4.65045,
+    2.08867,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e0a93a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadAntennaBase",
+   "shape": "Block",
+   "size": [
+    0.3,
+    0.14,
+    0.3
+   ],
+   "cf": [
+    -1.6,
+    5.0,
+    1.55,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadAntenna",
+   "shape": "Cylinder",
+   "size": [
+    1.05,
+    0.1,
+    0.1
+   ],
+   "cf": [
+    -1.6,
+    5.525,
+    1.55,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "HeadAntennaTip",
+   "shape": "Ball",
+   "size": [
+    0.24,
+    0.24,
+    0.24
+   ],
+   "cf": [
+    -1.6,
+    6.1,
+    1.55,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BarrelMantlet",
+   "shape": "Cylinder",
+   "size": [
+    2.12,
+    1.9,
+    1.9
+   ],
+   "cf": [
+    0.0,
+    3.7,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BarrelMantletPlate",
+   "shape": "Block",
+   "size": [
+    1.9,
+    1.1,
+    0.26
+   ],
+   "cf": [
+    0.0,
+    3.7,
+    -0.96,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "56627a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BarrelPlateBolt1",
+   "shape": "Cylinder",
+   "size": [
+    0.08,
+    0.16,
+    0.16
+   ],
+   "cf": [
+    0.78,
+    4.1,
+    -1.11,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BarrelPlateBolt2",
+   "shape": "Cylinder",
+   "size": [
+    0.08,
+    0.16,
+    0.16
+   ],
+   "cf": [
+    -0.78,
+    4.1,
+    -1.11,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BarrelPlateBolt3",
+   "shape": "Cylinder",
+   "size": [
+    0.08,
+    0.16,
+    0.16
+   ],
+   "cf": [
+    0.78,
+    3.3,
+    -1.11,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BarrelPlateBolt4",
+   "shape": "Cylinder",
+   "size": [
+    0.08,
+    0.16,
+    0.16
+   ],
+   "cf": [
+    -0.78,
+    3.3,
+    -1.11,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BarrelTubeL",
+   "shape": "Cylinder",
+   "size": [
+    2.3,
+    0.54,
+    0.54
+   ],
+   "cf": [
+    0.5,
+    3.7,
+    -2.15,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BarrelSleeveL",
+   "shape": "Cylinder",
+   "size": [
+    1.15,
+    0.7,
+    0.7
+   ],
+   "cf": [
+    0.5,
+    3.7,
+    -1.625,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BarrelRibAL",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.82,
+    0.82
+   ],
+   "cf": [
+    0.5,
+    3.7,
+    -1.32,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "ff8a2a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BarrelRibBL",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.82,
+    0.82
+   ],
+   "cf": [
+    0.5,
+    3.7,
+    -1.96,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "ff8a2a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BarrelBrakeL",
+   "shape": "Block",
+   "size": [
+    0.8,
+    0.8,
+    0.42
+   ],
+   "cf": [
+    0.5,
+    3.7,
+    -3.41,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "56627a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BarrelSlotL1",
+   "shape": "Block",
+   "size": [
+    0.05,
+    0.5,
+    0.08
+   ],
+   "cf": [
+    0.905,
+    3.7,
+    -3.3,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BarrelSlotL2",
+   "shape": "Block",
+   "size": [
+    0.05,
+    0.5,
+    0.08
+   ],
+   "cf": [
+    0.905,
+    3.7,
+    -3.5,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BarrelRingL",
+   "shape": "Cylinder",
+   "size": [
+    0.16,
+    0.86,
+    0.86
+   ],
+   "cf": [
+    0.5,
+    3.7,
+    -3.68,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BarrelBoreL",
+   "shape": "Cylinder",
+   "size": [
+    0.07,
+    0.4,
+    0.4
+   ],
+   "cf": [
+    0.5,
+    3.7,
+    -3.765,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BarrelTubeR",
+   "shape": "Cylinder",
+   "size": [
+    2.3,
+    0.54,
+    0.54
+   ],
+   "cf": [
+    -0.5,
+    3.7,
+    -2.15,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BarrelSleeveR",
+   "shape": "Cylinder",
+   "size": [
+    1.15,
+    0.7,
+    0.7
+   ],
+   "cf": [
+    -0.5,
+    3.7,
+    -1.625,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BarrelRibAR",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.82,
+    0.82
+   ],
+   "cf": [
+    -0.5,
+    3.7,
+    -1.32,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "ff8a2a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BarrelRibBR",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.82,
+    0.82
+   ],
+   "cf": [
+    -0.5,
+    3.7,
+    -1.96,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "ff8a2a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BarrelBrakeR",
+   "shape": "Block",
+   "size": [
+    0.8,
+    0.8,
+    0.42
+   ],
+   "cf": [
+    -0.5,
+    3.7,
+    -3.41,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "56627a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BarrelSlotR1",
+   "shape": "Block",
+   "size": [
+    0.05,
+    0.5,
+    0.08
+   ],
+   "cf": [
+    -0.905,
+    3.7,
+    -3.3,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BarrelSlotR2",
+   "shape": "Block",
+   "size": [
+    0.05,
+    0.5,
+    0.08
+   ],
+   "cf": [
+    -0.905,
+    3.7,
+    -3.5,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BarrelRingR",
+   "shape": "Cylinder",
+   "size": [
+    0.16,
+    0.86,
+    0.86
+   ],
+   "cf": [
+    -0.5,
+    3.7,
+    -3.68,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BarrelBoreR",
+   "shape": "Cylinder",
+   "size": [
+    0.07,
+    0.4,
+    0.4
+   ],
+   "cf": [
+    -0.5,
+    3.7,
+    -3.765,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BarrelClamp",
+   "shape": "Block",
+   "size": [
+    1.8,
+    0.7,
+    0.3
+   ],
+   "cf": [
+    0.0,
+    3.7,
+    -2.62,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BarrelMuzzleGlow",
+   "shape": "Block",
+   "size": [
+    1.0,
+    0.18,
+    0.1
+   ],
+   "cf": [
+    0.0,
+    3.7,
+    -3.7,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  }
+ ],
+ "pivots": {
+  "YawPivot": [
+   0.0,
+   2.2,
+   0.0
+  ],
+  "PitchPivot": [
+   0.0,
+   3.7,
+   0.0
+  ],
+  "MuzzleTipL": [
+   0.5,
+   3.7,
+   -3.85
+  ],
+  "MuzzleTipR": [
+   -0.5,
+   3.7,
+   -3.85
+  ],
+  "EyeLens": [
+   0.0,
+   5.4,
+   -0.33
+  ],
+  "DrumCentre": [
+   0.0,
+   3.55,
+   2.6
+  ]
+ },
+ "attrs": {
+  "Cost": 25000,
+  "PropSet": "defence",
+  "Notes": "Turret rebuilt 2026-09-24 (fun-builds/models/build_Turret.py, primlib parts). Rig by name prefix (DefenceService set 1): Base* static; Head* yaw about the vertical axis through BasePlinth (x = z = 0); Barrel* pitch about the X axis through HeadTrunnion (0, 3.70, 0). Barrels point -Z at rest; BarrelMuzzleGlow is centred between the muzzles (x = +/-0.5), shots leave its CFrame * (+/-0.5, 0, -0.15). Every yawing part stays within radius 4 at pitch -25..+45, and no moving part cuts another deeper than 0.03 at any yaw / pitch (build_Turret.py clash_sweep)."
+ },
+ "size_studs": [
+  7.2,
+  6.22,
+  7.4
+ ],
+ "min": [
+  -3.6,
+  0.0,
+  -3.8
+ ],
+ "max": [
+  3.6,
+  6.22,
+  3.6
+ ],
+ "part_count": 118,
+ "duplicate_names": []
+}

@@ -1,0 +1,21 @@
+=== Defences/BoostPad
+  @AssetId = 132852865089450
+  @Cost = 400
+  @Notes = Friendly / helpful read, never a hazard: no yellow-black stripes, no spikes, no red. Travel is +Y and the SILHOUETTE carries it: the two side rails start as knee-high kerbs at the -Y mouth and climb steadily to a pair of 2.94-stud lit gate posts at the +Y exit, so from every angle the prop is a wedge pointing +Y. Five cues agree: (1) the rail tops rise 0.62 -> 1.80 toward +Y with orange caps riding the rising line; (2) the cyan glow panel on each inner rail face is a taper - 0.10 tall at the mouth, 0.85 tall at the exit; (3) three cyan chevrons grow 2.8 / 3.9 / 5.0 studs wide and get brighter (rbx_transparency 0.30 / 0.15 / 0.00 - Roblox only, Blender's preview does not wire transparency into the material, which is why the SIZE ramp was made big enough to carry the read on its own); (4) the -Y entrance is a full-lane orange on-ramp with a cyan chevron laid into its slope - the first thin
+  @PropSet = defence
+  @Tris = 624
+  BollardCaps [MeshPart] pos (0.00, 0.93, 5.43) size (8.00, 0.26, 1.14) SmoothPlastic ff8a3d T0.00 collide=true
+  Chevron1 [MeshPart] pos (0.00, 0.53, 3.12) size (2.80, 0.26, 1.57) Neon 4dd2ff T0.30 collide=true
+  Chevron2 [MeshPart] pos (-0.00, 0.53, -0.14) size (3.90, 0.26, 2.07) Neon 4dd2ff T0.15 collide=true
+  Chevron3 [MeshPart] pos (-0.00, 0.53, -3.88) size (5.00, 0.26, 2.57) Neon 4dd2ff T0.00 collide=true
+  DeckSlab [MeshPart] pos (-0.00, 0.18, -0.69) size (7.96, 0.36, 10.62) Metal 6c7789 T0.00 collide=true
+  EntryBollards [MeshPart] pos (0.00, 0.43, 5.43) size (7.92, 0.86, 1.06) Metal 3b4350 T0.00 collide=true
+  EntryRamp [MeshPart] pos (0.00, 0.26, 5.30) size (6.80, 0.52, 1.40) SmoothPlastic ff8a3d T0.00 collide=true
+  ExitPosts [MeshPart] pos (-0.00, 1.35, -5.13) size (7.92, 2.70, 1.66) Metal 3b4350 T0.00 collide=true
+  PostCaps [MeshPart] pos (-0.00, 2.79, -5.11) size (8.00, 0.30, 1.79) SmoothPlastic ff8a3d T0.00 collide=true
+  PostLights [MeshPart] pos (-0.00, 2.24, -5.13) size (8.00, 0.44, 1.75) Neon 4dd2ff T0.00 collide=true
+  RailBodies [MeshPart] pos (0.00, 0.90, 0.30) size (8.00, 1.80, 9.40) Metal 3b4350 T0.00 collide=true
+  RailCaps [MeshPart] pos (0.00, 1.25, 0.30) size (8.00, 1.40, 9.40) SmoothPlastic ff8a3d T0.00 collide=true
+  RailGlow [MeshPart] pos (-0.00, 1.07, -0.10) size (7.00, 1.18, 8.60) Neon 4dd2ff T0.00 collide=true
+  RampArrow [MeshPart] pos (0.00, 0.30, 5.31) size (3.20, 0.54, 1.20) Neon 4dd2ff T0.00 collide=true
+  TreadDeck [MeshPart] pos (-0.00, 0.42, -0.64) size (6.80, 0.20, 10.52) Plastic 2a2d33 T0.00 collide=true

@@ -1,0 +1,598 @@
+{
+ "set": "defence props",
+ "props": {
+  "Turret": {
+   "collection": "Turret",
+   "parts": 22,
+   "tris": 1316,
+   "size_studs": [
+    5.8,
+    6.78,
+    5.86
+   ],
+   "min_z": 0.0,
+   "file": "build_turret.py",
+   "notes": "Rig by name prefix: Base* is static, Head* yaws about the world Z axis through (0, 0), Barrel* pitches about a horizontal axis parallel to X through the trunnion at (0, 0, 4.80). Modelled at zero yaw / zero pitch, barrels level and pointing +Y. Mass hierarchy is deliberate: the GUN is the biggest thing on the prop. The twin cannon runs 4.6 studs nose to tail (y -0.75 to 3.88) with 0.84-stud-thick tubes and chunky square muzzle brakes, and it projects 3.1 studs past the cradle face; the counterweight is a fat horizontal ammo drum behind the trunnion, NOT a vertical column - the silhouette's long axis is fore-aft, not up. Static base footprint 5.8 x 5.8 studs (feet), total height 5.86 studs. The gun deliberately overhangs the plinth, as a real turret's does: the widest yawing point is a brake-tip corner at radius 3.99, so a full 360 deg spin stays inside the standard 8 x 8 TILE. Everything on the head BEHIND the trunnion stays inside radius 2.76, i.e. within the 6 x 6 base footprint. Nothing dips below z = 0 (lowest geometry is the foot pads' bottom face at z = 0.0 and the conduit, which terminates buried inside the rear-left foot). Three Neon parts: HeadEye (sensor lens on the housing front) and BarrelMuzzleGlow (a charge disc inside each muzzle) - cyan reads as the targeting line. Orange accents: BaseCollar, HeadCheeks, BarrelMantlet, BarrelBand. HeadTrunnion is the axle and is grouped with the head, not the barrels, so it does not spin visually when the guns elevate. HeadDrum likewise stays with the head, so the counterweight never has to clear anything. The pitching group is centred on the trunnion in both y and z: traced by hand, at +/- 30 deg it still clears the housing top by 0.13 and the drum surface by 0.20, so +/- 25 deg is a safe usable range.",
+   "PIVOTS": {
+    "YawPivot": [
+     0.0,
+     0.0,
+     1.58
+    ],
+    "PitchPivot": [
+     0.0,
+     0.0,
+     4.8
+    ],
+    "MuzzleTipL": [
+     -0.5,
+     3.88,
+     4.8
+    ],
+    "MuzzleTipR": [
+     0.5,
+     3.88,
+     4.8
+    ],
+    "EyeLens": [
+     0.0,
+     1.1,
+     2.75
+    ],
+    "DrumCentre": [
+     0.0,
+     -1.65,
+     4.35
+    ]
+   }
+  },
+  "WoodenWall": {
+   "collection": "WoodenWall",
+   "parts": 8,
+   "tris": 816,
+   "size_studs": [
+    8.0,
+    1.36,
+    8.0
+   ],
+   "min_z": 0.0,
+   "file": "build_wooden_wall.py",
+   "notes": "TILING: every full-width member (Frame back-slab + ground sill, both front rails, both back rails, both iron bands) runs from x = -4.000 to x = +4.000 and stops there, so two copies placed 8 studs apart butt with no gap and no overlap. The pickets themselves stop at x = +/-3.92, which makes the tile-seam gap 0.16 studs - inside the 0.16..0.20 range of the interior plank gaps - so the seam vanishes into the plank rhythm. Picket pitch is exactly 1.000 stud (8 per tile), so the sharpened crest repeats with a period dividing 8. SEAM: the bevelled TIMBER members (sill, front rails, back rails) meet tile-to-tile as a 0.18-wide 0.09-deep chamfer groove. That is deliberate and correct - it reads as the butt joint between two 8-stud beams. The IRON BANDS are plain D.box, no bevel, exactly so they do NOT get that groove: banding is flat stock and a notch chipped out of it every 8 studs reads as a defect, not a joint. Their end faces are coplanar at x = +/-4 and the band runs unbroken down a whole wall. BOX: x -4.00..+4.00, y -0.68..+0.68 (1.36 deep, centred on y = 0), z 0.000..8.000. Nothing dips below z = 0; max z = 8.000 is the tip of pickets 2 and 3. Max y = +0.68 is the nail heads, min y = -0.68 the back rails - the depth is unchanged from the first pass. FACING: +Y is the weathered / attacked side and carries the front rails, the diagonal brace, the iron bands, the brace straps and every nail head. -Y is the dark back slab banded by two LIGHT back rails at the same heights as the front pair, so the wall reads from behind as well - it is meant to stand in open field, seen from both sides. DETERMINISM: the per-plank width jitter, the two leaning planks and the broken plank are a baked literal table (PLANKS / CHIP_CORE / CHIP_FACE), not a runtime RNG - the build is bit-identical every run and every coordinate is hand-checkable. No random module is used. VALUE - a 3-step ladder, and the whole point of the second pass. LIGHT c08a4e (L 145): picket face boards and the back rails. MID 8a5a2b (L 97): picket sides and sharpened tips, exposed as a 0.10 margin all round each face board. DARK 6b4423 (L 74): ALL structural timber - frame, sill, both front rails AND the diagonal brace. The structure is therefore ~2:1 darker than the picket field it crosses. Previously the rails and brace were 8a5a2b and measured the SAME rendered luminance as the plank faces (105 vs 104), so the wall flattened into one tan slab and the brace survived only on its lit edge; now the two horizontals and the diagonal are a dark graphic that holds at line-up distance. IRONWORK is Metal-mid 6c7789 - a cool grey that separates from warm wood in hue as well as value, and actually reads as iron; Metal-dark 3b4350 was reading as navy paint. The 3b4350 bolt heads now sit ON the mid-grey bands and straps, which is where a dark accent belongs. The four straps riding the diagonal are the brightest things on the wall, so they pin the brace even when it is only a few pixels wide. The only close pair (core mid vs back slab dark) is an internal face contact at the bottom of a 0.36-deep shadow slot, never a silhouette edge. The diagonal brace is 0.04 shallower than the front rails so their front faces are never coplanar where they cross - no z-fighting at the two brace/rail joints."
+  },
+  "StoneWall": {
+   "collection": "StoneWall",
+   "parts": 10,
+   "tris": 968,
+   "size_studs": [
+    8.0,
+    2.8,
+    8.0
+   ],
+   "min_z": 0.0,
+   "file": "build_stone_wall.py",
+   "notes": "Tiling wall segment, exactly 8 studs wide (x -4.00 .. 4.00), 8.00 tall, 2.64 deep (y -1.02 .. +1.62). Faces +Y: the batter, the buttress, the moss and every projecting ledge are on the +Y (attacker) side; the -Y side is a flat back with the same courses. WHY IT IS DEEP: this prop has to out-read the wooden wall as the upgrade, and both are 8 x 8. Mass is the only axis left, so it is 2.64 deep against the timber wall's 1.36 - a battered plinth 2.43 deep at the ground, a face that leans back 0.48 over the four courses (1.16 -> 0.68), a centre buttress whose toe reaches y 1.62 and a cap that corbels back OUT to 1.02. Face-on you read the crown and the buttress; from any angle off-axis the sloped base and the overhanging cap show in the outline. VALUE IS BUILT, NOT PAINTED: the three stone hexes only span 30 render levels under this key/fill rig (the +Y face is lit by the fill alone), so every dark in this prop is a SHADOW, not a colour. Three sources: (1) every block is inset 0.07 per side, so each joint is a 0.14-wide slot 0.28..0.76 deep whose mouth faces +Y - the key sun is behind the wall and the fill comes in at 26 deg, so nothing reaches the bottom of a joint and every block is outlined in near-black; (2) the cap overhangs the top course by 0.34 and lays a dark band across it, which is what makes the light crown read against the sky; (3) the buttress stands 0.14..0.30 proud and throws a hard vertical shadow to its LEFT (the fill comes from the front-right), breaking the horizontal courses. TILING CONTRACT: the crenellation period is 4 studs and a MERLON is centred on the seam - each tile carries a 1.20-wide half merlon at x -4..-2.8 and 2.8..4, so two copies butt into one 2.40-wide merlon and the joint is buried inside solid stone; the crenels (1.60) sit wholly inside a tile at |x| 1.2..2.8. Merlons are wider than the gaps on purpose - a solid crown reads heavier than a comb. The masonry is a real running bond: 3-block courses (joint ON the seam, so the seam is just another 0.14 mortar joint) alternate with 4-block courses that carry a full block ACROSS the seam via a 1.26 half block at each end. The bond colours are FORCED, not chosen: requiring every block to differ from its neighbours, from the blocks it overlaps below and from the block it meets across the seam leaves exactly one solution, L/D/M over D/M/L/D, repeating every two courses. The plinth, the buttress and the coping are all full-width single prisms, so they weld tile-to-tile with no joint at all. ENVELOPE: stone_block's corner jitter is hard-clamped per block (_clamp) to x = +/-4, z >= 0 and z <= 8. Blocks that straddle the seam are clamped with snap = 0.16, which also pulls their chamfer back out flush to x = +/-4 - without it the 0.07-0.08 bevel would cut a groove down the middle of a block that two tiles share and the pair would read as two walls. Every other block, and all the moss, uses snap = 0 so their 0.07 joint insets are never flattened onto the seam. Nothing dips below z = 0. MortarCore is a hidden slab (y -0.57 .. 0.40, z 1.24 .. 6.12) that backs every joint slot so no daylight comes through the jittered gaps; it is only ever seen at the bottom of a shadowed slot, so it is the darkest thing in the palette (metal dark). The parapet band is IRON on purpose - a 3-colour running bond forces all three stone values into every course, so a stone-valued band would have sat on its own value - and it ties the wall to the turret's palette. It is built matte (metallic 0, roughness 0.9) and roofed by the stone coping: an earlier metallic band blew a specular highlight off its exposed top face and rendered as a pure white (255) stripe across the crenels. The coping now covers that face completely, so the crenel floor is stone, not iron. The buttress is MID stone. It overlaps a same-value block only on its LEFT flank in courses 1 and 3, which is exactly the side its own cast shadow falls on. Moss is four patches in two clumps plus one at the base, each 1.3..2.8 studs across and standing 0.17 proud - sized to read as growth rather than the green slivers a scatter of small lumps gave. Three of the five sit on LIGHT blocks, where the green also separates in value. No moving parts, no pivots - this prop is static, so no PIVOTS / STATES are exported. Tri note: MossPatches are D.rock at the library default subdiv=1, the bare 20-face icosahedron (5 lumps = 100 tris of the 956 total)."
+  },
+  "SpikeTrap": {
+   "collection": "SpikeTrap",
+   "parts": 6,
+   "tris": 458,
+   "size_studs": [
+    8.0,
+    8.0,
+    2.97
+   ],
+   "min_z": 0.0,
+   "file": "build_spike_trap.py",
+   "notes": "Floor trap, 8 x 8 studs, x/y in [-4, 4], modelled EXTENDED (spikes up) so the render shows the danger. Three forms only: a dark plate, a RAISED hazard kerb ringing it, and nine large spikes in a black pit. The kerb is a real 0.45-stud-proud lip (top z = 0.90) rather than a flat decal, so the yellow/black warning is legible EDGE-ON at player eye height and not just from above; it is trivially steppable (a Roblox humanoid clears ~2 studs). Walkable surface inside the kerb is the pit pad at z = 0.52. Nothing dips below z = 0 in this pose. Spikes: 3 x 3 staggered, 1.8 pitch, heights falling off with distance from centre so the bed reads as a toothed mound, not a pincushion - tips run z 1.90 (outer) to 2.97 (centre), i.e. waist-to-chest on a 5-stud avatar. Each spike is a flared Danger-red socket (bottom 37% of its length) carrying a Steel-bright needle (top 63%); because a cone's silhouette area goes as the square of the height fraction, that split puts ~38% of each spike's ink in the bright steel - enough for the head to read as a polished point instead of a speck. METALLIC IS DELIBERATELY LOW (<= 0.15) on every part. These previews light a dark world with two suns, so a high-metallic surface mirrors that dark world and renders near-black: at metallic 0.9 the d5dbe4 tips measured luminance 0.40 against a 0.44 sky and vanished. The rbx_material custom prop still says Metal/DiamondPlate, which is what carries the look into Roblox - the Blender metallic value only affects these renders. MOVING PARTS are exactly the two objects whose names start with 'Spikes' (SpikesBed, SpikesTips); BasePlate / DeckPit / HazardKerb / HazardKerbDark never move. STATES is the z offset applied to the Spikes* parts: Retracted = -2.63 drops the tallest tip from z 2.9726 to 0.3426 - below the pit pad (0.52) and below the deck top (0.45), so nothing pokes through - and sinks the spike roots to z = -2.17. That is below the floor on purpose; the installer should either let them clip or hide the shaft. Spike lengths carry a subtractive seeded jitter (D.random.Random(7)) so no two match, and the same rng yaws each 4-sided spike so the facets do not all line up. Jitter only ever SHORTENS a spike, which is what makes the Retracted number provably safe. The rng comes off the lib as D.random to keep this module's only import as bmesh + mathutils.Matrix; bpy is never imported and bpy.ops is never called.",
+   "STATES": {
+    "Extended": 0.0,
+    "Retracted": -2.63
+   }
+  },
+  "BoostPad": {
+   "collection": "BoostPad",
+   "parts": 15,
+   "tris": 624,
+   "size_studs": [
+    8.0,
+    12.0,
+    2.94
+   ],
+   "min_z": 0.0,
+   "file": "build_boost_pad.py",
+   "notes": "Friendly / helpful read, never a hazard: no yellow-black stripes, no spikes, no red. Travel is +Y and the SILHOUETTE carries it: the two side rails start as knee-high kerbs at the -Y mouth and climb steadily to a pair of 2.94-stud lit gate posts at the +Y exit, so from every angle the prop is a wedge pointing +Y. Five cues agree: (1) the rail tops rise 0.62 -> 1.80 toward +Y with orange caps riding the rising line; (2) the cyan glow panel on each inner rail face is a taper - 0.10 tall at the mouth, 0.85 tall at the exit; (3) three cyan chevrons grow 2.8 / 3.9 / 5.0 studs wide and get brighter (rbx_transparency 0.30 / 0.15 / 0.00 - Roblox only, Blender's preview does not wire transparency into the material, which is why the SIZE ramp was made big enough to carry the read on its own); (4) the -Y entrance is a full-lane orange on-ramp with a cyan chevron laid into its slope - the first thing an approaching player sees, and the only direction cue that is not foreshortened from that angle; (5) the two ends differ utterly in mass - 1.06-stud kerb bollards at the entry, 2.94-stud dark posts with a cyan lamp collar and an orange cap at the exit - so a player who walks up to the +Y end knows at a glance they are at the wrong end.\nFootprint is exactly x -4..+4, y -6..+6; the top of the prop is z = 2.94 (the exit post caps). Running surface (TreadDeck top) is z = 0.52. The middle 6.2 studs of width (|x| <= 3.10) are a clean flat run: the only things above 0.52 inside it are the three chevrons at 0.66 (0.14 proud). Everything structural lives at |x| >= 3.10; the only thing that ever reaches over the lane is the exit lamp collar / cap at |x| >= 3.01 and z >= 2.02 - a player runs under it.\nNothing dips below z = 0 - min_z is exactly 0.0 (DeckSlab, EntryRamp, RailBodies, ExitPosts and EntryBollards all bottom out on the ground plane). Nothing floats: the chevrons and the ramp arrow are sunk into the surfaces they sit on, the rail caps are embedded 0.07 into the rail bodies, the glow panels 0.04 into the inner rail faces, the post caps 0.06 into the posts, the tread 0.04 into the chassis slab, and each rail runs 0.10 into the bollard / post it springs from. Coincident faces are avoided throughout: the post and bollard BODIES stop at x 3.96 / y +-5.96 so the collars and caps that reach the 4.00 / 6.00 footprint edge never share a plane with them, and the chassis slab is inset to 3.98 for the same reason.\nNeon parts use roughness 0.85 so a specular sheen does not stack on top of the emission and blow the cyan out to white. defenselib has no 'Rubber' Enum.Material, so the tread deck uses 'Plastic' with the Rubber-black hex (2a2d33) at roughness 0.92. Fully deterministic - the build uses no randomness at all, so no seed is needed."
+  }
+ },
+ "parts": [
+  {
+   "collection": "Turret",
+   "name": "Turret.BarrelBand",
+   "hex": "ff8a3d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.BarrelBrakeTips",
+   "hex": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.BarrelCradle",
+   "hex": "6c7789",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.BarrelMantlet",
+   "hex": "ff8a3d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.BarrelMuzzleGlow",
+   "hex": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 56
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.BarrelMuzzles",
+   "hex": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.BarrelSight",
+   "hex": "2a2d33",
+   "material": "Plastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.BarrelTubes",
+   "hex": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.BaseBolts",
+   "hex": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 80
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.BaseCollar",
+   "hex": "ff8a3d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.BaseConduit",
+   "hex": "2a2d33",
+   "material": "Plastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.BaseFeet",
+   "hex": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 176
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.BasePlinth",
+   "hex": "6c7789",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.BaseRing",
+   "hex": "2a2d33",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.HeadCheeks",
+   "hex": "ff8a3d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.HeadDrum",
+   "hex": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.HeadDrumHubs",
+   "hex": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 56
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.HeadEye",
+   "hex": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.HeadHousing",
+   "hex": "6c7789",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.HeadTrunnion",
+   "hex": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.HeadTurntable",
+   "hex": "9aa7b8",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.HeadYoke",
+   "hex": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "WoodenWall",
+   "name": "WoodenWall.BackRails",
+   "hex": "c08a4e",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "WoodenWall",
+   "name": "WoodenWall.BraceStraps",
+   "hex": "6c7789",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 176
+  },
+  {
+   "collection": "WoodenWall",
+   "name": "WoodenWall.Frame",
+   "hex": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 56
+  },
+  {
+   "collection": "WoodenWall",
+   "name": "WoodenWall.IronBands",
+   "hex": "6c7789",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 24
+  },
+  {
+   "collection": "WoodenWall",
+   "name": "WoodenWall.Nails",
+   "hex": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 144
+  },
+  {
+   "collection": "WoodenWall",
+   "name": "WoodenWall.PlankCores",
+   "hex": "8a5a2b",
+   "material": "WoodPlanks",
+   "transparency": 0.0,
+   "tris": 132
+  },
+  {
+   "collection": "WoodenWall",
+   "name": "WoodenWall.PlankFaces",
+   "hex": "c08a4e",
+   "material": "WoodPlanks",
+   "transparency": 0.0,
+   "tris": 96
+  },
+  {
+   "collection": "WoodenWall",
+   "name": "WoodenWall.RailsBrace",
+   "hex": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 100
+  },
+  {
+   "collection": "StoneWall",
+   "name": "StoneWall.BlocksDark",
+   "hex": "6b675f",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 264
+  },
+  {
+   "collection": "StoneWall",
+   "name": "StoneWall.BlocksLight",
+   "hex": "b9b3a7",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 176
+  },
+  {
+   "collection": "StoneWall",
+   "name": "StoneWall.BlocksMid",
+   "hex": "8f8a80",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 176
+  },
+  {
+   "collection": "StoneWall",
+   "name": "StoneWall.Buttress",
+   "hex": "6b675f",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 40
+  },
+  {
+   "collection": "StoneWall",
+   "name": "StoneWall.Coping",
+   "hex": "8f8a80",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 20
+  },
+  {
+   "collection": "StoneWall",
+   "name": "StoneWall.Merlons",
+   "hex": "b9b3a7",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 132
+  },
+  {
+   "collection": "StoneWall",
+   "name": "StoneWall.MortarCore",
+   "hex": "3b4350",
+   "material": "Concrete",
+   "transparency": 0.0,
+   "tris": 12
+  },
+  {
+   "collection": "StoneWall",
+   "name": "StoneWall.MossPatches",
+   "hex": "5f8f4a",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 100
+  },
+  {
+   "collection": "StoneWall",
+   "name": "StoneWall.ParapetBand",
+   "hex": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 20
+  },
+  {
+   "collection": "StoneWall",
+   "name": "StoneWall.Plinth",
+   "hex": "6b675f",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "SpikeTrap",
+   "name": "SpikeTrap.BasePlate",
+   "hex": "3b4350",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "SpikeTrap",
+   "name": "SpikeTrap.DeckPit",
+   "hex": "2a2d33",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 12
+  },
+  {
+   "collection": "SpikeTrap",
+   "name": "SpikeTrap.HazardKerb",
+   "hex": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 48
+  },
+  {
+   "collection": "SpikeTrap",
+   "name": "SpikeTrap.HazardKerbDark",
+   "hex": "2a2d33",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 192
+  },
+  {
+   "collection": "SpikeTrap",
+   "name": "SpikeTrap.SpikesBed",
+   "hex": "d9443c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 108
+  },
+  {
+   "collection": "SpikeTrap",
+   "name": "SpikeTrap.SpikesTips",
+   "hex": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 54
+  },
+  {
+   "collection": "BoostPad",
+   "name": "BoostPad.BollardCaps",
+   "hex": "ff8a3d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "BoostPad",
+   "name": "BoostPad.Chevron1",
+   "hex": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.3,
+   "tris": 20
+  },
+  {
+   "collection": "BoostPad",
+   "name": "BoostPad.Chevron2",
+   "hex": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.15,
+   "tris": 20
+  },
+  {
+   "collection": "BoostPad",
+   "name": "BoostPad.Chevron3",
+   "hex": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 20
+  },
+  {
+   "collection": "BoostPad",
+   "name": "BoostPad.DeckSlab",
+   "hex": "6c7789",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "BoostPad",
+   "name": "BoostPad.EntryBollards",
+   "hex": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "BoostPad",
+   "name": "BoostPad.EntryRamp",
+   "hex": "ff8a3d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 8
+  },
+  {
+   "collection": "BoostPad",
+   "name": "BoostPad.ExitPosts",
+   "hex": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "BoostPad",
+   "name": "BoostPad.PostCaps",
+   "hex": "ff8a3d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "BoostPad",
+   "name": "BoostPad.PostLights",
+   "hex": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 24
+  },
+  {
+   "collection": "BoostPad",
+   "name": "BoostPad.RailBodies",
+   "hex": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 24
+  },
+  {
+   "collection": "BoostPad",
+   "name": "BoostPad.RailCaps",
+   "hex": "ff8a3d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 24
+  },
+  {
+   "collection": "BoostPad",
+   "name": "BoostPad.RailGlow",
+   "hex": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 24
+  },
+  {
+   "collection": "BoostPad",
+   "name": "BoostPad.RampArrow",
+   "hex": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 20
+  },
+  {
+   "collection": "BoostPad",
+   "name": "BoostPad.TreadDeck",
+   "hex": "2a2d33",
+   "material": "Plastic",
+   "transparency": 0.0,
+   "tris": 44
+  }
+ ],
+ "total_parts": 61,
+ "total_tris": 4182
+}

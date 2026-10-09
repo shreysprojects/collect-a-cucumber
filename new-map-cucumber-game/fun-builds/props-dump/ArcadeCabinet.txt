@@ -1,0 +1,24 @@
+=== Fun/ArcadeCabinet
+  @AssetId = 110420633927919
+  @Cost = 900
+  @Notes = Upright cabinet, 2.84 wide (x) x 3.00 deep (y) x 6.42 tall over the T-molding bead; the body inside the bead is 2.76 x 3.00 x 6.40.  Centred on x=0, facing +Y. It stands on four feet, so the body floats 0.16 clear of the floor and the front kick space reads.  Both side panels are one prism of the classic cabinet profile - vertical back, marquee stepping forward at the top, screen recessed, control deck jutting out to y=+1.50, cash door and kick tucked back underneath.  Along the molded run (over the top and down the whole front) the panel stops EDGE_SET=0.13 short of that silhouette and the orange T-molding bead rides ON the set-back edge, so it caps it as a 0.30-wide half-round standing 0.15 proud of the panel edge and 0.04 proud of each side face - no blue edge strip is left showing (recolour TMolding for a cheap variant; it is the piece that names the object).  The panel's back and bo
+  @Pivot_CashDoorHinge = (-1.16, 1.25, -0.76)
+  @Pivot_JoystickPivot = (0.62, 2.74, -1.06)
+  @Pivot_MarqueeCentre = (0.00, 5.68, -0.62)
+  @PropSet = plot
+  @State_CashDoorOpen = -100
+  @State_CashDoorShut = 0
+  @Tris = 1610
+  Cabinet [MeshPart] pos (0.00, 3.28, 0.06) size (2.76, 6.24, 2.87) SmoothPlastic 3f79d4 T0.00 collide=true
+  DarkShell [MeshPart] pos (-0.00, 1.43, -0.05) size (2.79, 2.86, 2.91) SmoothPlastic 23262c T0.00 collide=true
+  FrontFrame [MeshPart] pos (0.00, 4.48, -0.18) size (2.32, 3.24, 0.96) SmoothPlastic 3b4350 T0.00 collide=true
+  MarqueePanel [MeshPart] pos (-0.00, 5.68, -0.57) size (2.18, 0.65, 0.10) SmoothPlastic f2f0ea T0.00 collide=true
+  MarqueeText [MeshPart] pos (0.02, 5.68, -0.67) size (2.08, 0.37, 0.09) Neon ff4fa3 T0.00 collide=true
+  Metalwork [MeshPart] pos (0.09, 1.95, -1.04) size (1.55, 2.46, 0.56) Metal 9aa7b8 T0.00 collide=true
+  PixelsCyan [MeshPart] pos (-0.00, 3.92, -0.08) size (0.96, 0.60, 0.17) Neon 4dd2ff T0.00 collide=true
+  PixelsLime [MeshPart] pos (-0.00, 3.50, -0.17) size (1.40, 0.42, 0.13) Neon 9dff4d T0.00 collide=true
+  Plinth [MeshPart] pos (0.00, 1.02, -0.23) size (2.32, 1.72, 1.06) SmoothPlastic 6c7789 T0.00 collide=true
+  RedControls [MeshPart] pos (-0.09, 2.99, -1.18) size (1.70, 0.69, 0.29) SmoothPlastic d9443c T0.00 collide=true
+  Screen [MeshPart] pos (-0.00, 3.79, -0.05) size (1.52, 1.12, 0.30) SmoothPlastic 10141c T0.00 collide=true
+  TMolding [MeshPart] pos (0.00, 3.28, 0.03) size (2.84, 6.24, 2.95) SmoothPlastic ff8a3d T0.00 collide=true
+  YellowButtons [MeshPart] pos (-0.60, 2.79, -0.90) size (0.79, 0.14, 0.23) SmoothPlastic f2c13d T0.00 collide=true

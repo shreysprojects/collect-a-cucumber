@@ -1,0 +1,533 @@
+--[[
+	BuildService  (Script, ServerScriptService)  2026-09-10
+	Server half of build mode. At start it turns ServerStorage.Builds/<Category>/<Model> into placeable
+	templates in ReplicatedStorage.PlaceableBuilds/<Category>/<Key>: variant collections are split by
+	their A_ / B_ / C_ part prefix (one build each), every part is anchored, an invisible "Hitbox"
+	PrimaryPart wraps the bounding box (the overlap test and the placement height use it), the
+	authoring attributes (Notes, Pivot_*, State_* ...) are dropped and Key / Category / DisplayName /
+	Cost / Source / IsFloor / IsStairs are stamped (BuildCatalog).
+	GRASS TILES: every plot gets plot.GrassTiles, round(Size / BuildCatalog.CELL) equal cells per axis (the
+	plot's colour in two shades alternating like a chessboard - one flat square per cell, no texture, so
+	each cell reads as one tile the size of a Flooring tile - columns centred on the plot's
+	X, rows hung off the back edge PlotUpgradeService keeps fixed, the grid ending exactly on the edges)
+	whose top is the ground walking surface. A placed Flooring tile fills exactly one cell (FitTile) and
+	RefreshGrass makes that grass tile invisible and non-collidable - nothing of the grass shows where a
+	tile is; it comes back when the tile leaves. Rebuilt when the plot is resized.
+	Remotes.requestBuildPlacement(key, cframe, {Collisions = bool}) -> ok, reason. Own plot, standing at the base, only the
+	client's X / Z + yaw (+ which floor) are trusted, the footprint must stay inside the plot, nothing
+	may overlap plot.Placed (eggs, cucumbers, builds) or the plot's fixtures. A Flooring tile snaps to
+	a full grid cell; a Staircase (IsStairs) snaps so its landing's open edge lies on a cell boundary.
+	Then the Cost is taken from the player's Cash (DataService) and the build is cloned into
+	plot.Placed with attributes Owner / BuildKey / Category / DisplayName / Cost / Level / PlotX / PlotZ
+	/ Yaw and the tag "PlacedBuild". Cash are charged at placement, never on the pick.
+	Remotes.requestBuildMove(model, cframe, {Collisions = bool}) -> ok, reason: the same validation for one of the player's
+	own placed builds (its own parts ignored), then it is pivoted there for free.
+	Remotes.requestBuildSell(model) -> ok, refund | reason: one of the player's own placed builds is
+	destroyed and BuildCatalog.SELL_REFUND of its Cost is paid back.
+	FLOORS: a build lands on the floor the player stands on (BuildCatalog.PlayerLevel); the level is
+	read back from the requested height and may never be above the player's. A tile's TOP and a
+	build's BOTTOM both sit at BuildCatalog.SurfaceY(level): the grass top on the ground, LEVEL_HEIGHT
+	+ FLOOR_THICKNESS above it upstairs (tiles rest on the 12-stud walls, flush with the Staircase
+	landing). Tiles and builds ignore each other in the overlap test on the ground (Blocks); upstairs a
+	tile blocks on everything, anything else must have flooring under its whole footprint
+	(Supported), and a tile must JOIN the upstairs floor (FloorAnchored: edge to edge with a tile
+	already up there, or the cell straight off a staircase landing).
+	Placed builds are NOT saved yet (nothing on a plot is). EggPlacement empties plot.Placed when the
+	plot is released.
+	EDGES + COLLISIONS (2026-09-10, later): a Flooring tile snaps to the nearest cell of ANY size and is
+	stretched to it (BuildCatalog.FitTile), so the edge strips take flooring too. The Collisions option the
+	client sends (the checkbox on the placing strip) is passed to BuildCatalog.Blocks: off, builds may
+	intersect each other; fixtures always block and a tile never takes a held cell.
+]]
+
+--..Services..--
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local ServerStorage = game:GetService("ServerStorage")
+local CollectionService = game:GetService("CollectionService")
+
+--..Modules..--
+local DataService = require(ServerStorage:WaitForChild("DataService"))
+local BuildCatalog = require(ReplicatedStorage:WaitForChild("Modules"):WaitForChild("BuildCatalog"))
+
+--..Config..--
+local COLLISION_SHRINK = 0.96 -- hitbox fraction for the overlap test so edges may touch (keep in step with BuildMenuClient)
+local PLACE_COOLDOWN = 0.15 -- seconds per player
+local BOUNDS_EPSILON = 0.05
+local AT_BASE_MARGIN = 6 -- studs outside the plot edge that still count as "at the base" (EggPlacement / BaseHUDController)
+local KEEP_ATTRIBUTES = {Key = true, Category = true, DisplayName = true, Cost = true, Source = true, IsFloor = true, IsStairs = true}
+local LOBBY = workspace:WaitForChild("Map"):WaitForChild("Lobby")
+local PLOTS = LOBBY:WaitForChild("Plots")
+
+--..Instances..--
+local Remotes = ReplicatedStorage:FindFirstChild("Remotes")
+if not Remotes then
+	Remotes = Instance.new("Folder")
+	Remotes.Name = "Remotes"
+	Remotes.Parent = ReplicatedStorage
+end
+local function RemoteFunction(name)
+	local remote = Remotes:FindFirstChild(name)
+	if not remote then
+		remote = Instance.new("RemoteFunction")
+		remote.Name = name
+		remote.Parent = Remotes
+	end
+	return remote
+end
+local requestBuildPlacement = RemoteFunction(BuildCatalog.REMOTE)
+local requestBuildMove = RemoteFunction(BuildCatalog.MOVE_REMOTE)
+local requestBuildSell = RemoteFunction(BuildCatalog.SELL_REMOTE)
+local Templates = ReplicatedStorage:FindFirstChild(BuildCatalog.TEMPLATES)
+if Templates then
+	Templates:ClearAllChildren()
+else
+	Templates = Instance.new("Folder")
+	Templates.Name = BuildCatalog.TEMPLATES
+end
+
+--..Variables..--
+local LastPlace = {} -- [player] = os.clock()
+
+--..Templates..--
+local function MakeTemplate(source, category, folder, variant)
+	local model = source:Clone()
+	local key = BuildCatalog.KeyOf(source, variant)
+	model.Name = key
+	if variant then
+		local prefix = variant.Letter .. "_"
+		for _, child in ipairs(model:GetChildren()) do
+			if child:IsA("BasePart") and child.Name:sub(1, #prefix) ~= prefix then child:Destroy() end
+		end
+	end
+	local isFloor = source:GetAttribute("IsFloor") == true
+	local parts = 0
+	for _, d in ipairs(model:GetDescendants()) do
+		if d:IsA("LuaSourceContainer") or d:IsA("ProximityPrompt") then
+			d:Destroy()
+		elseif d:IsA("BasePart") then
+			parts += 1
+			d.Anchored = true
+			d.CanTouch = false
+			if isFloor then d.CanCollide = true end -- a surface: always walkable
+		end
+	end
+	if parts == 0 then
+		model:Destroy()
+		return nil
+	end
+	local cf, size = model:GetBoundingBox()
+	local hitbox = Instance.new("Part")
+	hitbox.Name = "Hitbox"
+	hitbox.Size = size
+	hitbox.CFrame = CFrame.new(cf.Position) -- upright box around the build
+	hitbox.Transparency = 1
+	hitbox.Anchored = true
+	hitbox.CanCollide = false
+	hitbox.CanTouch = false
+	hitbox.CanQuery = true -- the overlap test finds placed builds through it
+	hitbox.Parent = model
+	model.PrimaryPart = hitbox
+	for name in pairs(model:GetAttributes()) do
+		if not KEEP_ATTRIBUTES[name] then model:SetAttribute(name, nil) end
+	end
+	model:SetAttribute("Key", key)
+	model:SetAttribute("Category", category)
+	model:SetAttribute("DisplayName", BuildCatalog.DisplayNameOf(source, variant))
+	model:SetAttribute("Cost", BuildCatalog.CostOf(source))
+	model:SetAttribute("Source", source.Name)
+	model:SetAttribute("IsFloor", isFloor)
+	model:SetAttribute("IsStairs", source:GetAttribute("IsStairs") == true)
+	model.Parent = folder
+	return model
+end
+
+local function BuildTemplates()
+	local source = ServerStorage:WaitForChild(BuildCatalog.FOLDER, 30)
+	if not source then
+		warn("[BuildService] ServerStorage." .. BuildCatalog.FOLDER .. " is missing; build mode has nothing to sell")
+		Templates.Parent = ReplicatedStorage
+		return 0, 0
+	end
+	local builds, categories = 0, 0
+	for _, sub in ipairs(source:GetChildren()) do
+		if sub:IsA("Folder") then
+			local folder = Instance.new("Folder")
+			folder.Name = sub.Name
+			for _, model in ipairs(sub:GetChildren()) do
+				if model:IsA("Model") then
+					local variants = BuildCatalog.VariantsOf(model)
+					if variants then
+						for _, variant in ipairs(variants) do
+							if MakeTemplate(model, sub.Name, folder, variant) then builds += 1 end
+						end
+					elseif MakeTemplate(model, sub.Name, folder) then
+						builds += 1
+					end
+				end
+			end
+			if #folder:GetChildren() > 0 then
+				categories += 1
+				folder.Parent = Templates
+			else
+				folder:Destroy()
+			end
+		elseif sub:IsA("Model") then
+			warn(("[BuildService] %s sits directly in ServerStorage.%s; move it into a category subfolder (Walls / Defences / Garden / Fun) to sell it"):format(sub.Name, BuildCatalog.FOLDER))
+		end
+	end
+	Templates.Parent = ReplicatedStorage
+	return builds, categories
+end
+
+--..Plots..--
+local function PlotOf(player)
+	for _, plot in ipairs(PLOTS:GetChildren()) do
+		if plot:IsA("BasePart") and plot:GetAttribute("Owner") == player.UserId then return plot end
+	end
+	return nil
+end
+
+local function HolderOf(plot)
+	local holder = plot:FindFirstChild("Placed")
+	if not holder then
+		holder = Instance.new("Folder")
+		holder.Name = "Placed"
+		holder.Parent = plot
+	end
+	return holder
+end
+
+local function FixturesOf(plot)
+	local fixtures = LOBBY:FindFirstChild("PlotFixtures")
+	return fixtures and fixtures:FindFirstChild(plot.Name) or nil
+end
+
+--..Grass tiles..--
+--.. the two shades of a plot's grass: the plot's colour and the same darkened a fifth (what the old
+--.. checker texture did with 20 % black), alternating by cell like a chessboard so every cell is one square
+local function GrassShade(plot, odd)
+	local c = plot.Color
+	return odd and Color3.new(c.R * 0.8, c.G * 0.8, c.B * 0.8) or c
+end
+
+local function BuildGrass(plot)
+	local folder = plot:FindFirstChild("GrassTiles")
+	if folder then
+		folder:ClearAllChildren()
+	else
+		folder = Instance.new("Folder")
+		folder.Name = "GrassTiles"
+		folder.Parent = plot
+	end
+	local surface = BuildCatalog.SurfaceY(plot, 1)
+	for _, cell in ipairs(BuildCatalog.Cells(plot)) do
+		local tile = Instance.new("Part")
+		tile.Name = "Grass"
+		tile.Size = Vector3.new(cell.W, BuildCatalog.GRASS_THICKNESS, cell.D)
+		tile.CFrame = plot.CFrame * CFrame.new(cell.X, surface - BuildCatalog.GRASS_THICKNESS * 0.5, cell.Z)
+		tile.Color = GrassShade(plot, ((cell.I or 0) + (cell.J or 0)) % 2 == 1)
+		tile.Material = plot.Material
+		tile.TopSurface = plot.TopSurface
+		tile.BottomSurface = Enum.SurfaceType.Smooth
+		tile.Anchored = true
+		tile.CanCollide = true
+		tile.CanQuery = false -- the placement rays aim at the plot slab, not at the grass
+		tile.CanTouch = false
+		tile:SetAttribute("CellX", cell.X)
+		tile:SetAttribute("CellZ", cell.Z)
+		tile:SetAttribute("Full", cell.Full)
+		tile.Parent = folder
+	end
+	return folder
+end
+
+--.. a grass tile disappears (and stops colliding) under a ground-floor Flooring tile, and comes back when it goes
+local function RefreshGrass(plot)
+	local folder = plot:FindFirstChild("GrassTiles")
+	if not folder then return end
+	local holder = plot:FindFirstChild("Placed")
+	local surface = BuildCatalog.SurfaceY(plot, 1)
+	local covered = {} -- plot-space centres of the ground-floor tiles
+	if holder then
+		for _, model in ipairs(holder:GetChildren()) do
+			local hitbox = model:IsA("Model") and model:GetAttribute("IsFloor") == true and model.PrimaryPart or nil
+			if hitbox then
+				local lp = plot.CFrame:PointToObjectSpace(hitbox.Position)
+				if math.abs(lp.Y + hitbox.Size.Y * 0.5 - surface) < 0.5 then table.insert(covered, lp) end
+			end
+		end
+	end
+	for _, tile in ipairs(folder:GetChildren()) do
+		local cx, cz = tile:GetAttribute("CellX") or 0, tile:GetAttribute("CellZ") or 0
+		local hidden = false
+		for _, lp in ipairs(covered) do
+			if math.abs(lp.X - cx) < 0.1 and math.abs(lp.Z - cz) < 0.1 then hidden = true break end
+		end
+		tile.Transparency = hidden and 1 or 0
+		tile.CanCollide = not hidden
+	end
+end
+
+local function WatchPlot(plot)
+	local holder = HolderOf(plot)
+	local function refresh() task.defer(RefreshGrass, plot) end
+	holder.ChildAdded:Connect(refresh)
+	holder.ChildRemoved:Connect(refresh)
+	local pending = false
+	local function rebuild()
+		if pending then return end
+		pending = true
+		task.defer(function() -- Resize sets Size then CFrame; wait for both
+			pending = false
+			BuildGrass(plot)
+			RefreshGrass(plot)
+		end)
+	end
+	plot:GetPropertyChangedSignal("Size"):Connect(rebuild)
+	plot:GetPropertyChangedSignal("CFrame"):Connect(rebuild)
+	BuildGrass(plot)
+	RefreshGrass(plot)
+end
+
+--..Placement..--
+local function Footprint(size, yaw)
+	local c, s = math.abs(math.cos(yaw)), math.abs(math.sin(yaw))
+	return c * size.X + s * size.Z, s * size.X + c * size.Z
+end
+
+--.. everything both a placement and a move must pass; ignore = the model being moved
+local function Validate(player, size, isFloor, isStairs, cframe, ignore, collisions)
+	if typeof(cframe) ~= "CFrame" then return false, "Bad placement" end
+	local plot = PlotOf(player)
+	if not plot then return false, "You have no plot" end
+	--.. must be standing at the base
+	local character = player.Character
+	local root = character and character:FindFirstChild("HumanoidRootPart")
+	if not root then return false, "No character" end
+	local rp = plot.CFrame:PointToObjectSpace(root.Position)
+	if math.abs(rp.X) > plot.Size.X * 0.5 + AT_BASE_MARGIN or math.abs(rp.Z) > plot.Size.Z * 0.5 + AT_BASE_MARGIN then
+		return false, "Stand in your base to build"
+	end
+	--.. only the client's X / Z + yaw (+ floor) are trusted; a tile fills one grid cell, square; a staircase
+	--.. lands its open landing edge on a cell boundary
+	local relative = plot.CFrame:ToObjectSpace(cframe)
+	local _, yaw = relative:ToEulerAnglesYXZ()
+	local x, z = relative.Position.X, relative.Position.Z
+	local cellW, cellD
+	if isFloor then
+		x, z, cellW, cellD = BuildCatalog.SnapCell(plot, x, z)
+		size = Vector3.new(cellW, size.Y, cellD) -- the tile stretches to its cell (an edge strip is narrower)
+		yaw = 0
+	elseif isStairs then
+		x, z = BuildCatalog.SnapStairs(plot, x, z, yaw, size)
+	end
+	local fx, fz = Footprint(size, yaw)
+	if math.abs(x) + fx * 0.5 > plot.Size.X * 0.5 + BOUNDS_EPSILON or math.abs(z) + fz * 0.5 > plot.Size.Z * 0.5 + BOUNDS_EPSILON then
+		return false, "Keep it inside your plot"
+	end
+	--.. which floor: read back from the requested height (a tile's top, a build's bottom), never above
+	--.. the floor the player stands on; a tile's top and a build's bottom both sit AT the surface
+	local edge = isFloor and (relative.Position.Y + size.Y * 0.5) or (relative.Position.Y - size.Y * 0.5)
+	local level = BuildCatalog.LevelFromEdge(plot, edge)
+	if isStairs and level >= 2 then return false, "Stairs go on the ground floor" end -- before the player check: never upstairs, wherever they stand
+	if level > BuildCatalog.PlayerLevel(plot, root.Position) then return false, "Go up a staircase to build up there" end
+	local surface = BuildCatalog.SurfaceY(plot, level)
+	local centreY = isFloor and (surface - size.Y * 0.5) or (surface + size.Y * 0.5)
+	local target = plot.CFrame * CFrame.new(x, centreY, z) * CFrame.Angles(0, yaw, 0)
+	--.. occupied? (placed eggs / cucumbers / builds and the plot's own fixtures; tiles and builds pass
+	--.. each other on the ground; a moved build ignores itself)
+	local holder = HolderOf(plot)
+	local filter = {holder}
+	local fixtures = FixturesOf(plot)
+	if fixtures then table.insert(filter, fixtures) end
+	local params = OverlapParams.new()
+	params.FilterType = Enum.RaycastFilterType.Include
+	params.FilterDescendantsInstances = filter
+	for _, part in ipairs(workspace:GetPartBoundsInBox(target, size * COLLISION_SHRINK, params)) do
+		if not (ignore and part:IsDescendantOf(ignore)) and BuildCatalog.Blocks(part, holder, isFloor, level, collisions) then
+			return false, "Something is in the way"
+		end
+	end
+	if level >= 2 then
+		if isFloor then
+			--.. an upstairs tile must join the floor: next to a tile up there, or straight off a landing
+			local anchored, anyTile = BuildCatalog.FloorAnchored(holder, target, size, level, ignore)
+			if not anchored then return false, anyTile and "Place it next to another tile" or "Start at the top of a staircase" end
+		elseif not BuildCatalog.Supported(holder, target, size, ignore) then
+			return false, "Needs flooring under it"
+		end
+	end
+	return true, {Plot = plot, Holder = holder, Target = target, Level = level, X = x, Z = z, Yaw = yaw, W = cellW, D = cellD}
+end
+
+local function Stamp(model, key, fit)
+	model:SetAttribute("BuildKey", key)
+	model:SetAttribute("Level", fit.Level)
+	model:SetAttribute("PlotX", fit.X)
+	model:SetAttribute("PlotZ", fit.Z)
+	model:SetAttribute("Yaw", math.deg(fit.Yaw))
+end
+
+local function Options(options)
+	return type(options) == "table" and options.Collisions ~= false
+end
+
+local function Place(player, key, cframe, options)
+	local template = BuildCatalog.Find(key)
+	if not template or not template.PrimaryPart then return false, "Unknown build" end
+	local now = os.clock()
+	if LastPlace[player] and now - LastPlace[player] < PLACE_COOLDOWN then return false, "Too fast" end
+	local isFloor = template:GetAttribute("IsFloor") == true
+	local ok, fit = Validate(player, template.PrimaryPart.Size, isFloor, template:GetAttribute("IsStairs") == true, cframe, nil, Options(options))
+	if not ok then return false, fit end
+	--.. pay
+	local cost = math.max(0, tonumber(template:GetAttribute("Cost")) or 0)
+	local cash = DataService.Get(player, "Cash")
+	if cash == nil then return false, "Your data is still loading" end
+	if cash < cost then return false, ("Need %s more Cash"):format(BuildCatalog.FormatCost(cost - cash)) end
+	LastPlace[player] = now
+	if cost > 0 then DataService.Increment(player, "Cash", -cost) end
+	--.. place
+	local placed = template:Clone()
+	if isFloor and fit.W then BuildCatalog.FitTile(placed, fit.W, fit.D) end
+	placed:PivotTo(fit.Target)
+	placed:SetAttribute("Owner", player.UserId)
+	Stamp(placed, key, fit)
+	CollectionService:AddTag(placed, BuildCatalog.PLACED_TAG)
+	placed.Parent = fit.Holder
+	print(("[BuildService] %s placed %s on %s for %s Cash (%.1f, %.1f, yaw %d, level %d)"):format(player.Name, key, fit.Plot.Name, BuildCatalog.FormatCost(cost), fit.X, fit.Z, math.round(math.deg(fit.Yaw)), fit.Level))
+	return true
+end
+
+--.. one of the player's own placed builds, or nil + reason
+local function OwnBuild(player, model)
+	if typeof(model) ~= "Instance" or not model:IsA("Model") or not CollectionService:HasTag(model, BuildCatalog.PLACED_TAG) then return nil, "Not a build" end
+	if not model.PrimaryPart then return nil, "Can't touch that" end
+	local plot = PlotOf(player)
+	if not plot or model.Parent ~= plot:FindFirstChild("Placed") or model:GetAttribute("Owner") ~= player.UserId then return nil, "Not yours" end
+	return plot
+end
+
+local function Move(player, model, cframe, options)
+	local plot, reason = OwnBuild(player, model)
+	if not plot then return false, reason end
+	local now = os.clock()
+	if LastPlace[player] and now - LastPlace[player] < PLACE_COOLDOWN then return false, "Too fast" end
+	local key = model:GetAttribute("BuildKey")
+	local isFloor = model:GetAttribute("IsFloor") == true
+	local ok, fit = Validate(player, model.PrimaryPart.Size, isFloor, model:GetAttribute("IsStairs") == true, cframe, model, Options(options))
+	if not ok then return false, fit end
+	LastPlace[player] = now
+	if isFloor and fit.W then BuildCatalog.FitTile(model, fit.W, fit.D) end
+	model:PivotTo(fit.Target)
+	Stamp(model, key, fit)
+	RefreshGrass(plot)
+	print(("[BuildService] %s moved %s on %s to (%.1f, %.1f, yaw %d, level %d)"):format(player.Name, tostring(key), plot.Name, fit.X, fit.Z, math.round(math.deg(fit.Yaw)), fit.Level))
+	return true
+end
+
+local function Sell(player, model)
+	local plot, reason = OwnBuild(player, model)
+	if not plot then return false, reason end
+	local now = os.clock()
+	if LastPlace[player] and now - LastPlace[player] < PLACE_COOLDOWN then return false, "Too fast" end
+	if not DataService.IsLoaded(player) then return false, "Your data is still loading" end
+	LastPlace[player] = now
+	local name = tostring(model:GetAttribute("DisplayName") or model.Name)
+	local refund = BuildCatalog.RefundOf(model:GetAttribute("Cost"))
+	model:Destroy()
+	if refund > 0 then DataService.Increment(player, "Cash", refund) end
+	RefreshGrass(plot)
+	print(("[BuildService] %s sold %s on %s for %s Cash"):format(player.Name, name, plot.Name, BuildCatalog.FormatCost(refund)))
+	return true, refund, name
+end
+
+--..API for BaseSaveService (2026-09-12): a saved build comes back free and unvalidated at its saved pivot
+--..(the level is saved too, the height is re-derived from it), an admin reset / a leaving player clears them..--
+local function RestoreBuild(player, plot, key, pivot, level)
+	local template = BuildCatalog.Find(key)
+	if not template or not template.PrimaryPart then return nil, "Unknown build " .. tostring(key) end
+	if typeof(pivot) ~= "CFrame" or not plot or not plot.Parent then return nil, "Bad restore" end
+	local isFloor = template:GetAttribute("IsFloor") == true
+	local isStairs = template:GetAttribute("IsStairs") == true
+	local size = template.PrimaryPart.Size
+	local relative = plot.CFrame:ToObjectSpace(pivot)
+	local _, yaw = relative:ToEulerAnglesYXZ()
+	local x, z = relative.Position.X, relative.Position.Z
+	local cellW, cellD
+	if isFloor then
+		x, z, cellW, cellD = BuildCatalog.SnapCell(plot, x, z)
+		size = Vector3.new(cellW, size.Y, cellD)
+		yaw = 0
+	elseif isStairs then
+		x, z = BuildCatalog.SnapStairs(plot, x, z, yaw, size)
+	end
+	level = math.clamp(math.floor(tonumber(level) or 1), 1, BuildCatalog.MAX_LEVELS)
+	local surface = BuildCatalog.SurfaceY(plot, level)
+	local centreY = isFloor and (surface - size.Y * 0.5) or (surface + size.Y * 0.5)
+	local target = plot.CFrame * CFrame.new(x, centreY, z) * CFrame.Angles(0, yaw, 0)
+	local placed = template:Clone()
+	if isFloor and cellW then BuildCatalog.FitTile(placed, cellW, cellD) end
+	placed:PivotTo(target)
+	placed:SetAttribute("Owner", player.UserId)
+	Stamp(placed, key, {Level = level, X = x, Z = z, Yaw = yaw})
+	CollectionService:AddTag(placed, BuildCatalog.PLACED_TAG)
+	placed.Parent = HolderOf(plot)
+	return placed
+end
+
+local function ClearBuilds(plot)
+	local holder = plot and plot:FindFirstChild("Placed")
+	if not holder then return 0 end
+	local n = 0
+	for _, model in ipairs(holder:GetChildren()) do
+		if model:IsA("Model") and CollectionService:HasTag(model, BuildCatalog.PLACED_TAG) then
+			model:Destroy()
+			n += 1
+		end
+	end
+	RefreshGrass(plot)
+	return n
+end
+
+do
+	local api = ServerStorage:FindFirstChild("BuildServiceAPI") or Instance.new("Folder")
+	api.Name = "BuildServiceAPI"
+	api.Parent = ServerStorage
+	local restore = api:FindFirstChild("RestoreBuild") or Instance.new("BindableFunction")
+	restore.Name = "RestoreBuild"
+	restore.OnInvoke = RestoreBuild
+	restore.Parent = api
+	local clear = api:FindFirstChild("ClearBuilds") or Instance.new("BindableFunction")
+	clear.Name = "ClearBuilds"
+	clear.OnInvoke = ClearBuilds
+	clear.Parent = api
+end
+
+--..Setup..--
+local builds, categories = BuildTemplates()
+local plots = 0
+for _, plot in ipairs(PLOTS:GetChildren()) do
+	if plot:IsA("BasePart") then
+		WatchPlot(plot)
+		plots += 1
+	end
+end
+
+local function Guard(fn, label)
+	return function(player, ...)
+		local ok, result, a, b = pcall(fn, player, ...)
+		if not ok then
+			warn("[BuildService] " .. label .. ": " .. tostring(result))
+			return false, "Something went wrong"
+		end
+		return result == true, a, b
+	end
+end
+requestBuildPlacement.OnServerInvoke = Guard(Place, "place")
+requestBuildMove.OnServerInvoke = Guard(Move, "move")
+requestBuildSell.OnServerInvoke = Guard(Sell, "sell")
+
+Players.PlayerRemoving:Connect(function(player) LastPlace[player] = nil end)
+print(("[BuildService] %d builds in %d categories ready (%s); grass tiles on %d plots"):format(builds, categories, BuildCatalog.TEMPLATES, plots))

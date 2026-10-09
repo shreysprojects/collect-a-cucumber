@@ -1,0 +1,355 @@
+{
+ "key": "Mortar",
+ "category": "Defences",
+ "parts_hash": "84e3d5cd1494",
+ "pivots": {
+  "PitchPivot": [
+   0.0,
+   3.85,
+   0.5
+  ],
+  "MuzzleTip": [
+   0.0,
+   7.1266,
+   -1.7943
+  ],
+  "YawPivot": [
+   0.0,
+   1.3,
+   0.0
+  ]
+ },
+ "attrs": {
+  "Cost": 400000000,
+  "PropSet": "defence2",
+  "State_Elevation": 55,
+  "Notes": "Mortar rebuilt 2026-09-24 (fun-builds/models/build_Mortar.py, primlib parts): chunky bronze siege mortar. Rig by name prefix: Base* static; Mount* yaws about the vertical axis through the origin (x = z = 0); Tube* pitches about the axis parallel to X through Pivot_PitchPivot (0, 3.85, 0.50) (trunnion centre). Built at 55 deg elevation pointing -Z and up, d = (0, sin55, -cos55); shells leave Pivot_MuzzleTip (0, 7.13, -1.79) = PitchPivot + 4.0 d, the centre of the muzzle face. Glow parts keep their group prefix: BaseGlowRim, MountGlowShell1..8, TubeGlowBore (orange neon). Mount + Tube stay within r 2.96 of the yaw axis for pitch 0..+8 (sandbags start at r 2.96, below the deck); the tube clears the carriage from -6 to +8 deg pitch about 55 (recoil is +6)."
+ },
+ "size_studs": [
+  7.95,
+  7.915,
+  7.939
+ ],
+ "objects": [
+  {
+   "name": "Base_1",
+   "color": "3b4350",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Base_2",
+   "color": "ff8a1f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Base_3",
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Base_4",
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Base_5",
+   "color": "cfb77f",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 12
+  },
+  {
+   "name": "Base_6",
+   "color": "bda46b",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 12
+  },
+  {
+   "name": "Base_7",
+   "color": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Base_8",
+   "color": "23262c",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Mount_1",
+   "color": "d9443c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 7
+  },
+  {
+   "name": "Mount_2",
+   "color": "a8302b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "Mount_3",
+   "color": "9aa7b8",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Mount_4",
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 11
+  },
+  {
+   "name": "Mount_5",
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 10
+  },
+  {
+   "name": "Mount_6",
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 7
+  },
+  {
+   "name": "Mount_7",
+   "color": "e8b64a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 7
+  },
+  {
+   "name": "Mount_8",
+   "color": "a8302b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "Mount_9",
+   "color": "e2a650",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "Mount_10",
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Mount_11",
+   "color": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Mount_12",
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "Mount_13",
+   "color": "8fd3ff",
+   "material": "Glass",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Mount_14",
+   "color": "23262c",
+   "material": "Rubber",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Mount_15",
+   "color": "e8b64a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 8
+  },
+  {
+   "name": "Mount_16",
+   "color": "ff8a1f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 8
+  },
+  {
+   "name": "Tube_1",
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Tube_2",
+   "color": "8e5b2a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 4
+  },
+  {
+   "name": "Tube_3",
+   "color": "c98a3e",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 4
+  },
+  {
+   "name": "Tube_4",
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 4
+  },
+  {
+   "name": "Tube_5",
+   "color": "e2a650",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Tube_6",
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Tube_7",
+   "color": "ff8a1f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Tube_8",
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 6
+  }
+ ]
+}

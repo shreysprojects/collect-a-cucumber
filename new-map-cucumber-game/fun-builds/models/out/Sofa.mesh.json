@@ -1,0 +1,194 @@
+{
+ "key": "Sofa",
+ "category": "Home",
+ "parts_hash": "e9abfbaf84fa",
+ "pivots": {
+  "Seat1": [
+   2.0,
+   1.912,
+   -0.1
+  ],
+  "Seat2": [
+   0.0,
+   1.912,
+   -0.1
+  ],
+  "Seat3": [
+   -2.0,
+   1.912,
+   -0.1
+  ]
+ },
+ "attrs": {
+  "Cost": 800,
+  "Seats": 3,
+  "Notes": "3-seat rolled-arm sofa (primlib parts). Seats Pivot_Seat1..3 face -Z; Cushion<i> squashes while seat i is taken, BackCushion<i> gives a little. Built by fun-builds/models/build_Sofa.py."
+ },
+ "size_studs": [
+  8.0,
+  3.62,
+  3.53
+ ],
+ "objects": [
+  {
+   "name": "FootTip1_m",
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 4
+  },
+  {
+   "name": "Foot1_m",
+   "color": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 4
+  },
+  {
+   "name": "Plinth_m",
+   "color": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Base_m",
+   "color": "3264b8",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 9
+  },
+  {
+   "name": "BasePiping_m",
+   "color": "f2f0ea",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 21
+  },
+  {
+   "name": "ArmCapL_m",
+   "color": "3264b8",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 4
+  },
+  {
+   "name": "CushBase1_m",
+   "color": "6a9ef0",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 9
+  },
+  {
+   "name": "Cushion1",
+   "color": "6a9ef0",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BackCushion1",
+   "color": "6a9ef0",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Cushion2",
+   "color": "6a9ef0",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BackCushion2",
+   "color": "6a9ef0",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Cushion3",
+   "color": "6a9ef0",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BackCushion3",
+   "color": "6a9ef0",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "PillowLCore_m",
+   "color": "f2c13d",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "PillowButtonL_m",
+   "color": "fbf6e8",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "PillowRCore_m",
+   "color": "d9443c",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 2
+  }
+ ]
+}

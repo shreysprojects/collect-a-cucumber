@@ -1,0 +1,218 @@
+{
+ "key": "Nightstand",
+ "category": "Home",
+ "parts_hash": "6e6d4d4435f2",
+ "pivots": {
+  "Lamp": [
+   0.42,
+   4.11,
+   0.14
+  ],
+  "ClockCentre": [
+   -0.56,
+   3.04,
+   -0.345
+  ]
+ },
+ "attrs": {
+  "Cost": 300,
+  "Notes": "Bedside cabinet (primlib parts): drawer + book shelf, table lamp (prompt 'Lamp on/off': PointLight in LampShade, ShadeInner* go Neon) and an alarm clock whose hands follow Lighting.ClockTime. Built by fun-builds/models/build_Nightstand.py."
+ },
+ "size_studs": [
+  2.44,
+  4.73,
+  2.37
+ ],
+ "objects": [
+  {
+   "name": "FootCap1_m",
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 14
+  },
+  {
+   "name": "Leg1_m",
+   "color": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 6
+  },
+  {
+   "name": "Bottom_m",
+   "color": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 5
+  },
+  {
+   "name": "ShelfLip_m",
+   "color": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "DrawerFront_m",
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "DrawerPanel_m",
+   "color": "6a9ef0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "BookRed_m",
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 3
+  },
+  {
+   "name": "BookYellow_m",
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BookBlue_m",
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "LampFoot_m",
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "LampBase_m",
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "LampShade",
+   "color": "f2f0ea",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "ShadeTrimBottom_m",
+   "color": "f2c13d",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "ShadeInnerBottom",
+   "color": "fff4d6",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "ShadeInnerTop",
+   "color": "fff4d6",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "ClockFoot1_m",
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "ClockFace_m",
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "ClockHour",
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "ClockMinute",
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  }
+ ]
+}

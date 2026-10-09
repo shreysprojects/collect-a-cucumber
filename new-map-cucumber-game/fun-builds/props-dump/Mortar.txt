@@ -1,0 +1,24 @@
+=== Defences/Mortar
+  @AssetId = 109345820438797
+  @Cost = 400000000
+  @Notes = Rig by name prefix: Base* is static, Mount* yaws about the world Z axis through (0, 0) (YawPivot = top of BasePlatform, z 1.3), Tube* pitches about the trunnion axis, a line parallel to X through PitchPivot (0, 0, 4.0). Modelled at zero yaw and 55 deg elevation (STATES.Elevation) with the tube pointing +Y and up: d = (0, cos 55, sin 55). Shells leave MuzzleTip = PitchPivot + d * 3.5, the centre of the muzzle face. Base plate is an octagon r 3.4 (vertex) = 6.28 flat-to-flat, so the static footprint is 6.28 x 6.28; total height 7.51 to the top of the muzzle collar rim (the muzzle face centre is at z 6.87). Widest yawing point is the muzzle collar rim at radius 2.93 from the yaw axis, so a full 360 deg yaw of Mount* + Tube* stays inside the base plate and well inside the 8 x 8 tile. Pitch clearance traced by hand: the tube (r <= 1.12 at the collar) clears the cheek inner faces at x = +/-1.2
+  @Pivot_MuzzleTip = (0.00, 6.87, -2.01)
+  @Pivot_PitchPivot = (0.00, 4.00, -0.00)
+  @Pivot_YawPivot = (0.00, 1.30, -0.00)
+  @PropSet = defence2
+  @State_Elevation = 55
+  @Tris = 1112
+  BaseBolts [MeshPart] pos (0.00, 0.55, 0.00) size (5.31, 0.46, 5.31) Metal 2f3136 T0.00 collide=true
+  BaseCorners [MeshPart] pos (-0.00, 0.55, -0.00) size (5.53, 1.00, 5.53) SmoothPlastic c8b276 T0.00 collide=true
+  BasePlate [MeshPart] pos (-0.00, 0.45, -0.00) size (6.28, 0.90, 6.28) SmoothPlastic 45474d T0.00 collide=true
+  BasePlatform [MeshPart] pos (-0.00, 1.09, -0.00) size (4.25, 0.43, 4.25) SmoothPlastic 565962 T0.00 collide=true
+  MountBar [MeshPart] pos (0.00, 2.09, 1.10) size (2.70, 0.83, 0.40) SmoothPlastic 45474d T0.00 collide=true
+  MountBolts [MeshPart] pos (-0.00, 3.09, -0.52) size (4.44, 2.23, 1.51) Metal 2f3136 T0.00 collide=true
+  MountCheeks [MeshPart] pos (0.00, 3.18, 0.15) size (3.50, 3.03, 2.40) SmoothPlastic 565962 T0.00 collide=true
+  MountTrunnionDiscs [MeshPart] pos (-0.00, 4.00, -0.00) size (4.00, 1.24, 1.24) SmoothPlastic c8b276 T0.00 collide=true
+  MountTurntable [MeshPart] pos (-0.00, 1.49, -0.00) size (3.80, 0.43, 3.80) SmoothPlastic 45474d T0.00 collide=true
+  TubeBarrel [MeshPart] pos (-0.00, 4.89, -0.63) size (1.90, 4.68, 4.07) SmoothPlastic 45474d T0.00 collide=true
+  TubeBore [MeshPart] pos (-0.00, 6.79, -1.95) size (1.44, 0.91, 1.24) SmoothPlastic 2f3136 T0.00 collide=true
+  TubeBreech [MeshPart] pos (0.00, 3.00, 0.70) size (1.60, 1.20, 1.51) SmoothPlastic 565962 T0.00 collide=true
+  TubeMuzzle [MeshPart] pos (-0.00, 6.68, -1.88) size (2.24, 1.65, 2.09) SmoothPlastic 565962 T0.00 collide=true
+  TubeRings [MeshPart] pos (-0.00, 5.23, -0.86) size (2.14, 2.96, 2.97) SmoothPlastic 565962 T0.00 collide=true

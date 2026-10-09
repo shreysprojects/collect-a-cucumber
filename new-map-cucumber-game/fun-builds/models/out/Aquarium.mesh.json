@@ -1,0 +1,569 @@
+{
+ "key": "Aquarium",
+ "category": "Home",
+ "parts_hash": "4e459c1cdced",
+ "pivots": {
+  "Castle": [
+   -1.55,
+   3.7332,
+   0.66
+  ],
+  "Flag": [
+   -2.08,
+   5.5832,
+   0.66
+  ],
+  "ChestHinge": [
+   1.72,
+   3.99,
+   -0.13
+  ],
+  "Bubbler": [
+   1.72,
+   4.02,
+   -0.66
+  ],
+  "Plant1": [
+   2.35,
+   3.8165,
+   0.78
+  ],
+  "Plant2": [
+   -2.55,
+   3.8552,
+   0.92
+  ],
+  "Plant3": [
+   0.62,
+   3.8497,
+   0.9
+  ],
+  "Plant4": [
+   -2.5,
+   3.57,
+   -0.82
+  ],
+  "Light": [
+   0.0,
+   5.97,
+   0.3
+  ],
+  "FeedHinge": [
+   0.0,
+   6.45,
+   -0.18
+  ],
+  "Feed": [
+   0.0,
+   5.94,
+   -0.745
+  ],
+  "TankMin": [
+   -2.9,
+   3.62,
+   -1.2
+  ],
+  "TankMax": [
+   2.9,
+   5.94,
+   1.2
+  ],
+  "WaterSurface": [
+   0.0,
+   5.94,
+   0.0
+  ]
+ },
+ "attrs": {
+  "Cost": 1500,
+  "DisplayName": "Aquarium",
+  "Notes": "Fish tank on a wooden cabinet (primlib parts, fun-builds HomeDecor). The client swims 5 runtime fish inside Pivot_TankMin/Max, bubbles rise from the treasure chest (Pivot_Bubbler, ChestLid pops), Plant<N>Leaf<M> sway about Pivot_Plant<N>, the TankLight glows; prompt 'Feed fish' opens the FeedFlap and sprinkles flakes on the water - the fish rush up to them. Built by fun-builds/models/build_Aquarium.py."
+ },
+ "size_studs": [
+  6.6,
+  7.38,
+  3.18
+ ],
+ "objects": [
+  {
+   "name": "Plinth_m",
+   "color": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "Carcass_m",
+   "color": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "DoorL_m",
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "DoorPanelL_m",
+   "color": "6a9ef0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "KnobL_m",
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "TankBase_m",
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 11
+  },
+  {
+   "name": "GlassFront_m",
+   "color": "e6f6ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.86,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true,
+   "parts": 3
+  },
+  {
+   "name": "Backdrop_m",
+   "color": "1f5fb8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BackdropReef_m",
+   "color": "184a91",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Water_m",
+   "color": "3ea6f2",
+   "material": "SmoothPlastic",
+   "transparency": 0.64,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "WaterTop_m",
+   "color": "b9e6ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.72,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Gravel_m",
+   "color": "e8c27a",
+   "material": "Pebble",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "PebblePink_m",
+   "color": "f28cb1",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "PebbleBlue_m",
+   "color": "6a9ef0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "PebbleYellow_m",
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "PebbleWhite_m",
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "CastleKeep_m",
+   "color": "b3aea4",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 6
+  },
+  {
+   "name": "CastleRoofL1_m",
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 9
+  },
+  {
+   "name": "CastlePole_m",
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 4
+  },
+  {
+   "name": "CastleFlag",
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "ChestBody_m",
+   "color": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "ChestBand_m",
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 3
+  },
+  {
+   "name": "ChestLid",
+   "color": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "RockBack_m",
+   "color": "8a8f99",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "RockFront_m",
+   "color": "9aa0aa",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Plant1Leaf1",
+   "color": "3dbb45",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Plant1Leaf2",
+   "color": "2a9a3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Plant1Leaf3",
+   "color": "2a9a3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Plant1Leaf4",
+   "color": "3dbb45",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Plant1Leaf5",
+   "color": "3dbb45",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Plant2Leaf1",
+   "color": "2a9a3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Plant2Leaf2",
+   "color": "3dbb45",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Plant2Leaf3",
+   "color": "3dbb45",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Plant2Leaf4",
+   "color": "2a9a3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Plant3Leaf1",
+   "color": "e0553a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Plant3Leaf2",
+   "color": "c23a30",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Plant3Leaf3",
+   "color": "e0553a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Plant3Leaf4",
+   "color": "c23a30",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Plant4Leaf1",
+   "color": "8bd346",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Plant4Leaf2",
+   "color": "8bd346",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Plant4Leaf3",
+   "color": "72bd35",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "HoodStripe_m",
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "TankLight_m",
+   "color": "e8f7ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "CoverL_m",
+   "color": "e6f6ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.78,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "FeedFlap",
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "FeedFlapTab",
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "FoodTub_m",
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "FoodLabel_m",
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  }
+ ]
+}

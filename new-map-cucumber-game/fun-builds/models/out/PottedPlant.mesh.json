@@ -1,0 +1,629 @@
+{
+ "key": "PottedPlant",
+ "category": "Home",
+ "parts_hash": "aa463336d42a",
+ "pivots": {
+  "Frond1": [
+   0.0,
+   2.37,
+   -0.1
+  ],
+  "Frond2": [
+   -0.0771,
+   2.37,
+   0.0919
+  ],
+  "Frond3": [
+   0.1128,
+   2.37,
+   0.041
+  ],
+  "Frond4": [
+   -0.1088,
+   2.37,
+   -0.0507
+  ],
+  "Frond5": [
+   0.0311,
+   2.37,
+   0.1159
+  ],
+  "Frond6": [
+   0.0983,
+   2.37,
+   -0.0688
+  ],
+  "Frond7": [
+   -0.0966,
+   2.37,
+   0.0259
+  ],
+  "Frond8": [
+   0.0707,
+   2.37,
+   0.0707
+  ],
+  "Frond9": [
+   0.0259,
+   2.37,
+   -0.0966
+  ],
+  "Frond10": [
+   -0.0259,
+   2.37,
+   0.0966
+  ],
+  "Frond11": [
+   -0.0574,
+   2.37,
+   -0.0819
+  ],
+  "Frond0": [
+   0.05,
+   2.42,
+   0.05
+  ]
+ },
+ "attrs": {
+  "Cost": 200,
+  "DisplayName": "Potted Plant",
+  "Notes": "Monstera in a glazed pot (primlib parts, fun-builds HomeDecor). The client sways each Frond<N>* group gently about Pivot_Frond<N>. Built by fun-builds/models/build_PottedPlant.py."
+ },
+ "size_studs": [
+  3.973,
+  6.226,
+  4.112
+ ],
+ "objects": [
+  {
+   "name": "Saucer_m",
+   "color": "b8612f",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "SaucerLip_m",
+   "color": "b8612f",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "PotFoot_m",
+   "color": "1d3f86",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "PotBelly_m",
+   "color": "2b5fc2",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.15,
+   "collide": true,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "PotBand_m",
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.1,
+   "collide": false,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "PotDot1_m",
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 8
+  },
+  {
+   "name": "PotLip_m",
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.1,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Soil_m",
+   "color": "5a3b24",
+   "material": "Ground",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "SoilPebble1_m",
+   "color": "c9c3b8",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "SoilPebble2_m",
+   "color": "9aa0aa",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Frond1Stem",
+   "color": "4f8f3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Frond1LeafL",
+   "color": "2f9e44",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Frond1LeafR",
+   "color": "2f9e44",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Frond1Rib",
+   "color": "8fd67a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Frond2Stem",
+   "color": "4f8f3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Frond2LeafL",
+   "color": "23823a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Frond2LeafR",
+   "color": "23823a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Frond2Rib",
+   "color": "8fd67a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Frond3Stem",
+   "color": "4f8f3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Frond3LeafL",
+   "color": "2f9e44",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Frond3LeafR",
+   "color": "2f9e44",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Frond3Rib",
+   "color": "8fd67a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Frond4Stem",
+   "color": "4f8f3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Frond4LeafL",
+   "color": "3fb957",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Frond4LeafR",
+   "color": "3fb957",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Frond4Rib",
+   "color": "8fd67a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Frond5Stem",
+   "color": "4f8f3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Frond5LeafL",
+   "color": "2f9e44",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Frond5LeafR",
+   "color": "2f9e44",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Frond5Rib",
+   "color": "8fd67a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Frond6Stem",
+   "color": "4f8f3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Frond6LeafL",
+   "color": "23823a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Frond6LeafR",
+   "color": "23823a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Frond6Rib",
+   "color": "8fd67a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Frond7Stem",
+   "color": "4f8f3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Frond7LeafL",
+   "color": "2f9e44",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Frond7LeafR",
+   "color": "2f9e44",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Frond7Rib",
+   "color": "8fd67a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Frond8Stem",
+   "color": "4f8f3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Frond8LeafL",
+   "color": "3fb957",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Frond8LeafR",
+   "color": "3fb957",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Frond8Rib",
+   "color": "8fd67a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Frond9Stem",
+   "color": "4f8f3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Frond9LeafL",
+   "color": "2f9e44",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Frond9LeafR",
+   "color": "2f9e44",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Frond9Rib",
+   "color": "8fd67a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Frond10Stem",
+   "color": "4f8f3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Frond10LeafL",
+   "color": "23823a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Frond10LeafR",
+   "color": "23823a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Frond10Rib",
+   "color": "8fd67a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Frond11Stem",
+   "color": "4f8f3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Frond11LeafL",
+   "color": "3fb957",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Frond11LeafR",
+   "color": "3fb957",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Frond11Rib",
+   "color": "8fd67a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "Frond0Spike",
+   "color": "3fb957",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  }
+ ]
+}

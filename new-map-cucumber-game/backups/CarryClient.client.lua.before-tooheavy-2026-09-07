@@ -1,0 +1,378 @@
+--[[
+	CarryClient  (LocalScript, StarterPlayerScripts)
+	While the server marks us as carrying a cucumber (CarryingCucumber player
+	attribute, set by CucumberCarry), a STUD-sized BillboardGui (scale units like the
+	plot owner badge in PlotBadges, so it shrinks with distance) rides the
+	CarriedCucumber model on our shoulder: cucumber name, a DROP button
+	(Remotes.DropCucumber) and a "take it to your plot" hint. Also plays the
+	Remotes.CarryFX cues (pickup / replant / fly home / placed = sound only / refused toast;
+	toasts use the game-wide ReplicatedStorage.Modules.Notify style, user 2026-09-07).
+	Hints (2026-09-07): one per CucumberStrength band via CarryingCucumberBand while
+	CarryingCucumberHeavy is set (sturdy = "watch your step", shaky = "hurry", hopeless =
+	"it's slipping"); the Stumble cue carries Weak (hopeless) for its toast.
+	Compact port of the Zombie Cucumber Game's CarryClient (no authored GUI here,
+	everything is built in code).
+]]
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+local Debris = game:GetService("Debris")
+local CollectionService = game:GetService("CollectionService")
+
+local SoundController = require(ReplicatedStorage:WaitForChild("Modules"):WaitForChild("SoundController"))
+local CucumberMutations = require(ReplicatedStorage:WaitForChild("Modules"):WaitForChild("CucumberMutations"))
+local CucumberStrength = require(ReplicatedStorage:WaitForChild("Modules"):WaitForChild("CucumberStrength"))
+
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+local Remotes = ReplicatedStorage:WaitForChild("Remotes")
+local DropRemote = Remotes:WaitForChild("DropCucumber")
+local FXRemote = Remotes:WaitForChild("CarryFX")
+
+local CARRY_W, CARRY_H = 6, 2.4 -- STUDS (BillboardGui scale units), like PlotBadges: same size in the world at any camera distance
+local CARRY_MAX_DISTANCE = 120
+local FONT = Enum.Font.FredokaOne
+
+--..Billboard..--
+local host = Instance.new("ScreenGui")
+host.Name = "CarryBillboardHost"
+host.ResetOnSpawn = false
+host.DisplayOrder = 1000
+host.Parent = playerGui
+
+local billboard = Instance.new("BillboardGui")
+billboard.Name = "CarryBillboard"
+billboard.Size = UDim2.fromScale(CARRY_W, CARRY_H)
+billboard.MaxDistance = CARRY_MAX_DISTANCE
+billboard.LightInfluence = 0
+billboard.AlwaysOnTop = true
+billboard.Active = true -- REQUIRED for descendant GuiButtons to get input in a BillboardGui
+billboard.Enabled = false
+billboard.Parent = host
+
+local content = Instance.new("Frame")
+content.Name = "Cluster"
+content.BackgroundTransparency = 1
+content.AnchorPoint = Vector2.new(0.5, 0.5)
+content.Position = UDim2.fromScale(0.5, 0.5)
+content.Size = UDim2.fromScale(1, 1)
+content.Parent = billboard
+
+local punchScale = Instance.new("UIScale")
+punchScale.Name = "PunchScale"
+punchScale.Parent = content
+
+local function stroke(parent, thickness, color)
+	local s = Instance.new("UIStroke")
+	s.Thickness = thickness
+	s.Color = color or Color3.fromRGB(20, 40, 15)
+	s.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
+	s.Parent = parent
+	return s
+end
+
+local nameLabel = Instance.new("TextLabel")
+nameLabel.Name = "NameLabel"
+nameLabel.BackgroundTransparency = 1
+nameLabel.AnchorPoint = Vector2.new(0.5, 0)
+nameLabel.Position = UDim2.fromScale(0.5, 0)
+nameLabel.Size = UDim2.fromScale(1, 0.34)
+nameLabel.Font = FONT
+nameLabel.TextScaled = true
+nameLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+nameLabel.Text = ""
+nameLabel.RichText = true -- material / mutation words in their colours (CucumberMutations)
+nameLabel.Parent = content
+stroke(nameLabel, 2.5)
+
+local hint = Instance.new("TextLabel")
+hint.Name = "Hint"
+hint.BackgroundTransparency = 1
+hint.AnchorPoint = Vector2.new(0.5, 0)
+hint.Position = UDim2.fromScale(0.5, 0.36)
+hint.Size = UDim2.fromScale(1, 0.2)
+hint.Font = FONT
+hint.TextScaled = true
+hint.TextColor3 = Color3.fromRGB(255, 226, 120)
+hint.Text = "Take it to your plot and click to place it"
+hint.Parent = content
+stroke(hint, 1.5)
+
+local button = Instance.new("TextButton")
+button.Name = "DropButton"
+button.AnchorPoint = Vector2.new(0.5, 0)
+button.Position = UDim2.fromScale(0.5, 0.6)
+button.Size = UDim2.fromScale(0.42, 0.36)
+button.BackgroundColor3 = Color3.fromRGB(226, 72, 72)
+button.Font = FONT
+button.TextScaled = true
+button.TextColor3 = Color3.fromRGB(255, 255, 255)
+button.Text = "DROP"
+button.AutoButtonColor = true
+button.Parent = content
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0.35, 0)
+corner.Parent = button
+stroke(button, 2.5, Color3.fromRGB(110, 20, 20))
+local pad = Instance.new("UIPadding")
+pad.PaddingLeft = UDim.new(0.12, 0)
+pad.PaddingRight = UDim.new(0.12, 0)
+pad.PaddingTop = UDim.new(0.1, 0)
+pad.PaddingBottom = UDim.new(0.1, 0)
+pad.Parent = button
+
+local HINT_NORMAL = "Take it to your plot and click to place it"
+--.. one hint per CucumberStrength.BANDS name (CarryingCucumberBand, only while a slip is coming)
+local HINTS = {
+	sturdy = {"Heavy! You can carry it a good way, but watch your step", Color3.fromRGB(255, 200, 110)},
+	shaky = {"So heavy! Hurry, you can't hold it for long", Color3.fromRGB(255, 150, 110)},
+	hopeless = {"WAY too heavy! It's slipping...", Color3.fromRGB(255, 110, 100)},
+}
+local function setLabels()
+	local name = player:GetAttribute("CarryingCucumber")
+	nameLabel.Text = name and CucumberMutations.ColorizeName(string.upper(name)) or ""
+	local band = player:GetAttribute("CarryingCucumberHeavy") == true and player:GetAttribute("CarryingCucumberBand") or nil
+	local h = band and HINTS[band] or nil
+	if not h and band then h = HINTS.shaky end -- an unknown band still reads as heavy
+	hint.Text = h and h[1] or HINT_NORMAL
+	hint.TextColor3 = h and h[2] or Color3.fromRGB(255, 226, 120)
+end
+
+local punchTween
+local function punch()
+	if punchTween then punchTween:Cancel() end
+	punchScale.Scale = 1
+	punchTween = TweenService:Create(punchScale, TweenInfo.new(0.08, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Scale = 1.18})
+	punchTween.Completed:Once(function(s)
+		if s ~= Enum.PlaybackState.Completed then return end
+		punchTween = TweenService:Create(punchScale, TweenInfo.new(0.16, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Scale = 1})
+		punchTween:Play()
+	end)
+	punchTween:Play()
+end
+
+--.. keep the billboard latched to the CURRENT shoulder model (it replicates a
+--.. beat after the attribute, and a same-name swap makes no attribute edge)
+local latchedPart
+task.spawn(function()
+	while true do
+		if player:GetAttribute("CarryingCucumber") ~= nil then
+			local char = player.Character
+			local model = char and char:FindFirstChild("CarriedCucumber")
+			local part = model and (model.PrimaryPart or model:FindFirstChildWhichIsA("BasePart"))
+			if part and part:IsDescendantOf(workspace) then
+				local anchor = billboard.Adornee
+				if latchedPart ~= part or not (anchor and anchor.Parent == part) then
+					if anchor and anchor:IsA("Attachment") then anchor:Destroy() end
+					anchor = Instance.new("Attachment")
+					anchor.Name = "CarryBillboardAnchor"
+					anchor.Parent = part
+					billboard.Adornee = anchor
+					latchedPart = part
+					setLabels()
+				end
+				local ok, bboxCF, bboxSize = pcall(model.GetBoundingBox, model)
+				if ok then
+					--.. the billboard is centred on the anchor: keep its bottom edge 0.4 studs over the model
+						anchor.WorldPosition = bboxCF.Position + Vector3.new(0, bboxSize.Y * 0.5 + CARRY_H * 0.5 + 0.4, 0)
+				end
+				billboard.Enabled = true
+			else
+				billboard.Enabled = false
+			end
+		else
+			billboard.Enabled = false
+			billboard.Adornee = nil
+			latchedPart = nil
+		end
+		task.wait(0.25)
+	end
+end)
+
+player:GetAttributeChangedSignal("CarryingCucumber"):Connect(function()
+	setLabels()
+	if player:GetAttribute("CarryingCucumber") ~= nil then punch() end
+end)
+player:GetAttributeChangedSignal("CarryingCucumberHeavy"):Connect(setLabels)
+player:GetAttributeChangedSignal("CarryingCucumberWeak"):Connect(setLabels)
+player:GetAttributeChangedSignal("CarryingCucumberBand"):Connect(setLabels)
+setLabels()
+
+button.Activated:Connect(function()
+	DropRemote:FireServer()
+end)
+
+--..Toast: the game-wide notification style (ReplicatedStorage.Modules.Notify, user 2026-09-07)..--
+local Notify = require(ReplicatedStorage:WaitForChild("Modules"):WaitForChild("Notify"))
+local function Toast(text, color)
+	Notify.Show(text, color)
+end
+
+--..FX..--
+local function dirtPuffRing(position)
+	local part = Instance.new("Part")
+	part.Name = "ReplantDirtPuff"
+	part.Anchored = true
+	part.CanCollide = false
+	part.CanQuery = false
+	part.CanTouch = false
+	part.CastShadow = false
+	part.Transparency = 1
+	part.Size = Vector3.new(3, 0.4, 3)
+	part.CFrame = CFrame.new(position + Vector3.new(0, 0.4, 0))
+	part.Parent = workspace
+	local e = Instance.new("ParticleEmitter")
+	e.Color = ColorSequence.new(Color3.fromRGB(150, 112, 70), Color3.fromRGB(95, 72, 48))
+	e.Lifetime = NumberRange.new(0.35, 0.6)
+	e.Speed = NumberRange.new(6, 11)
+	e.SpreadAngle = Vector2.new(85, 85)
+	e.Acceleration = Vector3.new(0, -22, 0)
+	e.Rotation = NumberRange.new(0, 360)
+	e.RotSpeed = NumberRange.new(-120, 120)
+	e.Size = NumberSequence.new({NumberSequenceKeypoint.new(0, 0.55), NumberSequenceKeypoint.new(1, 0.1)})
+	e.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 0.15), NumberSequenceKeypoint.new(1, 1)})
+	e.Enabled = false
+	e.Parent = part
+	e:Emit(14)
+	Debris:AddItem(part, 1.2)
+end
+
+--.. green comet launching off the shoulder in a high arc toward the home field
+local function flyHomeComet(targetPos)
+	local char = player.Character
+	local shoulder = char and (char:FindFirstChild("LeftUpperArm") or char:FindFirstChild("UpperTorso") or char:FindFirstChild("Torso") or char:FindFirstChild("HumanoidRootPart"))
+	if not shoulder then return end
+	local from = shoulder.Position + Vector3.new(0, 1, 0)
+	local dir = Vector3.zAxis
+	if typeof(targetPos) == "Vector3" then
+		local flat = Vector3.new(targetPos.X - from.X, 0, targetPos.Z - from.Z)
+		if flat.Magnitude > 0.01 then dir = flat.Unit end
+	end
+	local comet = Instance.new("Part")
+	comet.Name = "CarryHomeComet"
+	comet.Shape = Enum.PartType.Ball
+	comet.Size = Vector3.new(0.6, 0.6, 0.6)
+	comet.Material = Enum.Material.Neon
+	comet.Color = Color3.fromRGB(120, 255, 120)
+	comet.Anchored = true
+	comet.CanCollide = false
+	comet.CanQuery = false
+	comet.CanTouch = false
+	comet.CastShadow = false
+	comet.CFrame = CFrame.new(from)
+	local a0 = Instance.new("Attachment") a0.Position = Vector3.new(0, 0.15, 0) a0.Parent = comet
+	local a1 = Instance.new("Attachment") a1.Position = Vector3.new(0, -0.15, 0) a1.Parent = comet
+	local trail = Instance.new("Trail")
+	trail.Attachment0 = a0
+	trail.Attachment1 = a1
+	trail.Color = ColorSequence.new(Color3.fromRGB(150, 255, 150))
+	trail.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 0.25), NumberSequenceKeypoint.new(1, 1)})
+	trail.Lifetime = 0.25
+	trail.LightEmission = 0.7
+	trail.WidthScale = NumberSequence.new({NumberSequenceKeypoint.new(0, 1), NumberSequenceKeypoint.new(1, 0.2)})
+	trail.Parent = comet
+	comet.Parent = workspace
+	Debris:AddItem(comet, 1.2)
+	task.spawn(function()
+		local DUR = 1.1
+		local t0 = os.clock()
+		while comet.Parent do
+			local a = (os.clock() - t0) / DUR
+			if a >= 1 then break end
+			local height = math.sin(a * math.pi) * 24
+			comet.CFrame = CFrame.new(from + dir * (a * 55) + Vector3.new(0, height, 0))
+			comet.Transparency = math.max(0, (a - 0.45) / 0.55)
+			RunService.Heartbeat:Wait()
+		end
+		if comet.Parent then comet:Destroy() end
+	end)
+end
+
+--.. "made it to the lobby" screen bounce: the camera dips and springs back (damped, ~0.6 s)
+--.. with a small roll and a FOV punch. Applied AFTER the camera scripts each frame; if
+--.. nothing else rewrote the camera since our last write, our previous offset is removed
+--.. first so it never accumulates.
+local BOUNCE_NAME = "CarryLobbyBounce"
+local function cameraBounce()
+	local camera = workspace.CurrentCamera
+	if not camera then return end
+	pcall(RunService.UnbindFromRenderStep, RunService, BOUNCE_NAME)
+	local DUR = 0.65
+	local t0 = os.clock()
+	local baseFov = camera.FieldOfView
+	local lastSet, applied
+	RunService:BindToRenderStep(BOUNCE_NAME, Enum.RenderPriority.Camera.Value + 1, function()
+		local a = (os.clock() - t0) / DUR
+		local cf = camera.CFrame
+		if lastSet and applied and cf:FuzzyEq(lastSet, 1e-4) then cf = cf * applied:Inverse() end
+		if a >= 1 then
+			RunService:UnbindFromRenderStep(BOUNCE_NAME)
+			camera.CFrame = cf
+			camera.FieldOfView = baseFov
+			return
+		end
+		local decay = math.exp(-4 * a)
+		local dip = -math.sin(a * math.pi * 3) * 1.3 * decay -- studs: down first, then springs back
+		local roll = math.sin(a * math.pi * 3 + 0.6) * math.rad(1.5) * decay
+		applied = CFrame.new(0, dip, 0) * CFrame.Angles(0, 0, roll)
+		lastSet = cf * applied
+		camera.CFrame = lastSet
+		camera.FieldOfView = baseFov + 7 * math.sin(a * math.pi) * decay
+	end)
+end
+
+FXRemote.OnClientEvent:Connect(function(payload)
+	if type(payload) ~= "table" then return end
+	local kind = payload.Kind
+	if kind == "Pickup" then
+		SoundController.PlayFX("Collect", {Volume = 0.6, Pitch = 0.05}) -- no "Collected a ..." toast (user, 2026-09-06)
+	elseif kind == "Replant" then
+		if typeof(payload.Position) == "Vector3" then
+			SoundController.PlayFXAt("Dirt Dig", payload.Position, {MaxLife = 0.9})
+			dirtPuffRing(payload.Position)
+		end
+	elseif kind == "FlyHome" then
+		SoundController.PlayFX("Slide Whistle", {Volume = 0.5})
+		flyHomeComet(payload.Position)
+		Toast(("Sent the %s back to %s!"):format(tostring(payload.Name or "cucumber"), tostring(payload.Zone or "its field")), Notify.COLORS.Success)
+	elseif kind == "Placed" then
+		SoundController.PlayFX("Success", {Volume = 0.6}) -- no "Placed the ... on your plot!" toast (user, 2026-09-06)
+	elseif kind == "Refused" then
+		SoundController.PlayFX("Error", {Volume = 0.5})
+		Toast(tostring(payload.Reason or "Can't do that right now."), Notify.COLORS.Error)
+	elseif kind == "Stumble" then
+		--.. it slipped off the shoulder: inside a biome it lands where it slipped, FALL_FLIGHT
+		--.. later (CollectAnimClient tumbles it); outside the biomes (Home) it flew back to its field
+		local name = tostring(payload.Name or "cucumber")
+		if payload.Home then
+			SoundController.PlayFX("Slide Whistle", {Volume = 0.5})
+			flyHomeComet(payload.Position)
+			if payload.Weak then
+				Toast(("Too heavy! The %s slipped off and flew back to %s. Hit the bench to get stronger."):format(name, tostring(payload.Zone or "its field")), Notify.COLORS.Error)
+			else
+				Toast(("Oof! The %s slipped off and flew back to %s."):format(name, tostring(payload.Zone or "its field")), Notify.COLORS.Warn)
+			end
+		else
+			if payload.Weak then
+				--.. below the requirement: it went straight down again
+				Toast(("Too heavy! The %s slipped right off. Hit the bench to get stronger."):format(name), Notify.COLORS.Error)
+			else
+				Toast(("Oof! The %s was too heavy to carry far. Pick it up again!"):format(name), Notify.COLORS.Warn)
+			end
+			if typeof(payload.Position) == "Vector3" then
+				task.delay(CucumberStrength.FALL_FLIGHT, dirtPuffRing, payload.Position)
+			end
+		end
+	elseif kind == "LobbyReached" then
+		--.. carried it into the lobby: screen bounce + sting; a heavy load is light from here on
+		cameraBounce()
+		punch()
+		SoundController.PlayFX("Big Thud", {Volume = 0.4, MaxLife = 1})
+		SoundController.PlayFX("Magic Shimmer", {Volume = 0.55})
+		if payload.WasHeavy then
+			Toast(("Phew! You made it to the lobby with the %s. It feels lighter already!"):format(tostring(payload.Name or "cucumber")), Notify.COLORS.Success)
+		end
+	end
+end)
+

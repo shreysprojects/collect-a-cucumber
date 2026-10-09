@@ -1,0 +1,238 @@
+--[[
+	DataService  (ModuleScript, ServerStorage)
+	Player data on ProfileStore (loleris' successor to ProfileService: session
+	locking, periodic auto-save, save on leave / shutdown, Studio mock when
+	"Enable Studio Access to API Services" is off).
+
+	Saved template (profile.Data):  Coins, Cukes, Playtime (seconds, all sessions)
+
+	Every loaded player gets  player.Data  (a Folder, NOT leaderstats, so nothing
+	shows on the playerlist) holding NumberValues Coins / Cukes / Playtime that
+	mirror the profile and replicate to the client for UI.
+
+	Saving: any change to Coins / Cukes (or any key except Playtime) is written to
+	the DataStore straight away; further changes inside SAVE_DEBOUNCE seconds ride
+	the next write (DataStore budget). Playtime rides along with those writes and
+	is also auto-saved every AUTO_SAVE_PERIOD seconds and on leave.
+
+	Use from any server Script:
+		local DataService = require(game:GetService("ServerStorage"):WaitForChild("DataService"))
+		DataService.Increment(player, "Coins", 25)
+		DataService.Set(player, "Cukes", 0)
+		local coins = DataService.Get(player, "Coins")
+		local data = DataService.WaitForData(player)      -- yields until the profile is in
+		DataService.OnProfileLoaded(function(player, profile) ... end)
+		DataService.RequestSave(player)                    -- force a (coalesced) save
+	Writing the value object on the server also saves:
+		player.Data.Coins.Value += 25
+	Playtime is advanced by this module once a second; don't write it elsewhere.
+
+	ServerScriptService.DataLoader calls DataService.Start() once.
+	The ProfileStore library (ProfileStore.luau) is a child ModuleScript of this module.
+]]
+
+--..Services..--
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+
+--..Modules..--
+local ProfileStore = require(script:WaitForChild("ProfileStore"))
+
+--..Config..--
+local STORE_NAME = "PlayerData_v1" -- bump the suffix to reset everyone (old data stays under the old name)
+local PROFILE_KEY = "Player_%d"
+local USE_MOCK_IN_STUDIO = false -- true: Studio playtests never touch the live DataStore
+local VALUES_FOLDER = "Data"
+local PLAYTIME_TICK = 1
+local SAVE_DEBOUNCE = 5 -- seconds; a change saves at once, further changes inside this window ride the next write
+local AUTO_SAVE_PERIOD = 60 -- seconds; ProfileStore's periodic save (was 300)
+
+local TEMPLATE = {
+	Coins = 0,
+	Cukes = 0,
+	Playtime = 0, -- seconds in game across all sessions
+	Strength = 0, -- + Strength upgrade level per bench-press rep (GymService)
+	Upgrades = {BenchPress = 1}, -- bench upgrade level (GymService); old profiles may also carry FasterReps / Quests, ignored
+}
+local VALUE_ORDER = {"Coins", "Cukes", "Playtime", "Strength"}
+
+--..Variables..--
+ProfileStore.SetConstant("AUTO_SAVE_PERIOD", AUTO_SAVE_PERIOD)
+local Store = ProfileStore.New(STORE_NAME, TEMPLATE)
+if USE_MOCK_IN_STUDIO and RunService:IsStudio() then Store = Store.Mock end
+
+local DataService = {}
+DataService.Template = TEMPLATE
+DataService.StoreName = STORE_NAME
+
+local Profiles = {} -- [player] = profile
+local Values = {} -- [player] = {Coins = NumberValue, Cukes = NumberValue, Playtime = NumberValue}
+local PlaytimeBase = {} -- [player] = {At = os.clock(), Value = saved seconds at load}
+local LastSave = {} -- [player] = os.clock() of the last write this module asked for
+local SavePending = {} -- [player] = true while a coalesced write is scheduled
+local LoadedCallbacks = {}
+local Started = false
+
+--..Functions..--
+function DataService.GetProfile(player)
+	return Profiles[player]
+end
+
+function DataService.GetData(player)
+	local profile = Profiles[player]
+	return profile and profile.Data or nil
+end
+
+function DataService.IsLoaded(player)
+	return Profiles[player] ~= nil
+end
+
+function DataService.WaitForData(player, timeout)
+	local deadline = os.clock() + (timeout or 30)
+	while player.Parent == Players and Profiles[player] == nil and os.clock() < deadline do
+		task.wait(0.1)
+	end
+	return DataService.GetData(player)
+end
+
+local function SaveNow(player)
+	local profile = Profiles[player]
+	if profile and profile:IsActive() then
+		LastSave[player] = os.clock()
+		profile:Save() -- immediate UpdateAsync in its own thread
+	end
+end
+
+--.. write the profile to the DataStore now, or at the end of the current debounce window
+function DataService.RequestSave(player)
+	if SavePending[player] or not Profiles[player] then return end
+	local elapsed = os.clock() - (LastSave[player] or 0)
+	if elapsed >= SAVE_DEBOUNCE then
+		SaveNow(player)
+	else
+		SavePending[player] = true
+		task.delay(SAVE_DEBOUNCE - elapsed, function()
+			SavePending[player] = nil
+			SaveNow(player)
+		end)
+	end
+end
+
+function DataService.Get(player, key)
+	local data = DataService.GetData(player)
+	return data and data[key] or nil
+end
+
+function DataService.Set(player, key, value)
+	local data = DataService.GetData(player)
+	if not data then return false end
+	data[key] = value
+	local values = Values[player]
+	local object = values and values[key]
+	if object and object.Value ~= value then object.Value = value end
+	if key ~= "Playtime" then DataService.RequestSave(player) end
+	return true
+end
+
+function DataService.Increment(player, key, delta)
+	local current = DataService.Get(player, key)
+	if current == nil then return false end
+	return DataService.Set(player, key, current + (delta or 1))
+end
+
+function DataService.OnProfileLoaded(callback)
+	table.insert(LoadedCallbacks, callback)
+	for player, profile in pairs(Profiles) do
+		task.spawn(callback, player, profile)
+	end
+end
+
+local function BuildValues(player, data)
+	local folder = Instance.new("Folder")
+	folder.Name = VALUES_FOLDER
+	local map = {}
+	for _, key in ipairs(VALUE_ORDER) do
+		local object = Instance.new("NumberValue")
+		object.Name = key
+		object.Value = data[key] or 0
+		object.Parent = folder
+		map[key] = object
+		--.. server-side writes to the value object are the same as DataService.Set
+		object.Changed:Connect(function(newValue)
+			local live = DataService.GetData(player)
+			if live and live[key] ~= newValue then
+				live[key] = newValue
+				if key ~= "Playtime" then DataService.RequestSave(player) end
+			end
+		end)
+	end
+	Values[player] = map
+	folder.Parent = player
+end
+
+local function Forget(player)
+	Profiles[player] = nil
+	Values[player] = nil
+	PlaytimeBase[player] = nil
+	LastSave[player] = nil
+	SavePending[player] = nil
+end
+
+local function OnPlayerAdded(player)
+	local profile = Store:StartSessionAsync(PROFILE_KEY:format(player.UserId), {
+		Cancel = function() return player.Parent ~= Players end,
+	})
+	if profile == nil then
+		player:Kick("Your data could not be loaded. Please rejoin.")
+		return
+	end
+	profile:AddUserId(player.UserId)
+	profile:Reconcile()
+	profile.OnSessionEnd:Connect(function()
+		Forget(player)
+		if player.Parent == Players then
+			player:Kick("Your data was opened on another server. Please rejoin.")
+		end
+	end)
+	if player.Parent ~= Players then
+		profile:EndSession()
+		return
+	end
+	Profiles[player] = profile
+	LastSave[player] = os.clock()
+	PlaytimeBase[player] = {At = os.clock(), Value = profile.Data.Playtime or 0}
+	BuildValues(player, profile.Data)
+	for _, callback in ipairs(LoadedCallbacks) do
+		task.spawn(callback, player, profile)
+	end
+end
+
+local function OnPlayerRemoving(player)
+	local profile = Profiles[player]
+	if profile then profile:EndSession() end -- final save
+	Forget(player)
+end
+
+function DataService.Start()
+	if Started then return DataService end
+	Started = true
+	Players.PlayerAdded:Connect(OnPlayerAdded)
+	Players.PlayerRemoving:Connect(OnPlayerRemoving)
+	for _, player in ipairs(Players:GetPlayers()) do
+		task.spawn(OnPlayerAdded, player)
+	end
+	--.. Playtime: exact elapsed seconds since load on top of the saved total
+	task.spawn(function()
+		while true do
+			task.wait(PLAYTIME_TICK)
+			for player, base in pairs(PlaytimeBase) do
+				if Profiles[player] then
+					DataService.Set(player, "Playtime", base.Value + math.floor(os.clock() - base.At))
+				end
+			end
+		end
+	end)
+	return DataService
+end
+
+return DataService

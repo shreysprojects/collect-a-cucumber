@@ -1,0 +1,23 @@
+S0a seed of the Studio test key PetTest_140977250 (playtest 1, 2026-09-22 18:16 local)
+edit peer (step 1):
+restore_profile STEP 1 OK <- WP-DATA_fixture_profile.json at 2026-09-22 18:16:21
+PASS staged in PetTestTransfer/Restore_140977250
+7755 bytes (envelope): Cash=2154397399.1093736 PlotLevel=2 Pets=4 Eggs=3 Cucumbers=2 Builds=51
+NEXT (server VM): local PROFILE_TOOL_OPTS = {Name = "WP-DATA_fixture_profile.json", Nonce = "7d1aa3f6"} + this file
+
+server VM (step 2):
+restore_profile STEP 2 OK <- WP-DATA_fixture_profile.json at 2026-09-22 18:16:58
+session key PetTest_140977250 (test key)
+staged JSON: 7755 bytes, nonce 7d1aa3f6, staged 37s ago
+JSON (envelope): Cash=2154397399.1093736 Playtime=58874 PlotLevel=2 Pets=4 Eggs=3 Cucumbers=2 Builds=51 Base.Version=2
+PASS plot level (Plot 5 = 2, want 2)
+PASS Cash written (2154397399.1093736)
+PASS BaseSaveAPI.Reload (true true  in 1.0 s)
+Base table rebuilt by BaseSave (Collect)
+PASS #Base.Pets (4, want 4)
+PASS #Base.Eggs (3, want 3)
+PASS #Base.Cucumbers (2, want 2)
+PASS #Base.Builds (51, want 51)
+world on Plot 5: Pets=4 Eggs=3 Cucumbers=2 Builds=51
+PASS Cash after (2154397399.1093736 (+0 income since the write))
+PlotLevel=2 Strength=0 Playtime=219 (session clock)

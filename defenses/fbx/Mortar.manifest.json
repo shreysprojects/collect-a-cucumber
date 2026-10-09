@@ -1,0 +1,145 @@
+{
+ "collection": "Mortar",
+ "parts": [
+  {
+   "collection": "Mortar",
+   "name": "Mortar.BaseBolts",
+   "hex": "2f3136",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 80
+  },
+  {
+   "collection": "Mortar",
+   "name": "Mortar.BaseCorners",
+   "hex": "c8b276",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 176
+  },
+  {
+   "collection": "Mortar",
+   "name": "Mortar.BasePlate",
+   "hex": "45474d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "Mortar",
+   "name": "Mortar.BasePlatform",
+   "hex": "565962",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Mortar",
+   "name": "Mortar.MountBar",
+   "hex": "45474d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Mortar",
+   "name": "Mortar.MountBolts",
+   "hex": "2f3136",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 120
+  },
+  {
+   "collection": "Mortar",
+   "name": "Mortar.MountCheeks",
+   "hex": "565962",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 176
+  },
+  {
+   "collection": "Mortar",
+   "name": "Mortar.MountTrunnionDiscs",
+   "hex": "c8b276",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "Mortar",
+   "name": "Mortar.MountTurntable",
+   "hex": "45474d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Mortar",
+   "name": "Mortar.TubeBarrel",
+   "hex": "45474d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Mortar",
+   "name": "Mortar.TubeBore",
+   "hex": "2f3136",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Mortar",
+   "name": "Mortar.TubeBreech",
+   "hex": "565962",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Mortar",
+   "name": "Mortar.TubeMuzzle",
+   "hex": "565962",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 92
+  },
+  {
+   "collection": "Mortar",
+   "name": "Mortar.TubeRings",
+   "hex": "565962",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 88
+  }
+ ],
+ "pivots": {
+  "YawPivot": [
+   0.0,
+   0.0,
+   1.3
+  ],
+  "PitchPivot": [
+   0.0,
+   0.0,
+   4.0
+  ],
+  "MuzzleTip": [
+   0.0,
+   2.008,
+   6.867
+  ]
+ },
+ "states": {
+  "Elevation": 55
+ },
+ "notes": "Rig by name prefix: Base* is static, Mount* yaws about the world Z axis through (0, 0) (YawPivot = top of BasePlatform, z 1.3), Tube* pitches about the trunnion axis, a line parallel to X through PitchPivot (0, 0, 4.0). Modelled at zero yaw and 55 deg elevation (STATES.Elevation) with the tube pointing +Y and up: d = (0, cos 55, sin 55). Shells leave MuzzleTip = PitchPivot + d * 3.5, the centre of the muzzle face. Base plate is an octagon r 3.4 (vertex) = 6.28 flat-to-flat, so the static footprint is 6.28 x 6.28; total height 7.51 to the top of the muzzle collar rim (the muzzle face centre is at z 6.87). Widest yawing point is the muzzle collar rim at radius 2.93 from the yaw axis, so a full 360 deg yaw of Mount* + Tube* stays inside the base plate and well inside the 8 x 8 tile. Pitch clearance traced by hand: the tube (r <= 1.12 at the collar) clears the cheek inner faces at x = +/-1.25 at every angle, and the breech cap clears MountBar (top z 2.5) from 20 deg up to 90 deg, so 25..85 deg elevation is a safe usable range. TubeMuzzle's front face is a real annulus (outer r 1.12, inner r 0.78) with a 0.2-deep recess, and TubeBore is the dark disc sitting 0.05 inside that recess - that pair is what makes the muzzle read hollow, keep them together. MountTrunnionDiscs are embedded 0.1 into the cheeks and MountBar 0.1 into each cheek so no two parts share a coplanar face. Nothing dips below z = 0. No Neon parts. Tan (c8b276) accents: BaseCorners, MountTrunnionDiscs. Bolt-dark (2f3136) parts: BaseBolts (one per corner block, on its outer face), MountBolts (two on each cheek's front lower face plus one axle bolt in the centre of each trunnion disc), TubeBore.",
+ "tris": 1112,
+ "size_studs": [
+  6.28,
+  6.28,
+  7.51
+ ],
+ "min_z": 0.0
+}

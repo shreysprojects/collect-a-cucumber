@@ -1,0 +1,4106 @@
+{
+ "key": "TeslaCoil",
+ "category": "Defences",
+ "parts": [
+  {
+   "name": "BasePlinth1",
+   "shape": "Block",
+   "size": [
+    7.6,
+    0.9,
+    3.148
+   ],
+   "cf": [
+    0.0,
+    0.45,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BasePlinth2",
+   "shape": "Block",
+   "size": [
+    7.6,
+    0.92,
+    3.148
+   ],
+   "cf": [
+    0.0,
+    0.46,
+    0.0,
+    0.70711,
+    0.0,
+    0.70711,
+    0.0,
+    1.0,
+    0.0,
+    -0.70711,
+    0.0,
+    0.70711
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BasePlinth3",
+   "shape": "Block",
+   "size": [
+    7.6,
+    0.94,
+    3.148
+   ],
+   "cf": [
+    0.0,
+    0.47,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BasePlinth4",
+   "shape": "Block",
+   "size": [
+    7.6,
+    0.96,
+    3.148
+   ],
+   "cf": [
+    0.0,
+    0.48,
+    0.0,
+    -0.70711,
+    0.0,
+    0.70711,
+    0.0,
+    1.0,
+    0.0,
+    -0.70711,
+    0.0,
+    -0.70711
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseDeck",
+   "shape": "Cylinder",
+   "size": [
+    0.22,
+    7.1,
+    7.1
+   ],
+   "cf": [
+    0.0,
+    0.95,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "9aa7b8",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseWarn1",
+   "shape": "Block",
+   "size": [
+    2.6,
+    0.56,
+    0.1
+   ],
+   "cf": [
+    0.0,
+    0.45,
+    -3.83,
+    1.0,
+    0.0,
+    -0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseWarn1Stripe1",
+   "shape": "Block",
+   "size": [
+    0.2,
+    0.58,
+    0.06
+   ],
+   "cf": [
+    -0.62,
+    0.45,
+    -3.89,
+    0.70711,
+    -0.70711,
+    -0.0,
+    0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseWarn1Stripe2",
+   "shape": "Block",
+   "size": [
+    0.2,
+    0.58,
+    0.06
+   ],
+   "cf": [
+    0.0,
+    0.45,
+    -3.89,
+    0.70711,
+    -0.70711,
+    -0.0,
+    0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseWarn1Stripe3",
+   "shape": "Block",
+   "size": [
+    0.2,
+    0.58,
+    0.06
+   ],
+   "cf": [
+    0.62,
+    0.45,
+    -3.89,
+    0.70711,
+    -0.70711,
+    -0.0,
+    0.70711,
+    0.70711,
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseWarn2",
+   "shape": "Block",
+   "size": [
+    2.6,
+    0.56,
+    0.1
+   ],
+   "cf": [
+    3.83,
+    0.45,
+    -0.0,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseWarn2Stripe1",
+   "shape": "Block",
+   "size": [
+    0.2,
+    0.58,
+    0.06
+   ],
+   "cf": [
+    3.89,
+    0.45,
+    -0.62,
+    0.0,
+    -0.0,
+    -1.0,
+    0.70711,
+    0.70711,
+    0.0,
+    0.70711,
+    -0.70711,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseWarn2Stripe2",
+   "shape": "Block",
+   "size": [
+    0.2,
+    0.58,
+    0.06
+   ],
+   "cf": [
+    3.89,
+    0.45,
+    -0.0,
+    0.0,
+    -0.0,
+    -1.0,
+    0.70711,
+    0.70711,
+    0.0,
+    0.70711,
+    -0.70711,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseWarn2Stripe3",
+   "shape": "Block",
+   "size": [
+    0.2,
+    0.58,
+    0.06
+   ],
+   "cf": [
+    3.89,
+    0.45,
+    0.62,
+    0.0,
+    -0.0,
+    -1.0,
+    0.70711,
+    0.70711,
+    0.0,
+    0.70711,
+    -0.70711,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseWarn3",
+   "shape": "Block",
+   "size": [
+    2.6,
+    0.56,
+    0.1
+   ],
+   "cf": [
+    -0.0,
+    0.45,
+    3.83,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseWarn3Stripe1",
+   "shape": "Block",
+   "size": [
+    0.2,
+    0.58,
+    0.06
+   ],
+   "cf": [
+    0.62,
+    0.45,
+    3.89,
+    -0.70711,
+    0.70711,
+    0.0,
+    0.70711,
+    0.70711,
+    0.0,
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseWarn3Stripe2",
+   "shape": "Block",
+   "size": [
+    0.2,
+    0.58,
+    0.06
+   ],
+   "cf": [
+    -0.0,
+    0.45,
+    3.89,
+    -0.70711,
+    0.70711,
+    0.0,
+    0.70711,
+    0.70711,
+    0.0,
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseWarn3Stripe3",
+   "shape": "Block",
+   "size": [
+    0.2,
+    0.58,
+    0.06
+   ],
+   "cf": [
+    -0.62,
+    0.45,
+    3.89,
+    -0.70711,
+    0.70711,
+    0.0,
+    0.70711,
+    0.70711,
+    0.0,
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseWarn4",
+   "shape": "Block",
+   "size": [
+    2.6,
+    0.56,
+    0.1
+   ],
+   "cf": [
+    -3.83,
+    0.45,
+    -0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseWarn4Stripe1",
+   "shape": "Block",
+   "size": [
+    0.2,
+    0.58,
+    0.06
+   ],
+   "cf": [
+    -3.89,
+    0.45,
+    0.62,
+    0.0,
+    -0.0,
+    1.0,
+    0.70711,
+    0.70711,
+    0.0,
+    -0.70711,
+    0.70711,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseWarn4Stripe2",
+   "shape": "Block",
+   "size": [
+    0.2,
+    0.58,
+    0.06
+   ],
+   "cf": [
+    -3.89,
+    0.45,
+    -0.0,
+    0.0,
+    -0.0,
+    1.0,
+    0.70711,
+    0.70711,
+    0.0,
+    -0.70711,
+    0.70711,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseWarn4Stripe3",
+   "shape": "Block",
+   "size": [
+    0.2,
+    0.58,
+    0.06
+   ],
+   "cf": [
+    -3.89,
+    0.45,
+    -0.62,
+    0.0,
+    -0.0,
+    1.0,
+    0.70711,
+    0.70711,
+    0.0,
+    -0.70711,
+    0.70711,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseRivet1",
+   "shape": "Ball",
+   "size": [
+    0.26,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    2.00111,
+    0.45,
+    -3.34461,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseRivet2",
+   "shape": "Ball",
+   "size": [
+    0.26,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    3.34462,
+    0.45,
+    -2.00111,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseRivet3",
+   "shape": "Ball",
+   "size": [
+    0.26,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    3.34461,
+    0.45,
+    2.00111,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseRivet4",
+   "shape": "Ball",
+   "size": [
+    0.26,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    2.00111,
+    0.45,
+    3.34462,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseRivet5",
+   "shape": "Ball",
+   "size": [
+    0.26,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    -2.00111,
+    0.45,
+    3.34461,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseRivet6",
+   "shape": "Ball",
+   "size": [
+    0.26,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    -3.34462,
+    0.45,
+    2.00111,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseRivet7",
+   "shape": "Ball",
+   "size": [
+    0.26,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    -3.34461,
+    0.45,
+    -2.00111,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseRivet8",
+   "shape": "Ball",
+   "size": [
+    0.26,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    -2.00111,
+    0.45,
+    -3.34461,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DrumFoot",
+   "shape": "Cylinder",
+   "size": [
+    0.26,
+    5.5,
+    5.5
+   ],
+   "cf": [
+    0.0,
+    1.15,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "59636f",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Drum",
+   "shape": "Cylinder",
+   "size": [
+    1.24,
+    5.0,
+    5.0
+   ],
+   "cf": [
+    0.0,
+    1.88,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "2f64c0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "GlowBand",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    5.08,
+    5.08
+   ],
+   "cf": [
+    0.0,
+    1.51,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "4fc8ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DrumLid",
+   "shape": "Cylinder",
+   "size": [
+    0.3,
+    5.4,
+    5.4
+   ],
+   "cf": [
+    0.0,
+    2.61,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "DrumLidBolt1",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    1.21,
+    2.79,
+    2.09578,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DrumLidBolt2",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    2.42,
+    2.79,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DrumLidBolt3",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    1.21,
+    2.79,
+    -2.09578,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DrumLidBolt4",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    -1.21,
+    2.79,
+    -2.09578,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DrumLidBolt5",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    -2.42,
+    2.79,
+    -0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DrumLidBolt6",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    -1.21,
+    2.79,
+    2.09578,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SignFrontMount",
+   "shape": "Block",
+   "size": [
+    1.5,
+    1.08,
+    0.3
+   ],
+   "cf": [
+    0.0,
+    1.9,
+    -2.42,
+    1.0,
+    0.0,
+    -0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SignFrontTri1",
+   "shape": "Wedge",
+   "size": [
+    0.08,
+    0.98,
+    0.64
+   ],
+   "cf": [
+    0.32,
+    1.9,
+    -2.59,
+    -0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SignFrontTri2",
+   "shape": "Wedge",
+   "size": [
+    0.08,
+    0.98,
+    0.64
+   ],
+   "cf": [
+    -0.32,
+    1.9,
+    -2.59,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SignFrontBolt1",
+   "shape": "Block",
+   "size": [
+    0.13,
+    0.3562,
+    0.06
+   ],
+   "cf": [
+    -0.02,
+    1.96,
+    -2.65,
+    0.82219,
+    -0.56921,
+    -0.0,
+    0.56921,
+    0.82219,
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SignFrontBolt2",
+   "shape": "Block",
+   "size": [
+    0.13,
+    0.445,
+    0.06
+   ],
+   "cf": [
+    0.04,
+    1.66,
+    -2.65,
+    0.83957,
+    -0.54325,
+    -0.0,
+    0.54325,
+    0.83957,
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SignFrontBoltLink",
+   "shape": "Block",
+   "size": [
+    0.27,
+    0.12,
+    0.05
+   ],
+   "cf": [
+    0.0,
+    1.83,
+    -2.635,
+    1.0,
+    0.0,
+    -0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SignBackMount",
+   "shape": "Block",
+   "size": [
+    1.5,
+    1.08,
+    0.3
+   ],
+   "cf": [
+    -0.0,
+    1.9,
+    2.42,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SignBackTri1",
+   "shape": "Wedge",
+   "size": [
+    0.08,
+    0.98,
+    0.64
+   ],
+   "cf": [
+    -0.32,
+    1.9,
+    2.59,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SignBackTri2",
+   "shape": "Wedge",
+   "size": [
+    0.08,
+    0.98,
+    0.64
+   ],
+   "cf": [
+    0.32,
+    1.9,
+    2.59,
+    -0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SignBackBolt1",
+   "shape": "Block",
+   "size": [
+    0.13,
+    0.3562,
+    0.06
+   ],
+   "cf": [
+    0.02,
+    1.96,
+    2.65,
+    -0.82219,
+    0.56921,
+    0.0,
+    0.56921,
+    0.82219,
+    0.0,
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SignBackBolt2",
+   "shape": "Block",
+   "size": [
+    0.13,
+    0.445,
+    0.06
+   ],
+   "cf": [
+    -0.04,
+    1.66,
+    2.65,
+    -0.83957,
+    0.54325,
+    0.0,
+    0.54325,
+    0.83957,
+    0.0,
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SignBackBoltLink",
+   "shape": "Block",
+   "size": [
+    0.27,
+    0.12,
+    0.05
+   ],
+   "cf": [
+    -0.0,
+    1.83,
+    2.635,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Post1Rod",
+   "shape": "Cylinder",
+   "size": [
+    1.38,
+    0.34,
+    0.34
+   ],
+   "cf": [
+    2.15668,
+    1.73,
+    -2.15668,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Post1Shed1",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.78,
+    0.78
+   ],
+   "cf": [
+    2.15668,
+    1.42,
+    -2.15668,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Post1Shed2",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.78,
+    0.78
+   ],
+   "cf": [
+    2.15668,
+    1.86,
+    -2.15668,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "GlowPost1",
+   "shape": "Ball",
+   "size": [
+    0.44,
+    0.44,
+    0.44
+   ],
+   "cf": [
+    2.15668,
+    2.54,
+    -2.15668,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "4fc8ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Post1Lead",
+   "shape": "Cylinder",
+   "size": [
+    2.1761,
+    0.12,
+    0.12
+   ],
+   "cf": [
+    1.54503,
+    3.2,
+    -1.54503,
+    -0.56216,
+    0.42893,
+    -0.70711,
+    0.6066,
+    0.79501,
+    0.0,
+    0.56216,
+    -0.42893,
+    -0.70711
+   ],
+   "color": "d9894a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Post2Rod",
+   "shape": "Cylinder",
+   "size": [
+    1.38,
+    0.34,
+    0.34
+   ],
+   "cf": [
+    -2.15668,
+    1.73,
+    -2.15668,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Post2Shed1",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.78,
+    0.78
+   ],
+   "cf": [
+    -2.15668,
+    1.42,
+    -2.15668,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Post2Shed2",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.78,
+    0.78
+   ],
+   "cf": [
+    -2.15668,
+    1.86,
+    -2.15668,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "GlowPost2",
+   "shape": "Ball",
+   "size": [
+    0.44,
+    0.44,
+    0.44
+   ],
+   "cf": [
+    -2.15668,
+    2.54,
+    -2.15668,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "4fc8ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Post2Lead",
+   "shape": "Cylinder",
+   "size": [
+    2.1761,
+    0.12,
+    0.12
+   ],
+   "cf": [
+    -1.54503,
+    3.2,
+    -1.54503,
+    0.56216,
+    -0.42893,
+    -0.70711,
+    0.6066,
+    0.79501,
+    0.0,
+    0.56216,
+    -0.42893,
+    0.70711
+   ],
+   "color": "d9894a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Post3Rod",
+   "shape": "Cylinder",
+   "size": [
+    1.38,
+    0.34,
+    0.34
+   ],
+   "cf": [
+    -2.15668,
+    1.73,
+    2.15668,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Post3Shed1",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.78,
+    0.78
+   ],
+   "cf": [
+    -2.15668,
+    1.42,
+    2.15668,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Post3Shed2",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.78,
+    0.78
+   ],
+   "cf": [
+    -2.15668,
+    1.86,
+    2.15668,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "GlowPost3",
+   "shape": "Ball",
+   "size": [
+    0.44,
+    0.44,
+    0.44
+   ],
+   "cf": [
+    -2.15668,
+    2.54,
+    2.15668,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "4fc8ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Post3Lead",
+   "shape": "Cylinder",
+   "size": [
+    2.1761,
+    0.12,
+    0.12
+   ],
+   "cf": [
+    -1.54503,
+    3.2,
+    1.54503,
+    0.56216,
+    -0.42893,
+    0.70711,
+    0.6066,
+    0.79501,
+    -0.0,
+    -0.56216,
+    0.42893,
+    0.70711
+   ],
+   "color": "d9894a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Post4Rod",
+   "shape": "Cylinder",
+   "size": [
+    1.38,
+    0.34,
+    0.34
+   ],
+   "cf": [
+    2.15668,
+    1.73,
+    2.15668,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Post4Shed1",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.78,
+    0.78
+   ],
+   "cf": [
+    2.15668,
+    1.42,
+    2.15668,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Post4Shed2",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.78,
+    0.78
+   ],
+   "cf": [
+    2.15668,
+    1.86,
+    2.15668,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "GlowPost4",
+   "shape": "Ball",
+   "size": [
+    0.44,
+    0.44,
+    0.44
+   ],
+   "cf": [
+    2.15668,
+    2.54,
+    2.15668,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "4fc8ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Post4Lead",
+   "shape": "Cylinder",
+   "size": [
+    2.1761,
+    0.12,
+    0.12
+   ],
+   "cf": [
+    1.54503,
+    3.2,
+    1.54503,
+    -0.56216,
+    0.42893,
+    0.70711,
+    0.6066,
+    0.79501,
+    0.0,
+    -0.56216,
+    0.42893,
+    -0.70711
+   ],
+   "color": "d9894a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "InsulatorCore",
+   "shape": "Cylinder",
+   "size": [
+    1.01,
+    1.7,
+    1.7
+   ],
+   "cf": [
+    0.0,
+    3.245,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "InsulatorShed1",
+   "shape": "Cylinder",
+   "size": [
+    0.18,
+    3.5,
+    3.5
+   ],
+   "cf": [
+    0.0,
+    2.98,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "InsulatorShed2",
+   "shape": "Cylinder",
+   "size": [
+    0.18,
+    3.0,
+    3.0
+   ],
+   "cf": [
+    0.0,
+    3.3,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "InsulatorShed3",
+   "shape": "Cylinder",
+   "size": [
+    0.18,
+    3.3,
+    3.3
+   ],
+   "cf": [
+    0.0,
+    3.6,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CoilCollarLow",
+   "shape": "Cylinder",
+   "size": [
+    0.3,
+    2.85,
+    2.85
+   ],
+   "cf": [
+    0.0,
+    3.86,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "GlowCoil",
+   "shape": "Cylinder",
+   "size": [
+    4.4,
+    2.2,
+    2.2
+   ],
+   "cf": [
+    0.0,
+    6.15,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "4fc8ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CoilWinding01",
+   "shape": "Cylinder",
+   "size": [
+    0.314,
+    2.5,
+    2.5
+   ],
+   "cf": [
+    0.0,
+    4.217,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d9894a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CoilWinding02",
+   "shape": "Cylinder",
+   "size": [
+    0.314,
+    2.5,
+    2.5
+   ],
+   "cf": [
+    0.0,
+    4.651,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "b86f35",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CoilWinding03",
+   "shape": "Cylinder",
+   "size": [
+    0.314,
+    2.5,
+    2.5
+   ],
+   "cf": [
+    0.0,
+    5.085,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d9894a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CoilWinding04",
+   "shape": "Cylinder",
+   "size": [
+    0.314,
+    2.5,
+    2.5
+   ],
+   "cf": [
+    0.0,
+    5.519,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "b86f35",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CoilWinding05",
+   "shape": "Cylinder",
+   "size": [
+    0.314,
+    2.5,
+    2.5
+   ],
+   "cf": [
+    0.0,
+    5.953,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d9894a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CoilWinding06",
+   "shape": "Cylinder",
+   "size": [
+    0.314,
+    2.5,
+    2.5
+   ],
+   "cf": [
+    0.0,
+    6.387,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "b86f35",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CoilWinding07",
+   "shape": "Cylinder",
+   "size": [
+    0.314,
+    2.5,
+    2.5
+   ],
+   "cf": [
+    0.0,
+    6.821,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d9894a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CoilWinding08",
+   "shape": "Cylinder",
+   "size": [
+    0.314,
+    2.5,
+    2.5
+   ],
+   "cf": [
+    0.0,
+    7.255,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "b86f35",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CoilWinding09",
+   "shape": "Cylinder",
+   "size": [
+    0.314,
+    2.5,
+    2.5
+   ],
+   "cf": [
+    0.0,
+    7.689,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d9894a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CoilWinding10",
+   "shape": "Cylinder",
+   "size": [
+    0.314,
+    2.5,
+    2.5
+   ],
+   "cf": [
+    0.0,
+    8.123,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "b86f35",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CoilCollarHigh",
+   "shape": "Cylinder",
+   "size": [
+    0.3,
+    2.85,
+    2.85
+   ],
+   "cf": [
+    0.0,
+    8.44,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CoilCap",
+   "shape": "Cylinder",
+   "size": [
+    0.68,
+    1.9,
+    1.9
+   ],
+   "cf": [
+    0.0,
+    8.91,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Toroid01",
+   "shape": "Cylinder",
+   "size": [
+    1.1906,
+    1.1,
+    1.1
+   ],
+   "cf": [
+    0.575,
+    9.3,
+    2.14593,
+    0.96593,
+    0.0,
+    0.25882,
+    0.0,
+    1.0,
+    -0.0,
+    -0.25882,
+    0.0,
+    0.96593
+   ],
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ToroidJoint01",
+   "shape": "Ball",
+   "size": [
+    1.1,
+    1.1,
+    1.1
+   ],
+   "cf": [
+    0.0,
+    9.3,
+    2.3,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Toroid02",
+   "shape": "Cylinder",
+   "size": [
+    1.1906,
+    1.1,
+    1.1
+   ],
+   "cf": [
+    1.57093,
+    9.3,
+    1.57093,
+    0.70711,
+    0.0,
+    0.70711,
+    0.0,
+    1.0,
+    -0.0,
+    -0.70711,
+    0.0,
+    0.70711
+   ],
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ToroidJoint02",
+   "shape": "Ball",
+   "size": [
+    1.1,
+    1.1,
+    1.1
+   ],
+   "cf": [
+    1.15,
+    9.3,
+    1.99186,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Toroid03",
+   "shape": "Cylinder",
+   "size": [
+    1.1906,
+    1.1,
+    1.1
+   ],
+   "cf": [
+    2.14593,
+    9.3,
+    0.575,
+    0.25882,
+    0.0,
+    0.96593,
+    0.0,
+    1.0,
+    -0.0,
+    -0.96593,
+    0.0,
+    0.25882
+   ],
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ToroidJoint03",
+   "shape": "Ball",
+   "size": [
+    1.1,
+    1.1,
+    1.1
+   ],
+   "cf": [
+    1.99186,
+    9.3,
+    1.15,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Toroid04",
+   "shape": "Cylinder",
+   "size": [
+    1.1906,
+    1.1,
+    1.1
+   ],
+   "cf": [
+    2.14593,
+    9.3,
+    -0.575,
+    -0.25882,
+    0.0,
+    0.96593,
+    0.0,
+    1.0,
+    0.0,
+    -0.96593,
+    0.0,
+    -0.25882
+   ],
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ToroidJoint04",
+   "shape": "Ball",
+   "size": [
+    1.1,
+    1.1,
+    1.1
+   ],
+   "cf": [
+    2.3,
+    9.3,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Toroid05",
+   "shape": "Cylinder",
+   "size": [
+    1.1906,
+    1.1,
+    1.1
+   ],
+   "cf": [
+    1.57093,
+    9.3,
+    -1.57093,
+    -0.70711,
+    0.0,
+    0.70711,
+    0.0,
+    1.0,
+    0.0,
+    -0.70711,
+    0.0,
+    -0.70711
+   ],
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ToroidJoint05",
+   "shape": "Ball",
+   "size": [
+    1.1,
+    1.1,
+    1.1
+   ],
+   "cf": [
+    1.99186,
+    9.3,
+    -1.15,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Toroid06",
+   "shape": "Cylinder",
+   "size": [
+    1.1906,
+    1.1,
+    1.1
+   ],
+   "cf": [
+    0.575,
+    9.3,
+    -2.14593,
+    -0.96593,
+    0.0,
+    0.25882,
+    0.0,
+    1.0,
+    0.0,
+    -0.25882,
+    0.0,
+    -0.96593
+   ],
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ToroidJoint06",
+   "shape": "Ball",
+   "size": [
+    1.1,
+    1.1,
+    1.1
+   ],
+   "cf": [
+    1.15,
+    9.3,
+    -1.99186,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Toroid07",
+   "shape": "Cylinder",
+   "size": [
+    1.1906,
+    1.1,
+    1.1
+   ],
+   "cf": [
+    -0.575,
+    9.3,
+    -2.14593,
+    -0.96593,
+    0.0,
+    -0.25882,
+    0.0,
+    1.0,
+    0.0,
+    0.25882,
+    0.0,
+    -0.96593
+   ],
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ToroidJoint07",
+   "shape": "Ball",
+   "size": [
+    1.1,
+    1.1,
+    1.1
+   ],
+   "cf": [
+    0.0,
+    9.3,
+    -2.3,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Toroid08",
+   "shape": "Cylinder",
+   "size": [
+    1.1906,
+    1.1,
+    1.1
+   ],
+   "cf": [
+    -1.57093,
+    9.3,
+    -1.57093,
+    -0.70711,
+    0.0,
+    -0.70711,
+    0.0,
+    1.0,
+    0.0,
+    0.70711,
+    0.0,
+    -0.70711
+   ],
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ToroidJoint08",
+   "shape": "Ball",
+   "size": [
+    1.1,
+    1.1,
+    1.1
+   ],
+   "cf": [
+    -1.15,
+    9.3,
+    -1.99186,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Toroid09",
+   "shape": "Cylinder",
+   "size": [
+    1.1906,
+    1.1,
+    1.1
+   ],
+   "cf": [
+    -2.14593,
+    9.3,
+    -0.575,
+    -0.25882,
+    0.0,
+    -0.96593,
+    0.0,
+    1.0,
+    0.0,
+    0.96593,
+    0.0,
+    -0.25882
+   ],
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ToroidJoint09",
+   "shape": "Ball",
+   "size": [
+    1.1,
+    1.1,
+    1.1
+   ],
+   "cf": [
+    -1.99186,
+    9.3,
+    -1.15,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Toroid10",
+   "shape": "Cylinder",
+   "size": [
+    1.1906,
+    1.1,
+    1.1
+   ],
+   "cf": [
+    -2.14593,
+    9.3,
+    0.575,
+    0.25882,
+    0.0,
+    -0.96593,
+    0.0,
+    1.0,
+    0.0,
+    0.96593,
+    -0.0,
+    0.25882
+   ],
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ToroidJoint10",
+   "shape": "Ball",
+   "size": [
+    1.1,
+    1.1,
+    1.1
+   ],
+   "cf": [
+    -2.3,
+    9.3,
+    -0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Toroid11",
+   "shape": "Cylinder",
+   "size": [
+    1.1906,
+    1.1,
+    1.1
+   ],
+   "cf": [
+    -1.57093,
+    9.3,
+    1.57093,
+    0.70711,
+    0.0,
+    -0.70711,
+    0.0,
+    1.0,
+    0.0,
+    0.70711,
+    -0.0,
+    0.70711
+   ],
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ToroidJoint11",
+   "shape": "Ball",
+   "size": [
+    1.1,
+    1.1,
+    1.1
+   ],
+   "cf": [
+    -1.99186,
+    9.3,
+    1.15,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Toroid12",
+   "shape": "Cylinder",
+   "size": [
+    1.1906,
+    1.1,
+    1.1
+   ],
+   "cf": [
+    -0.575,
+    9.3,
+    2.14593,
+    0.96593,
+    0.0,
+    -0.25882,
+    0.0,
+    1.0,
+    0.0,
+    0.25882,
+    -0.0,
+    0.96593
+   ],
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ToroidJoint12",
+   "shape": "Ball",
+   "size": [
+    1.1,
+    1.1,
+    1.1
+   ],
+   "cf": [
+    -1.15,
+    9.3,
+    1.99186,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "ToroidWeb",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    4.6,
+    4.6
+   ],
+   "cf": [
+    0.0,
+    9.3,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "GlowNode1",
+   "shape": "Ball",
+   "size": [
+    0.44,
+    0.44,
+    0.44
+   ],
+   "cf": [
+    0.0,
+    9.3,
+    -2.79,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "b4ecff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "GlowNode2",
+   "shape": "Ball",
+   "size": [
+    0.44,
+    0.44,
+    0.44
+   ],
+   "cf": [
+    2.79,
+    9.3,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "b4ecff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "GlowNode3",
+   "shape": "Ball",
+   "size": [
+    0.44,
+    0.44,
+    0.44
+   ],
+   "cf": [
+    0.0,
+    9.3,
+    2.79,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "b4ecff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "GlowNode4",
+   "shape": "Ball",
+   "size": [
+    0.44,
+    0.44,
+    0.44
+   ],
+   "cf": [
+    -2.79,
+    9.3,
+    -0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "b4ecff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "NeckCore",
+   "shape": "Cylinder",
+   "size": [
+    1.12,
+    1.15,
+    1.15
+   ],
+   "cf": [
+    0.0,
+    9.76,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "NeckShed1",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    1.75,
+    1.75
+   ],
+   "cf": [
+    0.0,
+    10.01,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Cradle",
+   "shape": "Cylinder",
+   "size": [
+    0.18,
+    2.15,
+    2.15
+   ],
+   "cf": [
+    0.0,
+    10.33,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "59636f",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CradleTrim",
+   "shape": "Cylinder",
+   "size": [
+    0.1,
+    2.3,
+    2.3
+   ],
+   "cf": [
+    0.0,
+    10.33,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d9894a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Orb",
+   "shape": "Ball",
+   "size": [
+    1.7,
+    1.7,
+    1.7
+   ],
+   "cf": [
+    0.0,
+    11.32,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c4dcf2",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Claw1Lower",
+   "shape": "Cylinder",
+   "size": [
+    1.0121,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    0.83439,
+    10.67,
+    -0.83439,
+    0.55891,
+    -0.43315,
+    0.70711,
+    0.61257,
+    0.79042,
+    -0.0,
+    -0.55891,
+    0.43315,
+    0.70711
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Claw1Elbow",
+   "shape": "Ball",
+   "size": [
+    0.36,
+    0.36,
+    0.36
+   ],
+   "cf": [
+    1.11723,
+    10.98,
+    -1.11723,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9894a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Claw1Upper",
+   "shape": "Cylinder",
+   "size": [
+    1.0211,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    1.02884,
+    11.475,
+    -1.02884,
+    -0.17313,
+    0.68559,
+    -0.70711,
+    0.96956,
+    0.24484,
+    0.0,
+    0.17313,
+    -0.68559,
+    -0.70711
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "GlowTip1",
+   "shape": "Ball",
+   "size": [
+    0.36,
+    0.36,
+    0.36
+   ],
+   "cf": [
+    0.94045,
+    11.97,
+    -0.94045,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "b4ecff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Claw2Lower",
+   "shape": "Cylinder",
+   "size": [
+    1.0121,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    -0.83439,
+    10.67,
+    -0.83439,
+    -0.55891,
+    0.43315,
+    0.70711,
+    0.61257,
+    0.79042,
+    0.0,
+    -0.55891,
+    0.43315,
+    -0.70711
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Claw2Elbow",
+   "shape": "Ball",
+   "size": [
+    0.36,
+    0.36,
+    0.36
+   ],
+   "cf": [
+    -1.11723,
+    10.98,
+    -1.11723,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9894a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Claw2Upper",
+   "shape": "Cylinder",
+   "size": [
+    1.0211,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    -1.02884,
+    11.475,
+    -1.02884,
+    0.17313,
+    -0.68559,
+    -0.70711,
+    0.96956,
+    0.24484,
+    0.0,
+    0.17313,
+    -0.68559,
+    0.70711
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "GlowTip2",
+   "shape": "Ball",
+   "size": [
+    0.36,
+    0.36,
+    0.36
+   ],
+   "cf": [
+    -0.94045,
+    11.97,
+    -0.94045,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "b4ecff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Claw3Lower",
+   "shape": "Cylinder",
+   "size": [
+    1.0121,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    -0.83439,
+    10.67,
+    0.83439,
+    -0.55891,
+    0.43315,
+    -0.70711,
+    0.61257,
+    0.79042,
+    0.0,
+    0.55891,
+    -0.43315,
+    -0.70711
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Claw3Elbow",
+   "shape": "Ball",
+   "size": [
+    0.36,
+    0.36,
+    0.36
+   ],
+   "cf": [
+    -1.11723,
+    10.98,
+    1.11723,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9894a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Claw3Upper",
+   "shape": "Cylinder",
+   "size": [
+    1.0211,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    -1.02884,
+    11.475,
+    1.02884,
+    0.17313,
+    -0.68559,
+    0.70711,
+    0.96956,
+    0.24484,
+    -0.0,
+    -0.17313,
+    0.68559,
+    0.70711
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "GlowTip3",
+   "shape": "Ball",
+   "size": [
+    0.36,
+    0.36,
+    0.36
+   ],
+   "cf": [
+    -0.94045,
+    11.97,
+    0.94045,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "b4ecff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Claw4Lower",
+   "shape": "Cylinder",
+   "size": [
+    1.0121,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    0.83439,
+    10.67,
+    0.83439,
+    0.55891,
+    -0.43315,
+    -0.70711,
+    0.61257,
+    0.79042,
+    0.0,
+    0.55891,
+    -0.43315,
+    0.70711
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Claw4Elbow",
+   "shape": "Ball",
+   "size": [
+    0.36,
+    0.36,
+    0.36
+   ],
+   "cf": [
+    1.11723,
+    10.98,
+    1.11723,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9894a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Claw4Upper",
+   "shape": "Cylinder",
+   "size": [
+    1.0211,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    1.02884,
+    11.475,
+    1.02884,
+    -0.17313,
+    0.68559,
+    0.70711,
+    0.96956,
+    0.24484,
+    0.0,
+    -0.17313,
+    0.68559,
+    -0.70711
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "GlowTip4",
+   "shape": "Ball",
+   "size": [
+    0.36,
+    0.36,
+    0.36
+   ],
+   "cf": [
+    0.94045,
+    11.97,
+    0.94045,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "b4ecff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  }
+ ],
+ "pivots": {
+  "Spark1": [
+   0.0,
+   9.3,
+   -3.01
+  ],
+  "Spark2": [
+   3.01,
+   9.3,
+   0.0
+  ],
+  "Spark3": [
+   0.0,
+   9.3,
+   3.01
+  ],
+  "Spark4": [
+   -3.01,
+   9.3,
+   -0.0
+  ],
+  "OrbCentre": [
+   0.0,
+   11.32,
+   0.0
+  ],
+  "ProngTip1": [
+   0.9405,
+   11.97,
+   -0.9405
+  ],
+  "ProngTip2": [
+   -0.9405,
+   11.97,
+   -0.9405
+  ],
+  "ProngTip3": [
+   -0.9405,
+   11.97,
+   0.9405
+  ],
+  "ProngTip4": [
+   0.9405,
+   11.97,
+   0.9405
+  ]
+ },
+ "attrs": {
+  "Cost": 30000000,
+  "PropSet": "defence2",
+  "Notes": "TeslaCoil rebuilt 2026-09-24 (fun-builds/models/build_TeslaCoil.py, primlib parts): tesla tower. ONE moving part 'Orb' (Metal Ball d 1.7) centred on Pivot_OrbCentre (0, 11.32, 0); the server spins it about the vertical axis there. Pivot_ProngTip1..4 = the neon claw tip centres at radius 1.33, y 11.97 (1 +X-Z, 2 -X-Z, 3 -X+Z, 4 +X+Z), 1.48 from OrbCentre = ~0.45 studs of open air between the orb and each tip for the idle arcs; Pivot_Spark1..4 = toroid breakout nodes (front, +X, back, -X). Glow* = neon the DefenceFX client pulses. Everything else is static."
+ },
+ "size_studs": [
+  7.84,
+  12.17,
+  7.84
+ ],
+ "min": [
+  -3.92,
+  0.0,
+  -3.92
+ ],
+ "max": [
+  3.92,
+  12.17,
+  3.92
+ ],
+ "part_count": 139,
+ "duplicate_names": []
+}

@@ -1,0 +1,19 @@
+=== Fun/Seesaw
+  @AssetId = 116762852232075
+  @Cost = 400
+  @Notes = 7.90 long (x) x 1.60 wide (y) x 3.20 tall at the raised grab bar.  THE PLANK RUNS ALONG X and the axle along Y, so the long side-on profile faces the +Y camera and a player walks up to a seat from the front, not into the tip.  The A-frame stands on two foot rails spanning x +/-1.36, its bearing block tops out at z 1.26 and the axle pin runs along Y at z 1.32.  EVERYTHING NAMED Plank* IS ONE RIGID ASSEMBLY - PlankBeamRed, PlankBeamBlue, PlankSeats, PlankHandles, PlankPivotStrap - and swings about PIVOTS['PlankPivot'] = (0, 0, 1.35), axis = Y.  STATES are absolute angles applied as rot_euler(ry=angle) about that pivot; a POSITIVE angle drops the red +X end.  THE MODEL AS BUILT IS IN THE 'RedDown' POSE (+12 deg): the red +X end - screen LEFT in a front render - is down and resting on its tyre-stop, the blue -X end is up.  From the shipped pose subtract 12 deg to reach Level and 24 deg to re
+  @Pivot_PlankPivot = (0.00, 1.35, -0.00)
+  @PropSet = plot
+  @State_BlueDown = -12
+  @State_Level = 0
+  @State_RedDown = 12
+  @Tris = 944
+  Bearing [MeshPart] pos (-0.00, 1.27, -0.00) size (0.60, 0.43, 1.60) Metal 9aa7b8 T0.00 collide=true
+  Bumpers [MeshPart] pos (-0.00, 0.37, -0.00) size (7.90, 0.73, 1.05) Rubber 5b5f66 T0.00 collide=true
+  Frame [MeshPart] pos (-0.00, 0.59, -0.00) size (2.72, 1.18, 1.44) Metal 3b4350 T0.00 collide=true
+  FrameChevron [MeshPart] pos (-0.00, 0.92, -0.67) size (0.60, 0.43, 0.09) SmoothPlastic f2c13d T0.00 collide=true
+  PlankBeamBlue [MeshPart] pos (-1.83, 1.88, -0.00) size (3.75, 1.03, 0.92) SmoothPlastic 3f79d4 T0.00 collide=true
+  PlankBeamRed [MeshPart] pos (1.89, 1.09, -0.00) size (3.75, 1.03, 0.92) SmoothPlastic d9443c T0.00 collide=true
+  PlankHandles [MeshPart] pos (0.09, 2.08, 0.00) size (4.57, 2.21, 1.09) Metal 3b4350 T0.00 collide=true
+  PlankPivotStrap [MeshPart] pos (0.03, 1.51, -0.00) size (0.77, 0.46, 1.24) Metal 9aa7b8 T0.00 collide=true
+  PlankSeats [MeshPart] pos (0.09, 1.80, -0.00) size (6.33, 1.69, 1.04) SmoothPlastic f2c13d T0.00 collide=true

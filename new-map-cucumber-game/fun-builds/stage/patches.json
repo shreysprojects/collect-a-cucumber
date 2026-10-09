@@ -1,0 +1,34 @@
+[
+ {
+  "path": "game.ServerScriptService.DefenceService",
+  "file": "DefenceService.server.lua",
+  "edits": [
+   {
+    "old": "local FROST = {Radius = 24, Tick = 0.5, SlowFor = 0.8, Chill = 50, PulseEvery = 10, PulseStun = 1.5, OrbSpin = math.rad(35), AuraPulse = 0.06, ShowAura = false} -- ShowAura: the range disc on the ground (off, user 2026-09-18)\nlocal MINIGUN = {Range = 42, Interval = 0.08, Damage = 1500, TurnRate = math.rad(420), Cone = math.rad(6), Spinup = 1.2, Spindown = 1.6, SpinRate = math.rad(480), RestAfter = 2.5, ShotSoundEvery = 3} -- 2026-09-24: 480 deg/s = 24 deg per 20 Hz tick, so the 6-barrel cluster reads as turning (1440 = 72 deg/tick strobed to look nearly still)\nlocal LASER = {Tick = 0.1, DPS = 800, HalfWidth = 1.95, Height = 5.5, HalfDepth = 1.25, SparkEvery = 0.35} -- 2.5 studs deep: a walking zombie takes ~0.3 s to cross = ~240 damage, a slowed one ~640, one stuck at the pillars the full 800 per second\nlocal DEFENCES_FOLDER = \"Defences\" -- ServerStorage.Builds/<this>/<Source>: where a set-2 rig reads its Pivot_* attributes from\n--.. RANGE DISCS (2026-09-23): what the build-mode client draws around a defence's ghost, from the numbers above",
+    "new": "local FROST = {Radius = 24, Tick = 0.5, SlowFor = 0.8, Chill = 50, PulseEvery = 10, PulseStun = 1.5, OrbSpin = math.rad(35), AuraPulse = 0.06, ShowAura = false} -- ShowAura: the range disc on the ground (off, user 2026-09-18)\nlocal MINIGUN = {Range = 42, Interval = 0.08, Damage = 1500, TurnRate = math.rad(420), Cone = math.rad(6), Spinup = 1.2, Spindown = 1.6, SpinRate = math.rad(480), RestAfter = 2.5, ShotSoundEvery = 3} -- 2026-09-24: 480 deg/s = 24 deg per 20 Hz tick, so the 6-barrel cluster reads as turning (1440 = 72 deg/tick strobed to look nearly still)\n--.. 2026-09-24 (user: \"make laser gates taller, wider, make the pillars less thick\"): the v2 gate's beams span x +/-4.75,\n--.. y 1.5..9.0 (six of them, Beam1..Beam6), so the damage volume follows: HalfWidth 4.75, Height 9.8 (was 1.95 / 5.5)\nlocal LASER = {Tick = 0.1, DPS = 800, HalfWidth = 4.75, Height = 9.8, HalfDepth = 1.25, SparkEvery = 0.35, MaxBeams = 8} -- 2.5 studs deep: a walking zombie takes ~0.3 s to cross = ~240 damage, a slowed one ~640, one stuck at the pillars the full 800 per second\nlocal DEFENCES_FOLDER = \"Defences\" -- ServerStorage.Builds/<this>/<Source>: where a set-2 rig reads its Pivot_* attributes from\n--.. RANGE DISCS (2026-09-23): what the build-mode client draws around a defence's ghost, from the numbers above"
+   },
+   {
+    "old": "\tMortar = {Range = MORTAR.Range, MinRange = MORTAR.MinRange}, TeslaCoil = {Range = TESLA.Range},\n\tFreezeTower = {Range = FROST.Radius}, Minigun = {Range = MINIGUN.Range},\n}\n--.. HIT EFFECTS (2026-09-24): ReplicatedStorage.Remotes.<FX_REMOTE>, events per player per flush, how near a hit must",
+    "new": "\tMortar = {Range = MORTAR.Range, MinRange = MORTAR.MinRange}, TeslaCoil = {Range = TESLA.Range},\n\tFreezeTower = {Range = FROST.Radius}, Minigun = {Range = MINIGUN.Range},\n}\n--.. OVERHEAD STATS (2026-09-24, user: \"above each defense have an overhead ui that shows damage (same symbol as pets damage\n--.. indicator) and shows range\"): stamped on every PlaceableBuilds.Defences template as StatDamage (per hit; the laser's\n--.. per second, StatDamageSuffix \"/s\"; the freeze tower's per chill tick) and StatRange (studs from the defence: the\n--.. firing radius, the spike plate's half size, the laser gate's half width) for StarterPlayerScripts.DefenceStatsClient\nlocal STATS = {\n\tTurret = {Damage = TURRET.Damage, Range = TURRET.Range},\n\tSpikeTrap = {Damage = TRAP.Damage, Range = TRAP.Half},\n\tCatapult = {Damage = CATAPULT.Damage, Range = CATAPULT.Range},\n\tMortar = {Damage = MORTAR.Damage, Range = MORTAR.Range},\n\tTeslaCoil = {Damage = TESLA.Damage, Range = TESLA.Range},\n\tFreezeTower = {Damage = FROST.Chill, Range = FROST.Radius},\n\tMinigun = {Damage = MINIGUN.Damage, Range = MINIGUN.Range},\n\tLaserGate = {Damage = LASER.DPS, Range = LASER.HalfWidth, Suffix = \"/s\"},\n}\n--.. HIT EFFECTS (2026-09-24): ReplicatedStorage.Remotes.<FX_REMOTE>, events per player per flush, how near a hit must"
+   },
+   {
+    "old": "\t\telseif key == \"LaserGate\" then\n\t\t\tdef.Beams = {}\n\t\t\tfor i = 1, 4 do\n\t\t\t\tlocal beam = model:FindFirstChild(\"Beam\" .. i)\n\t\t\t\tif beam then",
+    "new": "\t\telseif key == \"LaserGate\" then\n\t\t\tdef.Beams = {}\n\t\t\tfor i = 1, LASER.MaxBeams do -- 2026-09-24: the v2 gate has six beams (the old one four)\n\t\t\t\tlocal beam = model:FindFirstChild(\"Beam\" .. i)\n\t\t\t\tif beam then"
+   },
+   {
+    "old": "\tif not defences then warn(\"[DefenceService] no PlaceableBuilds.\" .. DEFENCES_FOLDER .. \" folder; range discs stay off\") return end\n\tlocal function publish(template)\n\t\tlocal spec = RANGES[template:GetAttribute(\"Key\")] or RANGES[template:GetAttribute(\"Source\")] or RANGES[template.Name]\n\t\tif not spec then return end",
+    "new": "\tif not defences then warn(\"[DefenceService] no PlaceableBuilds.\" .. DEFENCES_FOLDER .. \" folder; range discs stay off\") return end\n\tlocal function publish(template)\n\t\tlocal key = template:GetAttribute(\"Key\") or template:GetAttribute(\"Source\") or template.Name\n\t\tlocal stats = STATS[key] or STATS[template.Name]\n\t\tif stats then -- 2026-09-24: the overhead damage / range line (DefenceStatsClient)\n\t\t\ttemplate:SetAttribute(\"StatDamage\", stats.Damage)\n\t\t\ttemplate:SetAttribute(\"StatRange\", stats.Range)\n\t\t\ttemplate:SetAttribute(\"StatDamageSuffix\", stats.Suffix or \"\")\n\t\tend\n\t\tlocal spec = RANGES[template:GetAttribute(\"Key\")] or RANGES[template:GetAttribute(\"Source\")] or RANGES[template.Name]\n\t\tif not spec then return end"
+   }
+  ]
+ },
+ {
+  "path": "game.ReplicatedStorage.Modules.BuildCatalog",
+  "file": "BuildCatalog.lua",
+  "edits": [
+   {
+    "old": "\tWheelbarrow = 1.3, WateringCan = 1.3, Bush = 1.25,\n\tSeesaw = 1.8,                                                   -- 7.9 -> 14.2 long\n\tTrampoline = 1.5, Slide = 1.5, TV = 1.45, HotTub = 1.4, DJBooth = 1.3, DanceFloor = 1.5,\n\tArcadeCabinet = 1.25, VendingMachine = 1.25, Hammock = 1.35, BeanBag = 1.4, GlassCase = 1.25, NeonSign = 1.5,\n}",
+    "new": "\tWheelbarrow = 1.3, WateringCan = 1.3, Bush = 1.25,\n\tSeesaw = 1.8,                                                   -- 7.9 -> 14.2 long\n\tTrampoline = 1.5, Slide = 1.5, TV = 1.7, HotTub = 1.4, -- TV 1.45 -> 1.7 (2026-09-24, user: \"make tv slightly bigger\") DJBooth = 1.3, DanceFloor = 1.5,\n\tArcadeCabinet = 1.25, VendingMachine = 1.25, Hammock = 1.35, BeanBag = 1.4, GlassCase = 1.25, NeonSign = 1.5,\n}"
+   }
+  ]
+ }
+]

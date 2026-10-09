@@ -1,0 +1,186 @@
+{
+ "collection": "LaserGate",
+ "parts": [
+  {
+   "collection": "LaserGate",
+   "name": "LaserGate.Beam1",
+   "hex": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "LaserGate",
+   "name": "LaserGate.Beam2",
+   "hex": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "LaserGate",
+   "name": "LaserGate.Beam3",
+   "hex": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "LaserGate",
+   "name": "LaserGate.Beam4",
+   "hex": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "LaserGate",
+   "name": "LaserGate.PillarLBolts",
+   "hex": "2f3136",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 60
+  },
+  {
+   "collection": "LaserGate",
+   "name": "LaserGate.PillarLCap",
+   "hex": "45474d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "LaserGate",
+   "name": "LaserGate.PillarLCapTop",
+   "hex": "565962",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "LaserGate",
+   "name": "LaserGate.PillarLColumn",
+   "hex": "565962",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "LaserGate",
+   "name": "LaserGate.PillarLCores",
+   "hex": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 112
+  },
+  {
+   "collection": "LaserGate",
+   "name": "LaserGate.PillarLEmitters",
+   "hex": "2f3136",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 112
+  },
+  {
+   "collection": "LaserGate",
+   "name": "LaserGate.PillarLFoot",
+   "hex": "45474d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "LaserGate",
+   "name": "LaserGate.PillarLPanel",
+   "hex": "45474d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "LaserGate",
+   "name": "LaserGate.PillarRBolts",
+   "hex": "2f3136",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 60
+  },
+  {
+   "collection": "LaserGate",
+   "name": "LaserGate.PillarRCap",
+   "hex": "45474d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "LaserGate",
+   "name": "LaserGate.PillarRCapTop",
+   "hex": "565962",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "LaserGate",
+   "name": "LaserGate.PillarRColumn",
+   "hex": "565962",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "LaserGate",
+   "name": "LaserGate.PillarRCores",
+   "hex": "ff2f2f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 112
+  },
+  {
+   "collection": "LaserGate",
+   "name": "LaserGate.PillarREmitters",
+   "hex": "2f3136",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 112
+  },
+  {
+   "collection": "LaserGate",
+   "name": "LaserGate.PillarRFoot",
+   "hex": "45474d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "LaserGate",
+   "name": "LaserGate.PillarRPanel",
+   "hex": "45474d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  }
+ ],
+ "pivots": {
+  "BeamLeft": [
+   -1.95,
+   0.0,
+   3.5
+  ],
+  "BeamRight": [
+   1.95,
+   0.0,
+   3.5
+  ]
+ },
+ "states": {},
+ "notes": "Static prop, nothing moves: two identical pillars PillarL* (x = -2.9) and PillarR* (x = +2.9) and four free-standing beams Beam1..Beam4 (bottom to top) at z = 2.0 / 3.0 / 4.0 / 5.0. Each beam is ONE Neon ff2f2f part, r 0.07, spanning x -1.95..1.95 (length 3.90) at y = 0 - the runtime flickers / toggles these by name. The beam ends sit 0.27 inside the emitter cores (the red core faces are at x = +/-1.68, the dark rims stand 0.25 proud of the column faces at x = +/-2.05), so a beam shortened at either end still appears to leave the emitter. The damage plane is the x-z rectangle between the pillars: x in [-1.95, 1.95], z 0..5.5, at y = 0; enemies walk THROUGH the gap along Y (the gap between the columns is 4.10 wide, 3.36 between the emitter faces). Neon parts: Beam1..Beam4, PillarLCores, PillarRCores (four cores in one part per pillar). Overall 8.0 wide (the outer foot-bolt tips reach x = +/-3.99), 2.62 deep (front bolt heads on the feet, the feet themselves are y -1.2..1.2), 6.4 tall. Pillar: foot 2.1 x 2.4 x 1.1 (bevel 0.30, body dark, its outer face at |x| 3.85 so the outer bolt stays inside the tile), column 1.7 x 1.7 z 0.75..5.56 (the extra length is sunk into the foot and the cap so the chamfered joins read clean; the visible column runs z 1.1..5.5), cap 2.0 x 2.1 x 0.7 z 5.5..6.2 with a 1.5 x 1.5 x 0.2 slab on top to z 6.4, a dark panel 0.9 x 2.8 standing 0.06 proud of the OUTER column face, four 8-gon emitter rims r 0.42 on the INNER face. Nothing below z = 0. Footprint in the 8 x 8 tile with 2.7 studs of clearance front and back.",
+ "tris": 1120,
+ "size_studs": [
+  7.98,
+  2.62,
+  6.4
+ ],
+ "min_z": 0.0
+}

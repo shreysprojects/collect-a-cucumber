@@ -1,0 +1,15 @@
+S3 P3, after the admin reset (mid-reveal) + resume check (2026-09-22 19:22)
+restore_profile STEP 2 OK <- profile_S3_P2_start.json at 2026-09-22 19:22:53
+session key PetTest_140977250
+staged JSON: 9688 bytes, nonce e286efdd
+JSON (envelope): Cash=2167122531.244216 PlotLevel=2 Pets=8 Eggs=3 Cucumbers=2 Builds=51
+PASS plot level (Plot 6 = 2, want 2)
+PASS Cash written (2167122531.244216)
+PASS BaseSaveAPI.Reload (true true in 1.0 s)
+PASS #Base.Pets (8, want 8)
+PASS #Base.Eggs (3, want 3)
+PASS #Base.Cucumbers (2, want 2)
+PASS #Base.Builds (51, want 51)
+world on Plot 6: Pets=6 Eggs=3 Cucumbers=2 Builds=51
+PASS Cash after (2167122531.4362526)
+PlotLevel=2 roster=6 schema=1 gen=2

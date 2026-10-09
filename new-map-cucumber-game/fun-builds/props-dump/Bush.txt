@@ -1,0 +1,22 @@
+=== Garden/Bush
+  @AssetId = 82006107561130
+  @Cost = 75
+  @Notes = Three separable variants, prefixed A_ / B_ / C_, each centred on its own origin and then moved to the X offset in VARIANTS.  All three stand on a gravel ground pad that IS the footprint.  A_Shrub: 3.04 pad, five-lobe canopy 2.53 wide x 2.56 deep, 2.24 tall, carried on three woody stems that run from the litter at z 0.12 up to 1.02-1.10 - half a stud INSIDE the foliage - so the join can never show daylight; the canopy underside rumples between 0.44 and 0.71 and its lowest vertex (0.35) sits down among the stem tops.  B_Hedge: 4.0 wide x 2.0 deep pad, body 3.76 x 1.56, clipped cap at 1.94 with three unclipped tufts scalloping the outline up to ~2.2 and one escaped sprig at 2.38; the pad and the dark base band are 4.00 / 3.96 wide so copies TILE cleanly at 4.0 stud spacing along X, and nothing on top crosses x +/-1.86.  C_FloweringBush: 2.84 pad, clump 2.35 across x 2.07 tall, sunk into a 0
+  @PropSet = plot
+  @Tris = 850
+  @Variants = {"A":{"name":"Shrub","x":7},"C":{"name":"FloweringBush","x":-7},"B":{"name":"Hedge","x":0}}
+  A_Canopy [MeshPart] pos (6.73, 1.29, -0.02) size (2.53, 1.89, 2.56) LeafyGrass 4f9c3e T0.00 collide=true
+  A_Highlight [MeshPart] pos (7.34, 1.76, -0.70) size (0.70, 0.63, 0.70) LeafyGrass 78c05a T0.00 collide=true
+  A_Litter [MeshPart] pos (7.08, 0.10, 0.08) size (2.58, 0.15, 2.47) LeafyGrass 2f6b2c T0.00 collide=true
+  A_Soil [MeshPart] pos (7.01, 0.03, -0.04) size (2.99, 0.06, 2.96) Ground 7d7a72 T0.00 collide=true
+  A_Stems [MeshPart] pos (7.00, 0.61, -0.10) size (1.11, 1.04, 0.86) Wood c08a4e T0.00 collide=true
+  B_Base [MeshPart] pos (-0.00, 0.28, -0.00) size (3.96, 0.45, 1.72) LeafyGrass 2f6b2c T0.00 collide=true
+  B_Body [MeshPart] pos (-0.00, 1.04, -0.00) size (3.76, 1.24, 1.56) LeafyGrass 4f9c3e T0.00 collide=true
+  B_Soil [MeshPart] pos (0.00, 0.04, 0.00) size (4.00, 0.07, 2.00) Ground 7d7a72 T0.00 collide=true
+  B_Top [MeshPart] pos (-0.00, 1.96, -0.01) size (3.71, 0.85, 1.95) LeafyGrass 4caf50 T0.00 collide=true
+  C_Berries [MeshPart] pos (-6.17, 0.89, -0.71) size (0.50, 0.49, 0.72) SmoothPlastic 5a3d20 T0.00 collide=true
+  C_Blooms [MeshPart] pos (-6.90, 1.50, -0.77) size (2.03, 1.15, 0.76) SmoothPlastic e878a8 T0.00 collide=true
+  C_Buds [MeshPart] pos (-6.89, 0.74, -0.88) size (1.32, 0.82, 0.78) SmoothPlastic d9443c T0.00 collide=true
+  C_Canopy [MeshPart] pos (-7.06, 1.07, -0.13) size (2.35, 1.81, 1.94) LeafyGrass 4f9c3e T0.00 collide=true
+  C_Shade [MeshPart] pos (-7.00, 0.18, 0.00) size (2.33, 0.32, 2.31) LeafyGrass 2f6b2c T0.00 collide=true
+  C_Soil [MeshPart] pos (-7.00, 0.03, 0.00) size (2.67, 0.06, 2.67) Ground 7d7a72 T0.00 collide=true

@@ -1,0 +1,17 @@
+[
+ {
+  "file": "ReplicatedStorage.Modules.DenConfig.lua",
+  "path": "ReplicatedStorage.Modules.DenConfig",
+  "class": "ModuleScript"
+ },
+ {
+  "file": "ServerScriptService.ZombieDenService.server.lua",
+  "path": "ServerScriptService.ZombieDenService",
+  "class": "Script"
+ },
+ {
+  "file": "StarterGui.CucumberMenus.DenController.lua",
+  "path": "StarterGui.CucumberMenus.DenController",
+  "class": "ModuleScript"
+ }
+]

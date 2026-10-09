@@ -1,0 +1,183 @@
+{
+ "key": "DiningTable",
+ "category": "Home",
+ "parts_hash": "841f89a5d9f0",
+ "pivots": {
+  "Seat1": [
+   3.2,
+   2.13,
+   0.0
+  ],
+  "Seat1Face": [
+   2.2,
+   2.13,
+   -0.0
+  ],
+  "Seat2": [
+   -3.2,
+   2.13,
+   0.0
+  ],
+  "Seat2Face": [
+   -2.2,
+   2.13,
+   -0.0
+  ],
+  "Seat3": [
+   0.0,
+   2.13,
+   -3.1
+  ],
+  "Seat3Face": [
+   -0.0,
+   2.13,
+   -2.1
+  ],
+  "Seat4": [
+   0.0,
+   2.13,
+   3.1
+  ],
+  "Seat4Face": [
+   0.0,
+   2.13,
+   2.1
+  ],
+  "Candle": [
+   -0.72,
+   4.36,
+   0.0
+  ]
+ },
+ "attrs": {
+  "Cost": 900,
+  "DisplayName": "Dining Table"
+ },
+ "size_studs": [
+  8.08,
+  4.78,
+  7.88
+ ],
+ "objects": [
+  {
+   "name": "TableTop_m",
+   "color": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 17
+  },
+  {
+   "name": "TableApron_m",
+   "color": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 21
+  },
+  {
+   "name": "Runner_m",
+   "color": "d9443c",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 7
+  },
+  {
+   "name": "RunnerStitchF_m",
+   "color": "f2c13d",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 2
+  },
+  {
+   "name": "PlateRim1_m",
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 6
+  },
+  {
+   "name": "Plate1_m",
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 6
+  },
+  {
+   "name": "Cucumber1_m",
+   "color": "5aa845",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 4
+  },
+  {
+   "name": "CandleBase_m",
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "CandleFlame",
+   "color": "ffb347",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false,
+   "parts": 1
+  },
+  {
+   "name": "VaseLeafL_m",
+   "color": "3f8f3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "FlowerRed_m",
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "FlowerYellow_m",
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  }
+ ]
+}

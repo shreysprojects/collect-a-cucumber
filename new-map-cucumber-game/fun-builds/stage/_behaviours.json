@@ -1,0 +1,12 @@
+[
+    {
+        "File":  "srv__GamingDesk.lua",
+        "Kind":  "server",
+        "Name":  "GamingDesk"
+    },
+    {
+        "File":  "cli__GamingDesk.lua",
+        "Kind":  "client",
+        "Name":  "GamingDesk"
+    }
+]

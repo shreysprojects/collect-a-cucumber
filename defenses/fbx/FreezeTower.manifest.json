@@ -1,0 +1,141 @@
+{
+ "collection": "FreezeTower",
+ "parts": [
+  {
+   "collection": "FreezeTower",
+   "name": "FreezeTower.Band",
+   "hex": "565962",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "FreezeTower",
+   "name": "FreezeTower.BandIcicles",
+   "hex": "9ed6ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 60
+  },
+  {
+   "collection": "FreezeTower",
+   "name": "FreezeTower.BaseBolts",
+   "hex": "2f3136",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 160
+  },
+  {
+   "collection": "FreezeTower",
+   "name": "FreezeTower.BaseLip",
+   "hex": "6a6e78",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "FreezeTower",
+   "name": "FreezeTower.BaseTier1",
+   "hex": "45474d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "FreezeTower",
+   "name": "FreezeTower.BaseTier2",
+   "hex": "565962",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "FreezeTower",
+   "name": "FreezeTower.Collar",
+   "hex": "565962",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "FreezeTower",
+   "name": "FreezeTower.CollarIcicles",
+   "hex": "9ed6ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 40
+  },
+  {
+   "collection": "FreezeTower",
+   "name": "FreezeTower.CollarTop",
+   "hex": "6a6e78",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "FreezeTower",
+   "name": "FreezeTower.Column",
+   "hex": "45474d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "FreezeTower",
+   "name": "FreezeTower.IceCrystals",
+   "hex": "9ed6ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 320
+  },
+  {
+   "collection": "FreezeTower",
+   "name": "FreezeTower.IceSheets",
+   "hex": "9ed6ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 128
+  },
+  {
+   "collection": "FreezeTower",
+   "name": "FreezeTower.Orb",
+   "hex": "bfe4ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 80
+  },
+  {
+   "collection": "FreezeTower",
+   "name": "FreezeTower.ProngIce",
+   "hex": "9ed6ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 40
+  },
+  {
+   "collection": "FreezeTower",
+   "name": "FreezeTower.Prongs",
+   "hex": "45474d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 176
+  }
+ ],
+ "pivots": {
+  "OrbCentre": [
+   0.0,
+   0.0,
+   8.68
+  ]
+ },
+ "states": {},
+ "notes": "Static tower with ONE moving part: 'Orb' (faceted icosphere r 1.0, Ice glow bfe4ff, Neon) spins in place about OrbCentre (0, 0, 8.68); the freeze aura / slow field is cast from OrbCentre. The orb's lowest vertex is at z 7.68, 0.08 clear of CollarTop (z 7.3..7.6), so it turns freely; the four prongs graze its equator (a deliberate cradle, ~0.05 of interpenetration, no gap). Everything else is one static body - no yaw / pitch groups. Footprint: base octagon +/-3.23 on the axes (r 3.5 at the vertices), ice tips reach r ~3.75, so the whole prop stays inside the 8 x 8 tile; height 9.75 to the tallest prong ice cap (prongs 9.30, orb top 9.68); nothing below z = 0. Ice parts are Ice 9ed6ff / SmoothPlastic, NOT emissive: IceCrystals (6 clusters on tier 1's top edge), IceSheets (2 slabs slumped over the tier-1 edge, each with an icicle), BandIcicles (3 under the mid band), CollarIcicles (2 under the collar's overhang), ProngIce (caps on the +Y and +X prongs). A frost shimmer / sparkle emitter belongs on those; the only glow is Orb. Charcoal value ladder: body dark 45474d = BaseTier1, Column, Prongs; body mid 565962 = BaseTier2, Band, Collar; body light 6a6e78 = BaseLip and CollarTop (the two small discs raised on mid parts - light so the dark column / prongs standing on them keep their feet at eye level); bolt 2f3136 = BaseBolts (8 hex heads on tier 2's top annulus, the pack's family mark). The octagon tiers have their flat faces on the axes (phase pi/8); the prongs stand at 0 / 90 / 180 / 270 deg at radius 1.42 and lean 8 deg inward. Faces +Y by convention only - the tower is radially symmetric apart from where the ice happens to grow.",
+ "tris": 1232,
+ "size_studs": [
+  6.85,
+  6.91,
+  9.79
+ ],
+ "min_z": 0.0
+}

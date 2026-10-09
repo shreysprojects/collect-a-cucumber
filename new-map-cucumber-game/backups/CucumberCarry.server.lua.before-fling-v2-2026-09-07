@@ -1,0 +1,896 @@
+--[[
+	CucumberCarry  (Script, ServerScriptService)
+	Proximity-prompt pickup, shoulder carry and plot placement for the cucumbers
+	CucumberSpawner spawns. Port of the Zombie Cucumber Game's CarryService (armful
+	model welded to the LEFT SHOULDER + an IKControl steadying hand) wired to this
+	place's conventions (ReplicatedStorage.Remotes, EggPlacement's plot rules).
+
+	  * every spawned cucumber (CollectionService tag "Breakable") gets a "Collect"
+	    ProximityPrompt on its root part
+	  * Collect is validated server-side (alive, within REACH, hands free): the field
+	    cucumber is cloned into a welded armful-sized model on the shoulder, the field
+	    copy is destroyed (the spawner refills the biome) and the player gets the
+	    attributes CarryingCucumber (display name) / CarryingCucumberZone /
+	    CarryingCucumberGolden. CarryClient draws the billboard + DROP button.
+	  * STRENGTH GATE + CHOREOGRAPHY (2026-09-06): every field cucumber gets a
+	    StrengthRequired attribute (ReplicatedStorage.Modules.CucumberStrength; the
+	    numbers are placeholders). A Collect compares it with player.Data.Strength:
+	    easy -> the pick-up clip; near the requirement -> the struggle loop for a
+	    few seconds first; too weak -> a WEAK lift (below). The server schedules
+	    it through Remotes.CollectAnim (CollectAnimClient walks up, animates, rocks the
+	    cucumber) and only swaps the field cucumber for the shoulder copy at the grab
+	    moment (APPROACH + struggle + GRAB_T), re-checking reach / life / hands.
+	  * HEAVY CARRY + STUMBLE (2026-09-06): the requirement is HIDDEN (no numbers on
+	    screen). A struggle-band pick-up (required <= strength < EASY_RATIO x) becomes
+	    a heavy carry: player attribute CarryingCucumberHeavy (CollectAnimClient slows
+	    the walk to HEAVY_SPEED_MULT), and CucumberStrength.FallDelay seconds later
+	    Stumble() plays the CucumberFall clip for everyone ({Kind = "Fall"}), drops the
+	    load FALL_LAND_AHEAD studs ahead as a real field cucumber again (SpawnCarried
+	    at that point; {Kind = "FallDrop"} lets the clients tumble it there) -- collect
+	    it again, stumble again, until it reaches the plot. Easy pick-ups never stumble.
+	  * LOBBY = SAFE (2026-09-06): once a carrier's root is inside the lobby box (inner
+	    faces of Map.Borders."Lobby Border" walls, read at start) the carry settles for
+	    good: Heavy is cleared (full speed, no more stumbles) and, on the way in, the
+	    owner gets CarryFX {Kind = "LobbyReached", WasHeavy} (camera bounce + sound).
+	  * WEAK LIFT (2026-09-07, user: "you can pick up any cucumber, but without the
+	    strength you pretty much just fall right after pulling and picking it up"):
+	    below the requirement the verdict is "weak" (CucumberStrength.WEAK_CAN_LIFT):
+	    WEAK_STRUGGLE seconds of tugging, the lift, then the same Stumble()
+	    CucumberStrength.WeakFallDelay(ratio) after the grab: hopeless = as you stand
+	    up, just under the requirement = a couple of seconds of walking first (user,
+	    later the same day) -- every time, and the lobby never settles it. Player attribute
+	    CarryingCucumberWeak (CarryClient hint), CarryFX Stumble carries Weak = true
+	    (its own toast), Place refuses a weak carry. The old "fail" tug survives for
+	    WEAK_CAN_LIFT = false. Every fall also flings the player a little back
+	    (FLING_BACK / FLING_UP; CollectAnimClient sets the velocity on the owning client).
+	  * Remotes.DropCucumber: inside the cucumber's own field it is re-planted at your
+	    feet, anywhere else it flies home to a fresh spot in that field
+	    (CucumberSpawnerAPI.SpawnCarried, so it is a real spawned cucumber again)
+	  * Remotes.requestCucumberPlacement(cframe) -> true/false, reason: EggPlacement's
+	    contract -- only the client's X/Z + yaw are trusted, you must stand at YOUR
+	    plot, the footprint must stay inside it and must not overlap plot.Placed. The
+	    carried model is anchored onto the plot in its natural resting pose
+	    (attributes Owner / CucumberName / Zone / TypeName / Golden, tag
+	    "PlacedCucumber") and shows NO prompt (user call 2026-09-05). Like eggs,
+	    placements are NOT saved. PickUp() survives for the Studio hook only.
+	  * prompts use Style = Custom: CucumberPromptClient draws the key badge +
+	    "Cucumber" / "Collect" look; the default Roblox panel never shows
+	  * Remotes.CarryFX (server -> client): {Kind = Pickup | Replant | FlyHome |
+	    Placed | Refused, ...} cues for CarryClient
+	  * Studio dev hook: workspace:SetAttribute("CarryDev", "collect:<Name>" |
+	    "drop:<Name>" | "pickup:<Name>" | "stumble:<Name>") drives the flow without a
+	    prompt press ("stumble" forces the heavy-carry fall right now)
+]]
+
+--..Services..--
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local ServerStorage = game:GetService("ServerStorage")
+local CollectionService = game:GetService("CollectionService")
+local RunService = game:GetService("RunService")
+
+--..Config..--
+local CARRY_LONGEST_AXIS = 2.8 -- studs: an armful, whatever the field model's size
+local PROMPT_DISTANCE = 10
+local PROMPT_HOLD = 0.25
+local REACH = 16 -- server-side distance check for a Collect / Pick up trigger
+local PLACE_COOLDOWN = 0.2
+local COLLISION_SHRINK = 0.96 -- keep in step with EggPlacement / CucumberPlacementClient
+local BOUNDS_EPSILON = 0.05
+local AT_BASE_MARGIN = 6 -- keep in step with CucumberPlacementClient
+--.. rest it ON the left shoulder like a carried log: leaned into the neck, nose up a touch
+local SHOULDER_OFFSET = CFrame.new(-1.05, 1.05, 0.05) * CFrame.Angles(math.rad(-10), 0, math.rad(8))
+local FallRandom = Random.new() -- jitter for CucumberStrength.FallDelay
+local PLOTS = workspace:WaitForChild("Map"):WaitForChild("Lobby"):WaitForChild("Plots")
+
+--..Instances..--
+local Remotes = ReplicatedStorage:FindFirstChild("Remotes")
+if not Remotes then
+	Remotes = Instance.new("Folder")
+	Remotes.Name = "Remotes"
+	Remotes.Parent = ReplicatedStorage
+end
+local function remote(className, name)
+	local r = Remotes:FindFirstChild(name)
+	if not r then
+		r = Instance.new(className)
+		r.Name = name
+		r.Parent = Remotes
+	end
+	return r
+end
+local DropRemote = remote("RemoteEvent", "DropCucumber")
+local PlaceRemote = remote("RemoteFunction", "requestCucumberPlacement")
+local FXRemote = remote("RemoteEvent", "CarryFX")
+local AnimRemote = remote("RemoteEvent", "CollectAnim") -- server -> all clients: collect choreography (CollectAnimClient)
+local CucumberStrength = require(ReplicatedStorage:WaitForChild("Modules"):WaitForChild("CucumberStrength"))
+
+local API = ServerStorage:WaitForChild("CucumberSpawnerAPI", 30)
+local SpawnCarried = API and API:WaitForChild("SpawnCarried", 10)
+local InField = API and API:WaitForChild("InField", 10)
+if not (SpawnCarried and InField) then
+	warn("[CucumberCarry] CucumberSpawner API missing; drops will discard cucumbers")
+end
+
+--..State..--
+local Carrying = {} -- [player] = {Model, Name, Zone, TypeName, Golden, Material, Mutations, PoseIK, Heavy, Weak, Ratio, Falling, FallAt, InLobby, AncestryConn}
+local Busy = {} -- [player] = true during a collect / pick up
+local LastPlace = {} -- [player] = os.clock()
+
+--..Helpers..--
+local function FX(player, payload)
+	if player.Parent == Players then FXRemote:FireClient(player, payload) end
+end
+
+local function RootPartOf(holder)
+	if holder:IsA("BasePart") then return holder end
+	return holder.PrimaryPart or holder:FindFirstChildWhichIsA("BasePart", true)
+end
+
+--.. root part, character, humanoid of a LIVING player (nil otherwise)
+local function Alive(player)
+	local char = player.Character
+	local humanoid = char and char:FindFirstChildOfClass("Humanoid")
+	if not (humanoid and humanoid.Health > 0 and char.Parent) then return nil end
+	return char:FindFirstChild("HumanoidRootPart"), char, humanoid
+end
+
+--..Lobby box: inner faces of the "Lobby Border" walls (LobbyLayout moves them, so read live)..--
+local LobbyBox -- {MinX, MaxX, MinZ, MaxZ}
+local function ComputeLobbyBox()
+	local borders = workspace:FindFirstChild("Map") and workspace.Map:FindFirstChild("Borders")
+	local border = borders and borders:FindFirstChild("Lobby Border")
+	local minX, maxX, minZ, maxZ
+	for _, p in ipairs(border and border:GetChildren() or {}) do
+		if p:IsA("BasePart") and p.Size.Y < 20 then -- wall bands, not the roof strips
+			--.. the bands are rotated (the north / south walls are Size.X-thin parts turned
+			--.. 90 deg), so classify by WORLD half-extents
+			local hx, hz = p.Size.X * 0.5, p.Size.Z * 0.5
+			local r, l = p.CFrame.RightVector, p.CFrame.LookVector
+			local ex = math.abs(r.X) * hx + math.abs(l.X) * hz
+			local ez = math.abs(r.Z) * hx + math.abs(l.Z) * hz
+			if ex <= 5 and ez > 10 then -- west / east walls (thin in world X)
+				minX = math.min(minX or math.huge, p.Position.X + ex)
+				maxX = math.max(maxX or -math.huge, p.Position.X - ex)
+			elseif ez <= 5 and ex > 10 then -- north / south walls (thin in world Z)
+				minZ = math.min(minZ or math.huge, p.Position.Z + ez)
+				maxZ = math.max(maxZ or -math.huge, p.Position.Z - ez)
+			end
+		end
+	end
+	if minX and maxX and minZ and maxZ and maxX > minX and maxZ > minZ then
+		return {MinX = minX, MaxX = maxX, MinZ = minZ, MaxZ = maxZ}
+	end
+	--.. no border walls: the plots row plus the walkway in front of it
+	local pMinX, pMaxX, pMinZ, pMaxZ
+	for _, plot in ipairs(PLOTS:GetChildren()) do
+		if plot:IsA("BasePart") then
+			local hx, hz = plot.Size.X * 0.5, plot.Size.Z * 0.5
+			local ex = math.abs(plot.CFrame.RightVector.X) * hx + math.abs(plot.CFrame.LookVector.X) * hz
+			local ez = math.abs(plot.CFrame.RightVector.Z) * hx + math.abs(plot.CFrame.LookVector.Z) * hz
+			pMinX = math.min(pMinX or math.huge, plot.Position.X - ex)
+			pMaxX = math.max(pMaxX or -math.huge, plot.Position.X + ex)
+			pMinZ = math.min(pMinZ or math.huge, plot.Position.Z - ez)
+			pMaxZ = math.max(pMaxZ or -math.huge, plot.Position.Z + ez)
+		end
+	end
+	if pMinX then return {MinX = pMinX - 80, MaxX = pMaxX + 8, MinZ = pMinZ - 12, MaxZ = pMaxZ + 12} end
+	return nil
+end
+
+local function InLobby(position)
+	local box = LobbyBox
+	if not box then
+		box = ComputeLobbyBox()
+		LobbyBox = box
+		if not box then return false end
+	end
+	return position.X >= box.MinX and position.X <= box.MaxX and position.Z >= box.MinZ and position.Z <= box.MaxZ
+end
+
+--.. world-aligned bounding box of the holder's parts in its resting pose
+local function WorldAABB(holder)
+	local minV, maxV
+	local parts = holder:IsA("BasePart") and {holder} or {}
+	for _, d in ipairs(holder:GetDescendants()) do
+		if d:IsA("BasePart") and d.Name ~= "Shadow" then parts[#parts + 1] = d end
+	end
+	for _, p in ipairs(parts) do
+		local cf, half = p.CFrame, p.Size * 0.5
+		for _, sx in ipairs({-1, 1}) do
+			for _, sy in ipairs({-1, 1}) do
+				for _, sz in ipairs({-1, 1}) do
+					local c = cf:PointToWorldSpace(Vector3.new(half.X * sx, half.Y * sy, half.Z * sz))
+					minV = minV and Vector3.new(math.min(minV.X, c.X), math.min(minV.Y, c.Y), math.min(minV.Z, c.Z)) or c
+					maxV = maxV and Vector3.new(math.max(maxV.X, c.X), math.max(maxV.Y, c.Y), math.max(maxV.Z, c.Z)) or c
+				end
+			end
+		end
+	end
+	return minV, maxV
+end
+
+--.. Clone the field cucumber into a self-contained, welded, armful-sized model and
+--.. record its natural resting pose (RestRotation / RestSize / RestLift attributes)
+--.. so a plot placement can stand it up exactly the way it sat in the field.
+local function BuildCarryModel(src)
+	local rest = src:GetPivot()
+	local minV, maxV = WorldAABB(src)
+	local model
+	if src:IsA("Model") then
+		model = src:Clone()
+	else
+		local partClone = src:Clone()
+		model = Instance.new("Model")
+		partClone.Parent = model
+		model.PrimaryPart = partClone
+	end
+	--.. gameplay leftovers have no place on a prop: prompts, scripts, the ground shadow
+	for _, obj in ipairs(model:GetDescendants()) do
+		if obj:IsA("BillboardGui") or obj:IsA("ClickDetector") or obj:IsA("ProximityPrompt")
+			or obj:IsA("LuaSourceContainer") or (obj:IsA("BasePart") and obj.Name == "Shadow") then
+			obj:Destroy()
+		end
+	end
+	local primary = model.PrimaryPart or model:FindFirstChildWhichIsA("BasePart", true)
+	if not primary then model:Destroy() return nil end
+	model.PrimaryPart = primary
+	--.. the clone inherits the spawner's "Breakable" tag; a carried / placed copy is
+	--.. NOT a field cucumber (no prompt, no population bookkeeping)
+	CollectionService:RemoveTag(model, "Breakable")
+	for _, obj in ipairs(model:GetDescendants()) do
+		if CollectionService:HasTag(obj, "Breakable") then CollectionService:RemoveTag(obj, "Breakable") end
+	end
+	--.. field cucumbers are anchored with no welds; a carried copy must be one rigid body
+	for _, obj in ipairs(model:GetDescendants()) do
+		if obj:IsA("BasePart") then
+			obj.Anchored = false
+			obj.CanCollide = false
+			obj.CanQuery = false
+			obj.CanTouch = false
+			obj.Massless = true
+			if obj ~= primary then
+				local weld = Instance.new("WeldConstraint")
+				weld.Part0 = primary
+				weld.Part1 = obj
+				weld.Parent = obj
+			end
+		end
+	end
+	--.. shrink to an armful; never upscale
+	local ext = model:GetExtentsSize()
+	local longest = math.max(ext.X, ext.Y, ext.Z, 0.001)
+	local scale = 1
+	if longest > CARRY_LONGEST_AXIS then
+		scale = CARRY_LONGEST_AXIS / longest
+		model:ScaleTo(model:GetScale() * scale)
+	end
+	local size = minV and (maxV - minV) * scale or ext * scale
+	local lift = minV and (rest.Position.Y - minV.Y) * scale or size.Y * 0.5
+	model:SetAttribute("RestRotation", rest - rest.Position)
+	model:SetAttribute("RestSize", size)
+	model:SetAttribute("RestLift", lift)
+	return model
+end
+
+--..Shoulder pose: the left hand reaches up to steady the load (IKControl, R15)..--
+local function ApplyArmPose(player, entry)
+	local char = player.Character
+	local humanoid = char and char:FindFirstChildOfClass("Humanoid")
+	local upperArm = char and char:FindFirstChild("LeftUpperArm")
+	local hand = char and char:FindFirstChild("LeftHand")
+	local primary = entry.Model and entry.Model.PrimaryPart
+	if not (humanoid and upperArm and hand and primary) then return end
+	local grip = Instance.new("Attachment")
+	grip.Name = "CarryGrip"
+	grip.Position = Vector3.new(0.15, -0.3, -0.85) -- front-underside: the palm cups it from below
+	grip.Parent = primary
+	local ik = Instance.new("IKControl")
+	ik.Name = "CarrySteadyIK"
+	ik.Type = Enum.IKControlType.Position
+	ik.ChainRoot = upperArm
+	ik.EndEffector = hand
+	ik.Target = grip
+	ik.SmoothTime = 0.12
+	ik.Parent = humanoid
+	entry.PoseIK = ik
+end
+
+local function RestoreArmPose(entry)
+	if entry and entry.PoseIK then
+		entry.PoseIK:Destroy()
+		entry.PoseIK = nil
+	end
+end
+
+local function SetCarryAttributes(player, entry)
+	if player.Parent ~= Players then return end
+	player:SetAttribute("CarryingCucumber", entry and entry.Name or nil)
+	player:SetAttribute("CarryingCucumberZone", entry and entry.Zone or nil)
+	player:SetAttribute("CarryingCucumberGolden", entry and entry.Golden or nil)
+	player:SetAttribute("CarryingCucumberMaterial", entry and entry.Material or nil)
+	player:SetAttribute("CarryingCucumberMutations", entry and entry.Mutations or nil)
+	player:SetAttribute("CarryingCucumberHeavy", (entry and entry.Heavy) and true or nil) -- CollectAnimClient slows the walk
+	player:SetAttribute("CarryingCucumberWeak", (entry and entry.Weak) and true or nil) -- below the requirement: slips right away (CarryClient hint)
+end
+
+local function ClearCarry(player)
+	local entry = Carrying[player]
+	if not entry then return end
+	Carrying[player] = nil
+	if entry.AncestryConn then entry.AncestryConn:Disconnect() end
+	RestoreArmPose(entry)
+	SetCarryAttributes(player, nil)
+	if entry.Model and entry.Model.Parent then entry.Model:Destroy() end
+end
+
+--.. Weld `model` onto the character's left shoulder (longest axis fore-aft) and
+--.. record what it is. Replaces any current carry. Returns true on success.
+local function GiveCarry(player, model, meta)
+	local root, char = Alive(player)
+	if not root then return false end
+	local mount = char:FindFirstChild("UpperTorso") or char:FindFirstChild("Torso") or root
+	ClearCarry(player)
+	for _, obj in ipairs(model:GetDescendants()) do
+		if obj:IsA("BasePart") then
+			obj.Anchored = false
+			obj.CanQuery = false
+		end
+	end
+	local ext = model:GetExtentsSize()
+	local rot = CFrame.new()
+	if ext.X >= ext.Y and ext.X >= ext.Z then
+		rot = CFrame.Angles(0, math.rad(90), 0) -- longest X -> Z
+	elseif ext.Y >= ext.X and ext.Y >= ext.Z then
+		rot = CFrame.Angles(math.rad(90), 0, 0) -- longest Y -> Z
+	end
+	model:PivotTo(mount.CFrame * SHOULDER_OFFSET * rot)
+	local weld = Instance.new("WeldConstraint")
+	weld.Name = "ShoulderWeld"
+	weld.Part0 = mount
+	weld.Part1 = model.PrimaryPart
+	weld.Parent = model.PrimaryPart
+	model.Name = "CarriedCucumber"
+	model.Parent = char
+
+	local entry = {Model = model, Name = meta.Name, Zone = meta.Zone, TypeName = meta.TypeName, Golden = meta.Golden == true, Material = meta.Material, Mutations = meta.Mutations, Heavy = meta.Heavy == true, Weak = meta.Weak == true, Ratio = meta.Ratio}
+	entry.InLobby = InLobby(root.Position) -- picked up inside the lobby: no arrival cue
+	Carrying[player] = entry
+	SetCarryAttributes(player, entry)
+	ApplyArmPose(player, entry)
+	--.. death / respawn / anything that displaces the model ends the carry (lost).
+	--.. Take() and ClearCarry() disconnect this first. The LIVE parent is checked
+	--.. (not the signal's argument): signals are deferred, so a detach + re-attach
+	--.. inside one frame (plot pick-up) would otherwise report a stale nil parent
+	--.. and destroy the freshly re-carried model.
+	entry.AncestryConn = model.AncestryChanged:Connect(function()
+		local current = Carrying[player]
+		if not current or current.Model ~= model then return end
+		if model.Parent == player.Character then return end
+		Carrying[player] = nil
+		if current.AncestryConn then current.AncestryConn:Disconnect() end
+		RestoreArmPose(current)
+		SetCarryAttributes(player, nil)
+		if model.Parent then task.defer(function() model:Destroy() end) end
+	end)
+	return true
+end
+
+--.. Detach the carried model (shoulder weld + grip off) and hand it + its meta back
+local function Take(player)
+	local entry = Carrying[player]
+	if not entry then return nil end
+	Carrying[player] = nil
+	if entry.AncestryConn then entry.AncestryConn:Disconnect() end
+	RestoreArmPose(entry)
+	SetCarryAttributes(player, nil)
+	local model = entry.Model
+	if not (model and model.Parent) then return nil end
+	local primary = model.PrimaryPart
+	if primary then
+		for _, c in ipairs(primary:GetChildren()) do
+			if (c:IsA("WeldConstraint") and c.Name == "ShoulderWeld") or (c:IsA("Attachment") and c.Name == "CarryGrip") then
+				c:Destroy()
+			end
+		end
+	end
+	model.Parent = nil
+	return model, entry
+end
+
+--..Stumble (heavy / weak carry: the load gets dropped in front of you)..--
+local ScheduleStumble
+
+local function RetryDelay(entry)
+	return entry.Weak and CucumberStrength.WEAK_RETRY or CucumberStrength.FALL_RETRY
+end
+
+--.. Play the fall for everyone, drop the load FALL_LAND_AHEAD studs ahead FALL_DROP_T in
+--.. (it becomes a field cucumber again right there), stay busy for the whole clip.
+--.. Returns false when it cannot happen right now (busy, seated, fields closed).
+local function Stumble(player, entry)
+	if Carrying[player] ~= entry or entry.Falling then return false end
+	local root, char, humanoid = Alive(player)
+	if not (root and humanoid) then return false end
+	if Busy[player] or humanoid.SeatPart or humanoid.Sit or not SpawnCarried then return false end
+	if workspace:GetAttribute("CyclePhase") ~= "Day" then return false end
+	local look = root.CFrame.LookVector
+	local flat = Vector3.new(look.X, 0, look.Z)
+	flat = flat.Magnitude > 0.05 and flat.Unit or Vector3.zAxis
+	local ahead = root.Position + flat * CucumberStrength.FALL_LAND_AHEAD
+	local rp = RaycastParams.new()
+	rp.FilterType = Enum.RaycastFilterType.Exclude
+	rp.FilterDescendantsInstances = {char, workspace:FindFirstChild("Breakables") or char}
+	local hit = workspace:Raycast(ahead + Vector3.new(0, 2, 0), Vector3.new(0, -30, 0), rp)
+	local landing = hit and hit.Position or (ahead - Vector3.new(0, humanoid.HipHeight + root.Size.Y * 0.5, 0))
+	entry.Falling = true
+	Busy[player] = true
+	AnimRemote:FireAllClients({Kind = "Fall", Player = player, Landing = landing})
+	task.delay(CucumberStrength.FALL_DROP_T, function()
+		if Carrying[player] ~= entry then return end
+		local from = (entry.Model and entry.Model.Parent) and entry.Model:GetPivot().Position or root.Position
+		local holder = SpawnCarried:Invoke(entry.Zone, entry.TypeName, entry.Golden, landing, {Material = entry.Material, Mutations = entry.Mutations})
+		if holder then
+			local model = Take(player)
+			if model then model:Destroy() end
+			AnimRemote:FireAllClients({Kind = "FallDrop", Player = player, Holder = holder, From = from})
+			FX(player, {Kind = "Stumble", Name = entry.Name, Position = landing, Weak = entry.Weak == true})
+		else
+			--.. that field is full or closed: keep hold of it, try again later
+			entry.Falling = false
+			ScheduleStumble(player, entry, RetryDelay(entry))
+		end
+	end)
+	task.delay(CucumberStrength.FALL_LENGTH, function()
+		Busy[player] = nil
+	end)
+	return true
+end
+
+--.. A heavy carry stumbles CucumberStrength.FallDelay(ratio) seconds after the grab, a
+--.. weak one CucumberStrength.WeakFallDelay(ratio) (standing up + a hold that grows with
+--.. strength / required) -- or `delay` seconds -- unless the load was placed / dropped meanwhile.
+ScheduleStumble = function(player, entry, delay)
+	delay = delay or (entry.Weak and CucumberStrength.WeakFallDelay(entry.Ratio, FallRandom) or CucumberStrength.FallDelay(entry.Ratio, FallRandom))
+	entry.FallAt = os.clock() + delay
+	task.delay(delay, function()
+		if Carrying[player] ~= entry or not entry.Heavy then return end
+		if not Stumble(player, entry) then ScheduleStumble(player, entry, RetryDelay(entry)) end
+	end)
+end
+
+--..Collect (field cucumber -> shoulder)..--
+local function StrengthOf(player)
+	local data = player:FindFirstChild("Data")
+	local value = data and data:FindFirstChild("Strength")
+	return value and tonumber(value.Value) or 0
+end
+
+local function PromptOf(holder)
+	local host = RootPartOf(holder)
+	return host and host:FindFirstChild("CollectPrompt")
+end
+
+--.. The grab moment: swap the field cucumber for the shoulder copy. Returns true on success.
+--.. heavy = struggle OR weak band (slowed walk + a stumble); weak = below the requirement
+local function Grab(player, holder, host, force, heavy, ratio, weak)
+	local root = Alive(player)
+	if not (root and holder.Parent and holder:IsDescendantOf(workspace) and host.Parent) then return false end
+	if not force and (host.Position - root.Position).Magnitude > REACH then return false end
+	if Carrying[player] then return false end
+	holder:SetAttribute("CollectingBy", nil) -- never inherited by the carried / placed copy
+	local model = BuildCarryModel(holder)
+	if not model then return false end
+	local meta = {
+		Name = holder.Name,
+		Zone = holder:GetAttribute("Zone") or "Spawn",
+		TypeName = holder:GetAttribute("TypeName") or holder.Name,
+		Golden = holder:GetAttribute("Golden") == true,
+		Material = holder:GetAttribute("Material"),
+		Mutations = holder:GetAttribute("Mutations"),
+		Heavy = heavy == true, -- struggle / weak band: slowed walk + a stumble on the way
+		Weak = weak == true, -- below the requirement: it slips right after the lift, every time
+		Ratio = ratio,
+	}
+	local position = host.Position
+	if GiveCarry(player, model, meta) then
+		holder:Destroy() -- this field slot stays empty until the next dawn
+		FX(player, {Kind = "Pickup", Name = meta.Name, Position = position})
+		if meta.Heavy and Carrying[player] then ScheduleStumble(player, Carrying[player]) end
+		return true
+	end
+	model:Destroy()
+	return false
+end
+
+local function Collect(player, holder, force)
+	if workspace:GetAttribute("CyclePhase") ~= "Day" then
+		FX(player, {Kind = "Refused", Reason = "The fields are closed until dawn!"})
+		return
+	end
+	if Busy[player] then return end
+	if not holder or not holder:IsDescendantOf(workspace) then return end
+	local root, _, humanoid = Alive(player)
+	if not root then return end
+	local host = RootPartOf(holder)
+	if not host then return end
+	if not force and (host.Position - root.Position).Magnitude > REACH then return end
+	if Carrying[player] then
+		FX(player, {Kind = "Refused", Reason = "Your hands are full! Drop it or place it on your plot first."})
+		return
+	end
+	if humanoid and (humanoid.SeatPart or humanoid.Sit) then
+		FX(player, {Kind = "Refused", Reason = "Stand up first!"})
+		return
+	end
+	if holder:GetAttribute("CollectingBy") then return end -- somebody is already tugging at it
+
+	--.. strength gate (CucumberStrength: placeholder numbers)
+	local required = CucumberStrength.Required(holder)
+	local strength = StrengthOf(player)
+	local verdict, struggleSeconds = CucumberStrength.Evaluate(strength, required)
+	local prompt = PromptOf(holder)
+	Busy[player] = true
+	holder:SetAttribute("CollectingBy", player.UserId)
+	if prompt then prompt.Enabled = false end
+	local function release()
+		Busy[player] = nil
+		if holder.Parent then
+			holder:SetAttribute("CollectingBy", nil)
+			if prompt and prompt.Parent then prompt.Enabled = true end
+		end
+	end
+
+	if verdict == "fail" then
+		--.. too heavy (CucumberStrength.WEAK_CAN_LIFT off): one short tug, then the refusal
+		AnimRemote:FireAllClients({Kind = "Tug", Player = player, Holder = holder, Duration = CucumberStrength.FAIL_TUG})
+		task.delay(CucumberStrength.APPROACH + CucumberStrength.FAIL_TUG, function()
+			release()
+			FX(player, {Kind = "Refused", Reason = "Too heavy! Hit the bench to get stronger."}) -- the number stays hidden
+		end)
+		return
+	end
+
+	task.spawn(function()
+		--.. the client walks up, tugs for struggleSeconds (0 = none) and bends down;
+		--.. the field cucumber becomes the shoulder copy at the grab moment
+		AnimRemote:FireAllClients({Kind = "Collect", Player = player, Holder = holder, Struggle = struggleSeconds})
+		task.wait(CucumberStrength.APPROACH + struggleSeconds + CucumberStrength.GRAB_T)
+		local ok, grabbed = pcall(Grab, player, holder, host, force, verdict ~= "easy", CucumberStrength.Ratio(strength, required), verdict == "weak")
+		if not ok then warn("[CucumberCarry] collect failed for " .. player.Name .. ": " .. tostring(grabbed)) end
+		if ok and grabbed then
+			--.. the lift finishes on the client; stay busy until the player is upright
+			task.wait(CucumberStrength.PICKUP_LENGTH - CucumberStrength.GRAB_T)
+			Busy[player] = nil
+		else
+			release()
+			AnimRemote:FireAllClients({Kind = "Cancel", Player = player, Holder = holder})
+		end
+	end)
+end
+
+local function AttachCollectPrompt(holder)
+	--.. only cucumbers standing in a field folder (never a shoulder / plot copy)
+	local container = workspace:FindFirstChild("Breakables")
+	if not (container and holder:IsDescendantOf(container)) then return end
+	local host = RootPartOf(holder)
+	if not host or host:FindFirstChild("CollectPrompt") then return end
+	--.. how strong you must be (read by CucumberPromptClient and CucumberStrength.Required)
+	holder:SetAttribute("StrengthRequired", CucumberStrength.Required(holder))
+	local prompt = Instance.new("ProximityPrompt")
+	prompt.Name = "CollectPrompt"
+	prompt.Style = Enum.ProximityPromptStyle.Custom -- drawn by CucumberPromptClient
+	prompt.ObjectText = holder.Name -- e.g. "Golden NEON Cucumber": CucumberPromptClient colours the words
+	prompt.ActionText = "Collect"
+	prompt.MaxActivationDistance = PROMPT_DISTANCE
+	prompt.HoldDuration = PROMPT_HOLD
+	prompt.RequiresLineOfSight = false
+	prompt.Exclusivity = Enum.ProximityPromptExclusivity.OnePerButton
+	CollectionService:AddTag(prompt, "CucumberPrompt")
+	prompt.Triggered:Connect(function(player)
+		Collect(player, holder)
+	end)
+	prompt.Parent = host
+end
+
+--..Drop (shoulder -> field)..--
+local function Drop(player)
+ if workspace:GetAttribute("CyclePhase") ~= "Day" then
+  FX(player, {Kind = "Refused", Reason = "The fields reopen at dawn. You can still place this on your plot."})
+  return
+ end
+	local entry = Carrying[player]
+	if not entry then return end
+	if entry.Falling then return end -- mid-stumble: it is on its way to the ground already
+	local root, char = Alive(player)
+	if not root then return end
+	local zone, typeName, golden, name = entry.Zone, entry.TypeName, entry.Golden, entry.Name
+	if not SpawnCarried then return end
+	local inField = InField and InField:Invoke(zone, root.Position) == true
+	local groundPos
+	if inField then
+		--.. standing in the cucumber's own field: it lands right at your feet
+		local rp = RaycastParams.new()
+		rp.FilterType = Enum.RaycastFilterType.Exclude
+		rp.FilterDescendantsInstances = {char, workspace:FindFirstChild("Breakables") or char}
+		local hit = workspace:Raycast(root.Position, Vector3.new(0, -30, 0), rp)
+		groundPos = hit and hit.Position or (root.Position - Vector3.new(0, 3, 0))
+	end
+	--.. anywhere else: it flies home to a fresh random spot in the field it came from
+	local holder = SpawnCarried:Invoke(zone, typeName, golden, groundPos, {Material = entry.Material, Mutations = entry.Mutations}) -- keeps its material + mutations
+ if not holder then
+  FX(player, {Kind = "Refused", Reason = "That field is full. Keep this cucumber or place it on your plot."})
+  return
+ end
+ ClearCarry(player)
+	local landing = holder and RootPartOf(holder)
+	if inField and holder then
+		FX(player, {Kind = "Replant", Position = landing and landing.Position or groundPos, Zone = zone, Name = name})
+	else
+		FX(player, {Kind = "FlyHome", Position = landing and landing.Position or nil, Zone = zone, Name = name})
+	end
+end
+
+--..Plot placement (EggPlacement's rules, for the carried cucumber)..--
+local function PlotOf(player)
+	for _, plot in ipairs(PLOTS:GetChildren()) do
+		if plot:IsA("BasePart") and plot:GetAttribute("Owner") == player.UserId then return plot end
+	end
+	return nil
+end
+
+local function HolderOf(plot)
+	local holder = plot:FindFirstChild("Placed")
+	if not holder then
+		holder = Instance.new("Folder")
+		holder.Name = "Placed"
+		holder.Parent = plot
+	end
+	return holder
+end
+
+local function Footprint(size, yaw)
+	local c, s = math.abs(math.cos(yaw)), math.abs(math.sin(yaw))
+	return c * size.X + s * size.Z, s * size.X + c * size.Z
+end
+
+local PickUp -- defined below (Studio hook only: placed cucumbers show no prompt)
+
+local function Place(player, cframe)
+	local entry = Carrying[player]
+	if not entry or not (entry.Model and entry.Model.Parent) then return false, "not carrying" end
+	if entry.Falling then return false, "stumbling" end
+	if entry.Weak then
+		--.. below the requirement: it is about to slip anyway, never onto the plot
+		FX(player, {Kind = "Refused", Reason = "Too heavy! You can't hold it steady enough to set it down."})
+		return false, "too heavy"
+	end
+	if typeof(cframe) ~= "CFrame" then return false, "bad cframe" end
+	local now = os.clock()
+	if LastPlace[player] and now - LastPlace[player] < PLACE_COOLDOWN then return false, "cooldown" end
+	local plot = PlotOf(player)
+	if not plot then return false, "no plot" end
+	local root = Alive(player)
+	if not root then return false, "no character" end
+	--.. must be standing at the base
+	local rp = plot.CFrame:PointToObjectSpace(root.Position)
+	if math.abs(rp.X) > plot.Size.X * 0.5 + AT_BASE_MARGIN or math.abs(rp.Z) > plot.Size.Z * 0.5 + AT_BASE_MARGIN then
+		return false, "not at base"
+	end
+	local model = entry.Model
+	local size = model:GetAttribute("RestSize")
+	local restRot = model:GetAttribute("RestRotation")
+	if typeof(size) ~= "Vector3" or typeof(restRot) ~= "CFrame" then return false, "no rest pose" end
+	local lift = tonumber(model:GetAttribute("RestLift")) or size.Y * 0.5
+
+	--.. rebuild the placement from the client's X/Z + yaw only, on the plot surface
+	local relative = plot.CFrame:ToObjectSpace(cframe)
+	local _, yaw = relative:ToEulerAnglesYXZ()
+	local fx, fz = Footprint(size, yaw)
+	local x, z = relative.Position.X, relative.Position.Z
+	if math.abs(x) + fx * 0.5 > plot.Size.X * 0.5 + BOUNDS_EPSILON or math.abs(z) + fz * 0.5 > plot.Size.Z * 0.5 + BOUNDS_EPSILON then
+		return false, "outside plot"
+	end
+	local top = plot.Size.Y * 0.5
+	local boxCF = plot.CFrame * CFrame.new(x, top + size.Y * 0.5, z) * CFrame.Angles(0, yaw, 0)
+
+	--.. occupied?
+	local holder = HolderOf(plot)
+	local params = OverlapParams.new()
+	params.FilterType = Enum.RaycastFilterType.Include
+	params.FilterDescendantsInstances = {holder}
+	if #workspace:GetPartBoundsInBox(boxCF, size * COLLISION_SHRINK, params) > 0 then
+		return false, "occupied"
+	end
+
+	LastPlace[player] = now
+	local taken, meta = Take(player)
+	if not taken then return false, "not carrying" end
+	--.. natural resting pose, standing on the plot surface
+	taken:PivotTo(plot.CFrame * CFrame.new(x, top + lift, z) * CFrame.Angles(0, yaw, 0) * restRot)
+	for _, d in ipairs(taken:GetDescendants()) do
+		if d:IsA("BasePart") then
+			d.Anchored = true
+			d.CanQuery = false
+		end
+	end
+	--.. invisible footprint box: the overlap test finds placed objects through it
+	local hitbox = Instance.new("Part")
+	hitbox.Name = "PlotHitbox"
+	hitbox.Size = size
+	hitbox.CFrame = boxCF
+	hitbox.Transparency = 1
+	hitbox.Anchored = true
+	hitbox.CanCollide = false
+	hitbox.CanTouch = false
+	hitbox.CanQuery = true
+	hitbox.Parent = taken
+	taken.Name = meta.Name
+	taken:SetAttribute("Owner", player.UserId)
+	taken:SetAttribute("CucumberName", meta.Name)
+	taken:SetAttribute("Zone", meta.Zone)
+	taken:SetAttribute("TypeName", meta.TypeName)
+	taken:SetAttribute("Golden", meta.Golden == true)
+	taken:SetAttribute("Material", meta.Material)
+	taken:SetAttribute("Mutations", meta.Mutations or "")
+	CollectionService:AddTag(taken, "PlacedCucumber")
+	taken.Parent = holder
+	FX(player, {Kind = "Placed", Name = meta.Name, Position = boxCF.Position})
+	return true
+end
+
+--..Pick up (plot -> shoulder) -- reachable only through the Studio dev hook..--
+PickUp = function(player, placed, force)
+	if Busy[player] then return end
+	if not placed or not placed:IsDescendantOf(workspace) then return end
+	if placed:GetAttribute("Owner") ~= player.UserId then
+		FX(player, {Kind = "Refused", Reason = "That's not your cucumber!"})
+		return
+	end
+	local root = Alive(player)
+	if not root then return end
+	local pivot = placed:GetPivot().Position
+	if not force and (pivot - root.Position).Magnitude > REACH then return end
+	if Carrying[player] then
+		FX(player, {Kind = "Refused", Reason = "Your hands are full! Drop it or place it on your plot first."})
+		return
+	end
+	Busy[player] = true
+	local ok, err = pcall(function()
+		local hb = placed:FindFirstChild("PlotHitbox")
+		if hb then hb:Destroy() end
+		local meta = {
+			Name = placed:GetAttribute("CucumberName") or placed.Name,
+			Zone = placed:GetAttribute("Zone") or "Spawn",
+			TypeName = placed:GetAttribute("TypeName") or placed.Name,
+			Golden = placed:GetAttribute("Golden") == true,
+			Material = placed:GetAttribute("Material"),
+			Mutations = placed:GetAttribute("Mutations"),
+		}
+		CollectionService:RemoveTag(placed, "PlacedCucumber")
+		placed:SetAttribute("Owner", nil)
+		placed:SetAttribute("CucumberName", nil)
+		placed.Parent = nil
+		if GiveCarry(player, placed, meta) then
+			FX(player, {Kind = "Pickup", Name = meta.Name, Position = pivot})
+		else
+			placed:Destroy()
+		end
+	end)
+	Busy[player] = nil
+	if not ok then warn("[CucumberCarry] pick up failed for " .. player.Name .. ": " .. tostring(err)) end
+end
+
+--..Wiring..--
+for _, holder in ipairs(CollectionService:GetTagged("Breakable")) do
+	AttachCollectPrompt(holder)
+end
+CollectionService:GetInstanceAddedSignal("Breakable"):Connect(function(holder)
+	task.defer(AttachCollectPrompt, holder)
+end)
+--.. belt and braces: the tag is stamped before the holder is parented, so also
+--.. watch the container itself
+task.spawn(function()
+	local container = workspace:WaitForChild("Breakables", 60)
+	if not container then return end
+	container.DescendantAdded:Connect(function(d)
+		if CollectionService:HasTag(d, "Breakable") then task.defer(AttachCollectPrompt, d) end
+	end)
+end)
+
+--.. Lobby watch: a carry that reaches the lobby settles (Heavy off for good) and the
+--.. owner gets the arrival cue once per entry from outside. A WEAK carry (below the
+--.. requirement) never settles: it slips wherever it is.
+task.spawn(function()
+	local lobby = workspace.Map:FindFirstChild("Lobby")
+	local deadline = os.clock() + 5
+	while lobby and not lobby:GetAttribute("LayoutReady") and os.clock() < deadline do
+		task.wait(0.1)
+	end
+	LobbyBox = ComputeLobbyBox()
+	if LobbyBox then
+		print(("[CucumberCarry] lobby box X %.1f..%.1f Z %.1f..%.1f"):format(LobbyBox.MinX, LobbyBox.MaxX, LobbyBox.MinZ, LobbyBox.MaxZ))
+	else
+		warn("[CucumberCarry] lobby box unknown: heavy carries never settle")
+	end
+	while true do
+		task.wait(0.1)
+		for player, entry in pairs(Carrying) do
+			local root = Alive(player)
+			if root and not entry.Weak then
+				if InLobby(root.Position) then
+					local wasHeavy = entry.Heavy == true
+					if wasHeavy then
+						entry.Heavy = false -- settled: full speed, no more stumbles
+						SetCarryAttributes(player, entry)
+					end
+					if not entry.InLobby then
+						entry.InLobby = true
+						FX(player, {Kind = "LobbyReached", Name = entry.Name, WasHeavy = wasHeavy})
+					end
+				else
+					entry.InLobby = false
+				end
+			end
+		end
+	end
+end)
+
+DropRemote.OnServerEvent:Connect(function(player)
+	local ok, err = pcall(Drop, player)
+	if not ok then warn("[CucumberCarry] drop failed for " .. player.Name .. ": " .. tostring(err)) end
+end)
+
+PlaceRemote.OnServerInvoke = function(player, cframe)
+	local ok, result, reason = pcall(Place, player, cframe)
+	if not ok then
+		warn("[CucumberCarry] " .. tostring(result))
+		return false
+	end
+	return result == true, reason
+end
+
+Players.PlayerRemoving:Connect(function(player)
+	Carrying[player] = nil
+	Busy[player] = nil
+	LastPlace[player] = nil
+end)
+
+--..Studio dev hook..--
+if RunService:IsStudio() then
+	workspace:GetAttributeChangedSignal("CarryDev"):Connect(function()
+		local cmd = workspace:GetAttribute("CarryDev")
+		if type(cmd) ~= "string" or cmd == "" then return end
+		workspace:SetAttribute("CarryDev", nil)
+		local action, name = cmd:match("^(%a+):(.+)$")
+		local player = name and Players:FindFirstChild(name)
+		if not (action and player) then return end
+		local root = Alive(player)
+		if action == "collect" and root then
+			local best, bestD
+			local container = workspace:FindFirstChild("Breakables")
+			for _, d in ipairs(container and container:GetDescendants() or {}) do
+				if CollectionService:HasTag(d, "Breakable") then
+					local host = RootPartOf(d)
+					local dist = host and (host.Position - root.Position).Magnitude
+					if dist and (not bestD or dist < bestD) then best, bestD = d, dist end
+				end
+			end
+			if best then Collect(player, best, true) end
+		elseif action == "drop" then
+			Drop(player)
+		elseif action == "stumble" then
+			local entry = Carrying[player]
+			if entry then
+				entry.Heavy = true
+				if not Stumble(player, entry) then warn("[CucumberCarry] stumble refused (busy / seated / night)") end
+			end
+		elseif action == "pickup" then
+			for _, placed in ipairs(CollectionService:GetTagged("PlacedCucumber")) do
+				if placed:GetAttribute("Owner") == player.UserId then PickUp(player, placed, true) break end
+			end
+		end
+	end)
+end
+
+print("[CucumberCarry] collect prompts, shoulder carry, drop and plot placement ready")

@@ -1,0 +1,198 @@
+--[[
+	PortalSignClient  (LocalScript, StarterPlayerScripts)  2026-09-22
+	The sign above every portal, drawn for the local player on the invisible anchor part PortalService
+	hangs over each portal (tag "PortalSign", attrs PortalDestination / StrengthRequired):
+	  * top pill   : this player's cooldown on that portal, "1:00:00" then "59:59" ... "0:01", hidden
+	                 when the portal is ready (player attribute PortalReadyAt_<destination>, server time)
+	  * bottom pill: [strength icon] + the strength needed to enter ("560", "1.35B"), green once
+	                 player.Data.Strength reaches it, red while it is short
+	Sized in STUDS like the plot owner badge (user rule): the BillboardGui is SIGN_W x SIGN_H studs,
+	its content is laid out in DESIGN px and one UIScale fits it to the billboard's current pixel size,
+	so the icon + number stay centred as a pair at every distance. Streaming-safe: the anchor carries
+	the gui, and a fresh one is built whenever the anchor streams back in.
+
+	2026-09-22 (later, user: "i dont see the portal strength requirement text for portals after desert
+	portal"): the Narmek / Neon signs were there, but 11 studs wide and bare red text on those biomes'
+	dark blue walls read as nothing. Each line now sits on a dark rounded PILL (any colour reads on any
+	wall), the sign is 17 studs wide, and the short-of-it red is brighter.
+	Test note: chrrxs capture_screenshot does not draw AlwaysOnTop billboards; set AlwaysOnTop = false on
+	the client copy to see a sign in a capture.
+]]
+local Players = game:GetService("Players")
+local CollectionService = game:GetService("CollectionService")
+local RunService = game:GetService("RunService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local NumberAbbrev = require(ReplicatedStorage:WaitForChild("Modules"):WaitForChild("NumberAbbrev"))
+
+local player = Players.LocalPlayer
+
+local TAG = "PortalSign"
+local COOLDOWN_ATTR = "PortalReadyAt_"
+local STRENGTH_ICON = "rbxassetid://15403007921" -- the HUD's strength icon (CucumberHUDDesign.Counters.StrengthIcon)
+local DESIGN_W, DESIGN_H = 320, 160 -- px layout box, fitted to the billboard by a UIScale
+local SIGN_W = 17 -- studs (was 11), about the plot owner badge's width
+local SIGN_H = SIGN_W * DESIGN_H / DESIGN_W
+local MAX_DISTANCE = 150 -- studs: about one biome, so the lobby does not see the Spawn portal's sign
+local FONT = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.ExtraBold, Enum.FontStyle.Italic) -- the HUD counters' face
+local OUTLINE = Color3.fromRGB(12, 12, 12) -- the HUD counters' outline
+local PILL_COLOR = Color3.fromRGB(16, 16, 24)
+local PILL_TRANSPARENCY = 0.2
+local MET = Color3.fromRGB(65, 235, 20) -- the HUD cash green
+local UNMET = Color3.fromRGB(255, 80, 80) -- a brighter red than Notify's, readable on the dark pill
+local STEP = 0.2 -- seconds between refreshes
+
+local signs = {} -- [anchor] = {Gui, Root, Scale, TimerPill, Timer, Value}
+
+-- 3600 -> "1:00:00", 3599 -> "59:59", 42 -> "0:42" (PortalService.FormatTime)
+local function formatTime(seconds)
+	local s = math.max(0, math.ceil(seconds))
+	if s >= 3600 then return ("%d:%02d:%02d"):format(s // 3600, s % 3600 // 60, s % 60) end
+	return ("%d:%02d"):format(s // 60, s % 60)
+end
+
+local strengthValue
+local function strength()
+	if not strengthValue or not strengthValue.Parent then
+		local data = player:FindFirstChild("Data")
+		strengthValue = data and data:FindFirstChild("Strength")
+	end
+	return strengthValue and strengthValue.Value or 0
+end
+
+local function textLabel(parent, name, height, textSize)
+	local label = Instance.new("TextLabel")
+	label.Name = name
+	label.BackgroundTransparency = 1
+	label.FontFace = FONT
+	label.TextSize = textSize
+	label.TextColor3 = Color3.new(1, 1, 1)
+	label.AutomaticSize = Enum.AutomaticSize.X
+	label.Size = UDim2.fromOffset(0, height)
+	label.Parent = parent
+	local stroke = Instance.new("UIStroke")
+	stroke.Color = OUTLINE
+	stroke.Thickness = 4
+	stroke.LineJoinMode = Enum.LineJoinMode.Round
+	stroke.Parent = label
+	return label
+end
+
+--.. a dark rounded pill that hugs its children side by side
+local function pill(parent, name, height, order)
+	local frame = Instance.new("Frame")
+	frame.Name = name
+	frame.LayoutOrder = order
+	frame.AutomaticSize = Enum.AutomaticSize.X
+	frame.Size = UDim2.fromOffset(0, height)
+	frame.BackgroundColor3 = PILL_COLOR
+	frame.BackgroundTransparency = PILL_TRANSPARENCY
+	frame.BorderSizePixel = 0
+	frame.Parent = parent
+	local corner = Instance.new("UICorner")
+	corner.CornerRadius = UDim.new(0, math.floor(height * 0.45))
+	corner.Parent = frame
+	local padding = Instance.new("UIPadding")
+	padding.PaddingLeft = UDim.new(0, 16)
+	padding.PaddingRight = UDim.new(0, 18)
+	padding.Parent = frame
+	local list = Instance.new("UIListLayout")
+	list.FillDirection = Enum.FillDirection.Horizontal
+	list.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	list.VerticalAlignment = Enum.VerticalAlignment.Center
+	list.SortOrder = Enum.SortOrder.LayoutOrder
+	list.Padding = UDim.new(0, 8)
+	list.Parent = frame
+	return frame
+end
+
+local function refresh(anchor, sign)
+	local key = anchor:GetAttribute("PortalDestination")
+	local readyAt = key and player:GetAttribute(COOLDOWN_ATTR .. tostring(key))
+	local left = typeof(readyAt) == "number" and readyAt - workspace:GetServerTimeNow() or 0
+	sign.TimerPill.Visible = left > 0
+	if left > 0 then sign.Timer.Text = formatTime(left) end
+	local required = anchor:GetAttribute("StrengthRequired")
+	required = typeof(required) == "number" and required or 0
+	sign.Value.Text = NumberAbbrev.Abbrev(required)
+	sign.Value.TextColor3 = strength() >= required and MET or UNMET
+end
+
+local function fit(sign)
+	local width = sign.Gui.AbsoluteSize.X
+	if width > 0 then sign.Scale.Scale = width / DESIGN_W end
+end
+
+local function build(anchor)
+	if signs[anchor] or not anchor:IsA("BasePart") then return end
+	local gui = Instance.new("BillboardGui")
+	gui.Name = "PortalSignGui"
+	gui.Size = UDim2.fromScale(SIGN_W, SIGN_H) -- scale = studs: shrinks with distance
+	gui.SizeOffset = Vector2.new(0, 0.5) -- bottom edge on the anchor, just over the portal's top
+	gui.AlwaysOnTop = true
+	gui.MaxDistance = MAX_DISTANCE
+	gui.LightInfluence = 0
+	gui.ResetOnSpawn = false
+	gui.Adornee = anchor
+
+	local root = Instance.new("Frame")
+	root.Name = "Root"
+	root.AnchorPoint = Vector2.new(0.5, 1)
+	root.Position = UDim2.fromScale(0.5, 1)
+	root.Size = UDim2.fromOffset(DESIGN_W, DESIGN_H)
+	root.BackgroundTransparency = 1
+	root.Parent = gui
+	local scale = Instance.new("UIScale")
+	scale.Parent = root
+	local list = Instance.new("UIListLayout")
+	list.FillDirection = Enum.FillDirection.Vertical
+	list.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	list.VerticalAlignment = Enum.VerticalAlignment.Bottom
+	list.SortOrder = Enum.SortOrder.LayoutOrder
+	list.Padding = UDim.new(0, 8)
+	list.Parent = root
+
+	local timerPill = pill(root, "Cooldown", 64, 1)
+	timerPill.Visible = false
+	local timer = textLabel(timerPill, "Time", 64, 52)
+
+	local strengthPill = pill(root, "Strength", 76, 2)
+	local icon = Instance.new("ImageLabel")
+	icon.Name = "Icon"
+	icon.LayoutOrder = 1
+	icon.Size = UDim2.fromOffset(60, 60)
+	icon.BackgroundTransparency = 1
+	icon.Image = STRENGTH_ICON
+	icon.ScaleType = Enum.ScaleType.Fit
+	icon.Parent = strengthPill
+	local value = textLabel(strengthPill, "Value", 76, 62)
+	value.LayoutOrder = 2
+
+	local sign = {Gui = gui, Root = root, Scale = scale, TimerPill = timerPill, Timer = timer, Value = value}
+	signs[anchor] = sign
+	gui:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() fit(sign) end)
+	refresh(anchor, sign)
+	gui.Parent = anchor
+	fit(sign)
+end
+
+local function drop(anchor)
+	local sign = signs[anchor]
+	if not sign then return end
+	signs[anchor] = nil
+	sign.Gui:Destroy()
+end
+
+for _, anchor in ipairs(CollectionService:GetTagged(TAG)) do build(anchor) end
+CollectionService:GetInstanceAddedSignal(TAG):Connect(build)
+CollectionService:GetInstanceRemovedSignal(TAG):Connect(drop)
+
+local elapsed = STEP
+RunService.Heartbeat:Connect(function(dt)
+	elapsed += dt
+	if elapsed < STEP then return end
+	elapsed = 0
+	for anchor, sign in pairs(signs) do
+		if anchor.Parent then refresh(anchor, sign) else drop(anchor) end
+	end
+end)

@@ -1,0 +1,24 @@
+restore_profile STEP 1 OK <- profile_R_start.json at 2026-09-22 20:51:29
+PASS staged in PetTestTransfer/Restore_140977250
+9673 bytes (envelope): Cash=2177490430.3434772 PlotLevel=2 Pets=8 Eggs=3 Cucumbers=2 Builds=51
+NEXT (server VM): local PROFILE_TOOL_OPTS = {Name = "profile_R_start.json", Nonce = "a0775529"} + this file
+
+restore_profile STEP 2 OK <- profile_R_start.json at 2026-09-22 20:51:56
+session key PetTest_140977250 (test key)
+staged JSON: 9673 bytes, nonce a0775529, staged 26s ago
+JSON (envelope): Cash=2177490430.3434772 Playtime=575 PlotLevel=2 Pets=8 Eggs=3 Cucumbers=2 Builds=51 Base.Version=2
+PASS plot level (Plot 5 = 2, want 2)
+PASS Cash written (2177490430.3434772)
+PASS BaseSaveAPI.Reload (true true  in 1.0 s)
+Base table rebuilt by BaseSave (Collect)
+PASS #Base.Pets (8, want 8)
+PASS #Base.Eggs (3, want 3)
+PASS #Base.Cucumbers (2, want 2)
+PASS #Base.Builds (51, want 51)
+world on Plot 5: Pets=6 Eggs=3 Cucumbers=2 Builds=51
+PASS Cash after (2177490430.3434772 (+0 income since the write))
+PlotLevel=2 Strength=0 Playtime=47 (session clock)
+
+(stage R, after the admin-reset check; PetNoticePending was consumed by the rebuild's unsolicited Full and set back to
+true by hand before the Stop, as in S3. After the Stop the test key held the snapshot's 8 pet Ids, roster order,
+3 eggs, 2 cucumbers at the same Pivots, 51 builds, PetSchemaVersion 1, PetNoticePending true, ActiveSession nil.)

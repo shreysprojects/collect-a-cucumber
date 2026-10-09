@@ -1,0 +1,74 @@
+[
+ {
+  "path": "game.ServerScriptService.ZombieRaidService",
+  "file": "ServerScriptService.ZombieRaidService.server.lua",
+  "edits": [
+   {
+    "old": "\t    took (a raid-end RestoreCarry had sent it home, then a stale rope put it back in the lobby).\n]]\n",
+    "new": "\t    took (a raid-end RestoreCarry had sent it home, then a stale rope put it back in the lobby).\n\t  * CO-OP NIGHTS (2026-09-24, user: \"at night people can help each other fight each other's zombies only if\n\t    they're done their wave, both users get boosts\"): a player's blow on ANOTHER player's night raid lands only\n\t    while their own raid is over (or they have none) - otherwise DamageZombie refuses it and they hear\n\t    \"HelpBlocked\". Every helper is remembered on the raid (raid.Helpers[player] = {Hits, Damage}, \"HelperJoined\"\n\t    to the owner / \"Helping\" to the helper on the first blow); when that raid is WON (every zombie dead, or dawn\n\t    with nothing stolen) the owner and every helper with HELP_MIN_HITS blows get TEAM_BOOST_SECONDS of the\n\t    potion boosts (ItemsCatalog.BOOSTS Cash + Strength attributes extended, never stacked) and a \"Teamwork\"\n\t    toast. Hostility is unchanged: a helped raid's zombies shove the helper too.\n\t  * ZOMBIE DEN (2026-09-24): every escape also fires ZombieAPI.CucumberStolen (BindableEvent: player, {Name,\n\t    Zone, Type}) AFTER ItemAPI.RecordLoss, so ZombieDenService can make a deal for the record it just wrote.\n]]\n"
+   },
+   {
+    "old": "local ZombieCatalog = require(ReplicatedStorage:WaitForChild(\"Modules\"):WaitForChild(\"ZombieCatalog\"))\nlocal SoundController = require(ReplicatedStorage.Modules:WaitForChild(\"SoundController\"))\n",
+    "new": "local ZombieCatalog = require(ReplicatedStorage:WaitForChild(\"Modules\"):WaitForChild(\"ZombieCatalog\"))\nlocal SoundController = require(ReplicatedStorage.Modules:WaitForChild(\"SoundController\"))\nlocal okItems, ItemsCatalog = pcall(function() return require(ReplicatedStorage.Modules:WaitForChild(\"ItemsCatalog\", 10)) end) -- 2026-09-24 co-op boosts: the potion attributes\nif not okItems then ItemsCatalog = nil end\n"
+   },
+   {
+    "old": "local function ReportResult(raid, result)\n\tif raid.Day or not raid.Player then return end\n\tRaidResultEvent:Fire(raid.Player, {Result = result, Level = raid.Level, Stolen = raid.Stolen, Limit = raid.Limit})\nend\nAPI.Parent = ServerStorage\n",
+    "new": "local function ReportResult(raid, result)\n\tif raid.Day or not raid.Player then return end\n\tRaidResultEvent:Fire(raid.Player, {Result = result, Level = raid.Level, Stolen = raid.Stolen, Limit = raid.Limit})\nend\nlocal CucumberStolenEvent = Instance.new(\"BindableEvent\") -- 2026-09-24 (Zombie Den): (player, {Name, Zone, Type}) after every theft is recorded\nCucumberStolenEvent.Name = \"CucumberStolen\"\nCucumberStolenEvent.Parent = API\nAPI.Parent = ServerStorage\n--.. 2026-09-24 CO-OP NIGHTS (see the top): helping is allowed once your own wave is done; a won raid pays both sides\nlocal HELP_MIN_HITS = 3        -- blows a helper must land before the win counts them\nlocal HELP_TOAST_GAP = 3       -- seconds between \"finish your own wave\" toasts per player\nlocal TEAM_BOOST_SECONDS = 300 -- 2x cash + 2x strength (the potion timers) for the owner and every helper\nlocal TEAM_BOOSTS = {\"Cash\", \"Strength\"}\nlocal HelpToastAt = {} -- [player] = os.clock()\n"
+   },
+   {
+    "old": "local function Send(raid, payload)\n\tif raid.Player and raid.Player.Parent then Remote:FireClient(raid.Player, payload) end\nend\n",
+    "new": "local function Send(raid, payload)\n\tif raid.Player and raid.Player.Parent then Remote:FireClient(raid.Player, payload) end\nend\n\n--..Co-op nights (2026-09-24)..--\nlocal function HelpAllowed(player) -- your own night wave is over, or you have none\n\tlocal mine = Raids[player]\n\treturn mine == nil or mine.Over == true\nend\n\nlocal function HelpBlocked(player)\n\tlocal now = os.clock()\n\tif HelpToastAt[player] and now - HelpToastAt[player] < HELP_TOAST_GAP then return end\n\tHelpToastAt[player] = now\n\tRemote:FireClient(player, {Kind = \"HelpBlocked\"})\nend\n\nlocal function RegisterHelp(raid, player, amount)\n\traid.Helpers = raid.Helpers or {}\n\tlocal h = raid.Helpers[player]\n\tif not h then\n\t\th = {Hits = 0, Damage = 0}\n\t\traid.Helpers[player] = h\n\t\tSend(raid, {Kind = \"HelperJoined\", Name = player.Name})\n\t\tRemote:FireClient(player, {Kind = \"Helping\", Name = raid.Player and raid.Player.Name or \"?\"})\n\t\tprint((\"[ZombieRaid] %s is helping %s fight their wave\"):format(player.Name, raid.Player and raid.Player.Name or \"?\"))\n\tend\n\th.Hits += 1\n\th.Damage += amount\nend\n\nlocal function GrantTeamBoost(player)\n\tif not (player and player.Parent) then return end\n\tlocal now = workspace:GetServerTimeNow()\n\tfor _, boost in ipairs(TEAM_BOOSTS) do\n\t\tlocal info = ItemsCatalog and type(ItemsCatalog.BOOSTS) == \"table\" and ItemsCatalog.BOOSTS[boost]\n\t\tlocal attr = info and info.Attr or (boost .. \"BoostUntil\")\n\t\tlocal current = tonumber(player:GetAttribute(attr)) or 0\n\t\tplayer:SetAttribute(attr, math.max(now, current) + TEAM_BOOST_SECONDS)\n\tend\nend\n\n--.. the raid was won: the owner and every helper who really fought get the team boost (once per raid)\nlocal function RewardHelpers(raid)\n\tif raid.Day or raid.Rewarded or type(raid.Helpers) ~= \"table\" then return end\n\tlocal helpers = {}\n\tfor helper, h in pairs(raid.Helpers) do\n\t\tif h.Hits >= HELP_MIN_HITS and helper.Parent then table.insert(helpers, helper) end\n\tend\n\tif #helpers == 0 then return end\n\traid.Rewarded = true\n\ttable.sort(helpers, function(a, b) return a.Name < b.Name end)\n\tlocal owner = raid.Player\n\tlocal ownerName = owner and owner.Name or \"?\"\n\tlocal names = {}\n\tfor _, helper in ipairs(helpers) do table.insert(names, helper.Name) end\n\tfor _, helper in ipairs(helpers) do\n\t\tGrantTeamBoost(helper)\n\t\tRemote:FireClient(helper, {Kind = \"Teamwork\", With = ownerName, Seconds = TEAM_BOOST_SECONDS})\n\tend\n\tif owner and owner.Parent then\n\t\tGrantTeamBoost(owner)\n\t\tSend(raid, {Kind = \"Teamwork\", With = table.concat(names, \", \"), Seconds = TEAM_BOOST_SECONDS})\n\tend\n\tprint((\"[ZombieRaid] teamwork: %s's wave was won with %s -> %d s of 2x cash + 2x strength for all of them\"):format(ownerName, table.concat(names, \", \"), TEAM_BOOST_SECONDS))\nend\n"
+   },
+   {
+    "old": "\tif entry.Shaded or entry.Underground then return false, entry.Humanoid.Health end -- a shadow / a digger underground: nothing touches it\n\tentry.Humanoid:TakeDamage(amount)\n",
+    "new": "\tif entry.Shaded or entry.Underground then return false, entry.Humanoid.Health end -- a shadow / a digger underground: nothing touches it\n\t--.. 2026-09-24 co-op nights: another player's blow lands only once their own wave is done (see the top)\n\tif typeof(attacker) == \"Instance\" and attacker:IsA(\"Player\") and entry.Raid and entry.Raid.Player ~= attacker and not entry.Raid.Day then\n\t\tif not HelpAllowed(attacker) then\n\t\t\tHelpBlocked(attacker)\n\t\t\treturn false, entry.Humanoid.Health\n\t\tend\n\t\tRegisterHelp(entry.Raid, attacker, amount)\n\tend\n\tentry.Humanoid:TakeDamage(amount)\n"
+   },
+   {
+    "old": "\t\tReportResult(raid, \"Survived\") -- 2026-09-23 (Manage panel: days survived)\n\tend\nend\n",
+    "new": "\t\tReportResult(raid, \"Survived\") -- 2026-09-23 (Manage panel: days survived)\n\t\tRewardHelpers(raid) -- 2026-09-24 co-op nights\n\tend\nend\n"
+   },
+   {
+    "old": "\t\t\tReportResult(raid, raid.Stolen == 0 and \"Survived\" or \"Dawn\") -- 2026-09-23 (Manage panel: days survived)\n",
+    "new": "\t\t\tReportResult(raid, raid.Stolen == 0 and \"Survived\" or \"Dawn\") -- 2026-09-23 (Manage panel: days survived)\n\t\t\tif raid.Stolen == 0 then RewardHelpers(raid) end -- 2026-09-24 co-op nights\n"
+   },
+   {
+    "old": "\t\tif recordLoss then\n\t\t\tpcall(recordLoss.Invoke, recordLoss, raid.Player, {Name = name, Zone = stolen:GetAttribute(\"Zone\"), Type = stolen:GetAttribute(\"TypeName\"),\n\t\t\t\tGolden = stolen:GetAttribute(\"Golden\") == true, Material = stolen:GetAttribute(\"Material\"), Mutations = stolen:GetAttribute(\"Mutations\"), SizeTier = stolen:GetAttribute(\"SizeTier\")})\n\t\tend\n",
+    "new": "\t\tif recordLoss then\n\t\t\tpcall(recordLoss.Invoke, recordLoss, raid.Player, {Name = name, Zone = stolen:GetAttribute(\"Zone\"), Type = stolen:GetAttribute(\"TypeName\"),\n\t\t\t\tGolden = stolen:GetAttribute(\"Golden\") == true, Material = stolen:GetAttribute(\"Material\"), Mutations = stolen:GetAttribute(\"Mutations\"), SizeTier = stolen:GetAttribute(\"SizeTier\")})\n\t\tend\n\t\tCucumberStolenEvent:Fire(raid.Player, {Name = name, Zone = stolen:GetAttribute(\"Zone\"), Type = stolen:GetAttribute(\"TypeName\")}) -- 2026-09-24 (Zombie Den: a deal for it)\n"
+   }
+  ]
+ },
+ {
+  "path": "game.StarterPlayer.StarterPlayerScripts.ZombieRaidClient",
+  "file": "StarterPlayer.StarterPlayerScripts.ZombieRaidClient.client.lua",
+  "edits": [
+   {
+    "old": "\t  Hostile    {Kind = \"Hostile\"}: the raid has turned on you (you hit one of them) - a warning.\n",
+    "new": "\t  Hostile    {Kind = \"Hostile\"}: the raid has turned on you (you hit one of them) - a warning.\n\t  Co-op      (2026-09-24) HelpBlocked (your own wave is not done) / HelperJoined {Name} / Helping {Name} /\n\t             Teamwork {With, Seconds} (the wave was won together: 2x cash + strength for Seconds) -> toasts.\n"
+   },
+   {
+    "old": "\tThief = function(p) Notify.Warn((\"A %s is sneaking toward your base!\"):format(p.Zombie or \"thief\"), 3) end,\n",
+    "new": "\t--.. 2026-09-24 co-op nights\n\tHelpBlocked = function() Notify.Error(\"Finish your own wave before helping others!\", 2.5) end,\n\tHelperJoined = function(p) Notify.Info((\"%s is helping you fight!\"):format(p.Name or \"A player\"), 2.5) end,\n\tHelping = function(p) Notify.Info((\"You are helping %s! Win the wave together for a boost.\"):format(p.Name or \"them\"), 3) end,\n\tTeamwork = function(p)\n\t\tlocal minutes = math.max(1, math.floor((tonumber(p.Seconds) or 300) / 60 + 0.5))\n\t\tNotify.Success((\"TEAMWORK with %s! 2x cash + 2x strength for %d min\"):format(p.With or \"your team\", minutes), 4)\n\t\tSoundController.PlayFX(\"Victory Sting\", {Volume = 0.9})\n\tend,\n\tThief = function(p) Notify.Warn((\"A %s is sneaking toward your base!\"):format(p.Zombie or \"thief\"), 3) end,\n"
+   }
+  ]
+ },
+ {
+  "path": "game.StarterGui.CucumberMenus.MenuController",
+  "file": "StarterGui.CucumberMenus.MenuController.lua",
+  "edits": [
+   {
+    "old": "    local buyShopPanel = gui:FindFirstChild(\"BuyShopPanel\")\n    if buyShopPanel and buyShopPanel:FindFirstChild(\"Content\") then panels.BuyShop = buyShopPanel.Content end\n",
+    "new": "    local buyShopPanel = gui:FindFirstChild(\"BuyShopPanel\")\n    if buyShopPanel and buyShopPanel:FindFirstChild(\"Content\") then panels.BuyShop = buyShopPanel.Content end\n    -- 2026-09-24: the ZOMBIE DEN panel (DenController opens it when the player walks up to the den and fills it);\n    -- no HUD opener, so it is wired for close / dimmer / Escape / OpenRequest only like BuyShop\n    local denPanel = gui:FindFirstChild(\"DenPanel\")\n    if denPanel and denPanel:FindFirstChild(\"Content\") then panels.Den = denPanel.Content end\n"
+   }
+  ]
+ },
+ {
+  "path": "game.StarterGui.CucumberMenus.MenuClient",
+  "file": "StarterGui.CucumberMenus.MenuClient.client.lua",
+  "edits": [
+   {
+    "old": "if not okItemShop then warn(\"[MenuClient] Item shop unavailable: \"..tostring(itemShop)) itemShop=nil end\nscript.Destroying:Connect(function() if itemShop then itemShop.Destroy() end;if manage then manage.Destroy() end;shop.Destroy();index.Destroy();menus.Destroy() end)",
+    "new": "if not okItemShop then warn(\"[MenuClient] Item shop unavailable: \"..tostring(itemShop)) itemShop=nil end\n-- 2026-09-24: the ZOMBIE DEN panel (DenPanel, opened by walking up to the den), guarded the same way\nlocal okDen,den=pcall(function() return require(script.Parent.DenController).Start(script.Parent,menus) end)\nif not okDen then warn(\"[MenuClient] Zombie Den unavailable: \"..tostring(den)) den=nil end\nscript.Destroying:Connect(function() if den then den.Destroy() end;if itemShop then itemShop.Destroy() end;if manage then manage.Destroy() end;shop.Destroy();index.Destroy();menus.Destroy() end)"
+   }
+  ]
+ }
+]

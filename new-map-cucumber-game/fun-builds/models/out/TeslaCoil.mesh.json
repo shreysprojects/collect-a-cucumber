@@ -1,0 +1,274 @@
+{
+ "key": "TeslaCoil",
+ "category": "Defences",
+ "parts_hash": "3fdc7e620418",
+ "pivots": {
+  "Spark1": [
+   0.0,
+   9.3,
+   -3.01
+  ],
+  "Spark2": [
+   3.01,
+   9.3,
+   0.0
+  ],
+  "Spark3": [
+   0.0,
+   9.3,
+   3.01
+  ],
+  "Spark4": [
+   -3.01,
+   9.3,
+   -0.0
+  ],
+  "OrbCentre": [
+   0.0,
+   11.32,
+   0.0
+  ],
+  "ProngTip1": [
+   0.9405,
+   11.97,
+   -0.9405
+  ],
+  "ProngTip2": [
+   -0.9405,
+   11.97,
+   -0.9405
+  ],
+  "ProngTip3": [
+   -0.9405,
+   11.97,
+   0.9405
+  ],
+  "ProngTip4": [
+   0.9405,
+   11.97,
+   0.9405
+  ]
+ },
+ "attrs": {
+  "Cost": 30000000,
+  "PropSet": "defence2",
+  "Notes": "TeslaCoil rebuilt 2026-09-24 (fun-builds/models/build_TeslaCoil.py, primlib parts): tesla tower. ONE moving part 'Orb' (Metal Ball d 1.7) centred on Pivot_OrbCentre (0, 11.32, 0); the server spins it about the vertical axis there. Pivot_ProngTip1..4 = the neon claw tip centres at radius 1.33, y 11.97 (1 +X-Z, 2 -X-Z, 3 -X+Z, 4 +X+Z), 1.48 from OrbCentre = ~0.45 studs of open air between the orb and each tip for the idle arcs; Pivot_Spark1..4 = toroid breakout nodes (front, +X, back, -X). Glow* = neon the DefenceFX client pulses. Everything else is static."
+ },
+ "size_studs": [
+  7.84,
+  12.17,
+  7.84
+ ],
+ "objects": [
+  {
+   "name": "Base_1",
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 13
+  },
+  {
+   "name": "Base_2",
+   "color": "9aa7b8",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Base_3",
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 8
+  },
+  {
+   "name": "Base_4",
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 18
+  },
+  {
+   "name": "Base_5",
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 14
+  },
+  {
+   "name": "Base_6",
+   "color": "59636f",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "Base_7",
+   "color": "2f64c0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Glow_1",
+   "color": "4fc8ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 5
+  },
+  {
+   "name": "Base_8",
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "Base_9",
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 9
+  },
+  {
+   "name": "Base_10",
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 10
+  },
+  {
+   "name": "Base_11",
+   "color": "d9894a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 5
+  },
+  {
+   "name": "Base_12",
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Glow_2",
+   "color": "4fc8ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Base_13",
+   "color": "d9894a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 9
+  },
+  {
+   "name": "Base_14",
+   "color": "b86f35",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 5
+  },
+  {
+   "name": "Base_15",
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Base_16",
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 12
+  },
+  {
+   "name": "Base_17",
+   "color": "d3dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 13
+  },
+  {
+   "name": "Glow_3",
+   "color": "b4ecff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 8
+  },
+  {
+   "name": "Orb",
+   "color": "c4dcf2",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  }
+ ]
+}

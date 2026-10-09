@@ -1,0 +1,438 @@
+{
+ "key": "Piano",
+ "category": "Home",
+ "parts_hash": "3e9e582beb13",
+ "pivots": {
+  "Bench": [
+   0.0,
+   2.2,
+   -4.5
+  ],
+  "Keys": [
+   0.0,
+   3.23,
+   -2.06
+  ],
+  "Sound": [
+   -0.3,
+   3.85,
+   1.6
+  ],
+  "Notes": [
+   -0.7,
+   4.2,
+   1.9
+  ]
+ },
+ "attrs": {
+  "Cost": 2500,
+  "Notes": "Glossy black grand piano (lid propped open, gold harp plate, strings, dampers, 3 gold pedals) with a matching red-tufted bench, primlib parts. Keyboard faces -Z. Pivot_Bench = bench cushion top (seat faces +Z toward the keys), Pivot_Keys = keyboard centre, Pivot_Sound = inside the case, Pivot_Notes = where floating notes start. Built by fun-builds/models/build_Piano.py."
+ },
+ "size_studs": [
+  6.104,
+  7.131,
+  10.725
+ ],
+ "objects": [
+  {
+   "name": "CaseFront_m",
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true,
+   "parts": 28
+  },
+  {
+   "name": "BandTreble_m",
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 15
+  },
+  {
+   "name": "PlateHole1_m",
+   "color": "4a3322",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "String1_m",
+   "color": "c9d0d8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 6
+  },
+  {
+   "name": "PinBlock_m",
+   "color": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Dampers_m",
+   "color": "23262c",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "SheetMusic_m",
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "SheetStaff1_m",
+   "color": "3b4350",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "WhiteKeys",
+   "color": "f7f5ee",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BlackKey01",
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BlackKey02",
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BlackKey03",
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BlackKey04",
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BlackKey05",
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BlackKey06",
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BlackKey07",
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BlackKey08",
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BlackKey09",
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BlackKey10",
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BlackKey11",
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BlackKey12",
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BlackKey13",
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BlackKey14",
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BlackKey15",
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "LegCuff1_m",
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 3
+  },
+  {
+   "name": "LidStick_m",
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BenchTop",
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BenchApron",
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BenchCushion",
+   "color": "c7372f",
+   "material": "Leather",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BenchTuft1",
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BenchTuft2",
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BenchTuft3",
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BenchLeg1",
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BenchFoot1",
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BenchLeg2",
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BenchFoot2",
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BenchLeg3",
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BenchFoot3",
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BenchLeg4",
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BenchFoot4",
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  }
+ ]
+}

@@ -1,0 +1,17 @@
+[
+ {
+  "file": "ReplicatedStorage.Modules.ItemsCatalog.lua",
+  "path": "ReplicatedStorage.Modules.ItemsCatalog",
+  "class": "ModuleScript"
+ },
+ {
+  "file": "ServerScriptService.ItemService.server.lua",
+  "path": "ServerScriptService.ItemService",
+  "class": "Script"
+ },
+ {
+  "file": "StarterPlayer.StarterPlayerScripts.ItemClient.client.lua",
+  "path": "StarterPlayer.StarterPlayerScripts.ItemClient",
+  "class": "LocalScript"
+ }
+]

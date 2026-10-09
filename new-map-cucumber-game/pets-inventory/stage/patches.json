@@ -1,0 +1,26 @@
+[
+ {
+  "path": "game.ServerStorage.PetService",
+  "file": "ServerStorage.PetService.lua",
+  "edits": [
+   {
+    "old": "function PetService.Equip(player, petId)\n",
+    "new": "--.. spot (2026-09-23, inventory placement): a world point on the plot top the pet spawns at (PetInventoryService\n--.. validated it); nil = the saved / a free spot as before\nfunction PetService.Equip(player, petId, spot)\n"
+   },
+   {
+    "old": "\tif not rp.PresentationPending and not rp.Model then SpawnPet(player, rt, rp, nil) end\n\tRefreshStatus(player, rt, rp, true, false)\n\tActiveDirty = true\n\tQueueDelta(player, petId, true)\n",
+    "new": "\tif not rp.PresentationPending and not rp.Model then SpawnPet(player, rt, rp, typeof(spot) == \"Vector3\" and spot or nil) end\n\tRefreshStatus(player, rt, rp, true, false)\n\tActiveDirty = true\n\tQueueDelta(player, petId, true)\n"
+   }
+  ]
+ },
+ {
+  "path": "game.StarterPlayer.StarterPlayerScripts.EggHatchClient",
+  "file": "StarterPlayer.StarterPlayerScripts.EggHatchClient.client.lua",
+  "edits": [
+   {
+    "old": "\t--.. 2026-09-22: cash/sec + ability and the inherited traits (labels authored by the pets-panel\n\t--.. builder; hidden when the template or the payload lacks them)\n\tfor name, fill in pairs({PetStats = function() return StatsText(info.Stats) end, PetTraits = function() return TraitsText(info.Material, info.Mutations) end}) do\n\t\tlocal label = card:FindFirstChild(name)\n\t\tif label and label:IsA(\"TextLabel\") then\n\t\t\tlocal ok, text = pcall(fill)\n\t\t\tlocal show = ok and type(text) == \"string\" and text ~= \"\"\n\t\t\tlabel.RichText = true\n\t\t\tlabel.Text = show and text or \"\"\n\t\t\tlabel.Visible = show\n\t\tend\n\tend\n",
+    "new": "\t--.. 2026-09-23 (user: \"just show pet - pet name/rarity and chance of getting pet, dont show all that other\n\t--.. info\"): the cash/sec + ability and traits lines of 2026-09-22 stay hidden (StatsText / TraitsText kept\n\t--.. for the info frame's sake)\n\tfor _, name in ipairs({\"PetStats\", \"PetTraits\"}) do\n\t\tlocal label = card:FindFirstChild(name)\n\t\tif label and label:IsA(\"TextLabel\") then\n\t\t\tlabel.Text = \"\"\n\t\t\tlabel.Visible = false\n\t\tend\n\tend\n"
+   }
+  ]
+ }
+]

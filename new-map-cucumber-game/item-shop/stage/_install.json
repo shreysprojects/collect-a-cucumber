@@ -1,0 +1,7 @@
+[
+ {"file": "ReplicatedStorage.Modules.ItemShopCatalog.lua", "path": "ReplicatedStorage.Modules.ItemShopCatalog", "class": "ModuleScript"},
+ {"file": "ServerScriptService.ItemShopService.server.lua", "path": "ServerScriptService.ItemShopService", "class": "Script"},
+ {"file": "StarterGui.CucumberMenus.ItemShopController.lua", "path": "StarterGui.CucumberMenus.ItemShopController", "class": "ModuleScript"},
+ {"file": "StarterGui.CucumberMenus.MenuController.lua", "path": "StarterGui.CucumberMenus.MenuController", "class": "ModuleScript"},
+ {"file": "StarterGui.CucumberMenus.MenuClient.client.lua", "path": "StarterGui.CucumberMenus.MenuClient", "class": "LocalScript"}
+]

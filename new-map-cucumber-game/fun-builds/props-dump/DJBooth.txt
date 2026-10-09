@@ -1,0 +1,30 @@
+=== Fun/DJBooth
+  @AssetId = 134384112624492
+  @Cost = 2000
+  @Notes = Faces +Y.  Footprint 8.1 wide (x -4.04..4.04) x 2.7 deep (y -1.78..0.93), 4.21 tall to the top of the spot cans.  The desk is 4.44 wide (x -2.22..2.22), its work surface is at z 2.44 - hip height for a 5-stud avatar standing on the -y side - and each turntable is a 0.49-tall console standing proud of it: deck top 2.90, platter top 3.00 (sunk to 2.87), record face 3.09, label 3.14, spindle 3.22 - the decks read as machines sitting ON the desk rather than trays sunk into it.  The mixer stays sunk between them at 2.54.  Nothing below z 0.
+Every part that rests on another sinks 0.03 INTO its host instead of butting flush (deck and mixer bottoms 2.41, yoke arms 3.43, cabinets 0.23, carcass and cheeks 0.27) and every slot is a proud track, not a flush inlay - two coplanar faces z-fight and render as a band of grainy dirt.  Keep 0.03 of overlap if you move anything.
+Deck A / stack A are at +x, 
+  @Pivot_DeckAPlatter = (1.30, 2.90, 0.44)
+  @Pivot_DeckATonearm = (1.74, 3.20, 1.00)
+  @Pivot_DeckBPlatter = (-1.30, 2.90, 0.44)
+  @Pivot_DeckBTonearm = (-1.74, 3.20, 1.00)
+  @Pivot_SpotA = (3.30, 3.88, 0.30)
+  @Pivot_SpotB = (-3.30, 3.88, 0.30)
+  @PropSet = plot
+  @State_ArmParked = 20
+  @State_ArmPlaying = 0
+  @State_SpotAimCrowd = -100
+  @State_SpotAimFloor = -120
+  @State_SpotAimSky = -55
+  @Tris = 2060
+  Cables [MeshPart] pos (-0.02, 0.50, 1.64) size (6.99, 0.91, 0.39) Rubber 2a2d33 T0.00 collide=true
+  Consoles [MeshPart] pos (0.00, 3.19, 0.45) size (7.24, 1.57, 1.50) Metal 3b4350 T0.00 collide=true
+  Frame [MeshPart] pos (0.00, 1.44, 0.38) size (8.08, 2.88, 2.56) Metal 6c7789 T0.00 collide=true
+  Hardware [MeshPart] pos (0.00, 3.52, 0.40) size (7.12, 1.34, 1.64) Metal 9aa7b8 T0.00 collide=true
+  Knobs [MeshPart] pos (0.00, 1.87, 0.24) size (6.84, 1.62, 1.54) SmoothPlastic f2f0ea T0.00 collide=true
+  LedStrip [MeshPart] pos (0.00, 1.55, 0.10) size (3.60, 2.07, 2.07) Neon 4dd2ff T0.00 collide=true
+  Letters [MeshPart] pos (0.64, 1.88, 0.14) size (2.27, 1.40, 2.01) Neon ff4fa3 T0.00 collide=true
+  Records [MeshPart] pos (0.00, 3.03, 0.44) size (3.32, 0.12, 0.72) SmoothPlastic 10141c T0.00 collide=true
+  Shell [MeshPart] pos (0.00, 1.85, 0.37) size (7.96, 3.23, 2.47) SmoothPlastic 23262c T0.00 collide=true
+  SpotGlow [MeshPart] pos (-0.00, 2.60, -0.27) size (6.98, 2.76, 1.03) Neon b45cff T0.00 collide=true
+  Trim [MeshPart] pos (-0.00, 1.76, -0.15) size (7.88, 2.76, 1.58) SmoothPlastic ff8a3d T0.00 collide=true

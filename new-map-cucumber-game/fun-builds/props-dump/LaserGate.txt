@@ -1,0 +1,28 @@
+=== Defences/LaserGate
+  @AssetId = 112459231146713
+  @Cost = 250000
+  @Notes = Static prop, nothing moves: two identical pillars PillarL* (x = -2.9) and PillarR* (x = +2.9) and four free-standing beams Beam1..Beam4 (bottom to top) at z = 2.0 / 3.0 / 4.0 / 5.0. Each beam is ONE Neon ff2f2f part, r 0.07, spanning x -1.95..1.95 (length 3.90) at y = 0 - the runtime flickers / toggles these by name. The beam ends sit 0.27 inside the emitter cores (the red core faces are at x = +/-1.68, the dark rims stand 0.25 proud of the column faces at x = +/-2.05), so a beam shortened at either end still appears to leave the emitter. The damage plane is the x-z rectangle between the pillars: x in [-1.95, 1.95], z 0..5.5, at y = 0; enemies walk THROUGH the gap along Y (the gap between the columns is 4.10 wide, 3.36 between the emitter faces). Neon parts: Beam1..Beam4, PillarLCores, PillarRCores (four cores in one part per pillar). Overall 8.0 wide (the outer foot-bolt tips reach x = 
+  @Pivot_BeamLeft = (-1.95, 3.50, -0.00)
+  @Pivot_BeamRight = (1.95, 3.50, -0.00)
+  @PropSet = defence2
+  @Tris = 1120
+  Beam1 [MeshPart] pos (-0.00, 2.00, -0.00) size (3.90, 0.14, 0.14) Neon ff2f2f T0.00 collide=false
+  Beam2 [MeshPart] pos (-0.00, 3.00, -0.00) size (3.90, 0.14, 0.14) Neon ff2f2f T0.00 collide=false
+  Beam3 [MeshPart] pos (-0.00, 4.00, -0.00) size (3.90, 0.14, 0.14) Neon ff2f2f T0.00 collide=false
+  Beam4 [MeshPart] pos (-0.00, 5.00, -0.00) size (3.90, 0.14, 0.14) Neon ff2f2f T0.00 collide=false
+  PillarLBolts [MeshPart] pos (-3.04, 0.55, -0.59) size (1.90, 0.48, 1.66) Metal 2f3136 T0.00 collide=true
+  PillarLCap [MeshPart] pos (-2.85, 5.85, -0.00) size (2.00, 0.70, 2.10) SmoothPlastic 45474d T0.00 collide=true
+  PillarLCapTop [MeshPart] pos (-2.85, 6.30, -0.00) size (1.50, 0.20, 1.50) SmoothPlastic 565962 T0.00 collide=true
+  PillarLColumn [MeshPart] pos (-2.90, 3.15, -0.00) size (1.70, 4.81, 1.70) SmoothPlastic 565962 T0.00 collide=true
+  PillarLCores [MeshPart] pos (-1.75, 3.50, -0.00) size (0.14, 3.48, 0.48) Neon ff2f2f T0.00 collide=true
+  PillarLEmitters [MeshPart] pos (-1.95, 3.50, -0.00) size (0.30, 3.78, 0.78) Metal 2f3136 T0.00 collide=true
+  PillarLFoot [MeshPart] pos (-2.80, 0.55, 0.00) size (2.10, 1.10, 2.40) SmoothPlastic 45474d T0.00 collide=true
+  PillarLPanel [MeshPart] pos (-3.75, 3.30, -0.00) size (0.12, 2.80, 0.90) SmoothPlastic 45474d T0.00 collide=true
+  PillarRBolts [MeshPart] pos (3.04, 0.55, -0.59) size (1.90, 0.48, 1.66) Metal 2f3136 T0.00 collide=true
+  PillarRCap [MeshPart] pos (2.85, 5.85, -0.00) size (2.00, 0.70, 2.10) SmoothPlastic 45474d T0.00 collide=true
+  PillarRCapTop [MeshPart] pos (2.85, 6.30, -0.00) size (1.50, 0.20, 1.50) SmoothPlastic 565962 T0.00 collide=true
+  PillarRColumn [MeshPart] pos (2.90, 3.15, -0.00) size (1.70, 4.81, 1.70) SmoothPlastic 565962 T0.00 collide=true
+  PillarRCores [MeshPart] pos (1.75, 3.50, -0.00) size (0.14, 3.48, 0.48) Neon ff2f2f T0.00 collide=true
+  PillarREmitters [MeshPart] pos (1.95, 3.50, -0.00) size (0.30, 3.78, 0.78) Metal 2f3136 T0.00 collide=true
+  PillarRFoot [MeshPart] pos (2.80, 0.55, -0.00) size (2.10, 1.10, 2.40) SmoothPlastic 45474d T0.00 collide=true
+  PillarRPanel [MeshPart] pos (3.75, 3.30, -0.00) size (0.12, 2.80, 0.90) SmoothPlastic 45474d T0.00 collide=true

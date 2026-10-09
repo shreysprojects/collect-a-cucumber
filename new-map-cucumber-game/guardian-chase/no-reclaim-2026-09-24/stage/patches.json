@@ -1,0 +1,24 @@
+[
+ {
+  "path": "game.ServerScriptService.GuardianService",
+  "file": "ServerScriptService.GuardianService.server.lua",
+  "edits": [
+   {
+    "old": "\t  * Caught: the zombie knockback (ZombieRaidService's 10-stud client-side parabola,\n\t    fired on the same remote so its client does the flight), the cucumber comes off\n\t    your shoulder, and the guardian carries it back to its seat and sits on it. That\n\t    cucumber goes back exactly as it was - no mark, no bonus.\n\t  * A cucumber dropped in the biome is a DECOY: it breaks off and reclaims that first.\n",
+    "new": "\t  * Caught: the zombie knockback (ZombieRaidService's 10-stud client-side parabola,\n\t    fired on the same remote so its client does the flight) and the cucumber FALLS WHERE\n\t    YOU STAND (CucumberCarryAPI.DropAtFeet). 2026-09-24 (user: \"cucumber just drops but\n\t    the guardian doesn't take it back or put it back where it originally was\"): the\n\t    guardian goes home EMPTY-HANDED and never reclaims what it knocked loose - the holder\n\t    is stamped GuardianDropped and the catch's own carry-clear is not a decoy.\n\t  * A cucumber you DROP yourself in the biome is a DECOY: it breaks off and reclaims that\n\t    first (takes it home and plants it at its seat).\n"
+   },
+   {
+    "old": "\t\t\tlocal distance, seconds = KnockbackFor(entry, player)\n\t\t\tKnockback(entry, player, dir, distance, seconds)\n\t\t\tDropAtFeet:Invoke(player)\n\t\t\tGoHome(entry, \"caught them\")\n",
+    "new": "\t\t\tlocal distance, seconds = KnockbackFor(entry, player)\n\t\t\tKnockback(entry, player, dir, distance, seconds)\n\t\t\t--.. 2026-09-24: the knocked-loose cucumber stays where it fell; this guardian never reclaims it\n\t\t\tlocal holder = DropAtFeet:Invoke(player)\n\t\t\tif typeof(holder) == \"Instance\" then holder:SetAttribute(\"GuardianDropped\", true) end\n\t\t\tentry.CaughtDropAt = t\n\t\t\tGoHome(entry, \"caught them\")\n"
+   },
+   {
+    "old": "local function OnCarryCleared(player, zone)\n\tlocal name = zone and Catalog.BY_ZONE[zone]\n\tlocal entry = name and Guardians[name]\n\tif not (entry and (entry.State == \"Chasing\" or entry.State == \"Waking\"\n\t\tor entry.State == \"Lurking\")) then return end\n",
+    "new": "local function OnCarryCleared(player, zone)\n\tlocal name = zone and Catalog.BY_ZONE[zone]\n\tlocal entry = name and Guardians[name]\n\tif not (entry and (entry.State == \"Chasing\" or entry.State == \"Waking\"\n\t\tor entry.State == \"Lurking\")) then return end\n\t--.. 2026-09-24: a carry that clears right after this guardian's catch IS the catch (DropAtFeet): no decoy\n\tif entry.CaughtDropAt and now() - entry.CaughtDropAt < 1.5 then return end\n"
+   },
+   {
+    "old": "\t\tfor _, holder in ipairs(folder:GetChildren()) do\n\t\t\tlocal part = holder:IsA(\"Model\") and (holder.PrimaryPart or holder:FindFirstChildWhichIsA(\"BasePart\"))\n\t\t\t\tor (holder:IsA(\"BasePart\") and holder)\n\t\t\tif part then\n",
+    "new": "\t\tfor _, holder in ipairs(folder:GetChildren()) do\n\t\t\tlocal part = holder:IsA(\"Model\") and (holder.PrimaryPart or holder:FindFirstChildWhichIsA(\"BasePart\"))\n\t\t\t\tor (holder:IsA(\"BasePart\") and holder)\n\t\t\tif part and holder:GetAttribute(\"GuardianDropped\") then part = nil end -- 2026-09-24: knocked loose by a catch: never a decoy\n\t\t\tif part then\n"
+   }
+  ]
+ }
+]

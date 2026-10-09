@@ -1,0 +1,769 @@
+{
+ "tiers": [
+  {
+   "name": "Starter",
+   "tier": 1,
+   "bar_length": 5.622,
+   "bench": [
+    {
+     "collection": "Starter_Bench",
+     "name": "Starter_Anchor",
+     "hex": "000000",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 12
+    },
+    {
+     "collection": "Starter_Bench",
+     "name": "Starter_Frame",
+     "hex": "8a5a2b",
+     "material": "WoodPlanks",
+     "transparency": 0.0,
+     "tris": 192
+    },
+    {
+     "collection": "Starter_Bench",
+     "name": "Starter_Pad",
+     "hex": "2a2a2e",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 12
+    }
+   ],
+   "barbell": [
+    {
+     "collection": "Starter_Barbell",
+     "name": "Starter_Bar",
+     "hex": "b8bcc4",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 28
+    },
+    {
+     "collection": "Starter_Barbell",
+     "name": "Starter_Collars",
+     "hex": "5a3a1c",
+     "material": "Wood",
+     "transparency": 0.0,
+     "tris": 72
+    },
+    {
+     "collection": "Starter_Barbell",
+     "name": "Starter_Plates",
+     "hex": "8c8c88",
+     "material": "Slate",
+     "transparency": 0.0,
+     "tris": 144
+    }
+   ]
+  },
+  {
+   "name": "Iron",
+   "tier": 2,
+   "bar_length": 6.25,
+   "bench": [
+    {
+     "collection": "Iron_Bench",
+     "name": "Iron_Anchor",
+     "hex": "000000",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 12
+    },
+    {
+     "collection": "Iron_Bench",
+     "name": "Iron_Feet",
+     "hex": "232428",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 48
+    },
+    {
+     "collection": "Iron_Bench",
+     "name": "Iron_Frame",
+     "hex": "8e939c",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 180
+    },
+    {
+     "collection": "Iron_Bench",
+     "name": "Iron_Pad",
+     "hex": "1f5fd6",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 12
+    }
+   ],
+   "barbell": [
+    {
+     "collection": "Iron_Barbell",
+     "name": "Iron_Bar",
+     "hex": "c4c8d0",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 28
+    },
+    {
+     "collection": "Iron_Barbell",
+     "name": "Iron_Collars",
+     "hex": "9a9ea6",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 72
+    },
+    {
+     "collection": "Iron_Barbell",
+     "name": "Iron_Plates",
+     "hex": "1b1b1e",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 312
+    }
+   ]
+  },
+  {
+   "name": "Gold",
+   "tier": 3,
+   "bar_length": 6.922,
+   "bench": [
+    {
+     "collection": "Gold_Bench",
+     "name": "Gold_Anchor",
+     "hex": "000000",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 12
+    },
+    {
+     "collection": "Gold_Bench",
+     "name": "Gold_Feet",
+     "hex": "2a2a2e",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 48
+    },
+    {
+     "collection": "Gold_Bench",
+     "name": "Gold_Frame",
+     "hex": "e3b526",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 120
+    },
+    {
+     "collection": "Gold_Bench",
+     "name": "Gold_Gems",
+     "hex": "f6c93c",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 72
+    },
+    {
+     "collection": "Gold_Bench",
+     "name": "Gold_Pad",
+     "hex": "b8202a",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 12
+    },
+    {
+     "collection": "Gold_Bench",
+     "name": "Gold_Trim",
+     "hex": "f5d76e",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 12
+    }
+   ],
+   "barbell": [
+    {
+     "collection": "Gold_Barbell",
+     "name": "Gold_Bar",
+     "hex": "d7d9dd",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 28
+    },
+    {
+     "collection": "Gold_Barbell",
+     "name": "Gold_Collars",
+     "hex": "e3b526",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 72
+    },
+    {
+     "collection": "Gold_Barbell",
+     "name": "Gold_Plates",
+     "hex": "3a2a1e",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 416
+    },
+    {
+     "collection": "Gold_Barbell",
+     "name": "Gold_Rims",
+     "hex": "e3b526",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 416
+    }
+   ]
+  },
+  {
+   "name": "Frost",
+   "tier": 4,
+   "bar_length": 7.75,
+   "bench": [
+    {
+     "collection": "Frost_Bench",
+     "name": "Frost_Anchor",
+     "hex": "000000",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 12
+    },
+    {
+     "collection": "Frost_Bench",
+     "name": "Frost_Crystals",
+     "hex": "b6e6ff",
+     "material": "Ice",
+     "transparency": 0.0,
+     "tris": 260
+    },
+    {
+     "collection": "Frost_Bench",
+     "name": "Frost_Frame",
+     "hex": "4fa9e6",
+     "material": "Ice",
+     "transparency": 0.0,
+     "tris": 168
+    },
+    {
+     "collection": "Frost_Bench",
+     "name": "Frost_Glow",
+     "hex": "e6fbff",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 40
+    },
+    {
+     "collection": "Frost_Bench",
+     "name": "Frost_Pad",
+     "hex": "2f9fe0",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 12
+    },
+    {
+     "collection": "Frost_Bench",
+     "name": "Frost_Trim",
+     "hex": "f4fbff",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 12
+    }
+   ],
+   "barbell": [
+    {
+     "collection": "Frost_Barbell",
+     "name": "Frost_Bar",
+     "hex": "cfd6dd",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 28
+    },
+    {
+     "collection": "Frost_Barbell",
+     "name": "Frost_Collars",
+     "hex": "2c4a60",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 72
+    },
+    {
+     "collection": "Frost_Barbell",
+     "name": "Frost_Plates",
+     "hex": "8fd3fa",
+     "material": "Ice",
+     "transparency": 0.0,
+     "tris": 280
+    }
+   ]
+  },
+  {
+   "name": "Inferno",
+   "tier": 5,
+   "bar_length": 8.714,
+   "bench": [
+    {
+     "collection": "Inferno_Bench",
+     "name": "Inferno_Anchor",
+     "hex": "000000",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 12
+    },
+    {
+     "collection": "Inferno_Bench",
+     "name": "Inferno_Bowls",
+     "hex": "3a3a40",
+     "material": "Slate",
+     "transparency": 0.0,
+     "tris": 56
+    },
+    {
+     "collection": "Inferno_Bench",
+     "name": "Inferno_Flames",
+     "hex": "ffb02e",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 52
+    },
+    {
+     "collection": "Inferno_Bench",
+     "name": "Inferno_Frame",
+     "hex": "2c2c31",
+     "material": "Slate",
+     "transparency": 0.0,
+     "tris": 188
+    },
+    {
+     "collection": "Inferno_Bench",
+     "name": "Inferno_Lava",
+     "hex": "ff5a14",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 144
+    },
+    {
+     "collection": "Inferno_Bench",
+     "name": "Inferno_Pad",
+     "hex": "c4262b",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 12
+    },
+    {
+     "collection": "Inferno_Bench",
+     "name": "Inferno_Trim",
+     "hex": "ff7a1a",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 12
+    }
+   ],
+   "barbell": [
+    {
+     "collection": "Inferno_Barbell",
+     "name": "Inferno_Bar",
+     "hex": "a9adb4",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 28
+    },
+    {
+     "collection": "Inferno_Barbell",
+     "name": "Inferno_Collars",
+     "hex": "4a4a50",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 72
+    },
+    {
+     "collection": "Inferno_Barbell",
+     "name": "Inferno_Glow",
+     "hex": "ff6a1f",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 432
+    },
+    {
+     "collection": "Inferno_Barbell",
+     "name": "Inferno_Plates",
+     "hex": "35302e",
+     "material": "Slate",
+     "transparency": 0.0,
+     "tris": 864
+    }
+   ]
+  },
+  {
+   "name": "Cosmic",
+   "tier": 6,
+   "bar_length": 10.707,
+   "bench": [
+    {
+     "collection": "Cosmic_Bench",
+     "name": "Cosmic_Anchor",
+     "hex": "000000",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 12
+    },
+    {
+     "collection": "Cosmic_Bench",
+     "name": "Cosmic_Crystals",
+     "hex": "7a5cff",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 16
+    },
+    {
+     "collection": "Cosmic_Bench",
+     "name": "Cosmic_Float1",
+     "hex": "7a5cff",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 8
+    },
+    {
+     "collection": "Cosmic_Bench",
+     "name": "Cosmic_Float2",
+     "hex": "7a5cff",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 8
+    },
+    {
+     "collection": "Cosmic_Bench",
+     "name": "Cosmic_Float3",
+     "hex": "7a5cff",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 8
+    },
+    {
+     "collection": "Cosmic_Bench",
+     "name": "Cosmic_Float4",
+     "hex": "7a5cff",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 8
+    },
+    {
+     "collection": "Cosmic_Bench",
+     "name": "Cosmic_Float5",
+     "hex": "7a5cff",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 8
+    },
+    {
+     "collection": "Cosmic_Bench",
+     "name": "Cosmic_Float6",
+     "hex": "7a5cff",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 8
+    },
+    {
+     "collection": "Cosmic_Bench",
+     "name": "Cosmic_Frame",
+     "hex": "2b2361",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 168
+    },
+    {
+     "collection": "Cosmic_Bench",
+     "name": "Cosmic_Pad",
+     "hex": "7c3ae0",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 12
+    },
+    {
+     "collection": "Cosmic_Bench",
+     "name": "Cosmic_Runes",
+     "hex": "8fe9ff",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 32
+    },
+    {
+     "collection": "Cosmic_Bench",
+     "name": "Cosmic_Trim",
+     "hex": "d9a93a",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 72
+    }
+   ],
+   "barbell": [
+    {
+     "collection": "Cosmic_Barbell",
+     "name": "Cosmic_Bar",
+     "hex": "b9bcc7",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 28
+    },
+    {
+     "collection": "Cosmic_Barbell",
+     "name": "Cosmic_Collars",
+     "hex": "d9a93a",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 72
+    },
+    {
+     "collection": "Cosmic_Barbell",
+     "name": "Cosmic_Glow",
+     "hex": "62e8ff",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 520
+    },
+    {
+     "collection": "Cosmic_Barbell",
+     "name": "Cosmic_Plates",
+     "hex": "2a1a5e",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 552
+    }
+   ]
+  },
+  {
+   "name": "Celestial",
+   "tier": 7,
+   "bar_length": 8.243,
+   "bench": [
+    {
+     "collection": "Celestial_Bench",
+     "name": "Celestial_Anchor",
+     "hex": "000000",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 12
+    },
+    {
+     "collection": "Celestial_Bench",
+     "name": "Celestial_Frame",
+     "hex": "f3efe6",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 168
+    },
+    {
+     "collection": "Celestial_Bench",
+     "name": "Celestial_Glow",
+     "hex": "fff1b8",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 160
+    },
+    {
+     "collection": "Celestial_Bench",
+     "name": "Celestial_Pad",
+     "hex": "f7f7f9",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 12
+    },
+    {
+     "collection": "Celestial_Bench",
+     "name": "Celestial_Trim",
+     "hex": "e6b422",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 136
+    },
+    {
+     "collection": "Celestial_Bench",
+     "name": "Celestial_Wings",
+     "hex": "e6b422",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 72
+    }
+   ],
+   "barbell": [
+    {
+     "collection": "Celestial_Barbell",
+     "name": "Celestial_Bar",
+     "hex": "c9ccd3",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 28
+    },
+    {
+     "collection": "Celestial_Barbell",
+     "name": "Celestial_Collars",
+     "hex": "e6b422",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 144
+    },
+    {
+     "collection": "Celestial_Barbell",
+     "name": "Celestial_Glow.001",
+     "hex": "fff1b8",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 216
+    },
+    {
+     "collection": "Celestial_Barbell",
+     "name": "Celestial_Plates",
+     "hex": "f2eee6",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 216
+    },
+    {
+     "collection": "Celestial_Barbell",
+     "name": "Celestial_Rims",
+     "hex": "e6b422",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 216
+    }
+   ]
+  },
+  {
+   "name": "VoidEmperor",
+   "tier": 8,
+   "bar_length": 8.602,
+   "bench": [
+    {
+     "collection": "VoidEmperor_Bench",
+     "name": "VoidEmperor_Anchor",
+     "hex": "000000",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 12
+    },
+    {
+     "collection": "VoidEmperor_Bench",
+     "name": "VoidEmperor_Crystals",
+     "hex": "2a0f1c",
+     "material": "Slate",
+     "transparency": 0.0,
+     "tris": 60
+    },
+    {
+     "collection": "VoidEmperor_Bench",
+     "name": "VoidEmperor_Float1",
+     "hex": "9a1426",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 8
+    },
+    {
+     "collection": "VoidEmperor_Bench",
+     "name": "VoidEmperor_Float2",
+     "hex": "9a1426",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 8
+    },
+    {
+     "collection": "VoidEmperor_Bench",
+     "name": "VoidEmperor_Float3",
+     "hex": "9a1426",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 8
+    },
+    {
+     "collection": "VoidEmperor_Bench",
+     "name": "VoidEmperor_Float4",
+     "hex": "9a1426",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 8
+    },
+    {
+     "collection": "VoidEmperor_Bench",
+     "name": "VoidEmperor_Float5",
+     "hex": "9a1426",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 8
+    },
+    {
+     "collection": "VoidEmperor_Bench",
+     "name": "VoidEmperor_Float6",
+     "hex": "9a1426",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 8
+    },
+    {
+     "collection": "VoidEmperor_Bench",
+     "name": "VoidEmperor_Frame",
+     "hex": "1a171f",
+     "material": "Slate",
+     "transparency": 0.0,
+     "tris": 180
+    },
+    {
+     "collection": "VoidEmperor_Bench",
+     "name": "VoidEmperor_Glow",
+     "hex": "ff2233",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 112
+    },
+    {
+     "collection": "VoidEmperor_Bench",
+     "name": "VoidEmperor_Pad",
+     "hex": "b0161e",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 12
+    },
+    {
+     "collection": "VoidEmperor_Bench",
+     "name": "VoidEmperor_Trim",
+     "hex": "d4a11e",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 120
+    }
+   ],
+   "barbell": [
+    {
+     "collection": "VoidEmperor_Barbell",
+     "name": "VoidEmperor_Bar",
+     "hex": "b4b7c0",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 28
+    },
+    {
+     "collection": "VoidEmperor_Barbell",
+     "name": "VoidEmperor_Collars",
+     "hex": "d4a11e",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 288
+    },
+    {
+     "collection": "VoidEmperor_Barbell",
+     "name": "VoidEmperor_Glow.001",
+     "hex": "ff2233",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 232
+    },
+    {
+     "collection": "VoidEmperor_Barbell",
+     "name": "VoidEmperor_Plates",
+     "hex": "1b1520",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 216
+    }
+   ]
+  }
+ ],
+ "scale": 1.12,
+ "rack_offset": [
+  1.6800000000000002,
+  3.9200000000000004
+ ]
+}

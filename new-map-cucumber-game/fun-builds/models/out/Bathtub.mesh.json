@@ -1,0 +1,333 @@
+{
+ "key": "Bathtub",
+ "category": "Home",
+ "parts_hash": "704ecbcfdde1",
+ "pivots": {
+  "WaterMin": [
+   -3.5,
+   2.68,
+   -1.45
+  ],
+  "WaterMax": [
+   2.9,
+   2.68,
+   1.45
+  ],
+  "SpoutTip": [
+   2.6,
+   3.49,
+   0.0
+  ],
+  "Taps": [
+   3.88,
+   3.6,
+   0.0
+  ],
+  "Duck": [
+   1.25,
+   2.82,
+   -0.9
+  ],
+  "BathSeat": [
+   -1.2,
+   1.8,
+   0.0
+  ],
+  "BathHead": [
+   -3.5635,
+   2.2168,
+   0.0
+  ]
+ },
+ "attrs": {
+  "Cost": 1000,
+  "Notes": "Clawfoot bathtub (primlib parts): one lying seat at Pivot_BathSeat (head toward Pivot_BathHead, the -X end), Bubbles prompt at the gold filler (Pivot_Taps) -> foam surge + bubbling loop, the Duck* parts bob. Built by fun-builds/models/build_Bathtub.py."
+ },
+ "size_studs": [
+  8.06,
+  3.98,
+  3.805
+ ],
+ "objects": [
+  {
+   "name": "Belly_m",
+   "color": "f6f4ee",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 16
+  },
+  {
+   "name": "RimJoint1_m",
+   "color": "f6f4ee",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 10
+  },
+  {
+   "name": "Water_m",
+   "color": "86cdee",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 3
+  },
+  {
+   "name": "FootLeg1_m",
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 12
+  },
+  {
+   "name": "FootPaw1_m",
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 6
+  },
+  {
+   "name": "BathPillow_m",
+   "color": "8fb8f0",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "TapMixer",
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "TapCapH_m",
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "TapCapC_m",
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "SpoutTip",
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Foam1",
+   "color": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Foam2",
+   "color": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Foam3",
+   "color": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Foam4",
+   "color": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Bubble1",
+   "color": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.05,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Bubble2",
+   "color": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.05,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Bubble3",
+   "color": "dcf1ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.05,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Bubble4",
+   "color": "ffe3f1",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.05,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Bubble5",
+   "color": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.05,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Bubble6",
+   "color": "e2fff0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.05,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Bubble7",
+   "color": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.05,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Bubble8",
+   "color": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.05,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "DuckBody",
+   "color": "ffd23f",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "DuckTail",
+   "color": "ffd23f",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "DuckHead",
+   "color": "ffd23f",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "DuckBeak",
+   "color": "f28a2e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "DuckEyeL",
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "DuckEyeR",
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 1
+  }
+ ]
+}

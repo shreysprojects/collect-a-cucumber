@@ -1,0 +1,222 @@
+{
+ "collection": "Turret",
+ "parts": [
+  {
+   "collection": "Turret",
+   "name": "Turret.BarrelBand",
+   "hex": "ff8a3d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.BarrelBrakeTips",
+   "hex": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.BarrelCradle",
+   "hex": "6c7789",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.BarrelMantlet",
+   "hex": "ff8a3d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.BarrelMuzzleGlow",
+   "hex": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 56
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.BarrelMuzzles",
+   "hex": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.BarrelSight",
+   "hex": "2a2d33",
+   "material": "Plastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.BarrelTubes",
+   "hex": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.BaseBolts",
+   "hex": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 80
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.BaseCollar",
+   "hex": "ff8a3d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.BaseConduit",
+   "hex": "2a2d33",
+   "material": "Plastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.BaseFeet",
+   "hex": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 176
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.BasePlinth",
+   "hex": "6c7789",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.BaseRing",
+   "hex": "2a2d33",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.HeadCheeks",
+   "hex": "ff8a3d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.HeadDrum",
+   "hex": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.HeadDrumHubs",
+   "hex": "d5dbe4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 56
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.HeadEye",
+   "hex": "4dd2ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.HeadHousing",
+   "hex": "6c7789",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.HeadTrunnion",
+   "hex": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.HeadTurntable",
+   "hex": "9aa7b8",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Turret",
+   "name": "Turret.HeadYoke",
+   "hex": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 88
+  }
+ ],
+ "pivots": {
+  "YawPivot": [
+   0.0,
+   0.0,
+   1.58
+  ],
+  "PitchPivot": [
+   0.0,
+   0.0,
+   4.8
+  ],
+  "MuzzleTipL": [
+   -0.5,
+   3.88,
+   4.8
+  ],
+  "MuzzleTipR": [
+   0.5,
+   3.88,
+   4.8
+  ],
+  "EyeLens": [
+   0.0,
+   1.1,
+   2.75
+  ],
+  "DrumCentre": [
+   0.0,
+   -1.65,
+   4.35
+  ]
+ },
+ "states": {},
+ "notes": "Rig by name prefix: Base* is static, Head* yaws about the world Z axis through (0, 0), Barrel* pitches about a horizontal axis parallel to X through the trunnion at (0, 0, 4.80). Modelled at zero yaw / zero pitch, barrels level and pointing +Y. Mass hierarchy is deliberate: the GUN is the biggest thing on the prop. The twin cannon runs 4.6 studs nose to tail (y -0.75 to 3.88) with 0.84-stud-thick tubes and chunky square muzzle brakes, and it projects 3.1 studs past the cradle face; the counterweight is a fat horizontal ammo drum behind the trunnion, NOT a vertical column - the silhouette's long axis is fore-aft, not up. Static base footprint 5.8 x 5.8 studs (feet), total height 5.86 studs. The gun deliberately overhangs the plinth, as a real turret's does: the widest yawing point is a brake-tip corner at radius 3.99, so a full 360 deg spin stays inside the standard 8 x 8 TILE. Everything on the head BEHIND the trunnion stays inside radius 2.76, i.e. within the 6 x 6 base footprint. Nothing dips below z = 0 (lowest geometry is the foot pads' bottom face at z = 0.0 and the conduit, which terminates buried inside the rear-left foot). Three Neon parts: HeadEye (sensor lens on the housing front) and BarrelMuzzleGlow (a charge disc inside each muzzle) - cyan reads as the targeting line. Orange accents: BaseCollar, HeadCheeks, BarrelMantlet, BarrelBand. HeadTrunnion is the axle and is grouped with the head, not the barrels, so it does not spin visually when the guns elevate. HeadDrum likewise stays with the head, so the counterweight never has to clear anything. The pitching group is centred on the trunnion in both y and z: traced by hand, at +/- 30 deg it still clears the housing top by 0.13 and the drum surface by 0.20, so +/- 25 deg is a safe usable range.",
+ "tris": 1316,
+ "size_studs": [
+  5.8,
+  6.78,
+  5.86
+ ],
+ "min_z": 0.0
+}

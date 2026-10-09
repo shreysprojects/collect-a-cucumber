@@ -1,0 +1,35 @@
+=== Fun/DanceFloor
+  @AssetId = 96961312252281
+  @Cost = 800
+  @Notes = Footprint 8.0 x 8.0 studs, x -4..4 and y -4..4, 0.43 studs tall, nothing below z=0. Walking surface is the tile tops at z=0.34; the black frame lip stands 0.02 proud of them at z=0.36 and the hex corner caps top out at 0.41 (the amber power dot at 0.43). Four copies butt cleanly on the 8-stud grid.
+
+GRID CONVENTION - this is the contract, do not re-derive it. The 16 tiles are named Tile_r<row>_c<col>, row and col 0..3, each one its OWN object so the game can recolour cells independently.  ROW 0 IS THE BACK of the floor (most negative y) and rows count forward toward the player: row 0 y=-2.61, row 1 y=-0.87, row 2 y=+0.87, row 3 y=+2.61. COL 0 IS THE +X EDGE, which is the viewer's LEFT because they stand on the +Y side and look down -Y: col 0 x=+2.61, col 1 x=+0.87, col 2 x=-0.87, col 3 x=-2.61.  So Tile_r0_c0 is the far corner on the player's left and Tile_r3_c3 is the near corner on the
+  @Pivot_Controller = (-2.05, 0.43, -3.72)
+  @Pivot_FloorCentre = (0.00, 0.34, -0.00)
+  @Pivot_TileR0C0 = (2.61, 0.34, 2.61)
+  @Pivot_TileR3C3 = (-2.61, 0.34, -2.61)
+  @PropSet = plot
+  @State_Dim = 0.45
+  @State_Off = 0.85
+  @State_On = 0
+  @Tris = 1080
+  EdgeStrip [MeshPart] pos (0.00, 0.38, 0.00) size (7.74, 0.03, 7.74) Metal 3b4350 T0.00 collide=true
+  Frame [MeshPart] pos (0.00, 0.20, 0.00) size (7.80, 0.32, 7.80) SmoothPlastic 23262c T0.00 collide=true
+  PowerLight [MeshPart] pos (-2.05, 0.40, -3.72) size (0.15, 0.05, 0.17) Neon 7a421d T0.00 collide=true
+  Tile_r0_c0 [MeshPart] pos (2.61, 0.27, 2.61) size (1.60, 0.15, 1.60) Neon 731e46 T0.00 collide=true
+  Tile_r0_c1 [MeshPart] pos (0.87, 0.27, 2.61) size (1.60, 0.15, 1.60) Neon 070911 T0.00 collide=true
+  Tile_r0_c2 [MeshPart] pos (-0.87, 0.27, 2.61) size (1.60, 0.15, 1.60) Neon 1c5f76 T0.00 collide=true
+  Tile_r0_c3 [MeshPart] pos (-2.61, 0.27, 2.61) size (1.60, 0.15, 1.60) Neon 070911 T0.00 collide=true
+  Tile_r1_c0 [MeshPart] pos (2.61, 0.27, 0.87) size (1.60, 0.15, 1.60) Neon 070911 T0.00 collide=true
+  Tile_r1_c1 [MeshPart] pos (0.87, 0.27, 0.87) size (1.60, 0.15, 1.60) Neon 1c5f76 T0.00 collide=true
+  Tile_r1_c2 [MeshPart] pos (-0.87, 0.27, 0.87) size (1.60, 0.15, 1.60) Neon 070911 T0.00 collide=true
+  Tile_r1_c3 [MeshPart] pos (-2.61, 0.27, 0.87) size (1.60, 0.15, 1.60) Neon 731e46 T0.00 collide=true
+  Tile_r2_c0 [MeshPart] pos (2.61, 0.26, -0.87) size (1.60, 0.15, 1.60) Neon 1c5f76 T0.00 collide=true
+  Tile_r2_c1 [MeshPart] pos (0.87, 0.26, -0.87) size (1.60, 0.15, 1.60) Neon 070911 T0.00 collide=true
+  Tile_r2_c2 [MeshPart] pos (-0.87, 0.26, -0.87) size (1.60, 0.15, 1.60) Neon 731e46 T0.00 collide=true
+  Tile_r2_c3 [MeshPart] pos (-2.61, 0.26, -0.87) size (1.60, 0.15, 1.60) Neon 070911 T0.00 collide=true
+  Tile_r3_c0 [MeshPart] pos (2.61, 0.26, -2.61) size (1.60, 0.15, 1.60) Neon 070911 T0.00 collide=true
+  Tile_r3_c1 [MeshPart] pos (0.87, 0.26, -2.61) size (1.60, 0.15, 1.60) Neon 731e46 T0.00 collide=true
+  Tile_r3_c2 [MeshPart] pos (-0.87, 0.26, -2.61) size (1.60, 0.15, 1.60) Neon 070911 T0.00 collide=true
+  Tile_r3_c3 [MeshPart] pos (-2.61, 0.26, -2.61) size (1.60, 0.15, 1.60) Neon 1c5f76 T0.00 collide=true
+  Trim [MeshPart] pos (0.00, 0.20, 0.00) size (8.00, 0.41, 8.00) Metal 6c7789 T0.00 collide=true

@@ -1,0 +1,28 @@
+=== Fun/VendingMachine
+  @AssetId = 129126207968363
+  @Cost = 700
+  @Notes = 3.20 wide (x) x 1.70 deep (y) x 6.56 tall, centred on x=0 / y=0, standing on z=0 on four short feet.  The whole front - glass, keypad, sign - faces +Y.
+MIRROR NOTE: the control column is at NEGATIVE x (x -1.34..-0.42), which is the player's RIGHT as they walk up to the machine; the glazed product bay is the wider bay at x -0.24..1.18.  Mirror the collection in X if you want a left-hand column.
+GlassPane (x -0.24..1.18, z 1.92..5.40, y 0.64..0.70) is Glass at transparency 0.6 - give it CanCollide=false if anything is ever meant to reach inside.  Behind it the cavity runs x -0.42..1.20, y -0.58..0.62, z 1.94..5.38 and its back / left / right walls are the WHITE Whitework liner, so the stock reads as bright colour against a lit field rather than against a black hole - do not repaint the liner dark.  The four Shelves are part of Steelwork; their top faces are z 2.02 / 2.88 / 3.74 / 4.60 and 
+  @Pivot_CardSlot = (-0.91, 2.94, -0.90)
+  @Pivot_CashSlot = (-0.87, 3.47, -0.90)
+  @Pivot_DropPoint = (0.47, 1.05, -0.36)
+  @Pivot_FlapHinge = (0.47, 1.58, -0.70)
+  @Pivot_KeypadCentre = (-0.88, 4.40, -0.92)
+  @PropSet = plot
+  @State_FlapAjar = -22
+  @State_FlapOpen = -78
+  @State_FlapShut = 0
+  @Tris = 1886
+  Body [MeshPart] pos (-0.00, 3.38, -0.03) size (3.20, 6.36, 1.62) SmoothPlastic d9443c T0.00 collide=true
+  DarkShell [MeshPart] pos (-0.00, 2.79, -0.04) size (2.92, 5.58, 1.64) SmoothPlastic 23262c T0.00 collide=true
+  DeliveryFlap [MeshPart] pos (0.47, 1.26, -0.58) size (1.14, 0.65, 0.29) Metal d5dbe4 T0.00 collide=true
+  GlassPane [MeshPart] pos (0.47, 3.66, -0.67) size (1.42, 3.48, 0.06) Glass cfe8f2 T0.60 collide=true
+  NeonText [MeshPart] pos (-0.01, 5.73, -0.84) size (2.49, 1.27, 0.10) Neon ff4d4d T0.00 collide=true
+  ProductsBlue [MeshPart] pos (0.45, 3.47, -0.40) size (1.27, 2.91, 0.21) SmoothPlastic 3f79d4 T0.00 collide=true
+  ProductsGreen [MeshPart] pos (0.46, 3.47, -0.39) size (1.31, 2.91, 0.23) SmoothPlastic 4caf50 T0.00 collide=true
+  ProductsOrange [MeshPart] pos (0.57, 3.46, -0.40) size (1.07, 2.88, 0.21) SmoothPlastic ff8a3d T0.00 collide=true
+  ProductsYellow [MeshPart] pos (0.57, 3.47, -0.40) size (1.06, 2.91, 0.20) SmoothPlastic f2c13d T0.00 collide=true
+  SignPanel [MeshPart] pos (-0.00, 6.15, -0.77) size (2.68, 0.54, 0.06) Neon ffe14d T0.00 collide=true
+  Steelwork [MeshPart] pos (-0.00, 2.91, -0.25) size (2.92, 5.34, 1.30) Metal 9aa7b8 T0.00 collide=true
+  Whitework [MeshPart] pos (0.05, 3.65, -0.17) size (2.58, 3.58, 1.50) SmoothPlastic f2f0ea T0.00 collide=true

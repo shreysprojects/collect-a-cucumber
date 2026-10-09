@@ -1,0 +1,74 @@
+--[[
+	EggShopClient  (LocalScript, StarterPlayerScripts)
+	Small toast for the egg shop: "Not enough Coins" when an EggShopPrompt is
+	triggered without the price, "Bought X Egg" when the tool arrives.
+]]
+local Players = game:GetService("Players")
+local ProximityPromptService = game:GetService("ProximityPromptService")
+local CollectionService = game:GetService("CollectionService")
+local TweenService = game:GetService("TweenService")
+
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "EggShopNotify"
+gui.ResetOnSpawn = false
+gui.IgnoreGuiInset = true
+gui.Parent = playerGui
+local label = Instance.new("TextLabel")
+label.Name = "Toast"
+label.AnchorPoint = Vector2.new(0.5, 0)
+label.Position = UDim2.fromScale(0.5, 0.12)
+label.Size = UDim2.fromOffset(420, 44)
+label.BackgroundColor3 = Color3.fromRGB(25, 25, 30)
+label.BackgroundTransparency = 0.25
+label.TextColor3 = Color3.fromRGB(255, 255, 255)
+label.Font = Enum.Font.FredokaOne
+label.TextSize = 24
+label.Text = ""
+label.Visible = false
+label.Parent = gui
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 10)
+corner.Parent = label
+
+local token = 0
+local function Toast(text, color)
+	token += 1
+	local my = token
+	label.Text = text
+	label.TextColor3 = color or Color3.fromRGB(255, 255, 255)
+	label.TextTransparency = 0
+	label.BackgroundTransparency = 0.25
+	label.Visible = true
+	task.delay(2.2, function()
+		if my ~= token then return end
+		TweenService:Create(label, TweenInfo.new(0.4), {TextTransparency = 1, BackgroundTransparency = 1}):Play()
+		task.delay(0.45, function()
+			if my == token then label.Visible = false end
+		end)
+	end)
+end
+
+ProximityPromptService.PromptTriggered:Connect(function(prompt, who)
+	if who ~= player or not CollectionService:HasTag(prompt, "EggShopPrompt") then return end
+	local price = tonumber(prompt:GetAttribute("Price")) or 0
+	local data = player:FindFirstChild("Data")
+	local coins = data and data:FindFirstChild("Coins") and data.Coins.Value or 0
+	if coins < price then
+		Toast(("Not enough Coins! You need %d more."):format(price - coins), Color3.fromRGB(255, 120, 120))
+	end
+end)
+
+local function WatchTools(container)
+	container.ChildAdded:Connect(function(child)
+		if child:IsA("Tool") and CollectionService:HasTag(child, "EggTool") and not child:GetAttribute("Announced") then
+			child:SetAttribute("Announced", true)
+			Toast(("Bought a %s!"):format(child.Name), Color3.fromRGB(150, 255, 150))
+		end
+	end)
+end
+WatchTools(player:WaitForChild("Backpack"))
+player.CharacterAdded:Connect(WatchTools)
+if player.Character then WatchTools(player.Character) end

@@ -1,0 +1,17 @@
+=== Fun/GlassCase
+  @AssetId = 132019530949190
+  @Cost = 500
+  @Notes = 4 wide (x) x 3 deep (y) x 5.98 tall, centred on x=0/y=0, standing on z=0.  The front - the brass TROPHY nameplate and the lock plate - faces +Y.  The interior holds only the stepped display column, so the game can drop an item onto PIVOTS.DisplayPoint at runtime: that is the brass cap ring on top of the column at z 3.05, and the clear display volume above it is x -1.75..1.75, y -1.25..1.25, z 3.05..4.35 (the downlight collar hangs down to z 4.39).  Give GlassPanes and LightBeam CanCollide=false - LightBeam is the decorative cone of light between the downlight and the column and a spawned item stands inside it.  SpotLens carries BOTH Neon lenses: the downlight inside the case and the brass spotlight on the crown.
+  @Pivot_DisplayPoint = (0.00, 3.05, -0.00)
+  @PropSet = plot
+  @Tris = 1196
+  BrassFrame [MeshPart] pos (-0.00, 3.59, -0.00) size (4.00, 4.78, 3.00) Metal c9a227 T0.00 collide=true
+  Engraving [MeshPart] pos (-0.27, 0.54, -1.45) size (2.63, 0.33, 0.07) Metal 2f3640 T0.00 collide=true
+  GlassPanes [MeshPart] pos (-0.00, 3.25, -0.00) size (3.72, 3.86, 2.72) Glass 9fd4e6 T0.50 collide=true
+  LampHood [MeshPart] pos (0.00, 4.81, 0.18) size (1.08, 0.62, 1.05) Metal 2f3640 T0.00 collide=true
+  LightBeam [MeshPart] pos (-0.00, 3.79, -0.00) size (1.48, 1.59, 1.55) Neon ffd98a T0.80 collide=true
+  Pedestal [MeshPart] pos (-0.00, 2.12, -0.00) size (1.50, 1.48, 1.43) Metal 3b4350 T0.00 collide=true
+  Plinth [MeshPart] pos (-0.00, 0.60, -0.00) size (4.00, 1.20, 3.00) Metal 3b4350 T0.00 collide=true
+  PlinthTrim [MeshPart] pos (-0.00, 0.59, -0.02) size (3.84, 0.62, 2.88) Metal c9a227 T0.00 collide=true
+  SpotLens [MeshPart] pos (0.00, 5.21, 0.17) size (0.90, 1.47, 0.89) Neon ffd98a T0.00 collide=true
+  VelvetPad [MeshPart] pos (-0.00, 1.30, -0.00) size (3.36, 0.20, 2.36) Fabric 7e2029 T0.00 collide=true

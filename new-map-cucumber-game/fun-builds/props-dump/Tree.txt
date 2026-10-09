@@ -1,0 +1,18 @@
+=== Garden/Tree
+  @AssetId = 95186066715638
+  @Cost = 300
+  @Notes = Three separable trees, prefixed A_/B_/C_.  A Oak: 11.0 tall, crown ~7 wide, trunk footprint 3.1 across at the roots, centred on x=+10.  B Pine: 12.9 tall, skirt 5.6 wide, centred on x=0.  C Sapling: 6.5 tall, crown 4.4 wide, centred on x=-9.5.  Move a variant by translating every part with its letter prefix; each one already sits with its trunk axis on its own declared x and on y=0, z=0.  No moving parts, no pit - all three stand on the ground plane.
+  @PropSet = plot
+  @Tris = 1344
+  @Variants = {"A":{"height":11,"x":10,"name":"Oak"},"C":{"height":6.5,"x":-9.5,"name":"Sapling"},"B":{"height":12.9,"x":0,"name":"Pine"}}
+  A_CrownBody [MeshPart] pos (10.20, 7.55, 0.34) size (5.89, 4.76, 5.37) LeafyGrass 4f9c3e T0.00 collide=true
+  A_CrownSun [MeshPart] pos (10.15, 9.23, -1.41) size (3.32, 2.59, 3.09) LeafyGrass 78c05a T0.00 collide=true
+  A_Roots [MeshPart] pos (9.88, 0.53, 0.05) size (4.27, 1.05, 3.55) Wood 8a5a2b T0.00 collide=true
+  A_Trunk [MeshPart] pos (9.59, 3.69, -0.18) size (3.60, 7.31, 2.19) Wood 5b4230 T0.00 collide=true
+  B_CanopyBlue [MeshPart] pos (-0.00, 7.30, 0.05) size (4.36, 6.09, 4.24) LeafyGrass 3f7f57 T0.00 collide=true
+  B_CanopyDark [MeshPart] pos (0.09, 7.38, 0.10) size (5.62, 10.94, 5.52) LeafyGrass 2f6b2c T0.00 collide=true
+  B_Trunk [MeshPart] pos (0.00, 4.85, 0.00) size (1.99, 9.71, 2.30) Wood 5b4230 T0.00 collide=true
+  C_CrownBody [MeshPart] pos (-9.38, 4.79, 0.05) size (2.44, 1.90, 2.40) LeafyGrass 4f9c3e T0.00 collide=true
+  C_CrownSun [MeshPart] pos (-9.21, 5.15, -0.67) size (1.58, 1.40, 1.58) LeafyGrass 78c05a T0.00 collide=true
+  C_Fruit [MeshPart] pos (-9.38, 5.01, 0.04) size (2.73, 1.97, 2.44) SmoothPlastic d9443c T0.00 collide=true
+  C_Trunk [MeshPart] pos (-9.42, 2.29, 0.00) size (1.85, 4.58, 1.40) Wood 8a5a2b T0.00 collide=true

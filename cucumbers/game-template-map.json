@@ -1,0 +1,76 @@
+{
+  "_note": "Maps the 57 new cucumber models onto the 59 template names ServerScriptService.CucumberSpawner asks for in ServerStorage.Assets.BreakableModels. The spawner builds its lookup as Template = '<Zone> <Name>' from its RAW pools, so the grass biome's templates carry a 'Spawn ' prefix and three slots are served by a reused model.",
+
+  "_quirks": {
+    "Desert Desert Palm": "The spawner's RAW entry for the palm is {\"Desert Palm\", 2}, and it builds Template = zone .. ' ' .. name, so it asks for 'Desert Desert Palm'. The folder only ever had 'Desert Palm', so the palm has NEVER spawned - CucumberSpawner's own comment at line ~82 records that this once wedged DayNightCycle at PreparingDay until a missing-template guard was added. Providing both names fixes it with no code change.",
+    "Desert Sliced Cucumber": "Desert's pool has BOTH 'Sun-Dried Slice' and a plain 'Sliced Cucumber'. The new set only has a desert sun-dried slice, so the plain one is served by the grass SlicedCucumber - which is what the name says it is.",
+    "Cucumber Tree": "The spawner's generic TYPES pool (used by Toyland and Neon, which have no hand-modelled set) asks for a bare 'Cucumber Tree'. Served by the grass CucumberTree."
+  },
+
+  "map": {
+    "Cucumber":                  ["Spawn Cucumber"],
+    "SlicedCucumber":            ["Spawn Sliced Cucumber", "Desert Sliced Cucumber"],
+    "SlicedCucumberStack":       ["Spawn Slice Stack"],
+    "VinedCucumber":             ["Spawn Vined Cucumber"],
+    "FloweredCucumber":          ["Spawn Flowered Cucumber"],
+    "CucumberTree":              ["Spawn Cucumber Tree", "Cucumber Tree"],
+
+    "DesertSunDriedSlice":       ["Desert Sun-Dried Slice"],
+    "DesertPricklyCucumber":     ["Desert Prickly Cucumber"],
+    "DesertSunBakedCucumber":    ["Desert Sun-Baked Cucumber"],
+    "DesertWrappedCucumber":     ["Desert Wrapped Cucumber"],
+    "DesertCactusCucumber":      ["Desert Cactus Cucumber"],
+    "DesertPalm":                ["Desert Desert Palm", "Desert Palm"],
+    "DesertSandstoneTree":       ["Desert Sandstone Tree"],
+
+    "SamuraiSlicedCucumber":     ["Samurai Sliced Cucumber"],
+    "SamuraiKatanaCucumber":     ["Samurai Katana Cucumber"],
+    "SamuraiBambooCucumber":     ["Samurai Bamboo Cucumber"],
+    "SamuraiLanternCucumber":    ["Samurai Lantern Cucumber"],
+    "SamuraiBambooGrove":        ["Samurai Bamboo Grove"],
+    "SamuraiToriiGate":          ["Samurai Torii Gate"],
+    "SamuraiSakuraTree":         ["Samurai Sakura Tree"],
+
+    "FarmCucumberBasket":        ["Farm Cucumber Basket"],
+    "FarmMuddyCucumber":         ["Farm Muddy Cucumber"],
+    "FarmCrateCucumber":         ["Farm Crate Cucumber"],
+    "FarmWindmillPlant":         ["Farm Windmill Plant"],
+    "FarmHayBale":               ["Farm Hay Bale"],
+    "FarmCucumberTree":          ["Farm Cucumber Tree"],
+
+    "SnowFrozenSlice":           ["Snow Frozen Slice"],
+    "SnowSnowcapCucumber":       ["Snow Snowcap Cucumber"],
+    "SnowSnowballSlice":         ["Snow Snowball Slice"],
+    "SnowCrystalCucumber":       ["Snow Crystal Cucumber"],
+    "SnowFrozenCucumber":        ["Snow Frozen Cucumber"],
+    "SnowSnowTree":              ["Snow Snow Tree"],
+    "SnowIcicleTree":            ["Snow Icicle Tree"],
+    "SnowFrozenTree":            ["Snow Frozen Tree"],
+
+    "UnderwaterBubbleSlice":     ["Underwater Bubble Slice"],
+    "UnderwaterSeaweedCucumber": ["Underwater Seaweed Cucumber"],
+    "UnderwaterShellSlice":      ["Underwater Shell Slice"],
+    "UnderwaterCoralCucumber":   ["Underwater Coral Cucumber"],
+    "UnderwaterPearlCucumber":   ["Underwater Pearl Cucumber"],
+    "UnderwaterKelpTree":        ["Underwater Kelp Tree"],
+    "UnderwaterBubbleTree":      ["Underwater Bubble Tree"],
+    "UnderwaterCoralTree":       ["Underwater Coral Tree"],
+
+    "VolcanoMoltenSlice":        ["Volcano Molten Slice"],
+    "VolcanoCharredCucumber":    ["Volcano Charred Cucumber"],
+    "VolcanoMoltenCucumber":     ["Volcano Molten Cucumber"],
+    "VolcanoFlameCucumber":      ["Volcano Flame Cucumber"],
+    "VolcanoObsidianTree":       ["Volcano Obsidian Tree"],
+    "VolcanoVolcanoCucumber":    ["Volcano Volcano Cucumber"],
+    "VolcanoMagmaTree":          ["Volcano Magma Tree"],
+
+    "NarmekMoonSlice":           ["Narmek Moon Slice"],
+    "NarmekMeteorCucumber":      ["Narmek Meteor Cucumber"],
+    "NarmekPlanetSlice":         ["Narmek Planet Slice"],
+    "NarmekAstronautCucumber":   ["Narmek Astronaut Cucumber"],
+    "NarmekNeonAlienCucumber":   ["Narmek Neon Alien Cucumber"],
+    "NarmekMoonTree":            ["Narmek Moon Tree"],
+    "NarmekAlienTree":           ["Narmek Alien Tree"],
+    "NarmekGalaxyTree":          ["Narmek Galaxy Tree"]
+  }
+}

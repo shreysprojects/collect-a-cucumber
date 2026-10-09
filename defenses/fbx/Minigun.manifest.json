@@ -1,0 +1,175 @@
+{
+ "collection": "Minigun",
+ "parts": [
+  {
+   "collection": "Minigun",
+   "name": "Minigun.BaseBolts",
+   "hex": "2f3136",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 160
+  },
+  {
+   "collection": "Minigun",
+   "name": "Minigun.BaseCollar",
+   "hex": "565962",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Minigun",
+   "name": "Minigun.BaseCorners",
+   "hex": "c8b276",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 176
+  },
+  {
+   "collection": "Minigun",
+   "name": "Minigun.BasePlate",
+   "hex": "45474d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 28
+  },
+  {
+   "collection": "Minigun",
+   "name": "Minigun.HeadAmmoBox",
+   "hex": "45474d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Minigun",
+   "name": "Minigun.HeadAmmoBracket",
+   "hex": "565962",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Minigun",
+   "name": "Minigun.HeadAmmoLid",
+   "hex": "c8b276",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Minigun",
+   "name": "Minigun.HeadBelt",
+   "hex": "c8b276",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 308
+  },
+  {
+   "collection": "Minigun",
+   "name": "Minigun.HeadHandle",
+   "hex": "565962",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 132
+  },
+  {
+   "collection": "Minigun",
+   "name": "Minigun.HeadPedestal",
+   "hex": "45474d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Minigun",
+   "name": "Minigun.HeadPivotDisc",
+   "hex": "c8b276",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Minigun",
+   "name": "Minigun.HeadPort",
+   "hex": "565962",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Minigun",
+   "name": "Minigun.HeadReceiver",
+   "hex": "45474d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Minigun",
+   "name": "Minigun.HeadYoke",
+   "hex": "565962",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Minigun",
+   "name": "Minigun.SpinBarrels",
+   "hex": "6a6e78",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 168
+  },
+  {
+   "collection": "Minigun",
+   "name": "Minigun.SpinBores",
+   "hex": "2f3136",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 120
+  },
+  {
+   "collection": "Minigun",
+   "name": "Minigun.SpinHousing",
+   "hex": "565962",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "Minigun",
+   "name": "Minigun.SpinMuzzleRing",
+   "hex": "c8b276",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  }
+ ],
+ "pivots": {
+  "YawPivot": [
+   0.0,
+   0.0,
+   1.7
+  ],
+  "BarrelAxis": [
+   0.45,
+   0.0,
+   4.1
+  ],
+  "MuzzleTip": [
+   0.45,
+   3.8,
+   4.1
+  ]
+ },
+ "states": {},
+ "notes": "Rig by name prefix: Base* is static, Head* yaws about the world Z axis through (0, 0) (YawPivot is the collar top at z 1.70), Spin* rolls about BarrelAxis - a line parallel to +Y through (x 0.45, z 4.10) - in the same direction as the barrels point. Built at zero yaw with the barrels level and pointing +Y. Muzzle flash at MuzzleTip (0.45, 3.80, 4.10); tracers tan / yellow. No Neon parts. Static footprint 6.84 x 6.84 (the octagon plate; the tan corner blocks stand 0.18 proud of its diagonal faces at radius 3.60). Total height 5.60 (top of the carry handle). Yaw sweep: the farthest Head*/Spin* point is a barrel-tip edge at (1.11, 3.80) = radius 3.96, so a full 360 deg spin stays inside the 8 x 8 tile; the ammo-lid corner sweeps radius 3.52. Departures from the brief, all for clearance or read: (1) the barrels end at y 3.80 (brief 4.30) and the muzzle ring sits at y 2.95..3.50 (brief 3.35..3.90) because the brief's lengths swing to radius 4.1-4.45, outside the tile; the barrels still stick 0.30 past the ring, and to keep the shortened gun fat the barrels are r 0.21 on a 0.52 ring with a r 0.80 muzzle ring (brief 0.19 / 0.5 / 0.78). (2) The ammo box bottom is z 1.98 (brief 1.75) so it clears the four collar bolt heads (top z 1.92) through the whole yaw. (3) The belt runs at y -1.10 (brief -0.95) so it passes behind the yoke's rear face (y -0.90) instead of through it; HeadPort covers where it enters the receiver. One extra part, HeadAmmoBracket (body mid), is the lug that hangs the ammo box off the yoke. Nothing dips below z = 0: the lowest geometry is the plate's bottom face; the corner blocks float 0.05 above the ground where they overhang the plate. Materials: charcoal bodies and tan accents SmoothPlastic; barrels, bolts and bores Metal.",
+ "tris": 1576,
+ "size_studs": [
+  6.84,
+  7.24,
+  5.6
+ ],
+ "min_z": 0.0
+}

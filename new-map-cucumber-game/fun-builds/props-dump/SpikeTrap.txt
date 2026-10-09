@@ -1,0 +1,14 @@
+=== Defences/SpikeTrap
+  @AssetId = 70844051699016
+  @Cost = 300
+  @Notes = Floor trap, 8 x 8 studs, x/y in [-4, 4], modelled EXTENDED (spikes up) so the render shows the danger. Three forms only: a dark plate, a RAISED hazard kerb ringing it, and nine large spikes in a black pit. The kerb is a real 0.45-stud-proud lip (top z = 0.90) rather than a flat decal, so the yellow/black warning is legible EDGE-ON at player eye height and not just from above; it is trivially steppable (a Roblox humanoid clears ~2 studs). Walkable surface inside the kerb is the pit pad at z = 0.52. Nothing dips below z = 0 in this pose. Spikes: 3 x 3 staggered, 1.8 pitch, heights falling off with distance from centre so the bed reads as a toothed mound, not a pincushion - tips run z 1.90 (outer) to 2.97 (centre), i.e. waist-to-chest on a 5-stud avatar. Each spike is a flared Danger-red socket (bottom 37% of its length) carrying a Steel-bright needle (top 63%); because a cone's silhouette 
+  @PropSet = defence
+  @State_Extended = 0
+  @State_Retracted = -2.63
+  @Tris = 458
+  BasePlate [MeshPart] pos (0.00, 0.22, 0.00) size (8.00, 0.45, 8.00) DiamondPlate 3b4350 T0.00 collide=true
+  DeckPit [MeshPart] pos (0.00, 0.47, 0.00) size (5.92, 0.10, 5.92) SmoothPlastic 2a2d33 T0.00 collide=true
+  HazardKerb [MeshPart] pos (-0.00, 0.64, -0.00) size (7.70, 0.52, 7.70) SmoothPlastic f2c13d T0.00 collide=true
+  HazardKerbDark [MeshPart] pos (-0.00, 0.64, -0.00) size (7.72, 0.54, 7.72) SmoothPlastic 2a2d33 T0.00 collide=true
+  SpikesBed [MeshPart] pos (-0.02, 0.92, 0.02) size (5.37, 0.93, 4.58) Metal d9443c T0.00 collide=true
+  SpikesTips [MeshPart] pos (-0.01, 1.98, 0.01) size (5.00, 1.97, 4.17) Metal d5dbe4 T0.00 collide=true

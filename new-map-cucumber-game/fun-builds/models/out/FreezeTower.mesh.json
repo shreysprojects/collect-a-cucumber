@@ -1,0 +1,214 @@
+{
+ "key": "FreezeTower",
+ "category": "Defences",
+ "parts_hash": "ca96bfd2fde0",
+ "pivots": {
+  "OrbCentre": [
+   0.0,
+   9.9,
+   0.0
+  ],
+  "Mist1": [
+   2.6304,
+   0.62,
+   -2.6304
+  ],
+  "Mist2": [
+   -2.6304,
+   0.62,
+   -2.6304
+  ],
+  "Mist3": [
+   -2.6304,
+   0.62,
+   2.6304
+  ],
+  "Mist4": [
+   2.6304,
+   0.62,
+   2.6304
+  ]
+ },
+ "attrs": {
+  "Cost": 3000000,
+  "PropSet": "defence2",
+  "Notes": "FreezeTower rebuilt 2026-09-24 (fun-builds/models/build_FreezeTower.py, primlib parts): crystalline frost spire. ONE moving part 'Orb' (Neon Ball d 2.2) centred on Pivot_OrbCentre (0, 9.90, 0); the server spins it about the vertical axis there. Everything else is static. Glow* = neon accents the DefenceFX client pulses; Pivot_Mist1..4 = frost-mist points on the foundation ledge."
+ },
+ "size_studs": [
+  7.8,
+  12.8,
+  7.8
+ ],
+ "objects": [
+  {
+   "name": "Base_1",
+   "color": "5f86b5",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Base_2",
+   "color": "dde8f4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 6
+  },
+  {
+   "name": "Base_3",
+   "color": "dfe7f1",
+   "material": "Limestone",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Base_4",
+   "color": "6f9ad0",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Glow_1",
+   "color": "8fe8ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 31
+  },
+  {
+   "name": "Base_5",
+   "color": "f7fbff",
+   "material": "Snow",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Base_6",
+   "color": "f7fbff",
+   "material": "Snow",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 4
+  },
+  {
+   "name": "Base_7",
+   "color": "cfefff",
+   "material": "Ice",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 12
+  },
+  {
+   "name": "Base_8",
+   "color": "6fc3ff",
+   "material": "Ice",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 8
+  },
+  {
+   "name": "Base_9",
+   "color": "cfefff",
+   "material": "Ice",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 8
+  },
+  {
+   "name": "Base_10",
+   "color": "9ed6ff",
+   "material": "Ice",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 8
+  },
+  {
+   "name": "Base_11",
+   "color": "3f6aa0",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 4
+  },
+  {
+   "name": "Base_12",
+   "color": "6fc3ff",
+   "material": "Glacier",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 9
+  },
+  {
+   "name": "Base_13",
+   "color": "cfefff",
+   "material": "Glacier",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 26
+  },
+  {
+   "name": "Orb",
+   "color": "aee6ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Base_14",
+   "color": "9ed6ff",
+   "material": "Ice",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 9
+  },
+  {
+   "name": "Base_15",
+   "color": "cfefff",
+   "material": "Glacier",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 9
+  }
+ ]
+}

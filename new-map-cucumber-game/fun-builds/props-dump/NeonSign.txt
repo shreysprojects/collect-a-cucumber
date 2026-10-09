@@ -1,0 +1,25 @@
+=== Fun/NeonSign
+  @AssetId = 77798887639908
+  @Cost = 600
+  @Notes = Three variants side by side along X, each built about its own origin and then offset (A x=+9.8, B x=+2.3, C x=-7.4), so a variant drops into a game by name prefix and lands at its own origin.  Footprints / heights: A_OpenSign 4.7 wide x 2.4 tall (the sign box itself is 4.7 x 1.9, z 0.5-2.4); B_ArrowSign 4.0 wide x 4.8 tall on a 1.1-wide hex foot; C_Marquee 8.0 wide x 6.25 tall on two poles 6.6 apart.  Whole line-up spans x -11.4 to +12.2 with 3.2 studs of air A-B and 3.7 B-C.  Nothing goes below z=0.
+A is a WALL sign: the two metal_dark struts at its back are the standoff channel it bolts to, and they run to the floor only so the prop can stand on its own for the render - delete A_Struts and bolt A_Hardware's two brackets to a wall if you are hanging it.  B's arrow points toward -x, i.e. to the RIGHT of a player facing the sign; mirror the whole variant in X to send them left.  C's stepp
+  @PropSet = plot
+  @Tris = 1804
+  @Variants = {"A":{"name":"OpenSign","x":9.8},"C":{"name":"Marquee","x":-7.4},"B":{"name":"ArrowSign","x":2.3}}
+  A_Border [MeshPart] pos (9.82, 1.45, -0.20) size (4.15, 1.48, 0.14) Neon 4dd2ff T0.00 collide=true
+  A_Hardware [MeshPart] pos (9.60, 1.15, 0.56) size (3.51, 1.94, 0.80) Metal 6c7789 T0.00 collide=true
+  A_Panel [MeshPart] pos (9.80, 1.45, 0.03) size (4.70, 1.90, 0.34) SmoothPlastic 23262c T0.00 collide=true
+  A_Struts [MeshPart] pos (9.80, 1.14, 0.56) size (3.16, 2.28, 0.36) Metal 3b4350 T0.00 collide=true
+  A_Text [MeshPart] pos (9.80, 1.45, -0.26) size (3.58, 0.85, 0.15) Neon ff4fa3 T0.00 collide=true
+  B_Arrow [MeshPart] pos (2.30, 2.51, -0.22) size (1.39, 0.92, 0.18) Neon ff8a3d T0.00 collide=true
+  B_Bulbs [MeshPart] pos (2.30, 3.19, -0.20) size (3.73, 2.92, 0.20) Neon ffe14d T0.00 collide=true
+  B_Gear [MeshPart] pos (1.97, 1.68, 0.35) size (0.38, 1.52, 0.49) Metal 3b4350 T0.00 collide=true
+  B_Panel [MeshPart] pos (2.30, 3.20, -0.00) size (4.00, 3.20, 0.26) SmoothPlastic 23262c T0.00 collide=true
+  B_Post [MeshPart] pos (2.30, 1.02, 0.16) size (1.08, 2.05, 1.08) Metal 6c7789 T0.00 collide=true
+  B_Text [MeshPart] pos (2.26, 3.75, -0.21) size (2.77, 1.38, 0.15) Neon 4dd2ff T0.00 collide=true
+  C_Bulbs [MeshPart] pos (-7.40, 3.94, -0.23) size (7.67, 1.72, 0.22) Neon ffe14d T0.00 collide=true
+  C_Crown [MeshPart] pos (-7.40, 5.15, 0.12) size (7.80, 2.20, 0.36) Metal 6c7789 T0.00 collide=true
+  C_Frame [MeshPart] pos (-7.40, 1.73, 0.25) size (7.52, 3.45, 0.82) Metal 6c7789 T0.00 collide=true
+  C_Panel [MeshPart] pos (-7.40, 3.95, 0.00) size (8.00, 2.00, 0.30) SmoothPlastic 23262c T0.00 collide=true
+  C_Rigging [MeshPart] pos (-7.16, 1.52, 0.44) size (7.13, 3.03, 0.57) Metal 3b4350 T0.00 collide=true
+  C_Text [MeshPart] pos (-7.40, 3.95, -0.28) size (6.82, 0.82, 0.16) Neon 9dff4d T0.00 collide=true

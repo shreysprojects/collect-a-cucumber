@@ -1,0 +1,48 @@
+{
+  "stage": "S4",
+  "date": "2026-09-22",
+  "session": "multiplayer_playtest, 2 clients (Player1 uid -1 owns Plot 5 with 6 dev-granted pets; Player2 uid -2 stands on Plot 5)",
+  "samplers": "tests/S4_roam_sampler_server.lua, tests/S4_roam_sampler_client.lua (30 s each, Heartbeat)",
+  "windows_server_time": {"server": [1790120162.83, 1790120192.83], "client1": [1790120171.72, 1790120201.72], "client2": [1790120179.28, 1790120209.28]},
+  "server": {
+    "frames": 1801,
+    "logical_samples": 10806,
+    "max_abs_GetLogicalPosition_minus_Sample_of_published_attributes": 0,
+    "segments_seen": 39,
+    "publish_lead_start_minus_first_seen_s": {"min": 0.2819, "max": 0.2852}
+  },
+  "segment_identity": {
+    "keys_compared": "PetId#RoamSeq for seq 15..17 of all 6 pets (the seqs every VM saw)",
+    "count": 18,
+    "canonical_string_len": 3068,
+    "hash_server": 1848143033,
+    "hash_client1": 1848143033,
+    "hash_client2": 1848143033,
+    "note": "From.X/Z, To.X/Z, Start, End, GroundY printed with %.17g: bit-identical on the server and both clients"
+  },
+  "client1": {
+    "frames": 1801, "samples": 10806, "walking": 4055, "idle": 6751,
+    "rendered_minus_sample_same_frame": {"median": 0, "p95": 0.1210, "p99": 0.1302, "max": 0.1463},
+    "rendered_minus_sample_best_of_this_or_previous_frame": {"median": 0, "p95": 0.00162, "p99": 0.00237, "max": 0.1192},
+    "max_frame_displacement_studs": 0.1478,
+    "max_speed_studs_per_s": 10.33,
+    "receive_lead_start_minus_first_seen_s": {"n": 32, "min": 0.2639, "max": 0.2848},
+    "server_stamp_arrival_delay_s": {"n": 21, "median": 0.0332, "max": 0.0357}
+  },
+  "client2": {
+    "frames": 1801, "samples": 10806, "walking": 4107, "idle": 6699,
+    "rendered_minus_sample_same_frame": {"median": 0, "p95": 0.1263, "p99": 0.1355, "max": 0.1560},
+    "rendered_minus_sample_best_of_this_or_previous_frame": {"median": 0, "p95": 0.00102, "p99": 0.00169, "max": 0.1147},
+    "max_frame_displacement_studs": 0.1577,
+    "max_speed_studs_per_s": 11.78,
+    "receive_lead_start_minus_first_seen_s": {"n": 33, "min": 0.2740, "max": 0.2944},
+    "server_stamp_arrival_delay_s": {"n": 13, "median": 0.0228, "max": 0.0262}
+  },
+  "solo_after_atomic_fix": {
+    "session": "solo on PetTest_140977250 (Plot 3, 51 builds, 6 roster pets), 8 s",
+    "samples": 2886,
+    "rendered_minus_sample_best": {"median": 0, "p99": 0.0114, "max": 0.1190},
+    "max_frame_displacement_studs": 0.175
+  },
+  "reading": "Same segments everywhere, every leg received 0.26-0.29 s before it starts (ROAM_LEAD 0.3), and each client renders PetMotion.Sample of that segment at its own server time (P99 < 0.003 studs; the same-frame column only shows the Heartbeat order of the sampler vs PetRoamClient, one frame of walking = at most 8 studs/s x 1/60 s = 0.13 studs). The largest per-frame move is 0.16 studs: no leg-start jump. max_speed above SPEED_MAX 8 is disp / Heartbeat dt when the two Heartbeat handlers swap order between frames, not a jump."
+}

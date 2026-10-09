@@ -1,0 +1,30 @@
+{
+  "Stage": "S0b",
+  "Note": "1 Hz client-VM samplers (eval_client_runtime, Heartbeat frame counter + Stats). Arrays are one value per second. The single ~450 ms hitch in each run is the start of capture_micro_profiler on that peer (it lines up with the capture start), not game code. Client Stats.DataReceiveKbps read 0 for every sample in Studio, so it is left out.",
+  "solo_raid_client1": {
+    "Scenario": "solo playtest, awesomeotheraccount (UserId 140977250) on key PetTest_140977250, Plot 5 (level 2, 51 builds, 2 cucumbers, 4 legacy pets); ZombieDev raid fired at dawn; sampler started about 4 s after the fire",
+    "RemoteEventsReceived": {"WindowSeconds": 45.6, "Total": 51, "PerSecond": 1.12, "JsonBytes": 2619,
+      "ByRemote": {"Remotes.CucumberIncome": {"Count": 44, "PerSecond": 0.96, "JsonBytes": 2192}, "Remotes.ZombieRaid": {"Count": 7, "PerSecond": 0.15, "JsonBytes": 427}}},
+    "HeartbeatsPerSecond": [61,60,60,61,61,60,61,60,61,61,61,60,61,61,63,61,61,61,60,62,60,36,61,61,61,60,61,60,61,61,60,60,61,61,60,61,61,60,60,61,61,60,61,61,60],
+    "MaxHeartbeatMs": [19,19.6,19.2,19.8,19.8,19.9,19,19,19,20.1,19.1,18.9,19.1,19.9,20.1,21.8,19.5,20,19.1,20,19,444.3,20.1,18.8,18.2,19.1,20,19.1,22.8,20.1,19,18.4,19.1,18.9,18.7,19.1,18.2,19,18,18.9,19,18.9,19.8,18.1,18.9],
+    "DataSendKbps": [1.15,1.04,1.69,9.91,10.23,4.43,4.48,6.93,11.07,6.46,5.50,5.69,8.68,6.96,6.35,6.63,6.99,9.81,7.57,3.33,1.77,1.17,2.32,1.23,1.04,0.98,0.99,1.02,317.93,57.01,12.29,3.11,1.50,1.08,1.03,1.07,1.00,1.15,1.07,1.03,1.03,1.04,1.09,1.11,1.08],
+    "DataSendKbpsNote": "the 317.9 / 57.0 spike at t 29-30 s follows the end of the client micro-profiler capture (the profiler dump leaving the peer); game traffic is 1-11 kbps",
+    "TotalMemoryMb": [2571,2571,2572,2570,2571,2571,2571,2570,2570,2564,2564,2565,2565,2621,2659,2702,2720,2728,2737,2747,2750,2761,2764,2764,2766,2768,2780,2780,2781,2781,2781,2784,2784,2784,2784,2784,2784,2784,2781,2781,2781,2781,2784,2784,2784],
+    "InstanceCount": [64722,64722,64731,64760,64766,64779,64770,64556,64565,64562,64560,64302,64324,65115,64607,64596,63826,63578,63568,63557,63286,63269,63258,63244,63235,63224,63213,63209,63201,63196,63191,63191,63191,63191,63191,63191,63191,63191,63191,63191,63191,63191,63193,63193,63193]
+  },
+  "mp2_raid_client1": {
+    "Scenario": "multiplayer_playtest 2 clients (Player1 uid -1 on PetTest_-1, Plot 6; Player2 uid -2 on PetTest_-2, Plot 2), both plots seeded with the fixture's 2 cucumbers, no builds; ZombieDev raid at dawn; 12 zombies; the zombies stole all 4 cucumbers (ZombiesWin for both)",
+    "RemoteEventsReceived": {"WindowSeconds": 50.6, "Total": 14, "PerSecond": 0.28, "JsonBytes": 1006,
+      "ByRemote": {"Remotes.CucumberIncome": {"Count": 7, "PerSecond": 0.14, "JsonBytes": 598}, "Remotes.ZombieRaid": {"Count": 7, "PerSecond": 0.14, "JsonBytes": 408}},
+      "Why CucumberIncome is low": "it fires only while some placed cucumber pays; the 12 zombies grabbed all 4 cucumbers within about 7 s of setting down, so income stopped for the rest of the window"},
+    "HeartbeatsPerSecond": [61,60,61,60,60,61,61,60,60,61,60,61,61,61,60,61,61,61,34,62,61,61,61,61,60,61,60,61,61,60,60,61,60,61,60,60,61,61,60,61,60,61,60,61,61,61,60,60,61,61],
+    "MaxHeartbeatMs": [18.9,19.9,19,19.4,18.9,20,19.4,18.3,19.2,19.3,18.9,18.4,18.3,19.3,19.1,19,18.6,18.8,470,20.5,19.3,19.6,19.8,21.4,18.1,19,18.9,19.6,19.9,18.3,19.8,18.8,21.6,22.4,21.1,18.9,18.1,20.5,19.1,18.7,19,18.8,18.9,18.2,18.8,19.8,18.9,19.1,19.8,19.7],
+    "TotalMemoryMb": [1911,1911,1915,1915,1914,1914,1914,1914,1913,1914,1914,1914,1914,1914,1914,1914,1914,1914,1990,2013,2013,2013,2013,2025,2026,2026,2026,2027,2027,2027,2027,2027,2027,2027,2026,2026,2026,2026,2026,2025,2025,2025,2025,2025,2025,2025,2025,2025,2025,2025],
+    "InstanceCount": [65570,65587,65605,65599,65599,65582,65569,65547,65546,65543,65543,65539,65538,65537,65537,65537,65537,65537,65534,65534,65534,65534,65262,65261,65259,65259,64993,64951,63722,63705,63705,63705,63668,62400,62388,62384,62379,62378,62377,62377,62379,62379,62379,62378,62378,62378,62378,62378,62378,62378]
+  },
+  "mp2_raid_client2": {
+    "RemoteEventsReceived": {"WindowSeconds": 45.8, "Total": 8, "PerSecond": 0.17, "JsonBytes": 517,
+      "ByRemote": {"Remotes.ZombieRaid": {"Count": 5, "PerSecond": 0.11, "JsonBytes": 315}, "Remotes.CucumberIncome": {"Count": 3, "PerSecond": 0.07, "JsonBytes": 202}}},
+    "Sampler": "not run on client-2 (remote counter only)"
+  }
+}

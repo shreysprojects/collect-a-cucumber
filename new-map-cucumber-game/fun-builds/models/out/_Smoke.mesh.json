@@ -1,0 +1,82 @@
+{
+ "key": "_Smoke",
+ "category": "Test",
+ "parts_hash": "44e7203d7119",
+ "pivots": {
+  "SeatTop": [
+   0.0,
+   2.7,
+   0.0
+  ]
+ },
+ "attrs": {
+  "Cost": 1
+ },
+ "size_studs": [
+  8.0,
+  6.4,
+  3.1
+ ],
+ "objects": [
+  {
+   "name": "Seat_m",
+   "color": "a0522d",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 2
+  },
+  {
+   "name": "Leg0_m",
+   "color": "5a3a22",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 4
+  },
+  {
+   "name": "Ramp_m",
+   "color": "44aa55",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Corner_m",
+   "color": "4455aa",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Knob_m",
+   "color": "ffcc00",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Cushion_m",
+   "color": "d04040",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  }
+ ]
+}

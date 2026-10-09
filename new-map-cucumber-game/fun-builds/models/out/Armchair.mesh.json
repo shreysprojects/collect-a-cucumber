@@ -1,0 +1,124 @@
+{
+ "key": "Armchair",
+ "category": "Home",
+ "parts_hash": "0a2dacef899f",
+ "pivots": {
+  "Seat1": [
+   0.0,
+   1.912,
+   -0.1
+  ]
+ },
+ "attrs": {
+  "Cost": 400,
+  "Seats": 1,
+  "Notes": "Single rolled-arm chair matching the Sofa (primlib parts). Seat Pivot_Seat1 faces -Z; Cushion1 squashes while it is taken. Built by fun-builds/models/build_Armchair.py + couchlib.py."
+ },
+ "size_studs": [
+  4.3,
+  3.73,
+  3.624
+ ],
+ "objects": [
+  {
+   "name": "FootTip1_m",
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 4
+  },
+  {
+   "name": "Foot1_m",
+   "color": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 4
+  },
+  {
+   "name": "Plinth_m",
+   "color": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "Base_m",
+   "color": "3264b8",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 9
+  },
+  {
+   "name": "BasePiping_m",
+   "color": "f2f0ea",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 27
+  },
+  {
+   "name": "ArmCapL_m",
+   "color": "3264b8",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 4
+  },
+  {
+   "name": "CushBase1_m",
+   "color": "6a9ef0",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 3
+  },
+  {
+   "name": "Cushion1",
+   "color": "6a9ef0",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "BackCushion1",
+   "color": "6a9ef0",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true,
+   "parts": 1
+  },
+  {
+   "name": "ThrowTop_m",
+   "color": "d9443c",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true,
+   "parts": 4
+  }
+ ]
+}

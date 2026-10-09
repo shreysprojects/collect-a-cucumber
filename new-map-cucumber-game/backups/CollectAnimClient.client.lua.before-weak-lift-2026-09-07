@@ -1,0 +1,542 @@
+--[[
+	CollectAnimClient  (LocalScript, StarterPlayerScripts)
+	Plays the cucumber-collect choreography that CucumberCarry (server) schedules
+	through Remotes.CollectAnim (server -> ALL clients):
+
+	  {Kind = "Collect", Player, Holder, Struggle = seconds}
+	      our own character: walk up to the cucumber (APPROACH), loop the
+	      CucumberStruggle clip for Struggle seconds (0 = none), then play the
+	      CucumberPickUp clip; the server swaps the field cucumber for the shoulder copy
+	      GRAB_T into the pick-up. Player input is frozen meanwhile (PlayerModule
+	      controls). A stud-sized "PULLING..." bar sits over the cucumber while tugging
+	      (no numbers: the strength requirement is hidden, user 2026-09-06).
+	      every client: the cucumber rocks with each tug and rides the hands up to the
+	      chest during the lift (local pivots only; the server never moves it).
+	  {Kind = "Tug", Player, Holder, Duration}             too heavy: one short tug
+	  {Kind = "Cancel", Player, Holder}                    stop and restore everything
+	  {Kind = "Fall", Player, Landing}                     heavy carry stumble: our own
+	      character freezes and plays CucumberFall (FALL_LENGTH); every client hears the
+	      thud at FALL_PLANT_T
+	  {Kind = "FallDrop", Player, Holder, From}            FALL_DROP_T in: the server has
+	      re-spawned the load as a field cucumber at the landing spot; every client
+	      tumbles it there from the shoulder (From) over FALL_FLIGHT, then it rests
+
+	HEAVY CARRY SLOWDOWN (2026-09-06): while the server flags CarryingCucumberHeavy on us
+	(a struggle-band pick-up) the walk runs at HEAVY_SPEED_MULT of the base speed. The
+	base is the StrengthWalkSpeed attribute StrengthProgressionServer stamps (it also
+	writes Humanoid.WalkSpeed itself, so any WalkSpeed change that is not ours is taken
+	as a new base and re-scaled). Steady (easy) carries are never slowed.
+
+	Animations live in ReplicatedStorage.Assets.Animations as Animation instances
+	(CucumberPickUp, CucumberStruggle, CucumberFall). While an AnimationId is still empty
+	(not published yet) Studio falls back to the KeyframeSequence stored next to it
+	(<Name>Sequence) through KeyframeSequenceProvider:RegisterKeyframeSequence, which
+	only works in Studio. Timeline constants: ReplicatedStorage.Modules.CucumberStrength.
+]]
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
+local KeyframeSequenceProvider = game:GetService("KeyframeSequenceProvider")
+
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+local Modules = ReplicatedStorage:WaitForChild("Modules")
+local CucumberStrength = require(Modules:WaitForChild("CucumberStrength"))
+local SoundController = require(Modules:WaitForChild("SoundController"))
+local Remotes = ReplicatedStorage:WaitForChild("Remotes")
+local AnimRemote = Remotes:WaitForChild("CollectAnim")
+local AnimFolder = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Animations")
+
+local APPROACH = CucumberStrength.APPROACH
+local GRAB_T = CucumberStrength.GRAB_T
+local PICKUP_LENGTH = CucumberStrength.PICKUP_LENGTH
+local LOOP = CucumberStrength.STRUGGLE_LOOP
+local FALL_LENGTH = CucumberStrength.FALL_LENGTH
+local FALL_FLIGHT = CucumberStrength.FALL_FLIGHT
+local HEAVY_SPEED_MULT = CucumberStrength.HEAVY_SPEED_MULT
+local FALL_PLANT_T = 0.733 -- seconds into CucumberFall: face meets floor (clip key)
+local RIDE_START = 0.7 -- seconds into the pick-up clip: the grip closes, the cucumber starts riding the hands
+local PULL_PEAK = 0.35 -- where in the struggle loop the pull-back peaks (clip key at 0.333 s)
+local FONT = Enum.Font.FredokaOne
+
+--..Input freeze + heavy-carry slowdown..--
+--.. With the PlayerModule present its controls are disabled for the whole choreography
+--.. (Humanoid:MoveTo keeps working). This place's PlayerScripts has NO PlayerModule
+--.. (checked 2026-09-06), so the fallback zeroes WalkSpeed / jump instead -- and only
+--.. AFTER the walk-up, because a zero WalkSpeed would stop MoveTo as well.
+local controls
+task.spawn(function()
+	local ok, pm = pcall(function()
+		return require(player:WaitForChild("PlayerScripts"):WaitForChild("PlayerModule", 10))
+	end)
+	if ok and type(pm) == "table" and pm.GetControls then
+		local ok2, c = pcall(pm.GetControls, pm)
+		if ok2 then controls = c end
+	end
+end)
+
+local frozen = false -- choreography running (fallback mode: WalkSpeed 0, no jump)
+local savedJump -- {JumpPower, JumpHeight} while frozen
+local ourSpeed -- the WalkSpeed we wrote last (nil = the server's value stands)
+local seenBase -- last WalkSpeed that was not ours
+
+local function humanoidOf()
+	local char = player.Character
+	return char and char:FindFirstChildOfClass("Humanoid")
+end
+
+local function heavy()
+	return player:GetAttribute("CarryingCucumberHeavy") == true
+end
+
+local function baseWalkSpeed(hum)
+	local v = tonumber(player:GetAttribute("StrengthWalkSpeed"))
+	if v and v > 0 then return v end
+	if seenBase and seenBase > 0 then return seenBase end
+	return hum.WalkSpeed > 0 and hum.WalkSpeed or 16
+end
+
+--.. what WE want the WalkSpeed to be, or nil when the server's value should stand
+local function desiredSpeed(hum)
+	if frozen and not controls then return 0 end
+	if heavy() then return baseWalkSpeed(hum) * HEAVY_SPEED_MULT end
+	return nil
+end
+
+local function applySpeed()
+	local hum = humanoidOf()
+	if not hum then return end
+	if frozen and not controls then
+		if not savedJump then savedJump = {JumpPower = hum.JumpPower, JumpHeight = hum.JumpHeight} end
+		hum.JumpPower = 0
+		hum.JumpHeight = 0
+	elseif savedJump then
+		hum.JumpPower = savedJump.JumpPower
+		hum.JumpHeight = savedJump.JumpHeight
+		savedJump = nil
+	end
+	local target = desiredSpeed(hum)
+	if target == nil then
+		if ourSpeed ~= nil then
+			ourSpeed = nil
+			hum.WalkSpeed = baseWalkSpeed(hum)
+		end
+		return
+	end
+	ourSpeed = target
+	if math.abs(hum.WalkSpeed - target) > 1e-3 then hum.WalkSpeed = target end
+end
+
+local function watchHumanoid(char)
+	local hum = char:WaitForChild("Humanoid", 10)
+	if not hum then return end
+	hum:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
+		local v = hum.WalkSpeed
+		if ourSpeed ~= nil and math.abs(v - ourSpeed) < 1e-3 then return end
+		--.. somebody else (StrengthProgressionServer) set a new base: re-scale it
+		seenBase = v
+		if desiredSpeed(hum) ~= nil then applySpeed() end
+	end)
+end
+if player.Character then task.spawn(watchHumanoid, player.Character) end
+player.CharacterAdded:Connect(function(char)
+	frozen = false
+	savedJump = nil
+	ourSpeed = nil
+	watchHumanoid(char)
+	task.defer(applySpeed)
+end)
+player:GetAttributeChangedSignal("CarryingCucumberHeavy"):Connect(applySpeed)
+player:GetAttributeChangedSignal("StrengthWalkSpeed"):Connect(applySpeed)
+
+local function freezeInput()
+	if controls then controls:Disable() end
+end
+local function freezeBody(on)
+	frozen = on
+	if not on and controls then controls:Enable() end
+	applySpeed()
+end
+
+--..Animations..--
+local fallbackAnims = {}
+local function animationFor(name)
+	local anim = AnimFolder:FindFirstChild(name)
+	if not (anim and anim:IsA("Animation")) then return nil end
+	if anim.AnimationId ~= "" then return anim end
+	if fallbackAnims[name] then return fallbackAnims[name] end
+	if not RunService:IsStudio() then return nil end
+	--.. not published yet: Studio can register the KeyframeSequence kept next to it
+	local kfs = AnimFolder:FindFirstChild(name .. "Sequence")
+	if not kfs then return nil end
+	local ok, id = pcall(KeyframeSequenceProvider.RegisterKeyframeSequence, KeyframeSequenceProvider, kfs)
+	if not ok or not id then
+		warn("[CollectAnim] " .. name .. " has no AnimationId and RegisterKeyframeSequence failed: " .. tostring(id))
+		return nil
+	end
+	local temp = Instance.new("Animation")
+	temp.Name = name
+	temp.AnimationId = id
+	fallbackAnims[name] = temp
+	return temp
+end
+
+local tracks = {} -- [character] = {[name] = AnimationTrack}
+local function trackFor(char, name)
+	local hum = char:FindFirstChildOfClass("Humanoid")
+	if not hum then return nil end
+	local animator = hum:FindFirstChildOfClass("Animator") or hum:WaitForChild("Animator", 3)
+	if not animator then return nil end
+	local perChar = tracks[char]
+	if not perChar then
+		perChar = {}
+		tracks[char] = perChar
+	end
+	if perChar[name] then return perChar[name] end
+	local anim = animationFor(name)
+	if not anim then return nil end
+	local ok, track = pcall(animator.LoadAnimation, animator, anim)
+	if not ok then
+		warn("[CollectAnim] LoadAnimation " .. name .. ": " .. tostring(track))
+		return nil
+	end
+	track.Priority = Enum.AnimationPriority.Action
+	track.Looped = (name == "CucumberStruggle")
+	perChar[name] = track
+	return track
+end
+player.CharacterRemoving:Connect(function(char)
+	tracks[char] = nil
+end)
+
+--..Holder helpers..--
+local function rootOf(holder)
+	if holder:IsA("BasePart") then return holder end
+	return holder.PrimaryPart or holder:FindFirstChildWhichIsA("BasePart", true)
+end
+
+local function boundsOf(holder)
+	if holder:IsA("Model") then
+		local ok, cf, size = pcall(holder.GetBoundingBox, holder)
+		if ok then return cf, size end
+	end
+	local part = rootOf(holder)
+	if part then return part.CFrame, part.Size end
+	return holder:GetPivot(), Vector3.new(2, 2, 2)
+end
+
+local function handsMidpoint(char)
+	local l = char and char:FindFirstChild("LeftHand")
+	local r = char and char:FindFirstChild("RightHand")
+	if l and r then return (l.Position + r.Position) * 0.5 end
+	local root = char and char:FindFirstChild("HumanoidRootPart")
+	return root and (root.Position + root.CFrame.LookVector * 1.5 - Vector3.new(0, 1, 0)) or nil
+end
+
+--..Cucumber visuals (every client): rock with each tug, then ride the hands up..--
+local Visual = {} -- [holder] = state
+
+local function stopVisual(holder, restore)
+	local st = Visual[holder]
+	if not st then return end
+	Visual[holder] = nil
+	if st.Conn then st.Conn:Disconnect() end
+	if restore ~= false and holder.Parent then pcall(holder.PivotTo, holder, st.Base) end
+end
+
+local function startVisual(holder, who, struggle, doPickup)
+	stopVisual(holder)
+	local base = holder:GetPivot()
+	local st = {Base = base, T0 = os.clock()}
+	Visual[holder] = st
+	st.Conn = RunService.Heartbeat:Connect(function()
+		if not holder.Parent then
+			stopVisual(holder, false)
+			return
+		end
+		local t = os.clock() - st.T0 - APPROACH
+		if t < 0 then return end
+		local char = who.Character
+		if t < struggle then
+			--.. tug: tip toward the puller, lift a touch, tremble at the peak
+			local phase = (t % LOOP) / LOOP
+			local pull = phase < 0.75 and math.sin(math.pi * phase / 0.75) or 0
+			local axis = Vector3.xAxis
+			local root = char and char:FindFirstChild("HumanoidRootPart")
+			if root then
+				local dir = Vector3.new(root.Position.X - base.Position.X, 0, root.Position.Z - base.Position.Z)
+				if dir.Magnitude > 0.05 then axis = Vector3.yAxis:Cross(dir.Unit) end
+			end
+			local angle = math.rad((8 + math.sin(t * 55) * 1.5) * pull)
+			holder:PivotTo(CFrame.new(base.Position + Vector3.new(0, 0.15 * pull, 0)) * CFrame.fromAxisAngle(axis, angle) * base.Rotation)
+			st.Shaken = true
+			local loopIndex = math.floor(t / LOOP)
+			if phase >= PULL_PEAK and st.PulledLoop ~= loopIndex then
+				st.PulledLoop = loopIndex
+				pcall(SoundController.PlayFXAt, "Dirt Dig", base.Position, {Volume = 0.25, MaxLife = 0.5})
+			end
+			return
+		end
+		if not doPickup then
+			stopVisual(holder)
+			return
+		end
+		local tp = t - struggle -- time into the pick-up clip
+		if tp < RIDE_START then
+			if st.Shaken then
+				st.Shaken = false
+				holder:PivotTo(base)
+			end
+			return
+		end
+		if not st.Whooshed then
+			st.Whooshed = true
+			pcall(SoundController.PlayFXAt, "Whoosh", base.Position, {Volume = 0.35})
+		end
+		local mid = handsMidpoint(char)
+		if mid then
+			local alpha = math.clamp((tp - RIDE_START) / (GRAB_T - RIDE_START), 0, 1)
+			alpha = alpha * alpha * (3 - 2 * alpha)
+			holder:PivotTo(base:Lerp(CFrame.new(mid) * base.Rotation, alpha))
+		end
+		--.. the server swaps it for the shoulder copy at GRAB_T; if that never came, let go
+		if tp > PICKUP_LENGTH + 0.5 then stopVisual(holder) end
+	end)
+end
+
+--.. Stumble drop (every client): the freshly re-spawned field cucumber tumbles from the
+--.. shoulder (`from`) to its resting spot in a low arc with a spin, then settles
+local function startTumble(holder, from)
+	stopVisual(holder)
+	local base = holder:GetPivot()
+	local st = {Base = base, T0 = os.clock()}
+	Visual[holder] = st
+	local travel = Vector3.new(base.Position.X - from.X, 0, base.Position.Z - from.Z)
+	local axis = travel.Magnitude > 0.05 and Vector3.yAxis:Cross(travel.Unit) or Vector3.xAxis
+	holder:PivotTo(CFrame.new(from) * base.Rotation)
+	st.Conn = RunService.Heartbeat:Connect(function()
+		if not holder.Parent then
+			stopVisual(holder, false)
+			return
+		end
+		local a = (os.clock() - st.T0) / FALL_FLIGHT
+		if a >= 1 then
+			stopVisual(holder) -- back to the server's resting pose
+			pcall(SoundController.PlayFXAt, "Dirt Dig", base.Position, {Volume = 0.45, MaxLife = 0.6})
+			return
+		end
+		local pos = from:Lerp(base.Position, a) + Vector3.new(0, math.sin(a * math.pi) * 1.1, 0)
+		holder:PivotTo(CFrame.new(pos) * CFrame.fromAxisAngle(axis, a * math.pi * 1.5) * base.Rotation)
+	end)
+end
+
+--..Struggle bar (own character only), sized in studs..--
+local function stroke(label, thickness)
+	local s = Instance.new("UIStroke")
+	s.Thickness = thickness
+	s.Color = Color3.fromRGB(20, 40, 15)
+	s.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
+	s.Parent = label
+end
+
+local function showBar(s, holder, seconds)
+	local host = rootOf(holder)
+	if not host then return end
+	local _, size = boundsOf(holder)
+	local gui = Instance.new("BillboardGui")
+	gui.Name = "StruggleBar"
+	gui.Size = UDim2.new(4.4, 0, 1.0, 0)
+	gui.StudsOffsetWorldSpace = Vector3.new(0, size.Y * 0.5 + 1.6, 0)
+	gui.AlwaysOnTop = true
+	gui.ResetOnSpawn = false
+	gui.Adornee = host
+	local bg = Instance.new("Frame")
+	bg.Size = UDim2.fromScale(1, 1)
+	bg.BackgroundColor3 = Color3.fromRGB(25, 25, 30)
+	bg.BackgroundTransparency = 0.25
+	bg.Parent = gui
+	local c = Instance.new("UICorner")
+	c.CornerRadius = UDim.new(0.25, 0)
+	c.Parent = bg
+	local label = Instance.new("TextLabel")
+	label.BackgroundTransparency = 1
+	label.Position = UDim2.fromScale(0.04, 0.06)
+	label.Size = UDim2.fromScale(0.92, 0.5)
+	label.Font = FONT
+	label.TextScaled = true
+	label.TextColor3 = Color3.fromRGB(255, 226, 120)
+	label.Text = "PULLING..." -- no number: the requirement stays hidden
+	label.Parent = bg
+	stroke(label, 1.5)
+	local trackBg = Instance.new("Frame")
+	trackBg.Position = UDim2.fromScale(0.06, 0.64)
+	trackBg.Size = UDim2.fromScale(0.88, 0.24)
+	trackBg.BackgroundColor3 = Color3.fromRGB(60, 60, 70)
+	trackBg.BorderSizePixel = 0
+	trackBg.Parent = bg
+	local tc = Instance.new("UICorner")
+	tc.CornerRadius = UDim.new(0.5, 0)
+	tc.Parent = trackBg
+	local fill = Instance.new("Frame")
+	fill.Size = UDim2.fromScale(0, 1)
+	fill.BackgroundColor3 = Color3.fromRGB(120, 230, 100)
+	fill.BorderSizePixel = 0
+	fill.Parent = trackBg
+	local fc = Instance.new("UICorner")
+	fc.CornerRadius = UDim.new(0.5, 0)
+	fc.Parent = fill
+	gui.Parent = playerGui
+	TweenService:Create(fill, TweenInfo.new(seconds, Enum.EasingStyle.Linear), {Size = UDim2.fromScale(1, 1)}):Play()
+	s.Bar = gui
+end
+
+--..Own character choreography..--
+local session
+
+local function finish(s, cancelled)
+	if s.Done then return end
+	s.Done = true
+	if session == s then session = nil end
+	if s.DiedConn then s.DiedConn:Disconnect() end
+	if s.Struggle and s.Struggle.IsPlaying then s.Struggle:Stop(0.15) end
+	if cancelled and s.Clip and s.Clip.IsPlaying then s.Clip:Stop(0.15) end
+	if s.Bar then
+		s.Bar:Destroy()
+		s.Bar = nil
+	end
+	freezeBody(false)
+end
+
+local function runOwn(payload, struggle)
+	local char = player.Character
+	local hum = char and char:FindFirstChildOfClass("Humanoid")
+	local root = char and char:FindFirstChild("HumanoidRootPart")
+	local holder = payload.Holder
+	if not (hum and root and holder and holder.Parent) then return end
+	if session then finish(session, true) end
+	local s = {Holder = holder, Char = char}
+	session = s
+	freezeInput()
+	s.DiedConn = hum.Died:Connect(function()
+		finish(s, true)
+	end)
+	task.spawn(function()
+		--.. walk up to the cucumber and face it
+		local cf, size = boundsOf(holder)
+		local center = cf.Position
+		local flat = Vector3.new(root.Position.X - center.X, 0, root.Position.Z - center.Z)
+		local dir = flat.Magnitude > 0.05 and flat.Unit or -Vector3.new(root.CFrame.LookVector.X, 0, root.CFrame.LookVector.Z).Unit
+		local standDist = math.clamp(math.max(size.X, size.Z) * 0.5 * 0.55 + 1.3, 1.6, 4.5)
+		local stand = Vector3.new(center.X, root.Position.Y, center.Z) + dir * standDist
+		local t0 = os.clock()
+		--.. Humanoid:Move per frame (what the control scripts do) -- MoveTo crawled on the
+		--.. physique-scaled characters here (3.6 studs in 0.6 s at WalkSpeed 116); the move
+		--.. vector shrinks over the last 3 studs so a fast character does not overshoot
+		local deadline = t0 + APPROACH - 0.08
+		while os.clock() < deadline and not s.Done do
+			local flat = Vector3.new(stand.X - root.Position.X, 0, stand.Z - root.Position.Z)
+			local dist = flat.Magnitude
+			if dist < 0.5 then break end
+			hum:Move(flat.Unit * math.clamp(dist / 3, 0.2, 1), false)
+			RunService.Heartbeat:Wait()
+		end
+		hum:Move(Vector3.zero, false)
+		if s.Done then return end
+		local look = Vector3.new(center.X, root.Position.Y, center.Z)
+		if (look - root.Position).Magnitude > 0.05 then
+			root.CFrame = CFrame.lookAt(root.Position, look)
+		end
+		freezeBody(true)
+		local remaining = APPROACH - (os.clock() - t0)
+		if remaining > 0 then task.wait(remaining) end
+		if s.Done then return end
+		--.. tug
+		if struggle > 0 then
+			s.Struggle = trackFor(char, "CucumberStruggle")
+			if s.Struggle then s.Struggle:Play(0.15) end
+			showBar(s, holder, struggle)
+			local tEnd = os.clock() + struggle
+			while os.clock() < tEnd and not s.Done do
+				RunService.Heartbeat:Wait()
+			end
+			if s.Struggle then s.Struggle:Stop(0.15) end
+			if s.Bar then
+				s.Bar:Destroy()
+				s.Bar = nil
+			end
+			if s.Done then return end
+		end
+		if payload.Kind == "Tug" then
+			finish(s)
+			return
+		end
+		--.. bend, grip, lift, stand up (the server swaps the cucumber GRAB_T in)
+		s.Clip = trackFor(char, "CucumberPickUp")
+		if s.Clip then s.Clip:Play(0.1) end
+		local tEnd = os.clock() + PICKUP_LENGTH
+		while os.clock() < tEnd and not s.Done do
+			RunService.Heartbeat:Wait()
+		end
+		finish(s)
+	end)
+end
+
+--.. heavy-carry stumble: freeze on the spot and fall (the server drops the load FALL_DROP_T in)
+local function runFall()
+	local char = player.Character
+	local hum = char and char:FindFirstChildOfClass("Humanoid")
+	if not hum then return end
+	if session then finish(session, true) end
+	local s = {Fall = true, Char = char}
+	session = s
+	freezeInput()
+	freezeBody(true)
+	hum:Move(Vector3.zero, false)
+	s.DiedConn = hum.Died:Connect(function()
+		finish(s, true)
+	end)
+	task.spawn(function()
+		s.Clip = trackFor(char, "CucumberFall")
+		if s.Clip then s.Clip:Play(0.08) end
+		local tEnd = os.clock() + FALL_LENGTH
+		while os.clock() < tEnd and not s.Done do
+			RunService.Heartbeat:Wait()
+		end
+		finish(s)
+	end)
+end
+
+AnimRemote.OnClientEvent:Connect(function(payload)
+	if type(payload) ~= "table" then return end
+	local holder = payload.Holder
+	local who = payload.Player
+	if payload.Kind == "Cancel" then
+		if holder then stopVisual(holder) end
+		if who == player and session and session.Holder == holder then finish(session, true) end
+		return
+	end
+	if payload.Kind == "Fall" then
+		if not who then return end
+		--.. everyone hears the face-plant
+		task.delay(FALL_PLANT_T, function()
+			local root = who.Character and who.Character:FindFirstChild("HumanoidRootPart")
+			if root then pcall(SoundController.PlayFXAt, "Big Thud", root.Position, {Volume = 0.35, MaxLife = 1.2}) end
+		end)
+		if who == player then runFall() end
+		return
+	end
+	if payload.Kind == "FallDrop" then
+		if holder and holder.Parent and typeof(payload.From) == "Vector3" then startTumble(holder, payload.From) end
+		return
+	end
+	if not (holder and holder.Parent and who) then return end
+	local struggle = 0
+	if payload.Kind == "Tug" then
+		struggle = tonumber(payload.Duration) or CucumberStrength.FAIL_TUG
+	else
+		struggle = tonumber(payload.Struggle) or 0
+	end
+	startVisual(holder, who, struggle, payload.Kind == "Collect")
+	if who == player then runOwn(payload, struggle) end
+end)

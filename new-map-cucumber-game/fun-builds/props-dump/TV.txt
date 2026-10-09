@@ -1,0 +1,26 @@
+=== Fun/TV
+  @AssetId = 72589005175614
+  @Cost = 350
+  @Notes = Footprint 6.4 x 1.8 studs (the black top slab is the widest part), 4.86 studs tall - console top surface at z 1.42, screen panel z 2.10..4.86, screen aperture x +/-2.34, z 2.37..4.73.  Stands flat on z=0 on four legs at (+/-2.58, +/-0.56); nothing dips below the ground plane.
+The screen is four Neon objects stacked a hair proud of one another between y 0.03 and y 0.116, all inside the bezel (front face y 0.13): ScreenSky is the lit backdrop, ScreenLand the ground band + hill + tower block, ScreenSun the sun disc + horizon glow strip, and RedLights holds the stand-by dot on the bezel.  To switch the set OFF, recolour ScreenSky to screen_dark and set the three Screen* objects' material to SmoothPlastic (or just raise their Transparency); to play a channel, swap or re-tint ScreenLand / ScreenSun - they are the only content geometry.
+The T-stand is meant to SHOW.  The oval foot plate is a ch
+  @Pivot_ScreenSwivel = (0.00, 1.66, 0.10)
+  @PropSet = plot
+  @State_Straight = 0
+  @State_TurnedLeft = 20
+  @State_TurnedRight = -20
+  @Tris = 864
+  BlackTrim [MeshPart] pos (-0.45, 1.52, -0.46) size (4.31, 0.14, 0.91) SmoothPlastic 23262c T0.00 collide=true
+  Cabinet [MeshPart] pos (-0.00, 0.79, -0.00) size (6.00, 0.98, 1.60) Wood 8a5a2b T0.00 collide=true
+  ConsoleTop [MeshPart] pos (-0.00, 1.35, -0.00) size (6.40, 0.14, 1.80) SmoothPlastic 23262c T0.00 collide=true
+  DoorRecess [MeshPart] pos (-0.00, 0.72, -0.81) size (5.00, 0.72, 0.06) Wood 6b4423 T0.00 collide=true
+  Doors [MeshPart] pos (-0.00, 0.72, -0.87) size (4.88, 0.51, 0.06) SmoothPlastic f2f0ea T0.00 collide=true
+  Metalwork [MeshPart] pos (-0.00, 0.61, -0.11) size (5.49, 1.22, 1.71) Metal 9aa7b8 T0.00 collide=true
+  Panel [MeshPart] pos (0.00, 3.48, 0.03) size (5.00, 2.76, 0.33) SmoothPlastic 23262c T0.00 collide=true
+  RedLights [MeshPart] pos (-2.18, 1.92, -0.34) size (1.00, 0.75, 0.42) Neon ff4d4d T0.00 collide=true
+  Remote [MeshPart] pos (-2.48, 1.49, -0.16) size (0.73, 0.14, 0.99) SmoothPlastic f2f0ea T0.00 collide=true
+  ScreenLand [MeshPart] pos (-0.00, 3.07, -0.09) size (4.68, 1.39, 0.01) Neon 9dff4d T0.00 collide=true
+  ScreenSky [MeshPart] pos (-0.00, 3.55, -0.06) size (4.68, 2.36, 0.06) Neon 6fd0ff T0.00 collide=true
+  ScreenSun [MeshPart] pos (-1.07, 3.73, -0.11) size (2.54, 1.46, 0.02) Neon ffe14d T0.00 collide=true
+  Soundbar [MeshPart] pos (-0.00, 1.52, -0.71) size (4.00, 0.20, 0.34) Metal 9aa7b8 T0.00 collide=true
+  Stand [MeshPart] pos (0.00, 1.88, 0.10) size (2.90, 0.93, 0.84) Metal 9aa7b8 T0.00 collide=true

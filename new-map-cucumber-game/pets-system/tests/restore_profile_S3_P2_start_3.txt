@@ -1,0 +1,21 @@
+S3 P4, final restore of the test key (2026-09-22 19:26)
+restore_profile STEP 2 OK <- profile_S3_P2_start.json at 2026-09-22 19:26:12
+session key PetTest_140977250
+staged JSON: 9688 bytes, nonce 763d44f4
+JSON (envelope): Cash=2167122531.244216 PlotLevel=2 Pets=8 Eggs=3 Cucumbers=2 Builds=51 notice=true
+PASS plot level (Plot 6 = 2, want 2)
+PASS Cash written (2167122531.244216)
+PASS BaseSaveAPI.Reload (true true in 1.0 s)
+PASS #Base.Pets (8, want 8)
+PASS #Base.Eggs (3, want 3)
+PASS #Base.Cucumbers (2, want 2)
+PASS #Base.Builds (51, want 51)
+world on Plot 6: Pets=6 Eggs=3 Cucumbers=2 Builds=51
+PASS Cash after (2167129348.2835226)
+PlotLevel=2 roster=6 schema=1 notice=nil gen=1
+NOTE: notice=nil because the post-restore rebuild pushed an unsolicited Full (PetService 3.5) to the test
+client, which had sent a GetState earlier in this session; that Full delivered and consumed the migration
+notice by design. PetNoticePending = true was set back by hand (server eval) and the playtest stopped at once.
+Edit-mode GetAsync afterwards: Cash 2167589571.74, PlotLevel 2, 8/3/2/51, roster 6, PetSchemaVersion 1,
+PetNoticePending true, pet/egg/cucumber Ids + roster equal to profile_S3_P2_start.json, ActiveSession nil,
+SessionLoadCount 15 (raw value: S3_testkey_after.json).

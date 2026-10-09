@@ -1,0 +1,2667 @@
+{
+ "key": "Fridge",
+ "category": "Home",
+ "parts": [
+  {
+   "name": "SkinL",
+   "shape": "Block",
+   "size": [
+    0.08,
+    7.9,
+    2.42
+   ],
+   "cf": [
+    1.96,
+    3.97,
+    0.09,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d0d8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "WallL",
+   "shape": "Block",
+   "size": [
+    0.22,
+    7.42,
+    2.3
+   ],
+   "cf": [
+    1.82,
+    4.21,
+    0.05,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "SkinR",
+   "shape": "Block",
+   "size": [
+    0.08,
+    7.9,
+    2.42
+   ],
+   "cf": [
+    -1.96,
+    3.97,
+    0.09,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d0d8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "WallR",
+   "shape": "Block",
+   "size": [
+    0.22,
+    7.42,
+    2.3
+   ],
+   "cf": [
+    -1.82,
+    4.21,
+    0.05,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "SkinTop",
+   "shape": "Block",
+   "size": [
+    4.02,
+    0.1,
+    2.45
+   ],
+   "cf": [
+    0.0,
+    7.95,
+    0.095,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d0d8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "WallTop",
+   "shape": "Block",
+   "size": [
+    3.46,
+    0.22,
+    2.3
+   ],
+   "cf": [
+    0.0,
+    7.81,
+    0.05,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Floor",
+   "shape": "Block",
+   "size": [
+    3.46,
+    0.28,
+    2.3
+   ],
+   "cf": [
+    0.0,
+    0.64,
+    0.05,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Divider",
+   "shape": "Block",
+   "size": [
+    3.46,
+    0.32,
+    2.3
+   ],
+   "cf": [
+    0.0,
+    5.46,
+    0.05,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "LinerBack",
+   "shape": "Block",
+   "size": [
+    3.46,
+    7.42,
+    0.22
+   ],
+   "cf": [
+    0.0,
+    4.21,
+    1.11,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BackPanel",
+   "shape": "Block",
+   "size": [
+    3.9,
+    7.8,
+    0.1
+   ],
+   "cf": [
+    0.0,
+    4.0,
+    1.27,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Coils",
+   "shape": "Block",
+   "size": [
+    2.9,
+    5.2,
+    0.08
+   ],
+   "cf": [
+    0.0,
+    4.4,
+    1.35,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Plinth",
+   "shape": "Block",
+   "size": [
+    3.84,
+    0.54,
+    2.2
+   ],
+   "cf": [
+    0.0,
+    0.27,
+    0.12,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "KickGrille",
+   "shape": "Block",
+   "size": [
+    3.7,
+    0.4,
+    0.06
+   ],
+   "cf": [
+    0.0,
+    0.27,
+    -1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HingeTop",
+   "shape": "Block",
+   "size": [
+    0.38,
+    0.08,
+    0.34
+   ],
+   "cf": [
+    -1.78,
+    8.02,
+    -1.3,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Shelf1",
+   "shape": "Block",
+   "size": [
+    3.44,
+    0.08,
+    1.5
+   ],
+   "cf": [
+    0.0,
+    1.74,
+    0.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d8ecf5",
+   "material": "Glass",
+   "transparency": 0.35,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Shelf2",
+   "shape": "Block",
+   "size": [
+    3.44,
+    0.08,
+    1.5
+   ],
+   "cf": [
+    0.0,
+    2.99,
+    0.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d8ecf5",
+   "material": "Glass",
+   "transparency": 0.35,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Shelf3",
+   "shape": "Block",
+   "size": [
+    3.44,
+    0.08,
+    1.5
+   ],
+   "cf": [
+    0.0,
+    4.19,
+    0.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d8ecf5",
+   "material": "Glass",
+   "transparency": 0.35,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CrisperL",
+   "shape": "Block",
+   "size": [
+    1.64,
+    0.9,
+    0.08
+   ],
+   "cf": [
+    0.87,
+    1.24,
+    -0.46,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "cfe8d2",
+   "material": "SmoothPlastic",
+   "transparency": 0.55,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CrisperR",
+   "shape": "Block",
+   "size": [
+    1.64,
+    0.9,
+    0.08
+   ],
+   "cf": [
+    -0.87,
+    1.24,
+    -0.46,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "cfe8d2",
+   "material": "SmoothPlastic",
+   "transparency": 0.55,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Cuke1",
+   "shape": "Ellipsoid",
+   "size": [
+    0.36,
+    0.36,
+    1.3
+   ],
+   "cf": [
+    0.48,
+    0.97,
+    0.15,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3f8f3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Cuke2",
+   "shape": "Ellipsoid",
+   "size": [
+    0.36,
+    0.36,
+    1.24
+   ],
+   "cf": [
+    1.14,
+    0.97,
+    0.2,
+    0.99255,
+    0.0,
+    0.12187,
+    0.0,
+    1.0,
+    0.0,
+    -0.12187,
+    0.0,
+    0.99255
+   ],
+   "color": "5aa845",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Cuke3",
+   "shape": "Ellipsoid",
+   "size": [
+    0.34,
+    0.34,
+    1.28
+   ],
+   "cf": [
+    0.8,
+    1.28,
+    0.1,
+    0.98769,
+    0.0,
+    -0.15643,
+    0.0,
+    1.0,
+    0.0,
+    0.15643,
+    0.0,
+    0.98769
+   ],
+   "color": "3f8f3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Tomato1",
+   "shape": "Ball",
+   "size": [
+    0.54,
+    0.54,
+    0.54
+   ],
+   "cf": [
+    -0.6,
+    1.06,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Tomato2",
+   "shape": "Ball",
+   "size": [
+    0.52,
+    0.52,
+    0.52
+   ],
+   "cf": [
+    -1.2,
+    1.05,
+    0.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MilkBox",
+   "shape": "Block",
+   "size": [
+    0.64,
+    0.84,
+    0.64
+   ],
+   "cf": [
+    1.0,
+    2.2,
+    0.3,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "fbfaf5",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MilkBand",
+   "shape": "Block",
+   "size": [
+    0.66,
+    0.34,
+    0.66
+   ],
+   "cf": [
+    1.0,
+    2.22,
+    0.3,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MilkRoofF",
+   "shape": "Wedge",
+   "size": [
+    0.64,
+    0.22,
+    0.32
+   ],
+   "cf": [
+    1.0,
+    2.73,
+    0.14,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MilkRoofB",
+   "shape": "Wedge",
+   "size": [
+    0.64,
+    0.22,
+    0.32
+   ],
+   "cf": [
+    1.0,
+    2.73,
+    0.46,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "EggCarton",
+   "shape": "Block",
+   "size": [
+    1.3,
+    0.24,
+    0.52
+   ],
+   "cf": [
+    -0.62,
+    1.9,
+    0.05,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9b089",
+   "material": "Cardboard",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Egg1",
+   "shape": "Ellipsoid",
+   "size": [
+    0.3,
+    0.4,
+    0.3
+   ],
+   "cf": [
+    -1.02,
+    2.13,
+    0.05,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f7efe0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Egg2",
+   "shape": "Ellipsoid",
+   "size": [
+    0.3,
+    0.4,
+    0.3
+   ],
+   "cf": [
+    -0.62,
+    2.13,
+    0.05,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f7efe0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Egg3",
+   "shape": "Ellipsoid",
+   "size": [
+    0.3,
+    0.4,
+    0.3
+   ],
+   "cf": [
+    -0.22,
+    2.13,
+    0.05,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f7efe0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CakePlate",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    1.34,
+    1.34
+   ],
+   "cf": [
+    0.42,
+    3.06,
+    0.3,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "fbfaf5",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CakeBody",
+   "shape": "Cylinder",
+   "size": [
+    0.52,
+    1.0,
+    1.0
+   ],
+   "cf": [
+    0.42,
+    3.34,
+    0.3,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "e87fa8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CakeCream",
+   "shape": "Cylinder",
+   "size": [
+    0.08,
+    1.03,
+    1.03
+   ],
+   "cf": [
+    0.42,
+    3.34,
+    0.3,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "fbfaf5",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CakeIcing",
+   "shape": "Cylinder",
+   "size": [
+    0.1,
+    1.06,
+    1.06
+   ],
+   "cf": [
+    0.42,
+    3.63,
+    0.3,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "fbfaf5",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CakeCherry",
+   "shape": "Ball",
+   "size": [
+    0.24,
+    0.24,
+    0.24
+   ],
+   "cf": [
+    0.42,
+    3.78,
+    0.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PickleJar",
+   "shape": "Cylinder",
+   "size": [
+    0.8,
+    0.62,
+    0.62
+   ],
+   "cf": [
+    -1.05,
+    3.43,
+    0.35,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "9fd18a",
+   "material": "Glass",
+   "transparency": 0.3,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PickleLid",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.66,
+    0.66
+   ],
+   "cf": [
+    -1.05,
+    3.87,
+    0.35,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d9443c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Pickle",
+   "shape": "Ellipsoid",
+   "size": [
+    0.24,
+    0.58,
+    0.24
+   ],
+   "cf": [
+    -1.01,
+    3.36,
+    0.32,
+    0.98481,
+    -0.17365,
+    0.0,
+    0.17365,
+    0.98481,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3f8f3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Cheese",
+   "shape": "Wedge",
+   "size": [
+    0.62,
+    0.46,
+    0.8
+   ],
+   "cf": [
+    1.02,
+    4.46,
+    0.2,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CheeseHole",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.13,
+    0.13
+   ],
+   "cf": [
+    1.2,
+    4.36,
+    -0.115,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "color": "d9a21f",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Leftovers",
+   "shape": "Block",
+   "size": [
+    1.0,
+    0.4,
+    0.7
+   ],
+   "cf": [
+    -0.45,
+    4.43,
+    0.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f08a30",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "LeftoversLid",
+   "shape": "Block",
+   "size": [
+    1.04,
+    0.1,
+    0.74
+   ],
+   "cf": [
+    -0.45,
+    4.67,
+    0.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "LightStrip",
+   "shape": "Block",
+   "size": [
+    1.6,
+    0.1,
+    0.3
+   ],
+   "cf": [
+    0.0,
+    5.27,
+    -0.2,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "FreezerShelf",
+   "shape": "Block",
+   "size": [
+    3.44,
+    0.06,
+    1.5
+   ],
+   "cf": [
+    0.0,
+    6.6,
+    0.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "IceCream",
+   "shape": "Cylinder",
+   "size": [
+    0.58,
+    0.8,
+    0.8
+   ],
+   "cf": [
+    0.75,
+    5.91,
+    0.3,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "fbfaf5",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "IceCreamLid",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.84,
+    0.84
+   ],
+   "cf": [
+    0.75,
+    6.24,
+    0.3,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "e87fa8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "IceTray",
+   "shape": "Block",
+   "size": [
+    1.2,
+    0.16,
+    0.62
+   ],
+   "cf": [
+    -0.7,
+    5.7,
+    0.2,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "8fc9ee",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "IceCubes",
+   "shape": "Block",
+   "size": [
+    1.08,
+    0.18,
+    0.5
+   ],
+   "cf": [
+    -0.7,
+    5.82,
+    0.2,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e6f4ff",
+   "material": "Ice",
+   "transparency": 0.25,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PizzaBox",
+   "shape": "Block",
+   "size": [
+    1.3,
+    0.2,
+    1.2
+   ],
+   "cf": [
+    -0.6,
+    6.73,
+    0.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9443c",
+   "material": "Cardboard",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PeasBag",
+   "shape": "Ellipsoid",
+   "size": [
+    0.95,
+    0.42,
+    0.72
+   ],
+   "cf": [
+    0.8,
+    6.84,
+    0.2,
+    0.97815,
+    0.0,
+    0.20791,
+    0.0,
+    1.0,
+    0.0,
+    -0.20791,
+    0.0,
+    0.97815
+   ],
+   "color": "5aa845",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Frost",
+   "shape": "Block",
+   "size": [
+    3.42,
+    0.14,
+    2.28
+   ],
+   "cf": [
+    0.0,
+    7.64,
+    0.05,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e6f4ff",
+   "material": "Ice",
+   "transparency": 0.2,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "FreezerLight",
+   "shape": "Block",
+   "size": [
+    0.8,
+    0.14,
+    0.08
+   ],
+   "cf": [
+    0.0,
+    7.3,
+    0.97,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorPanel",
+   "shape": "Block",
+   "size": [
+    3.96,
+    4.84,
+    0.36
+   ],
+   "cf": [
+    0.0,
+    2.98,
+    -1.3,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d0d8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "DoorGasket",
+   "shape": "Block",
+   "size": [
+    3.76,
+    4.66,
+    0.06
+   ],
+   "cf": [
+    0.0,
+    2.98,
+    -1.1,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorLiner",
+   "shape": "Block",
+   "size": [
+    3.36,
+    4.36,
+    0.12
+   ],
+   "cf": [
+    0.0,
+    3.03,
+    -1.04,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e6ecf1",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorBin1",
+   "shape": "Block",
+   "size": [
+    3.0,
+    0.5,
+    0.4
+   ],
+   "cf": [
+    0.0,
+    1.3,
+    -0.78,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "cfe3f2",
+   "material": "SmoothPlastic",
+   "transparency": 0.35,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorBin2",
+   "shape": "Block",
+   "size": [
+    3.0,
+    0.4,
+    0.4
+   ],
+   "cf": [
+    0.0,
+    3.35,
+    -0.78,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "cfe3f2",
+   "material": "SmoothPlastic",
+   "transparency": 0.35,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorKetchup",
+   "shape": "Cylinder",
+   "size": [
+    0.88,
+    0.34,
+    0.34
+   ],
+   "cf": [
+    -1.05,
+    1.51,
+    -0.78,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorKetchupCap",
+   "shape": "Cylinder",
+   "size": [
+    0.16,
+    0.187,
+    0.187
+   ],
+   "cf": [
+    -1.05,
+    2.01,
+    -0.78,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "fbfaf5",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorMustard",
+   "shape": "Cylinder",
+   "size": [
+    0.78,
+    0.32,
+    0.32
+   ],
+   "cf": [
+    -0.55,
+    1.46,
+    -0.78,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorMustardCap",
+   "shape": "Cylinder",
+   "size": [
+    0.16,
+    0.176,
+    0.176
+   ],
+   "cf": [
+    -0.55,
+    1.91,
+    -0.78,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorSoda",
+   "shape": "Cylinder",
+   "size": [
+    1.18,
+    0.36,
+    0.36
+   ],
+   "cf": [
+    0.1,
+    1.66,
+    -0.78,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "5aa845",
+   "material": "Glass",
+   "transparency": 0.15,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorSodaCap",
+   "shape": "Cylinder",
+   "size": [
+    0.16,
+    0.198,
+    0.198
+   ],
+   "cf": [
+    0.1,
+    2.31,
+    -0.78,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorJuice",
+   "shape": "Cylinder",
+   "size": [
+    1.08,
+    0.38,
+    0.38
+   ],
+   "cf": [
+    0.85,
+    1.61,
+    -0.78,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "f08a30",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorJuiceCap",
+   "shape": "Cylinder",
+   "size": [
+    0.16,
+    0.209,
+    0.209
+   ],
+   "cf": [
+    0.85,
+    2.21,
+    -0.78,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "5aa845",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorCanRed",
+   "shape": "Cylinder",
+   "size": [
+    0.46,
+    0.28,
+    0.28
+   ],
+   "cf": [
+    -0.95,
+    3.4,
+    -0.78,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d9443c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorCanBlue",
+   "shape": "Cylinder",
+   "size": [
+    0.46,
+    0.28,
+    0.28
+   ],
+   "cf": [
+    -0.6,
+    3.4,
+    -0.78,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "3f79d4",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorButter",
+   "shape": "Block",
+   "size": [
+    0.72,
+    0.22,
+    0.3
+   ],
+   "cf": [
+    0.65,
+    3.28,
+    -0.78,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ffe07a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorHandle",
+   "shape": "Cylinder",
+   "size": [
+    1.95,
+    0.17,
+    0.17
+   ],
+   "cf": [
+    1.62,
+    4.175,
+    -1.74,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "e3e8ee",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "DoorHandleTop",
+   "shape": "Block",
+   "size": [
+    0.14,
+    0.16,
+    0.3
+   ],
+   "cf": [
+    1.62,
+    5.02,
+    -1.61,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e3e8ee",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorHandleBot",
+   "shape": "Block",
+   "size": [
+    0.14,
+    0.16,
+    0.3
+   ],
+   "cf": [
+    1.62,
+    3.33,
+    -1.61,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e3e8ee",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorNote1",
+   "shape": "Block",
+   "size": [
+    0.8,
+    0.95,
+    0.05
+   ],
+   "cf": [
+    0.5,
+    4.3,
+    -1.49,
+    0.99452,
+    -0.10453,
+    0.0,
+    0.10453,
+    0.99452,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "fbfaf5",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorMagnet1",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.24,
+    0.24
+   ],
+   "cf": [
+    0.46,
+    4.7,
+    -1.53,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorNote2",
+   "shape": "Block",
+   "size": [
+    0.6,
+    0.6,
+    0.05
+   ],
+   "cf": [
+    -0.55,
+    3.95,
+    -1.49,
+    0.99027,
+    0.13917,
+    0.0,
+    -0.13917,
+    0.99027,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ffe680",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorMagnet2",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.22,
+    0.22
+   ],
+   "cf": [
+    -0.55,
+    4.16,
+    -1.53,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorDrawing",
+   "shape": "Block",
+   "size": [
+    1.05,
+    0.8,
+    0.05
+   ],
+   "cf": [
+    0.15,
+    2.55,
+    -1.49,
+    0.99863,
+    0.05234,
+    0.0,
+    -0.05234,
+    0.99863,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "fbfaf5",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorDoodle",
+   "shape": "Ellipsoid",
+   "size": [
+    0.62,
+    0.22,
+    0.05
+   ],
+   "cf": [
+    0.15,
+    2.48,
+    -1.515,
+    0.92718,
+    -0.37461,
+    0.0,
+    0.37461,
+    0.92718,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "5aa845",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorMagnet3",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.22,
+    0.22
+   ],
+   "cf": [
+    0.15,
+    2.9,
+    -1.53,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "FreezerDoorPanel",
+   "shape": "Block",
+   "size": [
+    3.96,
+    2.5,
+    0.36
+   ],
+   "cf": [
+    0.0,
+    6.71,
+    -1.3,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d0d8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "FreezerDoorGasket",
+   "shape": "Block",
+   "size": [
+    3.76,
+    2.32,
+    0.06
+   ],
+   "cf": [
+    0.0,
+    6.71,
+    -1.1,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "FreezerDoorLiner",
+   "shape": "Block",
+   "size": [
+    3.36,
+    1.9,
+    0.12
+   ],
+   "cf": [
+    0.0,
+    6.66,
+    -1.04,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e6ecf1",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "FreezerDoorHandle",
+   "shape": "Cylinder",
+   "size": [
+    1.28,
+    0.17,
+    0.17
+   ],
+   "cf": [
+    1.62,
+    6.36,
+    -1.74,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "e3e8ee",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "FreezerDoorHandleTop",
+   "shape": "Block",
+   "size": [
+    0.14,
+    0.16,
+    0.3
+   ],
+   "cf": [
+    1.62,
+    6.88,
+    -1.61,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e3e8ee",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "FreezerDoorHandleBot",
+   "shape": "Block",
+   "size": [
+    0.14,
+    0.16,
+    0.3
+   ],
+   "cf": [
+    1.62,
+    5.84,
+    -1.61,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e3e8ee",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "FreezerDoorBadge",
+   "shape": "Block",
+   "size": [
+    0.95,
+    0.24,
+    0.06
+   ],
+   "cf": [
+    0.0,
+    7.6,
+    -1.5,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "FreezerDoorLogo",
+   "shape": "Ellipsoid",
+   "size": [
+    0.5,
+    0.15,
+    0.05
+   ],
+   "cf": [
+    0.0,
+    7.6,
+    -1.535,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "5aa845",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "FreezerDoorMagnet",
+   "shape": "Ellipsoid",
+   "size": [
+    0.62,
+    0.22,
+    0.1
+   ],
+   "cf": [
+    -0.9,
+    6.45,
+    -1.51,
+    0.95106,
+    -0.30902,
+    0.0,
+    0.30902,
+    0.95106,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "5aa845",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  }
+ ],
+ "pivots": {
+  "DoorHinge": [
+   -1.98,
+   2.98,
+   -1.12
+  ],
+  "FreezerHinge": [
+   -1.98,
+   6.71,
+   -1.12
+  ],
+  "FridgeLight": [
+   0.0,
+   4.8,
+   0.1
+  ],
+  "FreezerLight": [
+   0.0,
+   7.1,
+   0.1
+  ],
+  "FridgeMist": [
+   0.0,
+   1.0,
+   -1.05
+  ],
+  "FreezerMist": [
+   0.0,
+   5.85,
+   -1.05
+  ],
+  "PromptDoor": [
+   1.62,
+   4.2,
+   -1.95
+  ],
+  "PromptFreezer": [
+   1.62,
+   6.4,
+   -1.95
+  ],
+  "Hum": [
+   0.0,
+   0.6,
+   1.2
+  ]
+ },
+ "attrs": {
+  "State_DoorOpen": 100,
+  "State_FreezerDoorOpen": 100,
+  "OpeningFridge": [
+   3.42,
+   4.52,
+   0
+  ],
+  "OpeningFreezer": [
+   3.42,
+   2.08,
+   0
+  ],
+  "Cost": 1500,
+  "DisplayName": "Fridge"
+ },
+ "size_studs": [
+  4.02,
+  8.06,
+  3.215
+ ],
+ "min": [
+  -2.01,
+  0.0,
+  -1.825
+ ],
+ "max": [
+  2.01,
+  8.06,
+  1.39
+ ],
+ "part_count": 89,
+ "duplicate_names": []
+}

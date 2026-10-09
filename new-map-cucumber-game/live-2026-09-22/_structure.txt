@@ -1,0 +1,677 @@
+=== ReplicatedStorage ===
+Folder Modules
+  ModuleScript SoundController
+  ModuleScript MusicManager
+  ModuleScript PlotUpgrades
+  ModuleScript BenchRuntimeMesh
+  ModuleScript NumberAbbrev
+  ModuleScript CucumberValues
+  ModuleScript BenchScale
+  ModuleScript StrengthProgression
+  ModuleScript CucumberMutations
+  ModuleScript PetsCatalog
+  ModuleScript ButtonFX
+  ModuleScript Notify
+  ModuleScript HeadbandsCatalog
+  ModuleScript BuildCatalog
+  ModuleScript ZombieCatalog
+  ModuleScript CucumberFootprint
+  ModuleScript GuardianCatalog
+  ModuleScript GuardianAudio
+  ModuleScript GroupGiftZone
+  ModuleScript CucumberLift
+  ModuleScript CucumberLiftPoses
+Folder Assets
+  Folder Sounds
+    ... 52 children
+  Folder BenchMeshData
+    ... 6 children
+  Folder BenchTiers
+    ... 7 children
+  Folder Animations
+  Folder Pets
+    ... 49 children
+  Folder Headbands
+    ... 12 children
+Folder Remotes
+  RemoteEvent GymBoardState
+  RemoteFunction GymBoardAction
+Folder CucumberIndexPreviews
+  Model Narmek Moon Slice @{NewSet=true, SourceModel=NarmekMoonSlice}
+    ... 5 children
+  Model Volcano Charred Cucumber @{NewSet=true, SourceModel=VolcanoCharredCucumber}
+    ... 4 children
+  Model Snow Snow Tree @{NewSet=true, SourceModel=SnowSnowTree}
+    ... 6 children
+  Model Spawn Cucumber @{NewSet=true, SourceModel=Cucumber}
+    ... 2 children
+  Model Samurai Lantern Cucumber @{NewSet=true, SourceModel=SamuraiLanternCucumber}
+    ... 9 children
+  Model Samurai Sakura Tree @{NewSet=true, SourceModel=SamuraiSakuraTree}
+    ... 9 children
+  Model Underwater Shell Slice @{NewSet=true, SourceModel=UnderwaterShellSlice}
+    ... 5 children
+  Model Snow Snowball Slice @{NewSet=true, SourceModel=SnowSnowballSlice}
+    ... 5 children
+  Model Desert Desert Palm @{NewSet=true, SourceModel=DesertPalm}
+    ... 5 children
+  Model Desert Palm @{NewSet=true, SourceModel=DesertPalm}
+    ... 5 children
+  Model Spawn Slice Stack @{NewSet=true, SourceModel=SlicedCucumberStack}
+    ... 4 children
+  Model Farm Hay Bale @{NewSet=true, SourceModel=FarmHayBale}
+    ... 5 children
+  Model Spawn Flowered Cucumber @{NewSet=true, SourceModel=FloweredCucumber}
+    ... 6 children
+  Model Samurai Bamboo Cucumber @{NewSet=true, SourceModel=SamuraiBambooCucumber}
+    ... 4 children
+  Model Desert Sun-Dried Slice @{NewSet=true, SourceModel=DesertSunDriedSlice}
+    ... 4 children
+  Model Narmek Alien Tree @{NewSet=true, SourceModel=NarmekAlienTree}
+    ... 5 children
+  Model Farm Cucumber Basket @{NewSet=true, SourceModel=FarmCucumberBasket}
+    ... 6 children
+  Model Narmek Moon Tree @{NewSet=true, SourceModel=NarmekMoonTree}
+    ... 5 children
+  Model Underwater Bubble Slice @{NewSet=true, SourceModel=UnderwaterBubbleSlice}
+    ... 4 children
+  Model Narmek Neon Alien Cucumber @{NewSet=true, SourceModel=NarmekNeonAlienCucumber}
+    ... 5 children
+  Model Spawn Cucumber Tree @{NewSet=true, SourceModel=CucumberTree}
+    ... 5 children
+  Model Cucumber Tree @{NewSet=true, SourceModel=CucumberTree}
+    ... 5 children
+  Model Underwater Pearl Cucumber @{NewSet=true, SourceModel=UnderwaterPearlCucumber}
+    ... 3 children
+  Model Narmek Astronaut Cucumber @{NewSet=true, SourceModel=NarmekAstronautCucumber}
+    ... 7 children
+  Model Desert Cactus Cucumber @{NewSet=true, SourceModel=DesertCactusCucumber}
+    ... 6 children
+  Model Narmek Meteor Cucumber @{NewSet=true, SourceModel=NarmekMeteorCucumber}
+    ... 4 children
+  Model Desert Sun-Baked Cucumber @{NewSet=true, SourceModel=DesertSunBakedCucumber}
+    ... 4 children
+  Model Volcano Magma Tree @{NewSet=true, SourceModel=VolcanoMagmaTree}
+    ... 6 children
+  Model Volcano Volcano Cucumber @{NewSet=true, SourceModel=VolcanoVolcanoCucumber}
+    ... 5 children
+  Model Spawn Sliced Cucumber @{NewSet=true, SourceModel=SlicedCucumber}
+    ... 4 children
+  Model Desert Sliced Cucumber @{NewSet=true, SourceModel=SlicedCucumber}
+    ... 4 children
+  Model Underwater Coral Tree @{NewSet=true, SourceModel=UnderwaterCoralTree}
+    ... 4 children
+  Model Desert Sandstone Tree @{NewSet=true, SourceModel=DesertSandstoneTree}
+    ... 5 children
+  Model Farm Windmill Plant @{NewSet=true, SourceModel=FarmWindmillPlant}
+    ... 8 children
+  Model Samurai Bamboo Grove @{NewSet=true, SourceModel=SamuraiBambooGrove}
+    ... 6 children
+  Model Desert Wrapped Cucumber @{NewSet=true, SourceModel=DesertWrappedCucumber}
+    ... 4 children
+  Model Snow Frozen Slice @{NewSet=true, SourceModel=SnowFrozenSlice}
+    ... 5 children
+  Model Volcano Obsidian Tree @{NewSet=true, SourceModel=VolcanoObsidianTree}
+    ... 5 children
+  Model Volcano Flame Cucumber @{NewSet=true, SourceModel=VolcanoFlameCucumber}
+    ... 5 children
+  Model Volcano Molten Cucumber @{NewSet=true, SourceModel=VolcanoMoltenCucumber}
+    ... 4 children
+  Model Volcano Molten Slice @{NewSet=true, SourceModel=VolcanoMoltenSlice}
+    ... 4 children
+  Model Farm Crate Cucumber @{NewSet=true, SourceModel=FarmCrateCucumber}
+    ... 6 children
+  Model Snow Snowcap Cucumber @{NewSet=true, SourceModel=SnowSnowcapCucumber}
+    ... 4 children
+  Model Underwater Bubble Tree @{NewSet=true, SourceModel=UnderwaterBubbleTree}
+    ... 4 children
+  Model Snow Icicle Tree @{NewSet=true, SourceModel=SnowIcicleTree}
+    ... 5 children
+  Model Underwater Kelp Tree @{NewSet=true, SourceModel=UnderwaterKelpTree}
+    ... 5 children
+  Model Narmek Planet Slice @{NewSet=true, SourceModel=NarmekPlanetSlice}
+    ... 5 children
+  Model Desert Prickly Cucumber @{NewSet=true, SourceModel=DesertPricklyCucumber}
+    ... 3 children
+  Model Underwater Coral Cucumber @{NewSet=true, SourceModel=UnderwaterCoralCucumber}
+    ... 3 children
+  Model Underwater Seaweed Cucumber @{NewSet=true, SourceModel=UnderwaterSeaweedCucumber}
+    ... 3 children
+  Model Snow Frozen Tree @{NewSet=true, SourceModel=SnowFrozenTree}
+    ... 7 children
+  Model Snow Frozen Cucumber @{NewSet=true, SourceModel=SnowFrozenCucumber}
+    ... 4 children
+  Model Snow Crystal Cucumber @{NewSet=true, SourceModel=SnowCrystalCucumber}
+    ... 4 children
+  Model Farm Cucumber Tree @{NewSet=true, SourceModel=FarmCucumberTree}
+    ... 5 children
+  Model Spawn Vined Cucumber @{NewSet=true, SourceModel=VinedCucumber}
+    ... 5 children
+  Model Farm Muddy Cucumber @{NewSet=true, SourceModel=FarmMuddyCucumber}
+    ... 4 children
+  Model Samurai Torii Gate @{NewSet=true, SourceModel=SamuraiToriiGate}
+    ... 7 children
+  Model Narmek Galaxy Tree @{NewSet=true, SourceModel=NarmekGalaxyTree}
+    ... 6 children
+  Model Samurai Katana Cucumber @{NewSet=true, SourceModel=SamuraiKatanaCucumber}
+    ... 8 children
+  Model Samurai Sliced Cucumber @{NewSet=true, SourceModel=SamuraiSlicedCucumber}
+    ... 5 children
+  Model Toyland Jack-in-the-Box Cucumber @{AssetId=100336131140870, NewSet=true, Rev3=true, SourceModel=ToylandJackInTheBoxCucumber}
+    ... 8 children
+  Model Neon Cyber Cucumber @{AssetId=95955640288214, NewSet=true, Rev3=true, SourceModel=NeonCyberCucumber}
+    ... 8 children
+  Model Toyland Lego Cucumber @{AssetId=104879943986751, NewSet=true, Rev3=true, SourceModel=ToylandLegoCucumber}
+    ... 6 children
+  Model Neon Neon Grid Cucumber @{AssetId=85516783331195, NewSet=true, Rev3=true, SourceModel=NeonGridCucumber}
+    ... 4 children
+  Model Neon Neon Tree @{AssetId=109316473181295, NewSet=true, Rev3=true, SourceModel=NeonTree}
+    ... 7 children
+  Model Neon Neon Palm @{AssetId=106113046143601, NewSet=true, Rev3=true, SourceModel=NeonPalm}
+    ... 7 children
+  Model Toyland Toy Train Cucumber @{AssetId=101375928716429, NewSet=true, Rev3=true, SourceModel=ToylandToyTrainCucumber}
+    ... 9 children
+  Model Toyland Building Block Tree @{AssetId=124257302950758, NewSet=true, Rev3=true, SourceModel=ToylandBuildingBlockTree}
+    ... 4 children
+  Model Neon Hologram Cucumber @{AssetId=95549929474117, NewSet=true, Rev3=true, SourceModel=NeonHologramCucumber}
+    ... 6 children
+  Model Neon Neon Slice @{AssetId=75821868527369, NewSet=true, Rev3=true, SourceModel=NeonNeonSlice}
+    ... 5 children
+  Model Toyland Toy Rocket Cucumber @{AssetId=127741505114443, NewSet=true, Rev3=true, SourceModel=ToylandToyRocketCucumber}
+    ... 10 children
+  Model Toyland Toy Slice @{AssetId=117605358178200, NewSet=true, Rev3=true, SourceModel=ToylandToySlice}
+    ... 4 children
+  Model Neon Electro Cucumber @{AssetId=109200224669813, NewSet=true, Rev3=true, SourceModel=NeonElectroCucumber}
+    ... 3 children
+  Model Toyland Pinwheel Plant @{AssetId=87978471888673, NewSet=true, Rev3=true, SourceModel=ToylandPinwheelPlant}
+    ... 7 children
+Folder GroupGift @{GroupId=14583228, RewardAmount=10000}
+  RemoteFunction Claim
+=== ServerStorage ===
+ModuleScript DataService
+  ModuleScript ProfileStore
+ModuleScript GymService
+ModuleScript LobbyLayout
+ModuleScript CharacterPhysique
+ModuleScript PortalService
+ModuleScript PortalTransitionService
+ModuleScript DesertHuntService
+ModuleScript CucumberAdventure
+ModuleScript HeadbandFitter
+ModuleScript GroupGiftReward
+Folder Assets
+  Folder Zombies @{ScaleToScalesHip=true}
+    ... 3 children
+  Folder BreakableModels
+    ... 74 children
+  Folder Guardians
+    ... 10 children
+  Folder GuardianAnims
+    ... 10 children
+KeyframeSequence BenchPressAnimation @{Version=3}
+  Keyframe Keyframe0
+    ... 1 children
+  Keyframe Keyframe30
+    ... 1 children
+  Keyframe Keyframe60
+    ... 1 children
+Folder __CollectAnimBackup_2026_09_06
+  Script CucumberCarry
+  Script CucumberSpawner
+  LocalScript CucumberPromptClient
+  Script DayNightCycle @{DayDurationSeconds=180, NightDurationSeconds=5}
+  LocalScript CarryClient
+  Script CucumberSpawner_preMutations
+  Script CucumberCarry_preMutations
+  ModuleScript CucumberValues_preMutations
+  LocalScript PlacedCucumberCardClient_preMutations
+Folder PortalMaps @{ImportStatus=Complete}
+  Model Classic Obby
+    ... 99 children
+  Model Avalanche
+    ... 9 children
+  Model LavaRun
+    ... 12 children
+  Model Wild_West
+    ... 7 children
+  Model BloxoutIncorporated
+    ... 8 children
+Folder PortalHuntAssets @{AudioCheck={"rbxassetid://144008269":"Success","rbxassetid://1845554017":"Success","rbxassetid://1840347412":"Success","rbxassetid://1837768494":"Success","rbxassetid://1844711929":"Success","rbxassetid://144008272":"Success","rbxassetid://1837768517":"Success"}}
+  Model Rat
+    ... 8 children
+  Tool Revolver
+    ... 3 children
+Folder __PortalBeforeEffects
+  ModuleScript PortalService
+  LocalScript PortalHudClient
+Folder __CarryAndEggLabelsBackup
+  Script CucumberCarry
+  Script DayNightCycle @{DayClockEnd=16, DayClockStart=11, DayDurationSeconds=180, NightAmbient=rgb(60,66,98), NightBrightness=1, NightClockTime=0, NightDurationSeconds=10, NightOutdoorAmbient=rgb(78,85,122)}
+  LocalScript EggTimerClient
+  LocalScript CollectAnimClient
+Folder __CarryConvenienceBackup
+  LocalScript CarryClient
+  LocalScript CucumberPlacementClient
+  LocalScript CucumberPromptClient
+  LocalScript CollectAnimClient
+  ModuleScript CucumberStrength
+  Script CucumberCarry
+Folder __CartoonGripBackup
+  ModuleScript CucumberStrength
+  LocalScript CucumberGripClient
+  LocalScript CucumberPromptClient
+Folder __CucumberAdventureBackup
+  Folder Originals
+    ... 8 children
+Folder Builds
+  Folder Fun
+    ... 13 children
+  Folder Garden
+    ... 11 children
+  Folder Defences
+    ... 9 children
+  Folder Walls
+    ... 6 children
+Folder __BaseSaveBackup_2026_09_12
+  Script CucumberCarry
+  Script CucumberSpawner
+  Script DayNightCycle
+  Script PetHatchService
+  Script BuildService
+  ModuleScript DataService
+  Script EggPlacement
+  ModuleScript BenchRuntimeMesh
+  LocalScript BenchTierClient
+Folder CucumberIndexStyleBackup_20260913
+  ModuleScript IndexView
+  Frame IndexPanel
+    ... 2 children
+  Frame CucumberCard @{CucumberName=Spawn Cucumber, PreviewCollected=true}
+    ... 8 children
+  TextButton BiomeTab
+    ... 2 children
+Folder IndexHeaderAndOverlayBackup_20260913
+  ModuleScript MenuController
+  Frame Header
+    ... 8 children
+  TextButton CloseButton
+    ... 6 children
+Folder StrengthShopRedesignBackup_20260913
+  ModuleScript ShopController
+  Frame ShopPanel @{Reference=Zombie Cucumber Game Store look (Display.Frame.Frames.Store); built by hud-shop/build_shop.lua; ShopController wires it, RequestedTab=Strength}
+    ... 2 children
+Folder CoinPacksRedesignBackup_20260913
+  Frame CoinsSection
+    ... 4 children
+Folder ShopPassesAndClippingBackup_20260913
+  Frame ShopPanel @{Reference=Zombie Cucumber Game Store look (Display.Frame.Frames.Store); built by hud-shop/build_shop.lua; ShopController wires it, RequestedTab=Strength}
+    ... 2 children
+Folder CucumberIndexPreviews_pre_newset_2026_09_13
+  Model Cucumber Tree
+    ... 9 children
+  Model Spawn Cucumber
+    ... 5 children
+  Model Spawn Sliced Cucumber
+    ... 8 children
+  Model Spawn Slice Stack
+    ... 29 children
+  Model Spawn Vined Cucumber
+    ... 7 children
+  Model Spawn Flowered Cucumber
+    ... 7 children
+  Model Spawn Cucumber Tree
+    ... 10 children
+  Model Desert Sun-Dried Slice
+    ... 5 children
+  Model Desert Prickly Cucumber
+    ... 4 children
+  Model Desert Sun-Baked Cucumber
+    ... 5 children
+  Model Desert Wrapped Cucumber
+    ... 7 children
+  Model Desert Cactus Cucumber
+    ... 7 children
+  Model Desert Palm
+    ... 6 children
+  Model Desert Sandstone Tree
+    ... 9 children
+  Model Desert Sliced Cucumber
+    ... 8 children
+  Model Samurai Katana Cucumber
+    ... 9 children
+  Model Samurai Bamboo Cucumber
+    ... 6 children
+  Model Samurai Lantern Cucumber
+    ... 9 children
+  Model Samurai Bamboo Grove
+    ... 6 children
+  Model Samurai Torii Gate
+    ... 11 children
+  Model Samurai Sakura Tree
+    ... 9 children
+  Model Samurai Sliced Cucumber
+    ... 8 children
+  Model Farm Cucumber Basket
+    ... 7 children
+  Model Farm Muddy Cucumber
+    ... 5 children
+  Model Farm Crate Cucumber
+    ... 6 children
+  Model Farm Windmill Plant
+    ... 10 children
+  Model Farm Hay Bale
+    ... 11 children
+  Model Farm Cucumber Tree
+    ... 9 children
+  Model Snow Frozen Slice
+    ... 6 children
+  Model Snow Snowcap Cucumber
+    ... 5 children
+  Model Snow Snowball Slice
+    ... 7 children
+  Model Snow Crystal Cucumber
+    ... 6 children
+  Model Snow Frozen Cucumber
+    ... 5 children
+  Model Snow Snow Tree
+    ... 6 children
+  Model Snow Icicle Tree
+    ... 10 children
+  Model Snow Frozen Tree
+    ... 11 children
+  Model Underwater Bubble Slice
+    ... 6 children
+  Model Underwater Seaweed Cucumber
+    ... 5 children
+  Model Underwater Shell Slice
+    ... 8 children
+  Model Underwater Coral Cucumber
+    ... 9 children
+  Model Underwater Pearl Cucumber
+    ... 8 children
+  Model Underwater Kelp Tree
+    ... 9 children
+  Model Underwater Bubble Tree
+    ... 9 children
+  Model Underwater Coral Tree
+    ... 12 children
+  Model Volcano Molten Slice
+    ... 7 children
+  Model Volcano Charred Cucumber
+    ... 6 children
+  Model Volcano Molten Cucumber
+    ... 4 children
+  Model Volcano Flame Cucumber
+    ... 7 children
+  Model Volcano Obsidian Tree
+    ... 8 children
+  Model Volcano Volcano Cucumber
+    ... 9 children
+  Model Volcano Magma Tree
+    ... 9 children
+  Model Narmek Moon Slice
+    ... 4 children
+  Model Narmek Meteor Cucumber
+    ... 7 children
+  Model Narmek Planet Slice
+    ... 7 children
+  Model Narmek Astronaut Cucumber
+    ... 8 children
+  Model Narmek Neon Alien Cucumber
+    ... 8 children
+  Model Narmek Moon Tree
+    ... 11 children
+  Model Narmek Alien Tree
+    ... 11 children
+  Model Narmek Galaxy Tree
+    ... 11 children
+Folder BreakableModels_pre_newset_2026_09_13
+  Model Cucumber Tree
+    ... 10 children
+  Model Spawn Cucumber
+    ... 6 children
+  Model Spawn Sliced Cucumber
+    ... 9 children
+  Model Spawn Slice Stack
+    ... 30 children
+  Model Spawn Vined Cucumber
+    ... 8 children
+  Model Spawn Flowered Cucumber
+    ... 8 children
+  Model Spawn Cucumber Tree
+    ... 11 children
+  Model Desert Sun-Dried Slice
+    ... 6 children
+  Model Desert Prickly Cucumber
+    ... 5 children
+  Model Desert Sun-Baked Cucumber
+    ... 6 children
+  Model Desert Wrapped Cucumber
+    ... 8 children
+  Model Desert Cactus Cucumber
+    ... 8 children
+  Model Desert Palm
+    ... 7 children
+  Model Desert Sandstone Tree
+    ... 10 children
+  Model Desert Sliced Cucumber
+    ... 9 children
+  Model Samurai Katana Cucumber
+    ... 10 children
+  Model Samurai Bamboo Cucumber
+    ... 7 children
+  Model Samurai Lantern Cucumber
+    ... 10 children
+  Model Samurai Bamboo Grove
+    ... 7 children
+  Model Samurai Torii Gate
+    ... 12 children
+  Model Samurai Sakura Tree
+    ... 10 children
+  Model Samurai Sliced Cucumber
+    ... 9 children
+  Model Farm Cucumber Basket
+    ... 8 children
+  Model Farm Muddy Cucumber
+    ... 6 children
+  Model Farm Crate Cucumber
+    ... 7 children
+  Model Farm Windmill Plant
+    ... 11 children
+  Model Farm Hay Bale
+    ... 12 children
+  Model Farm Cucumber Tree
+    ... 10 children
+  Model Snow Frozen Slice
+    ... 7 children
+  Model Snow Snowcap Cucumber
+    ... 6 children
+  Model Snow Snowball Slice
+    ... 8 children
+  Model Snow Crystal Cucumber
+    ... 7 children
+  Model Snow Frozen Cucumber
+    ... 6 children
+  Model Snow Snow Tree
+    ... 7 children
+  Model Snow Icicle Tree
+    ... 11 children
+  Model Snow Frozen Tree
+    ... 12 children
+  Model Underwater Bubble Slice
+    ... 7 children
+  Model Underwater Seaweed Cucumber
+    ... 6 children
+  Model Underwater Shell Slice
+    ... 9 children
+  Model Underwater Coral Cucumber
+    ... 10 children
+  Model Underwater Pearl Cucumber
+    ... 9 children
+  Model Underwater Kelp Tree
+    ... 10 children
+  Model Underwater Bubble Tree
+    ... 10 children
+  Model Underwater Coral Tree
+    ... 13 children
+  Model Volcano Molten Slice
+    ... 8 children
+  Model Volcano Charred Cucumber
+    ... 7 children
+  Model Volcano Molten Cucumber
+    ... 5 children
+  Model Volcano Flame Cucumber
+    ... 8 children
+  Model Volcano Obsidian Tree
+    ... 9 children
+  Model Volcano Volcano Cucumber
+    ... 10 children
+  Model Volcano Magma Tree
+    ... 10 children
+  Model Narmek Moon Slice
+    ... 5 children
+  Model Narmek Meteor Cucumber
+    ... 8 children
+  Model Narmek Planet Slice
+    ... 8 children
+  Model Narmek Astronaut Cucumber
+    ... 9 children
+  Model Narmek Neon Alien Cucumber
+    ... 9 children
+  Model Narmek Moon Tree
+    ... 12 children
+  Model Narmek Alien Tree
+    ... 12 children
+  Model Narmek Galaxy Tree
+    ... 12 children
+Folder ShopAndGuardianAudioBackup_20260915
+  Script GuardianService
+  Frame ShopPanel @{Reference=Zombie Cucumber Game Store look (Display.Frame.Frames.Store); built by hud-shop/build_shop.lua; ShopController wires it, RequestedTab=Strength}
+    ... 2 children
+Folder ShopGroupGiftBackup_20260915
+  ModuleScript ShopController
+  ModuleScript CucumberAdventure
+  ModuleScript DataService
+    ... 1 children
+  Script CucumberSpawner
+  Script CucumberCarry
+  Frame ShopPanel @{Reference=Zombie Cucumber Game Store look (Display.Frame.Frames.Store); built by hud-shop/build_shop.lua; ShopController wires it, RequestedTab=Strength}
+    ... 2 children
+  ScreenGui FreeGiftGui @{DesignReference=Free Gift popup • 940 x 690, RewardAmount=10000, RewardConnected=false, RewardType=Speed}
+    ... 3 children
+Folder __LiftRebuildBackup_2026_09_16
+  Script CucumberCarry
+  LocalScript CarryClient
+  LocalScript CucumberPromptClient
+  ModuleScript CucumberStrength
+  LocalScript CollectAnimClient
+  LocalScript CucumberGripClient
+  Animation Anim_CucumberPickUp
+  Animation Anim_CucumberStruggle
+  Animation Anim_CucumberFall
+  KeyframeSequence Anim_CucumberPickUpSequence
+    ... 22 children
+  KeyframeSequence Anim_CucumberStruggleSequence
+    ... 16 children
+  KeyframeSequence Anim_CucumberFallSequence
+    ... 37 children
+Folder __DefenceSet2Backup_2026_09_16
+  Script DefenceService
+=== ServerScriptService ===
+Script CucumberSpawner
+Script PlotService
+Script DataLoader
+Script EggShop
+Script EggPlacement
+Script BenchServer
+Script CucumberCarry
+Script GymLoader
+Script PlotUpgradeService
+Script LobbyLayoutServer
+Script PlotBadges
+Script LeaderstatsService
+Script DayNightCycle @{DayClockEnd=16, DayClockStart=11, DayDurationSeconds=180, NightAmbient=rgb(60,66,98), NightBrightness=1, NightClockTime=0, NightDurationSeconds=45, NightOutdoorAmbient=rgb(78,85,122)}
+Script StrengthProgressionServer
+Script PortalLoader
+Script PetHatchService
+Script HeadbandService
+Script ShopProductsServer
+Script BuildService
+Script ZombieRaidService
+Script DefenceService
+Script BuildPromptServer
+Script SpawnAtBaseServer
+Script BuildHealthService
+Script BaseSaveService
+Script AdminService
+Script CucumberMoveServer
+Script GuardianService
+Script GroupGiftServer
+Script BoostPadService
+=== RS.Assets.Pets ===
+Model Cat
+Model Dog
+Model Bunny
+Model Wolf
+Model Tabby
+Model Fox
+Model Gregory
+Model Barrel
+Model Treasure Gem
+Model Cannon
+Model Chest
+Model Desert Overlord
+Model Cactus
+Model Dog Ninja
+Model Good Ninja
+Model Evil Ninja
+Model Good Samurai
+Model Evil Samurai
+Model Sensei
+Model Hay
+Model Bird
+Model Panda
+Model Cow
+Model Pig
+Model Farmer
+Model Red Snowman
+Model Blue Snowman
+Model Frozen Dragon
+Model Frozen Hydra
+Model Frozen Ice Shock
+Model Frozen Gem
+Model Oceanic Dog
+Model Oceanic Kitty
+Model Oceanic Bunny
+Model Oceanic Bear
+Model Ocean Dragon
+Model Atlantic Hydra
+Model Lava Plume
+Model Lava Golem
+Model Lava Veltal
+Model Lava Trio
+Model Lava Dragon
+Model Demon Dog
+Model Moon Bunny
+Model Satellite Pup
+Model Alien Slime
+Model Meteor Moth
+Model Nebula Fox
+Model Cosmo Cat
+=== script attributes (SSS) ===
+DayNightCycle @{DayClockEnd=16, DayClockStart=11, DayDurationSeconds=180, NightAmbient=rgb(60,66,98), NightBrightness=1, NightClockTime=0, NightDurationSeconds=45, NightOutdoorAmbient=rgb(78,85,122)}
+=== workspace attrs ===
+=== Plots ===
+Plot 5 Part @{PlotIndex=5}
+  Texture Top Texture
+Plot 6 Part @{PlotIndex=6}
+  Texture Top Texture
+Plot 1 Part @{PlotIndex=1}
+  Texture Top Texture
+Plot 2 Part @{PlotIndex=2}
+  Texture Top Texture
+Plot 3 Part @{PlotIndex=3}
+  Texture Top Texture
+Plot 4 Part @{PlotIndex=4}
+  Texture Top Texture
+StreamingEnabled=true

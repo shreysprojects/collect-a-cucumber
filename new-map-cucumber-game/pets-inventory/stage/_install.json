@@ -1,0 +1,17 @@
+[
+ {
+  "file": "ServerScriptService.PetInventoryService.server.lua",
+  "path": "ServerScriptService.PetInventoryService",
+  "class": "Script"
+ },
+ {
+  "file": "StarterPlayer.StarterPlayerScripts.PetInventoryClient.client.lua",
+  "path": "StarterPlayer.StarterPlayerScripts.PetInventoryClient",
+  "class": "LocalScript"
+ },
+ {
+  "file": "StarterPlayer.StarterPlayerScripts.PetInfoClient.client.lua",
+  "path": "StarterPlayer.StarterPlayerScripts.PetInfoClient",
+  "class": "LocalScript"
+ }
+]

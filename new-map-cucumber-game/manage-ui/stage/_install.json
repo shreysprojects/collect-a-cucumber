@@ -1,0 +1,17 @@
+[
+ {
+  "file": "ReplicatedStorage.Modules.ManageConfig.lua",
+  "path": "ReplicatedStorage.Modules.ManageConfig",
+  "class": "ModuleScript"
+ },
+ {
+  "file": "ServerScriptService.ManageService.server.lua",
+  "path": "ServerScriptService.ManageService",
+  "class": "Script"
+ },
+ {
+  "file": "StarterGui.CucumberMenus.ManageController.lua",
+  "path": "StarterGui.CucumberMenus.ManageController",
+  "class": "ModuleScript"
+ }
+]

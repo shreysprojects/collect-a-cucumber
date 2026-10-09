@@ -1,0 +1,3987 @@
+{
+ "models": {
+  "SlicedCucumber": {
+   "collection": "SlicedCucumber",
+   "parts": 4,
+   "tris": 3744,
+   "size_studs": [
+    3.36,
+    2.28,
+    1.77
+   ],
+   "min_z": -0.055,
+   "biome": "grass",
+   "archetype": "slice",
+   "notes": ""
+  },
+  "SlicedCucumberStack": {
+   "collection": "SlicedCucumberStack",
+   "parts": 4,
+   "tris": 3744,
+   "size_studs": [
+    1.75,
+    1.69,
+    2.75
+   ],
+   "min_z": 0.006,
+   "biome": "grass",
+   "archetype": "slice",
+   "notes": ""
+  },
+  "Cucumber": {
+   "collection": "Cucumber",
+   "parts": 2,
+   "tris": 1112,
+   "size_studs": [
+    1.37,
+    1.36,
+    4.3
+   ],
+   "min_z": 0.0,
+   "biome": "grass",
+   "archetype": "cuke",
+   "notes": ""
+  },
+  "FloweredCucumber": {
+   "collection": "FloweredCucumber",
+   "parts": 6,
+   "tris": 1500,
+   "size_studs": [
+    2.57,
+    1.36,
+    4.59
+   ],
+   "min_z": 0.0,
+   "biome": "grass",
+   "archetype": "cuke",
+   "notes": ""
+  },
+  "VinedCucumber": {
+   "collection": "VinedCucumber",
+   "parts": 5,
+   "tris": 1744,
+   "size_studs": [
+    2.3,
+    1.51,
+    4.69
+   ],
+   "min_z": 0.0,
+   "biome": "grass",
+   "archetype": "cuke",
+   "notes": ""
+  },
+  "CucumberTree": {
+   "collection": "CucumberTree",
+   "parts": 5,
+   "tris": 3620,
+   "size_studs": [
+    7.27,
+    6.04,
+    11.65
+   ],
+   "min_z": 0.0,
+   "biome": "grass",
+   "archetype": "tree",
+   "notes": ""
+  },
+  "DesertSunDriedSlice": {
+   "collection": "DesertSunDriedSlice",
+   "parts": 4,
+   "tris": 3744,
+   "size_studs": [
+    3.36,
+    2.26,
+    1.76
+   ],
+   "min_z": -0.047,
+   "biome": "desert",
+   "archetype": "slice",
+   "notes": ""
+  },
+  "DesertPricklyCucumber": {
+   "collection": "DesertPricklyCucumber",
+   "parts": 3,
+   "tris": 806,
+   "size_studs": [
+    1.83,
+    1.85,
+    4.3
+   ],
+   "min_z": 0.0,
+   "biome": "desert",
+   "archetype": "cuke",
+   "notes": ""
+  },
+  "DesertSunBakedCucumber": {
+   "collection": "DesertSunBakedCucumber",
+   "parts": 4,
+   "tris": 1476,
+   "size_studs": [
+    1.36,
+    1.37,
+    4.4
+   ],
+   "min_z": 0.0,
+   "biome": "desert",
+   "archetype": "cuke",
+   "notes": ""
+  },
+  "DesertWrappedCucumber": {
+   "collection": "DesertWrappedCucumber",
+   "parts": 4,
+   "tris": 1888,
+   "size_studs": [
+    1.6,
+    1.59,
+    4.3
+   ],
+   "min_z": 0.0,
+   "biome": "desert",
+   "archetype": "cuke",
+   "notes": ""
+  },
+  "DesertCactusCucumber": {
+   "collection": "DesertCactusCucumber",
+   "parts": 6,
+   "tris": 2060,
+   "size_studs": [
+    3.32,
+    1.52,
+    4.47
+   ],
+   "min_z": 0.0,
+   "biome": "desert",
+   "archetype": "cuke",
+   "notes": ""
+  },
+  "DesertPalm": {
+   "collection": "DesertPalm",
+   "parts": 5,
+   "tris": 3056,
+   "size_studs": [
+    8.06,
+    7.82,
+    10.98
+   ],
+   "min_z": 0.0,
+   "biome": "desert",
+   "archetype": "tree",
+   "notes": ""
+  },
+  "DesertSandstoneTree": {
+   "collection": "DesertSandstoneTree",
+   "parts": 5,
+   "tris": 5060,
+   "size_studs": [
+    6.63,
+    5.61,
+    11.58
+   ],
+   "min_z": 0.0,
+   "biome": "desert",
+   "archetype": "tree",
+   "notes": ""
+  },
+  "VolcanoMoltenSlice": {
+   "collection": "VolcanoMoltenSlice",
+   "parts": 4,
+   "tris": 3744,
+   "size_studs": [
+    3.36,
+    2.28,
+    1.77
+   ],
+   "min_z": -0.055,
+   "biome": "volcano",
+   "archetype": "slice",
+   "notes": ""
+  },
+  "VolcanoCharredCucumber": {
+   "collection": "VolcanoCharredCucumber",
+   "parts": 4,
+   "tris": 1168,
+   "size_studs": [
+    1.36,
+    1.38,
+    4.44
+   ],
+   "min_z": 0.0,
+   "biome": "volcano",
+   "archetype": "cuke",
+   "notes": ""
+  },
+  "VolcanoMoltenCucumber": {
+   "collection": "VolcanoMoltenCucumber",
+   "parts": 4,
+   "tris": 1360,
+   "size_studs": [
+    1.66,
+    1.7,
+    4.68
+   ],
+   "min_z": 0.0,
+   "biome": "volcano",
+   "archetype": "cuke",
+   "notes": ""
+  },
+  "VolcanoFlameCucumber": {
+   "collection": "VolcanoFlameCucumber",
+   "parts": 5,
+   "tris": 1720,
+   "size_studs": [
+    2.16,
+    2.06,
+    4.79
+   ],
+   "min_z": 0.0,
+   "biome": "volcano",
+   "archetype": "cuke",
+   "notes": ""
+  },
+  "VolcanoObsidianTree": {
+   "collection": "VolcanoObsidianTree",
+   "parts": 5,
+   "tris": 2290,
+   "size_studs": [
+    6.52,
+    5.27,
+    11.05
+   ],
+   "min_z": 0.0,
+   "biome": "volcano",
+   "archetype": "tree",
+   "notes": ""
+  },
+  "VolcanoVolcanoCucumber": {
+   "collection": "VolcanoVolcanoCucumber",
+   "parts": 5,
+   "tris": 1292,
+   "size_studs": [
+    3.5,
+    3.33,
+    4.78
+   ],
+   "min_z": 0.0,
+   "biome": "volcano",
+   "archetype": "cuke",
+   "notes": ""
+  },
+  "VolcanoMagmaTree": {
+   "collection": "VolcanoMagmaTree",
+   "parts": 6,
+   "tris": 2992,
+   "size_studs": [
+    7.19,
+    6.01,
+    11.78
+   ],
+   "min_z": 0.0,
+   "biome": "volcano",
+   "archetype": "tree",
+   "notes": ""
+  },
+  "NarmekMoonSlice": {
+   "collection": "NarmekMoonSlice",
+   "parts": 5,
+   "tris": 3744,
+   "size_studs": [
+    3.36,
+    2.28,
+    1.77
+   ],
+   "min_z": -0.055,
+   "biome": "narmek",
+   "archetype": "slice",
+   "notes": ""
+  },
+  "NarmekMeteorCucumber": {
+   "collection": "NarmekMeteorCucumber",
+   "parts": 4,
+   "tris": 1580,
+   "size_studs": [
+    1.95,
+    1.78,
+    4.3
+   ],
+   "min_z": 0.0,
+   "biome": "narmek",
+   "archetype": "cuke",
+   "notes": ""
+  },
+  "NarmekPlanetSlice": {
+   "collection": "NarmekPlanetSlice",
+   "parts": 5,
+   "tris": 1832,
+   "size_studs": [
+    2.72,
+    2.16,
+    1.73
+   ],
+   "min_z": 0.0,
+   "biome": "narmek",
+   "archetype": "slice",
+   "notes": ""
+  },
+  "NarmekAstronautCucumber": {
+   "collection": "NarmekAstronautCucumber",
+   "parts": 7,
+   "tris": 1032,
+   "size_studs": [
+    1.44,
+    1.59,
+    5.01
+   ],
+   "min_z": 0.0,
+   "biome": "narmek",
+   "archetype": "cuke",
+   "notes": ""
+  },
+  "NarmekNeonAlienCucumber": {
+   "collection": "NarmekNeonAlienCucumber",
+   "parts": 5,
+   "tris": 2040,
+   "size_studs": [
+    3.29,
+    1.53,
+    4.51
+   ],
+   "min_z": 0.0,
+   "biome": "narmek",
+   "archetype": "cuke",
+   "notes": ""
+  },
+  "NarmekMoonTree": {
+   "collection": "NarmekMoonTree",
+   "parts": 5,
+   "tris": 2456,
+   "size_studs": [
+    5.81,
+    4.7,
+    11.51
+   ],
+   "min_z": 0.0,
+   "biome": "narmek",
+   "archetype": "tree",
+   "notes": ""
+  },
+  "NarmekAlienTree": {
+   "collection": "NarmekAlienTree",
+   "parts": 5,
+   "tris": 2888,
+   "size_studs": [
+    6.26,
+    5.22,
+    11.5
+   ],
+   "min_z": 0.0,
+   "biome": "narmek",
+   "archetype": "tree",
+   "notes": ""
+  },
+  "NarmekGalaxyTree": {
+   "collection": "NarmekGalaxyTree",
+   "parts": 6,
+   "tris": 3492,
+   "size_studs": [
+    6.64,
+    4.7,
+    11.11
+   ],
+   "min_z": 0.0,
+   "biome": "narmek",
+   "archetype": "tree",
+   "notes": ""
+  },
+  "SamuraiKatanaCucumber": {
+   "collection": "SamuraiKatanaCucumber",
+   "parts": 8,
+   "tris": 1862,
+   "size_studs": [
+    1.77,
+    1.69,
+    6.44
+   ],
+   "min_z": 0.0,
+   "biome": "samurai",
+   "archetype": "cuke",
+   "notes": ""
+  },
+  "SamuraiBambooCucumber": {
+   "collection": "SamuraiBambooCucumber",
+   "parts": 4,
+   "tris": 1936,
+   "size_studs": [
+    2.4,
+    1.78,
+    4.34
+   ],
+   "min_z": 0.0,
+   "biome": "samurai",
+   "archetype": "cuke",
+   "notes": ""
+  },
+  "SamuraiLanternCucumber": {
+   "collection": "SamuraiLanternCucumber",
+   "parts": 9,
+   "tris": 2002,
+   "size_studs": [
+    1.76,
+    1.76,
+    5.62
+   ],
+   "min_z": 0.0,
+   "biome": "samurai",
+   "archetype": "cuke",
+   "notes": ""
+  },
+  "SamuraiBambooGrove": {
+   "collection": "SamuraiBambooGrove",
+   "parts": 6,
+   "tris": 1716,
+   "size_studs": [
+    3.04,
+    2.34,
+    9.23
+   ],
+   "min_z": -0.023,
+   "biome": "samurai",
+   "archetype": "tree",
+   "notes": ""
+  },
+  "SamuraiToriiGate": {
+   "collection": "SamuraiToriiGate",
+   "parts": 7,
+   "tris": 4204,
+   "size_studs": [
+    9.48,
+    1.9,
+    9.51
+   ],
+   "min_z": 0.0,
+   "biome": "samurai",
+   "archetype": "gate",
+   "notes": ""
+  },
+  "SamuraiSakuraTree": {
+   "collection": "SamuraiSakuraTree",
+   "parts": 9,
+   "tris": 3714,
+   "size_studs": [
+    6.81,
+    5.78,
+    11.68
+   ],
+   "min_z": 0.0,
+   "biome": "samurai",
+   "archetype": "tree",
+   "notes": ""
+  },
+  "SamuraiSlicedCucumber": {
+   "collection": "SamuraiSlicedCucumber",
+   "parts": 5,
+   "tris": 2320,
+   "size_studs": [
+    3.11,
+    2.42,
+    1.78
+   ],
+   "min_z": 0.02,
+   "biome": "samurai",
+   "archetype": "slice",
+   "notes": ""
+  },
+  "FarmCucumberBasket": {
+   "collection": "FarmCucumberBasket",
+   "parts": 6,
+   "tris": 2708,
+   "size_studs": [
+    3.25,
+    3.29,
+    4.03
+   ],
+   "min_z": 0.0,
+   "biome": "farm",
+   "archetype": "prop",
+   "notes": ""
+  },
+  "FarmMuddyCucumber": {
+   "collection": "FarmMuddyCucumber",
+   "parts": 4,
+   "tris": 1816,
+   "size_studs": [
+    1.4,
+    1.42,
+    4.3
+   ],
+   "min_z": 0.0,
+   "biome": "farm",
+   "archetype": "cuke",
+   "notes": ""
+  },
+  "FarmCrateCucumber": {
+   "collection": "FarmCrateCucumber",
+   "parts": 6,
+   "tris": 2648,
+   "size_studs": [
+    3.34,
+    2.84,
+    3.34
+   ],
+   "min_z": 0.0,
+   "biome": "farm",
+   "archetype": "prop",
+   "notes": ""
+  },
+  "FarmWindmillPlant": {
+   "collection": "FarmWindmillPlant",
+   "parts": 8,
+   "tris": 1480,
+   "size_studs": [
+    2.9,
+    1.71,
+    5.75
+   ],
+   "min_z": 0.0,
+   "biome": "farm",
+   "archetype": "tree",
+   "notes": ""
+  },
+  "FarmHayBale": {
+   "collection": "FarmHayBale",
+   "parts": 5,
+   "tris": 1368,
+   "size_studs": [
+    4.44,
+    3.04,
+    2.96
+   ],
+   "min_z": 0.038,
+   "biome": "farm",
+   "archetype": "prop",
+   "notes": ""
+  },
+  "FarmCucumberTree": {
+   "collection": "FarmCucumberTree",
+   "parts": 5,
+   "tris": 4172,
+   "size_studs": [
+    6.58,
+    5.67,
+    11.91
+   ],
+   "min_z": 0.0,
+   "biome": "farm",
+   "archetype": "tree",
+   "notes": ""
+  },
+  "SnowFrozenSlice": {
+   "collection": "SnowFrozenSlice",
+   "parts": 5,
+   "tris": 3976,
+   "size_studs": [
+    3.45,
+    2.38,
+    2.02
+   ],
+   "min_z": -0.055,
+   "biome": "snow",
+   "archetype": "slice",
+   "notes": ""
+  },
+  "SnowSnowcapCucumber": {
+   "collection": "SnowSnowcapCucumber",
+   "parts": 4,
+   "tris": 1544,
+   "size_studs": [
+    1.97,
+    1.93,
+    4.5
+   ],
+   "min_z": 0.0,
+   "biome": "snow",
+   "archetype": "cuke",
+   "notes": ""
+  },
+  "SnowSnowballSlice": {
+   "collection": "SnowSnowballSlice",
+   "parts": 5,
+   "tris": 932,
+   "size_studs": [
+    2.47,
+    2.59,
+    2.5
+   ],
+   "min_z": 0.0,
+   "biome": "snow",
+   "archetype": "slice",
+   "notes": ""
+  },
+  "SnowCrystalCucumber": {
+   "collection": "SnowCrystalCucumber",
+   "parts": 4,
+   "tris": 2128,
+   "size_studs": [
+    2.86,
+    2.47,
+    4.94
+   ],
+   "min_z": 0.0,
+   "biome": "snow",
+   "archetype": "cuke",
+   "notes": ""
+  },
+  "SnowFrozenCucumber": {
+   "collection": "SnowFrozenCucumber",
+   "parts": 4,
+   "tris": 1700,
+   "size_studs": [
+    2.43,
+    2.32,
+    4.98
+   ],
+   "min_z": 0.0,
+   "biome": "snow",
+   "archetype": "cuke",
+   "notes": ""
+  },
+  "SnowSnowTree": {
+   "collection": "SnowSnowTree",
+   "parts": 6,
+   "tris": 3760,
+   "size_studs": [
+    6.29,
+    5.6,
+    11.52
+   ],
+   "min_z": 0.0,
+   "biome": "snow",
+   "archetype": "tree",
+   "notes": ""
+  },
+  "SnowIcicleTree": {
+   "collection": "SnowIcicleTree",
+   "parts": 5,
+   "tris": 3804,
+   "size_studs": [
+    6.37,
+    5.27,
+    11.4
+   ],
+   "min_z": 0.0,
+   "biome": "snow",
+   "archetype": "tree",
+   "notes": ""
+  },
+  "SnowFrozenTree": {
+   "collection": "SnowFrozenTree",
+   "parts": 7,
+   "tris": 3136,
+   "size_studs": [
+    6.22,
+    4.7,
+    11.35
+   ],
+   "min_z": 0.0,
+   "biome": "snow",
+   "archetype": "tree",
+   "notes": ""
+  },
+  "UnderwaterBubbleSlice": {
+   "collection": "UnderwaterBubbleSlice",
+   "parts": 4,
+   "tris": 4064,
+   "size_studs": [
+    3.36,
+    2.3,
+    1.79
+   ],
+   "min_z": -0.054,
+   "biome": "underwater",
+   "archetype": "slice",
+   "notes": ""
+  },
+  "UnderwaterSeaweedCucumber": {
+   "collection": "UnderwaterSeaweedCucumber",
+   "parts": 3,
+   "tris": 1600,
+   "size_studs": [
+    1.62,
+    1.58,
+    4.38
+   ],
+   "min_z": 0.0,
+   "biome": "underwater",
+   "archetype": "cuke",
+   "notes": ""
+  },
+  "UnderwaterShellSlice": {
+   "collection": "UnderwaterShellSlice",
+   "parts": 5,
+   "tris": 1484,
+   "size_studs": [
+    2.8,
+    2.27,
+    1.95
+   ],
+   "min_z": 0.047,
+   "biome": "underwater",
+   "archetype": "slice",
+   "notes": ""
+  },
+  "UnderwaterCoralCucumber": {
+   "collection": "UnderwaterCoralCucumber",
+   "parts": 3,
+   "tris": 2022,
+   "size_studs": [
+    2.97,
+    2.53,
+    4.6
+   ],
+   "min_z": 0.0,
+   "biome": "underwater",
+   "archetype": "cuke",
+   "notes": ""
+  },
+  "UnderwaterPearlCucumber": {
+   "collection": "UnderwaterPearlCucumber",
+   "parts": 3,
+   "tris": 1656,
+   "size_studs": [
+    1.99,
+    1.83,
+    4.3
+   ],
+   "min_z": 0.0,
+   "biome": "underwater",
+   "archetype": "cuke",
+   "notes": ""
+  },
+  "UnderwaterKelpTree": {
+   "collection": "UnderwaterKelpTree",
+   "parts": 5,
+   "tris": 3020,
+   "size_studs": [
+    6.86,
+    6.92,
+    11.2
+   ],
+   "min_z": 0.0,
+   "biome": "underwater",
+   "archetype": "tree",
+   "notes": ""
+  },
+  "UnderwaterBubbleTree": {
+   "collection": "UnderwaterBubbleTree",
+   "parts": 4,
+   "tris": 2916,
+   "size_studs": [
+    6.12,
+    5.15,
+    11.75
+   ],
+   "min_z": 0.0,
+   "biome": "underwater",
+   "archetype": "tree",
+   "notes": ""
+  },
+  "UnderwaterCoralTree": {
+   "collection": "UnderwaterCoralTree",
+   "parts": 4,
+   "tris": 2666,
+   "size_studs": [
+    6.63,
+    5.45,
+    11.47
+   ],
+   "min_z": 0.0,
+   "biome": "underwater",
+   "archetype": "tree",
+   "notes": ""
+  },
+  "ToylandToySlice": {
+   "collection": "ToylandToySlice",
+   "parts": 4,
+   "tris": 1896,
+   "size_studs": [
+    1.73,
+    0.58,
+    1.69
+   ],
+   "min_z": 0.0,
+   "biome": "toyland",
+   "archetype": "slice",
+   "notes": "One chunky cucumber slice standing on its edge, cut face to +Y (the game lays an upright disc flat in the field; the index card shows it standing, like the tile). A 10-sided dark-green rind drum (r 0.86, 0.46 thick, toy_green_dk) with seven lighter-green speckles round its skin; a bright light-green cut face on BOTH sides (toy_face_lt, inset 0.15); on each face a pale centre disc (r 0.45, toy_spoke) carrying six lime teardrop seed chambers that point in at a small pale hub, so the pale shows between them as six radial spokes; and a ring of ten small lime squares along the face's edge where it meets the rind (the tile's 'lighter squares on the rind'). Footprint ~1.73 (X) x 0.58 (Y) x 1.70 (Z) studs, disc centre at z 0.845; the lowest point is the chamfered bottom vertex of the rind, a flat strip on z = 0. Y-extent 0.58 < 0.45 x 1.70, so the game's lay-flat test fires. 4 parts. Deviations from the brief, all because the tile disagrees: SIX spokes/chambers, not eight (the tile has six); the brief's square Seeds are the tile's six lime teardrop chambers instead (hub ~0.11, chambers out to r 0.40, pale disc r 0.45, not spokes to 0.78 of the face radius); the pale centre is ONE disc (part PaleCentre) with the chambers on it, the spokes and hub being the pale left between them; the chambers and the face-edge squares are the tile's lime, which is cuke_stud, the same colour + material as the rim speckles, so rule 5 merges all three into one part 'Lime' (4 parts, not 5); face inset 0.15, not 0.10 (the tile's rind ring is ~15 % of the radius). The disc centre sits at R - 0.05*sin(18 deg) = 0.8445, not R: the rind's 0.05 chamfer lifts the true lowest point 0.0155 above the bare 10-gon vertex. Everything is placed with matrices, so dryrun's bbox and min_z are not meaningful."
+  },
+  "ToylandLegoCucumber": {
+   "collection": "ToylandLegoCucumber",
+   "parts": 6,
+   "tris": 1688,
+   "size_studs": [
+    1.44,
+    1.44,
+    4.65
+   ],
+   "min_z": 0.0,
+   "biome": "toyland",
+   "archetype": "cuke",
+   "notes": "A toy-brick cucumber.  The set's standard upright body (h 4.0, r 0.68, 8 facets, facet 1 = +Y, NO stem nub) in cuke_green stands on a small white toy_white PEG (r 0.22, 12-sided, chamfered foot, z 0 .. 0.18, its top 0.02 up inside the body's flat base), so the whole body is lifted 0.16 and runs z 0.16 .. 4.16.  The peg is the only thing touching the ground (lowest point exactly z = 0); from the hero camera only its lower ~0.09 shows as a white sliver under the body, as in the tile.  CHECKER: the tile's body is a checkerboard of bright and dark squares, so 36 flush nar_alien_grn cells (0.02 proud, one per facet, 9 bands from zf 0.032 to 0.922 - 7 even bands over the straight part plus one on each chamfered shoulder, the shoulder cells laid flat on the sloped facet) alternate with the bare cuke_green skin.  BUMPS: 21 chunky raised squares in cuke_mid, DARKER than the body the way the tile's lumps read - the exact slots of cuke_studs(rows 7, per_row 3, z0 0.11, z1 0.90, seed 4), 0.09 proud, but each one 0.27-0.33 wide and, on the straight middle rows only (zf 0.2 .. 0.8), up to 1.3x taller than wide, because the tile's lumps are irregular; every bump is laid on the real (sloped) facet plane, so the top and bottom rows sit flush on the shoulders instead of floating off them.  BRICK: a toy_yellow bevelled plate 1.10 x 1.10 x 0.34 sitting on the body's flat top, tipped 8 degrees about X TOWARD THE VIEWER (front edge low, so its top face and stud show from the front camera); its pivot is sunk 0.06 below the body top (z 4.10) so the tilted plate swallows the whole top disc (every top vert >= 0.017 inside it) with no wedge of daylight under it, while the highest bump still clears its underside by ~0.05; the plate spans z 4.02 .. 4.51.  BRICKSTUD: one round toy_yellow_dk stud r 0.26 on the plate's top centre, 12-sided, 0.18 visible height (0.02 more sunk into the plate) with a small chamfered top edge, same tilt, top at z 4.65.  Overall 1.44 x 1.44 x 4.65 (the width is the bumps on the +-X / +-Y facets), centred on x = 0, y = 0, ~1690 tris.  Six parts: Peg, Body, Checker, Bumps, Brick, BrickStud.  Departures from the brief, all from the tile: the Checker part (the brief does not mention the tile's checker) and the bump size/aspect jitter; the brief's 'tilted 8 degrees' gave no direction, toward the viewer was chosen.  The brick and stud are placed with a matrix, so dryrun's bounding box under-reads the height."
+  },
+  "ToylandJackInTheBoxCucumber": {
+   "collection": "ToylandJackInTheBoxCucumber",
+   "parts": 8,
+   "tris": 1668,
+   "size_studs": [
+    3.39,
+    2.55,
+    5.95
+   ],
+   "min_z": 0.0,
+   "biome": "toyland",
+   "archetype": "cuke",
+   "notes": "A toy JACK-IN-THE-BOX.  A red toy_red box 2.4 x 2.4 x 2.1 (z 0 - 2.10, bevel 0.10) stands on the ground, centred on x = 0, y = 0; round its open top runs a proud rim frame 2.52 across (4 bevelled bars, lip 0.20 wide, z 1.90 - 2.22) and inside the frame a dark toy_red_dk plate (2.16 across, top z 2.13) reads as the open box's shadowed inside - the tile shows the box open, so the brief's solid rim band became a frame 0.10 taller with a dark floor 0.09 below its lip.  A big yellow toy_yellow 5-point STAR (outer r 0.62, inner 0.27, point up) stands 0.06 proud of each of the four side faces, centred at z 1.0.  Two yellow square sticks (0.12 x 0.12, 1.5 long - the open lid's hinges) rise from the back top corners (x +-1.0, y -1.0, z 2.0) leaning 25 deg outward and 10 deg back, tips at (+-1.63, -1.24, 3.34).  A yellow CRANK sticks out of the box's NEGATIVE-x side (the screen right, as in the tile) behind that side's star: a 0.12-square stub along -X at y -0.78, z 1.10, reaching x -1.66, ending in an upturned 0.14 x 0.14 x 0.40 handle (x -1.72 - -1.58, z 1.02 - 1.42).  Stars, sticks and crank are ONE part, Yellow.  Out of the box rises a green cuke_green SPRING: a square-section coil (0.19 tall x 0.26 deep, no twist) on radius 0.55, 4.5 turns, z 2.05 - 3.25, 8 samples per turn so it is octagonal like the body - lofted with D.ribbon along radial frames instead of the brief's D.coil 0.13-radius round wire, because coil's aim()-rolled rings twist round the wire at every step and a 0.26-thick round wire at this 0.267 pitch would leave no gap between coils; its bottom end is buried in the box floor at the front, its top end runs into the head at the back.  On it sits the HEAD: the set's cucumber body scaled to h 2.3, r 0.70, base z 3.15, with the standard (0.30, 0.30) nub, facet 1 facing +Y.  The spring is merged into the Head part (same colour + material - the merge rule), so Head = spring + head.  Nine cuke_stud speckles (HeadStuds, size 0.28) are hand-slotted in three rows (zf 0.17 / 0.48 / 0.78) so the face stays clear: none on facet 1 or on facet 2, and on facet 0 only one low stud (z 3.40 - 3.68) well under the nose; the top row is on the sides and back (facets 3 / 5 / 7), ~0.2 under the brim.  The FACE on facet 1: two black toy_eye rounded squares (0.30 x 0.36, 0.05 proud) at zf 0.62 (z 4.58), x +-0.21 (the Faces rule's 0.42 spacing, not the brief's +-0.22), each with a 0.10 white toy_eye_hl highlight in its upper OUTER corner (0.02 proud); the pair (0.72 across) is wider than the 0.54-wide front facet, so each eye is sunk 0.14 behind the facet plane and never floats off the receding side facet.  A dark-green NOSE block (0.30 x 0.24, 0.15 proud, bevelled) sits just under the eyes, z 4.10 - 4.34, in cuke_dark - one step darker than the brief's cuke_mid, because the tile's nose reads clearly darker than the head and cuke_mid barely differs in value from the skin.  A red BOWLER HAT - a flat 10-gon brim r 0.95 x 0.10 and an 8-sided crown r 0.62 tapering to 0.53 then chamfered to a flat top, 0.55 tall - sits on the head top (brim base z 5.28 on the axis), tilted 10 deg about X so its top tips TOWARD the viewer (brim underside ~5.12 at the front, ~5.44 at the back); the head's crown and nub are wholly inside it (>= 0.07 clear of the crown walls).  The hat shares the Box part (same colour + material).  Box, spring and head keep the brief's proportions rather than the tile's (the tile's head is a little smaller against the box).  Footprint about 3.4 x 2.6 (the crank and the two sticks are the extremes), height ~5.95 at the back edge of the tilted crown's top.  Lowest point: the box bottom, exactly z = 0.  All SmoothPlastic.  8 parts: Box, Opening, Yellow, Head, HeadStuds, Eyes, EyeShine, Nose; ~1670 tris.  Stars, eyes, the spring, the sticks and the hat are placed with matrices, so dryrun's bounding box is only an approximation."
+  },
+  "ToylandToyRocketCucumber": {
+   "collection": "ToylandToyRocketCucumber",
+   "parts": 10,
+   "tris": 1566,
+   "size_studs": [
+    3.44,
+    2.5,
+    5.16
+   ],
+   "min_z": 0.0,
+   "biome": "toyland",
+   "archetype": "cuke",
+   "notes": "A cucumber riding in a toy rocket, standing upright on the rocket's blue base; the cucumber's head pokes out of the top wearing a red nose cone.  Everything is toy plastic (SmoothPlastic), no Neon.  BOTTOM TO TOP: a stepped toy_blue base - a narrow foot r 0.64 (z 0-0.12, the only thing touching z = 0) under a drum r 0.92 (z 0.12-0.50); the toy_white 8-sided hull (z 0.45-2.90), a chamfered bottom edge (r 0.94 -> 1.00 by z 0.51) barrelling out to 1.08 (straight z 1.40-2.40) and back to 1.02 at the top; a toy_red band r 1.10 (z 2.80-3.00) round the hull's top edge; the cucumber head (cuke_green, 8-sided, r 0.78) rising from z 2.60 inside the hull to a rounded top at z 4.25; and a red 8-sided ogive nose cone (base r 0.62, z 4.21-5.16) sitting on it like a hat.  FRONT (+Y): a porthole centred on the hull's front facet at z 1.90 - a toy_blue ring (outer r 0.42, inner r 0.28, 0.08 proud) around a toy_blue_dk disc recessed 0.035 behind the ring's face.  FINS (toy_red): one at +X, one at -X and one on the FRONT, all swept down-and-out the way the tile draws them, their outer tips at z 0.05.  The side fins are 0.22 thick and reach ~0.75 out from the hull (x = +-1.72), leaving the body between z 0.34 (out of the blue drum) and z 1.20 (into the hull); the front fin is a wider tab, 0.52 thick, reaching ~0.47 out (face at y 1.46, top meets the hull at z 1.30) with a flat front face z 0.16-1.02 carrying a toy_yellow square (0.28, upper, z 0.74) and a toy_orange square (0.22, lower, z 0.36), 0.02 proud.  FACE on the head's +Y facet: two black toy_eye rounded squares 0.28 x 0.36 at x +-0.19, z 3.66 with white 0.10 highlights in their upper OUTER corners; a green snout block (0.26 wide, 0.14 proud, z 3.28-3.46, part of Head) with a dark open U-shaped mouth under it (0.30 wide, z 3.125-3.265); two small dark cheek squares at x +-0.245, z 3.34.  Mouth and cheeks are merged into Eyes.  Seven cuke_stud speckles on the head's other facets (none on the face facet).  Footprint about 3.44 (x) by 2.5 (y, -1.02 .. +1.48, the front fin makes it deeper in front), height 5.16, rocket axis on x = 0, y = 0.  Ten parts: Blue, PortholeGlass, Hull, Red, DotYellow, DotOrange, Head, HeadStuds, Eyes, EyeShine.  DEVIATIONS: body upright (the tile leans, REV3 rule 1).  Tile over brief: the front fin is a wide tab (tile) rather than a 0.22 fin, so the two dots fit on its face; the fins sweep downward (tile) instead of being plain wedges; the base has the tile's narrower foot under the drum; the tile's green snout above the mouth is added.  The brief's separate Base and Porthole-ring parts share colour + material, so they are merged into one part named Blue.  Eyes follow the REV3 'Faces' rule (black rounded square + white highlight) instead of the tile's white-sclera eyes, at 0.28 wide and +-0.19 so they nearly fit the head's 0.60-wide front facet (0.03 overhang onto the neighbouring facets).  The tile shows one cheek clearly; the brief's two symmetric cheeks are kept.  No exhaust flame (the tile has none).  Most parts are placed with matrices, so dryrun's bounding box is an approximation."
+  },
+  "ToylandPinwheelPlant": {
+   "collection": "ToylandPinwheelPlant",
+   "parts": 7,
+   "tris": 1052,
+   "size_studs": [
+    3.03,
+    2.2,
+    5.89
+   ],
+   "min_z": 0.0,
+   "biome": "toyland",
+   "archetype": "cuke",
+   "notes": "A toy pinwheel 'flower' on a curved green stem, planted in a green toy brick.  BRICK: two bevelled toy_green halves side by side, together 2.2 x 2.2 x 0.95 (z 0-0.95, the lowest point of the model), so the joint between them reads as the seam down the tile's front face; on top, four chunky 8-sided studs (r 0.30, 0.18 tall, chamfered tops, flat faces square to the brick) on a 2 x 2 grid 1.0 apart.  STEM: a 0.36-wide square-section toy_green_dk stalk of seven bevelled branch_box segments.  It rises out of the brick between the studs just screen-left of centre (x +0.10), bows gently to screen-RIGHT as it climbs (x -0.09 around z 3.0, the lean the tile's stem has) and swings back to x = 0 behind the pinwheel; in side view it leans back 0.125 so its front face (y 0.055) stays just behind the blades, and it ends at z 4.58 behind the hub.  Five raised toy_green speckles sit on the stem (three on its front, one on each side) and are merged into the Brick part (same colour + material).  PINWHEEL: faces +Y, disc in the XZ plane, centred at (0, 0.10, 4.40).  Six folded-kite blades at 60-degree steps, 1.55 from the hub centre to the tip, 0.08 thick (y 0.06-0.14); each is two triangles sharing the radial crease hub -> tip: a narrow flat half on the vane's CLOCKWISE side (as you face it) and a broad half on its anticlockwise side folded 25 degrees toward the viewer (its outer corner stands 0.27 proud, y 0.41), which is how every vane in the tile is drawn - a straight edge clockwise, the bulge anticlockwise - so it reads as a pinwheel vane, not a flat fan.  Clockwise from the top-left as you face it: blue, red, yellow, green, green, yellow - i.e. world angle alpha = 73 + 60*i measured from +X toward +Z, so blue (alpha 73, tip at x +0.45, z 5.88) is on the +X side = screen-LEFT and the two yellows sit at alpha 13 (screen-left) and 193 (screen-right); the tips land within ~8 degrees of the tile's.  The stem shows through the narrow gap between the two lower green blades, as in the tile.  HUB: a toy_red_dk 10-sided disc r 0.36 x 0.20 with a chamfered front (y 0.13-0.33) plus a hidden r 0.12 axle through the blade centre into the stem; a chamfered green centre stud r 0.16 x 0.14 on its front (y 0.32-0.46) lives in the BladeGreen part.  About 3.03 wide x 2.2 deep x 5.89 tall, centred on x = 0, y = 0, nothing below z = 0.  Seven parts: Brick, Stem, BladeBlue, BladeRed, BladeYellow, BladeGreen, Hub.  The rotor (BladeBlue, BladeRed, BladeYellow, BladeGreen, Hub) shares no colour with the static Brick/Stem, so it can be spun as a group about the Y axis through PinwheelHub; the six blades are centrally symmetric, so the group's bounding-box centre in x and z IS the hub (in y the rotor spans -0.03 to 0.46, axle to centre stud).  Deviations, all tile-driven: the hub is toy_red_dk, not toy_red (the tile's hub reads a step darker than its red blade, it keeps the adjacent hub and blade apart in value, and a toy_red hub would have to merge into BladeRed under the same-colour rule); the green blades + centre stud are plastic_green, not toy_green (the tile's blade green samples a touch bluer than its brick, and a distinct colour keeps the spinning rotor separable from the brick without breaking the merge-same-colour rule - FarmWindmillPlant used a material switch for the same reason, but Toyland is SmoothPlastic throughout); the stem is 0.36 wide, not 0.26 (the tile's stem is nearly as wide as a brick stud, ~0.5; 0.36 keeps it reading as a stalk); the studs are 8-sided rounded squares rather than round (as drawn in the tile); the brick is two halves (the tile's front seam); the stem runs BEHIND the blades to the back of the hub rather than to the hub point itself (the tile shows it passing behind the lower green blades); the tile's hub sits ~0.4 screen-right of the stem's foot, but the hub is kept on x = 0 as the brief asks so the footprint stays centred.  Blades, hub and studs are placed with matrices, so dryrun's bounding box under-reads the width and height."
+  },
+  "ToylandBuildingBlockTree": {
+   "collection": "ToylandBuildingBlockTree",
+   "parts": 4,
+   "tris": 1372,
+   "size_studs": [
+    6.93,
+    3.44,
+    8.76
+   ],
+   "min_z": 0.0,
+   "biome": "toyland",
+   "archetype": "tree",
+   "notes": "A tree built from toy bricks, transcribed from the reference tile.  Faces +Y, centred on the trunk at x=0/y=0, lowest point exactly z=0, nothing below it.  Footprint ~6.9 x 3.4, 8.8 tall (stud tops at z 8.76).  TRUNK: four stacked brown bricks (bevel 0.08) - a wider foot brick 1.80 across (z 0-1.25), then 1.64 (z 1.25-2.32), 1.58 (z 2.32-3.38) and 1.52 (z 3.38-5.0, running up into the crown and seen only through the crown's front notch).  A thin dark-brown band sits in the bevel groove at each joint (z 1.25 / 2.32 / 3.38) so the brick seams read as the tile's dark lines.  CROWN (all one toy green, bevel 0.08), bottom at z 3.38: layer 1 (z 3.38-4.76) and layer 2 (z 4.76-6.16) are both the full 6.9 x 3.4, split into staggered front and back rows of bricks.  As in the tile, layer 1 has a 0.76-wide NOTCH in the front centre where the brown trunk shows through, and layer 2's middle front brick (x -1.0..1.55) is RECESSED to y 0.84 (the flanking bricks come forward to y 1.70).  On top sits a narrower two-tier block 3.44 wide x 2.6 deep, offset toward -X (the tile's RIGHT, the +X trap) and a little back: a thin layer 3 of three bricks (z 6.16-6.98) under one big top brick (z 6.98-8.32).  STUDS: 8 chunky round studs (r 0.48, 0.44 tall, chamfered top, 12 segs, sized from the tile: ~0.28 of the top brick's width): 2 x 2 on the top brick and a front/back pair on each exposed shoulder of layer 2 (x +2.30 and x -2.75).  They stand in for the set's square speckle.  Four parts: Trunk (toy_brown), TrunkSeams (toy_brown_dk), Crown (toy_green), CrownStuds (nar_alien_grn), all SmoothPlastic.  ~1.4k tris.  DEVIATIONS from the brief (the tile wins): (1) proportions follow the tile, not the brief's 6.4 x 3.4 x 10.2 with a 1.25-wide trunk to z 5: the tile's trunk is about a quarter of the crown's width and only ~39% of the height, and its crown is ~0.8 of the height wide.  Holding the crown at the contract's <= 7 wide, the tree is 8.8 tall, below the set's usual 11-13.  In the game this changes nothing: install_game.lua scales every tree so its dominant axis (height here) is 8.6 in the field, so only the proportions reach the player, and the authored 8.8 is already about its in-field size.  (2) The top brick is as wide as layer 3 (3.4 x 2.5), as in the tile, not the brief's 2.4 x 2.0.  (3) 8 big studs (r 0.48 x 0.44) where the tile shows them, not <= 26 small r 0.30 x 0.20 ones on a 1.0 grid (the tile's studs are chunky and sparse; every exposed top that can hold one has one).  (4) Stud colour is nar_alien_grn, not plastic_green: plastic_green has exactly the same luminance as toy_green (0.328), so it would not read as the lighter step the brief asks for; nar_alien_grn is the same hue one clear step lighter.  (5) No CrownDark part: the tile's crown is a single green.  (6) Crown depth kept at the brief's 3.4 (the tile hints ~2.6) because the game spins the model to a random yaw."
+  },
+  "ToylandToyTrainCucumber": {
+   "collection": "ToylandToyTrainCucumber",
+   "parts": 9,
+   "tris": 2128,
+   "size_studs": [
+    4.6,
+    2.2,
+    4.7
+   ],
+   "min_z": 0.0,
+   "biome": "toyland",
+   "archetype": "prop",
+   "notes": "The Toyland landmark: a chunky toy-brick steam engine seen side-on, with a fat cucumber riding in the open tub on its back.  The long axis is X and the chimney is at the FRONT = +X (the render's left); the side faces +Y.  Footprint 4.60 x 2.20 (x -2.30..+2.30, y -1.10..+1.10 across the hubs), 4.70 tall to the stem nub, centred on x = 0 / y = 0, mirror-symmetric about y = 0 apart from the cucumber's face and speckles, nothing below z = 0.  WHEELS: six toy_yellow 12-sided wheels, r 0.54 and 0.30 thick, three a side at x +0.48 / -0.62 / -1.72 (almost touching, like the tile), a flat facet resting exactly on z = 0 (centre z 0.522), y 0.72..1.02 and mirrored; each carries a toy_yellow_dk 8-sided hub r 0.22 standing 0.08 proud of its outer face.  Their inner faces are sunk 0.02 into the red undercarriage so nothing floats.  UNDER (toy_red): a long red brick x -2.05..+2.05, y +-0.74, z 0.25..1.30 that shows as the red bumper under the front overhang and as a red strip above the rear wheels; the square red chimney column 0.88 x 0.88, x +0.66..+1.54, z 1.74..2.92; and a small red cube at the chimney foot on each side face (x +0.72..+1.04).  CHASSIS (toy_blue): the front slab x -0.60..+2.30, y +-0.95, z 1.05..1.78 (its underside just clears the wheel tops at 1.043); the cab block x -2.12..-0.20, y +-0.82, z 1.28..2.12 standing on the red brick; a small blue brick x -0.22..+0.36 on the slab that carries the tub's front overhang; and the open tub on top: a floor (z 2.12..2.22) inside four 0.18-thick walls, outer x -2.30..+0.40, y +-1.00, z 2.10..2.62.  WINDOW: a toy_blue_dk panel 0.70 x 0.56 on each side of the cab block, toward its rear as in the tile (x -1.82..-1.12, z 1.36..1.92), 0.03 proud.  CAP: the wide toy_yellow cap block 1.24 x 1.24 x 0.48 on the chimney (z 2.90..3.38), merged into Wheels.  BLOCKS: two toy_magenta slabs 0.64 x 0.58 x 0.32 butted against the chimney foot, one in front of each side face, poking 0.32 past its +X face (x +1.22..+1.86).  CUKE: a squat CUKE_PROFILE_STUB body h 2.2, r 0.86 standing in the tub at (-0.72, 0), base z 2.20, top 4.40, with a 0.44-wide stem nub to 4.70; like the tile it sits toward the tub's front wall (0.15 clear of it, 0.61 clear of the back wall), its flats clear the side walls by 0.025, it rises 1.78 above the rim.  16 raised cuke_stud_dk speckles above the rim (zf 0.28-0.82) and two small dark toy_eye eyes (0.20 x 0.16, 0.045 proud) on the two FRONT DIAGONAL facets (0 and 2, +-45 deg from +Y) at zf 0.50 (z 3.30), wide-set like the tile.  DEVIATIONS from the brief (the tile wins): (1) three wheels a side, not two at x +-1.35 - the tile shows three in a row on the near side, rear-weighted, with the red undercarriage bare under the front overhang (the fourth wheel it shows is a far-side wheel peeking past the front); (2) the wheels sit BELOW the chassis (tops touching its underside) instead of half-covering its side, and the cab is a windowed block under a shallow 2.70 x 2.00 open tub (not one 1.9-cube tub), so the engine stands 4.70 tall rather than ~3.9, in the tile's proportions; (3) the chimney is a square brick column centred at x +1.10 with a 1.24 cap, like the tile, not an 8-sided r 0.42 column at x +1.45; (4) the undercarriage is 1.48 wide (not 1.3) so the wheels bear on it; (5) the cucumber is the tile's darker green (cuke_dark body, cuke_stud_dk speckles), a STUB profile h 2.2 r 0.86 based at z 2.20, not cuke_green h 2.4 r 0.82 at z 1.45; (6) its eyes sit wide-set on the two front diagonal facets at zf 0.50, as in the tile, not side by side on the +Y facet at zf 0.45; (7) the tile's chimney-foot blocks are one magenta slab and one red cube, so the magenta slabs (0.64 x 0.58 x 0.32, not 0.45 cubes) are mirrored onto both sides and the red cubes live in Under.  Nine parts: Chassis, Under, Wheels, Hubs, Blocks, Window, Cuke, CukeStuds, Eyes; ~2130 triangles (~1140 faces)."
+  },
+  "NeonNeonSlice": {
+   "collection": "NeonNeonSlice",
+   "parts": 5,
+   "tris": 1436,
+   "size_studs": [
+    1.9,
+    0.5,
+    1.9
+   ],
+   "min_z": 0.0,
+   "biome": "neon",
+   "archetype": "slice",
+   "notes": "ONE cucumber slice standing on its edge, cut face to +Y, belted by a glowing neon ring - the Neon biome's sliced-slot cucumber.  Footprint ~1.90 (X) x 0.50 (Y) x 1.90 (Z) studs, centred on x = y = 0; Y-extent is 0.26 x the X/Z extents, well under the 0.45 the game needs to lay it flat.  Rim: 10-sided drum r 0.82 x 0.42 thick, cuke_dark.  Face: lime cut face (slice_face inset 0.10, neo_lime) on both sides.  Studs (cuke_stud, one part): ten rim speckles 0.15 square, one per rim facet, alternating front and back rows either side of the halo, PLUS the face seeds - six green teardrop pips on each face, points toward the centre, one straight up and one straight down, 0.015 proud.  Spokes: six pale radial bars between the pips out to 0.78 of the face radius plus a small pale 12-gon hub r 0.12 (cuke_pale), 0.02 proud.  Halo: a 20 x 6 torus (major 0.88, tube 0.07) round the rim in the disc's own plane, #f04dff, Neon, emit 0.6.  The HALO is the only ground contact: its lowest vertex sits on z = 0, so the disc itself hovers ~0.15 above the ground inside it (per the brief).  Five parts, ~1450 tris.  Deviations: (1) the tile shows six petal seeds with pale gaps between them, so the model adds seeds the brief does not list and has SIX spokes, one in each gap, not the brief's eight; the tile's seeds sample ~#7cf93f, a bright grass green only a step darker than the face, so they are cuke_stud (the nearest key) and, sharing colour + material with the rim speckles, live in the same Studs part (the brief's RimStuds, renamed); (2) the hub is r 0.12, not the Toy Slice's 0.18: the tile's pale centre is small and a 0.18 hub would cover the pip tips at r 0.15; (3) the halo colour is the tile's fuchsia, sampled at hue ~295-300 deg (#f04dff), between neo_magenta and neo_purple rather than the brief's neo_purple; (4) the rim studs are hand-placed (ten, size 0.15, two rows at +-0.125 off the mid-plane) instead of slice_studs(n=6): on a 10-gon slice_studs(n=6) steps 2 facets and puts its sixth stud on top of its first, and its random z would bury most studs under the halo belt; (5) the Y-extent is 0.50, not ~0.46, which follows from the brief's own face (0.02) + spoke (0.02) proud numbers.  Everything is placed with the slice_stand matrix, so dryrun's bbox and its min_z warning are not meaningful."
+  },
+  "NeonElectroCucumber": {
+   "collection": "NeonElectroCucumber",
+   "parts": 3,
+   "tris": 1496,
+   "size_studs": [
+    2.25,
+    2.21,
+    4.3
+   ],
+   "min_z": 0.0,
+   "biome": "neon",
+   "archetype": "cuke",
+   "notes": "The set's standard upright cucumber (cuke_green, h 4.0, r 0.68, the (0.30, 0.30) stem nub, top z 4.30) with the standard 21 raised cuke_stud speckles (rows 7 x 3, zf 0.11-0.90, size 0.28) - the tile's lighter checker of squares - circled by TWO glowing cyan rings (neo_cyan, Neon, emit 0.6) that float clear of the skin like electron orbits.  Ring 1 (the lower one): centred on the body axis at z 1.45 (zf 0.36), radius 1.05, tube 0.09, 16 x 6 segments.  Ring 2 (the upper one): centred at z 2.50 (zf 0.62), radius 1.02, tube 0.09, 16 x 6.  Both are tipped so their FRONT (+Y) arc sits lower than the back and their screen-RIGHT (-X) side lower than the screen-left (+X) side, the lower ring more steeply: ring 1 = rot_euler(-14, -10, 0) (17 deg off level), ring 2 = rot_euler(-12, -4, 0) (13 deg), so they are not parallel.  Ring 1 spans z 1.05-1.85 and ring 2 z 2.19-2.81, so they never meet; each ring's inner edge stays >= 0.89 from the axis, at least 0.15 clear of the skin and speckles (which reach r ~0.70).  Footprint ~2.25 x 2.2 (the rings), height 4.30, centred on x = 0, y = 0, lowest point the body's base on z = 0.  The rings are placed with rot=, so dryrun's transform-blind bbox is only approximate.  3 parts: Body, Studs, Rings.  DEVIATIONS from the brief (the tile wins): the brief tipped ring 1 +14 about X (front RAISED) and ring 2 +8 about Y (which lowers +X = screen-LEFT, the +X trap).  In the tile both rings are open ellipses seen from above, and both dip toward screen-right, the lower one more.  Under the set's cuke hero camera (pitched 12 down) a front-raised ring 1 would show edge-on as a flat bar.  So both rings now tip front-down, and their Y turns are negative (-X side lower).  The centres, radii, tube, segment counts and colour are exactly as briefed.  Per the REV3 rule the body stands upright instead of leaning like the tile.  The tile's small blossom-end tip under the body is left off: on an upright body it would sit hidden under the base and would lift the standard body off z = 0."
+  },
+  "NeonGridCucumber": {
+   "collection": "NeonGridCucumber",
+   "parts": 4,
+   "tris": 1120,
+   "size_studs": [
+    1.35,
+    1.35,
+    4.46
+   ],
+   "min_z": 0.0,
+   "biome": "neon",
+   "archetype": "cuke",
+   "notes": "A see-through cucumber drawn in glowing WIREFRAME.  The body is the set's standard 8-sided pillar (h 4.0, r 0.68, no nub) in dark neo_night Glass at transparency 0.35, lifted 0.06 so it rests on a small lime tip; nothing else carries its weight.  Over it runs a grid of Neon strips (emit 0.6): EIGHT lengthwise lines, one down the CENTRE of every facet (angles 0, 45 .. 315; facet 1 = +Y, the front, so the index card shows a line straight down the middle and one on each silhouette edge, the way the tile reads), zf 0.03 -> 0.97, 0.07 wide, 0.03 proud, with frames on every profile knot so they follow both chamfers; and SIX rings round the body at zf 0.16, 0.30, 0.44, 0.58, 0.72, 0.86, 0.07 tall, drawn vertex-to-vertex round the octagon so every ring segment lies flat on its facet, 0.05 proud at the ridges (0.046 over the facets) so each ring sits clearly OVER the lengthwise lines where they cross.  Colours follow the tile: its outline, top ring and bottom ring glow cyan and only the middle rings are purple - so the 8 lengthwise lines plus the top (zf 0.86) and bottom (zf 0.16) rings are neo_cyan (part GridCyan) and the four middle rings are neo_purple (part GridPurple).  A neo_lime Neon stem 0.30 x 0.30 x 0.40 stands on the flat top (z 4.03 - 4.46, sunk 0.03) and a lime tip 0.20 x 0.20 x 0.10 sits under the bottom centre (z 0 - 0.10, 0.04 of it inside the body): one part, Lime.  Rotationally symmetric, centred on x = 0, y = 0, lowest point exactly z = 0 (the tip).  Footprint ~1.35 x 1.35 (1.46 across the ring corners), height 4.46.  4 parts: Body, GridCyan, GridPurple, Lime; ~1120 tris.  Deviations from the REV3 brief, all to match the tile or to fix geometry the dry run cannot see: (1) lengthwise lines on facet CENTRES, not facet edges - the tile shows three inner lines between two outline lines, which is the facet-centre layout seen from the front; (2) the brief's ring points (0..360 step 45 at the facet plane) are facet centres, whose straight chords would sink ~0.10 under every ridge and leave each ring dashed, so the rings run through the eight ridge vertices at the true (circumscribed) radius instead, and rise 0.05 rather than 0.035 so they do not z-fight the 0.03-proud lines at the crossings; (3) the top and bottom rings are cyan and the parts are named GridCyan / GridPurple rather than GridLong / GridRings; (4) no raised speckles - the tile has none, the grid is this model's pattern.  The strips are laid in the body's own frame and lifted with it by D.translate, so dryrun's bounding box sits 0.06 low for them."
+  },
+  "NeonHologramCucumber": {
+   "collection": "NeonHologramCucumber",
+   "parts": 6,
+   "tris": 2052,
+   "size_studs": [
+    2.84,
+    2.42,
+    5.03
+   ],
+   "min_z": 0.0,
+   "biome": "neon",
+   "archetype": "cuke",
+   "notes": "A HOLOGRAM of a cucumber hovering over a projector pedestal.  PEDESTAL: a dark neo_night Metal hexagon (6-sided lathe, circumradius 1.35, flat-to-flat 2.34, a flat face square to +Y, points at +-X) from z 0 to 0.42 with 0.05 chamfers top and bottom; a neo_night_lt SmoothPlastic top plate (hex r 1.22, z 0.40-0.50) on it.  STRIPS (one neo_cyan Neon part, emit 0.6): a 0.9 x 0.12 light strip standing 0.03 proud of the middle of each of the six side faces (z 0.15-0.27), a hexagonal glowing band hugging the top plate's edge (centreline circumradius 1.18, 0.10 x 0.09 section, z 0.455-0.545; hexagonal, not the brief's round torus, because a round r 1.18 ring would hang ~0.17 past the plate's flat sides and float off the pedestal) and a glowing hexagonal projector pad (r 0.92, 0.025 proud) in the middle of the plate - the tile's top glows, so the pad is added on top of the brief.  HOLO: the set's standard body (h 4.0, r 0.68, nub 0.30 x 0.30) in neo_holo Neon at transparency 0.35, emit 0.5, its base centre at (0.30, 0, 0.78) - floating 0.28 over the plate - and LEANING 10 degrees about Y toward -X (screen right, as in the tile, whose much stronger lean is capped at 10 by the rev-3 rule), so its tip ends near x -0.45 and its lowest corner at z ~0.71.  SCANLINES (neo_holo_lt Neon, transparency 0.3, emit 0.6, carried by the same lean): five rings round the body at zf 0.20 / 0.35 / 0.50 / 0.65 / 0.80, drawn through the octagon's corners so they hug the facets, and four lengthwise lines down alternate facet edges (22.5 / 112.5 / 202.5 / 292.5 deg) - the tile's wireframe; plus the set's twelve raised square speckles (size 0.26) sitting between the rings, which is also how the tile's lighter squares inside the hologram read.  PIXELS (neo_holo_lt Neon, emit 0.6): nine small bevelled cubes 0.16-0.26 floating round the hologram, alternating the screen-left (+X) and screen-right (-X) side on a rising ladder from z ~1.5 to ~4.1, 1.15-1.5 from the leaning axis (drawn from 1.1-1.6 by random.Random(58)), some in front of the body and some behind - they float, that is the point.  Footprint about 2.85 x 2.4 (x -1.35 .. +1.49, y -1.20 .. +1.22: pedestal strips plus pixels), height 5.04 (the leaning nub).  ~2050 tris.  Lowest point: the pedestal's underside at z 0.  The hologram and its lines are placed with a matrix, so dryrun's bounding box ignores the lean.  6 parts: Pedestal, PedestalTop, Strips, Holo, ScanLines, Pixels."
+  },
+  "NeonPalm": {
+   "collection": "NeonPalm",
+   "parts": 7,
+   "tris": 2988,
+   "size_studs": [
+    7.39,
+    5.03,
+    11.52
+   ],
+   "min_z": 0.0,
+   "biome": "neon",
+   "archetype": "tree",
+   "notes": "An 11.5-stud neon palm, transcribed from the rev-3 reference tile.  A dark indigo 12-gon puck (r 1.30, z 0-0.18, neo_night) carries a chunky 8-sided trunk of EIGHT stacked tapering segments (r 0.80 at the foot -> 0.62 at its top, z 0.10-8.60, neo_trunk), each pinched 5 % at its top so the next steps out over it and the segments read.  The trunk curves as it rises (offset grows as (z/8.6)^1.7) and puts the crown axis at (-0.80, +0.42): a ~6 deg lean toward the tile's right (-X) and the viewer (+Y).  Three glowing magenta Neon bands (0.16 tall, 0.045 proud) ring it: one at the FOOT sitting on the puck (z 0.18-0.34), then z 2.37-2.53 and 4.32-4.48 over two segment seams.  A short 8-sided heart (z 8.50-9.12) caps the trunk and SEVEN folded (roof section, 18 deg), sawtooth-notched, broad fronds (~1.2 wide at 55 % of their length) spring from it at z 8.92-9.04, each rolled about its own axis so its face, not its edge, shows from the front.  As in the tile: +X side (tile LEFT) = a full cyan Neon frond arching back-left (yaw 338) and a green frond with a cyan Neon outer 45 % running out flat then hanging to z ~6.0 (yaw 8); the back two (yaw 300 / 258) are plain green and arch highest (the model's top, z 11.5); -X side (tile RIGHT) = three green fronds with magenta Neon outer 45 % (yaw 215 arching back, 175 hanging to z ~6.5, 138 plunging to z ~6.0 just outside the front-right coconut).  The front sector (yaw 8-138) is left open so the coconuts show, as in the tile.  Under the crown hang FIVE big faceted coconut pods (8-sided, bulb at the bottom, r 0.72-0.76 x 2.3-2.45 long, neck tops at z 8.78, 0.85 off the crown axis, resting against the heart with their inner sides sunk 0.03-0.3 into the trunk top, splayed 13 deg outward, bottoms at z ~6.3-6.5) in a light yellow-green, each with three raised dark-green speckles on its outward facets.  Footprint ~7.4 (X, crown) x 5.0 (Y) x 11.5 tall; the base is centred on x=0/y=0, the crown axis sits at (-0.80, +0.42) so the crown overhangs toward -X, and its fronds reach further back (y -2.8) than front (y +2.2); faces +Y; nothing below z=0 (the puck's underside is the lowest point).  ~3000 tris.  SEVEN parts: Base, Trunk, Magenta (3 bands + 3 magenta frond tips, Neon emit 0.6), FrondsGreen, FrondsCyan (Neon emit 0.6), Coconuts, CoconutStuds.  DEVIATIONS from the brief, each because the tile shows it: 7 fronds, not 8 (2 green, 1 cyan, 1 green-with-cyan-tip, 3 green-with-magenta-tip, not 3 green / 3 cyan / 2 magenta-tip); the lowest magenta glow is a band at the trunk foot, not a ring on the puck rim (the tile's puck is plain dark), and the upper bands sit at z 2.45 / 4.40 (not 2.0 / 4.3 / 6.6); the trunk is as chunky as the tile's (r 0.80 -> 0.62, not 0.52 -> 0.34), so the puck grew to r 1.30, and its top is at z 8.6 with the crown rooted at ~9.0 (not 9.2 / 9.3) so that, as in the tile, the crown fills the top half; fronds reach 2.4-3.45 out but are 4.4-5.8 long along their curve, and are lofted with D.ribbon + D.prism teeth instead of D.palm_frond (which is one flat strip) so each can split into a green inner and a glowing outer piece and roll its face to the viewer; the coconuts are the tile's big pods (not 0.55 lumps), coloured LIGHTER and yellower than the fronds (sam_leaf, not neo_green_dk), with darker speckles (neo_green_dk); green parts are SmoothPlastic like the rest of the neon set, not LeafyGrass.  Fronds, teeth and pods are lofted / matrix-placed, so dryrun's bounding box is approximate."
+  },
+  "NeonTree": {
+   "collection": "NeonTree",
+   "parts": 7,
+   "tris": 2864,
+   "size_studs": [
+    6.6,
+    4.7,
+    11.45
+   ],
+   "min_z": 0.0,
+   "biome": "neon",
+   "archetype": "tree",
+   "notes": "An 11.45-stud neon tree built on the CucumberTree recipe.  A flat dark square plinth 2.6 x 2.6 x 0.22 (neo_night, Metal - the set's pedestal material) with a thin glowing purple frame (0.06 wide, z 0.17-0.26, 0.02 proud of the sides) wrapped round its top edge.  On it a dark-indigo blocky trunk (neo_trunk, SmoothPlastic): a flared square foot (1.36 -> 1.00 across, z 0.15-0.95, its bottom buried in the plinth), then three stacked blocks tapering 1.05 -> 0.85 from z 0.22 to z 6.0, with a magenta Neon band at z 2.4 and a cyan Neon band at z 3.9 (0.14 tall, 0.04 proud, both on the middle block, clear of its seams).  Two short square arms (0.42 -> 0.30 thick, about 1 stud of each showing) leave the trunk above the cyan band - the +X one (screen-LEFT) at z ~4.6, the -X one (screen-right) at z ~5.1 - and run up-outward: the +X one dies inside the lower magenta cube, the -X one inside the lower-right green cube.  The trunk top is buried in the lower-centre and lower-right green cubes.  The crown is TWELVE cubes (1.5-2.1 on a side, bevel 0.09, every one overlapping a neighbour, none floating) between z 5.2 and z 11.45, x -3.42 .. +3.18 (6.6 wide) and y -2.45 .. +2.25, transcribed from the tile with +X on the tile's LEFT: a big cyan cube crowns the top, cyan cubes cap both outer sides (+X mid, -X mid-low) and the upper back at -X; a big magenta cube stands proud at the front centre (slightly -X) and a second hangs lowest at the front +X side; five solid green cubes fill the core (upper-left back, right-upper, centre-back, lower-centre, lower-right).  Cyan and Magenta are Neon at emit 0.55 and also hold the trunk band of their colour.  Only the green cubes carry the set's speckles (43 of them, neo_green_dk, a jittered 2 x 2 lattice on every side and top face, plus a centre one on faces that neighbours mostly cover); any speckle that would be buried in or poke through a neighbouring cube is culled, so none clip.  The glowing cubes and bands are plain.  About 2860 tris.  DEVIATIONS: (1) the tile shows only TWO magenta cubes; the brief asks for three, so the third sits at the BACK (-Y) of the cluster where the tile's front view cannot see it - it gives the back view some glow when the game spins the tree.  (2) The tile shows five green cubes, not four, so there are five (12 cubes, not ~11).  (3) The tile's tree is stubbier than the set allows (its crown would be ~8.5 wide at 11.5 tall); the crown is held to the brief's <= 7 wide and 11-12 tall, so the trunk below the crown reads a little longer than in the tile.  (4) The flared trunk foot comes from the tile, not the brief.  (5) The trunk stays plain, as in the tile.  (6) The crown spans z 5.2-11.45 rather than the brief's 5.5-11.2: the low magenta cube hangs lowest, as in the tile, and the top cube is 2.1 on a side.  Footprint 6.6 x 4.7 x 11.45, lowest point z = 0 (the plinth), faces +Y.  Seven parts: Base, BaseGlow, Trunk, Cyan, Magenta, CubesGreen, CubeStuds.  The arms and trunk foot are placed with matrices, so dryrun's bounding box is local-space for them; nothing real sits below z = 0."
+  },
+  "NeonCyberCucumber": {
+   "collection": "NeonCyberCucumber",
+   "parts": 8,
+   "tris": 1504,
+   "size_studs": [
+    1.53,
+    1.84,
+    4.3
+   ],
+   "min_z": 0.0,
+   "biome": "neon",
+   "archetype": "cuke",
+   "notes": "The Neon biome's landmark: the set's standard upright cucumber (cuke_green, h 4.0, r 0.68, the (0.30, 0.30) stem nub, 18 cuke_stud speckles) wearing chunky lavender VR GOGGLES round its upper third.  The whole goggle assembly is built upright round z 2.72 (zf 0.68) and then tipped -6 degrees about X through the body axis at that height, so it sits lower at the front than at the back; the body itself stays upright (REV3 departure 1, the tile leans the whole cucumber).  GOGGLES (neo_goggle, one part): an 8-sided strap band hugging the body, inradius 0.728 (0.10 proud of the skin), 0.48 tall with chamfered edges, world z ~2.40-3.04 front to back; a VISOR on the front, 1.46 wide x 0.68 tall, its back face at y 0.56 (inside the body, strap and temples; only a 0.10 ledge above and below the strap shows from behind) and its face 0.40 proud of the skin (y 1.03), front edges chamfered 0.06, corners cut 0.12, and a NOSE NOTCH cut up into its lower edge (0.42 wide at the bottom, 0.18 at the top, 0.14 high) as the tile shows; and two side TEMPLE blocks (x 0.47-0.73, y 0.05-0.75) that fill the gap between the visor's back and the strap, so each side of the goggles is one flat lavender panel at x = +-0.73, flush with the strap's side facets.  On the visor face, each outline a true inset of the visor's (notch included): GoggleRim (neo_goggle_dk) a 0.04-wide raised frame line 0.10 in from the visor edge, standing 0.045 proud; Lenses (neo_lens) one dark panel inside it, 0.02 proud, which is the dark border (it follows the nose notch too, so the notch itself stays lavender, framed by the rim) and the 0.10 dark bridge between the lenses; LensGlow (neo_magenta, Neon, emit 0.6) two glowing lenses ~0.50 x 0.32 on the dark panel, 0.02 proud of it, their lower inner corners cut away by the nose notch.  SideLight (neon_blue, Neon, emit 0.6) a 0.18 x 0.34 x 0.26 block set into the goggles' side panel just behind the visor on the NEGATIVE-x side only (the tile's right), 0.05 proud; SideLightHi (neo_cyan, Neon, emit 0.6) a thin vertical stripe on its face toward the front.  Speckles: the standard 7 x 3 scatter (seed 7) minus the two rows the goggles cover (zf 0.64 and 0.76 - checked: the 0.64 row is under the strap, and the jittered 0.763 row would be half-buried in the tilted strap's back or jammed within 0.02 of the temples and visor at the front, so the skip band is zf 0.56 .. 0.78, not the brief's 0.60 .. 0.76), whose three studs are re-seated just above the goggles at zf 0.81 on facets 0, 3, 6 so the upper body is not bare.  Deviations from the brief, where the tile wins: the lenses glow magenta-pink over almost their whole area inside a dark frame (so LensGlow fills each lens instead of a lower-half bar, and uses neo_magenta, the nearest key to the tile's violet-pink, not neo_pink), and Lenses is the tile's one dark window panel rather than two separate 0.46 x 0.34 dark lenses; the visor is 1.46 x 0.68 (not 1.30 x 0.62) so its sides run flush into the strap, with the tile's nose notch and side housings; the side light is BLUE with a cyan highlight stripe as drawn, not a plain cyan block.  The tile's darker-magenta glare strokes inside the lenses are left out (a ninth colour for a detail that does not read at range).  Footprint about 1.53 (x) x 1.84 (y) x 4.30 tall (nub top), centred on x = 0, y = 0, nothing below z = 0.  About 1500 tris.  8 parts: Body, Studs, Goggles, GoggleRim, Lenses, LensGlow, SideLight, SideLightHi.  Everything on the goggles is placed with one matrix, so dryrun's transform-blind bounding box shows it untilted."
+  }
+ },
+ "parts": [
+  {
+   "collection": "SlicedCucumber",
+   "name": "SlicedCucumber.Faces",
+   "hex": "dcefb4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 288
+  },
+  {
+   "collection": "SlicedCucumber",
+   "name": "SlicedCucumber.RimStuds",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 880
+  },
+  {
+   "collection": "SlicedCucumber",
+   "name": "SlicedCucumber.Rims",
+   "hex": "2f7a24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 464
+  },
+  {
+   "collection": "SlicedCucumber",
+   "name": "SlicedCucumber.Seeds",
+   "hex": "b9dd7d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 2112
+  },
+  {
+   "collection": "SlicedCucumberStack",
+   "name": "SlicedCucumberStack.Faces",
+   "hex": "dcefb4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 288
+  },
+  {
+   "collection": "SlicedCucumberStack",
+   "name": "SlicedCucumberStack.RimStuds",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 880
+  },
+  {
+   "collection": "SlicedCucumberStack",
+   "name": "SlicedCucumberStack.Rims",
+   "hex": "2f7a24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 464
+  },
+  {
+   "collection": "SlicedCucumberStack",
+   "name": "SlicedCucumberStack.Seeds",
+   "hex": "b9dd7d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 2112
+  },
+  {
+   "collection": "Cucumber",
+   "name": "Cucumber.Body",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 188
+  },
+  {
+   "collection": "Cucumber",
+   "name": "Cucumber.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 924
+  },
+  {
+   "collection": "FloweredCucumber",
+   "name": "FloweredCucumber.Body",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 188
+  },
+  {
+   "collection": "FloweredCucumber",
+   "name": "FloweredCucumber.FlowerCentre",
+   "hex": "f5c032",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "FloweredCucumber",
+   "name": "FloweredCucumber.Leaves",
+   "hex": "2f6b2c",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 80
+  },
+  {
+   "collection": "FloweredCucumber",
+   "name": "FloweredCucumber.Petals",
+   "hex": "f2efe4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 176
+  },
+  {
+   "collection": "FloweredCucumber",
+   "name": "FloweredCucumber.Stem",
+   "hex": "3a8f27",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "FloweredCucumber",
+   "name": "FloweredCucumber.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 924
+  },
+  {
+   "collection": "VinedCucumber",
+   "name": "VinedCucumber.Body",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 188
+  },
+  {
+   "collection": "VinedCucumber",
+   "name": "VinedCucumber.Leaves",
+   "hex": "2f6b2c",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 80
+  },
+  {
+   "collection": "VinedCucumber",
+   "name": "VinedCucumber.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 924
+  },
+  {
+   "collection": "VinedCucumber",
+   "name": "VinedCucumber.Tendril",
+   "hex": "78c05a",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 164
+  },
+  {
+   "collection": "VinedCucumber",
+   "name": "VinedCucumber.Vine",
+   "hex": "4a8b34",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 388
+  },
+  {
+   "collection": "CucumberTree",
+   "name": "CucumberTree.Crown",
+   "hex": "46a831",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 264
+  },
+  {
+   "collection": "CucumberTree",
+   "name": "CucumberTree.CrownStuds",
+   "hex": "7fd13d",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 1152
+  },
+  {
+   "collection": "CucumberTree",
+   "name": "CucumberTree.CukeStuds",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 1056
+  },
+  {
+   "collection": "CucumberTree",
+   "name": "CucumberTree.Cukes",
+   "hex": "3d9429",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 752
+  },
+  {
+   "collection": "CucumberTree",
+   "name": "CucumberTree.Trunk",
+   "hex": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 396
+  },
+  {
+   "collection": "DesertSunDriedSlice",
+   "name": "DesertSunDriedSlice.Faces",
+   "hex": "dcc78f",
+   "material": "Sand",
+   "transparency": 0.0,
+   "tris": 288
+  },
+  {
+   "collection": "DesertSunDriedSlice",
+   "name": "DesertSunDriedSlice.RimStuds",
+   "hex": "6f8f2e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 880
+  },
+  {
+   "collection": "DesertSunDriedSlice",
+   "name": "DesertSunDriedSlice.Rims",
+   "hex": "556f22",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 464
+  },
+  {
+   "collection": "DesertSunDriedSlice",
+   "name": "DesertSunDriedSlice.Seeds",
+   "hex": "7d8a3c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 2112
+  },
+  {
+   "collection": "DesertPricklyCucumber",
+   "name": "DesertPricklyCucumber.Body",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 188
+  },
+  {
+   "collection": "DesertPricklyCucumber",
+   "name": "DesertPricklyCucumber.Spikes",
+   "hex": "ecdcad",
+   "material": "Sandstone",
+   "transparency": 0.0,
+   "tris": 90
+  },
+  {
+   "collection": "DesertPricklyCucumber",
+   "name": "DesertPricklyCucumber.Studs",
+   "hex": "6f8f2e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 528
+  },
+  {
+   "collection": "DesertSunBakedCucumber",
+   "name": "DesertSunBakedCucumber.Body",
+   "hex": "7d8a3c",
+   "material": "Sand",
+   "transparency": 0.0,
+   "tris": 144
+  },
+  {
+   "collection": "DesertSunBakedCucumber",
+   "name": "DesertSunBakedCucumber.Cracks",
+   "hex": "3d451c",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 152
+  },
+  {
+   "collection": "DesertSunBakedCucumber",
+   "name": "DesertSunBakedCucumber.Shoulder",
+   "hex": "5e6a2a",
+   "material": "Sand",
+   "transparency": 0.0,
+   "tris": 168
+  },
+  {
+   "collection": "DesertSunBakedCucumber",
+   "name": "DesertSunBakedCucumber.Studs",
+   "hex": "5e6a2a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 1012
+  },
+  {
+   "collection": "DesertWrappedCucumber",
+   "name": "DesertWrappedCucumber.BandEdges",
+   "hex": "cbb98d",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 744
+  },
+  {
+   "collection": "DesertWrappedCucumber",
+   "name": "DesertWrappedCucumber.Bands",
+   "hex": "e6d7ae",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 516
+  },
+  {
+   "collection": "DesertWrappedCucumber",
+   "name": "DesertWrappedCucumber.Body",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 188
+  },
+  {
+   "collection": "DesertWrappedCucumber",
+   "name": "DesertWrappedCucumber.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 440
+  },
+  {
+   "collection": "DesertCactusCucumber",
+   "name": "DesertCactusCucumber.Arms",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 576
+  },
+  {
+   "collection": "DesertCactusCucumber",
+   "name": "DesertCactusCucumber.Body",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 188
+  },
+  {
+   "collection": "DesertCactusCucumber",
+   "name": "DesertCactusCucumber.FlowerCentre",
+   "hex": "8a5a2b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "DesertCactusCucumber",
+   "name": "DesertCactusCucumber.Petals",
+   "hex": "f2d44e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 220
+  },
+  {
+   "collection": "DesertCactusCucumber",
+   "name": "DesertCactusCucumber.Spikes",
+   "hex": "ecdcad",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 108
+  },
+  {
+   "collection": "DesertCactusCucumber",
+   "name": "DesertCactusCucumber.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 924
+  },
+  {
+   "collection": "DesertPalm",
+   "name": "DesertPalm.Base",
+   "hex": "8a5c2c",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 1584
+  },
+  {
+   "collection": "DesertPalm",
+   "name": "DesertPalm.Coconuts",
+   "hex": "7a4a28",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 128
+  },
+  {
+   "collection": "DesertPalm",
+   "name": "DesertPalm.Fronds",
+   "hex": "4fa83a",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 592
+  },
+  {
+   "collection": "DesertPalm",
+   "name": "DesertPalm.FrondsBack",
+   "hex": "3d8a2c",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 444
+  },
+  {
+   "collection": "DesertPalm",
+   "name": "DesertPalm.Trunk",
+   "hex": "a9793f",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 308
+  },
+  {
+   "collection": "DesertSandstoneTree",
+   "name": "DesertSandstoneTree.Base",
+   "hex": "b9a069",
+   "material": "Sandstone",
+   "transparency": 0.0,
+   "tris": 132
+  },
+  {
+   "collection": "DesertSandstoneTree",
+   "name": "DesertSandstoneTree.Branches",
+   "hex": "8a5c2c",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 176
+  },
+  {
+   "collection": "DesertSandstoneTree",
+   "name": "DesertSandstoneTree.Crown",
+   "hex": "d6c08a",
+   "material": "Rock",
+   "transparency": 0.0,
+   "tris": 220
+  },
+  {
+   "collection": "DesertSandstoneTree",
+   "name": "DesertSandstoneTree.Studs",
+   "hex": "8a5c2c",
+   "material": "Rock",
+   "transparency": 0.0,
+   "tris": 4224
+  },
+  {
+   "collection": "DesertSandstoneTree",
+   "name": "DesertSandstoneTree.Trunk",
+   "hex": "d6c08a",
+   "material": "Sandstone",
+   "transparency": 0.0,
+   "tris": 308
+  },
+  {
+   "collection": "VolcanoMoltenSlice",
+   "name": "VolcanoMoltenSlice.Faces",
+   "hex": "ff6a1e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 288
+  },
+  {
+   "collection": "VolcanoMoltenSlice",
+   "name": "VolcanoMoltenSlice.RimStuds",
+   "hex": "5cb32e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 880
+  },
+  {
+   "collection": "VolcanoMoltenSlice",
+   "name": "VolcanoMoltenSlice.Rims",
+   "hex": "556f22",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 464
+  },
+  {
+   "collection": "VolcanoMoltenSlice",
+   "name": "VolcanoMoltenSlice.Seeds",
+   "hex": "e8431a",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 2112
+  },
+  {
+   "collection": "VolcanoCharredCucumber",
+   "name": "VolcanoCharredCucumber.Body",
+   "hex": "3e3833",
+   "material": "Basalt",
+   "transparency": 0.0,
+   "tris": 144
+  },
+  {
+   "collection": "VolcanoCharredCucumber",
+   "name": "VolcanoCharredCucumber.Cracks",
+   "hex": "ff6a1e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 196
+  },
+  {
+   "collection": "VolcanoCharredCucumber",
+   "name": "VolcanoCharredCucumber.Stem",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 168
+  },
+  {
+   "collection": "VolcanoCharredCucumber",
+   "name": "VolcanoCharredCucumber.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 660
+  },
+  {
+   "collection": "VolcanoMoltenCucumber",
+   "name": "VolcanoMoltenCucumber.Body",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 188
+  },
+  {
+   "collection": "VolcanoMoltenCucumber",
+   "name": "VolcanoMoltenCucumber.LavaFlow",
+   "hex": "ff6a1e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 392
+  },
+  {
+   "collection": "VolcanoMoltenCucumber",
+   "name": "VolcanoMoltenCucumber.LavaLip",
+   "hex": "ffa42b",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 76
+  },
+  {
+   "collection": "VolcanoMoltenCucumber",
+   "name": "VolcanoMoltenCucumber.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 704
+  },
+  {
+   "collection": "VolcanoFlameCucumber",
+   "name": "VolcanoFlameCucumber.Body",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 188
+  },
+  {
+   "collection": "VolcanoFlameCucumber",
+   "name": "VolcanoFlameCucumber.FlameCore",
+   "hex": "ffa42b",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 252
+  },
+  {
+   "collection": "VolcanoFlameCucumber",
+   "name": "VolcanoFlameCucumber.FlameLicks",
+   "hex": "ffd24a",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 104
+  },
+  {
+   "collection": "VolcanoFlameCucumber",
+   "name": "VolcanoFlameCucumber.FlameRibbon",
+   "hex": "ff6a1e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 252
+  },
+  {
+   "collection": "VolcanoFlameCucumber",
+   "name": "VolcanoFlameCucumber.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 924
+  },
+  {
+   "collection": "VolcanoObsidianTree",
+   "name": "VolcanoObsidianTree.Cracks",
+   "hex": "ff6a1e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 446
+  },
+  {
+   "collection": "VolcanoObsidianTree",
+   "name": "VolcanoObsidianTree.CukeStuds",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 792
+  },
+  {
+   "collection": "VolcanoObsidianTree",
+   "name": "VolcanoObsidianTree.Cukes",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 468
+  },
+  {
+   "collection": "VolcanoObsidianTree",
+   "name": "VolcanoObsidianTree.Rocks",
+   "hex": "241f2b",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 120
+  },
+  {
+   "collection": "VolcanoObsidianTree",
+   "name": "VolcanoObsidianTree.Trunk",
+   "hex": "241f2b",
+   "material": "Basalt",
+   "transparency": 0.0,
+   "tris": 464
+  },
+  {
+   "collection": "VolcanoVolcanoCucumber",
+   "name": "VolcanoVolcanoCucumber.Cone",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 180
+  },
+  {
+   "collection": "VolcanoVolcanoCucumber",
+   "name": "VolcanoVolcanoCucumber.Crater",
+   "hex": "ffa42b",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 100
+  },
+  {
+   "collection": "VolcanoVolcanoCucumber",
+   "name": "VolcanoVolcanoCucumber.Ejecta",
+   "hex": "e8431a",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 132
+  },
+  {
+   "collection": "VolcanoVolcanoCucumber",
+   "name": "VolcanoVolcanoCucumber.Flows",
+   "hex": "ff6a1e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 220
+  },
+  {
+   "collection": "VolcanoVolcanoCucumber",
+   "name": "VolcanoVolcanoCucumber.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 660
+  },
+  {
+   "collection": "VolcanoMagmaTree",
+   "name": "VolcanoMagmaTree.Crown",
+   "hex": "2c2723",
+   "material": "CrackedLava",
+   "transparency": 0.0,
+   "tris": 264
+  },
+  {
+   "collection": "VolcanoMagmaTree",
+   "name": "VolcanoMagmaTree.CrownGlow",
+   "hex": "ffa42b",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 672
+  },
+  {
+   "collection": "VolcanoMagmaTree",
+   "name": "VolcanoMagmaTree.CukeStuds",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 288
+  },
+  {
+   "collection": "VolcanoMagmaTree",
+   "name": "VolcanoMagmaTree.Cukes",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 624
+  },
+  {
+   "collection": "VolcanoMagmaTree",
+   "name": "VolcanoMagmaTree.Trunk",
+   "hex": "2c2723",
+   "material": "Basalt",
+   "transparency": 0.0,
+   "tris": 440
+  },
+  {
+   "collection": "VolcanoMagmaTree",
+   "name": "VolcanoMagmaTree.Veins",
+   "hex": "ff6a1e",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 704
+  },
+  {
+   "collection": "NarmekMoonSlice",
+   "name": "NarmekMoonSlice.Faces",
+   "hex": "d6d9df",
+   "material": "Concrete",
+   "transparency": 0.0,
+   "tris": 288
+  },
+  {
+   "collection": "NarmekMoonSlice",
+   "name": "NarmekMoonSlice.GlowSquare",
+   "hex": "58e08a",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "NarmekMoonSlice",
+   "name": "NarmekMoonSlice.RimStuds",
+   "hex": "b9bcc4",
+   "material": "Rock",
+   "transparency": 0.0,
+   "tris": 880
+  },
+  {
+   "collection": "NarmekMoonSlice",
+   "name": "NarmekMoonSlice.Rims",
+   "hex": "8b8f99",
+   "material": "Rock",
+   "transparency": 0.0,
+   "tris": 464
+  },
+  {
+   "collection": "NarmekMoonSlice",
+   "name": "NarmekMoonSlice.Seeds",
+   "hex": "8b8f99",
+   "material": "Rock",
+   "transparency": 0.0,
+   "tris": 2068
+  },
+  {
+   "collection": "NarmekMeteorCucumber",
+   "name": "NarmekMeteorCucumber.Body",
+   "hex": "463a5e",
+   "material": "Rock",
+   "transparency": 0.0,
+   "tris": 188
+  },
+  {
+   "collection": "NarmekMeteorCucumber",
+   "name": "NarmekMeteorCucumber.Crack",
+   "hex": "b45cff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 36
+  },
+  {
+   "collection": "NarmekMeteorCucumber",
+   "name": "NarmekMeteorCucumber.Shards",
+   "hex": "6d5a8f",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 432
+  },
+  {
+   "collection": "NarmekMeteorCucumber",
+   "name": "NarmekMeteorCucumber.Studs",
+   "hex": "6d5a8f",
+   "material": "Rock",
+   "transparency": 0.0,
+   "tris": 924
+  },
+  {
+   "collection": "NarmekPlanetSlice",
+   "name": "NarmekPlanetSlice.Continents",
+   "hex": "6ec84a",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 264
+  },
+  {
+   "collection": "NarmekPlanetSlice",
+   "name": "NarmekPlanetSlice.Faces",
+   "hex": "6ec84a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 72
+  },
+  {
+   "collection": "NarmekPlanetSlice",
+   "name": "NarmekPlanetSlice.Planet",
+   "hex": "3fa8e0",
+   "material": "Plastic",
+   "transparency": 0.0,
+   "tris": 120
+  },
+  {
+   "collection": "NarmekPlanetSlice",
+   "name": "NarmekPlanetSlice.Rims",
+   "hex": "3fa8e0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 232
+  },
+  {
+   "collection": "NarmekPlanetSlice",
+   "name": "NarmekPlanetSlice.Studs",
+   "hex": "6fd8e8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 1144
+  },
+  {
+   "collection": "NarmekAstronautCucumber",
+   "name": "NarmekAstronautCucumber.Body",
+   "hex": "f0efec",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 188
+  },
+  {
+   "collection": "NarmekAstronautCucumber",
+   "name": "NarmekAstronautCucumber.Gear",
+   "hex": "8d929c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 100
+  },
+  {
+   "collection": "NarmekAstronautCucumber",
+   "name": "NarmekAstronautCucumber.Lights",
+   "hex": "58e08a",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "NarmekAstronautCucumber",
+   "name": "NarmekAstronautCucumber.Stripes",
+   "hex": "e8802e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 164
+  },
+  {
+   "collection": "NarmekAstronautCucumber",
+   "name": "NarmekAstronautCucumber.Studs",
+   "hex": "d2d0cb",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 352
+  },
+  {
+   "collection": "NarmekAstronautCucumber",
+   "name": "NarmekAstronautCucumber.Visor",
+   "hex": "1a1d2a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 84
+  },
+  {
+   "collection": "NarmekAstronautCucumber",
+   "name": "NarmekAstronautCucumber.VisorGlint",
+   "hex": "343a52",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 56
+  },
+  {
+   "collection": "NarmekNeonAlienCucumber",
+   "name": "NarmekNeonAlienCucumber.Arms",
+   "hex": "4fc83a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 512
+  },
+  {
+   "collection": "NarmekNeonAlienCucumber",
+   "name": "NarmekNeonAlienCucumber.Body",
+   "hex": "4fc83a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 188
+  },
+  {
+   "collection": "NarmekNeonAlienCucumber",
+   "name": "NarmekNeonAlienCucumber.Gems",
+   "hex": "ff5fd0",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 360
+  },
+  {
+   "collection": "NarmekNeonAlienCucumber",
+   "name": "NarmekNeonAlienCucumber.GemsDark",
+   "hex": "d63fa8",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 144
+  },
+  {
+   "collection": "NarmekNeonAlienCucumber",
+   "name": "NarmekNeonAlienCucumber.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 836
+  },
+  {
+   "collection": "NarmekMoonTree",
+   "name": "NarmekMoonTree.Craters",
+   "hex": "8b8f99",
+   "material": "Rock",
+   "transparency": 0.0,
+   "tris": 352
+  },
+  {
+   "collection": "NarmekMoonTree",
+   "name": "NarmekMoonTree.Glow",
+   "hex": "b45cff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 896
+  },
+  {
+   "collection": "NarmekMoonTree",
+   "name": "NarmekMoonTree.SaucerStuds",
+   "hex": "c6c2d0",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 660
+  },
+  {
+   "collection": "NarmekMoonTree",
+   "name": "NarmekMoonTree.Saucers",
+   "hex": "9b96a9",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 240
+  },
+  {
+   "collection": "NarmekMoonTree",
+   "name": "NarmekMoonTree.Trunk",
+   "hex": "b9bcc4",
+   "material": "Rock",
+   "transparency": 0.0,
+   "tris": 308
+  },
+  {
+   "collection": "NarmekAlienTree",
+   "name": "NarmekAlienTree.Base",
+   "hex": "227a68",
+   "material": "Rock",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "NarmekAlienTree",
+   "name": "NarmekAlienTree.Crown",
+   "hex": "f2a12e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 600
+  },
+  {
+   "collection": "NarmekAlienTree",
+   "name": "NarmekAlienTree.CrownStuds",
+   "hex": "d4831c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 1100
+  },
+  {
+   "collection": "NarmekAlienTree",
+   "name": "NarmekAlienTree.Trunk",
+   "hex": "2f9e86",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 308
+  },
+  {
+   "collection": "NarmekAlienTree",
+   "name": "NarmekAlienTree.TrunkStuds",
+   "hex": "227a68",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 792
+  },
+  {
+   "collection": "NarmekGalaxyTree",
+   "name": "NarmekGalaxyTree.Arms",
+   "hex": "cfe0ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 756
+  },
+  {
+   "collection": "NarmekGalaxyTree",
+   "name": "NarmekGalaxyTree.Cores",
+   "hex": "e8d8ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 156
+  },
+  {
+   "collection": "NarmekGalaxyTree",
+   "name": "NarmekGalaxyTree.Discs",
+   "hex": "4a2b80",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 336
+  },
+  {
+   "collection": "NarmekGalaxyTree",
+   "name": "NarmekGalaxyTree.Stars",
+   "hex": "cfe0ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 440
+  },
+  {
+   "collection": "NarmekGalaxyTree",
+   "name": "NarmekGalaxyTree.Trunk",
+   "hex": "6a3fb0",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 396
+  },
+  {
+   "collection": "NarmekGalaxyTree",
+   "name": "NarmekGalaxyTree.TrunkStuds",
+   "hex": "4a2b80",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 1408
+  },
+  {
+   "collection": "SamuraiKatanaCucumber",
+   "name": "SamuraiKatanaCucumber.Blade",
+   "hex": "d8dde6",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "SamuraiKatanaCucumber",
+   "name": "SamuraiKatanaCucumber.Body",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 144
+  },
+  {
+   "collection": "SamuraiKatanaCucumber",
+   "name": "SamuraiKatanaCucumber.Fittings",
+   "hex": "e8b73a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 468
+  },
+  {
+   "collection": "SamuraiKatanaCucumber",
+   "name": "SamuraiKatanaCucumber.Handle",
+   "hex": "23262c",
+   "material": "Leather",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "SamuraiKatanaCucumber",
+   "name": "SamuraiKatanaCucumber.Knot",
+   "hex": "9e2a21",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 70
+  },
+  {
+   "collection": "SamuraiKatanaCucumber",
+   "name": "SamuraiKatanaCucumber.Sash",
+   "hex": "cf3b30",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 212
+  },
+  {
+   "collection": "SamuraiKatanaCucumber",
+   "name": "SamuraiKatanaCucumber.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 792
+  },
+  {
+   "collection": "SamuraiKatanaCucumber",
+   "name": "SamuraiKatanaCucumber.Tag",
+   "hex": "3a3228",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "SamuraiBambooCucumber",
+   "name": "SamuraiBambooCucumber.Bands",
+   "hex": "d9bd72",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 180
+  },
+  {
+   "collection": "SamuraiBambooCucumber",
+   "name": "SamuraiBambooCucumber.Body",
+   "hex": "57ad3c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 188
+  },
+  {
+   "collection": "SamuraiBambooCucumber",
+   "name": "SamuraiBambooCucumber.Leaves",
+   "hex": "5cbf3f",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 160
+  },
+  {
+   "collection": "SamuraiBambooCucumber",
+   "name": "SamuraiBambooCucumber.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 1408
+  },
+  {
+   "collection": "SamuraiLanternCucumber",
+   "name": "SamuraiLanternCucumber.Body",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 188
+  },
+  {
+   "collection": "SamuraiLanternCucumber",
+   "name": "SamuraiLanternCucumber.Frame",
+   "hex": "b98d22",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 308
+  },
+  {
+   "collection": "SamuraiLanternCucumber",
+   "name": "SamuraiLanternCucumber.Kanji",
+   "hex": "3a3228",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 308
+  },
+  {
+   "collection": "SamuraiLanternCucumber",
+   "name": "SamuraiLanternCucumber.Lantern",
+   "hex": "d9bd72",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "SamuraiLanternCucumber",
+   "name": "SamuraiLanternCucumber.Roof",
+   "hex": "44474f",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 50
+  },
+  {
+   "collection": "SamuraiLanternCucumber",
+   "name": "SamuraiLanternCucumber.RoofRidge",
+   "hex": "5c606a",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 48
+  },
+  {
+   "collection": "SamuraiLanternCucumber",
+   "name": "SamuraiLanternCucumber.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 880
+  },
+  {
+   "collection": "SamuraiLanternCucumber",
+   "name": "SamuraiLanternCucumber.Tag",
+   "hex": "e8dcb8",
+   "material": "Plaster",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "SamuraiLanternCucumber",
+   "name": "SamuraiLanternCucumber.Windows",
+   "hex": "ffd98a",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 132
+  },
+  {
+   "collection": "SamuraiBambooGrove",
+   "name": "SamuraiBambooGrove.Bands",
+   "hex": "d9bd72",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 616
+  },
+  {
+   "collection": "SamuraiBambooGrove",
+   "name": "SamuraiBambooGrove.Leaves",
+   "hex": "5cbf3f",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 320
+  },
+  {
+   "collection": "SamuraiBambooGrove",
+   "name": "SamuraiBambooGrove.Shoots",
+   "hex": "3f8c2c",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 80
+  },
+  {
+   "collection": "SamuraiBambooGrove",
+   "name": "SamuraiBambooGrove.Stalks",
+   "hex": "57ad3c",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 112
+  },
+  {
+   "collection": "SamuraiBambooGrove",
+   "name": "SamuraiBambooGrove.Stones",
+   "hex": "8f8a80",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 60
+  },
+  {
+   "collection": "SamuraiBambooGrove",
+   "name": "SamuraiBambooGrove.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 528
+  },
+  {
+   "collection": "SamuraiToriiGate",
+   "name": "SamuraiToriiGate.Footings",
+   "hex": "6b675f",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "SamuraiToriiGate",
+   "name": "SamuraiToriiGate.Gate",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 760
+  },
+  {
+   "collection": "SamuraiToriiGate",
+   "name": "SamuraiToriiGate.Plinths",
+   "hex": "8f8a80",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "SamuraiToriiGate",
+   "name": "SamuraiToriiGate.Rope",
+   "hex": "d9bd72",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 248
+  },
+  {
+   "collection": "SamuraiToriiGate",
+   "name": "SamuraiToriiGate.SliceFace",
+   "hex": "dcefb4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 72
+  },
+  {
+   "collection": "SamuraiToriiGate",
+   "name": "SamuraiToriiGate.SliceSeeds",
+   "hex": "b9dd7d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 528
+  },
+  {
+   "collection": "SamuraiToriiGate",
+   "name": "SamuraiToriiGate.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 2420
+  },
+  {
+   "collection": "SamuraiSakuraTree",
+   "name": "SamuraiSakuraTree.Base",
+   "hex": "513723",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 132
+  },
+  {
+   "collection": "SamuraiSakuraTree",
+   "name": "SamuraiSakuraTree.Blossom",
+   "hex": "f7a8cc",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 572
+  },
+  {
+   "collection": "SamuraiSakuraTree",
+   "name": "SamuraiSakuraTree.SliceFaces",
+   "hex": "dcefb4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 252
+  },
+  {
+   "collection": "SamuraiSakuraTree",
+   "name": "SamuraiSakuraTree.SliceRims",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 812
+  },
+  {
+   "collection": "SamuraiSakuraTree",
+   "name": "SamuraiSakuraTree.SliceSeeds",
+   "hex": "b9dd7d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 504
+  },
+  {
+   "collection": "SamuraiSakuraTree",
+   "name": "SamuraiSakuraTree.Stones",
+   "hex": "8f8a80",
+   "material": "Rock",
+   "transparency": 0.0,
+   "tris": 60
+  },
+  {
+   "collection": "SamuraiSakuraTree",
+   "name": "SamuraiSakuraTree.Trunk",
+   "hex": "6b4a32",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 352
+  },
+  {
+   "collection": "SamuraiSakuraTree",
+   "name": "SamuraiSakuraTree.TrunkStuds",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 792
+  },
+  {
+   "collection": "SamuraiSakuraTree",
+   "name": "SamuraiSakuraTree.Tufts",
+   "hex": "5f9e42",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 238
+  },
+  {
+   "collection": "SamuraiSlicedCucumber",
+   "name": "SamuraiSlicedCucumber.Faces",
+   "hex": "dcefb4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 216
+  },
+  {
+   "collection": "SamuraiSlicedCucumber",
+   "name": "SamuraiSlicedCucumber.RimStuds",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 660
+  },
+  {
+   "collection": "SamuraiSlicedCucumber",
+   "name": "SamuraiSlicedCucumber.Rims",
+   "hex": "2f7a24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 348
+  },
+  {
+   "collection": "SamuraiSlicedCucumber",
+   "name": "SamuraiSlicedCucumber.Seeds",
+   "hex": "b9dd7d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 1056
+  },
+  {
+   "collection": "SamuraiSlicedCucumber",
+   "name": "SamuraiSlicedCucumber.Stones",
+   "hex": "8f8a80",
+   "material": "Rock",
+   "transparency": 0.0,
+   "tris": 40
+  },
+  {
+   "collection": "FarmCucumberBasket",
+   "name": "FarmCucumberBasket.Basket",
+   "hex": "a9743c",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 320
+  },
+  {
+   "collection": "FarmCucumberBasket",
+   "name": "FarmCucumberBasket.Binds",
+   "hex": "7a4f2a",
+   "material": "Leather",
+   "transparency": 0.0,
+   "tris": 40
+  },
+  {
+   "collection": "FarmCucumberBasket",
+   "name": "FarmCucumberBasket.CukeStuds",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 1056
+  },
+  {
+   "collection": "FarmCucumberBasket",
+   "name": "FarmCucumberBasket.Cukes",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 336
+  },
+  {
+   "collection": "FarmCucumberBasket",
+   "name": "FarmCucumberBasket.Stems",
+   "hex": "3a8f27",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 132
+  },
+  {
+   "collection": "FarmCucumberBasket",
+   "name": "FarmCucumberBasket.Weave",
+   "hex": "7e5228",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 824
+  },
+  {
+   "collection": "FarmMuddyCucumber",
+   "name": "FarmMuddyCucumber.Body",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 188
+  },
+  {
+   "collection": "FarmMuddyCucumber",
+   "name": "FarmMuddyCucumber.Mud",
+   "hex": "6b4a2a",
+   "material": "Mud",
+   "transparency": 0.0,
+   "tris": 484
+  },
+  {
+   "collection": "FarmMuddyCucumber",
+   "name": "FarmMuddyCucumber.MudHighlights",
+   "hex": "8a6438",
+   "material": "Mud",
+   "transparency": 0.0,
+   "tris": 220
+  },
+  {
+   "collection": "FarmMuddyCucumber",
+   "name": "FarmMuddyCucumber.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 924
+  },
+  {
+   "collection": "FarmCrateCucumber",
+   "name": "FarmCrateCucumber.CukeStuds",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 704
+  },
+  {
+   "collection": "FarmCrateCucumber",
+   "name": "FarmCrateCucumber.Cukes",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 624
+  },
+  {
+   "collection": "FarmCrateCucumber",
+   "name": "FarmCrateCucumber.Floor",
+   "hex": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 132
+  },
+  {
+   "collection": "FarmCrateCucumber",
+   "name": "FarmCrateCucumber.Frame",
+   "hex": "b08842",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 352
+  },
+  {
+   "collection": "FarmCrateCucumber",
+   "name": "FarmCrateCucumber.Slats",
+   "hex": "d4a962",
+   "material": "WoodPlanks",
+   "transparency": 0.0,
+   "tris": 528
+  },
+  {
+   "collection": "FarmCrateCucumber",
+   "name": "FarmCrateCucumber.Straw",
+   "hex": "e0c454",
+   "material": "Sand",
+   "transparency": 0.0,
+   "tris": 308
+  },
+  {
+   "collection": "FarmWindmillPlant",
+   "name": "FarmWindmillPlant.BladeBorders",
+   "hex": "46a831",
+   "material": "Plastic",
+   "transparency": 0.0,
+   "tris": 176
+  },
+  {
+   "collection": "FarmWindmillPlant",
+   "name": "FarmWindmillPlant.BladeStuds",
+   "hex": "7fd13d",
+   "material": "Plastic",
+   "transparency": 0.0,
+   "tris": 176
+  },
+  {
+   "collection": "FarmWindmillPlant",
+   "name": "FarmWindmillPlant.Blades",
+   "hex": "dcefb4",
+   "material": "Plastic",
+   "transparency": 0.0,
+   "tris": 176
+  },
+  {
+   "collection": "FarmWindmillPlant",
+   "name": "FarmWindmillPlant.Hub",
+   "hex": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 36
+  },
+  {
+   "collection": "FarmWindmillPlant",
+   "name": "FarmWindmillPlant.HubCap",
+   "hex": "c79a58",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 36
+  },
+  {
+   "collection": "FarmWindmillPlant",
+   "name": "FarmWindmillPlant.Leaves",
+   "hex": "46a831",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 120
+  },
+  {
+   "collection": "FarmWindmillPlant",
+   "name": "FarmWindmillPlant.Stalk",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 144
+  },
+  {
+   "collection": "FarmWindmillPlant",
+   "name": "FarmWindmillPlant.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 616
+  },
+  {
+   "collection": "FarmHayBale",
+   "name": "FarmHayBale.Bands",
+   "hex": "d4a962",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "tris": 156
+  },
+  {
+   "collection": "FarmHayBale",
+   "name": "FarmHayBale.Body",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 52
+  },
+  {
+   "collection": "FarmHayBale",
+   "name": "FarmHayBale.Faces",
+   "hex": "dcefb4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 104
+  },
+  {
+   "collection": "FarmHayBale",
+   "name": "FarmHayBale.Seeds",
+   "hex": "b9dd7d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 352
+  },
+  {
+   "collection": "FarmHayBale",
+   "name": "FarmHayBale.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 704
+  },
+  {
+   "collection": "FarmCucumberTree",
+   "name": "FarmCucumberTree.Base",
+   "hex": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 132
+  },
+  {
+   "collection": "FarmCucumberTree",
+   "name": "FarmCucumberTree.Crown",
+   "hex": "46a831",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 176
+  },
+  {
+   "collection": "FarmCucumberTree",
+   "name": "FarmCucumberTree.Cukes",
+   "hex": "3d9429",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 564
+  },
+  {
+   "collection": "FarmCucumberTree",
+   "name": "FarmCucumberTree.Studs",
+   "hex": "7fd13d",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 3080
+  },
+  {
+   "collection": "FarmCucumberTree",
+   "name": "FarmCucumberTree.Trunk",
+   "hex": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 220
+  },
+  {
+   "collection": "SnowFrozenSlice",
+   "name": "SnowFrozenSlice.Faces",
+   "hex": "dcefb4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 288
+  },
+  {
+   "collection": "SnowFrozenSlice",
+   "name": "SnowFrozenSlice.RimStuds",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 880
+  },
+  {
+   "collection": "SnowFrozenSlice",
+   "name": "SnowFrozenSlice.Rims",
+   "hex": "2f7a24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 464
+  },
+  {
+   "collection": "SnowFrozenSlice",
+   "name": "SnowFrozenSlice.Seeds",
+   "hex": "b9dd7d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 2112
+  },
+  {
+   "collection": "SnowFrozenSlice",
+   "name": "SnowFrozenSlice.Snow",
+   "hex": "f4fafd",
+   "material": "Snow",
+   "transparency": 0.0,
+   "tris": 232
+  },
+  {
+   "collection": "SnowSnowcapCucumber",
+   "name": "SnowSnowcapCucumber.Body",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 188
+  },
+  {
+   "collection": "SnowSnowcapCucumber",
+   "name": "SnowSnowcapCucumber.SnowCap",
+   "hex": "f4fafd",
+   "material": "Snow",
+   "transparency": 0.0,
+   "tris": 168
+  },
+  {
+   "collection": "SnowSnowcapCucumber",
+   "name": "SnowSnowcapCucumber.SnowPatches",
+   "hex": "f4fafd",
+   "material": "Glacier",
+   "transparency": 0.0,
+   "tris": 176
+  },
+  {
+   "collection": "SnowSnowcapCucumber",
+   "name": "SnowSnowcapCucumber.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 1012
+  },
+  {
+   "collection": "SnowSnowballSlice",
+   "name": "SnowSnowballSlice.Ball",
+   "hex": "f4fafd",
+   "material": "Snow",
+   "transparency": 0.0,
+   "tris": 252
+  },
+  {
+   "collection": "SnowSnowballSlice",
+   "name": "SnowSnowballSlice.Face",
+   "hex": "dcefb4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 36
+  },
+  {
+   "collection": "SnowSnowballSlice",
+   "name": "SnowSnowballSlice.Rim",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 116
+  },
+  {
+   "collection": "SnowSnowballSlice",
+   "name": "SnowSnowballSlice.Seeds",
+   "hex": "b9dd7d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 220
+  },
+  {
+   "collection": "SnowSnowballSlice",
+   "name": "SnowSnowballSlice.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 308
+  },
+  {
+   "collection": "SnowCrystalCucumber",
+   "name": "SnowCrystalCucumber.Body",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 188
+  },
+  {
+   "collection": "SnowCrystalCucumber",
+   "name": "SnowCrystalCucumber.CrystalStuds",
+   "hex": "f4fafd",
+   "material": "Snow",
+   "transparency": 0.0,
+   "tris": 616
+  },
+  {
+   "collection": "SnowCrystalCucumber",
+   "name": "SnowCrystalCucumber.Crystals",
+   "hex": "9fe0f8",
+   "material": "Ice",
+   "transparency": 0.18,
+   "tris": 620
+  },
+  {
+   "collection": "SnowCrystalCucumber",
+   "name": "SnowCrystalCucumber.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 704
+  },
+  {
+   "collection": "SnowFrozenCucumber",
+   "name": "SnowFrozenCucumber.Body",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 188
+  },
+  {
+   "collection": "SnowFrozenCucumber",
+   "name": "SnowFrozenCucumber.Ice",
+   "hex": "8fd4f2",
+   "material": "Ice",
+   "transparency": 0.42,
+   "tris": 392
+  },
+  {
+   "collection": "SnowFrozenCucumber",
+   "name": "SnowFrozenCucumber.Snow",
+   "hex": "f4fafd",
+   "material": "Snow",
+   "transparency": 0.0,
+   "tris": 328
+  },
+  {
+   "collection": "SnowFrozenCucumber",
+   "name": "SnowFrozenCucumber.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 792
+  },
+  {
+   "collection": "SnowSnowTree",
+   "name": "SnowSnowTree.Crown",
+   "hex": "46a831",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 220
+  },
+  {
+   "collection": "SnowSnowTree",
+   "name": "SnowSnowTree.CrownStuds",
+   "hex": "7fd13d",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 960
+  },
+  {
+   "collection": "SnowSnowTree",
+   "name": "SnowSnowTree.CukeStuds",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 792
+  },
+  {
+   "collection": "SnowSnowTree",
+   "name": "SnowSnowTree.Cukes",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 468
+  },
+  {
+   "collection": "SnowSnowTree",
+   "name": "SnowSnowTree.Snow",
+   "hex": "f4fafd",
+   "material": "Snow",
+   "transparency": 0.0,
+   "tris": 924
+  },
+  {
+   "collection": "SnowSnowTree",
+   "name": "SnowSnowTree.Trunk",
+   "hex": "6b4a32",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 396
+  },
+  {
+   "collection": "SnowIcicleTree",
+   "name": "SnowIcicleTree.Base",
+   "hex": "215c19",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 132
+  },
+  {
+   "collection": "SnowIcicleTree",
+   "name": "SnowIcicleTree.Icicles",
+   "hex": "8fd4f2",
+   "material": "Ice",
+   "transparency": 0.18,
+   "tris": 152
+  },
+  {
+   "collection": "SnowIcicleTree",
+   "name": "SnowIcicleTree.Snow",
+   "hex": "f4fafd",
+   "material": "Snow",
+   "transparency": 0.0,
+   "tris": 1232
+  },
+  {
+   "collection": "SnowIcicleTree",
+   "name": "SnowIcicleTree.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 1892
+  },
+  {
+   "collection": "SnowIcicleTree",
+   "name": "SnowIcicleTree.Trunk",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 396
+  },
+  {
+   "collection": "SnowFrozenTree",
+   "name": "SnowFrozenTree.BranchesRims",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 552
+  },
+  {
+   "collection": "SnowFrozenTree",
+   "name": "SnowFrozenTree.Faces",
+   "hex": "dcefb4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 264
+  },
+  {
+   "collection": "SnowFrozenTree",
+   "name": "SnowFrozenTree.Icicles",
+   "hex": "8fd4f2",
+   "material": "Ice",
+   "transparency": 0.18,
+   "tris": 88
+  },
+  {
+   "collection": "SnowFrozenTree",
+   "name": "SnowFrozenTree.Seeds",
+   "hex": "b9dd7d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 792
+  },
+  {
+   "collection": "SnowFrozenTree",
+   "name": "SnowFrozenTree.Snow",
+   "hex": "f4fafd",
+   "material": "Snow",
+   "transparency": 0.0,
+   "tris": 716
+  },
+  {
+   "collection": "SnowFrozenTree",
+   "name": "SnowFrozenTree.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 504
+  },
+  {
+   "collection": "SnowFrozenTree",
+   "name": "SnowFrozenTree.Trunk",
+   "hex": "6b4a32",
+   "material": "Wood",
+   "transparency": 0.0,
+   "tris": 220
+  },
+  {
+   "collection": "UnderwaterBubbleSlice",
+   "name": "UnderwaterBubbleSlice.Faces",
+   "hex": "b8e6f8",
+   "material": "Glass",
+   "transparency": 0.35,
+   "tris": 416
+  },
+  {
+   "collection": "UnderwaterBubbleSlice",
+   "name": "UnderwaterBubbleSlice.RimStuds",
+   "hex": "b8e6f8",
+   "material": "Glass",
+   "transparency": 0.15,
+   "tris": 880
+  },
+  {
+   "collection": "UnderwaterBubbleSlice",
+   "name": "UnderwaterBubbleSlice.Rims",
+   "hex": "6fc8f0",
+   "material": "Glass",
+   "transparency": 0.42,
+   "tris": 656
+  },
+  {
+   "collection": "UnderwaterBubbleSlice",
+   "name": "UnderwaterBubbleSlice.Seeds",
+   "hex": "f4fafd",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 2112
+  },
+  {
+   "collection": "UnderwaterSeaweedCucumber",
+   "name": "UnderwaterSeaweedCucumber.Body",
+   "hex": "3f9e3a",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 480
+  },
+  {
+   "collection": "UnderwaterSeaweedCucumber",
+   "name": "UnderwaterSeaweedCucumber.Fins",
+   "hex": "2f7d2c",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 592
+  },
+  {
+   "collection": "UnderwaterSeaweedCucumber",
+   "name": "UnderwaterSeaweedCucumber.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 528
+  },
+  {
+   "collection": "UnderwaterShellSlice",
+   "name": "UnderwaterShellSlice.Lining",
+   "hex": "f4ead2",
+   "material": "Marble",
+   "transparency": 0.0,
+   "tris": 40
+  },
+  {
+   "collection": "UnderwaterShellSlice",
+   "name": "UnderwaterShellSlice.Pips",
+   "hex": "f4f0e8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 220
+  },
+  {
+   "collection": "UnderwaterShellSlice",
+   "name": "UnderwaterShellSlice.Ribs",
+   "hex": "c98cb8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 660
+  },
+  {
+   "collection": "UnderwaterShellSlice",
+   "name": "UnderwaterShellSlice.Shells",
+   "hex": "e8b4d8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 80
+  },
+  {
+   "collection": "UnderwaterShellSlice",
+   "name": "UnderwaterShellSlice.Speckles",
+   "hex": "b8e6f8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 484
+  },
+  {
+   "collection": "UnderwaterCoralCucumber",
+   "name": "UnderwaterCoralCucumber.Arms",
+   "hex": "f0544a",
+   "material": "Limestone",
+   "transparency": 0.0,
+   "tris": 910
+  },
+  {
+   "collection": "UnderwaterCoralCucumber",
+   "name": "UnderwaterCoralCucumber.Body",
+   "hex": "6a4fb0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 188
+  },
+  {
+   "collection": "UnderwaterCoralCucumber",
+   "name": "UnderwaterCoralCucumber.Studs",
+   "hex": "f0544a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 924
+  },
+  {
+   "collection": "UnderwaterPearlCucumber",
+   "name": "UnderwaterPearlCucumber.Body",
+   "hex": "f4f0e8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 188
+  },
+  {
+   "collection": "UnderwaterPearlCucumber",
+   "name": "UnderwaterPearlCucumber.Pearls",
+   "hex": "f4fafd",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 720
+  },
+  {
+   "collection": "UnderwaterPearlCucumber",
+   "name": "UnderwaterPearlCucumber.Studs",
+   "hex": "ddd6c8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 748
+  },
+  {
+   "collection": "UnderwaterKelpTree",
+   "name": "UnderwaterKelpTree.Base",
+   "hex": "2f6b5e",
+   "material": "Rock",
+   "transparency": 0.0,
+   "tris": 132
+  },
+  {
+   "collection": "UnderwaterKelpTree",
+   "name": "UnderwaterKelpTree.Fronds",
+   "hex": "4faa4a",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 1044
+  },
+  {
+   "collection": "UnderwaterKelpTree",
+   "name": "UnderwaterKelpTree.FrondsDark",
+   "hex": "3c8a38",
+   "material": "LeafyGrass",
+   "transparency": 0.0,
+   "tris": 680
+  },
+  {
+   "collection": "UnderwaterKelpTree",
+   "name": "UnderwaterKelpTree.Stalk",
+   "hex": "3f8a7a",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 372
+  },
+  {
+   "collection": "UnderwaterKelpTree",
+   "name": "UnderwaterKelpTree.StalkStuds",
+   "hex": "2f6b5e",
+   "material": "Grass",
+   "transparency": 0.0,
+   "tris": 792
+  },
+  {
+   "collection": "UnderwaterBubbleTree",
+   "name": "UnderwaterBubbleTree.BubbleStuds",
+   "hex": "f4fafd",
+   "material": "Glass",
+   "transparency": 0.2,
+   "tris": 880
+  },
+  {
+   "collection": "UnderwaterBubbleTree",
+   "name": "UnderwaterBubbleTree.Bubbles",
+   "hex": "b8e6f8",
+   "material": "Glass",
+   "transparency": 0.48,
+   "tris": 672
+  },
+  {
+   "collection": "UnderwaterBubbleTree",
+   "name": "UnderwaterBubbleTree.Trunk",
+   "hex": "3f6fb0",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 440
+  },
+  {
+   "collection": "UnderwaterBubbleTree",
+   "name": "UnderwaterBubbleTree.TrunkStuds",
+   "hex": "2f5490",
+   "material": "Slate",
+   "transparency": 0.0,
+   "tris": 924
+  },
+  {
+   "collection": "UnderwaterCoralTree",
+   "name": "UnderwaterCoralTree.CoralOrange",
+   "hex": "f08a3a",
+   "material": "Pebble",
+   "transparency": 0.0,
+   "tris": 390
+  },
+  {
+   "collection": "UnderwaterCoralTree",
+   "name": "UnderwaterCoralTree.CoralRed",
+   "hex": "f0544a",
+   "material": "Pebble",
+   "transparency": 0.0,
+   "tris": 780
+  },
+  {
+   "collection": "UnderwaterCoralTree",
+   "name": "UnderwaterCoralTree.Trunk",
+   "hex": "6a4fb0",
+   "material": "Sandstone",
+   "transparency": 0.0,
+   "tris": 264
+  },
+  {
+   "collection": "UnderwaterCoralTree",
+   "name": "UnderwaterCoralTree.TrunkStuds",
+   "hex": "50398a",
+   "material": "Sandstone",
+   "transparency": 0.0,
+   "tris": 1232
+  },
+  {
+   "collection": "ToylandToySlice",
+   "name": "ToylandToySlice.Face",
+   "hex": "a6e25a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 72
+  },
+  {
+   "collection": "ToylandToySlice",
+   "name": "ToylandToySlice.Lime",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 1620
+  },
+  {
+   "collection": "ToylandToySlice",
+   "name": "ToylandToySlice.PaleCentre",
+   "hex": "e6f7c4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "ToylandToySlice",
+   "name": "ToylandToySlice.Rim",
+   "hex": "2c8a2a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 116
+  },
+  {
+   "collection": "ToylandLegoCucumber",
+   "name": "ToylandLegoCucumber.Body",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 144
+  },
+  {
+   "collection": "ToylandLegoCucumber",
+   "name": "ToylandLegoCucumber.Brick",
+   "hex": "ffc72a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "ToylandLegoCucumber",
+   "name": "ToylandLegoCucumber.BrickStud",
+   "hex": "dca21a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 72
+  },
+  {
+   "collection": "ToylandLegoCucumber",
+   "name": "ToylandLegoCucumber.Bumps",
+   "hex": "3d9429",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 924
+  },
+  {
+   "collection": "ToylandLegoCucumber",
+   "name": "ToylandLegoCucumber.Checker",
+   "hex": "4fc83a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 432
+  },
+  {
+   "collection": "ToylandLegoCucumber",
+   "name": "ToylandLegoCucumber.Peg",
+   "hex": "f4f2ec",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 72
+  },
+  {
+   "collection": "ToylandJackInTheBoxCucumber",
+   "name": "ToylandJackInTheBoxCucumber.Box",
+   "hex": "e0352b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 304
+  },
+  {
+   "collection": "ToylandJackInTheBoxCucumber",
+   "name": "ToylandJackInTheBoxCucumber.EyeShine",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 24
+  },
+  {
+   "collection": "ToylandJackInTheBoxCucumber",
+   "name": "ToylandJackInTheBoxCucumber.Eyes",
+   "hex": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "ToylandJackInTheBoxCucumber",
+   "name": "ToylandJackInTheBoxCucumber.Head",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 480
+  },
+  {
+   "collection": "ToylandJackInTheBoxCucumber",
+   "name": "ToylandJackInTheBoxCucumber.HeadStuds",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 396
+  },
+  {
+   "collection": "ToylandJackInTheBoxCucumber",
+   "name": "ToylandJackInTheBoxCucumber.Nose",
+   "hex": "2f7a24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "ToylandJackInTheBoxCucumber",
+   "name": "ToylandJackInTheBoxCucumber.Opening",
+   "hex": "a82620",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 12
+  },
+  {
+   "collection": "ToylandJackInTheBoxCucumber",
+   "name": "ToylandJackInTheBoxCucumber.Yellow",
+   "hex": "ffc72a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 320
+  },
+  {
+   "collection": "ToylandToyRocketCucumber",
+   "name": "ToylandToyRocketCucumber.Blue",
+   "hex": "2f6fe0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 222
+  },
+  {
+   "collection": "ToylandToyRocketCucumber",
+   "name": "ToylandToyRocketCucumber.DotOrange",
+   "hex": "ff8a24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "ToylandToyRocketCucumber",
+   "name": "ToylandToyRocketCucumber.DotYellow",
+   "hex": "ffc72a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "ToylandToyRocketCucumber",
+   "name": "ToylandToyRocketCucumber.EyeShine",
+   "hex": "ffffff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "ToylandToyRocketCucumber",
+   "name": "ToylandToyRocketCucumber.Eyes",
+   "hex": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 196
+  },
+  {
+   "collection": "ToylandToyRocketCucumber",
+   "name": "ToylandToyRocketCucumber.Head",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 140
+  },
+  {
+   "collection": "ToylandToyRocketCucumber",
+   "name": "ToylandToyRocketCucumber.HeadStuds",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 308
+  },
+  {
+   "collection": "ToylandToyRocketCucumber",
+   "name": "ToylandToyRocketCucumber.Hull",
+   "hex": "f4f2ec",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 128
+  },
+  {
+   "collection": "ToylandToyRocketCucumber",
+   "name": "ToylandToyRocketCucumber.PortholeGlass",
+   "hex": "2350b0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 48
+  },
+  {
+   "collection": "ToylandToyRocketCucumber",
+   "name": "ToylandToyRocketCucumber.Red",
+   "hex": "e0352b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 348
+  },
+  {
+   "collection": "ToylandPinwheelPlant",
+   "name": "ToylandPinwheelPlant.BladeBlue",
+   "hex": "2f6fe0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 16
+  },
+  {
+   "collection": "ToylandPinwheelPlant",
+   "name": "ToylandPinwheelPlant.BladeGreen",
+   "hex": "4caf50",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 92
+  },
+  {
+   "collection": "ToylandPinwheelPlant",
+   "name": "ToylandPinwheelPlant.BladeRed",
+   "hex": "e0352b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 16
+  },
+  {
+   "collection": "ToylandPinwheelPlant",
+   "name": "ToylandPinwheelPlant.BladeYellow",
+   "hex": "ffc72a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 32
+  },
+  {
+   "collection": "ToylandPinwheelPlant",
+   "name": "ToylandPinwheelPlant.Brick",
+   "hex": "3fb13a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 492
+  },
+  {
+   "collection": "ToylandPinwheelPlant",
+   "name": "ToylandPinwheelPlant.Hub",
+   "hex": "a82620",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 96
+  },
+  {
+   "collection": "ToylandPinwheelPlant",
+   "name": "ToylandPinwheelPlant.Stem",
+   "hex": "2c8a2a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 308
+  },
+  {
+   "collection": "ToylandBuildingBlockTree",
+   "name": "ToylandBuildingBlockTree.Crown",
+   "hex": "3fb13a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 616
+  },
+  {
+   "collection": "ToylandBuildingBlockTree",
+   "name": "ToylandBuildingBlockTree.CrownStuds",
+   "hex": "4fc83a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 544
+  },
+  {
+   "collection": "ToylandBuildingBlockTree",
+   "name": "ToylandBuildingBlockTree.Trunk",
+   "hex": "8a5530",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 176
+  },
+  {
+   "collection": "ToylandBuildingBlockTree",
+   "name": "ToylandBuildingBlockTree.TrunkSeams",
+   "hex": "6a3f22",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 36
+  },
+  {
+   "collection": "ToylandToyTrainCucumber",
+   "name": "ToylandToyTrainCucumber.Blocks",
+   "hex": "c23a8e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "ToylandToyTrainCucumber",
+   "name": "ToylandToyTrainCucumber.Chassis",
+   "hex": "2f6fe0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 352
+  },
+  {
+   "collection": "ToylandToyTrainCucumber",
+   "name": "ToylandToyTrainCucumber.Cuke",
+   "hex": "2f7a24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 156
+  },
+  {
+   "collection": "ToylandToyTrainCucumber",
+   "name": "ToylandToyTrainCucumber.CukeStuds",
+   "hex": "5cb32e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 704
+  },
+  {
+   "collection": "ToylandToyTrainCucumber",
+   "name": "ToylandToyTrainCucumber.Eyes",
+   "hex": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "ToylandToyTrainCucumber",
+   "name": "ToylandToyTrainCucumber.Hubs",
+   "hex": "dca21a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 168
+  },
+  {
+   "collection": "ToylandToyTrainCucumber",
+   "name": "ToylandToyTrainCucumber.Under",
+   "hex": "e0352b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 176
+  },
+  {
+   "collection": "ToylandToyTrainCucumber",
+   "name": "ToylandToyTrainCucumber.Wheels",
+   "hex": "ffc72a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 308
+  },
+  {
+   "collection": "ToylandToyTrainCucumber",
+   "name": "ToylandToyTrainCucumber.Window",
+   "hex": "2350b0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "NeonNeonSlice",
+   "name": "NeonNeonSlice.Face",
+   "hex": "a6ff3f",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 72
+  },
+  {
+   "collection": "NeonNeonSlice",
+   "name": "NeonNeonSlice.Halo",
+   "hex": "f04dff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 240
+  },
+  {
+   "collection": "NeonNeonSlice",
+   "name": "NeonNeonSlice.Rim",
+   "hex": "2f7a24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 116
+  },
+  {
+   "collection": "NeonNeonSlice",
+   "name": "NeonNeonSlice.Spokes",
+   "hex": "dcefb4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 232
+  },
+  {
+   "collection": "NeonNeonSlice",
+   "name": "NeonNeonSlice.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 776
+  },
+  {
+   "collection": "NeonElectroCucumber",
+   "name": "NeonElectroCucumber.Body",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 188
+  },
+  {
+   "collection": "NeonElectroCucumber",
+   "name": "NeonElectroCucumber.Rings",
+   "hex": "3fe6ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 384
+  },
+  {
+   "collection": "NeonElectroCucumber",
+   "name": "NeonElectroCucumber.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 924
+  },
+  {
+   "collection": "NeonGridCucumber",
+   "name": "NeonGridCucumber.Body",
+   "hex": "1c1942",
+   "material": "Glass",
+   "transparency": 0.35,
+   "tris": 144
+  },
+  {
+   "collection": "NeonGridCucumber",
+   "name": "NeonGridCucumber.GridCyan",
+   "hex": "3fe6ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 616
+  },
+  {
+   "collection": "NeonGridCucumber",
+   "name": "NeonGridCucumber.GridPurple",
+   "hex": "a04dff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 272
+  },
+  {
+   "collection": "NeonGridCucumber",
+   "name": "NeonGridCucumber.Lime",
+   "hex": "a6ff3f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 88
+  },
+  {
+   "collection": "NeonHologramCucumber",
+   "name": "NeonHologramCucumber.Holo",
+   "hex": "3fa8ff",
+   "material": "Neon",
+   "transparency": 0.35,
+   "tris": 188
+  },
+  {
+   "collection": "NeonHologramCucumber",
+   "name": "NeonHologramCucumber.Pedestal",
+   "hex": "1c1942",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 48
+  },
+  {
+   "collection": "NeonHologramCucumber",
+   "name": "NeonHologramCucumber.PedestalTop",
+   "hex": "2c2866",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 20
+  },
+  {
+   "collection": "NeonHologramCucumber",
+   "name": "NeonHologramCucumber.Pixels",
+   "hex": "9fe4ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 396
+  },
+  {
+   "collection": "NeonHologramCucumber",
+   "name": "NeonHologramCucumber.ScanLines",
+   "hex": "9fe4ff",
+   "material": "Neon",
+   "transparency": 0.3,
+   "tris": 1044
+  },
+  {
+   "collection": "NeonHologramCucumber",
+   "name": "NeonHologramCucumber.Strips",
+   "hex": "3fe6ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 356
+  },
+  {
+   "collection": "NeonPalm",
+   "name": "NeonPalm.Base",
+   "hex": "1c1942",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 72
+  },
+  {
+   "collection": "NeonPalm",
+   "name": "NeonPalm.CoconutStuds",
+   "hex": "2d8a36",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 660
+  },
+  {
+   "collection": "NeonPalm",
+   "name": "NeonPalm.Coconuts",
+   "hex": "5cbf3f",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 560
+  },
+  {
+   "collection": "NeonPalm",
+   "name": "NeonPalm.FrondsCyan",
+   "hex": "3fe6ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 296
+  },
+  {
+   "collection": "NeonPalm",
+   "name": "NeonPalm.FrondsGreen",
+   "hex": "3fae45",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 736
+  },
+  {
+   "collection": "NeonPalm",
+   "name": "NeonPalm.Magenta",
+   "hex": "ff3fd2",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 396
+  },
+  {
+   "collection": "NeonPalm",
+   "name": "NeonPalm.Trunk",
+   "hex": "2a2560",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 268
+  },
+  {
+   "collection": "NeonTree",
+   "name": "NeonTree.Base",
+   "hex": "1c1942",
+   "material": "Metal",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "NeonTree",
+   "name": "NeonTree.BaseGlow",
+   "hex": "a04dff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 48
+  },
+  {
+   "collection": "NeonTree",
+   "name": "NeonTree.CubeStuds",
+   "hex": "2d8a36",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 1892
+  },
+  {
+   "collection": "NeonTree",
+   "name": "NeonTree.CubesGreen",
+   "hex": "3fae45",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 220
+  },
+  {
+   "collection": "NeonTree",
+   "name": "NeonTree.Cyan",
+   "hex": "3fe6ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 220
+  },
+  {
+   "collection": "NeonTree",
+   "name": "NeonTree.Magenta",
+   "hex": "ff3fd2",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 176
+  },
+  {
+   "collection": "NeonTree",
+   "name": "NeonTree.Trunk",
+   "hex": "2a2560",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 264
+  },
+  {
+   "collection": "NeonCyberCucumber",
+   "name": "NeonCyberCucumber.Body",
+   "hex": "46a831",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 188
+  },
+  {
+   "collection": "NeonCyberCucumber",
+   "name": "NeonCyberCucumber.GoggleRim",
+   "hex": "8a5cd6",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 120
+  },
+  {
+   "collection": "NeonCyberCucumber",
+   "name": "NeonCyberCucumber.Goggles",
+   "hex": "c7a2ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 216
+  },
+  {
+   "collection": "NeonCyberCucumber",
+   "name": "NeonCyberCucumber.LensGlow",
+   "hex": "ff3fd2",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 56
+  },
+  {
+   "collection": "NeonCyberCucumber",
+   "name": "NeonCyberCucumber.Lenses",
+   "hex": "241a48",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "NeonCyberCucumber",
+   "name": "NeonCyberCucumber.SideLight",
+   "hex": "4d7cff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "NeonCyberCucumber",
+   "name": "NeonCyberCucumber.SideLightHi",
+   "hex": "3fe6ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "tris": 44
+  },
+  {
+   "collection": "NeonCyberCucumber",
+   "name": "NeonCyberCucumber.Studs",
+   "hex": "7fd13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "tris": 792
+  }
+ ],
+ "total_models": 71,
+ "total_parts": 373,
+ "total_tris": 164368
+}

@@ -1,0 +1,20 @@
+=== Garden/Fountain
+  @AssetId = 121744129147553
+  @Cost = 1000
+  @Notes = Free-standing garden centrepiece, 7.3 studs across and 4.2 tall, centred on the origin and sitting flat on z = 0 (the basin is a RAISED wall, no pit needed). The coping rim is a continuous octagonal ledge 0.96 wide - eight radial trapezoid stones with hairline joints, not loose blocks - whose top face is at z 1.06, low enough to perch on. Basin water surface is at z 0.72 (over a darker water_deep bed at 0.41-0.70); the upper bowl's water is at z 2.50. Both water objects and the Jets object are transparent, so make them non-collidable in Roblox and let players walk into the basin. The Foam object is flat splash rings lying IN the two water planes plus a few flung droplets - it is decoration, leave it non-collidable too. PIVOTS gives the anchor points for ParticleEmitters / a looping water animation. One coping stone (front, index 1) is dropped 4 hundredths and skewed with a moss clump bes
+  @Pivot_BasinWaterTop = (0.00, 0.72, -0.00)
+  @Pivot_BowlWaterTop = (0.00, 2.50, -0.00)
+  @Pivot_JetOrigin = (0.00, 3.62, -0.00)
+  @Pivot_JetTop = (0.00, 4.20, -0.00)
+  @PropSet = plot
+  @Tris = 1910
+  BasinWall [MeshPart] pos (0.00, 0.47, 0.00) size (6.37, 0.66, 6.37) Slate 7d7a72 T0.00 collide=true
+  BowlAndFinial [MeshPart] pos (-0.00, 2.88, -0.00) size (3.01, 1.76, 3.16) Concrete b9b3a7 T0.00 collide=true
+  Coping [MeshPart] pos (-0.00, 0.69, -0.01) size (6.68, 0.73, 6.69) Concrete b9b3a7 T0.00 collide=true
+  DarkStonework [MeshPart] pos (0.00, 1.81, 0.00) size (6.87, 3.62, 6.87) Slate 56524b T0.00 collide=true
+  Foam [MeshPart] pos (0.01, 1.62, 0.21) size (4.86, 1.82, 4.63) Plaster eef7fb T0.00 collide=true
+  Jets [MeshPart] pos (0.01, 2.46, 0.12) size (4.74, 3.48, 4.31) Glass 5fc8d8 T0.35 collide=true
+  Moss [MeshPart] pos (-0.97, 0.59, -2.45) size (4.75, 1.04, 2.44) Grass 2f6b2c T0.00 collide=true
+  Pedestal [MeshPart] pos (-0.00, 1.28, -0.00) size (1.94, 1.88, 1.94) Concrete 7d7a72 T0.00 collide=true
+  WaterBed [MeshPart] pos (0.00, 0.56, 0.00) size (4.99, 0.29, 4.99) Glass 1d6f9c T0.12 collide=true
+  WaterSurface [MeshPart] pos (0.00, 1.61, 0.00) size (5.15, 1.78, 5.15) Glass 2f9ec4 T0.42 collide=true

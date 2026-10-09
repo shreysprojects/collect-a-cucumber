@@ -1,0 +1,22 @@
+=== Defences/FreezeTower
+  @AssetId = 104160326837517
+  @Cost = 3000000
+  @Notes = Static tower with ONE moving part: 'Orb' (faceted icosphere r 1.0, Ice glow bfe4ff, Neon) spins in place about OrbCentre (0, 0, 8.68); the freeze aura / slow field is cast from OrbCentre. The orb's lowest vertex is at z 7.68, 0.08 clear of CollarTop (z 7.3..7.6), so it turns freely; the four prongs graze its equator (a deliberate cradle, ~0.05 of interpenetration, no gap). Everything else is one static body - no yaw / pitch groups. Footprint: base octagon +/-3.23 on the axes (r 3.5 at the vertices), ice tips reach r ~3.75, so the whole prop stays inside the 8 x 8 tile; height 9.75 to the tallest prong ice cap (prongs 9.30, orb top 9.68); nothing below z = 0. Ice parts are Ice 9ed6ff / SmoothPlastic, NOT emissive: IceCrystals (6 clusters on tier 1's top edge), IceSheets (2 slabs slumped over the tier-1 edge, each with an icicle), BandIcicles (3 under the mid band), CollarIcicles (2 under 
+  @Pivot_OrbCentre = (0.00, 8.68, -0.00)
+  @PropSet = defence2
+  @Tris = 1232
+  Band [MeshPart] pos (-0.00, 4.30, -0.00) size (3.60, 0.80, 3.60) SmoothPlastic 565962 T0.00 collide=true
+  BandIcicles [MeshPart] pos (0.31, 3.30, -0.00) size (2.83, 1.31, 3.54) SmoothPlastic 9ed6ff T0.00 collide=true
+  BaseBolts [MeshPart] pos (-0.00, 2.10, -0.00) size (4.86, 0.24, 4.92) SmoothPlastic 2f3136 T0.00 collide=true
+  BaseLip [MeshPart] pos (-0.00, 2.25, -0.00) size (3.88, 0.50, 3.88) SmoothPlastic 6a6e78 T0.00 collide=true
+  BaseTier1 [MeshPart] pos (-0.00, 0.60, -0.00) size (6.47, 1.20, 6.47) SmoothPlastic 45474d T0.00 collide=true
+  BaseTier2 [MeshPart] pos (-0.00, 1.60, -0.00) size (4.99, 0.80, 4.99) SmoothPlastic 565962 T0.00 collide=true
+  Collar [MeshPart] pos (-0.00, 6.95, -0.00) size (3.88, 0.70, 3.88) SmoothPlastic 565962 T0.00 collide=true
+  CollarIcicles [MeshPart] pos (-0.45, 6.10, -1.08) size (2.82, 1.11, 1.45) SmoothPlastic 9ed6ff T0.00 collide=true
+  CollarTop [MeshPart] pos (-0.00, 7.45, -0.00) size (3.40, 0.30, 3.40) SmoothPlastic 6a6e78 T0.00 collide=true
+  Column [MeshPart] pos (-0.00, 4.55, -0.00) size (3.00, 4.10, 3.00) SmoothPlastic 45474d T0.00 collide=true
+  IceCrystals [MeshPart] pos (-0.14, 1.61, 0.33) size (6.17, 1.64, 5.88) SmoothPlastic 9ed6ff T0.00 collide=true
+  IceSheets [MeshPart] pos (1.46, 0.78, -1.47) size (4.32, 1.13, 4.34) SmoothPlastic 9ed6ff T0.00 collide=true
+  Orb [MeshPart] pos (-0.00, 8.68, -0.00) size (1.90, 2.00, 2.00) Neon bfe4ff T0.00 collide=true
+  ProngIce [MeshPart] pos (0.64, 9.48, -0.64) size (1.74, 0.62, 1.81) SmoothPlastic 9ed6ff T0.00 collide=true
+  Prongs [MeshPart] pos (-0.00, 8.27, -0.00) size (3.93, 2.11, 3.93) SmoothPlastic 45474d T0.00 collide=true

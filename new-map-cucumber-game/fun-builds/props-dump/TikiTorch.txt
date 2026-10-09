@@ -1,0 +1,34 @@
+=== Garden/TikiTorch
+  @AssetId = 122941013345857
+  @Cost = 250
+  @Notes = Three separable torch variants in one collection, split by the A_ / B_ / C_ part-name prefix; each is modelled about its own origin and then offset along X.
+A BambooTorch: x=+5, footprint ~1.1 dia, 5.24 tall, flame tops out at z 5.24.
+B TikiHead:    x= 0, footprint 1.6 x 1.3, 5.46 tall, face on the +Y side, flame tops out at z 5.46.
+C Brazier:     x=-5, footprint 1.85 dia over the legs, 1.64 tall, flame tops out at z 1.64.
+Nothing moves. The Neon parts (flames + coals) are the only emissive ones - hang a Roblox PointLight / Fire on the FlameAnchor pivot of each variant rather than on the mesh. Drop a variant into a game at its own origin (subtract its VARIANTS x).
+  @Pivot_A_FlameAnchor = (5.00, 4.18, -0.00)
+  @Pivot_B_FlameAnchor = (0.00, 4.60, -0.00)
+  @Pivot_C_FlameAnchor = (-5.00, 0.90, -0.00)
+  @PropSet = plot
+  @Tris = 1388
+  @Variants = {"A":{"name":"BambooTorch","x":5},"C":{"name":"Brazier","x":-5},"B":{"name":"TikiHead","x":0}}
+  A_Bowl [MeshPart] pos (5.00, 3.87, -0.00) size (1.06, 0.54, 1.06) Metal 6c7789 T0.00 collide=true
+  A_FlameCore [MeshPart] pos (5.00, 4.29, -0.00) size (0.24, 0.47, 0.23) Neon ffe9a8 T0.00 collide=true
+  A_FlameMid [MeshPart] pos (5.00, 4.46, -0.00) size (0.40, 0.85, 0.34) Neon ff9c2e T0.00 collide=true
+  A_FlameTip [MeshPart] pos (5.00, 4.63, -0.00) size (0.50, 1.22, 0.36) Neon e04a1f T0.00 collide=true
+  A_Lashing [MeshPart] pos (5.01, 2.09, -0.05) size (0.62, 2.46, 0.70) Fabric 6b4423 T0.00 collide=true
+  A_Pole [MeshPart] pos (5.00, 1.85, -0.00) size (0.52, 3.70, 0.52) Wood c8a75a T0.00 collide=true
+  B_Bowl [MeshPart] pos (-0.00, 4.36, -0.00) size (1.08, 0.32, 1.08) Metal 3b4350 T0.00 collide=true
+  B_Brow [MeshPart] pos (-0.00, 3.71, -0.59) size (1.40, 0.46, 0.38) Wood 8a5a2b T0.00 collide=true
+  B_FlameCore [MeshPart] pos (-0.00, 4.67, -0.00) size (0.19, 0.39, 0.17) Neon ffe9a8 T0.00 collide=true
+  B_FlameMid [MeshPart] pos (-0.00, 4.81, -0.00) size (0.40, 0.71, 0.39) Neon ff9c2e T0.00 collide=true
+  B_FlameTip [MeshPart] pos (-0.00, 4.95, -0.00) size (0.57, 1.02, 0.50) Neon e04a1f T0.00 collide=true
+  B_Head [MeshPart] pos (-0.00, 2.76, -0.07) size (1.52, 3.01, 1.38) Wood c08a4e T0.00 collide=true
+  B_Post [MeshPart] pos (-0.00, 2.11, -0.06) size (1.60, 4.22, 1.44) Wood 6b4423 T0.00 collide=true
+  B_TeethEyes [MeshPart] pos (-0.00, 2.94, -0.54) size (1.00, 0.73, 0.32) SmoothPlastic e8e0cc T0.00 collide=true
+  C_Bowl [MeshPart] pos (-5.00, 0.58, 0.00) size (1.84, 0.64, 1.84) Slate 8f8a80 T0.00 collide=true
+  C_Coals [MeshPart] pos (-5.00, 0.82, 0.00) size (1.18, 0.40, 1.21) Neon ff8a3d T0.00 collide=true
+  C_FlameCore [MeshPart] pos (-5.00, 0.94, 0.00) size (0.22, 0.35, 0.21) Neon ffe9a8 T0.00 collide=true
+  C_FlameMid [MeshPart] pos (-5.00, 1.06, 0.00) size (0.29, 0.63, 0.22) Neon ff9c2e T0.00 collide=true
+  C_FlameTip [MeshPart] pos (-5.00, 1.19, 0.00) size (0.49, 0.90, 0.40) Neon e04a1f T0.00 collide=true
+  C_Legs [MeshPart] pos (-5.00, 0.28, 0.13) size (1.35, 0.57, 1.26) Metal 2f3640 T0.00 collide=true

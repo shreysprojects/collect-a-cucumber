@@ -1,0 +1,2565 @@
+{
+ "key": "Aquarium",
+ "category": "Home",
+ "parts": [
+  {
+   "name": "Plinth",
+   "shape": "Block",
+   "size": [
+    6.2,
+    0.42,
+    2.7
+   ],
+   "cf": [
+    0.0,
+    0.21,
+    0.02,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Carcass",
+   "shape": "Block",
+   "size": [
+    6.4,
+    2.45,
+    2.8
+   ],
+   "cf": [
+    0.0,
+    1.625,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CabinetTop",
+   "shape": "Block",
+   "size": [
+    6.6,
+    0.2,
+    3.0
+   ],
+   "cf": [
+    0.0,
+    2.95,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CabinetLip",
+   "shape": "Cylinder",
+   "size": [
+    6.6,
+    0.22,
+    0.22
+   ],
+   "cf": [
+    0.0,
+    2.95,
+    -1.5,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "DoorL",
+   "shape": "Block",
+   "size": [
+    2.94,
+    2.06,
+    0.1
+   ],
+   "cf": [
+    1.56,
+    1.63,
+    -1.44,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "DoorPanelL",
+   "shape": "Block",
+   "size": [
+    2.3,
+    1.44,
+    0.05
+   ],
+   "cf": [
+    1.56,
+    1.63,
+    -1.495,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "6a9ef0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "KnobL",
+   "shape": "Ball",
+   "size": [
+    0.24,
+    0.24,
+    0.24
+   ],
+   "cf": [
+    0.3,
+    1.74,
+    -1.56,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DoorR",
+   "shape": "Block",
+   "size": [
+    2.94,
+    2.06,
+    0.1
+   ],
+   "cf": [
+    -1.56,
+    1.63,
+    -1.44,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "DoorPanelR",
+   "shape": "Block",
+   "size": [
+    2.3,
+    1.44,
+    0.05
+   ],
+   "cf": [
+    -1.56,
+    1.63,
+    -1.495,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "6a9ef0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "KnobR",
+   "shape": "Ball",
+   "size": [
+    0.24,
+    0.24,
+    0.24
+   ],
+   "cf": [
+    -0.3,
+    1.74,
+    -1.56,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "TankBase",
+   "shape": "Block",
+   "size": [
+    6.04,
+    0.27,
+    2.64
+   ],
+   "cf": [
+    0.0,
+    3.165,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Post1",
+   "shape": "Block",
+   "size": [
+    0.14,
+    2.95,
+    0.14
+   ],
+   "cf": [
+    2.95,
+    4.75,
+    -1.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Post2",
+   "shape": "Block",
+   "size": [
+    0.14,
+    2.95,
+    0.14
+   ],
+   "cf": [
+    -2.95,
+    4.75,
+    -1.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Post3",
+   "shape": "Block",
+   "size": [
+    0.14,
+    2.95,
+    0.14
+   ],
+   "cf": [
+    2.95,
+    4.75,
+    1.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Post4",
+   "shape": "Block",
+   "size": [
+    0.14,
+    2.95,
+    0.14
+   ],
+   "cf": [
+    -2.95,
+    4.75,
+    1.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "RimFront",
+   "shape": "Block",
+   "size": [
+    6.04,
+    0.2,
+    0.14
+   ],
+   "cf": [
+    0.0,
+    6.32,
+    -1.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "RimBack",
+   "shape": "Block",
+   "size": [
+    6.04,
+    0.2,
+    0.14
+   ],
+   "cf": [
+    0.0,
+    6.32,
+    1.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "RimL",
+   "shape": "Block",
+   "size": [
+    0.14,
+    0.2,
+    2.64
+   ],
+   "cf": [
+    2.95,
+    6.32,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "RimR",
+   "shape": "Block",
+   "size": [
+    0.14,
+    0.2,
+    2.64
+   ],
+   "cf": [
+    -2.95,
+    6.32,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "GlassFront",
+   "shape": "Block",
+   "size": [
+    5.8,
+    2.94,
+    0.06
+   ],
+   "cf": [
+    0.0,
+    4.76,
+    -1.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e6f6ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.86,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "GlassL",
+   "shape": "Block",
+   "size": [
+    0.06,
+    2.94,
+    2.4
+   ],
+   "cf": [
+    2.95,
+    4.76,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e6f6ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.86,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "GlassR",
+   "shape": "Block",
+   "size": [
+    0.06,
+    2.94,
+    2.4
+   ],
+   "cf": [
+    -2.95,
+    4.76,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e6f6ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.86,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Backdrop",
+   "shape": "Block",
+   "size": [
+    5.8,
+    2.94,
+    0.06
+   ],
+   "cf": [
+    0.0,
+    4.76,
+    1.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1f5fb8",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BackdropReef",
+   "shape": "Ellipsoid",
+   "size": [
+    5.74,
+    2.1,
+    0.06
+   ],
+   "cf": [
+    0.0,
+    4.05,
+    1.2,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "184a91",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Water",
+   "shape": "Block",
+   "size": [
+    5.8,
+    2.64,
+    2.4
+   ],
+   "cf": [
+    0.0,
+    4.62,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3ea6f2",
+   "material": "SmoothPlastic",
+   "transparency": 0.64,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "WaterTop",
+   "shape": "Block",
+   "size": [
+    5.78,
+    0.05,
+    2.38
+   ],
+   "cf": [
+    0.0,
+    5.94,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "b9e6ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.72,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Gravel",
+   "shape": "Block",
+   "size": [
+    5.78,
+    0.34,
+    2.38
+   ],
+   "cf": [
+    0.0,
+    3.45,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e8c27a",
+   "material": "Pebble",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "GravelSlope",
+   "shape": "Wedge",
+   "size": [
+    5.78,
+    0.36,
+    1.3
+   ],
+   "cf": [
+    0.0,
+    3.78,
+    0.54,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e8c27a",
+   "material": "Pebble",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PebblePink",
+   "shape": "Ball",
+   "size": [
+    0.18,
+    0.18,
+    0.18
+   ],
+   "cf": [
+    -0.95,
+    3.665,
+    -0.92,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f28cb1",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PebbleBlue",
+   "shape": "Ball",
+   "size": [
+    0.16,
+    0.16,
+    0.16
+   ],
+   "cf": [
+    0.35,
+    3.66,
+    -0.78,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "6a9ef0",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PebbleYellow",
+   "shape": "Ball",
+   "size": [
+    0.17,
+    0.17,
+    0.17
+   ],
+   "cf": [
+    1.05,
+    3.6625,
+    -1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "PebbleWhite",
+   "shape": "Ball",
+   "size": [
+    0.15,
+    0.15,
+    0.15
+   ],
+   "cf": [
+    -1.7,
+    3.6575,
+    -0.62,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "CastleKeep",
+   "shape": "Block",
+   "size": [
+    0.82,
+    0.9,
+    0.52
+   ],
+   "cf": [
+    -1.55,
+    4.18323,
+    0.66,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "b3aea4",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CastleCrenel1",
+   "shape": "Block",
+   "size": [
+    0.17,
+    0.16,
+    0.3
+   ],
+   "cf": [
+    -1.85,
+    4.70323,
+    0.56,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "b3aea4",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CastleCrenel2",
+   "shape": "Block",
+   "size": [
+    0.17,
+    0.16,
+    0.3
+   ],
+   "cf": [
+    -1.55,
+    4.70323,
+    0.56,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "b3aea4",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CastleCrenel3",
+   "shape": "Block",
+   "size": [
+    0.17,
+    0.16,
+    0.3
+   ],
+   "cf": [
+    -1.25,
+    4.70323,
+    0.56,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "b3aea4",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CastleTowerL",
+   "shape": "Block",
+   "size": [
+    0.5,
+    1.22,
+    0.5
+   ],
+   "cf": [
+    -2.08,
+    4.34323,
+    0.66,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "b3aea4",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CastleRoofL1",
+   "shape": "CornerWedge",
+   "size": [
+    0.32,
+    0.44,
+    0.32
+   ],
+   "cf": [
+    -2.24,
+    5.15323,
+    0.82,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CastleRoofL2",
+   "shape": "CornerWedge",
+   "size": [
+    0.32,
+    0.44,
+    0.32
+   ],
+   "cf": [
+    -1.92,
+    5.15323,
+    0.82,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CastleRoofL3",
+   "shape": "CornerWedge",
+   "size": [
+    0.32,
+    0.44,
+    0.32
+   ],
+   "cf": [
+    -1.92,
+    5.15323,
+    0.5,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CastleRoofL4",
+   "shape": "CornerWedge",
+   "size": [
+    0.32,
+    0.44,
+    0.32
+   ],
+   "cf": [
+    -2.24,
+    5.15323,
+    0.5,
+    -0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CastleTowerR",
+   "shape": "Block",
+   "size": [
+    0.44,
+    1.06,
+    0.44
+   ],
+   "cf": [
+    -1.02,
+    4.26323,
+    0.66,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "b3aea4",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CastleRoofR1",
+   "shape": "CornerWedge",
+   "size": [
+    0.29,
+    0.44,
+    0.29
+   ],
+   "cf": [
+    -1.165,
+    4.99323,
+    0.805,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CastleRoofR2",
+   "shape": "CornerWedge",
+   "size": [
+    0.29,
+    0.44,
+    0.29
+   ],
+   "cf": [
+    -0.875,
+    4.99323,
+    0.805,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CastleRoofR3",
+   "shape": "CornerWedge",
+   "size": [
+    0.29,
+    0.44,
+    0.29
+   ],
+   "cf": [
+    -0.875,
+    4.99323,
+    0.515,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CastleRoofR4",
+   "shape": "CornerWedge",
+   "size": [
+    0.29,
+    0.44,
+    0.29
+   ],
+   "cf": [
+    -1.165,
+    4.99323,
+    0.515,
+    -0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CastlePole",
+   "shape": "Cylinder",
+   "size": [
+    0.38,
+    0.05,
+    0.05
+   ],
+   "cf": [
+    -2.08,
+    5.48323,
+    0.66,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "CastleFlag",
+   "shape": "Block",
+   "size": [
+    0.3,
+    0.17,
+    0.05
+   ],
+   "cf": [
+    -1.92,
+    5.58323,
+    0.66,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "CastleDoor",
+   "shape": "Block",
+   "size": [
+    0.3,
+    0.34,
+    0.05
+   ],
+   "cf": [
+    -1.55,
+    4.00323,
+    0.39,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "CastleDoorArch",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    -1.55,
+    4.17323,
+    0.39,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "CastleWindow",
+   "shape": "Block",
+   "size": [
+    0.1,
+    0.18,
+    0.05
+   ],
+   "cf": [
+    -2.08,
+    4.53323,
+    0.4,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ChestBody",
+   "shape": "Block",
+   "size": [
+    0.72,
+    0.4,
+    0.46
+   ],
+   "cf": [
+    1.72,
+    3.79,
+    -0.36,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "ChestBand",
+   "shape": "Block",
+   "size": [
+    0.74,
+    0.08,
+    0.48
+   ],
+   "cf": [
+    1.72,
+    3.86,
+    -0.36,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ChestLock",
+   "shape": "Block",
+   "size": [
+    0.12,
+    0.15,
+    0.05
+   ],
+   "cf": [
+    1.72,
+    3.89,
+    -0.61,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ChestGold",
+   "shape": "Ellipsoid",
+   "size": [
+    0.6,
+    0.16,
+    0.36
+   ],
+   "cf": [
+    1.72,
+    3.99,
+    -0.36,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ChestLid",
+   "shape": "Block",
+   "size": [
+    0.76,
+    0.14,
+    0.48
+   ],
+   "cf": [
+    1.72,
+    4.15157,
+    -0.32078,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.91355,
+    -0.40674,
+    0.0,
+    0.40674,
+    0.91355
+   ],
+   "color": "6b4423",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "RockBack",
+   "shape": "Ellipsoid",
+   "size": [
+    0.75,
+    0.42,
+    0.5
+   ],
+   "cf": [
+    0.05,
+    3.82277,
+    0.55,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "8a8f99",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "RockFront",
+   "shape": "Ellipsoid",
+   "size": [
+    0.52,
+    0.36,
+    0.44
+   ],
+   "cf": [
+    2.45,
+    3.7,
+    -0.72,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa0aa",
+   "material": "Slate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Plant1Leaf1",
+   "shape": "Ellipsoid",
+   "size": [
+    0.26,
+    2.0,
+    0.07
+   ],
+   "cf": [
+    2.19962,
+    4.80127,
+    0.69318,
+    0.5,
+    -0.15038,
+    0.85287,
+    0.0,
+    0.98481,
+    0.17365,
+    -0.86603,
+    -0.08682,
+    0.4924
+   ],
+   "color": "3dbb45",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Plant1Leaf2",
+   "shape": "Ellipsoid",
+   "size": [
+    0.24,
+    1.75,
+    0.07
+   ],
+   "cf": [
+    2.2776,
+    4.66547,
+    0.58108,
+    0.93969,
+    -0.08274,
+    0.33186,
+    0.0,
+    0.9703,
+    0.24192,
+    -0.34202,
+    -0.22733,
+    0.91178
+   ],
+   "color": "2a9a3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Plant1Leaf3",
+   "shape": "Ellipsoid",
+   "size": [
+    0.26,
+    1.95,
+    0.07
+   ],
+   "cf": [
+    2.09746,
+    4.75369,
+    0.87192,
+    -0.34202,
+    -0.25901,
+    0.90329,
+    0.0,
+    0.96126,
+    0.27564,
+    -0.93969,
+    0.09427,
+    -0.32877
+   ],
+   "color": "2a9a3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Plant1Leaf4",
+   "shape": "Ellipsoid",
+   "size": [
+    0.24,
+    1.45,
+    0.07
+   ],
+   "cf": [
+    2.29955,
+    4.53441,
+    0.86738,
+    -0.86603,
+    -0.06959,
+    0.49513,
+    0.0,
+    0.99027,
+    0.13917,
+    -0.5,
+    0.12053,
+    -0.8576
+   ],
+   "color": "3dbb45",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Plant1Leaf5",
+   "shape": "Ellipsoid",
+   "size": [
+    0.25,
+    1.6,
+    0.07
+   ],
+   "cf": [
+    2.40204,
+    4.55821,
+    0.48487,
+    0.98481,
+    0.06505,
+    -0.161,
+    0.0,
+    0.92718,
+    0.37461,
+    0.17365,
+    -0.36892,
+    0.9131
+   ],
+   "color": "3dbb45",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Plant2Leaf1",
+   "shape": "Ellipsoid",
+   "size": [
+    0.26,
+    2.05,
+    0.07
+   ],
+   "cf": [
+    -2.42646,
+    4.87026,
+    0.84867,
+    0.5,
+    0.12053,
+    -0.8576,
+    0.0,
+    0.99027,
+    0.13917,
+    0.86603,
+    -0.06959,
+    0.49513
+   ],
+   "color": "2a9a3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Plant2Leaf2",
+   "shape": "Ellipsoid",
+   "size": [
+    0.24,
+    1.8,
+    0.07
+   ],
+   "cf": [
+    -2.44516,
+    4.72037,
+    0.69517,
+    0.90631,
+    0.11649,
+    -0.40625,
+    0.0,
+    0.96126,
+    0.27564,
+    0.42262,
+    -0.24981,
+    0.8712
+   ],
+   "color": "3dbb45",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Plant2Leaf3",
+   "shape": "Ellipsoid",
+   "size": [
+    0.25,
+    1.6,
+    0.07
+   ],
+   "cf": [
+    -2.36813,
+    4.63147,
+    0.98619,
+    -0.34202,
+    0.22733,
+    -0.91178,
+    0.0,
+    0.9703,
+    0.24192,
+    0.93969,
+    0.08274,
+    -0.33186
+   ],
+   "color": "3dbb45",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Plant2Leaf4",
+   "shape": "Ellipsoid",
+   "size": [
+    0.24,
+    1.3,
+    0.07
+   ],
+   "cf": [
+    -2.26939,
+    4.43945,
+    0.87052,
+    0.17365,
+    0.43171,
+    -0.88514,
+    0.0,
+    0.89879,
+    0.43837,
+    0.98481,
+    -0.07612,
+    0.15607
+   ],
+   "color": "2a9a3a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Plant3Leaf1",
+   "shape": "Ellipsoid",
+   "size": [
+    0.36,
+    1.25,
+    0.07
+   ],
+   "cf": [
+    0.50926,
+    4.45048,
+    0.76803,
+    0.76604,
+    -0.17718,
+    0.61789,
+    0.0,
+    0.96126,
+    0.27564,
+    -0.64279,
+    -0.21115,
+    0.73637
+   ],
+   "color": "e0553a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Plant3Leaf2",
+   "shape": "Ellipsoid",
+   "size": [
+    0.34,
+    1.05,
+    0.07
+   ],
+   "cf": [
+    0.70978,
+    4.34303,
+    0.7445,
+    0.86603,
+    0.17101,
+    -0.46985,
+    0.0,
+    0.93969,
+    0.34202,
+    0.5,
+    -0.2962,
+    0.8138
+   ],
+   "color": "c23a30",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Plant3Leaf3",
+   "shape": "Ellipsoid",
+   "size": [
+    0.36,
+    1.4,
+    0.07
+   ],
+   "cf": [
+    0.61362,
+    4.54586,
+    0.82711,
+    0.99619,
+    -0.00911,
+    0.08668,
+    0.0,
+    0.99452,
+    0.10453,
+    -0.08716,
+    -0.10413,
+    0.99074
+   ],
+   "color": "e0553a",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Plant3Leaf4",
+   "shape": "Ellipsoid",
+   "size": [
+    0.32,
+    0.9,
+    0.07
+   ],
+   "cf": [
+    0.53571,
+    4.26692,
+    1.04599,
+    -0.86603,
+    -0.1873,
+    0.46359,
+    0.0,
+    0.92718,
+    0.37461,
+    -0.5,
+    0.32442,
+    -0.80296
+   ],
+   "color": "c23a30",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Plant4Leaf1",
+   "shape": "Ellipsoid",
+   "size": [
+    0.28,
+    0.72,
+    0.07
+   ],
+   "cf": [
+    -2.40366,
+    3.91238,
+    -0.87562,
+    0.5,
+    0.26762,
+    -0.82364,
+    0.0,
+    0.95106,
+    0.30902,
+    0.86603,
+    -0.15451,
+    0.47553
+   ],
+   "color": "8bd346",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Plant4Leaf2",
+   "shape": "Ellipsoid",
+   "size": [
+    0.26,
+    0.6,
+    0.07
+   ],
+   "cf": [
+    -2.52119,
+    3.84406,
+    -0.94017,
+    0.98481,
+    -0.07063,
+    0.15864,
+    0.0,
+    0.91355,
+    0.40674,
+    -0.17365,
+    -0.40056,
+    0.89967
+   ],
+   "color": "8bd346",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Plant4Leaf3",
+   "shape": "Ellipsoid",
+   "size": [
+    0.26,
+    0.55,
+    0.07
+   ],
+   "cf": [
+    -2.42108,
+    3.82498,
+    -0.75378,
+    -0.64279,
+    0.28697,
+    -0.71026,
+    0.0,
+    0.92718,
+    0.37461,
+    0.76604,
+    0.24079,
+    -0.59598
+   ],
+   "color": "72bd35",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Hood",
+   "shape": "Block",
+   "size": [
+    6.08,
+    0.3,
+    1.41
+   ],
+   "cf": [
+    0.0,
+    6.55,
+    0.625,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HoodNose",
+   "shape": "Cylinder",
+   "size": [
+    6.08,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    0.0,
+    6.55,
+    -0.08,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "HoodStripe",
+   "shape": "Block",
+   "size": [
+    5.74,
+    0.05,
+    0.14
+   ],
+   "cf": [
+    0.0,
+    6.71,
+    0.5,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3f79d4",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "TankLight",
+   "shape": "Block",
+   "size": [
+    5.6,
+    0.1,
+    0.3
+   ],
+   "cf": [
+    0.0,
+    6.17,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e8f7ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "CoverL",
+   "shape": "Block",
+   "size": [
+    2.36,
+    0.05,
+    1.13
+   ],
+   "cf": [
+    1.81,
+    6.44,
+    -0.745,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e6f6ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.78,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CoverR",
+   "shape": "Block",
+   "size": [
+    2.36,
+    0.05,
+    1.13
+   ],
+   "cf": [
+    -1.81,
+    6.44,
+    -0.745,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e6f6ff",
+   "material": "SmoothPlastic",
+   "transparency": 0.78,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "FeedFlap",
+   "shape": "Block",
+   "size": [
+    1.22,
+    0.06,
+    1.13
+   ],
+   "cf": [
+    0.0,
+    6.45,
+    -0.745,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "FeedFlapTab",
+   "shape": "Block",
+   "size": [
+    0.36,
+    0.06,
+    0.14
+   ],
+   "cf": [
+    0.0,
+    6.47,
+    -1.36,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "FoodTub",
+   "shape": "Cylinder",
+   "size": [
+    0.58,
+    0.54,
+    0.54
+   ],
+   "cf": [
+    2.25,
+    6.97,
+    0.62,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "f2c13d",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "FoodLabel",
+   "shape": "Cylinder",
+   "size": [
+    0.26,
+    0.56,
+    0.56
+   ],
+   "cf": [
+    2.25,
+    6.95,
+    0.62,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "FoodLid",
+   "shape": "Cylinder",
+   "size": [
+    0.14,
+    0.6,
+    0.6
+   ],
+   "cf": [
+    2.25,
+    7.31,
+    0.62,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  }
+ ],
+ "pivots": {
+  "Castle": [
+   -1.55,
+   3.7332,
+   0.66
+  ],
+  "Flag": [
+   -2.08,
+   5.5832,
+   0.66
+  ],
+  "ChestHinge": [
+   1.72,
+   3.99,
+   -0.13
+  ],
+  "Bubbler": [
+   1.72,
+   4.02,
+   -0.66
+  ],
+  "Plant1": [
+   2.35,
+   3.8165,
+   0.78
+  ],
+  "Plant2": [
+   -2.55,
+   3.8552,
+   0.92
+  ],
+  "Plant3": [
+   0.62,
+   3.8497,
+   0.9
+  ],
+  "Plant4": [
+   -2.5,
+   3.57,
+   -0.82
+  ],
+  "Light": [
+   0.0,
+   5.97,
+   0.3
+  ],
+  "FeedHinge": [
+   0.0,
+   6.45,
+   -0.18
+  ],
+  "Feed": [
+   0.0,
+   5.94,
+   -0.745
+  ],
+  "TankMin": [
+   -2.9,
+   3.62,
+   -1.2
+  ],
+  "TankMax": [
+   2.9,
+   5.94,
+   1.2
+  ],
+  "WaterSurface": [
+   0.0,
+   5.94,
+   0.0
+  ]
+ },
+ "attrs": {
+  "Cost": 1500,
+  "DisplayName": "Aquarium",
+  "Notes": "Fish tank on a wooden cabinet (primlib parts, fun-builds HomeDecor). The client swims 5 runtime fish inside Pivot_TankMin/Max, bubbles rise from the treasure chest (Pivot_Bubbler, ChestLid pops), Plant<N>Leaf<M> sway about Pivot_Plant<N>, the TankLight glows; prompt 'Feed fish' opens the FeedFlap and sprinkles flakes on the water - the fish rush up to them. Built by fun-builds/models/build_Aquarium.py."
+ },
+ "size_studs": [
+  6.6,
+  7.38,
+  3.18
+ ],
+ "min": [
+  -3.3,
+  0.0,
+  -1.68
+ ],
+ "max": [
+  3.3,
+  7.38,
+  1.5
+ ],
+ "part_count": 85,
+ "duplicate_names": []
+}

@@ -1,0 +1,22 @@
+restore_profile STEP 1 OK <- profile_S6_start.json at 2026-09-22 21:44:29
+PASS staged in PetTestTransfer/Restore_140977250
+9696 bytes (envelope): Cash=2182880215.6106772 PlotLevel=2 Pets=8 Eggs=3 Cucumbers=2 Builds=51
+NEXT (server VM): local PROFILE_TOOL_OPTS = {Name = "profile_S6_start.json", Nonce = "bc2101c6"} + this file
+
+restore_profile STEP 2 OK <- profile_S6_start.json at 2026-09-22 21:44:54
+session key PetTest_140977250 (test key)
+staged JSON: 9696 bytes, nonce bc2101c6, staged 24s ago
+JSON (envelope): Cash=2182880215.6106772 Playtime=787 PlotLevel=2 Pets=8 Eggs=3 Cucumbers=2 Builds=51 Base.Version=2
+PASS plot level (Plot 4 = 2, want 2)
+PASS Cash written (2182880215.6106772)
+PASS BaseSaveAPI.Reload (true true  in 1.0 s)
+Base table rebuilt by BaseSave (Collect)
+PASS #Base.Pets (8, want 8)
+PASS #Base.Eggs (3, want 3)
+PASS #Base.Cucumbers (2, want 2)
+PASS #Base.Builds (51, want 51)
+world on Plot 4: Pets=6 Eggs=3 Cucumbers=2 Builds=51
+PASS Cash after (2182887224.968023 (+7009.357345581055 income since the write))
+PlotLevel=2 Strength=0 Playtime=1156 (session clock)
+
+(after the restore, same VM) roster 7d48d412,f0e99836,ddc86f4c,58908ed8,00e002fa,ea1041d7; PetNoticePending true; cucumber records with PetBuffs 0

@@ -1,0 +1,3613 @@
+{
+ "key": "Mortar",
+ "category": "Defences",
+ "parts": [
+  {
+   "name": "BasePlate",
+   "shape": "Cylinder",
+   "size": [
+    0.42,
+    7.8,
+    7.8
+   ],
+   "cf": [
+    0.0,
+    0.21,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "3b4350",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseGlowRim",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    7.86,
+    7.86
+   ],
+   "cf": [
+    0.0,
+    0.21,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "ff8a1f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BasePedestal",
+   "shape": "Cylinder",
+   "size": [
+    0.7,
+    4.6,
+    4.6
+   ],
+   "cf": [
+    0.0,
+    0.75,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseRace",
+   "shape": "Cylinder",
+   "size": [
+    0.25,
+    5.2,
+    5.2
+   ],
+   "cf": [
+    0.0,
+    1.175,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseSandbag1_01",
+   "shape": "Ellipsoid",
+   "size": [
+    1.88,
+    0.6,
+    0.88
+   ],
+   "cf": [
+    0.0,
+    0.72,
+    3.4,
+    0.99905,
+    0.04362,
+    0.0,
+    -0.04362,
+    0.99905,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "cfb77f",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseSandbag1_02",
+   "shape": "Ellipsoid",
+   "size": [
+    1.96,
+    0.64,
+    0.88
+   ],
+   "cf": [
+    1.7,
+    0.72,
+    2.94449,
+    0.8652,
+    -0.03778,
+    0.5,
+    0.04362,
+    0.99905,
+    0.0,
+    -0.49952,
+    0.02181,
+    0.86603
+   ],
+   "color": "bda46b",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseSandbag1_03",
+   "shape": "Ellipsoid",
+   "size": [
+    2.04,
+    0.68,
+    0.88
+   ],
+   "cf": [
+    2.94449,
+    0.72,
+    1.7,
+    0.5,
+    0.0,
+    0.86603,
+    0.0,
+    1.0,
+    0.0,
+    -0.86603,
+    0.0,
+    0.5
+   ],
+   "color": "cfb77f",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseSandbag1_04",
+   "shape": "Ellipsoid",
+   "size": [
+    1.92,
+    0.62,
+    0.88
+   ],
+   "cf": [
+    3.4,
+    0.72,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    -0.04362,
+    0.99905,
+    0.0,
+    -0.99905,
+    -0.04362,
+    0.0
+   ],
+   "color": "bda46b",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseSandbag1_05",
+   "shape": "Ellipsoid",
+   "size": [
+    2.0,
+    0.66,
+    0.88
+   ],
+   "cf": [
+    2.94449,
+    0.72,
+    -1.7,
+    -0.49952,
+    0.02181,
+    0.86603,
+    0.04362,
+    0.99905,
+    0.0,
+    -0.8652,
+    0.03778,
+    -0.5
+   ],
+   "color": "cfb77f",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseSandbag1_06",
+   "shape": "Ellipsoid",
+   "size": [
+    1.88,
+    0.6,
+    0.88
+   ],
+   "cf": [
+    1.7,
+    0.72,
+    -2.94449,
+    -0.86603,
+    0.0,
+    0.5,
+    0.0,
+    1.0,
+    0.0,
+    -0.5,
+    0.0,
+    -0.86603
+   ],
+   "color": "bda46b",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseSandbag1_07",
+   "shape": "Ellipsoid",
+   "size": [
+    1.96,
+    0.64,
+    0.88
+   ],
+   "cf": [
+    0.0,
+    0.72,
+    -3.4,
+    -0.99905,
+    -0.04362,
+    0.0,
+    -0.04362,
+    0.99905,
+    0.0,
+    -0.0,
+    -0.0,
+    -1.0
+   ],
+   "color": "cfb77f",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseSandbag1_08",
+   "shape": "Ellipsoid",
+   "size": [
+    2.04,
+    0.68,
+    0.88
+   ],
+   "cf": [
+    -1.7,
+    0.72,
+    -2.94449,
+    -0.8652,
+    0.03778,
+    -0.5,
+    0.04362,
+    0.99905,
+    0.0,
+    0.49952,
+    -0.02181,
+    -0.86603
+   ],
+   "color": "bda46b",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseSandbag1_09",
+   "shape": "Ellipsoid",
+   "size": [
+    1.92,
+    0.62,
+    0.88
+   ],
+   "cf": [
+    -2.94449,
+    0.72,
+    -1.7,
+    -0.5,
+    0.0,
+    -0.86603,
+    0.0,
+    1.0,
+    0.0,
+    0.86603,
+    0.0,
+    -0.5
+   ],
+   "color": "cfb77f",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseSandbag1_10",
+   "shape": "Ellipsoid",
+   "size": [
+    2.0,
+    0.66,
+    0.88
+   ],
+   "cf": [
+    -3.4,
+    0.72,
+    -0.0,
+    0.0,
+    0.0,
+    -1.0,
+    -0.04362,
+    0.99905,
+    0.0,
+    0.99905,
+    0.04362,
+    0.0
+   ],
+   "color": "bda46b",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseSandbag1_11",
+   "shape": "Ellipsoid",
+   "size": [
+    1.88,
+    0.6,
+    0.88
+   ],
+   "cf": [
+    -2.94449,
+    0.72,
+    1.7,
+    0.49952,
+    -0.02181,
+    -0.86603,
+    0.04362,
+    0.99905,
+    0.0,
+    0.8652,
+    -0.03778,
+    0.5
+   ],
+   "color": "cfb77f",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseSandbag1_12",
+   "shape": "Ellipsoid",
+   "size": [
+    1.96,
+    0.64,
+    0.88
+   ],
+   "cf": [
+    -1.7,
+    0.72,
+    2.94449,
+    0.86603,
+    0.0,
+    -0.5,
+    0.0,
+    1.0,
+    0.0,
+    0.5,
+    0.0,
+    0.86603
+   ],
+   "color": "bda46b",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseSandbag2_01",
+   "shape": "Ellipsoid",
+   "size": [
+    2.0,
+    0.66,
+    0.88
+   ],
+   "cf": [
+    0.87998,
+    1.27,
+    3.28415,
+    0.96593,
+    0.0,
+    0.25882,
+    0.0,
+    1.0,
+    0.0,
+    -0.25882,
+    0.0,
+    0.96593
+   ],
+   "color": "bda46b",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseSandbag2_02",
+   "shape": "Ellipsoid",
+   "size": [
+    1.88,
+    0.6,
+    0.88
+   ],
+   "cf": [
+    2.40416,
+    1.27,
+    2.40416,
+    0.70643,
+    0.03084,
+    0.70711,
+    -0.04362,
+    0.99905,
+    0.0,
+    -0.70643,
+    -0.03084,
+    0.70711
+   ],
+   "color": "cfb77f",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseSandbag2_03",
+   "shape": "Ellipsoid",
+   "size": [
+    1.96,
+    0.64,
+    0.88
+   ],
+   "cf": [
+    3.28415,
+    1.27,
+    0.87998,
+    0.25857,
+    -0.01129,
+    0.96593,
+    0.04362,
+    0.99905,
+    0.0,
+    -0.96501,
+    0.04213,
+    0.25882
+   ],
+   "color": "bda46b",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseSandbag2_04",
+   "shape": "Ellipsoid",
+   "size": [
+    2.04,
+    0.68,
+    0.88
+   ],
+   "cf": [
+    3.28415,
+    1.27,
+    -0.87998,
+    -0.25882,
+    0.0,
+    0.96593,
+    0.0,
+    1.0,
+    0.0,
+    -0.96593,
+    0.0,
+    -0.25882
+   ],
+   "color": "cfb77f",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseSandbag2_05",
+   "shape": "Ellipsoid",
+   "size": [
+    1.92,
+    0.62,
+    0.88
+   ],
+   "cf": [
+    2.40416,
+    1.27,
+    -2.40416,
+    -0.70643,
+    -0.03084,
+    0.70711,
+    -0.04362,
+    0.99905,
+    0.0,
+    -0.70643,
+    -0.03084,
+    -0.70711
+   ],
+   "color": "bda46b",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseSandbag2_06",
+   "shape": "Ellipsoid",
+   "size": [
+    2.0,
+    0.66,
+    0.88
+   ],
+   "cf": [
+    0.87998,
+    1.27,
+    -3.28415,
+    -0.96501,
+    0.04213,
+    0.25882,
+    0.04362,
+    0.99905,
+    0.0,
+    -0.25857,
+    0.01129,
+    -0.96593
+   ],
+   "color": "cfb77f",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseSandbag2_07",
+   "shape": "Ellipsoid",
+   "size": [
+    1.88,
+    0.6,
+    0.88
+   ],
+   "cf": [
+    -0.87998,
+    1.27,
+    -3.28415,
+    -0.96593,
+    0.0,
+    -0.25882,
+    0.0,
+    1.0,
+    0.0,
+    0.25882,
+    0.0,
+    -0.96593
+   ],
+   "color": "bda46b",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseSandbag2_08",
+   "shape": "Ellipsoid",
+   "size": [
+    1.96,
+    0.64,
+    0.88
+   ],
+   "cf": [
+    -2.40416,
+    1.27,
+    -2.40416,
+    -0.70643,
+    -0.03084,
+    -0.70711,
+    -0.04362,
+    0.99905,
+    0.0,
+    0.70643,
+    0.03084,
+    -0.70711
+   ],
+   "color": "cfb77f",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseSandbag2_09",
+   "shape": "Ellipsoid",
+   "size": [
+    2.04,
+    0.68,
+    0.88
+   ],
+   "cf": [
+    -3.28415,
+    1.27,
+    -0.87998,
+    -0.25857,
+    0.01129,
+    -0.96593,
+    0.04362,
+    0.99905,
+    0.0,
+    0.96501,
+    -0.04213,
+    -0.25882
+   ],
+   "color": "bda46b",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseSandbag2_10",
+   "shape": "Ellipsoid",
+   "size": [
+    1.92,
+    0.62,
+    0.88
+   ],
+   "cf": [
+    -3.28415,
+    1.27,
+    0.87998,
+    0.25882,
+    0.0,
+    -0.96593,
+    0.0,
+    1.0,
+    0.0,
+    0.96593,
+    0.0,
+    0.25882
+   ],
+   "color": "cfb77f",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseSandbag2_11",
+   "shape": "Ellipsoid",
+   "size": [
+    2.0,
+    0.66,
+    0.88
+   ],
+   "cf": [
+    -2.40416,
+    1.27,
+    2.40416,
+    0.70643,
+    0.03084,
+    -0.70711,
+    -0.04362,
+    0.99905,
+    0.0,
+    0.70643,
+    0.03084,
+    0.70711
+   ],
+   "color": "bda46b",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseSandbag2_12",
+   "shape": "Ellipsoid",
+   "size": [
+    1.88,
+    0.6,
+    0.88
+   ],
+   "cf": [
+    -0.87998,
+    1.27,
+    3.28415,
+    0.96501,
+    -0.04213,
+    -0.25882,
+    0.04362,
+    0.99905,
+    0.0,
+    0.25857,
+    -0.01129,
+    0.96593
+   ],
+   "color": "cfb77f",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BaseRamrod",
+   "shape": "Cylinder",
+   "size": [
+    2.4011,
+    0.14,
+    0.14
+   ],
+   "cf": [
+    -2.68079,
+    1.63,
+    1.61078,
+    -0.51504,
+    0.0,
+    0.85717,
+    0.0,
+    1.0,
+    0.0,
+    -0.85717,
+    0.0,
+    -0.51504
+   ],
+   "color": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BaseRamrodBrush",
+   "shape": "Cylinder",
+   "size": [
+    0.45,
+    0.34,
+    0.34
+   ],
+   "cf": [
+    -3.15747,
+    1.63,
+    0.81744,
+    0.51504,
+    0.0,
+    -0.85717,
+    0.0,
+    1.0,
+    0.0,
+    0.85717,
+    -0.0,
+    0.51504
+   ],
+   "color": "23262c",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountRing",
+   "shape": "Cylinder",
+   "size": [
+    0.44,
+    5.8,
+    5.8
+   ],
+   "cf": [
+    0.0,
+    1.5,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "d9443c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountRingLip",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    5.92,
+    5.92
+   ],
+   "cf": [
+    0.0,
+    1.34,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "a8302b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountDeck",
+   "shape": "Cylinder",
+   "size": [
+    0.15,
+    5.2,
+    5.2
+   ],
+   "cf": [
+    0.0,
+    1.775,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "9aa7b8",
+   "material": "DiamondPlate",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountRingBolt1",
+   "shape": "Cylinder",
+   "size": [
+    0.09,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    0.0,
+    1.765,
+    -2.72,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountRingBolt2",
+   "shape": "Cylinder",
+   "size": [
+    0.09,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    1.06279,
+    1.765,
+    -2.50377,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountRingBolt3",
+   "shape": "Cylinder",
+   "size": [
+    0.09,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    -1.06279,
+    1.765,
+    -2.50377,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountRingBolt4",
+   "shape": "Cylinder",
+   "size": [
+    0.09,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    2.02135,
+    1.765,
+    -1.82004,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountRingBolt5",
+   "shape": "Cylinder",
+   "size": [
+    0.09,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    -2.02135,
+    1.765,
+    -1.82004,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountRingBolt6",
+   "shape": "Cylinder",
+   "size": [
+    0.09,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    2.58687,
+    1.765,
+    -0.84053,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountRingBolt7",
+   "shape": "Cylinder",
+   "size": [
+    0.09,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    -2.58687,
+    1.765,
+    -0.84053,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountRingBolt8",
+   "shape": "Cylinder",
+   "size": [
+    0.09,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    0.0,
+    1.765,
+    2.72,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountCheekL",
+   "shape": "Block",
+   "size": [
+    0.5,
+    2.0,
+    1.6
+   ],
+   "cf": [
+    1.45,
+    2.85,
+    0.5,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9443c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountCheekLSlope",
+   "shape": "Wedge",
+   "size": [
+    0.5,
+    2.0,
+    0.71
+   ],
+   "cf": [
+    1.45,
+    2.85,
+    -0.645,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9443c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountCheekLTop",
+   "shape": "Cylinder",
+   "size": [
+    0.5,
+    1.6,
+    1.6
+   ],
+   "cf": [
+    1.45,
+    3.85,
+    0.5,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9443c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountFootL",
+   "shape": "Block",
+   "size": [
+    0.95,
+    0.22,
+    2.4
+   ],
+   "cf": [
+    1.475,
+    1.96,
+    0.05,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountFootBoltL1",
+   "shape": "Cylinder",
+   "size": [
+    0.1,
+    0.24,
+    0.24
+   ],
+   "cf": [
+    1.83,
+    2.11,
+    -0.8,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountFootBoltL2",
+   "shape": "Cylinder",
+   "size": [
+    0.1,
+    0.24,
+    0.24
+   ],
+   "cf": [
+    1.83,
+    2.11,
+    0.95,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountCheekBoltL1",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.36,
+    0.36
+   ],
+   "cf": [
+    1.79,
+    2.5,
+    -0.35,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e8b64a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountCheekBoltL2",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.36,
+    0.36
+   ],
+   "cf": [
+    1.79,
+    2.5,
+    1.02,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e8b64a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountCheekBoltL3",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.36,
+    0.36
+   ],
+   "cf": [
+    1.79,
+    3.35,
+    1.08,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e8b64a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountCheekLPanel",
+   "shape": "Block",
+   "size": [
+    0.07,
+    0.9,
+    1.6
+   ],
+   "cf": [
+    1.725,
+    2.6,
+    0.35,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "a8302b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountCapL",
+   "shape": "Cylinder",
+   "size": [
+    0.2,
+    1.3,
+    1.3
+   ],
+   "cf": [
+    1.8,
+    3.85,
+    0.5,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e2a650",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountNutL",
+   "shape": "Cylinder",
+   "size": [
+    0.22,
+    0.62,
+    0.62
+   ],
+   "cf": [
+    2.0,
+    3.85,
+    0.5,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountCheekR",
+   "shape": "Block",
+   "size": [
+    0.5,
+    2.0,
+    1.6
+   ],
+   "cf": [
+    -1.45,
+    2.85,
+    0.5,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9443c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountCheekRSlope",
+   "shape": "Wedge",
+   "size": [
+    0.5,
+    2.0,
+    0.71
+   ],
+   "cf": [
+    -1.45,
+    2.85,
+    -0.645,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9443c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountCheekRTop",
+   "shape": "Cylinder",
+   "size": [
+    0.5,
+    1.6,
+    1.6
+   ],
+   "cf": [
+    -1.45,
+    3.85,
+    0.5,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9443c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountFootR",
+   "shape": "Block",
+   "size": [
+    0.95,
+    0.22,
+    2.4
+   ],
+   "cf": [
+    -1.475,
+    1.96,
+    0.05,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountFootBoltR1",
+   "shape": "Cylinder",
+   "size": [
+    0.1,
+    0.24,
+    0.24
+   ],
+   "cf": [
+    -1.83,
+    2.11,
+    -0.8,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountFootBoltR2",
+   "shape": "Cylinder",
+   "size": [
+    0.1,
+    0.24,
+    0.24
+   ],
+   "cf": [
+    -1.83,
+    2.11,
+    0.95,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountCheekBoltR1",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.36,
+    0.36
+   ],
+   "cf": [
+    -1.79,
+    2.5,
+    -0.35,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e8b64a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountCheekBoltR2",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.36,
+    0.36
+   ],
+   "cf": [
+    -1.79,
+    2.5,
+    1.02,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e8b64a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountCheekBoltR3",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.36,
+    0.36
+   ],
+   "cf": [
+    -1.79,
+    3.35,
+    1.08,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e8b64a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountCheekRPanel",
+   "shape": "Block",
+   "size": [
+    0.07,
+    0.9,
+    1.6
+   ],
+   "cf": [
+    -1.725,
+    2.6,
+    0.35,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "a8302b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountCapR",
+   "shape": "Cylinder",
+   "size": [
+    0.2,
+    1.3,
+    1.3
+   ],
+   "cf": [
+    -1.8,
+    3.85,
+    0.5,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e2a650",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountNutR",
+   "shape": "Cylinder",
+   "size": [
+    0.22,
+    0.62,
+    0.62
+   ],
+   "cf": [
+    -2.0,
+    3.85,
+    0.5,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountTransom",
+   "shape": "Block",
+   "size": [
+    2.44,
+    0.84,
+    0.44
+   ],
+   "cf": [
+    0.0,
+    2.27,
+    -0.78,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "a8302b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountWheelShaft",
+   "shape": "Cylinder",
+   "size": [
+    0.42,
+    0.2,
+    0.2
+   ],
+   "cf": [
+    -1.89,
+    2.78,
+    -0.72,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountWheel",
+   "shape": "Cylinder",
+   "size": [
+    0.1,
+    1.2,
+    1.2
+   ],
+   "cf": [
+    -2.12,
+    2.78,
+    -0.72,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountWheelInner",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.9,
+    0.9
+   ],
+   "cf": [
+    -2.12,
+    2.78,
+    -0.72,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountWheelSpokeA",
+   "shape": "Block",
+   "size": [
+    0.14,
+    0.92,
+    0.14
+   ],
+   "cf": [
+    -2.12,
+    2.78,
+    -0.72,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountWheelSpokeB",
+   "shape": "Block",
+   "size": [
+    0.14,
+    0.14,
+    0.92
+   ],
+   "cf": [
+    -2.12,
+    2.78,
+    -0.72,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f2c13d",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountWheelHub",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    -2.19,
+    2.78,
+    -0.72,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "e8b64a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountWheelGrip",
+   "shape": "Cylinder",
+   "size": [
+    0.32,
+    0.16,
+    0.16
+   ],
+   "cf": [
+    -2.28,
+    3.24,
+    -0.72,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountSightArm",
+   "shape": "Block",
+   "size": [
+    0.34,
+    0.16,
+    0.22
+   ],
+   "cf": [
+    1.86,
+    3.12,
+    -0.42,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountSight",
+   "shape": "Block",
+   "size": [
+    0.3,
+    0.34,
+    0.86
+   ],
+   "cf": [
+    2.1,
+    3.34,
+    -0.55,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountSightLens",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.24,
+    0.24
+   ],
+   "cf": [
+    2.1,
+    3.34,
+    -0.99,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "color": "8fd3ff",
+   "material": "Glass",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountSightEye",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.3,
+    0.3
+   ],
+   "cf": [
+    2.1,
+    3.34,
+    -0.1,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "Rubber",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountShellCase1",
+   "shape": "Cylinder",
+   "size": [
+    0.56,
+    0.48,
+    0.48
+   ],
+   "cf": [
+    1.27181,
+    2.13,
+    2.03532,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "e8b64a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountShellNose1",
+   "shape": "Ellipsoid",
+   "size": [
+    0.44,
+    1.02,
+    0.44
+   ],
+   "cf": [
+    1.27181,
+    2.41,
+    2.03532,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountGlowShell1",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.5,
+    0.5
+   ],
+   "cf": [
+    1.27181,
+    2.38,
+    2.03532,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "ff8a1f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountShellCase2",
+   "shape": "Cylinder",
+   "size": [
+    0.56,
+    0.48,
+    0.48
+   ],
+   "cf": [
+    1.83851,
+    2.13,
+    1.54269,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "e8b64a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountShellNose2",
+   "shape": "Ellipsoid",
+   "size": [
+    0.44,
+    1.02,
+    0.44
+   ],
+   "cf": [
+    1.83851,
+    2.41,
+    1.54269,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountGlowShell2",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.5,
+    0.5
+   ],
+   "cf": [
+    1.83851,
+    2.38,
+    1.54269,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "ff8a1f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountShellCase3",
+   "shape": "Cylinder",
+   "size": [
+    0.56,
+    0.48,
+    0.48
+   ],
+   "cf": [
+    2.22524,
+    2.13,
+    0.89906,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "e8b64a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountShellNose3",
+   "shape": "Ellipsoid",
+   "size": [
+    0.44,
+    1.02,
+    0.44
+   ],
+   "cf": [
+    2.22524,
+    2.41,
+    0.89906,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountGlowShell3",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.5,
+    0.5
+   ],
+   "cf": [
+    2.22524,
+    2.38,
+    0.89906,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "ff8a1f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountShellCase4",
+   "shape": "Cylinder",
+   "size": [
+    0.56,
+    0.48,
+    0.48
+   ],
+   "cf": [
+    2.39415,
+    2.13,
+    0.16742,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "e8b64a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountShellNose4",
+   "shape": "Ellipsoid",
+   "size": [
+    0.44,
+    1.02,
+    0.44
+   ],
+   "cf": [
+    2.39415,
+    2.41,
+    0.16742,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountGlowShell4",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.5,
+    0.5
+   ],
+   "cf": [
+    2.39415,
+    2.38,
+    0.16742,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "ff8a1f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountShellCase5",
+   "shape": "Cylinder",
+   "size": [
+    0.56,
+    0.48,
+    0.48
+   ],
+   "cf": [
+    -1.27181,
+    2.13,
+    2.03532,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "e8b64a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountShellNose5",
+   "shape": "Ellipsoid",
+   "size": [
+    0.44,
+    1.02,
+    0.44
+   ],
+   "cf": [
+    -1.27181,
+    2.41,
+    2.03532,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountGlowShell5",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.5,
+    0.5
+   ],
+   "cf": [
+    -1.27181,
+    2.38,
+    2.03532,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "ff8a1f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountShellCase6",
+   "shape": "Cylinder",
+   "size": [
+    0.56,
+    0.48,
+    0.48
+   ],
+   "cf": [
+    -1.83851,
+    2.13,
+    1.54269,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "e8b64a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountShellNose6",
+   "shape": "Ellipsoid",
+   "size": [
+    0.44,
+    1.02,
+    0.44
+   ],
+   "cf": [
+    -1.83851,
+    2.41,
+    1.54269,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountGlowShell6",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.5,
+    0.5
+   ],
+   "cf": [
+    -1.83851,
+    2.38,
+    1.54269,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "ff8a1f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountShellCase7",
+   "shape": "Cylinder",
+   "size": [
+    0.56,
+    0.48,
+    0.48
+   ],
+   "cf": [
+    -2.22524,
+    2.13,
+    0.89906,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "e8b64a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountShellNose7",
+   "shape": "Ellipsoid",
+   "size": [
+    0.44,
+    1.02,
+    0.44
+   ],
+   "cf": [
+    -2.22524,
+    2.41,
+    0.89906,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountGlowShell7",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.5,
+    0.5
+   ],
+   "cf": [
+    -2.22524,
+    2.38,
+    0.89906,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "ff8a1f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MountShellCase8",
+   "shape": "Cylinder",
+   "size": [
+    0.56,
+    0.48,
+    0.48
+   ],
+   "cf": [
+    -2.39415,
+    2.13,
+    0.16742,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "e8b64a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountShellNose8",
+   "shape": "Ellipsoid",
+   "size": [
+    0.44,
+    1.02,
+    0.44
+   ],
+   "cf": [
+    -2.39415,
+    2.41,
+    0.16742,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MountGlowShell8",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    0.5,
+    0.5
+   ],
+   "cf": [
+    -2.39415,
+    2.38,
+    0.16742,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "ff8a1f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "TubeTrunnion",
+   "shape": "Cylinder",
+   "size": [
+    3.44,
+    0.82,
+    0.82
+   ],
+   "cf": [
+    0.0,
+    3.85,
+    0.5,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "TubeKnob",
+   "shape": "Ball",
+   "size": [
+    0.62,
+    0.62,
+    0.62
+   ],
+   "cf": [
+    0.0,
+    2.33457,
+    1.56112,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "8e5b2a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "TubeKnobNeck",
+   "shape": "Cylinder",
+   "size": [
+    0.4,
+    0.42,
+    0.42
+   ],
+   "cf": [
+    0.0,
+    2.53936,
+    1.41772,
+    0.0,
+    0.0,
+    1.0,
+    0.81915,
+    0.57358,
+    -0.0,
+    -0.57358,
+    0.81915,
+    0.0
+   ],
+   "color": "8e5b2a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "TubeBreech",
+   "shape": "Ellipsoid",
+   "size": [
+    2.02,
+    1.5,
+    2.02
+   ],
+   "cf": [
+    0.0,
+    3.07181,
+    1.0449,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.81915,
+    0.57358,
+    0.0,
+    -0.57358,
+    0.81915
+   ],
+   "color": "c98a3e",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "TubeBody",
+   "shape": "Cylinder",
+   "size": [
+    2.25,
+    2.05,
+    2.05
+   ],
+   "cf": [
+    0.0,
+    3.99335,
+    0.39962,
+    0.0,
+    0.0,
+    1.0,
+    0.81915,
+    0.57358,
+    -0.0,
+    -0.57358,
+    0.81915,
+    0.0
+   ],
+   "color": "c98a3e",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "TubeBandBreech",
+   "shape": "Cylinder",
+   "size": [
+    0.25,
+    2.22,
+    2.22
+   ],
+   "cf": [
+    0.0,
+    3.1742,
+    0.9732,
+    0.0,
+    0.0,
+    1.0,
+    0.81915,
+    0.57358,
+    -0.0,
+    -0.57358,
+    0.81915,
+    0.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "TubeBandTrunnion",
+   "shape": "Cylinder",
+   "size": [
+    0.84,
+    2.3,
+    2.3
+   ],
+   "cf": [
+    0.0,
+    3.85,
+    0.5,
+    0.0,
+    0.0,
+    1.0,
+    0.81915,
+    0.57358,
+    -0.0,
+    -0.57358,
+    0.81915,
+    0.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "TubeBandMid",
+   "shape": "Cylinder",
+   "size": [
+    0.25,
+    2.25,
+    2.25
+   ],
+   "cf": [
+    0.0,
+    4.93538,
+    -0.25999,
+    0.0,
+    0.0,
+    1.0,
+    0.81915,
+    0.57358,
+    -0.0,
+    -0.57358,
+    0.81915,
+    0.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "TubeChase",
+   "shape": "Cylinder",
+   "size": [
+    2.05,
+    1.82,
+    1.82
+   ],
+   "cf": [
+    0.0,
+    5.75453,
+    -0.83357,
+    0.0,
+    0.0,
+    1.0,
+    0.81915,
+    0.57358,
+    -0.0,
+    -0.57358,
+    0.81915,
+    0.0
+   ],
+   "color": "c98a3e",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "TubeBandChase",
+   "shape": "Cylinder",
+   "size": [
+    0.2,
+    2.0,
+    2.0
+   ],
+   "cf": [
+    0.0,
+    5.85692,
+    -0.90526,
+    0.0,
+    0.0,
+    1.0,
+    0.81915,
+    0.57358,
+    -0.0,
+    -0.57358,
+    0.81915,
+    0.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "TubeAstragal",
+   "shape": "Cylinder",
+   "size": [
+    0.15,
+    2.02,
+    2.02
+   ],
+   "cf": [
+    0.0,
+    6.57368,
+    -1.40714,
+    0.0,
+    0.0,
+    1.0,
+    0.81915,
+    0.57358,
+    -0.0,
+    -0.57358,
+    0.81915,
+    0.0
+   ],
+   "color": "8e5b2a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "TubeFlare1",
+   "shape": "Cylinder",
+   "size": [
+    0.24,
+    2.22,
+    2.22
+   ],
+   "cf": [
+    0.0,
+    6.71703,
+    -1.50752,
+    0.0,
+    0.0,
+    1.0,
+    0.81915,
+    0.57358,
+    -0.0,
+    -0.57358,
+    0.81915,
+    0.0
+   ],
+   "color": "c98a3e",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "TubeFlare2",
+   "shape": "Cylinder",
+   "size": [
+    0.22,
+    2.5,
+    2.5
+   ],
+   "cf": [
+    0.0,
+    6.88905,
+    -1.62797,
+    0.0,
+    0.0,
+    1.0,
+    0.81915,
+    0.57358,
+    -0.0,
+    -0.57358,
+    0.81915,
+    0.0
+   ],
+   "color": "e2a650",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "TubeLip",
+   "shape": "Cylinder",
+   "size": [
+    0.2,
+    2.75,
+    2.75
+   ],
+   "cf": [
+    0.0,
+    7.04469,
+    -1.73695,
+    0.0,
+    0.0,
+    1.0,
+    0.81915,
+    0.57358,
+    -0.0,
+    -0.57358,
+    0.81915,
+    0.0
+   ],
+   "color": "8e5b2a",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "TubeBore",
+   "shape": "Cylinder",
+   "size": [
+    0.08,
+    1.62,
+    1.62
+   ],
+   "cf": [
+    0.0,
+    7.12661,
+    -1.79431,
+    0.0,
+    0.0,
+    1.0,
+    0.81915,
+    0.57358,
+    -0.0,
+    -0.57358,
+    0.81915,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "TubeGlowBore",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.92,
+    0.92
+   ],
+   "cf": [
+    0.0,
+    7.15118,
+    -1.81151,
+    0.0,
+    0.0,
+    1.0,
+    0.81915,
+    0.57357,
+    -0.0,
+    -0.57357,
+    0.81915,
+    0.0
+   ],
+   "color": "ff8a1f",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "TubeHandleLPost1",
+   "shape": "Block",
+   "size": [
+    0.16,
+    0.42,
+    0.16
+   ],
+   "cf": [
+    0.77135,
+    4.88514,
+    0.89739,
+    -0.76604,
+    0.64279,
+    -0.0,
+    0.36869,
+    0.43939,
+    0.81915,
+    0.52654,
+    0.62751,
+    -0.57358
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "TubeHandleLPost2",
+   "shape": "Block",
+   "size": [
+    0.16,
+    0.42,
+    0.16
+   ],
+   "cf": [
+    0.77135,
+    5.2128,
+    0.66796,
+    -0.76604,
+    0.64279,
+    -0.0,
+    0.36869,
+    0.43939,
+    0.81915,
+    0.52654,
+    0.62751,
+    -0.57358
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "TubeHandleLBar",
+   "shape": "Block",
+   "size": [
+    0.16,
+    0.16,
+    0.58
+   ],
+   "cf": [
+    0.91919,
+    5.15003,
+    0.927,
+    -0.76604,
+    0.64279,
+    -0.0,
+    0.36869,
+    0.43939,
+    0.81915,
+    0.52654,
+    0.62751,
+    -0.57358
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "TubeHandleRPost1",
+   "shape": "Block",
+   "size": [
+    0.16,
+    0.42,
+    0.16
+   ],
+   "cf": [
+    -0.77135,
+    4.88514,
+    0.89739,
+    -0.76604,
+    -0.64279,
+    0.0,
+    -0.36869,
+    0.43939,
+    0.81915,
+    -0.52654,
+    0.62751,
+    -0.57358
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "TubeHandleRPost2",
+   "shape": "Block",
+   "size": [
+    0.16,
+    0.42,
+    0.16
+   ],
+   "cf": [
+    -0.77135,
+    5.2128,
+    0.66796,
+    -0.76604,
+    -0.64279,
+    0.0,
+    -0.36869,
+    0.43939,
+    0.81915,
+    -0.52654,
+    0.62751,
+    -0.57358
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "TubeHandleRBar",
+   "shape": "Block",
+   "size": [
+    0.16,
+    0.16,
+    0.58
+   ],
+   "cf": [
+    -0.91919,
+    5.15003,
+    0.927,
+    -0.76604,
+    -0.64279,
+    0.0,
+    -0.36869,
+    0.43939,
+    0.81915,
+    -0.52654,
+    0.62751,
+    -0.57358
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  }
+ ],
+ "pivots": {
+  "PitchPivot": [
+   0.0,
+   3.85,
+   0.5
+  ],
+  "MuzzleTip": [
+   0.0,
+   7.1266,
+   -1.7943
+  ],
+  "YawPivot": [
+   0.0,
+   1.3,
+   0.0
+  ]
+ },
+ "attrs": {
+  "Cost": 400000000,
+  "PropSet": "defence2",
+  "State_Elevation": 55,
+  "Notes": "Mortar rebuilt 2026-09-24 (fun-builds/models/build_Mortar.py, primlib parts): chunky bronze siege mortar. Rig by name prefix: Base* static; Mount* yaws about the vertical axis through the origin (x = z = 0); Tube* pitches about the axis parallel to X through Pivot_PitchPivot (0, 3.85, 0.50) (trunnion centre). Built at 55 deg elevation pointing -Z and up, d = (0, sin55, -cos55); shells leave Pivot_MuzzleTip (0, 7.13, -1.79) = PitchPivot + 4.0 d, the centre of the muzzle face. Glow parts keep their group prefix: BaseGlowRim, MountGlowShell1..8, TubeGlowBore (orange neon). Mount + Tube stay within r 2.96 of the yaw axis for pitch 0..+8 (sandbags start at r 2.96, below the deck); the tube clears the carriage from -6 to +8 deg pitch about 55 (recoil is +6)."
+ },
+ "size_studs": [
+  7.95,
+  7.915,
+  7.939
+ ],
+ "min": [
+  -3.977,
+  0.0,
+  -3.971
+ ],
+ "max": [
+  3.973,
+  7.915,
+  3.968
+ ],
+ "part_count": 123,
+ "duplicate_names": []
+}

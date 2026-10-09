@@ -1,0 +1,158 @@
+[
+ {
+  "path": "game.ServerStorage.PetService",
+  "file": "ServerStorage.PetService.lua",
+  "edits": [
+   {
+    "old": "local function RequestSave(player)\n\tif DataService and type(DataService.RequestSave) == \"function\" then\n\t\tpcall(DataService.RequestSave, player)\n\tend\nend\n",
+    "new": "local function RequestSave(player)\n\tif DataService and type(DataService.RequestSave) == \"function\" then\n\t\tpcall(DataService.RequestSave, player)\n\tend\nend\n\n--.. 2026-09-23 (Manage panel): the roster limit grows with the plot level - ReplicatedStorage.Modules.ManageConfig\n--.. .PetCapacity(Data.PlotLevel), never above SLOTS; without that module (or a profile) it is SLOTS. A roster that\n--.. is already bigger keeps its pets (nothing is unequipped for it); new equips wait for room.\nlocal ManageConfigCache = nil\nlocal function SlotsOf(player)\n\tif ManageConfigCache == nil then\n\t\tlocal modules = ReplicatedStorage:FindFirstChild(\"Modules\")\n\t\tlocal module = modules and modules:FindFirstChild(\"ManageConfig\")\n\t\tlocal ok, result = false, nil\n\t\tif module then ok, result = pcall(require, module) end\n\t\tManageConfigCache = (ok and type(result) == \"table\" and type(result.PetCapacity) == \"function\") and result or false\n\tend\n\tif not ManageConfigCache then return SLOTS end\n\tlocal data = GetDataOf(player)\n\tlocal ok, n = pcall(ManageConfigCache.PetCapacity, data and data.PlotLevel or 0)\n\tif ok and Finite(n) then return math.clamp(math.floor(n), 1, SLOTS) end\n\treturn SLOTS\nend\n"
+   },
+   {
+    "old": "\t\tSlots = SLOTS, MaxOwned = MAX_OWNED, IsSpawnable = IsSpawnable, Index = rt.Index, Pending = queued,",
+    "new": "\t\tSlots = SlotsOf(player), MaxOwned = MAX_OWNED, IsSpawnable = IsSpawnable, Index = rt.Index, Pending = queued,"
+   },
+   {
+    "old": "\t\tSlots = SLOTS, Locked = PetService.IsCombatLocked(player), HasPlot = HasPlot(player, rt),",
+    "new": "\t\tSlots = SlotsOf(player), Locked = PetService.IsCombatLocked(player), HasPlot = HasPlot(player, rt),"
+   },
+   {
+    "old": "\tend, IsSpawnable, mode, SLOTS)",
+    "new": "\tend, IsSpawnable, mode, SlotsOf(player))"
+   },
+   {
+    "old": "\t\tSlots = SLOTS, EquippedIds = {}, Pets = {}, Totals = TotalsOf(player),",
+    "new": "\t\tSlots = SlotsOf(player), EquippedIds = {}, Pets = {}, Totals = TotalsOf(player),"
+   },
+   {
+    "old": "\t\tif #roster >= SLOTS then break end",
+    "new": "\t\tif #roster >= SlotsOf(player) then break end"
+   },
+   {
+    "old": "\t\tif #upserts > 0 then payload.Upserts = upserts end\n\t\tif pd.Roster then\n",
+    "new": "\t\tif #upserts > 0 then payload.Upserts = upserts end\n\t\tif pd.Removed then -- 2026-09-23: sold pets leave the client's inventory\n\t\t\tlocal removed = {}\n\t\t\tfor id in pairs(pd.Removed) do table.insert(removed, id) end\n\t\t\tif #removed > 0 then payload.Removed = removed end\n\t\tend\n\t\tif pd.Roster then\n"
+   },
+   {
+    "old": "QueueDelta = function(player, petId, roster, lock)\n",
+    "new": "QueueDelta = function(player, petId, roster, lock, removedId)\n"
+   },
+   {
+    "old": "\tif lock then pd.Lock = true end\nend\n",
+    "new": "\tif lock then pd.Lock = true end\n\tif removedId then -- 2026-09-23 (Sell)\n\t\tpd.Removed = pd.Removed or {}\n\t\tpd.Removed[removedId] = true\n\tend\nend\n"
+   },
+   {
+    "old": "--.. budget (a client request only: the session's ChurnLimiter) = the models this swap would spawn + despawn;\n",
+    "new": "--.. 2026-09-23 (Manage panel): SELL - the pet leaves the roster, its record leaves Data.Base.Pets for good and\n--.. the client hears a Delta with Removed. Refused while combat-locked or mid-reveal (PresentationPending).\n--.. The caller pays the cash (ManageService: ManageConfig.PetSellValue(stats.Income)).\n--.. Returns true, nil, record, stats | false, err\nfunction PetService.Sell(player, petId)\n\tlocal rt, data, err = RosterGuard(player)\n\tif not rt then return false, err end\n\tif PetService.IsCombatLocked(player) then return false, \"CombatLocked\" end\n\tif not IsValidId(petId) then return false, \"BadRequest\" end\n\tlocal rp = rt.Pets[petId]\n\tif not rp then return false, \"NotOwned\" end\n\tif rp.PresentationPending then return false, \"Unavailable\" end\n\tlocal base = data.Base\n\tif type(base.Pets) ~= \"table\" or base.Pets ~= rt.PetsArray then return false, \"NotLoaded\" end\n\tlocal queued = table.find(rt.PendingAutoEquip, petId)\n\tif queued then table.remove(rt.PendingAutoEquip, queued) end\n\tlocal roster = RosterArray(base)\n\tif table.find(roster, petId) then SetRoster(base, Core.Unequip(roster, petId)) end\n\tif rp.Model or rp.Producer then Despawn(rt, rp) end\n\tlocal index\n\tfor i, rec in ipairs(base.Pets) do\n\t\tif rec == rp.Record then index = i break end\n\tend\n\tif index then table.remove(base.Pets, index) end\n\trt.KnownCount = #base.Pets\n\trt.Pets[petId] = nil\n\trt.Spawned[petId] = nil\n\tif rt.Index.ById[petId] == rp.Record then rt.Index.ById[petId] = nil end\n\tlocal eggId = rp.Record.SourceEggId\n\tif IsValidId(eggId) and rt.Index.BySourceEgg[eggId] == rp.Record then rt.Index.BySourceEgg[eggId] = nil end\n\tActiveDirty = true\n\tQueueDelta(player, nil, true, false, petId)\n\tRequestSave(player)\n\treturn true, nil, rp.Record, rp.Stats\nend\n\n--.. budget (a client request only: the session's ChurnLimiter) = the models this swap would spawn + despawn;\n"
+   }
+  ]
+ },
+ {
+  "path": "game.StarterGui.CucumberMenus.PetController",
+  "file": "StarterGui.CucumberMenus.PetController.lua",
+  "edits": [
+   {
+    "old": "\t\tnew.EquippedIds = CleanIds(payload.EquippedIds, slots)",
+    "new": "\t\tnew.EquippedIds = CleanIds(payload.EquippedIds, Core.MAX_SLOTS) -- 2026-09-23: a roster over the plot's capacity is still shown whole"
+   },
+   {
+    "old": "\t\tif payload.EquippedIds ~= nil then new.EquippedIds = CleanIds(payload.EquippedIds, new.Slots) end",
+    "new": "\t\tif payload.EquippedIds ~= nil then new.EquippedIds = CleanIds(payload.EquippedIds, Core.MAX_SLOTS) end"
+   },
+   {
+    "old": "\tfor i = 1, slots do\n\t\tlocal id = equippedIds[i]",
+    "new": "\tfor i = 1, math.max(slots, #equippedIds) do -- 2026-09-23: an over-capacity roster (plot level) still shows every active pet\n\t\tlocal id = equippedIds[i]"
+   }
+  ]
+ },
+ {
+  "path": "game.StarterGui.CucumberMenus.MenuController",
+  "file": "StarterGui.CucumberMenus.MenuController.lua",
+  "edits": [
+   {
+    "old": "local OPENERS = {Shop = {\"LeftMenu\", \"Shop\", \"OpenShop\"}, Index = {\"LeftMenu\", \"Index\", \"OpenIndex\"}, Pets = {\"LeftMenu\", \"Pets\", \"OpenPets\"}}\nlocal OPTIONAL = {Pets = true}\nlocal CLOSE_ON_BASE = {Shop = true, Index = true} -- their openers tuck away inside the base; Pets stays open\n",
+    "new": "local OPENERS = {Shop = {\"LeftMenu\", \"Shop\", \"OpenShop\"}, Index = {\"LeftMenu\", \"Index\", \"OpenIndex\"}, Pets = {\"LeftMenu\", \"Pets\", \"OpenPets\"}, Manage = {\"LeftMenu\", \"Manage\", \"ManageButton\"}}\nlocal OPTIONAL = {Pets = true, Manage = true}\nlocal CLOSE_ON_BASE = {Shop = true, Index = true} -- their openers tuck away inside the base; Pets stays open\n-- 2026-09-23: Manage's opener only shows inside the base (BaseHUDController), so leaving the base closes it;\n-- BaseHUDController already gives that button its hover / press pop (HoverScale), so MenuController must not\nlocal CLOSE_OUTSIDE = {Manage = true}\nlocal NO_HOVER = {Manage = true}\n"
+   },
+   {
+    "old": "    if petsPanel and petsPanel:FindFirstChild(\"Content\") then panels.Pets = petsPanel.Content end\n",
+    "new": "    if petsPanel and petsPanel:FindFirstChild(\"Content\") then panels.Pets = petsPanel.Content end\n    -- 2026-09-23: the Manage panel (ManageController fills it)\n    local managePanel = gui:FindFirstChild(\"ManagePanel\")\n    if managePanel and managePanel:FindFirstChild(\"Content\") then panels.Manage = managePanel.Content end\n"
+   },
+   {
+    "old": "            hover(opener, opener.Parent)\n        end\n",
+    "new": "            if not NO_HOVER[name] then hover(opener, opener.Parent) end\n        end\n"
+   },
+   {
+    "old": "        if hud:GetAttribute(\"BaseMode\") and activeName and CLOSE_ON_BASE[activeName] then show(nil) end\n",
+    "new": "        if hud:GetAttribute(\"BaseMode\") and activeName and CLOSE_ON_BASE[activeName] then show(nil) end\n        if not hud:GetAttribute(\"BaseMode\") and activeName and CLOSE_OUTSIDE[activeName] then show(nil) end\n"
+   }
+  ]
+ },
+ {
+  "path": "game.StarterGui.CucumberMenus.MenuClient",
+  "file": "StarterGui.CucumberMenus.MenuClient.client.lua",
+  "edits": [
+   {
+    "old": "if not okPets then warn(\"[MenuClient] Pets menu unavailable: \"..tostring(pets)) pets=nil end\nscript.Destroying:Connect(function() if pets then pets.Destroy() end;shop.Destroy();index.Destroy();menus.Destroy() end)",
+    "new": "if not okPets then warn(\"[MenuClient] Pets menu unavailable: \"..tostring(pets)) pets=nil end\n-- 2026-09-23: the Manage panel, guarded the same way\nlocal okManage,manage=pcall(function() return require(script.Parent.ManageController).Start(script.Parent,menus) end)\nif not okManage then warn(\"[MenuClient] Manage menu unavailable: \"..tostring(manage)) manage=nil end\nscript.Destroying:Connect(function() if manage then manage.Destroy() end;if pets then pets.Destroy() end;shop.Destroy();index.Destroy();menus.Destroy() end)"
+   }
+  ]
+ },
+ {
+  "path": "game.ServerScriptService.CucumberCarry",
+  "file": "ServerScriptService.CucumberCarry.server.lua",
+  "edits": [
+   {
+    "old": "local PetBuffs = Lazy(\"PetBuffService\") -- StampFromRecord / ClearCucumber\n",
+    "new": "local PetBuffs = Lazy(\"PetBuffService\") -- StampFromRecord / ClearCucumber\n--.. 2026-09-23 (Manage panel): a base holds ManageConfig.CucumberCapacity(PlotLevel) placed cucumbers; without\n--.. the module there is no cap. Restores (RestorePlaced) never count against it, placements (Place) do.\nlocal ManageConfigCache = nil\nlocal function CucumberCapacityOf(plot)\n\tif ManageConfigCache == nil then\n\t\tlocal modules = ReplicatedStorage:FindFirstChild(\"Modules\")\n\t\tlocal module = modules and modules:FindFirstChild(\"ManageConfig\")\n\t\tlocal ok, result = false, nil\n\t\tif module then ok, result = pcall(require, module) end\n\t\tManageConfigCache = (ok and type(result) == \"table\" and type(result.CucumberCapacity) == \"function\") and result or false\n\tend\n\tif not ManageConfigCache then return nil end\n\tlocal ok, n = pcall(ManageConfigCache.CucumberCapacity, plot:GetAttribute(\"PlotLevel\") or 0)\n\tif ok and type(n) == \"number\" and n == n then return math.floor(n) end\n\treturn nil\nend\n"
+   },
+   {
+    "old": "\t\treturn false, \"not at base\"\n\tend\n\tlocal model = entry.Model\n",
+    "new": "\t\treturn false, \"not at base\"\n\tend\n\t--.. 2026-09-23: the base's cucumber capacity (Manage panel); at it the placement is refused \"base full\"\n\tlocal capacity = CucumberCapacityOf(plot)\n\tif capacity then\n\t\tlocal standing = 0\n\t\tfor _, placed in ipairs(HolderOf(plot):GetChildren()) do\n\t\t\tif placed:IsA(\"Model\") and CollectionService:HasTag(placed, \"PlacedCucumber\") and placed:GetAttribute(\"Owner\") == player.UserId then standing += 1 end\n\t\tend\n\t\tif standing >= capacity then return false, \"base full\" end\n\tend\n\tlocal model = entry.Model\n"
+   }
+  ]
+ },
+ {
+  "path": "game.StarterPlayer.StarterPlayerScripts.CucumberPlacementClient",
+  "file": "StarterPlayer.StarterPlayerScripts.CucumberPlacementClient.client.lua",
+  "edits": [
+   {
+    "old": "\t\telseif reason == \"occupied\" then\n\t\t\tNotify.Warn(\"Something is already standing there.\")\n\t\tend\n",
+    "new": "\t\telseif reason == \"occupied\" then\n\t\t\tNotify.Warn(\"Something is already standing there.\")\n\t\telseif reason == \"base full\" then -- 2026-09-23: ManageConfig.CucumberCapacity (Manage panel)\n\t\t\tNotify.Warn(\"Your base is full. Upgrade your plot or sell a cucumber in Manage.\")\n\t\tend\n"
+   }
+  ]
+ },
+ {
+  "path": "game.ServerStorage.DataService",
+  "file": "ServerStorage.DataService.lua",
+  "edits": [
+   {
+    "old": "\tPortalCooldowns = {}, -- [PortalDestination] = server time (unix s) the portal opens again for this player (PortalService, 2026-09-22)\n}\n",
+    "new": "\tPortalCooldowns = {}, -- [PortalDestination] = server time (unix s) the portal opens again for this player (PortalService, 2026-09-22)\n\tDefense = {Survived = {}, LastSeen = 0, OfflineRate = 0, Level = 1}, -- zombie defence (ManageService, 2026-09-23): night raids survived per threat level (Survived[\"<level>\"]), last-seen time + cucumber cash/s + threat level for offline earnings\n}\n"
+   }
+  ]
+ },
+ {
+  "path": "game.ServerScriptService.ZombieRaidService",
+  "file": "ServerScriptService.ZombieRaidService.server.lua",
+  "edits": [
+   {
+    "old": "local TargetInfosAPI = Bindable(\"TargetInfos\") -- 2026-09-22: pet targeting (primitives + the Model)\nAPI.Parent = ServerStorage\n",
+    "new": "local TargetInfosAPI = Bindable(\"TargetInfos\") -- 2026-09-22: pet targeting (primitives + the Model)\nlocal ThreatLevelAPI = Bindable(\"ThreatLevel\") -- 2026-09-23 (Manage panel): (player) -> level, score, cucumbers a raid would be right now\nlocal RaidResultEvent = Instance.new(\"BindableEvent\") -- 2026-09-23 (Manage panel): (player, {Result, Level, Stolen, Limit}) at every night raid's end\nRaidResultEvent.Name = \"RaidResult\"\nRaidResultEvent.Parent = API\nlocal function ReportResult(raid, result)\n\tif raid.Day or not raid.Player then return end\n\tRaidResultEvent:Fire(raid.Player, {Result = result, Level = raid.Level, Stolen = raid.Stolen, Limit = raid.Limit})\nend\nAPI.Parent = ServerStorage\n"
+   },
+   {
+    "old": "\t\tSend(raid, {Kind = \"Survived\", Level = raid.Level, Stolen = raid.Stolen, Limit = raid.Limit})\n\t\tprint((\"[ZombieRaid] %s survived (level %d, stolen %d/%d)\"):format(raid.Player.Name, raid.Level, raid.Stolen, raid.Limit))\n",
+    "new": "\t\tSend(raid, {Kind = \"Survived\", Level = raid.Level, Stolen = raid.Stolen, Limit = raid.Limit})\n\t\tprint((\"[ZombieRaid] %s survived (level %d, stolen %d/%d)\"):format(raid.Player.Name, raid.Level, raid.Stolen, raid.Limit))\n\t\tReportResult(raid, \"Survived\") -- 2026-09-23 (Manage panel: days survived)\n"
+   },
+   {
+    "old": "\t\tSend(raid, {Kind = \"ZombiesWin\", Stolen = raid.Stolen, Limit = raid.Limit})\n\t\tprint((\"[ZombieRaid] the zombies win against %s\"):format(raid.Player.Name))\n",
+    "new": "\t\tSend(raid, {Kind = \"ZombiesWin\", Stolen = raid.Stolen, Limit = raid.Limit})\n\t\tprint((\"[ZombieRaid] the zombies win against %s\"):format(raid.Player.Name))\n\t\tReportResult(raid, \"ZombiesWin\") -- 2026-09-23 (Manage panel)\n"
+   },
+   {
+    "old": "\t\t\tSend(raid, {Kind = raid.Stolen == 0 and \"Survived\" or \"Dawn\", Stolen = raid.Stolen, Limit = raid.Limit, Level = raid.Level})\n\t\t\tprint((\"[ZombieRaid] dawn for %s: stolen %d/%d -> %s\"):format(raid.Player.Name, raid.Stolen, raid.Limit, raid.Stolen == 0 and \"won the night\" or \"night over\"))\n",
+    "new": "\t\t\tSend(raid, {Kind = raid.Stolen == 0 and \"Survived\" or \"Dawn\", Stolen = raid.Stolen, Limit = raid.Limit, Level = raid.Level})\n\t\t\tprint((\"[ZombieRaid] dawn for %s: stolen %d/%d -> %s\"):format(raid.Player.Name, raid.Stolen, raid.Limit, raid.Stolen == 0 and \"won the night\" or \"night over\"))\n\t\t\tReportResult(raid, raid.Stolen == 0 and \"Survived\" or \"Dawn\") -- 2026-09-23 (Manage panel: days survived)\n"
+   },
+   {
+    "old": "\treturn ZombieCatalog.LevelOf(score), score, #cucumbers\nend\n\nlocal function NewRaid(player, plot, forcedLevel, isDay)\n",
+    "new": "\treturn ZombieCatalog.LevelOf(score), score, #cucumbers\nend\nThreatLevelAPI.OnInvoke = function(player) -- 2026-09-23 (Manage panel): the level a raid would be right now\n\tif typeof(player) ~= \"Instance\" or not player:IsA(\"Player\") then return nil end\n\tlocal plot = PlotOf(player)\n\tif not plot then return nil end\n\treturn ThreatOf(player, plot)\nend\n\nlocal function NewRaid(player, plot, forcedLevel, isDay)\n"
+   }
+  ]
+ }
+]

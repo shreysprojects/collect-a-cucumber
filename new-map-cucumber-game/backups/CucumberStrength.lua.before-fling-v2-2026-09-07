@@ -1,0 +1,193 @@
+--[[
+	CucumberStrength  (ModuleScript, ReplicatedStorage.Modules)
+	Shared rules for "how strong do you have to be to pick this cucumber up" plus the
+	timeline of the collect choreography. The strength numbers are PLACEHOLDERS
+	(user, 2026-09-06: "just make up something random, don't worry about the economy").
+	The requirement is HIDDEN (user, 2026-09-06): nothing on screen shows the number,
+	you find out by trying.
+
+	  Required(holder)             strength a field cucumber asks for (reads the
+	                               StrengthRequired attribute CucumberCarry stamps, else
+	                               computes it from Zone / TypeName / Golden / Sliced / Tree)
+	  Evaluate(strength, required) -> "easy" | "struggle" | "weak" | "fail", struggleSeconds
+	      easy     strength >= EASY_RATIO x required     clean pick-up, steady carry
+	      struggle required <= strength < EASY_RATIO x   tug for STRUGGLE_MAX..MIN seconds,
+	               then a HEAVY carry: slowed to HEAVY_SPEED_MULT and, FallDelay(ratio)
+	               seconds later, a stumble drops the load in front of you -- pick it up
+	               again, carry, stumble again ("carry it a little bit but keep falling")
+	      weak     below the requirement (WEAK_CAN_LIFT)  tug for WEAK_STRUGGLE seconds, lift
+	               it anyway, then it slips WeakHold(ratio) seconds after you stand up: the
+	               same stumble, every time (user 2026-09-07: "you can pick up any cucumber
+	               but without the strength you pretty much just fall right after pulling and
+	               picking it up"). How far you get scales with strength / required (user,
+	               later: "depending on how much strength the user has compared to how much
+	               is needed, let them walk a couple of steps before falling"): hopeless
+	               (ratio ~0) = WEAK_HOLD_MIN, it slips as you stand up; just under the
+	               requirement = WEAK_HOLD_MAX, a couple of seconds of (slowed) walking.
+	               The lobby never settles a weak carry.
+	      fail     below the requirement (WEAK_CAN_LIFT = false): one short tug, then refused
+	  Ratio(strength, required)    strength / required (math.huge when nothing is required)
+	  FallDelay(ratio, rng?)       seconds of heavy carrying before the next stumble
+	  WeakHold(ratio)              seconds a weak lift stays up after the pick-up (no jitter)
+	  WeakFallDelay(ratio, rng?)   seconds after the grab before a weak lift slips
+	  Format(n)                    short number ("40", "2.5K", "1M") for debugging / toasts
+
+	Timeline (seconds) shared by CucumberCarry (server) and CollectAnimClient:
+	  APPROACH        the client walks up to the cucumber
+	  + struggle      CucumberStruggle loop (whole loops of STRUGGLE_LOOP)
+	  + GRAB_T        into CucumberPickUp: the server swaps the field cucumber for
+	                  the shoulder copy (the hands have lifted it to the chest)
+	  + rest of PICKUP_LENGTH: the player stands up, then is free again
+	  Stumble: the CucumberFall clip (FALL_LENGTH). FALL_DROP_T in, the load leaves the
+	  shoulder and tumbles FALL_LAND_AHEAD studs ahead over FALL_FLIGHT seconds (the
+	  server re-spawns it there as a field cucumber); the player gets up, then is free.
+	  As the fall starts the player is flung a little BACK: a LinearVelocity shove of
+	  FLING_BACK / FLING_UP studs/s that decays to zero over FLING_TIME (about 3.5 studs
+	  back, a small hop), applied by CollectAnimClient on the character's own client
+	  (user 2026-09-07; a plain velocity write is eaten by the Humanoid's ground controller).
+]]
+local M = {}
+
+--..Requirements (placeholders)..--
+M.ZONE_BASE = {
+	Spawn = 0, Desert = 10, Samurai = 30, Farm = 100, Snow = 300,
+	Underwater = 1000, Volcano = 3000, Narmek = 10000, Toyland = 30000, Neon = 100000,
+}
+M.TYPE_FACTORS = {0.6, 0.8, 1, 1.25, 1.5} -- one per TypeName, picked by a stable hash
+M.SLICED_FACTOR = 0.5 -- slices are light
+M.TREE_FACTOR = 3 -- landmark trees are heavy
+M.GOLDEN_FACTOR = 2
+M.GOLDEN_MIN = 6 -- a golden cucumber always asks for a few bench reps, even in Spawn
+M.TREE_MIN = 12
+
+--..Bands..--
+M.EASY_RATIO = 1.5 -- this much spare strength: clean pick-up, full speed, no stumble
+M.FLOOR_RATIO = 1.0 -- below the requirement itself: a WEAK lift (slips right away) or, with WEAK_CAN_LIFT off, no budge
+M.STRUGGLE_MIN = 1 -- seconds of tugging just under EASY_RATIO
+M.STRUGGLE_MAX = 5 -- seconds at exactly the requirement
+
+--..Weak lift (below the requirement)..--
+M.WEAK_CAN_LIFT = true -- false = the old rule: one short tug, then "Too heavy!"
+M.WEAK_STRUGGLE = 5 -- seconds of tugging (whole loops) before a weak lift
+M.WEAK_HOLD_MIN = 0.2 -- seconds up after the pick-up clip at ratio 0 (hopeless: it slips as you stand)
+M.WEAK_HOLD_MAX = 2.0 -- seconds up just under the requirement (a couple of steps at HEAVY_SPEED_MULT)
+M.WEAK_HOLD_CURVE = 1.5 -- hold = MIN + (MAX - MIN) * ratio ^ CURVE: half the requirement gives ~0.85 s, 90 % ~1.75 s
+M.WEAK_RETRY = 0.5 -- seconds before another try when the slip could not happen right now
+
+--..Stumble fling..--
+M.FLING_BACK = 28 -- studs/s straight back (away from the load) as the fall starts, decaying to 0 over FLING_TIME
+M.FLING_UP = 6 -- studs/s up at the start (a small hop, about 0.7 studs)
+M.FLING_TIME = 0.25 -- seconds the shove lasts (displacement = FLING_BACK * FLING_TIME / 2, about 3.5 studs)
+
+--..Heavy carry (struggle band)..--
+M.HEAVY_SPEED_MULT = 0.6 -- WalkSpeed while lugging something near your limit
+M.FALL_DELAY_MIN = 3 -- seconds of carrying before the stumble, at exactly the requirement
+M.FALL_DELAY_MAX = 7 -- just under EASY_RATIO
+M.FALL_JITTER = 0.25 -- +-25 % so it never feels like a timer
+M.FALL_RETRY = 2 -- seconds before another try when a stumble could not happen (busy, seated, fields closed)
+
+--..Timeline..--
+M.APPROACH = 0.6
+M.PICKUP_LENGTH = 1.4
+M.GRAB_T = 1.0
+M.STRUGGLE_LOOP = 1.0
+M.FAIL_TUG = 1.0
+M.FALL_LENGTH = 2.4 -- CucumberFall clip
+M.FALL_DROP_T = 0.467 -- into the clip: the load leaves the shoulder
+M.FALL_FLIGHT = 0.5 -- seconds it tumbles to the ground
+M.FALL_LAND_AHEAD = 3.0 -- studs in front of the player
+
+local function hash(s)
+	local h = 5381
+	for i = 1, #s do
+		h = (h * 33 + s:byte(i)) % 4294967296
+	end
+	return h
+end
+
+--.. two significant digits: 37.5 -> 38, 1875 -> 1900
+local function nice(n)
+	if n <= 0 then return 0 end
+	local mag = 10 ^ (math.floor(math.log10(n)) - 1)
+	return math.floor(n / mag + 0.5) * mag
+end
+
+function M.IsTree(typeName)
+	local s = string.lower(tostring(typeName or ""))
+	return s:find("tree", 1, true) ~= nil or s:find("grove", 1, true) ~= nil or s:find("palm", 1, true) ~= nil
+end
+
+function M.Compute(zone, typeName, golden, sliced, tree)
+	local base = M.ZONE_BASE[zone] or 0
+	local factor = M.TYPE_FACTORS[hash(tostring(typeName)) % #M.TYPE_FACTORS + 1]
+	if sliced then factor = M.SLICED_FACTOR end
+	if tree then factor = M.TREE_FACTOR end
+	local required = base * factor
+	if golden then required = math.max(required * M.GOLDEN_FACTOR, M.GOLDEN_MIN) end
+	if tree then required = math.max(required, M.TREE_MIN) end
+	return nice(required)
+end
+
+function M.Required(holder)
+	local stamped = holder:GetAttribute("StrengthRequired")
+	if type(stamped) == "number" then return stamped end
+	local typeName = holder:GetAttribute("TypeName") or holder.Name
+	local tree = holder:GetAttribute("Tree") == true or M.IsTree(typeName)
+	return M.Compute(holder:GetAttribute("Zone") or "Spawn", typeName, holder:GetAttribute("Golden") == true, holder:GetAttribute("Sliced") == true, tree)
+end
+
+function M.Ratio(strength, required)
+	strength = tonumber(strength) or 0
+	required = tonumber(required) or 0
+	if required <= 0 then return math.huge end
+	return strength / required
+end
+
+function M.Evaluate(strength, required)
+	local ratio = M.Ratio(strength, required)
+	if ratio >= M.EASY_RATIO then return "easy", 0 end
+	if ratio < M.FLOOR_RATIO then
+		if M.WEAK_CAN_LIFT then return "weak", M.WEAK_STRUGGLE end
+		return "fail", 0
+	end
+	--.. 0 at the requirement, 1 at the easy band
+	local a = (ratio - M.FLOOR_RATIO) / (M.EASY_RATIO - M.FLOOR_RATIO)
+	local seconds = M.STRUGGLE_MAX + (M.STRUGGLE_MIN - M.STRUGGLE_MAX) * a
+	--.. whole loops of the struggle clip read best
+	seconds = math.max(M.STRUGGLE_LOOP, math.floor(seconds / M.STRUGGLE_LOOP + 0.5) * M.STRUGGLE_LOOP)
+	return "struggle", seconds
+end
+
+--.. seconds of heavy carrying before the stumble: FALL_DELAY_MIN at the requirement,
+--.. FALL_DELAY_MAX just under EASY_RATIO, +-FALL_JITTER
+function M.FallDelay(ratio, rng)
+	local a = math.clamp(((tonumber(ratio) or M.FLOOR_RATIO) - M.FLOOR_RATIO) / (M.EASY_RATIO - M.FLOOR_RATIO), 0, 1)
+	local base = M.FALL_DELAY_MIN + (M.FALL_DELAY_MAX - M.FALL_DELAY_MIN) * a
+	local r = rng and rng:NextNumber(-1, 1) or (math.random() * 2 - 1)
+	return base * (1 + M.FALL_JITTER * r)
+end
+
+--.. seconds a weak lift stays on the shoulder after the pick-up clip: WEAK_HOLD_MIN at
+--.. ratio 0, WEAK_HOLD_MAX just under the requirement, bowed by WEAK_HOLD_CURVE so a
+--.. hopeless lift slips at once and only near-misses get to walk
+function M.WeakHold(ratio)
+	local a = math.clamp((tonumber(ratio) or 0) / M.FLOOR_RATIO, 0, 1)
+	return M.WEAK_HOLD_MIN + (M.WEAK_HOLD_MAX - M.WEAK_HOLD_MIN) * a ^ M.WEAK_HOLD_CURVE
+end
+
+--.. seconds after the GRAB (where the server starts the stumble timer) before a weak
+--.. lift slips: the rest of the pick-up clip, then WeakHold(ratio) +-FALL_JITTER
+function M.WeakFallDelay(ratio, rng)
+	local r = rng and rng:NextNumber(-1, 1) or (math.random() * 2 - 1)
+	return (M.PICKUP_LENGTH - M.GRAB_T) + M.WeakHold(ratio) * (1 + M.FALL_JITTER * r)
+end
+
+function M.Format(n)
+	n = tonumber(n) or 0
+	if n >= 1e9 then return string.format("%.3gB", n / 1e9) end
+	if n >= 1e6 then return string.format("%.3gM", n / 1e6) end
+	if n >= 1e3 then return string.format("%.3gK", n / 1e3) end
+	return tostring(math.floor(n + 0.5))
+end
+
+return M

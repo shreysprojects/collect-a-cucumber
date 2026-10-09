@@ -1,0 +1,10 @@
+[
+ {"file": "ServerStorage.TimeSkipService.lua", "path": "ServerStorage.TimeSkipService", "class": "ModuleScript"},
+ {"file": "ServerScriptService.TimeSkipServer.server.lua", "path": "ServerScriptService.TimeSkipServer", "class": "Script"},
+ {"file": "ServerScriptService.ShopProductsServer.server.lua", "path": "ServerScriptService.ShopProductsServer", "class": "Script"},
+ {"file": "StarterGui.CucumberMenus.ShopController.lua", "path": "StarterGui.CucumberMenus.ShopController", "class": "ModuleScript"},
+ {"file": "ServerStorage.RewardSpinnerService.lua", "path": "ServerStorage.RewardSpinnerService", "class": "ModuleScript"},
+ {"file": "ServerScriptService.RewardSpinnerServer.server.lua", "path": "ServerScriptService.RewardSpinnerServer", "class": "Script"},
+ {"file": "StarterPlayer.StarterPlayerScripts.RewardSpinnerClient.client.lua", "path": "StarterPlayer.StarterPlayerScripts.RewardSpinnerClient", "class": "LocalScript"},
+ {"file": "StarterPlayer.StarterPlayerScripts.PetEffectsClient.client.lua", "path": "StarterPlayer.StarterPlayerScripts.PetEffectsClient", "class": "LocalScript"}
+]

@@ -1,0 +1,21 @@
+=== Defences/Catapult
+  @AssetId = 120553179563396
+  @Cost = 2500
+  @Notes = About 4.8 wide x 6.7 long (y -4.1 .. 2.6) x 5.2 tall, standing on four wheels that touch z = 0.01.  Built in the LOADED pose: the arm rakes BACK and UP over the tail, so the bright beam and the loaded bucket are the silhouette and clear the dark A-frame by about a stud.  Every object whose name starts with 'Arm' (ArmBeam, ArmIron, ArmBucket, ArmRope, ArmLoad) is the swinging group: weld them together and rotate the lot about PIVOTS['ArmPivot'] on a horizontal axis parallel to world +X.  SIGN CONVENTION: STATES are degrees about that +X axis, right-handed, applied to the pose as built.  POSITIVE winds the arm further BACK and DOWN (cocking it harder); NEGATIVE swings the bucket forward and over the top toward +Y (firing).  'Loaded' = 0 (as built), 'Fired' = -92, which lays the front face of the arm beam onto the padded stop bar at (0, 0.34, 3.42) - that pad IS the mechanical stop, so do n
+  @Pivot_ArmPivot = (0.00, 2.30, 1.30)
+  @PropSet = plot
+  @State_Fired = -92
+  @State_Loaded = 0
+  @Tris = 1708
+  ArmBeam [MeshPart] pos (0.00, 3.16, 2.26) size (0.42, 2.68, 2.93) Wood c08a4e T0.00 collide=true
+  ArmBucket [MeshPart] pos (0.00, 4.59, 3.48) size (1.12, 0.44, 1.12) Wood 6b4423 T0.00 collide=true
+  ArmIron [MeshPart] pos (0.00, 2.97, 2.04) size (0.88, 1.91, 2.07) Metal 2f3640 T0.00 collide=true
+  ArmLoad [MeshPart] pos (-0.01, 4.77, 3.43) size (0.57, 0.76, 0.65) Slate 8f8a80 T0.00 collide=true
+  ArmRope [MeshPart] pos (0.00, 3.61, 2.53) size (0.48, 1.92, 1.63) Fabric b99a63 T0.00 collide=true
+  Deck [MeshPart] pos (-0.00, 1.79, -0.90) size (2.84, 0.18, 2.65) WoodPlanks c08a4e T0.00 collide=true
+  Frame [MeshPart] pos (-0.00, 2.32, -0.26) size (3.80, 2.43, 4.60) Wood 5b4230 T0.00 collide=true
+  Ironwork [MeshPart] pos (-0.05, 1.45, -0.23) size (4.82, 2.88, 4.64) Metal 2f3640 T0.00 collide=true
+  RopeBundle [MeshPart] pos (0.00, 2.91, 1.97) size (1.34, 1.94, 2.20) Fabric b99a63 T0.00 collide=true
+  StopPad [MeshPart] pos (-0.00, 3.42, -0.34) size (1.56, 0.50, 0.43) Leather 2a2d33 T0.00 collide=true
+  Timbers [MeshPart] pos (-0.00, 1.40, -0.23) size (4.50, 1.91, 4.75) Wood 8a5a2b T0.00 collide=true
+  Wheels [MeshPart] pos (-0.00, 0.96, -0.28) size (4.68, 1.80, 4.45) Wood 6b4423 T0.00 collide=true

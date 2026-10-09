@@ -1,0 +1,16 @@
+=== Fun/Trampoline
+  @AssetId = 107589465211147
+  @Cost = 450
+  @Notes = 8.0 studs across (the pad rim is the widest thing, r = 4.00) and 1.62 tall at the pad; the six rubber feet plant flat on z = 0 inside that footprint so it drops straight onto a plot with no overhang.  The jump surface is MatSurface: a dish whose rim sits at z 1.20 (r 2.95) and drops to z 0.68 in the middle - stand-on height is ~0.7 at the centre, ~1.2 at the edge.  The pad is only a 0.70-wide collar (r 3.30 -> 4.00), so a 0.35-stud ring of daylight is left open between the mat rim and the pad's inner lip: the sixteen springs and the lower half of the frame tube read through it from any above-horizon angle, which is what makes it a trampoline and not a paddling pool.  DO NOT widen the pad inwards or sink the prop into the ground - both close that gap.  THE GAME ANIMATES THE Mat* PARTS: drop them straight down and spring them back for the bounce (see STATES; the frame, pad, springs and fee
+  @Pivot_MatCentre = (0.00, 0.68, -0.00)
+  @PropSet = plot
+  @State_Bottom = -0.5
+  @State_Rest = 0
+  @Tris = 1234
+  Feet [MeshPart] pos (-0.00, 0.13, -0.19) size (7.85, 0.26, 6.93) Rubber 2a2d33 T0.00 collide=true
+  Frame [MeshPart] pos (0.01, 0.77, -0.00) size (7.90, 1.30, 7.48) Metal 6c7789 T0.00 collide=true
+  LabelMarks [MeshPart] pos (-1.83, 1.59, -3.24) size (0.89, 0.09, 0.53) Fabric d9443c T0.00 collide=true
+  LabelPatch [MeshPart] pos (-1.83, 1.55, -3.17) size (1.13, 0.14, 0.84) Fabric f2f0ea T0.00 collide=true
+  MatSurface [MeshPart] pos (-0.00, 0.90, -0.00) size (5.90, 0.61, 5.90) Rubber 2a2d33 T0.00 collide=true
+  Pad [MeshPart] pos (-0.00, 1.45, -0.00) size (8.00, 0.34, 8.00) Fabric 3f79d4 T0.00 collide=true
+  Springs [MeshPart] pos (0.00, 1.25, 0.00) size (6.73, 0.31, 6.73) Metal d5dbe4 T0.00 collide=true

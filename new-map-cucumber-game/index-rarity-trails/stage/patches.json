@@ -1,0 +1,126 @@
+[
+ {
+  "path": "game.ServerScriptService.CucumberSpawner",
+  "file": "CucumberSpawner.server.lua",
+  "edits": [
+   {
+    "old": "-- to 2x / 3x / 4x their size (CucumberMutations.SIZES / GIANT_CHANCE) -- a third mutation axis\n-- beside Material and Mutations. They keep their size when dropped, when they slip and on the plot.\n-- Biome tracking and carry/drop API remain available for streaming and collection.\n",
+    "new": "-- to 2x / 3x / 4x their size (CucumberMutations.SIZES / GIANT_CHANCE) -- a third mutation axis\n-- beside Material and Mutations. They keep their size when dropped, when they slip and on the plot.\n-- LANDMARKS (2026-09-23): the biome's \"T\" type (the last card of its Index page) is no longer kept\n-- standing every day. Every regular roll has a 1-in-LANDMARK_ODDS[zone] chance of being it (one\n-- standing per biome at most), and every type def carries its per-roll odds (Odds, \"1 in X\") plus\n-- Landmark = true on that one, which CucumberAdventure.SetCatalog hands to the Index cards.\n-- Biome tracking and carry/drop API remain available for streaming and collection.\n"
+   },
+   {
+    "old": "end\n\nAdventure.SetCatalog(ZONES, EffectiveTypes)\n",
+    "new": "end\n\n--.. 2026-09-23: the landmark (\"T\" type, the biome's last Index card) is a rare roll instead of a\n--.. daily fixture: every regular (non-sliced) roll has a 1-in-N chance of being it, N per biome\n--.. below, one standing per biome at most (HasStandingTree). Its RAW weight is ignored. The other\n--.. regular types share the remaining (1 - 1/N) by RAW weight. Sliced types fill the two fixed\n--.. sliced slots of the morning and never roll here. Four regular rolls per biome per day, and\n--.. the day's dice are shared, so a landmark day is the same day on every server.\nlocal LANDMARK_ODDS = {Spawn = 100, Desert = 150, Samurai = 200, Farm = 250, Snow = 300, Underwater = 400, Volcano = 500, Narmek = 650, Toyland = 800, Neon = 1000}\nlocal LANDMARK_ODDS_DEFAULT = 500\nlocal function LandmarkOddsOf(zone)\n\treturn LANDMARK_ODDS[zone] or LANDMARK_ODDS_DEFAULT\nend\n\n--.. \"1 in Odds\" per regular roll, stamped on every type def for the Index (Odds nil = a sliced or\n--.. missing type: no chance shown); the landmark also gets Landmark = true (the gold card)\nlocal function StampOdds(zone)\n\tlocal pool, total, landmark = {}, 0, nil\n\tfor _, t in ipairs(EffectiveTypes(zone)) do\n\t\tt.Odds, t.Landmark = nil, nil\n\t\tif not t.Sliced and not t.Missing then\n\t\t\tif t.Tree then\n\t\t\t\tlandmark = landmark or t\n\t\t\telse\n\t\t\t\tpool[#pool + 1] = t\n\t\t\t\ttotal += t.Weight\n\t\t\tend\n\t\tend\n\tend\n\tlocal rest = landmark and (1 - 1 / LandmarkOddsOf(zone)) or 1\n\tfor _, t in ipairs(pool) do\n\t\tif total > 0 and t.Weight > 0 then t.Odds = total / (t.Weight * rest) end\n\tend\n\tif landmark then landmark.Odds, landmark.Landmark = LandmarkOddsOf(zone), true end\nend\nfor _, zone in ipairs(ZONES) do StampOdds(zone) end\n\nAdventure.SetCatalog(ZONES, EffectiveTypes)\n"
+   },
+   {
+    "old": "end\n\nlocal function PickType(zone)\n\tlocal pool = {}\n\tfor _, t in ipairs(EffectiveTypes(zone)) do\n\t\tif not t.Sliced and not t.Missing then pool[#pool + 1] = t end\n\tend\n\tlocal total = 0\n\tfor _, t in ipairs(pool) do total += t.Weight end",
+    "new": "end\n\nlocal function HasStandingTree(zone)\n\tfor holder, data in pairs(Live) do\n\t\tif data.Zone == zone and data.Type.Tree and holder.Parent then return true end\n\tend\n\treturn false\nend\n\nlocal function PickType(zone)\n\tlocal pool, landmark = {}, nil\n\tfor _, t in ipairs(EffectiveTypes(zone)) do\n\t\tif not t.Sliced and not t.Missing then\n\t\t\tif t.Tree then landmark = landmark or t else pool[#pool + 1] = t end\n\t\tend\n\tend\n\t--.. 2026-09-23: the landmark roll comes first (1 in LANDMARK_ODDS), never a second one while\n\t--.. one stands; everything else shares the rest by weight\n\tif landmark and not HasStandingTree(zone) and randint(1, LandmarkOddsOf(zone)) == 1 then return landmark end\n\tif #pool == 0 then return landmark end\n\tlocal total = 0\n\tfor _, t in ipairs(pool) do total += t.Weight end"
+   },
+   {
+    "old": "\tend\n\treturn pool[1]\nend\n\nlocal function HasStandingTree(zone)\n\tfor holder, data in pairs(Live) do\n\t\tif data.Zone == zone and data.Type.Tree and holder.Parent then return true end\n\tend\n\treturn false\nend\n",
+    "new": "\tend\n\treturn pool[1]\nend\n"
+   },
+   {
+    "old": "\tlocal typeDef = (fixed and fixed.Type) or (forceSliced and SlicedTypeFor(zone) or PickType(zone))\n\tif not typeDef then return end\n\t--.. every zone keeps at least one tree standing: it's the landmark payday\n\tif not fixed and not typeDef.Sliced and not typeDef.Tree then\n\t\tlocal treeType = TreeTypeFor(zone)\n\t\tif treeType and not HasStandingTree(zone) then typeDef = treeType end\n\tend\n\t--.. material (Golden / Diamond, one at most) on every fresh roll; 1..4 stacking mutations only on\n\t--.. the cucumbers BeginDay picked for the day (mutate = true, MUTATED_PER_DAY); a re-plant keeps",
+    "new": "\tlocal typeDef = (fixed and fixed.Type) or (forceSliced and SlicedTypeFor(zone) or PickType(zone))\n\tif not typeDef then return end\n\t--.. 2026-09-23: no forced daily tree any more -- the landmark is PickType's rare 1-in-N roll\n\t--.. material (Golden / Diamond, one at most) on every fresh roll; 1..4 stacking mutations only on\n\t--.. the cucumbers BeginDay picked for the day (mutate = true, MUTATED_PER_DAY); a re-plant keeps"
+   }
+  ]
+ },
+ {
+  "path": "game.ServerStorage.CucumberAdventure",
+  "file": "CucumberAdventure.lua",
+  "edits": [
+   {
+    "old": "-- Server-owned collection records, field traits and cosmetic rewards.\nlocal Players = game:GetService(\"Players\")\nlocal RS = game:GetService(\"ReplicatedStorage\")",
+    "new": "-- Server-owned collection records, field traits and cosmetic rewards.\n-- 2026-09-23: the Index reward is a character TRAIL per biome (ReplicatedStorage.Modules.CollectionTrails)\n-- that also multiplies bench strength (GymService.TrailMultiplier, stacks with the headband); the\n-- catalog carries each type's spawn odds (CucumberSpawner stamps Odds / Landmark) for the \"[1 in X]\" cards.\nlocal Players = game:GetService(\"Players\")\nlocal RS = game:GetService(\"ReplicatedStorage\")"
+   },
+   {
+    "old": "local Http = game:GetService(\"HttpService\")\nlocal Data = require(script.Parent.DataService)\nlocal M = {}\nlocal remotes = RS:WaitForChild(\"Remotes\")",
+    "new": "local Http = game:GetService(\"HttpService\")\nlocal Data = require(script.Parent.DataService)\nlocal Trails = require(RS:WaitForChild(\"Modules\"):WaitForChild(\"CollectionTrails\"))\nlocal M = {}\nlocal remotes = RS:WaitForChild(\"Remotes\")"
+   },
+   {
+    "old": "local bookRemote = remote(\"RemoteFunction\", \"CucumberCollectionBook\")\nlocal equipRemote = remote(\"RemoteEvent\", \"EquipCucumberCollection\")\nlocal catalog, order = {}, {}\nlocal lastBook, lastEquip = {}, {}\nlocal colors = {Spawn=Color3.fromRGB(125,255,95), Desert=Color3.fromRGB(255,199,85), Samurai=Color3.fromRGB(255,135,188), Farm=Color3.fromRGB(250,226,97), Snow=Color3.fromRGB(158,231,255), Underwater=Color3.fromRGB(60,210,232), Volcano=Color3.fromRGB(255,110,62), Narmek=Color3.fromRGB(176,117,255), Toyland=Color3.fromRGB(255,133,235), Neon=Color3.fromRGB(58,255,207)}",
+    "new": "local bookRemote = remote(\"RemoteFunction\", \"CucumberCollectionBook\")\nlocal equipRemote = remote(\"RemoteEvent\", \"EquipCucumberCollection\")\nlocal catalog, meta, order = {}, {}, {}\nlocal lastBook, lastEquip = {}, {}\nlocal colors = {Spawn=Color3.fromRGB(125,255,95), Desert=Color3.fromRGB(255,199,85), Samurai=Color3.fromRGB(255,135,188), Farm=Color3.fromRGB(250,226,97), Snow=Color3.fromRGB(158,231,255), Underwater=Color3.fromRGB(60,210,232), Volcano=Color3.fromRGB(255,110,62), Narmek=Color3.fromRGB(176,117,255), Toyland=Color3.fromRGB(255,133,235), Neon=Color3.fromRGB(58,255,207)}"
+   },
+   {
+    "old": "-- 2026-09-18: the index lists each biome worst -> best (left to right, top to bottom): break value\n-- ascending (CucumberValues.RewardOf), the commoner one first on a tie, then the name\nlocal Values = require(RS:WaitForChild(\"Modules\"):WaitForChild(\"CucumberValues\"))\nfunction M.SetCatalog(zones, typesFor)\n catalog, order = {}, table.clone(zones)\n for _,zone in order do\n  local names, weight = {}, {}\n  for _,t in typesFor(zone) do\n   if not t.Missing and not table.find(names,t.Name) then table.insert(names,t.Name); weight[t.Name] = tonumber(t.Weight) or 0 end\n  end\n  table.sort(names, function(a, b)",
+    "new": "-- 2026-09-18: the index lists each biome worst -> best (left to right, top to bottom): break value\n-- ascending (CucumberValues.RewardOf), the commoner one first on a tie, then the name\n-- 2026-09-23: each name also keeps the spawner's per-roll odds (\"1 in Odds\") and its Landmark flag\nlocal Values = require(RS:WaitForChild(\"Modules\"):WaitForChild(\"CucumberValues\"))\nfunction M.SetCatalog(zones, typesFor)\n catalog, meta, order = {}, {}, table.clone(zones)\n for _,zone in order do\n  local names, weight, info = {}, {}, {}\n  for _,t in typesFor(zone) do\n   if not t.Missing and not table.find(names,t.Name) then\n    table.insert(names,t.Name); weight[t.Name] = tonumber(t.Weight) or 0\n    info[t.Name] = {Odds = tonumber(t.Odds), Landmark = t.Landmark == true}\n   end\n  end\n  table.sort(names, function(a, b)"
+   },
+   {
+    "old": "  end)\n  catalog[zone] = names\n end\nend",
+    "new": "  end)\n  catalog[zone] = names\n  meta[zone] = info\n end\nend"
+   },
+   {
+    "old": "   local seen = s.Seen[zone..\":\"..name] == true\n   if seen then count += 1 end\n   table.insert(names,{Name=name,Seen=seen})\n  end\n  table.insert(rows,{Zone=zone,Names=names,Count=count,Total=#names,Unlocked=s.Families[zone]==true,Color=colors[zone]})\n end\n return {Ready=true,Rows=rows,Equipped=s.Equipped,BestRequired=s.BestRequired,BestName=s.BestName,Total=s.TotalSecured,FirstImpossible=s.FirstImpossible==true}",
+    "new": "   local seen = s.Seen[zone..\":\"..name] == true\n   if seen then count += 1 end\n   local info = meta[zone] and meta[zone][name] or {}\n   table.insert(names,{Name=name,Seen=seen,Odds=info.Odds,Landmark=info.Landmark==true})\n  end\n  table.insert(rows,{Zone=zone,Names=names,Count=count,Total=#names,Unlocked=s.Families[zone]==true,Color=colors[zone],Trail=Trails.NameOf(zone),StrengthMult=Trails.StrengthMultOf(zone)})\n end\n return {Ready=true,Rows=rows,Equipped=s.Equipped,BestRequired=s.BestRequired,BestName=s.BestName,Total=s.TotalSecured,FirstImpossible=s.FirstImpossible==true}"
+   },
+   {
+    "old": " text.TextStrokeTransparency,text.TextStrokeColor3=0,Color3.fromRGB(15,25,20)\n text.Parent,gui.Parent=gui,head\nend\nfunction M.ApplyCosmetic(player, model)",
+    "new": " text.TextStrokeTransparency,text.TextStrokeColor3=0,Color3.fromRGB(15,25,20)\n text.Parent,gui.Parent=gui,head\nend\n-- the character trail of the equipped biome (CollectionTrails), cleared when nothing is equipped\nlocal function wear(player)\n local char = player.Character\n if not (char and char:FindFirstChild(\"HumanoidRootPart\")) then return end\n Trails.Clear(char)\n local zone = player:GetAttribute(\"CucumberCollectorCosmetic\")\n if zone then Trails.Wear(char, zone) end\nend\nlocal function dress(player)\n title(player)\n wear(player)\nend\n-- GymService.StrengthPerRep reads the equipped trail: re-push the attribute + gym board after a change\nlocal function refreshGym(player)\n local ok, err = pcall(function()\n  local gym = require(script.Parent:WaitForChild(\"GymService\", 10))\n  if gym and gym.Refresh then gym.Refresh(player) end\n end)\n if not ok then warn(\"[CucumberAdventure] GymService.Refresh failed: \" .. tostring(err)) end\nend\nfunction M.ApplyCosmetic(player, model)"
+   },
+   {
+    "old": " s.Equipped=zone~=\"\" and zone or nil\n player:SetAttribute(\"CucumberCollectorCosmetic\",s.Equipped)\n title(player)\n local model=player.Character and player.Character:FindFirstChild(\"CarriedCucumber\")\n if model then M.ApplyCosmetic(player,model) end\n Data.RequestSave(player)\n event:FireClient(player,{Kind=\"BookChanged\"})",
+    "new": " s.Equipped=zone~=\"\" and zone or nil\n player:SetAttribute(\"CucumberCollectorCosmetic\",s.Equipped)\n dress(player)\n local model=player.Character and player.Character:FindFirstChild(\"CarriedCucumber\")\n if model then M.ApplyCosmetic(player,model) end\n refreshGym(player)\n Data.RequestSave(player)\n event:FireClient(player,{Kind=\"BookChanged\"})"
+   },
+   {
+    "old": "  if count==#names and not s.Families[entry.Zone] then\n   s.Families[entry.Zone]=true\n   table.insert(messages,entry.Zone..\" collection complete! Title + carry trail unlocked!\")\n   if not s.Equipped then equip(player,entry.Zone) end\n  else",
+    "new": "  if count==#names and not s.Families[entry.Zone] then\n   s.Families[entry.Zone]=true\n   table.insert(messages,string.format(\"%s collection complete! %s unlocked (%dx strength)!\",entry.Zone,Trails.NameOf(entry.Zone),Trails.StrengthMultOf(entry.Zone)))\n   if not s.Equipped then equip(player,entry.Zone) end\n  else"
+   },
+   {
+    "old": " local s=state(player)\n if s and s.Equipped and s.Families[s.Equipped] then player:SetAttribute(\"CucumberCollectorCosmetic\",s.Equipped) end\n title(player)\nend)\nlocal function added(player)\n player.CharacterAdded:Connect(function(char) char:WaitForChild(\"Head\",10) title(player) end)\nend\nPlayers.PlayerAdded:Connect(added)\nfor _,p in Players:GetPlayers() do added(p) end\nPlayers.PlayerRemoving:Connect(function(p) lastBook[p],lastEquip[p]=nil,nil end)\nreturn M\n",
+    "new": " local s=state(player)\n if s and s.Equipped and s.Families[s.Equipped] then player:SetAttribute(\"CucumberCollectorCosmetic\",s.Equipped) end\n dress(player)\nend)\nlocal function added(player)\n player.CharacterAdded:Connect(function(char) char:WaitForChild(\"Head\",10) char:WaitForChild(\"HumanoidRootPart\",10) dress(player) end)\nend\nPlayers.PlayerAdded:Connect(added)\nfor _,p in Players:GetPlayers() do added(p) end\nPlayers.PlayerRemoving:Connect(function(p) lastBook[p],lastEquip[p]=nil,nil end)\n-- Studio dev hook (2026-09-23): ServerStorage.CucumberAdventure:SetAttribute(\"AdventureDev\", cmd), cmd =\n--   \"complete:<zone>[:<player>]\"  marks every cucumber of the biome Seen + the family complete\n--   \"reset:<zone>[:<player>]\"     clears that biome's Seen + family (unequips its trail if worn)\n--   \"equip:<zone>[:<player>]\" / \"unequip[:<player>]\"   -- <player> defaults to the first player\nif RunService:IsStudio() then\n script:GetAttributeChangedSignal(\"AdventureDev\"):Connect(function()\n  local cmd=script:GetAttribute(\"AdventureDev\")\n  if type(cmd)~=\"string\" or cmd==\"\" then return end\n  script:SetAttribute(\"AdventureDev\",nil)\n  local action,zone,who=cmd:match(\"^(%a+):?([^:]*):?(.*)$\")\n  local player=(who and who~=\"\" and Players:FindFirstChild(who)) or Players:GetPlayers()[1]\n  local s=player and state(player)\n  if not s then warn(\"[CucumberAdventure] AdventureDev: no player data\") return end\n  if action==\"complete\" and catalog[zone] then\n   for _,name in catalog[zone] do s.Seen[zone..\":\"..name]=true end\n   s.Families[zone]=true\n  elseif action==\"reset\" and catalog[zone] then\n   for _,name in catalog[zone] do s.Seen[zone..\":\"..name]=nil end\n   s.Families[zone]=nil\n   if s.Equipped==zone then equip(player,\"\") end\n  elseif action==\"equip\" then\n   equip(player,zone)\n  elseif action==\"unequip\" then\n   equip(player,\"\")\n  else\n   warn(\"[CucumberAdventure] AdventureDev: unknown command \"..cmd) return\n  end\n  Data.RequestSave(player)\n  event:FireClient(player,{Kind=\"BookChanged\"})\n  print((\"[CucumberAdventure] AdventureDev %s -> %s (equipped %s)\"):format(cmd,player.Name,tostring(s.Equipped)))\n end)\nend\nreturn M\n"
+   }
+  ]
+ },
+ {
+  "path": "game.ServerStorage.GymService",
+  "file": "GymService.lua",
+  "edits": [
+   {
+    "old": "\t\t           is (N+1)x, bare-headed 1x; HeadbandService keeps data.Headbands.Equipped and calls\n\t\t           GymService.Refresh on every equip)  (player attribute StrengthPerRep, BenchServer)\n\t\t        -> rep animation speed REP_SPEEDS[L]  (attribute RepSpeed, BenchLieClient)\n\t\t        -> bench model tier clamp(L, 1, MAX_BENCH_TIER)  (attribute BenchTier, BenchTierClient)",
+    "new": "\t\t           is (N+1)x, bare-headed 1x; HeadbandService keeps data.Headbands.Equipped and calls\n\t\t           GymService.Refresh on every equip)  (player attribute StrengthPerRep, BenchServer)\n\t\t           x the equipped Index trail's StrengthMult (CollectionTrails: biome N's trail is (N+1)x,\n\t\t           none 1x; CucumberAdventure keeps data.CucumberCollection.Equipped and calls\n\t\t           GymService.Refresh on every equip; it STACKS with the headband, 2026-09-23)\n\t\t        -> rep animation speed REP_SPEEDS[L]  (attribute RepSpeed, BenchLieClient)\n\t\t        -> bench model tier clamp(L, 1, MAX_BENCH_TIER)  (attribute BenchTier, BenchTierClient)"
+   },
+   {
+    "old": "local DataService = require(ServerStorage:WaitForChild(\"DataService\"))\nlocal HeadbandsCatalog = require(ReplicatedStorage:WaitForChild(\"Modules\"):WaitForChild(\"HeadbandsCatalog\")) -- StrengthMult per band\n\nlocal GymService = {}",
+    "new": "local DataService = require(ServerStorage:WaitForChild(\"DataService\"))\nlocal HeadbandsCatalog = require(ReplicatedStorage:WaitForChild(\"Modules\"):WaitForChild(\"HeadbandsCatalog\")) -- StrengthMult per band\nlocal CollectionTrails = require(ReplicatedStorage:WaitForChild(\"Modules\"):WaitForChild(\"CollectionTrails\")) -- StrengthMult per Index trail (2026-09-23)\n\nlocal GymService = {}"
+   },
+   {
+    "old": "end\n\nfunction GymService.StrengthPerRep(data)\n\treturn 2 ^ (Level(data, \"BenchPress\") - 1) * GymService.HeadbandMultiplier(data)\nend\n",
+    "new": "end\n\n--.. the equipped Index trail multiplies every rep too, on top of the headband (2026-09-23):\n--.. CucumberAdventure writes data.CucumberCollection.Equipped = zone once that biome's Index is\n--.. complete (Families[zone]); no trail, or a trail the profile has not earned, is 1x\nfunction GymService.TrailMultiplier(data)\n\tlocal collection = type(data.CucumberCollection) == \"table\" and data.CucumberCollection or nil\n\tlocal zone = collection and collection.Equipped\n\tif type(zone) ~= \"string\" or type(collection.Families) ~= \"table\" or collection.Families[zone] ~= true then return 1 end\n\treturn CollectionTrails.StrengthMultOf(zone)\nend\n\nfunction GymService.StrengthPerRep(data)\n\treturn 2 ^ (Level(data, \"BenchPress\") - 1) * GymService.HeadbandMultiplier(data) * GymService.TrailMultiplier(data)\nend\n"
+   }
+  ]
+ },
+ {
+  "path": "game.StarterGui.CucumberMenus.IndexView",
+  "file": "IndexView.lua",
+  "edits": [
+   {
+    "old": "local View = {}\nlocal C=Color3.fromRGB\n\nfunction View.Start(gui, previews)",
+    "new": "local View = {}\nlocal C=Color3.fromRGB\nlocal RS=game:GetService(\"ReplicatedStorage\")\n-- 2026-09-23: trail names + strength multipliers for the reward button / footer\nlocal Trails=require(RS:WaitForChild(\"Modules\"):WaitForChild(\"CollectionTrails\"))\n-- 2026-09-23: spawn odds on the cards. A card whose per-roll odds round to 1 in CHANCE_MIN or rarer\n-- shows \"[1 in X]\" in white; the biome's landmark (its last card, the rare one) shows it in gold.\nlocal CHANCE_MIN=10\nlocal CHANCE_WHITE,CHANCE_GOLD=C(255,255,255),C(255,214,64)\nlocal function roundOdds(odds) -- 9.9 -> 10, 24.6 -> 25, 1234 -> 1200 (two significant digits from 100 up)\n    if odds<100 then return math.floor(odds+.5) end\n    local mag=10^(math.floor(math.log10(odds))-1)\n    return math.floor(odds/mag+.5)*mag\nend\nlocal function commas(n)\n    local s=tostring(math.floor(n+.5))\n    local out=s:reverse():gsub(\"(%d%d%d)\",\"%1,\"):reverse()\n    return (out:gsub(\"^,\",\"\"))\nend\nlocal function chanceLabel(card) -- the authored Templates.CucumberCard.Chance, or a copy of Number's style\n    local label=card:FindFirstChild(\"Chance\")\n    if label then return label end\n    label=card.Number:Clone();label.Name=\"Chance\";label.TextScaled=true;label.TextXAlignment=Enum.TextXAlignment.Right\n    label.Parent=card\n    return label\nend\n\nfunction View.Start(gui, previews)"
+   },
+   {
+    "old": "        vp.ImageColor3=Color3.new(1,1,1)\n    end\n    local render\n    render=function()",
+    "new": "        vp.ImageColor3=Color3.new(1,1,1)\n    end\n    local function addChance(card,item)\n        local label=chanceLabel(card)\n        local odds=tonumber(item.Odds)\n        local shown=odds and roundOdds(odds) or 0\n        if shown<CHANCE_MIN then label.Visible=false return end\n        label.Visible=true\n        label.Text=\"[1 in \"..commas(shown)..\"]\"\n        label.TextColor3=item.Landmark and CHANCE_GOLD or CHANCE_WHITE\n        -- right-aligned on the card's top row, next to the collected check when that shows\n        label.Position=UDim2.fromOffset(90,8)\n        label.Size=UDim2.fromOffset(item.Seen and 105 or 152,30)\n    end\n    local render\n    render=function()"
+   },
+   {
+    "old": "        panel.CollectionProgress.Fill.BackgroundColor3=Color3.new(1,1,1)\n        local equipped=snapshot.Equipped==row.Zone\n        local equip=panel.EquipReward\n        equip.Visible=true;equip.Active=row.Unlocked==true",
+    "new": "        panel.CollectionProgress.Fill.BackgroundColor3=Color3.new(1,1,1)\n        local equipped=snapshot.Equipped==row.Zone\n        local trailName=row.Trail or Trails.NameOf(row.Zone)\n        local mult=row.StrengthMult or Trails.StrengthMultOf(row.Zone)\n        local equip=panel.EquipReward\n        equip.Visible=true;equip.Active=row.Unlocked==true"
+   },
+   {
+    "old": "        equip.Label.Position=UDim2.fromOffset(row.Unlocked and 8 or 61,1)\n        equip.Label.Size=UDim2.new(1,row.Unlocked and -16 or -73,1,-2)\n        equip.Label.Text=row.Unlocked and (equipped and \"UNEQUIP\" or \"EQUIP REWARD\") or \"LOCKED\"\n        equip.Gradient.Color=ColorSequence.new(row.Unlocked and C(149,255,70) or C(149,172,180),row.Unlocked and C(63,204,28) or C(104,130,143))\n        panel.Footer.Text=row.Unlocked and \"Title + carry trail unlocked!\" or \"Complete this biome to unlock its title + carry trail.\"\n        panel.BestLift.Text=\"Best lift: \"..(snapshot.BestName or \"None yet\")\n        for _,tab in tabs:GetChildren() do",
+    "new": "        equip.Label.Position=UDim2.fromOffset(row.Unlocked and 8 or 61,1)\n        equip.Label.Size=UDim2.new(1,row.Unlocked and -16 or -73,1,-2)\n        equip.Label.Text=row.Unlocked and (equipped and \"UNEQUIP TRAIL\" or \"EQUIP TRAIL\") or \"LOCKED\"\n        equip.Gradient.Color=ColorSequence.new(row.Unlocked and C(149,255,70) or C(149,172,180),row.Unlocked and C(63,204,28) or C(104,130,143))\n        if row.Unlocked then\n            panel.Footer.Text=equipped and string.format(\"%s equipped: %dx strength (stacks with your headband)\",trailName,mult) or string.format(\"%s unlocked! Equip it: %dx strength, stacks with headbands\",trailName,mult)\n        else\n            panel.Footer.Text=string.format(\"Collect every %s cucumber to unlock the %s (%dx strength)\",row.Zone,trailName,mult)\n        end\n        panel.BestLift.Text=\"Best lift: \"..(snapshot.BestName or \"None yet\")\n        for _,tab in tabs:GetChildren() do"
+   },
+   {
+    "old": "            local card=template:Clone();card.Name=\"Cucumber_\"..n;card.LayoutOrder=n;card.Visible=true\n            card:SetAttribute(\"CucumberName\",item.Name);card:SetAttribute(\"Zone\",row.Zone);card:SetAttribute(\"Collected\",item.Seen==true)\n            card.NamePlate.CucumberName.Text=item.Name\n            card.NamePlate.Status.Text=item.Seen and \"COLLECTED\" or \"NOT COLLECTED\"",
+    "new": "            local card=template:Clone();card.Name=\"Cucumber_\"..n;card.LayoutOrder=n;card.Visible=true\n            card:SetAttribute(\"CucumberName\",item.Name);card:SetAttribute(\"Zone\",row.Zone);card:SetAttribute(\"Collected\",item.Seen==true)\n            card:SetAttribute(\"Odds\",tonumber(item.Odds));card:SetAttribute(\"Landmark\",item.Landmark==true)\n            card.NamePlate.CucumberName.Text=item.Name\n            card.NamePlate.Status.Text=item.Seen and \"COLLECTED\" or \"NOT COLLECTED\""
+   },
+   {
+    "old": "            card.CollectedCheck.Visible=item.Seen==true\n            card.Number.Text=string.format(\"#%02d\",n)\n            local question=card:FindFirstChild(\"Undiscovered\");if question then question:Destroy() end\n            addViewport(card,row.Zone,item.Name,item.Seen)",
+    "new": "            card.CollectedCheck.Visible=item.Seen==true\n            card.Number.Text=string.format(\"#%02d\",n)\n            addChance(card,item)\n            local question=card:FindFirstChild(\"Undiscovered\");if question then question:Destroy() end\n            addViewport(card,row.Zone,item.Name,item.Seen)"
+   },
+   {
+    "old": "end\nreturn View",
+    "new": "end\nreturn View\n"
+   }
+  ]
+ }
+]

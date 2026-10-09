@@ -1,0 +1,16 @@
+restore_profile STEP 2 OK <- profile_S2_prewalkoff.json at 2026-09-22 18:52:49
+(S2 playtest 1, after the walk-off thief stole the Cucumber Tree; step 1 nonce 641a3b4d)
+session key PetTest_140977250 (test key)
+staged JSON: 7678 bytes, nonce 641a3b4d, staged 64s ago
+JSON (envelope): Cash=2175639617.1024156 Playtime=915 PlotLevel=2 Pets=4 Eggs=3 Cucumbers=2 Builds=51 Base.Version=2
+PASS plot level (Plot 1 = 2, want 2)
+PASS Cash written (2175639617.1024156)
+PASS BaseSaveAPI.Reload (true true  in 1.0 s)
+Base table rebuilt by BaseSave (Collect)
+PASS #Base.Pets (4, want 4)
+PASS #Base.Eggs (3, want 3)
+PASS #Base.Cucumbers (2, want 2)
+PASS #Base.Builds (51, want 51)
+world on Plot 1: Pets=4 Eggs=3 Cucumbers=2 Builds=51
+PASS Cash after (2175672009.9017763 (+32392.799360752106 income since the write))
+PlotLevel=2 Strength=0 Playtime=1046 (session clock)

@@ -1,0 +1,13 @@
+=== Garden/WateringCan
+  @AssetId = 118681479026648
+  @Cost = 60
+  @Notes = Sits on the ground, 2.0 studs tall to the top of the carry handle, body 1.48 wide. The spout swings out to y +2.1 and the rose lip reaches y +2.49 (z 1.09..1.77), so leave ~2.6 studs of clear ground in front of it.  The carry bar spans x -0.46..0.46 at z 1.92; the back grip is at y -0.86.  All one rigid prop, no moving parts.
+  @PropSet = plot
+  @Tris = 858
+  Bands [MeshPart] pos (0.00, 0.81, 0.00) size (1.60, 1.61, 1.60) Metal 4d5866 T0.00 collide=true
+  Body [MeshPart] pos (0.00, 0.79, 0.00) size (1.48, 1.58, 1.48) Metal 4caf50 T0.00 collide=true
+  Handles [MeshPart] pos (-0.00, 1.20, 0.39) size (1.20, 1.59, 1.07) Metal 4d5866 T0.00 collide=true
+  Rivets [MeshPart] pos (-0.00, 0.93, 0.30) size (1.23, 1.16, 0.98) Metal 9aa7b8 T0.00 collide=true
+  RoseFace [MeshPart] pos (-0.00, 1.43, -2.34) size (0.57, 0.56, 0.30) Metal 23262c T0.00 collide=true
+  RoseHead [MeshPart] pos (-0.00, 1.43, -2.24) size (0.75, 0.65, 0.48) Metal 4d5866 T0.00 collide=true
+  Spout [MeshPart] pos (-0.00, 0.86, -1.20) size (0.34, 1.54, 1.85) Metal 4d5866 T0.00 collide=true

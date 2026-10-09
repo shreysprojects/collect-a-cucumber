@@ -1,0 +1,2637 @@
+{
+ "key": "GamingDesk",
+ "category": "Home",
+ "parts": [
+  {
+   "name": "DeskTop",
+   "shape": "Block",
+   "size": [
+    7.2,
+    0.16,
+    3.4
+   ],
+   "cf": [
+    0.0,
+    3.02,
+    1.6,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "RGBDeskFront",
+   "shape": "Block",
+   "size": [
+    6.9,
+    0.06,
+    0.06
+   ],
+   "cf": [
+    0.0,
+    2.91,
+    -0.04,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff3df0",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "MatTrim",
+   "shape": "Block",
+   "size": [
+    5.5,
+    0.05,
+    1.66
+   ],
+   "cf": [
+    0.1,
+    3.12,
+    0.86,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9443c",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Mat",
+   "shape": "Block",
+   "size": [
+    5.4,
+    0.05,
+    1.56
+   ],
+   "cf": [
+    0.1,
+    3.135,
+    0.86,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DeskFootL",
+   "shape": "Block",
+   "size": [
+    0.38,
+    0.22,
+    3.3
+   ],
+   "cf": [
+    3.2,
+    0.11,
+    1.6,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "DeskPostL",
+   "shape": "Block",
+   "size": [
+    0.38,
+    0.42,
+    3.635
+   ],
+   "cf": [
+    3.2,
+    1.525,
+    1.75,
+    1.0,
+    0.0,
+    -0.0,
+    -0.0,
+    0.66026,
+    -0.75104,
+    0.0,
+    0.75104,
+    0.66026
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "DeskRailL",
+   "shape": "Block",
+   "size": [
+    0.38,
+    0.16,
+    3.1
+   ],
+   "cf": [
+    3.2,
+    2.86,
+    1.6,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "DeskStripeL",
+   "shape": "Block",
+   "size": [
+    0.05,
+    0.14,
+    3.2675
+   ],
+   "cf": [
+    3.4,
+    1.56,
+    1.76,
+    1.0,
+    0.0,
+    -0.0,
+    -0.0,
+    0.63657,
+    -0.77122,
+    0.0,
+    0.77122,
+    0.63657
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DeskFootR",
+   "shape": "Block",
+   "size": [
+    0.38,
+    0.22,
+    3.3
+   ],
+   "cf": [
+    -3.2,
+    0.11,
+    1.6,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "DeskPostR",
+   "shape": "Block",
+   "size": [
+    0.38,
+    0.42,
+    3.635
+   ],
+   "cf": [
+    -3.2,
+    1.525,
+    1.75,
+    1.0,
+    0.0,
+    -0.0,
+    -0.0,
+    0.66026,
+    -0.75104,
+    0.0,
+    0.75104,
+    0.66026
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "DeskRailR",
+   "shape": "Block",
+   "size": [
+    0.38,
+    0.16,
+    3.1
+   ],
+   "cf": [
+    -3.2,
+    2.86,
+    1.6,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "DeskStripeR",
+   "shape": "Block",
+   "size": [
+    0.05,
+    0.14,
+    3.2675
+   ],
+   "cf": [
+    -3.4,
+    1.56,
+    1.76,
+    1.0,
+    0.0,
+    -0.0,
+    -0.0,
+    0.63657,
+    -0.77122,
+    0.0,
+    0.77122,
+    0.63657
+   ],
+   "color": "d9443c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "DeskBrace",
+   "shape": "Block",
+   "size": [
+    6.02,
+    0.22,
+    0.22
+   ],
+   "cf": [
+    0.0,
+    1.1,
+    2.2,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MonitorC",
+   "shape": "Block",
+   "size": [
+    2.62,
+    1.54,
+    0.14
+   ],
+   "cf": [
+    0.0,
+    4.4,
+    2.32,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ScreenC",
+   "shape": "Block",
+   "size": [
+    2.56,
+    1.42,
+    0.05
+   ],
+   "cf": [
+    0.0,
+    4.4,
+    2.245,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "6fd0ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "ScreenArtGround",
+   "shape": "Block",
+   "size": [
+    2.56,
+    0.34,
+    0.05
+   ],
+   "cf": [
+    0.0,
+    3.86,
+    2.215,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "5fe05a",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ScreenArtHero",
+   "shape": "Ellipsoid",
+   "size": [
+    0.2,
+    0.36,
+    0.05
+   ],
+   "cf": [
+    0.62,
+    4.2,
+    2.215,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "2f8f3a",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ScreenArtCoin",
+   "shape": "Cylinder",
+   "size": [
+    0.055,
+    0.14,
+    0.14
+   ],
+   "cf": [
+    0.05,
+    4.32,
+    2.215,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "ffd23d",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "MonitorL",
+   "shape": "Block",
+   "size": [
+    0.9,
+    1.54,
+    0.14
+   ],
+   "cf": [
+    1.7568,
+    4.4,
+    2.16187,
+    0.93969,
+    0.0,
+    0.34202,
+    0.0,
+    1.0,
+    0.0,
+    -0.34202,
+    0.0,
+    0.93969
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ScreenL",
+   "shape": "Block",
+   "size": [
+    0.85,
+    1.42,
+    0.05
+   ],
+   "cf": [
+    1.70766,
+    4.4,
+    2.09994,
+    0.93969,
+    0.0,
+    0.34202,
+    0.0,
+    1.0,
+    0.0,
+    -0.34202,
+    0.0,
+    0.93969
+   ],
+   "color": "6fd0ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "ScreenArtGroundL",
+   "shape": "Block",
+   "size": [
+    0.85,
+    0.34,
+    0.05
+   ],
+   "cf": [
+    1.6974,
+    3.86,
+    2.07175,
+    0.93969,
+    0.0,
+    0.34202,
+    0.0,
+    1.0,
+    0.0,
+    -0.34202,
+    0.0,
+    0.93969
+   ],
+   "color": "5fe05a",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "MonitorR",
+   "shape": "Block",
+   "size": [
+    0.9,
+    1.54,
+    0.14
+   ],
+   "cf": [
+    -1.7568,
+    4.4,
+    2.16187,
+    0.93969,
+    0.0,
+    -0.34202,
+    0.0,
+    1.0,
+    0.0,
+    0.34202,
+    0.0,
+    0.93969
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ScreenR",
+   "shape": "Block",
+   "size": [
+    0.85,
+    1.42,
+    0.05
+   ],
+   "cf": [
+    -1.70766,
+    4.4,
+    2.09994,
+    0.93969,
+    0.0,
+    -0.34202,
+    0.0,
+    1.0,
+    0.0,
+    0.34202,
+    0.0,
+    0.93969
+   ],
+   "color": "6fd0ff",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "ScreenArtGroundR",
+   "shape": "Block",
+   "size": [
+    0.85,
+    0.34,
+    0.05
+   ],
+   "cf": [
+    -1.6974,
+    3.86,
+    2.07175,
+    0.93969,
+    0.0,
+    -0.34202,
+    0.0,
+    1.0,
+    0.0,
+    0.34202,
+    0.0,
+    0.93969
+   ],
+   "color": "5fe05a",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "MonitorBack",
+   "shape": "Ellipsoid",
+   "size": [
+    2.2,
+    1.2,
+    0.42
+   ],
+   "cf": [
+    0.0,
+    4.35,
+    2.55,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "RGBMonitorBack",
+   "shape": "Cylinder",
+   "size": [
+    0.055,
+    0.84,
+    0.84
+   ],
+   "cf": [
+    0.0,
+    4.42,
+    2.75,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "color": "ff3df0",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "MonitorBackCap",
+   "shape": "Cylinder",
+   "size": [
+    0.055,
+    0.6,
+    0.6
+   ],
+   "cf": [
+    0.0,
+    4.42,
+    2.78,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MonitorNeck",
+   "shape": "Block",
+   "size": [
+    0.3,
+    1.3,
+    0.16
+   ],
+   "cf": [
+    0.0,
+    3.75,
+    2.67,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MonitorFootL",
+   "shape": "Block",
+   "size": [
+    0.2,
+    0.06,
+    1.063
+   ],
+   "cf": [
+    0.4,
+    3.13,
+    2.32,
+    0.6585,
+    0.0,
+    -0.75258,
+    -0.0,
+    1.0,
+    -0.0,
+    0.75258,
+    0.0,
+    0.6585
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "MonitorFootR",
+   "shape": "Block",
+   "size": [
+    0.2,
+    0.06,
+    1.063
+   ],
+   "cf": [
+    -0.4,
+    3.13,
+    2.32,
+    0.6585,
+    0.0,
+    0.75258,
+    0.0,
+    1.0,
+    -0.0,
+    -0.75258,
+    0.0,
+    0.6585
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Keyboard",
+   "shape": "Block",
+   "size": [
+    1.96,
+    0.1,
+    0.62
+   ],
+   "cf": [
+    0.0,
+    3.21,
+    0.72,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Keys1",
+   "shape": "Block",
+   "size": [
+    1.76,
+    0.06,
+    0.13
+   ],
+   "cf": [
+    0.05,
+    3.28,
+    0.57,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Keys2",
+   "shape": "Block",
+   "size": [
+    1.76,
+    0.06,
+    0.13
+   ],
+   "cf": [
+    0.05,
+    3.28,
+    0.74,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Keys3",
+   "shape": "Block",
+   "size": [
+    1.56,
+    0.06,
+    0.13
+   ],
+   "cf": [
+    0.15,
+    3.28,
+    0.9,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "RGBKeyboard",
+   "shape": "Block",
+   "size": [
+    1.96,
+    0.05,
+    0.05
+   ],
+   "cf": [
+    0.0,
+    3.18,
+    0.4,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff3df0",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "Mouse",
+   "shape": "Ellipsoid",
+   "size": [
+    0.3,
+    0.17,
+    0.44
+   ],
+   "cf": [
+    -1.4,
+    3.24,
+    0.78,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "RGBMouse",
+   "shape": "Block",
+   "size": [
+    0.05,
+    0.05,
+    0.16
+   ],
+   "cf": [
+    -1.4,
+    3.3,
+    0.9,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff3df0",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "SpeakerL",
+   "shape": "Block",
+   "size": [
+    0.46,
+    1.04,
+    0.62
+   ],
+   "cf": [
+    2.43,
+    3.62,
+    1.82,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "WooferL",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.36,
+    0.36
+   ],
+   "cf": [
+    2.43,
+    3.46,
+    1.5,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "TweeterL",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.17,
+    0.17
+   ],
+   "cf": [
+    2.43,
+    3.9,
+    1.5,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SpeakerR",
+   "shape": "Block",
+   "size": [
+    0.46,
+    1.04,
+    0.62
+   ],
+   "cf": [
+    -2.43,
+    3.62,
+    1.82,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "WooferR",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.36,
+    0.36
+   ],
+   "cf": [
+    -2.43,
+    3.46,
+    1.5,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "TweeterR",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.17,
+    0.17
+   ],
+   "cf": [
+    -2.43,
+    3.9,
+    1.5,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CucumberSoda",
+   "shape": "Cylinder",
+   "size": [
+    0.43,
+    0.26,
+    0.26
+   ],
+   "cf": [
+    3.15,
+    3.305,
+    0.95,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "5aa845",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "TowerTop",
+   "shape": "Block",
+   "size": [
+    0.88,
+    0.1,
+    2.2
+   ],
+   "cf": [
+    -3.14,
+    5.3,
+    2.05,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "TowerBottom",
+   "shape": "Block",
+   "size": [
+    0.88,
+    0.12,
+    2.2
+   ],
+   "cf": [
+    -3.14,
+    3.16,
+    2.05,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "TowerBack",
+   "shape": "Block",
+   "size": [
+    0.88,
+    2.25,
+    0.08
+   ],
+   "cf": [
+    -3.14,
+    4.225,
+    3.11,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "TowerFront",
+   "shape": "Block",
+   "size": [
+    0.88,
+    2.25,
+    0.1
+   ],
+   "cf": [
+    -3.14,
+    4.225,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "2d3139",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "TowerWall",
+   "shape": "Block",
+   "size": [
+    0.08,
+    2.25,
+    2.2
+   ],
+   "cf": [
+    -2.74,
+    4.225,
+    2.05,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "TowerBoard",
+   "shape": "Block",
+   "size": [
+    0.05,
+    1.85,
+    1.8
+   ],
+   "cf": [
+    -2.8,
+    4.275,
+    2.1,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "243a5e",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "TowerGlass",
+   "shape": "Block",
+   "size": [
+    0.05,
+    2.05,
+    2.08
+   ],
+   "cf": [
+    -3.55,
+    4.225,
+    2.05,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "9fb8d0",
+   "material": "Glass",
+   "transparency": 0.55,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": false
+  },
+  {
+   "name": "TowerGpu",
+   "shape": "Block",
+   "size": [
+    0.5,
+    0.24,
+    1.5
+   ],
+   "cf": [
+    -3.19,
+    4.075,
+    2.17,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "RGBGpu",
+   "shape": "Block",
+   "size": [
+    0.05,
+    0.07,
+    1.4
+   ],
+   "cf": [
+    -3.38,
+    4.075,
+    2.17,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff3df0",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "RGBCooler",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.62,
+    0.62
+   ],
+   "cf": [
+    -3.24,
+    4.725,
+    2.3,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "ff3df0",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "CoolerHub",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    0.4,
+    0.4
+   ],
+   "cf": [
+    -3.28,
+    4.725,
+    2.3,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "RGBRam",
+   "shape": "Block",
+   "size": [
+    0.3,
+    0.5,
+    0.1
+   ],
+   "cf": [
+    -3.19,
+    4.725,
+    1.6,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff3df0",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "RGBFan1",
+   "shape": "Cylinder",
+   "size": [
+    0.055,
+    0.66,
+    0.66
+   ],
+   "cf": [
+    -3.14,
+    4.645,
+    0.93,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "ff3df0",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "FanHub1",
+   "shape": "Cylinder",
+   "size": [
+    0.055,
+    0.44,
+    0.44
+   ],
+   "cf": [
+    -3.14,
+    4.645,
+    0.9,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "RGBFan2",
+   "shape": "Cylinder",
+   "size": [
+    0.055,
+    0.66,
+    0.66
+   ],
+   "cf": [
+    -3.14,
+    3.865,
+    0.93,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "ff3df0",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "FanHub2",
+   "shape": "Cylinder",
+   "size": [
+    0.055,
+    0.44,
+    0.44
+   ],
+   "cf": [
+    -3.14,
+    3.865,
+    0.9,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "RGBTowerStrip",
+   "shape": "Block",
+   "size": [
+    0.06,
+    1.95,
+    0.06
+   ],
+   "cf": [
+    -3.52,
+    4.225,
+    0.93,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "ff3df0",
+   "material": "Neon",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": false
+  },
+  {
+   "name": "ChairBase",
+   "shape": "Cylinder",
+   "size": [
+    0.24,
+    0.34,
+    0.34
+   ],
+   "cf": [
+    0.0,
+    0.38,
+    -2.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ChairLeg1",
+   "shape": "Block",
+   "size": [
+    0.16,
+    0.12,
+    1.0127
+   ],
+   "cf": [
+    0.15451,
+    0.32,
+    -1.52447,
+    -0.95106,
+    0.04882,
+    -0.30514,
+    0.0,
+    0.98744,
+    0.15799,
+    0.30902,
+    0.15026,
+    -0.93911
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ChairWheel1",
+   "shape": "Ball",
+   "size": [
+    0.24,
+    0.24,
+    0.24
+   ],
+   "cf": [
+    0.29975,
+    0.12,
+    -1.07748,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ChairLeg2",
+   "shape": "Block",
+   "size": [
+    0.16,
+    0.12,
+    1.0127
+   ],
+   "cf": [
+    0.5,
+    0.32,
+    -2.0,
+    -0.0,
+    0.15799,
+    -0.98744,
+    0.0,
+    0.98744,
+    0.15799,
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ChairWheel2",
+   "shape": "Ball",
+   "size": [
+    0.24,
+    0.24,
+    0.24
+   ],
+   "cf": [
+    0.97,
+    0.12,
+    -2.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ChairLeg3",
+   "shape": "Block",
+   "size": [
+    0.16,
+    0.12,
+    1.0127
+   ],
+   "cf": [
+    0.15451,
+    0.32,
+    -2.47553,
+    0.95106,
+    0.04882,
+    -0.30514,
+    -0.0,
+    0.98744,
+    0.15799,
+    0.30902,
+    -0.15026,
+    0.93911
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ChairWheel3",
+   "shape": "Ball",
+   "size": [
+    0.24,
+    0.24,
+    0.24
+   ],
+   "cf": [
+    0.29975,
+    0.12,
+    -2.92252,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ChairLeg4",
+   "shape": "Block",
+   "size": [
+    0.16,
+    0.12,
+    1.0127
+   ],
+   "cf": [
+    -0.40451,
+    0.32,
+    -2.29389,
+    0.58779,
+    -0.12782,
+    0.79886,
+    0.0,
+    0.98744,
+    0.15799,
+    -0.80902,
+    -0.09286,
+    0.5804
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ChairWheel4",
+   "shape": "Ball",
+   "size": [
+    0.24,
+    0.24,
+    0.24
+   ],
+   "cf": [
+    -0.78475,
+    0.12,
+    -2.57015,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ChairLeg5",
+   "shape": "Block",
+   "size": [
+    0.16,
+    0.12,
+    1.0127
+   ],
+   "cf": [
+    -0.40451,
+    0.32,
+    -1.70611,
+    -0.58779,
+    -0.12782,
+    0.79886,
+    0.0,
+    0.98744,
+    0.15799,
+    -0.80902,
+    0.09286,
+    -0.5804
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ChairWheel5",
+   "shape": "Ball",
+   "size": [
+    0.24,
+    0.24,
+    0.24
+   ],
+   "cf": [
+    -0.78475,
+    0.12,
+    -1.42985,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "3b4350",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "ChairSleeve",
+   "shape": "Cylinder",
+   "size": [
+    0.72,
+    0.2,
+    0.2
+   ],
+   "cf": [
+    0.0,
+    0.84,
+    -2.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "SwivelLift",
+   "shape": "Cylinder",
+   "size": [
+    0.47,
+    0.12,
+    0.12
+   ],
+   "cf": [
+    0.0,
+    1.385,
+    -2.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "9aa7b8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SwivelMech",
+   "shape": "Block",
+   "size": [
+    0.8,
+    0.14,
+    0.8
+   ],
+   "cf": [
+    0.0265,
+    1.66,
+    -1.9576,
+    0.84805,
+    0.0,
+    0.52992,
+    0.0,
+    1.0,
+    0.0,
+    -0.52992,
+    0.0,
+    0.84805
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SwivelPan",
+   "shape": "Block",
+   "size": [
+    1.8,
+    0.26,
+    1.85
+   ],
+   "cf": [
+    0.0265,
+    1.85,
+    -1.9576,
+    0.84805,
+    0.0,
+    0.52992,
+    0.0,
+    1.0,
+    0.0,
+    -0.52992,
+    0.0,
+    0.84805
+   ],
+   "color": "23262c",
+   "material": "Leather",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SwivelSeat",
+   "shape": "Ellipsoid",
+   "size": [
+    1.3,
+    0.34,
+    1.8
+   ],
+   "cf": [
+    0.05299,
+    2.0,
+    -1.9152,
+    0.84805,
+    0.0,
+    0.52992,
+    0.0,
+    1.0,
+    0.0,
+    -0.52992,
+    0.0,
+    0.84805
+   ],
+   "color": "23262c",
+   "material": "Leather",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SwivelBolsterL",
+   "shape": "Ellipsoid",
+   "size": [
+    0.44,
+    0.44,
+    1.84
+   ],
+   "cf": [
+    0.65299,
+    2.05,
+    -2.3137,
+    0.84805,
+    0.0,
+    0.52992,
+    0.0,
+    1.0,
+    0.0,
+    -0.52992,
+    0.0,
+    0.84805
+   ],
+   "color": "d9443c",
+   "material": "Leather",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SwivelBolsterR",
+   "shape": "Ellipsoid",
+   "size": [
+    0.44,
+    0.44,
+    1.84
+   ],
+   "cf": [
+    -0.5682,
+    2.05,
+    -1.55061,
+    0.84805,
+    0.0,
+    0.52992,
+    0.0,
+    1.0,
+    0.0,
+    -0.52992,
+    0.0,
+    0.84805
+   ],
+   "color": "d9443c",
+   "material": "Leather",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SwivelBack",
+   "shape": "Block",
+   "size": [
+    1.5,
+    2.56,
+    0.34
+   ],
+   "cf": [
+    -0.44513,
+    3.28,
+    -2.71236,
+    0.84805,
+    -0.09202,
+    0.52187,
+    0.0,
+    0.98481,
+    0.17365,
+    -0.52992,
+    -0.14726,
+    0.83516
+   ],
+   "color": "23262c",
+   "material": "Leather",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SwivelWingL",
+   "shape": "Block",
+   "size": [
+    0.34,
+    2.2,
+    0.5
+   ],
+   "cf": [
+    0.23522,
+    3.17571,
+    -3.02002,
+    0.93802,
+    -0.09202,
+    0.33415,
+    0.0361,
+    0.98481,
+    0.16985,
+    -0.3447,
+    -0.14726,
+    0.92709
+   ],
+   "color": "d9443c",
+   "material": "Leather",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SwivelWingR",
+   "shape": "Block",
+   "size": [
+    0.34,
+    2.2,
+    0.5
+   ],
+   "cf": [
+    -1.0199,
+    3.17571,
+    -2.23574,
+    0.72101,
+    -0.09202,
+    0.68678,
+    -0.0361,
+    0.98481,
+    0.16985,
+    -0.69198,
+    -0.14726,
+    0.70674
+   ],
+   "color": "d9443c",
+   "material": "Leather",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SwivelHeadrest",
+   "shape": "Ellipsoid",
+   "size": [
+    0.92,
+    0.46,
+    0.28
+   ],
+   "cf": [
+    -0.40946,
+    4.16514,
+    -2.65527,
+    0.84805,
+    -0.09202,
+    0.52187,
+    0.0,
+    0.98481,
+    0.17365,
+    -0.52992,
+    -0.14726,
+    0.83516
+   ],
+   "color": "23262c",
+   "material": "Leather",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SwivelLumbar",
+   "shape": "Ellipsoid",
+   "size": [
+    1.04,
+    0.44,
+    0.28
+   ],
+   "cf": [
+    -0.27327,
+    2.70762,
+    -2.43732,
+    0.84805,
+    -0.09202,
+    0.52187,
+    0.0,
+    0.98481,
+    0.17365,
+    -0.52992,
+    -0.14726,
+    0.83516
+   ],
+   "color": "d9443c",
+   "material": "Leather",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SwivelLogo",
+   "shape": "Ellipsoid",
+   "size": [
+    0.34,
+    0.74,
+    0.06
+   ],
+   "cf": [
+    -0.57128,
+    3.59343,
+    -2.91423,
+    0.84805,
+    -0.09202,
+    0.52187,
+    0.0,
+    0.98481,
+    0.17365,
+    -0.52992,
+    -0.14726,
+    0.83516
+   ],
+   "color": "5aa845",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SwivelArmPostL",
+   "shape": "Block",
+   "size": [
+    0.14,
+    0.64,
+    0.22
+   ],
+   "cf": [
+    0.84805,
+    2.1,
+    -2.52992,
+    0.84805,
+    0.0,
+    0.52992,
+    0.0,
+    1.0,
+    0.0,
+    -0.52992,
+    0.0,
+    0.84805
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SwivelArmPadL",
+   "shape": "Block",
+   "size": [
+    0.24,
+    0.1,
+    0.84
+   ],
+   "cf": [
+    0.91164,
+    2.46,
+    -2.42815,
+    0.84805,
+    0.0,
+    0.52992,
+    0.0,
+    1.0,
+    0.0,
+    -0.52992,
+    0.0,
+    0.84805
+   ],
+   "color": "23262c",
+   "material": "Leather",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SwivelArmPostR",
+   "shape": "Block",
+   "size": [
+    0.14,
+    0.64,
+    0.22
+   ],
+   "cf": [
+    -0.84805,
+    2.1,
+    -1.47008,
+    0.84805,
+    0.0,
+    0.52992,
+    0.0,
+    1.0,
+    0.0,
+    -0.52992,
+    0.0,
+    0.84805
+   ],
+   "color": "23262c",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SwivelArmPadR",
+   "shape": "Block",
+   "size": [
+    0.24,
+    0.1,
+    0.84
+   ],
+   "cf": [
+    -0.78446,
+    2.46,
+    -1.36831,
+    0.84805,
+    0.0,
+    0.52992,
+    0.0,
+    1.0,
+    0.0,
+    -0.52992,
+    0.0,
+    0.84805
+   ],
+   "color": "23262c",
+   "material": "Leather",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  }
+ ],
+ "pivots": {
+  "ChairSwivel": [
+   0.0,
+   0.0,
+   -2.0
+  ],
+  "Seat": [
+   0.0,
+   2.12,
+   -1.92
+  ],
+  "RGBGlow": [
+   0.0,
+   2.3,
+   1.5
+  ],
+  "Keys": [
+   0.0,
+   3.3,
+   0.7
+  ],
+  "Monitor": [
+   0.0,
+   4.4,
+   2.25
+  ]
+ },
+ "attrs": {
+  "State_ChairIdleYaw": 32.0,
+  "State_ChairSitYaw": 0.0,
+  "Cost": 2000,
+  "DisplayName": "Gaming Desk"
+ },
+ "size_studs": [
+  7.2,
+  5.35,
+  6.772
+ ],
+ "min": [
+  -3.6,
+  0.0,
+  -3.472
+ ],
+ "max": [
+  3.6,
+  5.35,
+  3.3
+ ],
+ "part_count": 89,
+ "duplicate_names": []
+}

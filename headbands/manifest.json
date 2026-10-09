@@ -1,0 +1,662 @@
+{
+ "bandZOnHead": 0.28,
+ "headRadius": 0.6,
+ "headbands": [
+  {
+   "collection": "Sweatband",
+   "tier": 1,
+   "displayName": "Sweatband",
+   "notes": "The cheapest item in the set and it is meant to look it: three concentric rings, no centrepiece, no metal, no glow, nothing above the band. It is fully ROTATIONALLY SYMMETRIC - there is no front detail - so the installer can drop it on at any yaw and it still reads correctly (the +Y front only matters for the tiers that have a badge).\nConstruction, outside in: Hem is a plain ring (r 0.635 -> 0.730, z -0.17 .. +0.17) that is BOTH the lining against the head and the pinched, slightly greyer edge of the towelling. Terry is the fat bulged ring (r 0.710 -> 0.755 + 0.05 bulge, z -0.14 .. +0.14) that sits inside it, so 0.03 of the darker hem is left exposed as a rim at the top and the bottom - that step, not the hue, is what keeps the two whites apart. Stripe is a flat-walled ring standing 0.020 proud of the bulge at mid-height (0.040 at its own edges, where the terry has curved away).\nTerry and Stripe are built with the SAME seed, segment count and jitter, so the per-segment radial wobble is identical on both and the stripe stays exactly parallel to the cloth it sits on all the way round instead of sinking into it on some facets. Do not change SEG on one ring without changing it on all three: the facet corners of the three 16-gons line up exactly at the moment, which is what stops the terry poking through the stripe.\nHead fit: the tightest point anywhere is the hem's inner wall at radius 0.635, i.e. 0.035 of clearance over a default R15 head. Nothing else on the model ever comes inside that. Total height is 0.34 studs (z -0.17 .. +0.17), a touch taller than the plain 0.26 band, and the widest point is radius 0.834 at the stripe.\nRoblox: all three parts are Fabric and all three want FLAT shading - the flat facets plus the radial jitter are the whole towelling read, and smoothing them turns it back into shiny plastic.",
+   "tris": 448,
+   "sizeStuds": [
+    1.65,
+    1.64,
+    0.34
+   ],
+   "zRange": [
+    -0.17,
+    0.17
+   ],
+   "minRadius": 0.635,
+   "bandZOnHead": 0.28,
+   "parts": [
+    {
+     "object": "Sweatband.Hem",
+     "part": "Hem",
+     "hex": "e2e2df",
+     "material": "Fabric",
+     "transparency": 0.0,
+     "tris": 128
+    },
+    {
+     "object": "Sweatband.Stripe",
+     "part": "Stripe",
+     "hex": "2f7fd4",
+     "material": "Fabric",
+     "transparency": 0.0,
+     "tris": 128
+    },
+    {
+     "object": "Sweatband.Terry",
+     "part": "Terry",
+     "hex": "f2f2f0",
+     "material": "Fabric",
+     "transparency": 0.0,
+     "tris": 192
+    }
+   ]
+  },
+  {
+   "collection": "RedBandana",
+   "tier": 2,
+   "displayName": "Red Bandana",
+   "notes": "Fit: tightest vertex radius is 0.640 (the band's inner wall) against the 0.63 head limit, and every ring here is built with enough segments that the FACE chords never dip inside 0.63 either - a 22-gon at r_in 0.640 bottoms out at 0.6335, a 16-gon at 0.660 at 0.6473. Widest point is 1.14 (the upper tail's tip ring); z spans -0.302 .. +0.201, so nothing needs the above-0.60 allowance. CLOTH, NOT A WASHER: the main ring carries bulge 0.028 plus a seeded per-segment radial jitter of +/-0.014, so its outer wall breathes between 0.731 and 0.759 and the closing seam (row 21 -> row 0) reads as the overlap where the cloth is tucked under itself. The top edge is deliberately NOT a circle: band() cannot vary z per segment, so the height variation is added as separate geometry - one lighter-red fold arc riding the top edge across the forehead (ring angles -100 to +60, cresting to z 0.178) and five hand-tuned crest slabs around the back at z 0.131..0.152, each at its own tilt. Nothing is random at build time; the crest table is literal, so two builds are bit-identical. KNOT: H.knot() only drops its SECOND tail (tail_drop), which would leave one tail sticking out dead level. So the knot is built into its own bmesh at the ORIGIN with angle_deg 90, then transformed by Translation(0.79, 0, -0.012) @ rot_euler(0, 14, 0) - a 14 deg pitch about +Y tips the outward axis (+X at angle 90) downward, so BOTH tails flick out and down, one at z -0.09 and the lower one at z -0.28. The knot's own dark cinch strap gets the matching tilt via H.face_out(90, -14). PARTS: five MeshParts over the brief's three reds. The light-red fold cloth and the deep-red shadow cloth are each grouped into one bmesh per REGION rather than one per detail - all five crest slabs plus the fold arc are a single object, and the knot's underside lump plus its cinch strap are a single object. The knot is split off from the band's fold cloth (same hex), and the hem off the knot shadow (same hex), only because knot and band are physically separate elements the installer may want to weld, offset or swap on their own. All five are Fabric.",
+   "tris": 644,
+   "sizeStuds": [
+    1.91,
+    1.58,
+    0.5
+   ],
+   "zRange": [
+    -0.294,
+    0.201
+   ],
+   "minRadius": 0.64,
+   "bandZOnHead": 0.28,
+   "parts": [
+    {
+     "object": "RedBandana.Band",
+     "part": "Band",
+     "hex": "c0322b",
+     "material": "Fabric",
+     "transparency": 0.0,
+     "tris": 264
+    },
+    {
+     "object": "RedBandana.BandFolds",
+     "part": "BandFolds",
+     "hex": "d94a3d",
+     "material": "Fabric",
+     "transparency": 0.0,
+     "tris": 136
+    },
+    {
+     "object": "RedBandana.Knot",
+     "part": "Knot",
+     "hex": "d94a3d",
+     "material": "Fabric",
+     "transparency": 0.0,
+     "tris": 84
+    },
+    {
+     "object": "RedBandana.KnotShadow",
+     "part": "KnotShadow",
+     "hex": "8f231d",
+     "material": "Fabric",
+     "transparency": 0.0,
+     "tris": 32
+    },
+    {
+     "object": "RedBandana.LowerHem",
+     "part": "LowerHem",
+     "hex": "8f231d",
+     "material": "Fabric",
+     "transparency": 0.0,
+     "tris": 128
+    }
+   ]
+  },
+  {
+   "collection": "CamoBand",
+   "tier": 3,
+   "displayName": "Camo Band",
+   "notes": "Four MeshParts, one per colour: Band / PatchesDark / PatchesSage / PatchesTan. The blotches are short arcs of band() sitting 0.014-0.023 proud of the olive ring's outer face, so they follow the curve exactly and read as printed camo rather than stuck-on tiles. Every arc is generated from random.Random(BLOTCH_SEED) with a fixed colour order and a fixed top/bottom/floating pattern, so the layout is identical on every rebuild - change BLOTCH_SEED to reroll the camo. The base ring is deliberately un-bulged: the patches have to clear the band's widest point at every angle, and a bulge would swallow them at mid-height. Tightest radius anywhere = 0.630 (the band's own inner wall); patches never come inside 0.732. Everything lives in z -0.139..+0.139, i.e. the 0.26-tall band plus the <=0.01 lip where a patch wraps over an edge. No yaw offset is required on install - the pattern is asymmetric on purpose and reads the same from any side.",
+   "tris": 692,
+   "sizeStuds": [
+    1.54,
+    1.54,
+    0.28
+   ],
+   "zRange": [
+    -0.139,
+    0.139
+   ],
+   "minRadius": 0.63,
+   "bandZOnHead": 0.28,
+   "parts": [
+    {
+     "object": "CamoBand.Band",
+     "part": "Band",
+     "hex": "4a5d32",
+     "material": "Fabric",
+     "transparency": 0.0,
+     "tris": 224
+    },
+    {
+     "object": "CamoBand.PatchesDark",
+     "part": "PatchesDark",
+     "hex": "2f3a22",
+     "material": "Fabric",
+     "transparency": 0.0,
+     "tris": 156
+    },
+    {
+     "object": "CamoBand.PatchesSage",
+     "part": "PatchesSage",
+     "hex": "6b7a44",
+     "material": "Fabric",
+     "transparency": 0.0,
+     "tris": 156
+    },
+    {
+     "object": "CamoBand.PatchesTan",
+     "part": "PatchesTan",
+     "hex": "7a6a45",
+     "material": "Fabric",
+     "transparency": 0.0,
+     "tris": 156
+    }
+   ]
+  },
+  {
+   "collection": "CucumberBand",
+   "tier": 4,
+   "displayName": "Cucumber Band",
+   "notes": "Signature item. Four MeshParts, one per colour: Band / Rinds / Flesh / Seeds. Six slices at 0, 60, 120, 180, 240, 300 deg - the 0 deg one is dead centre on the forehead (+Y), so the accessory must not be yaw-offset on install. Nothing reaches inside radius 0.63 (the band's own inner wall is the tightest point); everything lives in z -0.17..+0.17, well inside the head clearance.",
+   "tris": 848,
+   "sizeStuds": [
+    1.65,
+    1.8,
+    0.34
+   ],
+   "zRange": [
+    -0.17,
+    0.17
+   ],
+   "minRadius": 0.63,
+   "bandZOnHead": 0.28,
+   "parts": [
+    {
+     "object": "CucumberBand.Band",
+     "part": "Band",
+     "hex": "5aa832",
+     "material": "Plastic",
+     "transparency": 0.0,
+     "tris": 224
+    },
+    {
+     "object": "CucumberBand.Flesh",
+     "part": "Flesh",
+     "hex": "d8f0b0",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 216
+    },
+    {
+     "object": "CucumberBand.Rinds",
+     "part": "Rinds",
+     "hex": "2f7d2a",
+     "material": "Plastic",
+     "transparency": 0.0,
+     "tris": 216
+    },
+    {
+     "object": "CucumberBand.Seeds",
+     "part": "Seeds",
+     "hex": "9ec96a",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 192
+    }
+   ]
+  },
+  {
+   "collection": "StrawBand",
+   "tier": 5,
+   "displayName": "Straw Band",
+   "notes": "Three MeshParts, one per colour, exactly as the reference sheet reads: Weave (shadowed straw b8873c - the core ring PLUS every recessed checker cell), Strands (light straw d9b063 - the 16 proud cells that pass over the top) and Spikes (e8c87a). All three are Enum.Material.Sand. The weave is a two-row basket checker: 16 cells per row on the same angular grid with the parity flipped between rows, so a light cell in the lower row always sits under a shadowed cell in the upper one. The proud cells stand up to 0.09 out from the core ring and the recessed ones 0.05, so the checker shades as well as reading in value, and a 2-degree shadow gap is left between neighbouring cells so the dark core ring shows through as the gap between strands. The core ring is also 0.018 taller than the tallest cell at both rims, which gives the band a bound dark edge for free. The band proper lives in z -0.150 .. +0.150 and radius 0.642 .. 0.812. Only the 20 straw spikes leave that envelope: they root INSIDE the core ring (z 0.06..0.12, radius 0.688..0.714, so no spike floats) and reach z +0.227 at most, 0.087..0.149 long. Give the accessory ~0.24 of headroom above the band when it is worn. Tightest vertex radius anywhere is 0.642 - 0.042 of clearance over a default R15 head and 0.012 outside H.R_IN. No moving parts, no centrepiece, nothing sinks below the band.",
+   "tris": 744,
+   "sizeStuds": [
+    1.59,
+    1.58,
+    0.38
+   ],
+   "zRange": [
+    -0.15,
+    0.227
+   ],
+   "minRadius": 0.642,
+   "bandZOnHead": 0.28,
+   "parts": [
+    {
+     "object": "StrawBand.Spikes",
+     "part": "Spikes",
+     "hex": "e8c87a",
+     "material": "Sand",
+     "transparency": 0.0,
+     "tris": 120
+    },
+    {
+     "object": "StrawBand.Strands",
+     "part": "Strands",
+     "hex": "d9b063",
+     "material": "Sand",
+     "transparency": 0.0,
+     "tris": 192
+    },
+    {
+     "object": "StrawBand.Weave",
+     "part": "Weave",
+     "hex": "b8873c",
+     "material": "Sand",
+     "transparency": 0.0,
+     "tris": 432
+    }
+   ]
+  },
+  {
+   "collection": "LeafCrown",
+   "tier": 6,
+   "displayName": "Leaf Crown",
+   "notes": "NOT a closed band - the signature is the open V over the forehead. The two vines meet under a gold bud at angle 0 (front) and sweep back to a second bud at the nape; every leaf leans BACKWARD along its own vine, so the front-top stays empty. Do not add a ring to 'close' it. Four MeshParts, grouped by colour; the two greens alternate along each vine so every overlap shows a value step. Tightest radius is 0.662 (the vine), so it clears a 1.2-stud R15 head with ~0.06 of slack; top of the leaves is z 0.41.",
+   "tris": 720,
+   "sizeStuds": [
+    2.01,
+    1.79,
+    0.55
+   ],
+   "zRange": [
+    -0.14,
+    0.412
+   ],
+   "minRadius": 0.673,
+   "bandZOnHead": 0.28,
+   "parts": [
+    {
+     "object": "LeafCrown.Buds",
+     "part": "Buds",
+     "hex": "e8c34a",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 48
+    },
+    {
+     "object": "LeafCrown.LeavesDark",
+     "part": "LeavesDark",
+     "hex": "2d7a28",
+     "material": "Grass",
+     "transparency": 0.0,
+     "tris": 240
+    },
+    {
+     "object": "LeafCrown.LeavesMid",
+     "part": "LeavesMid",
+     "hex": "3f9b3a",
+     "material": "Grass",
+     "transparency": 0.0,
+     "tris": 240
+    },
+    {
+     "object": "LeafCrown.Vines",
+     "part": "Vines",
+     "hex": "4a5c2a",
+     "material": "Wood",
+     "transparency": 0.0,
+     "tris": 192
+    }
+   ]
+  },
+  {
+   "collection": "SteelBand",
+   "tier": 7,
+   "displayName": "Steel Band",
+   "notes": "Three MeshParts, grouped by colour: Band (steel b8bec6), EdgeRims (bright d5dbe4 - the top and bottom chamfer rings share one mesh), Rivets (dark steel 8a9199, six half-buried spheres). Every part is Enum.Material.Metal; no ornament by design, this is the austere tier of the set. The ring runs radius 0.635..0.80 and z -0.172..+0.172, so it is 0.344 tall and 0.165 thick against the 0.26 x 0.12 cloth bands - it should read visibly heavier next to tiers 1-6. Only the rivets leave the ring, bulging to radius 0.855. Tightest radius anywhere is 0.635: 0.035 of clearance over a default R15 head, 0.005 outside H.R_IN. Nothing rises above the band, so this one needs no special headroom when it is worn.",
+   "tris": 480,
+   "sizeStuds": [
+    1.56,
+    1.69,
+    0.34
+   ],
+   "zRange": [
+    -0.172,
+    0.172
+   ],
+   "minRadius": 0.635,
+   "bandZOnHead": 0.28,
+   "parts": [
+    {
+     "object": "SteelBand.Band",
+     "part": "Band",
+     "hex": "b8bec6",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 112
+    },
+    {
+     "object": "SteelBand.EdgeRims",
+     "part": "EdgeRims",
+     "hex": "d5dbe4",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 224
+    },
+    {
+     "object": "SteelBand.Rivets",
+     "part": "Rivets",
+     "hex": "8a9199",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 144
+    }
+   ]
+  },
+  {
+   "collection": "CactusBand",
+   "tier": 8,
+   "displayName": "Cactus Band",
+   "notes": "Six MeshParts, one per colour: Band / CactusPads / CactusHighlight / Spines / Petals / FlowerCentres. Four cactus clusters sit round the ring at -42, 50, 138 and 230 deg (0 deg = forehead / +Y); three five-petal daisies fill the gaps at -6, 92 and 185 deg, so the -6 one lands on the forehead and MUST NOT be yaw-offset away from it on install. Every pad is buried to z=0.03 inside the band, i.e. its widest cross-section is still inside the ring, so no pad floats or shows a neck. Tightest vertex radius anywhere is 0.630 - the band's own inner wall; the nearest decoration to the head is a cactus pad at 0.676, so there is 0.076 of clearance over a default R15 head. Vertical extent is z -0.130 .. +0.336 (the band is -0.130..+0.130; only the pads, their ribs and their spines go above it), so the piece sits well inside the standard z -0.35..+0.60 envelope and needs no headroom waiver. Widest point is a spine tip at radius 0.848. No moving parts, no centrepiece.",
+   "tris": 966,
+   "sizeStuds": [
+    1.6,
+    1.66,
+    0.47
+   ],
+   "zRange": [
+    -0.13,
+    0.336
+   ],
+   "minRadius": 0.63,
+   "bandZOnHead": 0.28,
+   "parts": [
+    {
+     "object": "CactusBand.Band",
+     "part": "Band",
+     "hex": "5f9e3f",
+     "material": "Fabric",
+     "transparency": 0.0,
+     "tris": 216
+    },
+    {
+     "object": "CactusBand.CactusHighlight",
+     "part": "CactusHighlight",
+     "hex": "6fb54d",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 180
+    },
+    {
+     "object": "CactusBand.CactusPads",
+     "part": "CactusPads",
+     "hex": "4a8c3a",
+     "material": "Plastic",
+     "transparency": 0.0,
+     "tris": 216
+    },
+    {
+     "object": "CactusBand.FlowerCentres",
+     "part": "FlowerCentres",
+     "hex": "f5c542",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 60
+    },
+    {
+     "object": "CactusBand.Petals",
+     "part": "Petals",
+     "hex": "ffffff",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 180
+    },
+    {
+     "object": "CactusBand.Spines",
+     "part": "Spines",
+     "hex": "e8e0b0",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 114
+    }
+   ]
+  },
+  {
+   "collection": "FrostBand",
+   "tier": 9,
+   "displayName": "Frost Band",
+   "notes": "'Snowflake' is the ONLY Neon part - the four Ice parts must stay non-emissive or the flake stops reading as the hero. The flake is held off the brow by a short tapered ice stem that lives in the 'Crystals' mesh (it starts buried in the band at y 0.66 and pokes 0.005 into the flake's lower arm), so Crystals and Snowflake must never be moved relative to each other. The forehead arc +-22.5 deg carries no shards on purpose - that gap is the flake's window; the small 'Frost' shards deliberately stop at +-27 deg for the same reason. Tightest radius is 0.630 (the plain band bore); everything else grows outward, widest point r 0.851 (a snowflake arm tip). Z spans -0.155 (Rim lip) to +0.410 (flake top).",
+   "tris": 960,
+   "sizeStuds": [
+    1.58,
+    1.63,
+    0.56
+   ],
+   "zRange": [
+    -0.155,
+    0.41
+   ],
+   "minRadius": 0.63,
+   "bandZOnHead": 0.28,
+   "parts": [
+    {
+     "object": "FrostBand.Band",
+     "part": "Band",
+     "hex": "4a9fd8",
+     "material": "Ice",
+     "transparency": 0.0,
+     "tris": 160
+    },
+    {
+     "object": "FrostBand.Crystals",
+     "part": "Crystals",
+     "hex": "a8dcf5",
+     "material": "Ice",
+     "transparency": 0.0,
+     "tris": 260
+    },
+    {
+     "object": "FrostBand.Frost",
+     "part": "Frost",
+     "hex": "dcf1ff",
+     "material": "Ice",
+     "transparency": 0.0,
+     "tris": 192
+    },
+    {
+     "object": "FrostBand.Rim",
+     "part": "Rim",
+     "hex": "2f6fa8",
+     "material": "Ice",
+     "transparency": 0.0,
+     "tris": 160
+    },
+    {
+     "object": "FrostBand.Snowflake",
+     "part": "Snowflake",
+     "hex": "e8f7ff",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 188
+    }
+   ]
+  },
+  {
+   "collection": "GoldBand",
+   "tier": 10,
+   "displayName": "Gold Band",
+   "notes": "Four MeshParts, grouped by colour. BandBody (gold f0b429) is the mid ring; BrightTrim (ffd966) carries the top edge ring AND all eleven pyramid studs in one mesh; DarkTrim (d99a1a) carries the bottom edge ring AND the boss's collar plate plus its four prongs; Boss (ffd966) is the single big gem, kept its own part because it is the focal point and wants its own material tuning. Everything is metallic 0.9 / roughness ~0.25, Enum.Material.Foil on the two bright parts and Metal on the two darker ones.\nThe band is a STEPPED TAPER, not a cylinder: outer radius grows 0.735 -> 0.757 -> 0.775 from bottom to top, so the mid body overhangs the dark bottom ring (shadow line) and the bright top ring overhangs the body (catch line). Hard edges throughout, bulge=0 - this is cast metal, not cloth.\nHEADROOM: the boss and its prongs deliberately overhang the band, reaching z +0.295 above and z -0.275 below and radius 1.109 forward. Nothing else leaves the ring. Tightest radius anywhere is 0.633 (the band's inner wall, 0.003 outside H.R_IN and 0.033 clear of a default R15 head); the boss's buried rear point is the next tightest at 0.662. Worn with the Handle attachment at (0, H.BAND_Z_ON_HEAD, 0) like every other band in the set.",
+   "tris": 732,
+   "sizeStuds": [
+    1.77,
+    1.99,
+    0.57
+   ],
+   "zRange": [
+    -0.275,
+    0.295
+   ],
+   "minRadius": 0.633,
+   "bandZOnHead": 0.28,
+   "parts": [
+    {
+     "object": "GoldBand.BandBody",
+     "part": "BandBody",
+     "hex": "f0b429",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 192
+    },
+    {
+     "object": "GoldBand.Boss",
+     "part": "Boss",
+     "hex": "ffd966",
+     "material": "Foil",
+     "transparency": 0.0,
+     "tris": 8
+    },
+    {
+     "object": "GoldBand.BrightTrim",
+     "part": "BrightTrim",
+     "hex": "ffd966",
+     "material": "Foil",
+     "transparency": 0.0,
+     "tris": 280
+    },
+    {
+     "object": "GoldBand.DarkTrim",
+     "part": "DarkTrim",
+     "hex": "d99a1a",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 252
+    }
+   ]
+  },
+  {
+   "collection": "LavaBand",
+   "tier": 11,
+   "displayName": "Lava Band",
+   "notes": "The glowing ring IS the band - there is no cloth/plastic band underneath. 'Lava' and 'HotCore' MUST stay Material=Neon (and should keep a high-ish Color brightness) or the cracks between the rock chunks go dead. The rocks are 16 separate chunks left with real gaps between them; the gaps are not modelled, they are just holes in the rock ring that let the neon ring show through, so never weld/merge the Rocks mesh onto the Lava mesh. Tightest radius is 0.64 (inner wall of Lava); rock chunks never come inside 0.71. Z spans -0.235 (underglow lip) to +0.31 (emblem top point).",
+   "tris": 912,
+   "sizeStuds": [
+    1.72,
+    1.86,
+    0.55
+   ],
+   "zRange": [
+    -0.235,
+    0.31
+   ],
+   "minRadius": 0.64,
+   "bandZOnHead": 0.28,
+   "parts": [
+    {
+     "object": "LavaBand.Emblem",
+     "part": "Emblem",
+     "hex": "1a1518",
+     "material": "Slate",
+     "transparency": 0.0,
+     "tris": 12
+    },
+    {
+     "object": "LavaBand.HotCore",
+     "part": "HotCore",
+     "hex": "ffb347",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 152
+    },
+    {
+     "object": "LavaBand.Lava",
+     "part": "Lava",
+     "hex": "ff5a1a",
+     "material": "Neon",
+     "transparency": 0.0,
+     "tris": 288
+    },
+    {
+     "object": "LavaBand.RockChips",
+     "part": "RockChips",
+     "hex": "4a4045",
+     "material": "Slate",
+     "transparency": 0.0,
+     "tris": 140
+    },
+    {
+     "object": "LavaBand.Rocks",
+     "part": "Rocks",
+     "hex": "2a2529",
+     "material": "Slate",
+     "transparency": 0.0,
+     "tris": 320
+    }
+   ]
+  },
+  {
+   "collection": "ChampionBand",
+   "tier": 12,
+   "displayName": "Champion Band",
+   "notes": "Top-tier flex piece. Front is +Y: the trophy cup stands on the forehead at angle 0 and the wings sweep off angles ~56-86 (left) and their mirror (right). HEAD CLEARANCE: the tightest point anywhere on the model is the band's own inner wall at r = 0.63 (H.R_IN); every decoration is further out than that. The trophy is deliberately built around an axis at y = 0.86 rather than on the band's outer face, because a cup centred any nearer the front would put its rear rim inside the head - so the cup PROJECTS FORWARD off the brow (its base overlaps the band top from y 0.69 to 1.03 and is embedded in the top of the ring, so it reads as seated, not floating). Nearest trophy point to the axis is the deep-gold lip disc at r 0.660. ENVELOPE: radius max ~1.11 (left primary feather tip, incl. its thickness), z from -0.18 (wing root plates) to +0.709 (primary feather tips). The cup tops out at z 0.630, i.e. 0.50 studs above the band's top edge (0.13). The wings are the silhouette and are the only geometry above z 0.60. Both wings live in ONE object (Wings); the right wing is the exact mirror of the left (angle, in-plane sweep and profile x all negated), so a reflection through the YZ plane maps one onto the other. Six MeshParts, grouped by colour: Band + Cup share the mid gold f5c542 but never touch (the deep-gold stepped base sits between them); Wings are the bright gold so they read light against the mid-gold ring; GoldTrim d99a1a is every dark structural element (bottom rail, wing root plates, cup base/stem/collar/lip). Gold is Foil / Metal, the red accents are Fabric so the band still reads as cloth under the metalwork.",
+   "tris": 1288,
+   "sizeStuds": [
+    2.13,
+    1.87,
+    0.89
+   ],
+   "zRange": [
+    -0.18,
+    0.709
+   ],
+   "minRadius": 0.63,
+   "bandZOnHead": 0.28,
+   "parts": [
+    {
+     "object": "ChampionBand.Band",
+     "part": "Band",
+     "hex": "f5c542",
+     "material": "Foil",
+     "transparency": 0.0,
+     "tris": 224
+    },
+    {
+     "object": "ChampionBand.Cup",
+     "part": "Cup",
+     "hex": "f5c542",
+     "material": "Foil",
+     "transparency": 0.0,
+     "tris": 180
+    },
+    {
+     "object": "ChampionBand.GoldTrim",
+     "part": "GoldTrim",
+     "hex": "d99a1a",
+     "material": "Metal",
+     "transparency": 0.0,
+     "tris": 368
+    },
+    {
+     "object": "ChampionBand.RedAccents",
+     "part": "RedAccents",
+     "hex": "c0322b",
+     "material": "Fabric",
+     "transparency": 0.0,
+     "tris": 192
+    },
+    {
+     "object": "ChampionBand.Star",
+     "part": "Star",
+     "hex": "ffffff",
+     "material": "SmoothPlastic",
+     "transparency": 0.0,
+     "tris": 36
+    },
+    {
+     "object": "ChampionBand.Wings",
+     "part": "Wings",
+     "hex": "ffe08a",
+     "material": "Foil",
+     "transparency": 0.0,
+     "tris": 288
+    }
+   ]
+  }
+ ]
+}

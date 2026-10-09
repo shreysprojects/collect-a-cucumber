@@ -1,0 +1,2659 @@
+{
+ "key": "Piano",
+ "category": "Home",
+ "parts": [
+  {
+   "name": "CaseFront",
+   "shape": "Block",
+   "size": [
+    6.0,
+    1.35,
+    3.0
+   ],
+   "cf": [
+    0.0,
+    3.175,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CaseBass",
+   "shape": "Block",
+   "size": [
+    3.0,
+    1.35,
+    2.5
+   ],
+   "cf": [
+    1.5,
+    3.175,
+    2.75,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CaseCurve",
+   "shape": "Cylinder",
+   "size": [
+    1.35,
+    6.0,
+    6.0
+   ],
+   "cf": [
+    0.0,
+    3.175,
+    1.5,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CaseTail",
+   "shape": "Cylinder",
+   "size": [
+    1.35,
+    3.0,
+    3.0
+   ],
+   "cf": [
+    1.5,
+    3.175,
+    4.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CaseBridge",
+   "shape": "Block",
+   "size": [
+    1.683,
+    1.35,
+    0.7
+   ],
+   "cf": [
+    -0.0378,
+    3.175,
+    4.41517,
+    0.88235,
+    0.0,
+    -0.47059,
+    0.0,
+    1.0,
+    0.0,
+    0.47059,
+    0.0,
+    0.88235
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BandTreble",
+   "shape": "Block",
+   "size": [
+    0.05,
+    0.1,
+    2.8
+   ],
+   "cf": [
+    -3.015,
+    2.65,
+    -0.1,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BandBass",
+   "shape": "Block",
+   "size": [
+    0.05,
+    0.1,
+    5.5
+   ],
+   "cf": [
+    3.015,
+    2.65,
+    1.25,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BandCurve",
+   "shape": "Cylinder",
+   "size": [
+    0.1,
+    6.05,
+    6.05
+   ],
+   "cf": [
+    0.0,
+    2.65,
+    1.5,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BandTail",
+   "shape": "Cylinder",
+   "size": [
+    0.1,
+    3.05,
+    3.05
+   ],
+   "cf": [
+    1.5,
+    2.65,
+    4.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BandBridge",
+   "shape": "Block",
+   "size": [
+    1.5769,
+    0.1,
+    0.05
+   ],
+   "cf": [
+    -0.20297,
+    2.65,
+    4.72375,
+    0.88235,
+    0.0,
+    -0.47059,
+    0.0,
+    1.0,
+    0.0,
+    0.47059,
+    0.0,
+    0.88235
+   ],
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PlateFront",
+   "shape": "Block",
+   "size": [
+    5.4,
+    0.12,
+    2.55
+   ],
+   "cf": [
+    0.0,
+    3.87,
+    0.225,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PlateBass",
+   "shape": "Block",
+   "size": [
+    2.7,
+    0.12,
+    2.5
+   ],
+   "cf": [
+    1.35,
+    3.87,
+    2.75,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PlateCurve",
+   "shape": "Cylinder",
+   "size": [
+    0.06,
+    5.4,
+    5.4
+   ],
+   "cf": [
+    0.0,
+    3.84,
+    1.5,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PlateTail",
+   "shape": "Cylinder",
+   "size": [
+    0.08,
+    2.4,
+    2.4
+   ],
+   "cf": [
+    1.5,
+    3.85,
+    4.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PlateBridge",
+   "shape": "Block",
+   "size": [
+    1.7593,
+    0.1,
+    0.5
+   ],
+   "cf": [
+    0.06265,
+    3.86,
+    4.24208,
+    0.88235,
+    0.0,
+    -0.47059,
+    0.0,
+    1.0,
+    0.0,
+    0.47059,
+    0.0,
+    0.88235
+   ],
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PlateHole1",
+   "shape": "Cylinder",
+   "size": [
+    0.07,
+    0.75,
+    0.75
+   ],
+   "cf": [
+    -1.25,
+    3.855,
+    2.75,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "4a3322",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PlateHole2",
+   "shape": "Cylinder",
+   "size": [
+    0.13,
+    0.62,
+    0.62
+   ],
+   "cf": [
+    1.2,
+    3.885,
+    3.95,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "4a3322",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "String1",
+   "shape": "Block",
+   "size": [
+    0.1,
+    0.05,
+    5.1367
+   ],
+   "cf": [
+    2.25,
+    3.96,
+    2.01837,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d0d8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "String2",
+   "shape": "Block",
+   "size": [
+    0.1,
+    0.05,
+    5.3906
+   ],
+   "cf": [
+    1.35,
+    3.96,
+    2.14529,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d0d8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "String3",
+   "shape": "Block",
+   "size": [
+    0.1,
+    0.05,
+    4.7809
+   ],
+   "cf": [
+    0.45,
+    3.96,
+    1.84047,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d0d8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "String4",
+   "shape": "Block",
+   "size": [
+    0.1,
+    0.05,
+    4.3622
+   ],
+   "cf": [
+    -0.45,
+    3.96,
+    1.63112,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d0d8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "String5",
+   "shape": "Block",
+   "size": [
+    0.1,
+    0.05,
+    4.0383
+   ],
+   "cf": [
+    -1.35,
+    3.96,
+    1.46913,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d0d8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "String6",
+   "shape": "Block",
+   "size": [
+    0.1,
+    0.05,
+    3.1925
+   ],
+   "cf": [
+    -2.25,
+    3.96,
+    1.04624,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c9d0d8",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "PinBlock",
+   "shape": "Block",
+   "size": [
+    5.3,
+    0.1,
+    0.6
+   ],
+   "cf": [
+    0.0,
+    3.96,
+    -0.8,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "8a5a2b",
+   "material": "Wood",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Dampers",
+   "shape": "Block",
+   "size": [
+    5.1,
+    0.22,
+    0.34
+   ],
+   "cf": [
+    0.0,
+    4.03,
+    0.15,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "23262c",
+   "material": "Fabric",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "MusicDesk",
+   "shape": "Block",
+   "size": [
+    2.7,
+    0.8,
+    0.1
+   ],
+   "cf": [
+    0.0,
+    4.40343,
+    -0.89818,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.96593,
+    -0.25882,
+    0.0,
+    0.25882,
+    0.96593
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "DeskLedge",
+   "shape": "Block",
+   "size": [
+    2.7,
+    0.1,
+    0.26
+   ],
+   "cf": [
+    0.0,
+    4.06,
+    -1.15,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "SheetMusic",
+   "shape": "Block",
+   "size": [
+    1.5,
+    0.66,
+    0.05
+   ],
+   "cf": [
+    0.0,
+    4.47821,
+    -0.94543,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.96593,
+    -0.25882,
+    0.0,
+    0.25882,
+    0.96593
+   ],
+   "color": "f2f0ea",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SheetStaff1",
+   "shape": "Block",
+   "size": [
+    1.3,
+    0.06,
+    0.05
+   ],
+   "cf": [
+    0.0,
+    4.6212,
+    -0.93818,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.96593,
+    -0.25882,
+    0.0,
+    0.25882,
+    0.96593
+   ],
+   "color": "3b4350",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "SheetStaff2",
+   "shape": "Block",
+   "size": [
+    1.3,
+    0.06,
+    0.05
+   ],
+   "cf": [
+    0.0,
+    4.38938,
+    -1.00029,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.96593,
+    -0.25882,
+    0.0,
+    0.25882,
+    0.96593
+   ],
+   "color": "3b4350",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Keybed",
+   "shape": "Block",
+   "size": [
+    6.0,
+    0.45,
+    1.35
+   ],
+   "cf": [
+    0.0,
+    2.725,
+    -2.125,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "KeySlip",
+   "shape": "Block",
+   "size": [
+    5.4,
+    0.2,
+    0.14
+   ],
+   "cf": [
+    0.0,
+    3.03,
+    -2.71,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "KeyPinstripe",
+   "shape": "Block",
+   "size": [
+    6.02,
+    0.06,
+    0.05
+   ],
+   "cf": [
+    0.0,
+    2.68,
+    -2.815,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "CheekL",
+   "shape": "Block",
+   "size": [
+    0.3,
+    0.55,
+    1.08
+   ],
+   "cf": [
+    2.85,
+    3.175,
+    -1.99,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CheekLNose",
+   "shape": "Cylinder",
+   "size": [
+    0.3,
+    0.55,
+    0.55
+   ],
+   "cf": [
+    2.85,
+    3.175,
+    -2.53,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CheekR",
+   "shape": "Block",
+   "size": [
+    0.3,
+    0.55,
+    1.08
+   ],
+   "cf": [
+    -2.85,
+    3.175,
+    -1.99,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "CheekRNose",
+   "shape": "Cylinder",
+   "size": [
+    0.3,
+    0.55,
+    0.55
+   ],
+   "cf": [
+    -2.85,
+    3.175,
+    -2.53,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "WhiteKeys",
+   "shape": "Block",
+   "size": [
+    5.4,
+    0.3,
+    1.12
+   ],
+   "cf": [
+    0.0,
+    3.08,
+    -2.06,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "f7f5ee",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Nameboard",
+   "shape": "Block",
+   "size": [
+    5.4,
+    0.46,
+    0.2
+   ],
+   "cf": [
+    0.0,
+    3.44,
+    -1.53,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "NameLogo",
+   "shape": "Block",
+   "size": [
+    0.8,
+    0.1,
+    0.05
+   ],
+   "cf": [
+    0.0,
+    3.47,
+    -1.645,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BlackKey01",
+   "shape": "Block",
+   "size": [
+    0.15,
+    0.2,
+    0.66
+   ],
+   "cf": [
+    2.44286,
+    3.31,
+    -1.84,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BlackKey02",
+   "shape": "Block",
+   "size": [
+    0.15,
+    0.2,
+    0.66
+   ],
+   "cf": [
+    2.18571,
+    3.31,
+    -1.84,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BlackKey03",
+   "shape": "Block",
+   "size": [
+    0.15,
+    0.2,
+    0.66
+   ],
+   "cf": [
+    1.67143,
+    3.31,
+    -1.84,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BlackKey04",
+   "shape": "Block",
+   "size": [
+    0.15,
+    0.2,
+    0.66
+   ],
+   "cf": [
+    1.41429,
+    3.31,
+    -1.84,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BlackKey05",
+   "shape": "Block",
+   "size": [
+    0.15,
+    0.2,
+    0.66
+   ],
+   "cf": [
+    1.15714,
+    3.31,
+    -1.84,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BlackKey06",
+   "shape": "Block",
+   "size": [
+    0.15,
+    0.2,
+    0.66
+   ],
+   "cf": [
+    0.64286,
+    3.31,
+    -1.84,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BlackKey07",
+   "shape": "Block",
+   "size": [
+    0.15,
+    0.2,
+    0.66
+   ],
+   "cf": [
+    0.38571,
+    3.31,
+    -1.84,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BlackKey08",
+   "shape": "Block",
+   "size": [
+    0.15,
+    0.2,
+    0.66
+   ],
+   "cf": [
+    -0.12857,
+    3.31,
+    -1.84,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BlackKey09",
+   "shape": "Block",
+   "size": [
+    0.15,
+    0.2,
+    0.66
+   ],
+   "cf": [
+    -0.38571,
+    3.31,
+    -1.84,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BlackKey10",
+   "shape": "Block",
+   "size": [
+    0.15,
+    0.2,
+    0.66
+   ],
+   "cf": [
+    -0.64286,
+    3.31,
+    -1.84,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BlackKey11",
+   "shape": "Block",
+   "size": [
+    0.15,
+    0.2,
+    0.66
+   ],
+   "cf": [
+    -1.15714,
+    3.31,
+    -1.84,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BlackKey12",
+   "shape": "Block",
+   "size": [
+    0.15,
+    0.2,
+    0.66
+   ],
+   "cf": [
+    -1.41429,
+    3.31,
+    -1.84,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BlackKey13",
+   "shape": "Block",
+   "size": [
+    0.15,
+    0.2,
+    0.66
+   ],
+   "cf": [
+    -1.92857,
+    3.31,
+    -1.84,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BlackKey14",
+   "shape": "Block",
+   "size": [
+    0.15,
+    0.2,
+    0.66
+   ],
+   "cf": [
+    -2.18571,
+    3.31,
+    -1.84,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BlackKey15",
+   "shape": "Block",
+   "size": [
+    0.15,
+    0.2,
+    0.66
+   ],
+   "cf": [
+    -2.44286,
+    3.31,
+    -1.84,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "15171b",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "LegCap1",
+   "shape": "Block",
+   "size": [
+    0.82,
+    0.34,
+    0.82
+   ],
+   "cf": [
+    2.45,
+    2.35,
+    -1.05,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Leg1",
+   "shape": "Cylinder",
+   "size": [
+    1.95,
+    0.52,
+    0.52
+   ],
+   "cf": [
+    2.45,
+    1.235,
+    -1.05,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "LegCuff1",
+   "shape": "Cylinder",
+   "size": [
+    0.3,
+    0.62,
+    0.62
+   ],
+   "cf": [
+    2.45,
+    0.15,
+    -1.05,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "LegCap2",
+   "shape": "Block",
+   "size": [
+    0.82,
+    0.34,
+    0.82
+   ],
+   "cf": [
+    -2.45,
+    2.35,
+    -1.05,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Leg2",
+   "shape": "Cylinder",
+   "size": [
+    1.95,
+    0.52,
+    0.52
+   ],
+   "cf": [
+    -2.45,
+    1.235,
+    -1.05,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "LegCuff2",
+   "shape": "Cylinder",
+   "size": [
+    0.3,
+    0.62,
+    0.62
+   ],
+   "cf": [
+    -2.45,
+    0.15,
+    -1.05,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "LegCap3",
+   "shape": "Block",
+   "size": [
+    0.82,
+    0.34,
+    0.82
+   ],
+   "cf": [
+    1.55,
+    2.35,
+    4.45,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Leg3",
+   "shape": "Cylinder",
+   "size": [
+    1.95,
+    0.52,
+    0.52
+   ],
+   "cf": [
+    1.55,
+    1.235,
+    4.45,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "LegCuff3",
+   "shape": "Cylinder",
+   "size": [
+    0.3,
+    0.62,
+    0.62
+   ],
+   "cf": [
+    1.55,
+    0.15,
+    4.45,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "LyrePostL",
+   "shape": "Block",
+   "size": [
+    0.16,
+    1.78,
+    0.16
+   ],
+   "cf": [
+    0.42,
+    1.63,
+    -0.95,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "LyrePostR",
+   "shape": "Block",
+   "size": [
+    0.16,
+    1.78,
+    0.16
+   ],
+   "cf": [
+    -0.42,
+    1.63,
+    -0.95,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "PedalBox",
+   "shape": "Block",
+   "size": [
+    1.3,
+    0.36,
+    0.5
+   ],
+   "cf": [
+    0.0,
+    0.58,
+    -0.95,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "Pedal1",
+   "shape": "Block",
+   "size": [
+    0.15,
+    0.08,
+    0.5
+   ],
+   "cf": [
+    0.36,
+    0.5,
+    -1.42,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Pedal2",
+   "shape": "Block",
+   "size": [
+    0.15,
+    0.08,
+    0.5
+   ],
+   "cf": [
+    0.0,
+    0.5,
+    -1.42,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "Pedal3",
+   "shape": "Block",
+   "size": [
+    0.15,
+    0.08,
+    0.5
+   ],
+   "cf": [
+    -0.36,
+    0.5,
+    -1.42,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "LidFront",
+   "shape": "Block",
+   "size": [
+    6.0,
+    0.12,
+    3.0
+   ],
+   "cf": [
+    0.48765,
+    5.49064,
+    0.0,
+    0.84805,
+    0.52992,
+    0.0,
+    -0.52992,
+    0.84805,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "LidBass",
+   "shape": "Block",
+   "size": [
+    3.0,
+    0.12,
+    2.5
+   ],
+   "cf": [
+    1.75972,
+    4.69576,
+    2.75,
+    0.84805,
+    0.52992,
+    0.0,
+    -0.52992,
+    0.84805,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "LidCurve",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    6.0,
+    6.0
+   ],
+   "cf": [
+    0.48765,
+    5.49064,
+    1.5,
+    0.52992,
+    -0.84805,
+    0.0,
+    0.84805,
+    0.52992,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "LidTail",
+   "shape": "Cylinder",
+   "size": [
+    0.12,
+    3.0,
+    3.0
+   ],
+   "cf": [
+    1.75972,
+    4.69576,
+    4.0,
+    0.52992,
+    -0.84805,
+    0.0,
+    0.84805,
+    0.52992,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "LidBridge",
+   "shape": "Block",
+   "size": [
+    1.683,
+    0.12,
+    0.7
+   ],
+   "cf": [
+    0.4556,
+    5.51067,
+    4.41517,
+    0.74828,
+    0.52992,
+    -0.39908,
+    -0.46758,
+    0.84805,
+    0.24937,
+    0.47059,
+    0.0,
+    0.88235
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "LidStick",
+   "shape": "Cylinder",
+   "size": [
+    3.0133,
+    0.14,
+    0.14
+   ],
+   "cf": [
+    -2.08399,
+    5.41299,
+    1.2,
+    0.17656,
+    -0.0,
+    0.98429,
+    0.98429,
+    0.0,
+    -0.17656,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BenchTop",
+   "shape": "Block",
+   "size": [
+    2.9,
+    0.16,
+    1.4
+   ],
+   "cf": [
+    0.0,
+    1.9,
+    -4.5,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BenchApron",
+   "shape": "Block",
+   "size": [
+    2.66,
+    0.3,
+    1.16
+   ],
+   "cf": [
+    0.0,
+    1.68,
+    -4.5,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BenchCushion",
+   "shape": "Block",
+   "size": [
+    2.74,
+    0.24,
+    1.26
+   ],
+   "cf": [
+    0.0,
+    2.08,
+    -4.5,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "c7372f",
+   "material": "Leather",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BenchTuft1",
+   "shape": "Ball",
+   "size": [
+    0.12,
+    0.12,
+    0.12
+   ],
+   "cf": [
+    0.75,
+    2.2,
+    -4.5,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BenchTuft2",
+   "shape": "Ball",
+   "size": [
+    0.12,
+    0.12,
+    0.12
+   ],
+   "cf": [
+    0.0,
+    2.2,
+    -4.5,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BenchTuft3",
+   "shape": "Ball",
+   "size": [
+    0.12,
+    0.12,
+    0.12
+   ],
+   "cf": [
+    -0.75,
+    2.2,
+    -4.5,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": false,
+   "shadow": true
+  },
+  {
+   "name": "BenchLeg1",
+   "shape": "Cylinder",
+   "size": [
+    1.44,
+    0.28,
+    0.28
+   ],
+   "cf": [
+    1.22,
+    0.88,
+    -5.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BenchFoot1",
+   "shape": "Cylinder",
+   "size": [
+    0.2,
+    0.34,
+    0.34
+   ],
+   "cf": [
+    1.22,
+    0.1,
+    -5.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BenchLeg2",
+   "shape": "Cylinder",
+   "size": [
+    1.44,
+    0.28,
+    0.28
+   ],
+   "cf": [
+    -1.22,
+    0.88,
+    -5.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BenchFoot2",
+   "shape": "Cylinder",
+   "size": [
+    0.2,
+    0.34,
+    0.34
+   ],
+   "cf": [
+    -1.22,
+    0.1,
+    -5.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BenchLeg3",
+   "shape": "Cylinder",
+   "size": [
+    1.44,
+    0.28,
+    0.28
+   ],
+   "cf": [
+    1.22,
+    0.88,
+    -4.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BenchFoot3",
+   "shape": "Cylinder",
+   "size": [
+    0.2,
+    0.34,
+    0.34
+   ],
+   "cf": [
+    1.22,
+    0.1,
+    -4.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BenchLeg4",
+   "shape": "Cylinder",
+   "size": [
+    1.44,
+    0.28,
+    0.28
+   ],
+   "cf": [
+    -1.22,
+    0.88,
+    -4.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "1c1e24",
+   "material": "SmoothPlastic",
+   "transparency": 0.0,
+   "reflectance": 0.12,
+   "collide": true,
+   "shadow": true
+  },
+  {
+   "name": "BenchFoot4",
+   "shape": "Cylinder",
+   "size": [
+    0.2,
+    0.34,
+    0.34
+   ],
+   "cf": [
+    -1.22,
+    0.1,
+    -4.0,
+    0.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "color": "d9a93b",
+   "material": "Metal",
+   "transparency": 0.0,
+   "reflectance": 0.0,
+   "collide": true,
+   "shadow": true
+  }
+ ],
+ "pivots": {
+  "Bench": [
+   0.0,
+   2.2,
+   -4.5
+  ],
+  "Keys": [
+   0.0,
+   3.23,
+   -2.06
+  ],
+  "Sound": [
+   -0.3,
+   3.85,
+   1.6
+  ],
+  "Notes": [
+   -0.7,
+   4.2,
+   1.9
+  ]
+ },
+ "attrs": {
+  "Cost": 2500,
+  "Notes": "Glossy black grand piano (lid propped open, gold harp plate, strings, dampers, 3 gold pedals) with a matching red-tufted bench, primlib parts. Keyboard faces -Z. Pivot_Bench = bench cushion top (seat faces +Z toward the keys), Pivot_Keys = keyboard centre, Pivot_Sound = inside the case, Pivot_Notes = where floating notes start. Built by fun-builds/models/build_Piano.py."
+ },
+ "size_studs": [
+  6.104,
+  7.131,
+  10.725
+ ],
+ "min": [
+  -3.04,
+  0.0,
+  -5.2
+ ],
+ "max": [
+  3.064,
+  7.131,
+  5.525
+ ],
+ "part_count": 90,
+ "duplicate_names": []
+}

@@ -1,0 +1,89 @@
+--[[
+	BarbellClient  (LocalScript, StarterPlayerScripts)
+	Every Barbell model (tag "Barbell", attributes Held / Holder / RackCFrame set by
+	BenchServer) is placed by this script on each client:
+	  * Held = true  -> every frame the bar's centre sits at the midpoint of the holder's
+	    two hands (GRIP_OFFSET toward the fingertips) with its axis running hand to hand,
+	    kept level, so it rides the press exactly with the hands. The collars and plates
+	    are welded to the bar, so they come along.
+	  * Held = false -> the bar tweens back to RackCFrame (where it originally was).
+	The bar stays anchored and server-owned; the moves here are local overrides.
+]]
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
+local CollectionService = game:GetService("CollectionService")
+
+local GRIP_OFFSET = 0.15 -- keep in step with BenchServer
+local RETURN_TIME = 0.35
+
+local Active = {} -- [barbell] = true while placed by us
+
+local function Place(barbell)
+	local root = barbell.PrimaryPart
+	local holderName = barbell:GetAttribute("Holder")
+	local character = holderName and holderName ~= "" and workspace:FindFirstChild(holderName)
+	local rh = character and character:FindFirstChild("RightHand")
+	local lh = character and character:FindFirstChild("LeftHand")
+	if not (root and rh and lh) then return end
+	local axis = (rh.Position - lh.Position)
+	if axis.Magnitude < 0.05 then return end
+	axis = axis.Unit
+	local up = axis:Cross(Vector3.yAxis):Cross(axis)
+	if up.Magnitude < 0.05 then return end
+	up = up.Unit
+	local pos = (rh.Position + lh.Position) * 0.5 - (rh.CFrame.UpVector + lh.CFrame.UpVector) * 0.5 * GRIP_OFFSET
+	root.CFrame = CFrame.fromMatrix(pos, axis, up) -- cylinder axis = X = hand to hand
+end
+
+local function ReturnToRack(barbell)
+	local root = barbell.PrimaryPart
+	local rack = barbell:GetAttribute("RackCFrame")
+	if not (root and typeof(rack) == "CFrame") then return end
+	local tween = TweenService:Create(root, TweenInfo.new(RETURN_TIME, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {CFrame = rack})
+	tween:Play()
+	tween.Completed:Once(function()
+		if not barbell:GetAttribute("Held") then root.CFrame = rack end
+	end)
+end
+
+local function Watch(barbell)
+	local function update()
+		if barbell:GetAttribute("Held") then
+			Active[barbell] = true
+		elseif Active[barbell] then
+			Active[barbell] = nil
+			ReturnToRack(barbell)
+		end
+	end
+	barbell:GetAttributeChangedSignal("Held"):Connect(update)
+	update()
+	barbell.AncestryChanged:Connect(function()
+		if not barbell:IsDescendantOf(workspace) then Active[barbell] = nil end
+	end)
+end
+
+for _, b in ipairs(CollectionService:GetTagged("Barbell")) do Watch(b) end
+CollectionService:GetInstanceAddedSignal("Barbell"):Connect(Watch)
+
+local function PlaceAll()
+	for barbell in pairs(Active) do
+		Place(barbell)
+	end
+end
+--.. ONE placement per frame. RenderStepped (just before the frame renders) gives the frame-exact
+--.. fit; Heartbeat only fills in on frames where RenderStepped did not run (Studio stops
+--.. RenderStepped while its window is unfocused), so the welded barbell assembly is no longer
+--.. moved twice every frame.
+local placedThisFrame = false
+RunService:BindToRenderStep("BarbellPlacement", Enum.RenderPriority.Last.Value, function()
+	placedThisFrame = true
+	PlaceAll()
+end)
+RunService.Heartbeat:Connect(function()
+	if placedThisFrame then
+		placedThisFrame = false -- RenderStepped already placed the bars this frame
+		return
+	end
+	PlaceAll()
+end)

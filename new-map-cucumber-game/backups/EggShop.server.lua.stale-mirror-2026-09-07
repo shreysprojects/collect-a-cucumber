@@ -1,0 +1,361 @@
+--[[
+	EggShop  (Script, ServerScriptService)
+	Every physical egg on an egg stand (Map/Biomes/<zone>/Eggs/<stand>/<... Egg> Model) gets a
+	ProximityPrompt. Triggering it buys the egg for its price in Coins (DataService) and hands the
+	player a Tool built from THAT egg model, equipped straight into the hand.
+
+	  * price: EGG_PRICE for every egg; a "Price" attribute on the stand or egg model overrides it
+	  * STOCK (2026-09-07): every stand sells DEFAULT_STOCK eggs per in-game day ("MaxStock"
+	    attribute on the stand / egg model overrides). The egg model carries live attributes
+	    Stock / StockMax, an overhead "X left!" / "Sold out!" billboard (FredokaOne, sized in studs
+	    like the rest of the overhead UI) shows the count, the prompt is disabled while sold out,
+	    and every stand restocks when DayNightCycle starts the next day (workspace attribute
+	    DayNumber changes).
+	  * EVERY BOUGHT EGG IS ROLLED (2026-09-07): a weight in kg (KG_BASE x a log-normal roll; a
+	    "Kg" attribute on the stand / egg overrides the base), a size from the weight (heavier =
+	    bigger: (kg / base)^(1/3), clamped SIZE_MIN..SIZE_MAX), the cucumber material roll (Golden /
+	    Diamond, CucumberMutations) and, with MUTATION_CHANCE, 1..4 cucumber mutations. The tool
+	    is built per purchase: the held egg is scaled by the size and painted with
+	    CucumberMutations.ApplyLook; its name reads "<Golden> <NEON> <Egg> Egg (2.4 kg)".
+	  * tool: CanBeDropped=false, attributes EggName / Price / Kg / Scale / Material / Mutations /
+	    DisplayName, tag "EggTool". EggPlacement places it with the same size + look.
+	  * prompts carry attributes EggName / Price / Stock and the tag "EggShopPrompt";
+	    StarterPlayerScripts.EggShopClient shows the "not enough coins" toast.
+	  * Studio dev hook: workspace:SetAttribute("EggShopDev", "buy:<EggName>") buys one for the
+	    first player, "reset" restocks every stand.
+]]
+
+--..Services..--
+local Players = game:GetService("Players")
+local ServerStorage = game:GetService("ServerStorage")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local CollectionService = game:GetService("CollectionService")
+local RunService = game:GetService("RunService")
+
+--..Modules..--
+local DataService = require(ServerStorage:WaitForChild("DataService"))
+local CucumberMutations = require(ReplicatedStorage:WaitForChild("Modules"):WaitForChild("CucumberMutations"))
+
+--..Config..--
+local EGG_PRICE = 100
+local DEFAULT_STOCK = 5 -- eggs per stand per in-game day ("MaxStock" attribute overrides)
+local MUTATION_CHANCE = 0.35 -- chance a bought egg mutates at all (then 1..4 mutations with the cucumber odds)
+local KG_BASE = 2 -- kg of an average egg ("Kg" attribute on the stand / egg overrides)
+local KG_SPREAD = 0.45 -- log2 standard deviation of the weight roll (most eggs land within x0.5 .. x2 of the base)
+local KG_MIN, KG_MAX = 0.35, 3 -- clamps, as multiples of the base
+local SIZE_MIN, SIZE_MAX = 0.75, 1.45 -- egg scale from the weight: (kg / base) ^ (1/3), clamped
+local HAND_EGG_HEIGHT = 2.2 -- studs; the held egg is scaled to this height (x the rolled size)
+local GRIP = CFrame.new(0, -0.9, 0.25) -- identity rotation keeps the egg upright in the R15 tool pose; centre 0.9 above the palm, 0.25 forward
+local PROMPT_DISTANCE = 12
+local PROMPT_HOLD = 0.35 -- seconds; a short hold so a stray key press never spends coins
+local OVERHEAD_SIZE = UDim2.fromScale(7, 1.8) -- studs (scale units on a BillboardGui = studs)
+local OVERHEAD_LIFT = 0.9 -- studs of air between the egg's top and the label's bottom edge
+local OVERHEAD_MAX_DISTANCE = 90
+local OVERHEAD_FONT = Enum.Font.FredokaOne -- the font most of the game's UI uses
+local IN_STOCK_COLOR = Color3.fromRGB(150, 255, 150)
+local LOW_STOCK_COLOR = Color3.fromRGB(255, 225, 110)
+local SOLD_OUT_COLOR = Color3.fromRGB(255, 110, 110)
+local BIOMES = workspace:WaitForChild("Map"):WaitForChild("Biomes")
+
+--..Variables..--
+local Eggs = {} -- [eggName] = {Name, Model, Stand, Host, Prompt, Label, Stock, Max}
+local Busy = {} -- [player] = true while a purchase is being processed
+
+--..Functions..--
+--.. the stand's own name label (SurfaceGui text that is not "EGG"); the "X left!" stock billboard
+--.. added below is skipped, and the result is stamped on the stand (attribute EggName) so
+--.. EggPlacement reads the same name whatever the script order
+local function EggNameOf(stand)
+	local stamped = stand:GetAttribute("EggName")
+	if type(stamped) == "string" and stamped ~= "" then return stamped end
+	for _, d in ipairs(stand:GetDescendants()) do
+		if d:IsA("TextLabel") and d.Text ~= "" and d.Text:upper() ~= "EGG" and not d:FindFirstAncestorWhichIsA("BillboardGui") then
+			return d.Text
+		end
+	end
+	return (stand.Name:gsub("%s*Egg%s*Stand$", ""):gsub("%s*Egg$", ""))
+end
+
+local function AttrOf(entry, name)
+	local v = entry.Model:GetAttribute(name)
+	if v == nil then v = entry.Stand:GetAttribute(name) end
+	return v
+end
+
+local function PriceOf(eggName)
+	local entry = Eggs[eggName]
+	return tonumber(entry and AttrOf(entry, "Price")) or EGG_PRICE
+end
+
+local function MaxStockOf(eggName)
+	local entry = Eggs[eggName]
+	return math.max(0, math.floor(tonumber(entry and AttrOf(entry, "MaxStock")) or DEFAULT_STOCK))
+end
+
+local function KgBaseOf(eggName)
+	local entry = Eggs[eggName]
+	return math.max(0.1, tonumber(entry and AttrOf(entry, "Kg")) or KG_BASE)
+end
+
+local function LargestPart(model)
+	local best, bestVolume
+	for _, d in ipairs(model:GetDescendants()) do
+		if d:IsA("BasePart") then
+			local v = d.Size.X * d.Size.Y * d.Size.Z
+			if not best or v > bestVolume then best, bestVolume = d, v end
+		end
+	end
+	return best
+end
+
+--..Stock..--
+local function RefreshStockUI(entry)
+	local n, max = entry.Stock, entry.Max
+	entry.Model:SetAttribute("Stock", n)
+	entry.Model:SetAttribute("StockMax", max)
+	if entry.Prompt then
+		entry.Prompt:SetAttribute("Stock", n)
+		entry.Prompt.Enabled = n > 0
+		entry.Prompt.ActionText = n > 0 and ("Buy (%d Coins)"):format(PriceOf(entry.Name)) or "Sold out"
+	end
+	if entry.Label then
+		if n <= 0 then
+			entry.Label.Text = "Sold out!"
+			entry.Label.TextColor3 = SOLD_OUT_COLOR
+		else
+			entry.Label.Text = ("%d left!"):format(n)
+			entry.Label.TextColor3 = n == 1 and LOW_STOCK_COLOR or IN_STOCK_COLOR
+		end
+	end
+end
+
+local function SetStock(entry, n)
+	entry.Stock = math.max(0, math.floor(n))
+	RefreshStockUI(entry)
+end
+
+local function ResetStock(entry)
+	entry.Max = MaxStockOf(entry.Name)
+	SetStock(entry, entry.Max)
+end
+
+local function ResetAll()
+	for _, entry in pairs(Eggs) do ResetStock(entry) end
+end
+
+--.. "X left!" over the egg: a stud-sized billboard (shrinks with distance like the plot badges)
+local function BuildOverhead(entry)
+	local host = entry.Host
+	local old = host:FindFirstChild("StockLabel")
+	if old then old:Destroy() end
+	local gui = Instance.new("BillboardGui")
+	gui.Name = "StockLabel"
+	gui.Size = OVERHEAD_SIZE
+	gui.Adornee = host
+	gui.AlwaysOnTop = true
+	gui.MaxDistance = OVERHEAD_MAX_DISTANCE
+	gui.ResetOnSpawn = false
+	gui.ExtentsOffsetWorldSpace = Vector3.new(0, 1, 0) -- the egg part's top
+	gui.StudsOffsetWorldSpace = Vector3.new(0, OVERHEAD_LIFT + OVERHEAD_SIZE.Y.Scale * 0.5, 0) -- the billboard is centred: lift by half its height
+	local label = Instance.new("TextLabel")
+	label.Name = "Count"
+	label.BackgroundTransparency = 1
+	label.Size = UDim2.fromScale(1, 1)
+	label.Font = OVERHEAD_FONT
+	label.TextScaled = true
+	label.TextColor3 = IN_STOCK_COLOR
+	label.Text = ""
+	label.Parent = gui
+	local stroke = Instance.new("UIStroke")
+	stroke.Thickness = 3
+	stroke.Color = Color3.fromRGB(20, 24, 40)
+	stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
+	stroke.Parent = label
+	gui.Parent = host
+	entry.Label = label
+end
+
+--..Rolls..--
+local function Gaussian()
+	return math.sqrt(-2 * math.log(1 - math.random())) * math.cos(2 * math.pi * math.random())
+end
+
+local function RollEgg(eggName)
+	local base = KgBaseOf(eggName)
+	local mult = math.clamp(2 ^ (Gaussian() * KG_SPREAD), KG_MIN, KG_MAX)
+	local kg = math.max(0.1, math.round(base * mult * 10) / 10)
+	local scale = math.clamp((kg / base) ^ (1 / 3), SIZE_MIN, SIZE_MAX)
+	local material = CucumberMutations.RollMaterial()
+	local mutations = {}
+	if math.random() < MUTATION_CHANCE then
+		mutations = CucumberMutations.RollMutations(nil, CucumberMutations.RollCountAtLeastOne())
+	end
+	return {Kg = kg, Scale = scale, Material = material, Mutations = mutations}
+end
+
+--..Tool (built per purchase: size + look are part of the egg)..--
+local function BuildTool(entry, roll)
+	local eggName = entry.Name
+	local display = CucumberMutations.DisplayName(eggName .. " Egg", roll.Material, roll.Mutations)
+	local tool = Instance.new("Tool")
+	tool.Name = ("%s (%.1f kg)"):format(display, roll.Kg)
+	tool.ToolTip = tool.Name
+	tool.CanBeDropped = false
+	tool.RequiresHandle = true
+	tool.Grip = GRIP
+	tool:SetAttribute("EggName", eggName)
+	tool:SetAttribute("DisplayName", display)
+	tool:SetAttribute("Kg", roll.Kg)
+	tool:SetAttribute("Scale", roll.Scale)
+	tool:SetAttribute("Material", roll.Material or "")
+	tool:SetAttribute("Mutations", CucumberMutations.Join(roll.Mutations))
+	CollectionService:AddTag(tool, "EggTool")
+
+	local egg = entry.Model:Clone()
+	egg.Name = "Egg"
+	for _, d in ipairs(egg:GetDescendants()) do
+		if d:IsA("ProximityPrompt") or d:IsA("LuaSourceContainer") or d:IsA("BillboardGui") then d:Destroy() end
+	end
+	local _, size = egg:GetBoundingBox()
+	if size.Y > 0 then egg:ScaleTo(egg:GetScale() * HAND_EGG_HEIGHT * roll.Scale / size.Y) end
+	local cf = egg:GetBoundingBox()
+
+	local handle = Instance.new("Part")
+	handle.Name = "Handle"
+	handle.Size = Vector3.new(0.6, 0.6, 0.6)
+	handle.CFrame = CFrame.new(cf.Position) -- upright, at the egg's centre
+	handle.Transparency = 1
+	handle.CanCollide = false
+	handle.CanQuery = false
+	handle.CanTouch = false
+	handle.Massless = true
+	handle.Anchored = false
+	handle.Parent = tool
+
+	for _, d in ipairs(egg:GetDescendants()) do
+		if d:IsA("BasePart") then
+			d.Anchored = false
+			d.CanCollide = false
+			d.CanQuery = false
+			d.CanTouch = false
+			d.Massless = true
+			local weld = Instance.new("WeldConstraint")
+			weld.Part0 = handle
+			weld.Part1 = d
+			weld.Parent = d
+		end
+	end
+	CucumberMutations.ApplyLook(egg, roll.Material, roll.Mutations, {ParticleScale = 0.6})
+	egg.Parent = tool
+	return tool
+end
+
+local function Purchase(player, eggName)
+	if Busy[player] then return false, "busy" end
+	local entry = Eggs[eggName]
+	if not entry then return false, "unknown egg" end
+	if entry.Stock <= 0 then return false, "sold out" end
+	Busy[player] = true
+	local bought = false
+	local ok, err = pcall(function()
+		local price = PriceOf(eggName)
+		local coins = DataService.Get(player, "Coins")
+		if coins == nil then return end -- data still loading
+		if coins < price then return end -- client shows the toast
+		if entry.Stock <= 0 then return end
+		DataService.Increment(player, "Coins", -price)
+		SetStock(entry, entry.Stock - 1)
+		local tool = BuildTool(entry, RollEgg(eggName))
+		tool:SetAttribute("Price", price)
+		tool.Parent = player:WaitForChild("Backpack", 5) or player
+		local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+		if humanoid and humanoid.Health > 0 then
+			humanoid:EquipTool(tool)
+		end
+		bought = true
+	end)
+	Busy[player] = nil
+	if not ok then warn("[EggShop] purchase failed for " .. player.Name .. ": " .. tostring(err)) end
+	return ok and bought, err
+end
+
+local function AddPrompt(entry)
+	local host = entry.Host
+	local old = host:FindFirstChild("BuyPrompt")
+	if old then old:Destroy() end
+	local prompt = Instance.new("ProximityPrompt")
+	prompt.Name = "BuyPrompt"
+	prompt.ObjectText = entry.Name .. " Egg"
+	prompt.ActionText = ("Buy (%d Coins)"):format(PriceOf(entry.Name))
+	prompt.MaxActivationDistance = PROMPT_DISTANCE
+	prompt.HoldDuration = PROMPT_HOLD
+	prompt.RequiresLineOfSight = false
+	prompt.Exclusivity = Enum.ProximityPromptExclusivity.OnePerButton
+	prompt:SetAttribute("EggName", entry.Name)
+	prompt:SetAttribute("Price", PriceOf(entry.Name))
+	CollectionService:AddTag(prompt, "EggShopPrompt")
+	prompt.Triggered:Connect(function(player)
+		Purchase(player, entry.Name)
+	end)
+	prompt.Parent = host
+	entry.Prompt = prompt
+	return prompt
+end
+
+--..Setup..--
+for _, biome in ipairs(BIOMES:GetChildren()) do
+	local eggsFolder = biome:FindFirstChild("Eggs")
+	if eggsFolder then
+		for _, stand in ipairs(eggsFolder:GetChildren()) do
+			local eggModel
+			for _, c in ipairs(stand:GetChildren()) do
+				if c:IsA("Model") and c.Name:find("Egg") then eggModel = c break end
+			end
+			if eggModel then
+				local eggName = EggNameOf(stand)
+				stand:SetAttribute("EggName", eggName) -- EggPlacement reads this back
+				local host = LargestPart(eggModel)
+				if Eggs[eggName] then
+					warn(("[EggShop] duplicate egg name %s (%s)"):format(eggName, stand:GetFullName()))
+				elseif not host then
+					warn(("[EggShop] %s has no parts"):format(stand:GetFullName()))
+				else
+					local entry = {Name = eggName, Model = eggModel, Stand = stand, Host = host, Stock = 0, Max = 0}
+					Eggs[eggName] = entry
+					BuildOverhead(entry)
+					AddPrompt(entry)
+					ResetStock(entry)
+				end
+			end
+		end
+	end
+end
+
+--.. restock at every new in-game day (DayNightCycle stamps DayNumber when a day starts)
+workspace:GetAttributeChangedSignal("DayNumber"):Connect(ResetAll)
+
+Players.PlayerRemoving:Connect(function(player) Busy[player] = nil end)
+
+if RunService:IsStudio() then
+	workspace:GetAttributeChangedSignal("EggShopDev"):Connect(function()
+		local cmd = workspace:GetAttribute("EggShopDev")
+		if type(cmd) ~= "string" or cmd == "" then return end
+		workspace:SetAttribute("EggShopDev", nil)
+		if cmd == "reset" then
+			ResetAll()
+			print("[EggShop] dev: restocked")
+			return
+		end
+		local eggName = cmd:match("^buy:(.+)$")
+		local player = Players:GetPlayers()[1]
+		if eggName and player then
+			local ok, err = Purchase(player, eggName)
+			print(("[EggShop] dev: buy %s for %s -> %s %s"):format(eggName, player.Name, tostring(ok), tostring(err or "")))
+		end
+	end)
+end
+
+local names = {}
+for name in pairs(Eggs) do names[#names + 1] = name end
+table.sort(names)
+print(("[EggShop] %d eggs ready: %s (price %d, %d in stock per day)"):format(#names, table.concat(names, ", "), EGG_PRICE, DEFAULT_STOCK))
