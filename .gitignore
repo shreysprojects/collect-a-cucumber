@@ -3,3 +3,15 @@ __pycache__/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+/economy-redesign-2026-08-28/audit/
+/economy-redesign-2026-08-28/REDESIGN-REPORT.md
+/new-map-cucumber-game/**/tests/REPORT.md
+/new-map-cucumber-game/**/tests/*_report.md
+/new-map-cucumber-game/**/tests/*_results.txt
+/new-map-cucumber-game/**/tests/*_summary.json
+/new-map-cucumber-game/pets-system/tests/S8_load.md
+/new-map-cucumber-game/pets-system/review/
+/ras-dev/launcher-anims/launchers/*/report.json
+/ras-dev/launcher-anims/out/audit_*.json
+/ras-dev/launcher-anims/out/round*_reviews.json

@@ -829,7 +829,7 @@ On the live place, `Dictionaries.Pets` still has `Multi2`, the pills still exist
 
 ## 30. Backups and revert points
 
-**In this repo:** `backups/Cleanup_2026-09-01/` (four rbxm exports of everything removed from the place on 2026-09-01, pre-edit copies of the five edited scripts, and `MANIFEST.md` with restore steps), `backups/EconomyRedesign_2026-08-28/` (full rbxm exports of ServerController, all services, Workspace, plus 106 pre-redesign `.lua` dumps and baseline values), `backups/CucumberBank_v1/v2_backup_2026-08-26.rbxm`, `backups/LobbyArea1_backup_2026-08-25.rbxm`, `backups/misc/petsim99_destroy_vfx.rbxm`, `economy-redesign-2026-08-28/` (REDESIGN-REPORT.md, final-design.json, audits, simulator), `HANDOVER-cucumber-vault-bank.md`, `SFX-PROPOSAL-cucumber.md`, `pets-remake/`.
+**In this repo:** `backups/Cleanup_2026-09-01/` (four rbxm exports of everything removed from the place on 2026-09-01, pre-edit copies of the five edited scripts, and `MANIFEST.md` with restore steps), `backups/EconomyRedesign_2026-08-28/` (full rbxm exports of ServerController, all services, Workspace, plus 106 pre-redesign `.lua` dumps and baseline values), `backups/CucumberBank_v1/v2_backup_2026-08-26.rbxm`, `backups/LobbyArea1_backup_2026-08-25.rbxm`, `backups/misc/petsim99_destroy_vfx.rbxm`, `economy-redesign-2026-08-28/` (final-design.json and simulator), `HANDOVER-cucumber-vault-bank.md`, `SFX-PROPOSAL-cucumber.md`, `pets-remake/`.
 
 **In ServerStorage (live place):** none. Every in-Studio backup folder was exported to `backups/Cleanup_2026-09-01/` and deleted on 2026-09-01; keep it that way and put future safety copies in this repo instead. Roblox cloud version history is the nuclear option.
 
