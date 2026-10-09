@@ -105,12 +105,12 @@ function api:GetCameraKick(_dt)
 end
 
 ----------------------------------------------------------------------------------------------
--- Each hit holds large and rocks in the middle for two seconds, then shrinks
+-- Each hit holds large and rocks in the middle for one second, then shrinks
 -- into the compact gold label below the run readouts. The extra visual hold
 -- does not extend ComboWindow for chaining hits or earning bonuses.
 ----------------------------------------------------------------------------------------------
 
-local COMBO_CENTER_HOLD = 2
+local COMBO_CENTER_HOLD = 1
 local combo = { Count = 0, Best = 0, Last = 0, Token = 0, Tweens = {} }
 
 local function ensureComboGui()
@@ -262,12 +262,12 @@ local function registerCombo()
 	c.Frame.Visible = true
 	c.Frame.Position = UDim2.fromScale(0.5, SMASH.ComboStartY)
 	c.Frame.Rotation = -7
-	-- Reduce the center pop by 25%, including on screens where its width is capped.
+	-- Keep the center pop compact: 20% smaller again, capped near half the screen width.
 	local viewport = c.Gui.AbsoluteSize
 	local plainText = c.Label.Text:gsub("<.->", "")
 	local textSize = game:GetService("TextService"):GetTextSize(plainText, c.Label.TextSize, c.Label.Font, Vector2.new(10000, 1000))
-	local fitScale = viewport.X * 0.85 / math.max(textSize.X + 12, 1)
-	c.Scale.Scale = math.min(base * SMASH.ComboPopScale * (64 / c.Label.TextSize), fitScale) * 0.75
+	local fitScale = viewport.X * 0.51 / math.max(textSize.X + 12, 1)
+	c.Scale.Scale = math.min(base * SMASH.ComboPopScale * (64 / c.Label.TextSize) * 0.6, fitScale)
 
 	local rock = TweenService:Create(c.Frame, TweenInfo.new(0.3, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, true), { Rotation = 7 })
 	local flash = TweenService:Create(c.Label, TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { TextColor3 = COMBO_COLOR })
