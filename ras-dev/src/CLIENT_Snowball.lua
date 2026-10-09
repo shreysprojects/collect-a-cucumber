@@ -1082,6 +1082,9 @@ local function liftAboveGround(desired, ignore)
 	local params = RaycastParams.new()
 	params.FilterType = Enum.RaycastFilterType.Exclude
 	params.FilterDescendantsInstances = ignore
+	-- Solid geometry only: the launch pad's invisible non-colliding trigger volume (15 studs
+	-- tall) used to count as ground and hopped the camera 8 studs up on the second frame.
+	params.RespectCanCollide = true
 	local hit = workspace:Raycast(desired + Vector3.yAxis * 60, Vector3.new(0, -120, 0), params)
 	if not hit then
 		return desired
@@ -1182,9 +1185,9 @@ function api:BindSnowballCamera(snowball)
 
 	local camera = workspace.CurrentCamera
 	-- Launched from the pad: the chase looks at the ball from this very frame (no hold on
-	-- the throw, no delayed blend). With LAUNCH.ChaseFromPadCamera the camera position
-	-- starts where the pad camera was and settles behind the ball through the follow lerp
-	-- below (about 0.3 s), so the launch reads as one continuous shot instead of a cut.
+	-- the throw, no delayed blend). With LAUNCH.ChaseFromPadCamera the camera starts where
+	-- the pad camera was and its offset from the ball eases into the chase framing (about
+	-- 0.4 s at any speed), so the launch reads as one continuous shot instead of a cut.
 	local fromPad = mountainConfig.LAUNCH.ChaseFromPadCamera ~= false and vars ~= nil and vars.OnLaunchPad == true
 	camera.CameraType = Enum.CameraType.Scriptable
 	setRideButtons(vars, true)
@@ -1200,7 +1203,15 @@ function api:BindSnowballCamera(snowball)
 	local stopGrace = launch.StopGrace or 1.25
 	-- Stay behind this heading for the whole ride. Do not yaw with wobble or reverse.
 	local behind = horizontalUnit(root.AssemblyLinearVelocity, Vector3.new(0, 0, -1))
-	local camPos = if fromPad then camera.CFrame.Position else nil
+	-- Camera = anchor + offset. The anchor eases toward the ball (lag-capped, see below); the
+	-- offset lives in ball space and eases at CameraOffsetRate, so the framing settles in the
+	-- same ~0.4 s at every gear. Launched from the pad it starts as the pad camera's offset from
+	-- the ball (a world-space lerp used to snap to the chase spot in one frame once the ball was
+	-- fast, which read as the camera leaping over the ball).
+	local anchor = nil
+	local offset = if fromPad then camera.CFrame.Position - root.Position else nil
+	local tilt = 0 -- eased travel pitch in radians (negative = descending)
+	local lift = 0 -- eased ground-clearance lift in studs
 	local followStarted = os.clock()
 	local lastFast = os.clock()
 	local missingFor = 0
@@ -1240,7 +1251,9 @@ function api:BindSnowballCamera(snowball)
 			end
 			if not holdSnapped then
 				holdSnapped = true
-				camPos = nil
+				anchor = nil
+				offset = nil
+				tilt = 0
 			end
 		end
 
@@ -1272,24 +1285,53 @@ function api:BindSnowballCamera(snowball)
 				end)
 			end)
 		end
-		local distance = launch.CameraDistance + math.max(0, scale - 1) * launch.CameraDistance * 0.5
-		local height = launch.CameraHeight + math.max(0, scale - 1) * launch.CameraHeight * 0.4
-		local desired = position - behind * distance + Vector3.yAxis * height
-		if camPos then
-			-- Exponential follow: the camera trails a moving target by speed x time constant,
-			-- so a fixed 0.1 s let a top-gear ball (1,300 studs/s) run 130 studs ahead of the
-			-- framing. Tighten the follow with speed so the trail never exceeds CameraMaxLag.
-			local rate = math.max(launch.CameraFollowRate or 10, speed / math.max(launch.CameraMaxLag or 6, 0.1))
-			camPos = camPos:Lerp(desired, 1 - math.exp(-rate * dt))
-		else
-			camPos = desired
+		local grow = math.max(0, scale - 1)
+		local distance = launch.CameraDistance * (1 + grow * (launch.CameraGrowDistance or 0.5))
+		local height = launch.CameraHeight * (1 + grow * (launch.CameraGrowHeight or 0.5))
+		-- Tilt the behind offset with the ball's travel pitch (eased, clamped) so on a downhill
+		-- the camera sits up the slope behind the ball instead of being pushed over it by the
+		-- ground clearance; a climbing ball is watched from nearly level.
+		local pitchTarget = 0
+		if typeof(hold) ~= "CFrame" and velocity.Magnitude > 1 then
+			pitchTarget = math.asin(math.clamp(velocity.Y / velocity.Magnitude, -1, 1))
 		end
+		pitchTarget = math.clamp(pitchTarget, math.rad(launch.CameraPitchMin or -20), math.rad(launch.CameraPitchMax or 8))
+		tilt += (pitchTarget - tilt) * (1 - math.exp(-(launch.CameraPitchRate or 2.5) * dt))
+		local backDir = -behind * math.cos(tilt) - Vector3.yAxis * math.sin(tilt)
+		local targetOffset = backDir * distance + Vector3.yAxis * height
+		if offset then
+			offset = offset:Lerp(targetOffset, 1 - math.exp(-(launch.CameraOffsetRate or 8) * dt))
+		else
+			offset = targetOffset
+		end
+		if anchor then
+			-- Exponential follow trails a moving target by speed x time constant, so a fixed
+			-- 0.1 s let a top-gear ball (1,300 studs/s) run 130 studs ahead of the framing.
+			-- Tighten the follow with speed so the trail never exceeds CameraMaxLag.
+			local rate = math.max(launch.CameraFollowRate or 10, speed / math.max(launch.CameraMaxLag or 6, 0.1))
+			anchor = anchor:Lerp(position, 1 - math.exp(-rate * dt))
+		else
+			anchor = position
+		end
+		local camPos = anchor + offset
 		local ignore = { snowball }
+		local character = Players.LocalPlayer.Character
+		if character then
+			table.insert(ignore, character)
+		end
 		local decor = workspace:FindFirstChild(mountainConfig.PROPS.WorkspaceFolder)
 		if decor then
 			table.insert(ignore, decor)
 		end
-		camPos = liftAboveGround(camPos, ignore)
+		-- Ground clearance: rise at once so the camera never clips, settle back down gently so a
+		-- rail or bump under the camera reads as a small lift rather than a pop.
+		local need = liftAboveGround(camPos, ignore).Y - camPos.Y
+		if need >= lift then
+			lift = need
+		else
+			lift += (need - lift) * (1 - math.exp(-(launch.CameraLiftSettle or 4) * dt))
+		end
+		camPos += Vector3.yAxis * lift
 		camera.CFrame = CFrame.lookAt(camPos, position, Vector3.yAxis)
 		if self.GetCameraKick then
 			camera.CFrame = camera.CFrame * self:GetCameraKick(dt)

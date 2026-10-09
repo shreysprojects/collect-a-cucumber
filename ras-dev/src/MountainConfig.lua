@@ -584,14 +584,30 @@ config.LAUNCH = {
 	MaxLoft = 120,
 	ForwardOffset = 8,
 	ExitOffset = 8,
+	-- Chase framing: behind the ball along its launch heading and a little above it (8 up over
+	-- 18 back = a 24 degree look-down with the track ahead in view; 16 up looked over the top
+	-- of the ball). Both grow with the snowball's scale by CameraGrow* per scale step so a big
+	-- ball still fits without the camera climbing over it.
 	CameraDistance = 18,
-	CameraHeight = 16,
+	CameraHeight = 8,
+	CameraGrowDistance = 0.5,
+	CameraGrowHeight = 0.5,
 	CameraClearance = 4,
-	-- Chase follow: the camera eases toward its spot behind the ball at CameraFollowRate (1/s)
-	-- and never trails the moving spot by more than CameraMaxLag studs (the follow tightens
-	-- with speed; a fixed rate left a top-gear ball 130 studs ahead of the camera).
+	CameraLiftSettle = 4, -- 1/s; a ground-clearance lift settles back down at this rate (it rises at once)
+	-- Slope follow: the behind offset tilts with the ball's travel pitch (eased at CameraPitchRate
+	-- 1/s, clamped to CameraPitchMin..Max degrees) so on a downhill the camera sits up the slope
+	-- behind the ball rather than being lifted over it by the ground clearance.
+	CameraPitchRate = 2.5,
+	CameraPitchMin = -20,
+	CameraPitchMax = 8,
+	-- Chase follow: the camera's anchor eases toward the ball at CameraFollowRate (1/s) and
+	-- never trails it by more than CameraMaxLag studs (the follow tightens with speed; a fixed
+	-- rate left a top-gear ball 130 studs ahead of the camera). The camera's offset from that
+	-- anchor eases separately, in ball space, at CameraOffsetRate (1/s): the launch settles from
+	-- the pad camera into the chase framing in the same ~0.4 s at every gear.
 	CameraFollowRate = 10,
 	CameraMaxLag = 6,
+	CameraOffsetRate = 8,
 	-- Pad camera: behind the pad centre (which sits ~3 studs above the floor), looking
 	-- a little past the character. Close enough that the launcher and the throw read.
 	PadCameraDistance = 13,
@@ -599,8 +615,8 @@ config.LAUNCH = {
 	PadLookAhead = 3,
 	-- The chase camera follows the ball from the frame it leaves the launcher: no hold on
 	-- the throw and no delayed blend. With ChaseFromPadCamera the camera position starts
-	-- where the pad camera was and settles behind the ball through the chase follow (about
-	-- 0.3 s), one continuous shot; false = cut straight to the chase framing instead.
+	-- where the pad camera was and settles behind the ball at CameraOffsetRate (about
+	-- 0.4 s), one continuous shot; false = cut straight to the chase framing instead.
 	ChaseFromPadCamera = true,
 	-- The ride ball starts where the launcher lets it go (the clip's Seat / Muzzle point at its
 	-- fire moment, reported by the client) instead of on the ground ahead of the pad, as long as
