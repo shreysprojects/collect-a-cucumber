@@ -10,8 +10,9 @@
 
 	Free look (MountainConfig.LAUNCH.CameraOrbit): on the pad and during the ride a
 	right-mouse drag, a touch drag off the buttons or the right stick orbits the camera
-	around the character / ball and the wheel zooms. The angles sit on top of the
-	scripted framing and ease back behind the ball after ReturnDelay without input.
+	around the character / ball (Roblox convention: drag right looks right, drag up looks
+	up) and the wheel zooms. The angles sit on top of the scripted framing; on the pad they
+	stay until the launch, on the ride they ease back behind the ball after RideReturnDelay.
 
 --------------------------------------------------------------------------------------------]]--
 
@@ -885,8 +886,9 @@ local function getOrbit(vars)
 	return orbit
 end
 
--- dx / dy in pixels (or stick units); sensitivity in degrees per unit. Dragging right turns
--- the view right, dragging up lifts the camera over the target (the Roblox camera convention).
+-- dx / dy in pixels (or stick units); sensitivity in degrees per unit. The Roblox camera
+-- convention: dragging right turns the view right, dragging up (dy < 0) looks up, which
+-- swings the camera down behind the target; dragging down lifts it over the target.
 local function orbitTurn(vars, dx, dy, sensitivity)
 	local settings = orbitSettings()
 	if not settings then
@@ -895,7 +897,7 @@ local function orbitTurn(vars, dx, dy, sensitivity)
 	local orbit = getOrbit(vars)
 	orbit.Yaw -= math.rad(dx * sensitivity)
 	orbit.Pitch = math.clamp(
-		orbit.Pitch - math.rad(dy * sensitivity),
+		orbit.Pitch + math.rad(dy * sensitivity),
 		math.rad(settings.PitchMin or -30),
 		math.rad(settings.PitchMax or 45)
 	)
@@ -926,8 +928,9 @@ local function orbitVector(vars, rel)
 end
 
 -- Per frame: the right stick turns at GamepadRate; otherwise, once the player has let go for
--- ReturnDelay, the angles ease back behind the target.
-local function orbitSettle(vars, dt)
+-- the camera's return delay (RideReturnDelay on the ride, PadReturnDelay on the pad; false =
+-- never), the angles ease back behind the target.
+local function orbitSettle(vars, dt, riding)
 	local settings = orbitSettings()
 	local orbit = vars and vars.CameraOrbit
 	if not settings or not orbit then
@@ -938,10 +941,14 @@ local function orbitSettle(vars, dt)
 		orbitTurn(vars, orbit.StickX * rate * dt, orbit.StickY * rate * dt, 1)
 		return
 	end
-	if orbit.Dragging or settings.ReturnDelay == false then
+	local delay = if riding then settings.RideReturnDelay else settings.PadReturnDelay
+	if delay == nil then
+		delay = settings.ReturnDelay
+	end
+	if orbit.Dragging or delay == false or delay == nil then
 		return
 	end
-	if os.clock() - orbit.LastInput < (tonumber(settings.ReturnDelay) or 1.5) then
+	if os.clock() - orbit.LastInput < (tonumber(delay) or 1.5) then
 		return
 	end
 	local k = 1 - math.exp(-(settings.ReturnRate or 3) * dt)
@@ -1077,6 +1084,10 @@ function api:BindPadCamera()
 	end
 	camera.CameraType = Enum.CameraType.Scriptable
 	setupOrbitInput(vars)
+	-- A fresh look behind the pad each time it binds (zoom is kept).
+	local orbit = getOrbit(vars)
+	orbit.Yaw = 0
+	orbit.Pitch = 0
 
 	local launch = mountainConfig.LAUNCH
 	local camPos = nil
@@ -1115,7 +1126,7 @@ function api:BindPadCamera()
 		-- The un-orbited framing: the chase camera starts its offset from here at launch, so a
 		-- dragged pad view carries over as the same orbit instead of a jump.
 		vars.PadCameraBase = camPos
-		orbitSettle(vars, dt)
+		orbitSettle(vars, dt, false)
 		camera.CFrame = CFrame.lookAt(lookAt + orbitVector(vars, camPos - lookAt), lookAt, Vector3.yAxis)
 	end)
 end
@@ -1530,7 +1541,7 @@ function api:BindSnowballCamera(snowball)
 		else
 			anchor = position
 		end
-		orbitSettle(vars, dt)
+		orbitSettle(vars, dt, true)
 		local camPos = anchor + orbitVector(vars, offset)
 		local ignore = { snowball }
 		local character = Players.LocalPlayer.Character
@@ -1560,7 +1571,10 @@ function api:BindSnowballCamera(snowball)
 			return
 		end
 
-		if smoothSpeed > stopSpeed or os.clock() < (vars.LaunchPropStopGraceUntil or 0) then
+		-- A ball dropping off the track has little horizontal speed but is not stopped: leave
+		-- it to the fall recovery (CLIENT_SnowballFX, FLIGHT.Recover) instead of ending the ride.
+		local falling = velocity.Y < -(launch.StopFallSpeed or 40)
+		if smoothSpeed > stopSpeed or falling or os.clock() < (vars.LaunchPropStopGraceUntil or 0) then
 			lastFast = os.clock()
 		end
 

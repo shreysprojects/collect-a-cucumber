@@ -430,16 +430,36 @@ config.FLIGHT = {
 		Blend = 5, -- per-second blend of vertical speed toward the target
 	},
 	-- Track edges + optional player steer while rolling. No auto left/right weave;
-	-- flight is vertical only (AirBlend bleeds leftover sideways speed).
+	-- flight is vertical only: steering only works with the ball on the ground, sideways
+	-- speed it took off with is capped at TakeoffLateralCap x forward and bled at AirBlend.
 	Wander = {
-		Gain = 2.4, -- lateral speed per stud of offset from a player steer target
+		Gain = 1.5, -- lateral speed per stud of offset from a player steer target
 		MaxHeading = 0.45, -- leftover lateral speed cap as a fraction of forward speed
 		GroundBlend = 3.5, -- per-second blend toward 0 (or player steer) on the ground
-		AirBlend = 2.2, -- bleed sideways speed in the air so flight stays up/down
+		AirBlend = 4.5, -- bleed sideways speed in the air so flight stays up/down
 		EdgeLimit = 40, -- beyond this |x| the ball is pushed back hard
-		PlayerHeading = 0.28, -- extra lateral speed as a fraction of forward speed at full input
-		PlayerMaxHeading = 0.7, -- heading cap while the player is steering
-		PlayerBlend = 7, -- ground blend while steering
+		PlayerHeading = 0.16, -- extra lateral speed as a fraction of forward speed at full input
+		PlayerMaxHeading = 0.45, -- heading cap while the player is steering
+		PlayerBlend = 5, -- ground blend while steering
+		TakeoffLateralCap = 0.25, -- sideways speed kept at takeoff, as a fraction of forward speed
+	},
+	-- Fell off the track (a jump over the edge, a kink, a hole): instead of ending the ride, the
+	-- ball is put back on the last good patch of track it rolled on, pulled CentrePull of the way
+	-- toward the centreline, at SpeedKeep of its speed (at least MinSpeed), and keeps going.
+	-- Triggers: below the run's floor, or airborne for MaxAirTime with no ground within
+	-- ProbeDepth studs below. At most one recovery per Cooldown seconds; more than MaxPerWindow
+	-- inside Window seconds ends the ride the old way.
+	Recover = {
+		MaxAirTime = 2.5,
+		ProbeDepth = 400,
+		SpeedKeep = 0.6,
+		MinSpeed = 30,
+		CentrePull = 0.5,
+		Cooldown = 3,
+		MaxPerWindow = 3,
+		Window = 20,
+		SampleInterval = 0.25, -- seconds between "last good" samples while rolling
+		EdgeMargin = 6, -- studs inside EdgeLimit a sample must be to count as good
 	},
 }
 
@@ -680,9 +700,13 @@ config.LAUNCH = {
 	PadLookAhead = 3,
 	-- Free look on the pad and chase cameras: drag with the right mouse button (touch: drag
 	-- anywhere off the buttons; gamepad: right stick) to orbit around the character / ball,
-	-- scroll to zoom. The angles sit on top of the scripted framing and ease back behind the
-	-- ball ReturnDelay seconds after the last input at ReturnRate (1/s); ReturnDelay = false
-	-- keeps the dragged angle. Zoom is remembered. Enabled = false locks the cameras as before.
+	-- scroll to zoom. Same feel as the Roblox camera: drag right looks right, drag up looks up
+	-- (the camera swings down behind). The angles sit on top of the scripted framing. On the
+	-- pad the dragged angle stays until the launch (PadReturnDelay = false); on the ride the
+	-- view eases back behind the ball RideReturnDelay seconds after the last input at
+	-- ReturnRate (1/s); a number for PadReturnDelay makes the pad ease back too. The angle
+	-- resets each time the pad camera binds; zoom is remembered. Enabled = false locks the
+	-- cameras as before.
 	CameraOrbit = {
 		Enabled = true,
 		Sensitivity = 0.28, -- degrees per pixel of mouse drag
@@ -690,7 +714,8 @@ config.LAUNCH = {
 		GamepadRate = 150, -- degrees per second at full right-stick deflection
 		PitchMin = -30, -- degrees below the framing's own pitch (looking up at the ball)
 		PitchMax = 45, -- degrees above it (looking down onto the ball)
-		ReturnDelay = 1.5,
+		PadReturnDelay = false,
+		RideReturnDelay = 3,
 		ReturnRate = 3,
 		ZoomMin = 0.5, -- scroll zoom, as a fraction of the framing distance
 		ZoomMax = 2.5,
@@ -709,6 +734,7 @@ config.LAUNCH = {
 	StopSpeed = 8, -- studs/s horizontal; at or below this counts as barely moving
 	StopHold = 0.75, -- seconds it must stay that slow before the ride ends
 	StopGrace = 1.25, -- ignore auto-stop this long after launch (stream/physics hitch)
+	StopFallSpeed = 40, -- a ball dropping faster than this is falling, not stopped (FLIGHT.Recover gets it)
 	-- Snow growth, no cap. Every unit of snow eaten grows the ball by GrowStep at 1x, and e
 	-- times less for each GrowDecay of scale gained since (an exponentially decaying rate):
 	--   scale = 1 + GrowDecay * ln(1 + snow * GrowStep / GrowDecay)

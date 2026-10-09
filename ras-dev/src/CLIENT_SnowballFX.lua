@@ -5,6 +5,9 @@
 	  * lift + glide forces while airborne so jumps float,
 	  * a random air trick per flight (glide, backspin, barrel roll, corkscrew, tumble),
 	  * clean landings (rolling spin restored, sideways drift removed, camera kick),
+	  * steering only on the ground (FLIGHT.Wander; takeoff caps the sideways speed),
+	  * off the map (over an edge, below the floor): back onto the last good patch of
+	    track at part speed instead of the ride ending (FLIGHT.Recover),
 	  * smash detection: rolling through a MountainProp fades it locally right away
 	    and asks the server (SmashProp) to fade it for everyone.
 
@@ -1063,6 +1066,85 @@ local function removeBall(model, reason)
 	end
 end
 
+-- Last good patch of track: sampled while rolling, well inside the edges (FLIGHT.Recover).
+-- The ball goes back there when it falls off the map instead of the ride ending.
+local function sampleGoodTrack(state, hit, speed, now)
+	local R = FLIGHT.Recover
+	if not R or not hit or not state.Right or not state.AxisOrigin then
+		return
+	end
+	if speed < 5 or now - (state.GoodSampledAt or 0) < (R.SampleInterval or 0.25) then
+		return
+	end
+	local W = FLIGHT.Wander or {}
+	local offset = (hit.Position - state.AxisOrigin):Dot(state.Right)
+	if math.abs(offset) > (W.EdgeLimit or 40) - (R.EdgeMargin or 6) then
+		return
+	end
+	state.GoodSampledAt = now
+	state.LastGood = {
+		Position = hit.Position,
+		Offset = offset,
+		Travel = state.Travel,
+		Speed = speed,
+	}
+end
+
+-- Put the ball back on the last good track sample, pulled toward the centreline, rolling at
+-- part of its speed. Returns true when it recovered (or just did), false when the ride should
+-- end instead (nothing to go back to, or it keeps happening).
+local function recoverToTrack(state, radius, now, reason)
+	local R = FLIGHT.Recover
+	local good = state.LastGood
+	if not R or not good then
+		return false
+	end
+	if now - (state.LastRecoverAt or -math.huge) < (R.Cooldown or 3) then
+		return true
+	end
+	local window = R.Window or 20
+	local kept = {}
+	for _, t in state.RecoverTimes or {} do
+		if now - t < window then
+			table.insert(kept, t)
+		end
+	end
+	if #kept >= (R.MaxPerWindow or 3) then
+		return false
+	end
+	table.insert(kept, now)
+	state.RecoverTimes = kept
+	state.LastRecoverAt = now
+
+	local root, model = state.Root, state.Model
+	local target = good.Position - state.Right * (good.Offset * (R.CentrePull or 0.5))
+	local surface = state.Probe and workspace:Raycast(target + Vector3.new(0, 40, 0), Vector3.new(0, -120, 0), state.Probe)
+	if surface then
+		target = surface.Position
+	end
+	target += Vector3.new(0, radius + 1, 0)
+	local travel = good.Travel or state.Travel or state.Axis or Vector3.new(0, 0, -1)
+	local speed = math.max((good.Speed or 0) * (R.SpeedKeep or 0.6), R.MinSpeed or 30)
+	if model:IsA("Model") then
+		model:PivotTo(CFrame.new(target))
+	else
+		root.CFrame = CFrame.new(target)
+	end
+	root.AssemblyLinearVelocity = travel * speed
+	root.AssemblyAngularVelocity = Vector3.zero
+	state.Airborne = false
+	state.LastGrounded = now
+	state.LastPos = target
+	state.GapGuard = false
+	state.SpeedPeak = speed -- the drop back is not an impact for the momentum keeper
+	if state.Lift then
+		state.Lift.Force = Vector3.zero
+	end
+	Audio.Play("Teleport")
+	warn(string.format("[CLIENT]: Ball off the map (%s) - back on the track at %s", tostring(reason), tostring(target)))
+	return true
+end
+
 local function stepBall(state, dt)
 	local root, model = state.Root, state.Model
 	if not root.Parent or not model.Parent then
@@ -1106,11 +1188,24 @@ local function stepBall(state, dt)
 			onLanding(state, now - state.AirStart, hit, radius)
 		end
 		state.LastGrounded = now
+		if state.Physics then
+			sampleGoodTrack(state, hit, speed, now)
+		end
 	elseif not state.Airborne and now - (state.LastGrounded or now) >= FLIGHT.MinAirTime then
 		state.Airborne = true
 		state.AirStart = state.LastGrounded or now
 		state.TrickDone = false
 		onTakeoff(state, speed)
+		-- No steering in the air: cap the sideways speed the ball leaves the ground with.
+		local W = FLIGHT.Wander
+		if state.Physics and W and W.TakeoffLateralCap and state.Right and state.Axis then
+			local v = root.AssemblyLinearVelocity
+			local lateral = v:Dot(state.Right)
+			local cap = math.abs(v:Dot(state.Axis)) * W.TakeoffLateralCap
+			if math.abs(lateral) > cap then
+				root.AssemblyLinearVelocity = v + state.Right * (math.sign(lateral) * cap - lateral)
+			end
+		end
 	end
 
 	local travel = Vector3.new(vel.X, 0, vel.Z)
@@ -1223,16 +1318,27 @@ local function stepBall(state, dt)
 			end
 		end
 
-		-- Rolled off the end of the finish platform: end the ride instead of
-		-- watching the ball fall for ten seconds. A finish arrival is handled above.
-		if state.FloorY and pos.Y < state.FloorY and not state.Ended and not model:GetAttribute("Finishing") then
-			state.Ended = true
-			local self = state.Self
-			task.defer(function()
-				if self and self.StopRide then
-					self:StopRide()
-				end
-			end)
+		-- Off the map: below the run's floor, or falling for too long with nothing under the
+		-- ball. It goes back onto the last good track (FLIGHT.Recover) and the ride carries
+		-- on; it only ends when there is nothing to go back to or it keeps happening. A finish
+		-- arrival is handled above.
+		if not state.Ended and not model:GetAttribute("Finishing") then
+			local R = FLIGHT.Recover or {}
+			local belowFloor = state.FloorY ~= nil and pos.Y < state.FloorY
+			local fell = belowFloor
+			if not fell and state.Airborne and vel.Y < 0 and now - (state.AirStart or now) >= (R.MaxAirTime or 4) then
+				local below = state.Probe and workspace:Raycast(pos, Vector3.new(0, -(R.ProbeDepth or 400), 0), state.Probe)
+				fell = below == nil
+			end
+			if fell and not recoverToTrack(state, radius, now, if belowFloor then "below the floor" else "falling") then
+				state.Ended = true
+				local self = state.Self
+				task.defer(function()
+					if self and self.StopRide then
+						self:StopRide()
+					end
+				end)
+			end
 		end
 	end
 end
