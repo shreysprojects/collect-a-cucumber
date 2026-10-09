@@ -1,6 +1,7 @@
 --[[---------------------------------------DESCRIPTION------------------------------------------
 	HUD module. GUIFramework spawns the empty "Interface" frame into PlayerGui.HUD.Base
-	as "HUD" (self.UI); the editable StarterGui.HUD.Base.MainUI is adopted into it here.
+	as "HUD" (self.UI); MainUI (the editable frame in ServerStorage.Assets.UserInterfaces.HUD,
+	moved under this module by SetupInterfaces) is cloned into it here.
 	SetProgress writes Level.Frame.TextLabel as "Level 1" and Frame.XPLabel as "0/10",
 	sizes MainUI.Level.BackFrame to the current XP fraction, and sets
 	MainUI.Coins to the player's coin balance.
@@ -2065,16 +2066,8 @@ function api:Initialize()
 
 	local main = root:FindFirstChild("MainUI")
 	if not main then
-		-- Reuse the Studio-authored HUD copied from StarterGui; keep one live HUD.
-		local screen = getPlayerGui():FindFirstChild("HUD")
-		local base = screen and screen:FindFirstChild("Base")
-		local authored = base and base:FindFirstChild("MainUI")
-		if authored and authored:IsA("GuiObject") then
-			main = authored
-			main.Parent = root
-		end
-	end
-	if not main then
+		-- The editable MainUI lives with the other HUD frames in
+		-- ServerStorage.Assets.UserInterfaces.HUD; SetupInterfaces moved it under this module.
 		local template = script:FindFirstChild("MainUI")
 		if template then
 			main = template:Clone()

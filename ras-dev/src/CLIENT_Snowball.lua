@@ -402,9 +402,10 @@ local function holdChargeAnimation(vars)
 end
 
 ----------------------------------------------------------------------------------------------
--- Hold-to-launch. Standing on the pad, hold click / touch: the bar (the LoadingProgressGui
--- from RAS - Maps, kept in ReplicatedStorage.Assets.UserInterfaces.ChargeBar) fills to
--- 100% quickly, then ping-pongs 100% ↔ 0% until release. Release fires at the live charge.
+-- Hold-to-launch. Standing on the pad, hold click / touch: the bar (the ChargeBar UI, spawned
+-- by GUIFramework from ServerStorage.Assets.UserInterfaces.ChargeBar) fills to 100% quickly,
+-- then ping-pongs 100% ↔ 0% until release. Release fires at the live charge. The prompt is
+-- the ChargeHint UI. Neither is cloned here: both come from the UI manifest (Default).
 ----------------------------------------------------------------------------------------------
 
 local function fallbackChargeBar()
@@ -460,24 +461,23 @@ end
 
 local function buildChargeBar(vars)
 	local playerGui = vars.PlayerGui or Players.LocalPlayer:WaitForChild("PlayerGui")
-	local old = playerGui:FindFirstChild("ChargeBar")
-	if old then
-		old:Destroy()
-	end
-
-	local interfaces = ReplicatedStorage.Assets:FindFirstChild("UserInterfaces")
-	local template = interfaces and interfaces:FindFirstChild("ChargeBar")
-	local gui = if template then template:Clone() else fallbackChargeBar()
-	for _, desc in gui:GetDescendants() do
-		if desc:IsA("LuaSourceContainer") then
-			desc:Destroy()
+	local framework = vars.Functions and vars.Functions.GUIFramework
+	-- The ChargeBar UI is already in PlayerGui (GUIFramework:SetupUIs); a place whose
+	-- manifest lacks it gets the plain fallback bar.
+	local gui = framework and framework:GetUI("ChargeBar")
+	if not gui then
+		local old = playerGui:FindFirstChild("ChargeBar")
+		if old then
+			old:Destroy()
 		end
+		gui = fallbackChargeBar()
+		gui.Name = "ChargeBar"
+		gui.ResetOnSpawn = false
+		gui.IgnoreGuiInset = true
+		gui.DisplayOrder = 1002
+		gui.Parent = playerGui
 	end
-	gui.Name = "ChargeBar"
 	gui.Enabled = false
-	gui.ResetOnSpawn = false
-	gui.IgnoreGuiInset = true
-	gui.DisplayOrder = 1002
 
 	local bar = gui:FindFirstChild("ProgressBar")
 	local track = bar and bar:FindFirstChild("Track")
@@ -490,18 +490,16 @@ local function buildChargeBar(vars)
 		label.Text = "0%"
 	end
 
-	-- "HOLD TO LAUNCH" prompt while standing on the pad (separate gui so it can show
-	-- while the bar itself is hidden).
-	local hintGui = playerGui:FindFirstChild("ChargeHint")
-	if not hintGui then
-		hintGui = game:GetService("StarterGui"):WaitForChild("ChargeHint"):Clone()
-		hintGui.Parent = playerGui
+	-- "HOLD TO LAUNCH" prompt while standing on the pad: the ChargeHint UI (its own
+	-- ScreenGui so it can show while the bar itself is hidden; its module sets the text).
+	local hintGui = framework and framework:GetUI("ChargeHint")
+	local hint = hintGui and hintGui:FindFirstChild("Hint")
+	if hint then
+		hint.Visible = false
+	else
+		warn("[CLIENT]: ChargeHint UI not found (manifest entry missing?)")
 	end
-	local hint = hintGui:WaitForChild("Hint")
-	hint.Text = (mountainConfig.LAUNCH.Charge and mountainConfig.LAUNCH.Charge.HintText) or "HOLD TO LAUNCH"
-	hint.Visible = false
 
-	gui.Parent = playerGui
 	vars.ChargeBar = {
 		Gui = gui,
 		Bar = bar,
