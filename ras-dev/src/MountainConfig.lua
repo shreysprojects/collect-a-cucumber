@@ -597,6 +597,10 @@ config.LAUNCH = {
 	-- is already further than BlendMaxDistance studs away when the blend would start
 	-- (high gear) gets a cut: a dolly over hundreds of studs reads as a glitch.
 	ReleaseCamera = { Hold = 0.45, Blend = 0.6, BlendMaxDistance = 150 },
+	-- The ride ball starts where the launcher lets it go (the clip's Seat / Muzzle point at its
+	-- fire moment, reported by the client) instead of on the ground ahead of the pad, as long as
+	-- that point is within MaxDistance studs of the character with nothing solid in between.
+	MuzzleSpawn = { Enabled = true, MaxDistance = 14, FloorClearance = 0.05, CollisionGroup = "Snowball" },
 	-- Auto-stop (same as the Stop button) once the ball is idle or crawling.
 	StopSpeed = 8, -- studs/s horizontal; at or below this counts as barely moving
 	StopHold = 0.75, -- seconds it must stay that slow before the ride ends
