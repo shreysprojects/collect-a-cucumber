@@ -2579,16 +2579,16 @@ impossible to place them near anything. make this less sensitive."
 
 ---
 
-## 2026-09-14 - BIOME GUARDIANS, phase 1: the ten models (Blender)
+## 2026-09-14 — BIOME GUARDIANS, phase 1: the ten models (Blender)
 
 Ten sitting guardians, one per biome, for the "steal a cucumber and it chases you" loop.
-**Phase 1 is the modelling only** - nothing is installed in the place yet. Source lives in
+**Phase 1 is the modelling only** — nothing is installed in the place yet. Source lives in
 `RobloxGames/guardians/` (its own `README.md` has the full detail); the modelling brief is
 `new-map-cucumber-game/guardians/GUARDIANS.md`.
 
 **What exists now.** `Strawman` (Spawn), `Dune` (Desert), `Kabuto` (Samurai), `Brisket`
 (Farm), `Frostbite` (Snow), `Pinch` (Underwater), `Ember` (Volcano), `Orbit` (Narmek),
-`Tick` (Toyland), `Scan` (Neon) - **361 parts / 29 415 tris**, every one inside the
+`Tick` (Toyland), `Scan` (Neon) — **361 parts / 29 415 tris**, every one inside the
 2 000–4 000 budget, plus a seat prop each (hay bale, sand mound, pedestal, mud patch, ice
 block, rock nook, rock pile, crescent moon, block stack, charging pad) and a crow for
 Strawman's wake burst. All 21 FBX are uploaded as group-owned Open Cloud Model assets
@@ -2602,7 +2602,7 @@ Phase 2 builds the Motor6Ds straight from that rather than deriving anything.
 
 **Naming carries the colour.** The FBX importer drops every material, so each part is named
 `<Guardian>_<Part>_<Role>` (`Frostbite_Arm_L_FurWhite`) and the installer stamps the colour
-from the role - the last underscore-separated token. Role tables are per guardian in
+from the role — the last underscore-separated token. Role tables are per guardian in
 `guardians/gmath.py`, so every guardian has its own `EyeGlow`. `SLEEP_LOOK` gives the dark
 variant for the asleep state; eyes are always separate Neon parts so the wake tell reads at
 100 studs.
@@ -2612,7 +2612,7 @@ Z-up scene. The convention that actually yields a forward LookVector is **+Y in 
 the importer's 180° yaw lands it on Roblox −Z. All ten are authored +Y.
 
 **Poses are the rig test.** Each script exports `POSES` (`Sit`, `Awake`, usually `Run` and a
-signature pose) mapping a part to `(rx, ry, rz)` about its own pivot, inherited by children -
+signature pose) mapping a part to `(rx, ry, rz)` about its own pivot, inherited by children —
 the same transform the Motor6D chain will apply. Rendering a pose therefore *proves the
 pivots*: `renders/<Guardian>_Sit.png` and `_Awake.png` exist for all ten and all compose
 correctly. Axis rule worth keeping: a limb hanging BELOW its pivot swings forward on `+rx`,
@@ -2622,13 +2622,13 @@ but a piece standing ABOVE its pivot (torso, head) tips BACK on `+rx` and slumps
 were authored in parallel (one agent each) against a written brief transcribed from the ten
 concept sheets, validated offline by `guardians/dryrun.py`, then re-read by an independent
 reviewer. Every guardian was then **reviewed from its render against its sheet** and the
-defects fixed in a second pass - a crab whose giant claw swept inward and vanished into the
+defects fixed in a second pass — a crab whose giant claw swept inward and vanished into the
 silhouette, a golem built from beads instead of boulders, a yeti reading blue instead of
 white with its fur in tiled rows, an oni whose horns swept backwards, a drone with a box for
 a head. Agents never touch Blender: concurrent `execute_blender_code` calls share one socket.
 
 **Open Cloud key note.** The key the user pastes is `w/<apikey><base64 JWT>`. The embedded
-JWT carries an `exp` one hour after `iat` - **it does not govern the key**. A key whose
+JWT carries an `exp` one hour after `iat` — **it does not govern the key**. A key whose
 embedded `exp` had passed 2 hours earlier uploaded all 21 assets without complaint. Never
 pre-flight on it (`cucumbers/upload-cucumbers.ps1` does, and will refuse a good key);
 `guardians/upload-guardians.ps1` only warns.
@@ -2637,9 +2637,9 @@ pre-flight on it (`cucumbers/upload-cucumbers.ps1` does, and will refuse a good 
 then Phase 3 (the chase system), Phase 4 (pickup refresh), Phase 5 (player stealing).
 
 
-## 2026-09-15 - BIOME GUARDIANS, phase 2: rigged, animated, installed
+## 2026-09-15 — BIOME GUARDIANS, phase 2: rigged, animated, installed
 
-All ten guardians are now **in the place** at `ServerStorage.Assets.Guardians.<Name>` -
+All ten guardians are now **in the place** at `ServerStorage.Assets.Guardians.<Name>` —
 each a Humanoid rig with its full Motor6D tree, its seat model in a `Props` folder, and an
 `Anims` folder of **7 published Animation assets**. 70 animations in total; ids in
 `guardians/anims/anim-ids.json`. Nothing is in Workspace: Phase 3 spawns them.
@@ -2664,15 +2664,15 @@ correction. That is what makes the Blender poses usable as-is.
 
 **Clips** (`guardians/clips.py` → `clips.json` → `build_anims.lua` → KeyframeSequences):
 `SitIdle` (loop), `Wake`, `Run` (loop), `Grab`, `ReturnToSeat`, `Stunned` (loop) and one
-signature each - CrowShake, DiveSurface, Slam, Charge, Throw, Snap, Throw, Blink, Rewind,
+signature each — CrowShake, DiveSurface, Slam, Charge, Throw, Snap, Throw, Blink, Rewind,
 Blink. `Run` is generated as **the authored Run pose and its MIRROR**, which is a whole
 stride cycle from one key pose. `Stunned` is **topology-driven** (droop decaying with joint
 depth) rather than name-driven, because a worm, a crab and a hovering drone have no part
-called `ArmUpper` - the name-matched first version moved 1 of Pinch's 50 motors; it now
+called `ArmUpper` — the name-matched first version moved 1 of Pinch's 50 motors; it now
 moves 100 % on all ten.
 
 **Space conversion**: a pose is `(rx, ry, rz)` about BLENDER world axes; Blender maps to
-Roblox by `M = Rx(-90°)`, so the Roblox rotation is `M · R_b · M⁻¹` - conjugation, not a
+Roblox by `M = Rx(-90°)`, so the Roblox rotation is `M · R_b · M⁻¹` — conjugation, not a
 component swap. `clips.py` emits QUATERNIONS so no Euler ordering has to agree across the
 two engines.
 
@@ -2694,7 +2694,7 @@ Two traps found here and worth keeping:
 **Still to do:** Phase 3 (the chase system), Phase 4 (pickup refresh), Phase 5 (stealing).
 
 
-## 2026-09-15 - BIOME GUARDIANS, phase 3: the chase system
+## 2026-09-15 — BIOME GUARDIANS, phase 3: the chase system
 
 Steal a cucumber out of a biome's field and that biome's guardian wakes up and comes for
 you. Source in `guardian-chase/`; live in the place.
@@ -2709,17 +2709,17 @@ character), `ServerScriptService.GuardianService` (the whole state machine),
 **THE RACE IS THE DESIGN.** Chase speed is solved every tick from the TARGET's own
 `WalkSpeed` and their `CarryingCucumberSpeed` multiplier: 7 % faster than they are moving
 loaded, and always at least 10 % slower than they could move empty. Keep the heavy
-cucumber and it reels you in; drop it and you are gone. Nothing is hard-coded - which
+cucumber and it reels you in; drop it and you are gone. Nothing is hard-coded — which
 matters here, because WalkSpeed is driven by gym strength and the test save runs at
 **103 studs/s** against a StarterPlayer base of 25.
 
 | | |
 |---|---|
 | wake | first field pickup in its biome; targets carriers of ITS cucumbers, nearest first, empty-handed players are invisible |
-| openings | one of charge / cut-off / feint picked per wake - verified mixing over 8 wakes each |
+| openings | one of charge / cut-off / feint picked per wake — verified mixing over 8 wakes each |
 | pace | sprint bursts with rests (Ember never rests; Frostbite starts slow; Tick rewinds) |
-| fence | the biome edge is the finish line - it never leaves, crossing sends it home |
-| catch | the zombie knockback (same remote, same payload - measured 10.6 studs of flight), the cucumber comes off your shoulder, it carries it home and plants it with the **GUARDED** mutation (×10) |
+| fence | the biome edge is the finish line — it never leaves, crossing sends it home |
+| catch | the zombie knockback (same remote, same payload — measured 10.6 studs of flight), the cucumber comes off your shoulder, it carries it home and plants it with the **GUARDED** mutation (×10) |
 | decoy | a cucumber dropped in the biome is reclaimed first |
 | heat | server-wide, +1 per theft banked in the lobby, reset at dawn; wakes them faster, runs them harder, lengthens reach |
 | bat | 4 blows knock one out for 60 s; beating a HIGH-HEAT one drops a rare mutated cucumber (verified: "VOID Sliced Cucumber") |
@@ -2728,20 +2728,20 @@ matters here, because WalkSpeed is driven by gym strength and the test save runs
 
 **GUARDED is a mutation, not a special case.** `CucumberMutations.M.SPECIAL` holds it
 OUTSIDE `M.MUTATIONS`, so `RollMutations` can never put it on a fresh cucumber, but
-`byName` finds it - which means value, plot rate, colour, display name and the chat
+`byName` finds it — which means value, plot rate, colour, display name and the chat
 announcement all work with no change to any value code. A reclaimed cucumber reads
 "GUARDED Cucumber Tree" and is worth ten times as much.
 
 ### Four things that cost real time here
 
 - **The seat was 20 studs up a wall.** `SeatSpot` put it behind the field and raycast for
-  ground - but the Spawn field is at y −229 and the ledge behind it at −209, so Strawman
+  ground — but the Spawn field is at y −229 and the ledge behind it at −209, so Strawman
   sat above its own field and could never reach anyone in it. Seats now sample the ground
   from just above the FIELD's height and step inside the field if what is behind it rises
   more than `SEAT_MAX_RISE`.
 - **The fence sent it straight back to bed.** With no `workspace.Zones.ZoneParts` in this
-  place the biome falls back to `SpawnArea.<n>` (120 × 44) - smaller than the biome and
-  not containing the seat - so the guardian woke, failed the fence test on the next tick
+  place the biome falls back to `SpawnArea.<n>` (120 × 44) — smaller than the biome and
+  not containing the seat — so the guardian woke, failed the fence test on the next tick
   and returned. Hence `FENCE_MARGIN` (20 studs) around the field.
 - **`SPEED_MAX = 46` made the chase impossible**, because players here run at 103.
 - **A `nil` type name silently spawns nothing.** The high-heat knockout drop called
@@ -2755,7 +2755,7 @@ reclaimed after a drop; 4 bat hits → Stunned and still stunned 4 s later; high
 knockout dropped VOID; heat 0 at dawn; guardians asleep at night; behaviour variety across
 8 wakes; knockback 10.6 studs.
 
-### 2026-09-15 (later) - guardians LURK, chase you to the lobby, fixed speeds, sleeping z's
+### 2026-09-15 (later) — guardians LURK, chase you to the lobby, fixed speeds, sleeping z's
 
 **Lurking.** A guardian no longer perches on its seat all day. The day-time idle is a
 patrol: it picks a random point inside its biome, walks there at `LURK_SPEED` (34 % of its
@@ -2766,12 +2766,12 @@ sleep.
 States: `Asleep` (night) → `Resting` (sat on the seat by day) → `Lurking` → `Waking` →
 `Chasing`/`Reclaiming` → `Returning` → back to `Resting`. A theft wakes it from any of the
 idle three, and **one already on its feet skips the stand-up clip and starts after you at
-`WAKE_FROM_LURK` (35 %) of the usual delay** - being caught mid-prowl is more dangerous
+`WAKE_FROM_LURK` (35 %) of the usual delay** — being caught mid-prowl is more dangerous
 than waking one that was sitting down. Measured 10/10 prowling, 71–127 studs of path each
 over 18 s.
 
 Two things it needed: **seat props are no longer collidable** (a guardian jammed against
-its own hay bale and ground there), and **stuck detection** - `Humanoid:MoveTo` walks in a
+its own hay bale and ground there), and **stuck detection** — `Humanoid:MoveTo` walks in a
 straight line, so anything in the way meant a 9-second stall; if it has not moved 2 studs
 in 2.5 s it repicks.
 
@@ -2780,7 +2780,7 @@ in 2.5 s it repicks.
 exactly as it was. The guardian standing over the field IS the protection. Verified: 60
 cucumbers, 0 guarded, a Sliced Cucumber back to a value of 3 (it was 30).
 
-**It chases you to the lobby.** The biome edge is no longer the finish line - a guardian
+**It chases you to the lobby.** The biome edge is no longer the finish line — a guardian
 follows you out of its own biome and breaks off only when you are inside the lobby walls
 (same `Map.Borders["Lobby Border"]` box CucumberCarry uses), or you drop the cucumber, or
 it catches you. `FENCE_MARGIN` now only keeps a *lurking* guardian in its own patch.
@@ -2791,7 +2791,7 @@ Two knock-ons that had to change with it:
 - **`LOSE_DISTANCE` 150 → 700.** At 150 a guardian gave up before the runner was halfway
   home, which defeats the whole rule.
 - **Fall recovery.** A chase that can leave the biome can run off an edge, and anything
-  below `FallenPartsDestroyHeight` is *destroyed* - which is exactly how one build reduced
+  below `FallenPartsDestroyHeight` is *destroyed* — which is exactly how one build reduced
   all ten to a Humanoid and an Anims folder. A guardian more than 40 studs below its seat
   is now put straight back on it.
 
@@ -2808,7 +2808,7 @@ Verified: Scan chased at exactly 96, Strawman lurks at 8 (24 × 0.34).
 
 **Sleeping z's.** A `BillboardGui` of drifting z's over any guardian that is sitting down
 (`Asleep` or `Resting`). Built on the server so it replicates once, **animated on the
-client on Heartbeat** - no network cost, and it keeps running with Studio unfocused, which
+client on Heartbeat** — no network cost, and it keeps running with Studio unfocused, which
 TweenService does not. Sized in **studs** like the plot owner badge. Each z rises
 `ZZZ_RISE` studs over `ZZZ_PERIOD`, drifting sideways, growing and fading, the three of
 them offset in phase so they file upward. Verified animating on a resting Brisket.
@@ -3427,7 +3427,7 @@ defences must be undone by hand (BuildHealthService never mends what it did not 
   at 40 (floor); the badge 80 / 49 / 37 / 37 px. Torso height and the missing panel re-checked.
 - Tuning: MIN_PX / MAX_PX are the band, HEIGHT_STUDS the world size inside it. Set MIN_PX = MAX_PX
   for a fixed-pixel prompt, or MIN_PX 0 / MAX_PX huge for a pure stud one.
-- Session gotcha: with two concurrent editor sessions on one Studio, `solo_playtest start` can answer "already
+- Session gotcha: with two Claude sessions on one Studio, `solo_playtest start` can answer "already
   running" and the evals then run inside the OTHER session's playtest (old scripts!) -- and a blind
   `stop` kills their session (it happened once here). Check `solo_playtest status` first and only
   stop a playtest you started.
