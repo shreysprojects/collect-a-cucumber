@@ -201,6 +201,20 @@ local function build()
 	panel:SetAttribute("DesignHeight", 735)
 	mk("UIScale", { Name = "Fit", Scale = 1 }, panel)
 
+	-- Swallows clicks on the panel body so they never reach the Dimmer behind it (a plain frame
+	-- passes clicks through; a transparent, non-selectable TextButton does not).
+	local catcher = mk("TextButton", {
+		Name = "ClickCatcher",
+		BackgroundTransparency = 1,
+		BorderSizePixel = 0,
+		Text = "",
+		AutoButtonColor = false,
+		Selectable = false,
+		Size = UDim2.fromScale(1, 1),
+		ZIndex = 1,
+	}, panel)
+	catcher:SetAttribute("HoverScaleBound", true)
+
 	local shadow = mk("Frame", {
 		Name = "Shadow",
 		Position = UDim2.fromOffset(78, 54),

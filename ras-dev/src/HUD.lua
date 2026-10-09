@@ -760,6 +760,27 @@ end
 -- stays clear (ShopPanel does the same for the shop).
 local PANEL_FIT = { Width = 1140, Height = 735, MarginX = 40, MarginY = 120, Min = 0.35, Max = 1.1, CenterY = 0.46 }
 
+-- A click on a plain frame falls through to whatever button sits beneath it, so a panel with a
+-- Dimmer behind it would close from a click on its own body. A transparent, non-selectable
+-- TextButton at the bottom of the panel (below its body, above the Dimmer) swallows those.
+local function ensureClickCatcher(panel)
+	local inner = panel:FindFirstChild("Panel") or panel
+	if inner:FindFirstChild("ClickCatcher") then
+		return
+	end
+	local catcher = Instance.new("TextButton")
+	catcher.Name = "ClickCatcher"
+	catcher.BackgroundTransparency = 1
+	catcher.BorderSizePixel = 0
+	catcher.Text = ""
+	catcher.AutoButtonColor = false
+	catcher.Selectable = false
+	catcher.Size = UDim2.fromScale(1, 1)
+	catcher.ZIndex = 1
+	catcher:SetAttribute("HoverScaleBound", true)
+	catcher.Parent = inner
+end
+
 local function bindPanelFit(self, panel)
 	local inner = panel:FindFirstChild("Panel")
 	local fit = inner and inner:FindFirstChild("Fit")
@@ -791,6 +812,7 @@ function api:WirePanel(panel)
 		table.insert(self.Connections, dimmer.Activated:Connect(function()
 			self:HidePanel(panel.Name)
 		end))
+		ensureClickCatcher(panel)
 	end
 	bindPanelFit(self, panel)
 	local hoverWatch = UIUtils.bindHoverScaleAll(panel, nil, true)
