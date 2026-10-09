@@ -1276,7 +1276,11 @@ function api:BindSnowballCamera(snowball)
 		local height = launch.CameraHeight + math.max(0, scale - 1) * launch.CameraHeight * 0.4
 		local desired = position - behind * distance + Vector3.yAxis * height
 		if camPos then
-			camPos = camPos:Lerp(desired, 1 - math.exp(-10 * dt))
+			-- Exponential follow: the camera trails a moving target by speed x time constant,
+			-- so a fixed 0.1 s let a top-gear ball (1,300 studs/s) run 130 studs ahead of the
+			-- framing. Tighten the follow with speed so the trail never exceeds CameraMaxLag.
+			local rate = math.max(launch.CameraFollowRate or 10, speed / math.max(launch.CameraMaxLag or 6, 0.1))
+			camPos = camPos:Lerp(desired, 1 - math.exp(-rate * dt))
 		else
 			camPos = desired
 		end

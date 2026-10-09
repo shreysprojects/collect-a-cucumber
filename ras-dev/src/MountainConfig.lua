@@ -587,6 +587,11 @@ config.LAUNCH = {
 	CameraDistance = 18,
 	CameraHeight = 16,
 	CameraClearance = 4,
+	-- Chase follow: the camera eases toward its spot behind the ball at CameraFollowRate (1/s)
+	-- and never trails the moving spot by more than CameraMaxLag studs (the follow tightens
+	-- with speed; a fixed rate left a top-gear ball 130 studs ahead of the camera).
+	CameraFollowRate = 10,
+	CameraMaxLag = 6,
 	-- Pad camera: behind the pad centre (which sits ~3 studs above the floor), looking
 	-- a little past the character. Close enough that the launcher and the throw read.
 	PadCameraDistance = 13,
